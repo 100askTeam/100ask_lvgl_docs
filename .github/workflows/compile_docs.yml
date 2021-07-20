@@ -73,9 +73,10 @@ jobs:
       - name: Commit documentation changes
         run: |
           git clone https://${{secrets.CODING_USERNAME}}:${{secrets.CODING_PASSWD}}@e.coding.net/weidongshan/sphinx_docs/100ask_lvgl_docs.git --branch master --single-branch master
-          cp -r out_html/* master/ && cp docs/*.pdf master/
+          cp -r out_html/* master/8.1 && cp docs/*.pdf master/8.1
+          cp -r out_html/* master/master && cp docs/*.pdf master/master
           cd master
-          touch .nojekyll
+          touch 8.1/.nojekyll && touch master/.nojekyll
           git config --local user.email "baiwenwang@100ask.com"
           git config --local user.name "www.100ask.org"
           git add .
