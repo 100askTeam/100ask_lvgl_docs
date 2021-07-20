@@ -57,6 +57,7 @@ print("Running doxygen")
 cmd("cd ../scripts && doxygen Doxyfile")
 # BUILD PDF
 
+'''
 if not skip_latex:
   # Silly workarond to include the more or less correct PDF download link in the PDF
   #cmd("cp -f " + lang +"/latex/LVGL.pdf LVGL.pdf | true")
@@ -68,6 +69,7 @@ if not skip_latex:
   cmd("cd out_latex && cp -f 100ASK_LVGL_CN.pdf ../100ASK_LVGL_CN.pdf")
 else:
   print("skipping latex build as requested")
+'''
 
 # BULD HTML
 cmd("sphinx-build -b html . ../out_html")
