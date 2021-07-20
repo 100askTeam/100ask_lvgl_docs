@@ -3,7 +3,7 @@
 :github_url: |github_link_base|/index.md
 ```
 
-# Welcome to the documentation of LVGL!
+# 欢迎阅读百问网LVGL中文开发手册
 
 <img src="_static/img/home_banner.jpg" style="width:100%">
 
