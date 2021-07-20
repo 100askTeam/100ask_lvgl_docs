@@ -3,11 +3,6 @@
 :github_url: |github_link_base|/index.md
 ```
 
-```eval_rst
-
-PDF version: :download:`100ASK_LVGL_CN.pdf <100ASK_LVGL_CN.pdf>`
-```
-
 # Welcome to the documentation of LVGL!
 
 <img src="_static/img/home_banner.jpg" style="width:100%">

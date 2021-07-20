@@ -16,7 +16,8 @@
 <script type="text/javascript">
 function add_version_selector()
 {
-    return fetch("https://raw.githubusercontent.com/lvgl/docs_compiled/gh-pages/versionlist.txt")
+    //return fetch("https://raw.githubusercontent.com/lvgl/docs_compiled/gh-pages/versionlist.txt")
+    return "master\n8.1.0\n7.11"
         .then(res => res.text())
         .then(text => {
             const versions = text.split("\n").filter(version => version.trim().length > 0);
