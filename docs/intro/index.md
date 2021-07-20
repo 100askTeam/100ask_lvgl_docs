@@ -9,9 +9,9 @@ LVGL(轻量级和通用图形库)是一个免费和开源的图形库，它提�
 
 <details>
 <summary>查看原文</summary>
-<pre>
+<pre><code>
 LVGL (Light and Versatile Graphics Library) is a free and open-source graphics library providing everything you need to create embedded GUI with easy-to-use graphical elements, beautiful visual effects and low memory footprint.
-</pre>
+</code></pre>
 </details>
 
 ## Key features （主要特性）
@@ -35,7 +35,7 @@ LVGL (Light and Versatile Graphics Library) is a free and open-source graphics l
 
 <details>
 <summary>查看原文</summary>
-<pre>
+<pre><code>
 - Powerful building blocks such as buttons, charts, lists, sliders, images etc.
 - Advanced graphics with animations, anti-aliasing, opacity, smooth scrolling
 - Various input devices such as touchpad, mouse, keyboard, encoder etc.
@@ -52,7 +52,7 @@ LVGL (Light and Versatile Graphics Library) is a free and open-source graphics l
 - Tutorials, examples, themes for rapid GUI design
 - Documentation is available as online and offline
 - Free and open-source under MIT license
-</pre>
+</code></pre>
 </details>
 
 ## Requirements（配置要求）
@@ -61,9 +61,9 @@ LVGL (Light and Versatile Graphics Library) is a free and open-source graphics l
 
 <details>
 <summary>查看原文</summary>
-<pre>
+<pre><code>
 Basically, every modern controller  (which is able to drive a display) is suitable to run LVGL. The minimal requirements are:
-</pre>
+</code></pre>
 </details>
 
 <ul>
@@ -123,10 +123,10 @@ LVGL 项目（包括所有存储库）在 [MIT license](https://github.com/lvgl/
 
 <details>
 <summary>查看原文</summary>
-<pre>
+<pre><code>
 The LVGL project (including all repositories) is licensed under [MIT license](https://github.com/lvgl/lvgl/blob/master/LICENCE.txt). 
 It means you can use it even in commercial projects.
-</pre>
+</code></pre>
 </details>
 
 
@@ -134,9 +134,9 @@ It means you can use it even in commercial projects.
 
 <details>
 <summary>查看原文</summary>
-<pre>
+<pre><code>
 It's not mandatory but we highly appreciate it if you write a few words about your project in the [My projects](https://forum.lvgl.io/c/my-projects/10) category of the Forum or a private message from [lvgl.io](https://lvgl.io/#contact).
-</pre>
+</code></pre>
 </details>
 
 
@@ -144,9 +144,9 @@ It's not mandatory but we highly appreciate it if you write a few words about yo
 
 <details>
 <summary>查看原文</summary>
-<pre>
+<pre><code>
 Although you can get LVGL for free there is a huge work behind it. It's created by a group of volunteers who made it available for you in their free time.
-</pre>
+</code></pre>
 </details>
 
 
@@ -155,10 +155,10 @@ Although you can get LVGL for free there is a huge work behind it. It's created 
 
 <details>
 <summary>查看原文</summary>
-<pre>
+<pre><code>
 To make the LVGL project sustainable, please consider [Contributing](/contributing/index) to the project. 
 You can choose from [many ways of contributions](/contributing/index) such as simply writing a tweet about you are using LVGL, fixing bugs, translating the documentation, or even becoming a maintainer.
-</pre>
+</code></pre>
 </details>
 
 ## Repository layout （仓库布局）
@@ -167,9 +167,9 @@ LVGL 项目的所有存储库都托管在 GitHub：[https://github.com/lvgl](htt
 
 <details>
 <summary>查看原文</summary>
-<pre>
+<pre><code>
 All repositories of the LVGL project are hosted n GitHub: https://github.com/lvgl
-</pre>
+</code></pre>
 </details>
 
 
@@ -187,7 +187,7 @@ All repositories of the LVGL project are hosted n GitHub: https://github.com/lvg
 
 <details>
 <summary>查看原文</summary>
-<pre>
+<pre><code>
 You fill these repositories there:
 - [lvgl](https://github.com/lvgl/lvgl) The library itself
 - [lv_examples](https://github.com/lvgl/lv_examples) Examples and demos
@@ -199,7 +199,7 @@ You fill these repositories there:
 - [lv_port_...](https://github.com/lvgl?q=lv_port&type=&language=) LVGL ports to development boards
 - [lv_binding_..](https://github.com/lvgl?q=lv_binding&type=&language=l) Bindings to other languages
 - [lv_...](https://github.com/lvgl?q=lv_&type=&language=) Ports to other platforms
-</pre>
+</code></pre>
 </details>
 
 
@@ -207,9 +207,9 @@ You fill these repositories there:
 
 <details>
 <summary>查看原文</summary>
-<pre>
+<pre><code>
 The [lvgl](https://github.com/lvgl/lvgl),  [lv_examples](https://github.com/lvgl/lv_examples) and [lv_drivers](https://github.com/lvgl/lv_drivers) are the core repositories which gets the most attentions regarding maintenance. 
-</pre>
+</code></pre>
 </details>
 
 ## Release policy（发布策略）
@@ -221,12 +221,12 @@ The [lvgl](https://github.com/lvgl/lvgl),  [lv_examples](https://github.com/lvg
 
 <details>
 <summary>查看原文</summary>
-<pre>
+<pre><code>
 The core repositories follow the rules of [Semantic versioning](https://semver.org/):
 - Major versions for incompatible API changes. E.g. v5.0.0, v6.0.0
 - Minor version for new but backward-compatible functionalities. E.g. v6.1.0, v6.2.0
 - Patch version for backward-compatible bug fixes. E.g. v6.1.1, v6.1.2
-</pre>
+</code></pre>
 </details>
 
 ### Branches（分支）
@@ -238,12 +238,12 @@ The core repositories follow the rules of [Semantic versioning](https://semver.o
 
 <details>
 <summary>查看原文</summary>
-<pre>
+<pre><code>
 The core repositories have at least the following branches:
 - `master` latest version, patches are merged directly here. 
 - `dev` merge new features here until they are merged into `master`.
 - `release/vX` stable versions of the major releases
-</pre>
+</code></pre>
 </details>
 
 ### Release cycle（发布周期）
@@ -258,7 +258,7 @@ LVGL 的发布周期为 2 周。每个月的第一个和第三个星期二：
 
 <details>
 <summary>查看原文</summary>
-<pre>
+<pre><code>
 LVGL has 2 weeks release cycle. On every first and third Tuesday of a month:
 1. A major, minor or bug fix release is created (based on the new features) from the `master` branch
 2. `master` is merged into `release/vX`
@@ -266,7 +266,7 @@ LVGL has 2 weeks release cycle. On every first and third Tuesday of a month:
 4. In the upcoming 2 weeks the new features in `master` can be tested
 5. Bug fixes are merged directly into `master`
 6. After 2 weeks start again from the first point
-</pre>
+</code></pre>
 </details>
 
 ### Tags（版本标签）
@@ -275,9 +275,9 @@ LVGL has 2 weeks release cycle. On every first and third Tuesday of a month:
 
 <details>
 <summary>查看原文</summary>
-<pre>
+<pre><code>
 Tags like `vX.Y.Z` are created for every release.
-</pre>
+</code></pre>
 </details>
 
 ### Changelog（变更日志）
@@ -285,9 +285,9 @@ Tags like `vX.Y.Z` are created for every release.
 
 <details>
 <summary>查看原文</summary>
-<pre>
+<pre><code>
 The changes are recorded in [CHANGELOG.md](https://github.com/lvgl/lvgl/blob/master/CHANGELOG.md).
-</pre>
+</code></pre>
 </details>
 
 ### Side projects
@@ -296,19 +296,19 @@ The changes are recorded in [CHANGELOG.md](https://github.com/lvgl/lvgl/blob/mas
 
 <details>
 <summary>查看原文</summary>
-<pre>
+<pre><code>
 The [docs](https://github.com/lvgl/docs) is rebuilt on every release. By default, the `latest` documentation is displayed which is for the current `master` branch of lvgl. 
 The documentation of earlier versions is available from the menu on the left. 
-</pre>
+</code></pre>
 </details>
 
 模拟器、移植和其他项目会尽最大努力进行更新。如果您更新其中之一，欢迎请求请求。
 
 <details>
 <summary>查看原文</summary>
-<pre>
+<pre><code>
 The simulator, porting, and other projects are updated with best effort. Pull requests are welcome if you updated one of them.
-</pre>
+</code></pre>
 </details>
 
 ### Version support（版本支持）
@@ -317,18 +317,18 @@ The simulator, porting, and other projects are updated with best effort. Pull re
 
 <details>
 <summary>查看原文</summary>
-<pre>
+<pre><code>
 In the core repositories each major version has a branch (e.g. `release/v6`). All the minor and patch releases of that major version are merged there. 
-</pre>
+</code></pre>
 </details>
 
 可以在不打扰新版本的情况下添加固定的旧版本。
 
 <details>
 <summary>查看原文</summary>
-<pre>
+<pre><code>
 It makes possible to add fixed older versions without bothering the newer ones.
-</pre>
+</code></pre>
 </details>
 
 
@@ -336,9 +336,9 @@ It makes possible to add fixed older versions without bothering the newer ones.
 
 <details>
 <summary>查看原文</summary>
-<pre>
+<pre><code>
 All major versions are officially supported for 1 year.
-</pre>
+</code></pre>
 </details>
 
 ## FAQ（常见问题）
@@ -350,9 +350,9 @@ All major versions are officially supported for 1 year.
 
 <details>
 <summary>查看原文</summary>
-<pre>
+<pre><code>
 You can ask questions in the Forum: [https://forum.lvgl.io/](https://forum.lvgl.io/).
-</pre>
+</code></pre>
 </details>
 
 
@@ -360,10 +360,10 @@ You can ask questions in the Forum: [https://forum.lvgl.io/](https://forum.lvgl.
 
 <details>
 <summary>查看原文</summary>
-<pre>
+<pre><code>
 We use [GitHub issues](https://github.com/lvgl/lvgl/issues) for development related discussion. 
 So you should use them only if your question or issue is tightly related to the development of the library. 
-</pre>
+</code></pre>
 </details>
 
 ### Is my MCU/hardware supported?（LVGL是否支持我的 MCU/硬件？）
@@ -372,9 +372,9 @@ LLVGL 支持每个能够通过并行端口、SPI、RGB 接口或其他任何方�
 
 <details>
 <summary>查看原文</summary>
-<pre>
+<pre><code>
 Every MCU which is capable of driving a display via Parallel port, SPI, RGB interface or anything else and fulfills the [Requirements](#requirements) is supported by LLVGL.
-</pre>
+</code></pre>
 </details>
 
 
@@ -386,13 +386,13 @@ Every MCU which is capable of driving a display via Parallel port, SPI, RGB inte
 
 <details>
 <summary>查看原文</summary>
-<pre>
+<pre><code>
 It includes:
 - "Common" MCUs like STM32F, STM32H, NXP Kinetis, LPC, iMX, dsPIC33, PIC32 etc. 
 - Bluetooth, GSM, WiFi modules like Nordic NRF and Espressif ESP32
 - Linux frame buffer like /dev/fb0 which includes Single-board computers too like Raspberry Pi
 - And anything else with a strong enough MCU and a periphery to drive a display
-</pre>
+</code></pre>
 </details>
 
 
@@ -401,10 +401,10 @@ LVGL 只需要一个简单的驱动程序函数即可将像素阵列复制到显
 如果您可以对显示器执行此操作，那么您可以将该显示器与 LVGL 一起使用。
 <details>
 <summary>查看原文</summary>
-<pre>
+<pre><code>
 LVGL needs just one simple driver function to copy an array of pixels into a given area of the display. 
 If you can do this with your display then you can use that display with LVGL.
-</pre>
+</code></pre>
 </details>
 
 
@@ -419,7 +419,7 @@ If you can do this with your display then you can use that display with LVGL.
 
 <details>
 <summary>查看原文</summary>
-<pre>
+<pre><code>
 Some examples of the supported display types:
 - TFTs with 16 or 24 bit color depth 
 - Monitors with HDMI port
@@ -427,15 +427,15 @@ Some examples of the supported display types:
 - Gray-scale displays
 - even LED matrices
 - or any other display where you can control the color/state of the pixels
-</pre>
+</code></pre>
 </details>
 
 请参阅 [移植](/porting/display) 部分以了解更多信息。
 <details>
 <summary>查看原文</summary>
-<pre>
+<pre><code>
 See the [Porting](/porting/display) section to learn more.
-</pre>
+</code></pre>
 </details>
 
 
@@ -445,18 +445,18 @@ See the [Porting](/porting/display) section to learn more.
 
 <details>
 <summary>查看原文</summary>
-<pre>
+<pre><code>
 Be sure you are calling `lv_tick_inc(x)` in an interrupt and `lv_task_handler()` in your main `while(1)`.
-</pre>
+</code></pre>
 </details>
 
 
 在 [Tick](/porting/tick) 和 [任务处理程序(Task handler)](/porting/task-handler) 部分了解更多信息。
 <details>
 <summary>查看原文</summary>
-<pre>
+<pre><code>
 Learn more in the [Tick](/porting/tick) and [Task handler](/porting/task-handler) section.
-</pre>
+</code></pre>
 </details>
 
 ### Why the display driver is called only once? Only the upper part of the display is refreshed. （为什么显示驱动程序只调用一次？仅刷新显示的上部。）
@@ -464,9 +464,9 @@ Learn more in the [Tick](/porting/tick) and [Task handler](/porting/task-handler
 确保在 “*显示刷新回调*” 结束时调用 `lv_disp_flush_ready(drv)` 。
 <details>
 <summary>查看原文</summary>
-<pre>
+<pre><code>
 Be sure you are calling `lv_disp_flush_ready(drv)` at the end of your "*display flush callback*". 
-</pre>
+</code></pre>
 </details>
 
 ### Why I see only garbage on the screen?（为什么我在屏幕上只看到垃圾？）
@@ -475,9 +475,9 @@ Be sure you are calling `lv_disp_flush_ready(drv)` at the end of your "*display 
 
 <details>
 <summary>查看原文</summary>
-<pre>
+<pre><code>
 Probably there a bug in your display driver. Try the following code without using LVGL. You should see a square with red-blue gradient
-</pre>
+</code></pre>
 </details>
 
 ```c
@@ -508,18 +508,18 @@ my_flush_cb(NULL, &a, buf);
 可能 LVGL 的颜色格式与您的显示器颜色格式不兼容。检查 *lv_conf.h* 中的 `LV_COLOR_DEPTH` 。
 <details>
 <summary>查看原文</summary>
-<pre>
+<pre><code>
 Probably LVGL's color format is not compatible with your displays color format. Check `LV_COLOR_DEPTH` in *lv_conf.h*.
-</pre>
+</code></pre>
 </details>
 
 如果您在 SPI（或其他面向字节的接口）中使用 16 位颜色，您可能需要在 *lv_conf.h* 中设置 `LV_COLOR_16_SWAP  1` 。它交换像素的高字节和低字节。
 <details>
 <summary>查看原文</summary>
-<pre>
+<pre><code>
 If you are using 16 bit colors with SPI (or other byte-oriented interface) probably you need to set `LV_COLOR_16_SWAP  1` in *lv_conf.h*. 
 It swaps the upper and lower bytes of the pixels.
-</pre>
+</code></pre>
 </details>
 
 ### How to speed up my UI?（如何加速我的用户界面？）
@@ -533,14 +533,14 @@ It swaps the upper and lower bytes of the pixels.
 
 <details>
 <summary>查看原文</summary>
-<pre>
+<pre><code>
 - Turn on compiler optimization and enable cache if your MCU has
 - Increase the size of the display buffer
 - Use 2 display buffers and flush the buffer with DMA (or similar periphery) in the background 
 - Increase the clock speed of the SPI or Parallel port if you use them to drive the display
 - If your display has SPI port consider changing to a model with parallel because it has much higher throughput
 - Keep the display buffer in the internal RAM (not in external SRAM) because LVGL uses it a lot and it should have a small access time
-</pre>
+</code></pre>
 </details>
 
 ### How to reduce flash/ROM usage?（如何减少闪存/ROM的使用？）
@@ -549,9 +549,9 @@ It swaps the upper and lower bytes of the pixels.
 
 <details>
 <summary>查看原文</summary>
-<pre>
+<pre><code>
 You can disable all the unused features (such as animations, file system, GPU etc.) and object types in *lv_conf.h*.
-</pre>
+</code></pre>
 </details>
 
 如果您使用的是 GCC，您可以添加
@@ -561,11 +561,11 @@ You can disable all the unused features (such as animations, file system, GPU et
 
 <details>
 <summary>查看原文</summary>
-<pre>
+<pre><code>
 If you are using GCC you can add 
 - `-fdata-sections -ffunction-sections` compiler flags 
 - `--gc-sections` linker flag
-</pre>
+</code></pre>
 </details>
 
 
@@ -573,9 +573,9 @@ If you are using GCC you can add
 
 <details>
 <summary>查看原文</summary>
-<pre>
+<pre><code>
 to remove unused functions and variables from the final binary
-</pre>
+</code></pre>
 </details>
 
 
@@ -587,11 +587,11 @@ to remove unused functions and variables from the final binary
 
 <details>
 <summary>查看原文</summary>
-<pre>
+<pre><code>
 - Lower the size of the *Display buffer* 
 - Reduce `LV_MEM_SIZE` in *lv_conf.h*. This memory used when you create objects like buttons, labels, etc.
 - To work with lower `LV_MEM_SIZE` you can create the objects only when required and deleted them when they are not required anymore
-</pre>
+</code></pre>
 </details>
 
 ### How to work with an operating system?（如何使用操作系统？）
@@ -601,8 +601,8 @@ to remove unused functions and variables from the final binary
 
 <details>
 <summary>查看原文</summary>
-<pre>
+<pre><code>
 To work with an operating system where tasks can interrupt each other (preemptive) you should protect LVGL related function calls with a mutex.
 See the [Operating system and interrupts](/porting/os) section to learn more.
-</pre>
+</code></pre>
 </details>
