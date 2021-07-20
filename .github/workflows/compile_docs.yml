@@ -72,8 +72,6 @@ jobs:
       # ===============================
       - name: Commit documentation changes
         run: |
-          #git clone https://${{secrets.GITEE_USERNAME}}:${{secrets.GITEE_PASSWD}}@gitee.com/${{secrets.GITEE_USERNAME}}/test.git --branch master --single-branch master
-          #https://e.coding.net/weidongshan/sphinx_docs/100ask_project_docs.git
           git clone https://${{secrets.CODING_USERNAME}}:${{secrets.CODING_PASSWD}}@e.coding.net/weidongshan/sphinx_docs/100ask_lvgl_docs.git --branch master --single-branch master
           cp -r out_html/* master/ && cp docs/*.pdf master/
           cd master
