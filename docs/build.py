@@ -65,7 +65,7 @@ if not skip_latex:
   # Generate PDF
   cmd("cd out_latex && latexmk -pdf '100ASK_LVGL_CN.tex'")
   # Copy the result PDF to the main directory to make it avaiable for the HTML build
-  cmd("cd out_latex && cp -f LVGL.pdf ../100ASK_LVGL_CN.pdf")
+  cmd("cd out_latex && cp -f 100ASK_LVGL_CN.pdf ../100ASK_LVGL_CN.pdf")
 else:
   print("skipping latex build as requested")
 

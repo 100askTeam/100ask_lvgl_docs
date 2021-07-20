@@ -5,7 +5,7 @@
 
 ```eval_rst
 
-PDF version: :download:`LVGL.pdf <LVGL.pdf>`
+PDF version: :download:`100ASK_LVGL_CN.pdf <100ASK_LVGL_CN.pdf>`
 ```
 
 # Welcome to the documentation of LVGL!

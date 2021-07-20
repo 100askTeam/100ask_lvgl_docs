@@ -10,7 +10,7 @@ docs/doxygen_html
 docs/xml
 docs/out_latex
 docs/_static/built_lv_examples
-docs/LVGL.pdf
+docs/100ASK_LVGL_CN.pdf
 docs/env
 out_html
 __pycache__
