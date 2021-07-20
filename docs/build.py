@@ -17,7 +17,7 @@ def cmd(s):
   print(s)
   print("-------------------------------------")
   r = os.system(s)
-  if r != 0: 
+  if r != 0:
     print("Exit build due to previous error")
     exit(-1)
 
@@ -25,7 +25,7 @@ def cmd(s):
 status, br = subprocess.getstatusoutput("git branch | grep '*'")
 br = re.sub('\* ', '', br)
 urlpath = re.sub('release/', '', br)
- 
+
 # Be sure the github links point to the right branch
 f = open("header.rst", "w")
 f.write(".. |github_link_base| replace:: https://github.com/lvgl/docs/blob/" + br)
@@ -42,7 +42,7 @@ args = sys.argv[1:]
 if len(args) >= 1:
   if "clean" in args: clean = 1
   if "skip_latex" in args: skip_latex = True
-  
+
 lang = "en"
 print("")
 print("****************")
@@ -63,12 +63,11 @@ if not skip_latex:
   cmd("sphinx-build -b latex . out_latex")
 
   # Generate PDF
-  cmd("cd out_latex && latexmk -pdf 'LVGL.tex'")
+  cmd("cd out_latex && latexmk -pdf '100ASK_LVGL_CN.tex'")
   # Copy the result PDF to the main directory to make it avaiable for the HTML build
-  cmd("cd out_latex && cp -f LVGL.pdf ../LVGL.pdf")
+  cmd("cd out_latex && cp -f LVGL.pdf ../100ASK_LVGL_CN.pdf")
 else:
   print("skipping latex build as requested")
 
 # BULD HTML
 cmd("sphinx-build -b html . ../out_html")
-
