@@ -16,7 +16,7 @@ An input device usually means:
 
 ## Pointers
 
-Pointer input devices can have a cursor. (typically for mouses)
+Pointer input devices (like a mouse) can have a cursor.
 
 ```c
 ...
@@ -73,7 +73,7 @@ With an encoder, you should use only `LV_KEY_LEFT`, `LV_KEY_RIGHT`, and `LV_KEY_
 
 #### Edit and navigate mode
 
-Since a keypad has plenty of keys, it's easy to navigate between the objects and edit them using the keypad. But, the encoders have a limited number of "keys" hence, it is difficult to navigate using the default options. *Navigate* and *Edit* are created to avoid this problem with the encoders.
+Since a keypad has plenty of keys, it's easy to navigate between the objects and edit them using the keypad. But the encoders have a limited number of "keys" and hence it is difficult to navigate using the default options. *Navigate* and *Edit* are created to avoid this problem with the encoders.
 
 In *Navigate* mode, the encoders `LV_KEY_LEFT/RIGHT` is translated to `LV_KEY_NEXT/PREV`. Therefore the next or previous object will be selected by turning the encoder.
 Pressing `LV_KEY_ENTER` will change to *Edit* mode.
@@ -81,6 +81,12 @@ Pressing `LV_KEY_ENTER` will change to *Edit* mode.
 In *Edit* mode, `LV_KEY_NEXT/PREV` is usually used to edit the object.
 Depending on the object's type, a short or long press of `LV_KEY_ENTER` changes back to *Navigate* mode.
 Usually, an object which can not be pressed (like a [Slider](/widgets/core/slider)) leaves *Edit* mode on short click. But with objects where short click has meaning (e.g. [Button](/widgets/core/btn)), a long press is required.
+
+#### Default group
+Interactive widgets - such as buttons, checkboxes, sliders, etc - can be automatically added to a default group.
+Just create a group with `lv_group_t * g = lv_group_create();` and set the default group with `lv_group_set_default(g);`
+
+Don't forget to assign the input device(s) to the default group with ` lv_indev_set_group(my_indev, g);`.
 
 ### Styling
 

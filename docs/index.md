@@ -28,6 +28,7 @@
    overview/index
    widgets/index
    layouts/index
+   others/index
    CONTRIBUTING
    CHANGELOG
    ROADMAP

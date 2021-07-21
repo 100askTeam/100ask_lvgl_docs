@@ -4,11 +4,11 @@
 ```
 # Events
 
-Events are triggered in LVGL when something happens which might be interesting to the user, e.g. if an object:
+Events are triggered in LVGL when something happens which might be interesting to the user, e.g. when an object
 - is clicked
 - is scrolled
-- its value has changed
-- redrawn, etc.
+- has its value changed
+- is redrawn, etc.
 
 ## Add events to the object
 
@@ -76,17 +76,17 @@ The following event codes exist:
 - `LV_EVENT_SHORT_CLICKED`    The object was pressed for a short period of time, then released it. Not called if scrolled.
 - `LV_EVENT_LONG_PRESSED` Object has been pressed for at least the `long_press_time` specified in the input device driver.  Not called if scrolled.
 - `LV_EVENT_LONG_PRESSED_REPEAT`  Called after `long_press_time` in every `long_press_repeat_time` ms.  Not called if scrolled.
-- `LV_EVENT_CLICKED`      Called on release if the object not scrolled (regardless to long press)
-- `LV_EVENT_RELEASED`     Called in every cases when the object has been released
-- `LV_EVENT_SCROLL_BEGIN` Scrolling begins
-- `LV_EVENT_SCROLL_END`   Scrolling ends
+- `LV_EVENT_CLICKED`      Called on release if the object did not scroll (regardless of long press)
+- `LV_EVENT_RELEASED`     Called in every case when the object has been released
+- `LV_EVENT_SCROLL_BEGIN` Scrolling begins. The event paramter is `NULL` or an `lv_anim_t *` with the scroll animation descriptor to modify if required. 
+- `LV_EVENT_SCROLL_END`   Scrolling ends.
 - `LV_EVENT_SCROLL`       The object was scrolled
 - `LV_EVENT_GESTURE`      A gesture is detected. Get the gesture with `lv_indev_get_gesture_dir(lv_indev_get_act());`
 - `LV_EVENT_KEY`          A key is sent to the object. Get the key with `lv_indev_get_key(lv_indev_get_act());`
 - `LV_EVENT_FOCUSED`      The object is focused 
 - `LV_EVENT_DEFOCUSED`    The object is defocused
 - `LV_EVENT_LEAVE`        The object is defocused but still selected
-- `LV_EVENT_HIT_TEST`     Perform advanced hit-testing
+- `LV_EVENT_HIT_TEST`     Perform advanced hit-testing. Use `lv_hit_test_info_t * a = lv_event_get_hit_test_info(e)` and check if `a->point` can click the object or not. If not set `a->res = false` 
 
 
 ### Drawing events
@@ -126,7 +126,7 @@ And can be sent to any object with `lv_event_send(obj, MY_EVENT_1, &some_data)`
 
 To manually send events to an object, use `lv_event_send(obj, <EVENT_CODE> &some_data)`.
 
-For example, it can be used to manually close a message box by simulating a button press (although there are simpler ways of doing this):
+For example, this can be used to manually close a message box by simulating a button press (although there are simpler ways to do this):
 ```c
 /*Simulate the press of the first button (indexes start from zero)*/
 uint32_t btn_id = 0;
@@ -143,10 +143,10 @@ lv_event_send(mbox, LV_EVENT_VALUE_CHANGED, &btn_id);
 
 ## Fields of lv_event_t
 
-`lv_event_t` is the only parameter passed to event callback and it contains all the data about the event. The following values can be get from it:
+`lv_event_t` is the only parameter passed to event callback and it contains all the data about the event. The following values can be gotten from it:
 - `lv_event_get_code(e)` get the event code
 - `lv_event_get_target(e)` get the object to which the event is sent
-- `lv_event_get_original_target(e)` get the object to which the event is sent originally sent (different from `lv_event_get_target` if [event bubbling](event-bubbling) is enabled)
+- `lv_event_get_original_target(e)` get the object to which the event is sent originally sent (different from `lv_event_get_target` if [event bubbling](#event-bubbling) is enabled)
 - `lv_event_get_user_data(e)` get the pointer passed as the last parameter of `lv_obj_add_event_cb`.
 - `lv_event_get_param(e)` get the parameter passed as the last parameter of `lv_event_send` 
 
@@ -157,3 +157,12 @@ If `lv_obj_add_flag(obj, LV_OBJ_FLAG_EVENT_BUBBLE)` is enabled all events will b
 
 The *target* parameter of the event is always the current target object, not the original object. To get the original target call `lv_event_get_original_target(e)` in the event handler.  
 
+
+
+## Examples
+
+```eval_rst
+
+.. include:: ../../examples/event/index.rst
+
+```
