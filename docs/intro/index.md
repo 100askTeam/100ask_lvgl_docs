@@ -481,6 +481,7 @@ If you can do this with your display then you can use that display with LVGL.
 </details>
 
 LVGL 只需要一个简单的驱动程序函数即可将像素阵列复制到显示器的给定区域。
+
 如果您可以对显示器执行此操作，那么您可以将该显示器与 LVGL 一起使用。
 
 
