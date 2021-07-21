@@ -3,7 +3,7 @@
 :github_url: |github_link_base|/intro/index.md
 ```
 
-# Introduction （引言）
+# Introduction （介绍）
 
 <details>
 <summary>查看原文</summary>
