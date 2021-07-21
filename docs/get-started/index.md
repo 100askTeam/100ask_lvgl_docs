@@ -7,14 +7,17 @@
 <details>
 <summary>查看原文</summary>
 <p>
+
 There are several ways to get your feet wet with LVGL. Here is one recommended order of documents to read and things to play with when you are learning to use LVGL:
 </p>
 </details>
+
 有几种方法可以让您快速上手LVGL。以下是您在学习使用 LVGL 时推荐阅读的文档顺序和要玩的东西：
 
 <details>
 <summary>查看原文</summary>
 <p>
+
 1. Check the [Online demos](https://lvgl.io/demos) to see LVGL in action (3 minutes)
 2. Read the [Introduction](https://docs.lvgl.io/latest/en/html/intro/index.html) page of the documentation (5 minutes)
 3. Read the [Quick overview](https://docs.lvgl.io/latest/en/html/get-started/quick-overview.html) page of the documentation (15 minutes)
@@ -25,6 +28,7 @@ There are several ways to get your feet wet with LVGL. Here is one recommended o
 8. Check the documentation of the [Widgets](https://docs.lvgl.io/latest/en/html/widgets/index.html) to see their features and usage
 9. If you have questions got to the [Forum](http://forum.lvgl.io/)
 10. Read the [Contributing](https://docs.lvgl.io/latest/en/html/contributing/index.html) guide to see how you can help to improve LVGL (15 minutes) 
+
 </p>
 </details>
 
