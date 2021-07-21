@@ -5,7 +5,7 @@
 
 # 欢迎阅读百问网LVGL中文开发手册
 
-<img src="_static/img/home_banner.jpg" style="width:100%">
+<img src="_static/img/home_banner.png" style="width:100%">
 
 
 <div style="margin-bottom:48px"> 
