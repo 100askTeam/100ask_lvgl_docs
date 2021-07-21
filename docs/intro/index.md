@@ -5,12 +5,13 @@
 
 # Introduction （引言）
 
-<details>
-<summary>查看原文</summary>
-<pre><code>
+
+```eval_rst
+查看原文
+^
 LVGL (Light and Versatile Graphics Library) is a free and open-source graphics library providing everything you need to create embedded GUI with easy-to-use graphical elements, beautiful visual effects and low memory footprint.
-</code></pre>
-</details>
+```
+
 LVGL(轻量级和通用图形库)是一个免费和开源的图形库，它提供了创建嵌入式GUI所需的一切，具有易于使用的图形元素，美丽的视觉效果和低内存占用。
 
 
