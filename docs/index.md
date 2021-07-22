@@ -5,7 +5,7 @@
 
 # 欢迎阅读百问网LVGL中文开发手册！
 
-<img src="_static/img/home_banner.png" style="width:100%">
+<a href="https://www.100ask.net/index"><img src="_static/img/home_banner.png" style="width:100%"></a>
 
 
 <div style="margin-bottom:48px"> 
@@ -14,7 +14,7 @@
     <a href="porting/index.html"><img class="home-img" src="_static/img/home_3.png" alt="See how to port LVGL to any platform"></a>
     <a href="overview/index.html"><img class="home-img" src="_static/img/home_4.png" alt="Learn the how LVGL works in more detail"></a>
     <a href="widgets/index.html"><img class="home-img" src="_static/img/home_5.png" alt="Take a look at the description of the available widgets"></a>
-    <a href="contributing/index.html"><img class="home-img" src="_static/img/home_6.png" alt="Be part of the development of LVGL"></a>
+    <a href="CONTRIBUTING.html"><img class="home-img" src="_static/img/home_6.png" alt="Be part of the development of LVGL"></a>
 </div> 
  
 

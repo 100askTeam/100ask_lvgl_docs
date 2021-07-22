@@ -9,10 +9,11 @@
 <p>
 
 There are several ways to get your feet wet with LVGL. Here is one recommended order of documents to read and things to play with when you are learning to use LVGL:
+
 </p>
 </details>
 
-有几种方法可以让您快速上手LVGL。以下是您在学习使用 LVGL 时推荐阅读的文档顺序和要玩的东西：
+有几种方法可以让您快速上手LVGL。以下是您在学习使用 LVGL 时推荐阅读的文档顺序和玩法：
 
 <details>
 <summary>查看原文</summary>

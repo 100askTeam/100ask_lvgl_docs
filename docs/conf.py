@@ -65,7 +65,7 @@ source_suffix = ['.rst', '.md']
 master_doc = 'index'
 
 # General information about the project.
-project = '100ASK_LVGL_CN'
+project = '百问网LVGL中文教程文档'
 copyright = '2008-2021 深圳百问网科技有限公司 All Rights Reserved'
 author = 'www.100ask.org'
 
@@ -184,8 +184,8 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, '100ASK_LVGL_CN.tex', '100ASK LVGL Chinese Documentation ' + version,
-     '100ASK LVGL community', 'manual'),
+    (master_doc, '100ASK_LVGL_CN.tex', '百问网LVGL中文手册' + version,
+     'www.100ask.net', 'manual'),
 ]
 
 
@@ -194,7 +194,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'lvgl', '100ASK LVGL Chinese Documentation ' + version,
+    (master_doc, 'lvgl', '百问网LVGL中文手册' + version,
      [author], 1)
 ]
 
@@ -205,7 +205,7 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'LVGL', '100ASK LVGL Chinese Documentation ' + version,
+    (master_doc, 'LVGL', '百问网LVGL中文手册' + version,
      author, 'Contributors of www.100ask.org', 'One line description of project.',
      'Miscellaneous'),
 ]
