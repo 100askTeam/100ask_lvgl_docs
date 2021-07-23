@@ -170,14 +170,14 @@ Although you can get LVGL for free there is a huge work behind it. It's created 
 <summary>查看原文</summary>
 <p>
 
-To make the LVGL project sustainable, please consider [Contributing](/contributing/index) to the project. 
+To make the LVGL project sustainable, please consider [Contributing](/CONTRIBUTING) to the project. 
 
-You can choose from [many ways of contributions](/contributing/index) such as simply writing a tweet about you are using LVGL, fixing bugs, translating the documentation, or even becoming a maintainer.
+You can choose from [many ways of contributions](/CONTRIBUTING) such as simply writing a tweet about you are using LVGL, fixing bugs, translating the documentation, or even becoming a maintainer.
 
 </p>
 </details>
 
-为了使 LVGL 项目可持续，请考虑为该项目做 [贡献](/contributing/index) 。您可以从 [多种投稿方式](/contributing/index) 中进行选择，例如简单地写一条关于您正在使用 LVGL 的推文、修复错误、翻译文档，甚至成为维护者。
+为了使 LVGL 项目可持续，请考虑为该项目做 [贡献](/CONTRIBUTING) 。您可以从 [多种投稿方式](/CONTRIBUTING) 中进行选择，例如简单地写一条关于您正在使用 LVGL 的推文、修复错误、翻译文档，甚至成为维护者。
 
 
 ## Repository layout （仓库布局）
