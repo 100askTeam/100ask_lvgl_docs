@@ -3,7 +3,7 @@
 :github_url: |github_link_base|/get-started/espressif.md
 ```
 
-# Espressif (ESP32)（乐鑫）
+# Espressif (ESP32)
 <details>
 <summary>查看原文</summary>
 <p>

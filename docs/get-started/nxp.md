@@ -2,7 +2,7 @@
 .. include:: /header.rst
 :github_url: |github_link_base|/get-started/nxp.md
 ```
-# NXP（恩智浦）
+# NXP
 
 <details>
 <summary>查看原文</summary>
