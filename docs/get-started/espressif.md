@@ -31,7 +31,6 @@ of supported display and indev (touch) controllers.
 我们创建了 [lv_port_esp32](https://github.com/lvgl/lv_port_esp32) 项目示例，这是一个使用 ESP-IDF 和 LVGL 的项目，这是从 [lv_examples](https://github.com/lvgl/lv_examples) 中移植的一个演示。您可以将项目配置为使用众多支持的显示控制器之一，请参阅 [lvgl_esp32_drivers](https://github.com/lvgl/lvgl_esp32_drivers) 以获取支持的显示和 indev（触摸）控制器的完整列表。
 
 ## Use LVGL in your ESP32 project（在 ESP32 项目中使用 LVGL）
-
 ### Prerequisites（前提）
 
 <details>

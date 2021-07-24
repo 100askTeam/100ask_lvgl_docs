@@ -82,7 +82,7 @@ LVGL 有自己的配置文件，名为 `lv_conf.h`。安装 LVGL 后，需要进
 4. 在`LV_COLOR_DEPTH`中设置你显示的颜色深度
 5. 设置`LV_TICK_CUSTOM 1`
 
-## Initialize LVGL and run an example
+## Initialize LVGL and run an example（初始化 LVGL 并运行示例）
 
 <details>
 <summary>查看原文</summary>
