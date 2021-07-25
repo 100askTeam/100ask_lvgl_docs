@@ -469,7 +469,7 @@ lv_coord_t content_w = lv_obj_get_content_width(obj);
 lv_coord_t content_h = lv_obj_get_content_height(obj);
 ```
 
-## Using styles
+## Using styles（使用样式）
 
 <details>
 <summary>查看原文</summary>
@@ -488,8 +488,9 @@ However, using styles as to set the coordinates has some great advantages:
 </p>
 </details>
 
-在引擎盖下，位置、大小和对齐属性是样式属性。
+在驱动中，位置、大小和对齐属性是样式属性。
 上面描述的“简单函数”为了简单起见隐藏了样式相关的代码，并在对象的局部样式中设置了位置、大小和对齐属性。
+
 但是，使用样式设置坐标有一些很大的优点：
 - 可以轻松地为多个对象设置宽度/高度/等。例如。使所有滑块的大小为 100x10 像素。
 - 还可以在一处修改值。
