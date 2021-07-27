@@ -152,10 +152,12 @@ The following event codes exist:
 - 特别活动
 - 自定义事件
 
-
 所有对象（例如按钮/标签/滑块等），无论其类型如何，都会接收 *Input device*、*Drawing* 和 *Other* 事件。
+
 然而，*特殊事件* 特定于特定的小部件类型。查看 [widgets' 文档](/widgets/index) 了解何时发送，
+
 *自定义事件*由用户添加，因此这些事件永远不会由 LVGL 发送。
+
 存在以下事件代码：
 
 ### Input device events（输入设备事件）
