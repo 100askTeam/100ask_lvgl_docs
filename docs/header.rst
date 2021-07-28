@@ -1,1 +1,1 @@
-.. |github_link_base| replace:: https://github.com/100askTeam/100ask_book_rtos/freertos
+.. |github_link_base| replace:: https://github.com/100askTeam/100ask_lvgl_docs_8.x/master
