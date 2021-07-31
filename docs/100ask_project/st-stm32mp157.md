@@ -4,7 +4,7 @@
 ```
 
 
-# 效果
+# STM32MP157 LVGL GUI DEMO效果
 
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20210517155314493.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM1MTgxMjM2,size_16,color_FFFFFF,t_70)
