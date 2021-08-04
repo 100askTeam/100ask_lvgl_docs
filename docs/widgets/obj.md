@@ -413,7 +413,6 @@ Learn more about [Keys](/overview/indev).
 
 如果启用了`LV_OBJ_FLAG_CHECKABLE`，则`LV_KEY_RIGHT` 和`LV_KEY_UP` 使对象被选中，而`LV_KEY_LEFT` 和`LV_KEY_DOWN` 使其不选中。
 
-
 了解有关 [Keys](/overview/indev) 的更多信息。
 
 ## Example
