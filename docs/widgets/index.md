@@ -2,7 +2,7 @@
 .. include:: /header.rst 
 :github_url: |github_link_base|/object-types/index.md
 ```
-# Widgets
+# Widgets（部件）
 
 ```eval_rst
 
