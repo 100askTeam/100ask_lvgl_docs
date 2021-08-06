@@ -9,6 +9,9 @@
 ### 获取资料
 使用阿里云盘下载关于本节的资料(不限速、下载速度飞起)：[https://www.aliyundrive.com/s/MDPET5oxypW](https://www.aliyundrive.com/s/MDPET5oxypW)
 
+
+> 由于阿里云盘不支持zip文件分享，分享出去的链接中无法查看到源码的zip压缩包，大家可以在这里免费下载codeblocks的工程示例源码包：[https://download.csdn.net/download/qq_35181236/20816316](https://download.csdn.net/download/qq_35181236/20816316)
+
 ### 获取Code::Blocks并安装
 使用了当前的最新版本 `20.03` 。
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/a9f2b83a69814c11840e668e921049cb.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM1MTgxMjM2,size_16,color_FFFFFF,t_70)
