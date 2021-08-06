@@ -7,10 +7,7 @@
 ## Code::Blocks上运行
 [Code::Blocks](https://www.codeblocks.org/) 是一个免费开放源码的全功能的跨平台C/C++集成开发环境。使用 Code::Blocks模拟器体验或开发lvlg，开箱即用很方便，相比VS更加轻量级。
 ### 获取资料
-使用阿里云盘下载关于本节的资料(不限速、下载速度飞起)：[https://www.aliyundrive.com/s/MDPET5oxypW](https://www.aliyundrive.com/s/MDPET5oxypW)
-
-
-> 由于阿里云盘不支持zip文件分享，分享出去的链接中无法查看到源码的zip压缩包，大家可以在这里免费下载codeblocks的工程示例源码包：[https://download.csdn.net/download/qq_35181236/20816316](https://download.csdn.net/download/qq_35181236/20816316)
+- 百度云下载：链接：[https://pan.baidu.com/s/14renDMjP6xBVh0bGy_yAWA](https://pan.baidu.com/s/14renDMjP6xBVh0bGy_yAWA)  提取码：root 
 
 ### 获取Code::Blocks并安装
 使用了当前的最新版本 `20.03` 。
