@@ -231,7 +231,7 @@ On **Windows** you have to do two additional things:
 - 右键单击​​项目-> 项目属性-> C/C++ 构建-> 设置-> 库-> 添加...并在SDLmain 和SDL 上方添加_mingw32_。 （顺序很重要：mingw32、SDLmain、SDL）
 
 
-### Compile and Run
+### Compile and Run（编译并运行）
 
 <details>
 <summary>查看原文</summary>
