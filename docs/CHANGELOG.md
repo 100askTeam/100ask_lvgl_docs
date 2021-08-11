@@ -1,6 +1,11 @@
-# Changelog
+# Changelog（更新日志）
 
-## v8.1.0 (In progress)
+## v8.1.0 (In progress)（进行中）
+
+<details>
+<summary>查看原文</summary>
+<p>
+
 - feat(img) add img_size property (#2284)  <a href="https://github.com/lvgl/lvgl/commit/fe461caf">fe461caf</a>  
 - feat(calendar) improve MicroPython example (#2366)  Amir Gonnen <a href="https://github.com/lvgl/lvgl/commit/5f6e07e5">5f6e07e5</a> 
 - feat(obj) add lv_obj_del_delayed() <a href="https://github.com/lvgl/lvgl/commit/c6a2e15e">c6a2e15e</a> 
@@ -12,7 +17,28 @@
 - feat(docs) add view on GitHub link <a href="https://github.com/lvgl/lvgl/commit/a716ac6e">a716ac6e</a> 
 - feat(event) pass the scroll aniamtion to LV_EVENT_SCROLL_BEGIN <a href="https://github.com/lvgl/lvgl/commit/ca54ecfe">ca54ecfe</a> 
 
+
+</p>
+</details>
+
+- feat(img) 添加 img_size 属性 (#2284) <a href="https://github.com/lvgl/lvgl/commit/fe461caf">fe461caf</a>
+- feat(calendar) 改进 MicroPython 示例 (#2366) Amir Gonnen <a href="https://github.com/lvgl/lvgl/commit/5f6e07e5">5f6e07e5</a>
+- feat(obj) 添加 lv_obj_del_delayed() <a href="https://github.com/lvgl/lvgl/commit/c6a2e15e">c6a2e15e</a>
+- feat(event, widgets) 改进了 LV_EVENT_DRAW_PART_BEGIN/END Gabor Kiss-Vamosi <a href="https://github.com/lvgl/lvgl/commit/88c48594">88c48594</a> 的参数
+- feat(led) 发送 LV_EVENT_DRAW_PART_BEGIN/END Gabor Kiss-Vamosi <a href="https://github.com/lvgl/lvgl/commit/fcd4aa39">fcd4aa39</a>
+- feat(obj) 发送 LV_EVENT_DRAW_PART_BEGIN/END for MAIN 和 SCROLLBAR 部分 Gabor Kiss-Vamosi <a href="https://github.com/lvgl/lvgl/commit/b203167c">b203167c</a>
+- feat(spinbox) 添加将光标设置到特定位置的功能 (#2314) dyktronix <a href="https://github.com/lvgl/lvgl/commit/7066c8fb">7066c8fb</a>
+- feat(timer) 检查 lv_tick_inc 是否被调用 <a href="https://github.com/lvgl/lvgl/commit/aa6641a6">aa6641a6</a>
+- feat(docs) 在 GitHub 链接上添加视图 <a href="https://github.com/lvgl/lvgl/commit/a716ac6e">a716ac6e</a>
+- feat(event) 将滚动动画传递给 LV_EVENT_SCROLL_BEGIN <a href="https://github.com/lvgl/lvgl/commit/ca54ecfe">ca54ecfe</a>
+
+
 ## v8.0.2 (16.07.2021)
+
+<details>
+<summary>查看原文</summary>
+<p>
+
 - fix(theme) improve button focus of keyboard
 - fix(tabview) send LV_EVENT_VALUE_CHANGED only once
 - fix(imgbtn) use the correct src in LV_EVENT_GET_SELF_SIZE
@@ -60,8 +86,63 @@
 - fix(draw) underflow in subpixel font drawing 
 - fix (scroll) do not send unnecessary scroll end events  
 
+</p>
+</details>
+
+- 修复（主题）改善键盘的按钮焦点
+- 修复（tabview）只发送一次 LV_EVENT_VALUE_CHANGED
+- fix(imgbtn) 在 LV_EVENT_GET_SELF_SIZE 中使用正确的 src
+- fix(color) 移除 8 位颜色的无关投射
+- fix(obj style) 如果父级的填充发生变化，则修复子级重新定位。
+- 修复（颜色）删除无关的 _LV_COLOR_MAKE_TYPE_HELPER (#2372)
+- 修复（微调器）不应该是可点击的（#2373）
+- fix(obj) 改进如何确定聚焦 indev
+- 修复（模板）更新 v8 的 indev 模板
+- 修复（printf）如果使用 pycparser 则跳过定义属性
+- 重构(printf) 将类似 printf 的函数属性添加到 _lv_txt_set_text_vfmt 和 lv_label_set_text_fmt (#2332)
+- 修复（模板）在 lv_port_*_template.c 文件中包含 lvgl.h
+- fix(obj) 检测哪个 indev 发送了 LV_EVENT_FOCUS
+- 修复（跨度）填充 LV_EVENT_GET_SELF_SIZE (#2360)
+- 修复（弧）默认禁用 LV_OBJ_FLAG_SCROLL_CHAIN
+- 修复（绘制）修复带有完整弧线的弧形背景图像绘制
+- fix(disp) 修复 lv_disp_remove 中的内存泄漏 (#2355)
+- 修复 3fb8baf5 引入的警告
+- 修复（小部件）对所有小部件使用 lv_obj_class
+- fix(obj) 将清理从 lv_obj_del 移动到 lv_obj_destructor
+- fix(roller) 修复选定区域的部分重绘
+- 修复（滚轮）正确调整所选区域的大小
+- fix(obj) 删除无用的类型转换 (#2343)
+- 修复（lv_obj_scroll.h）错别字（#2345）
+- 修复（滚动）在两个轴的同一位置触发 LV_EVENT_SCROLL_BEGIN
+- 修复（btnmatrix）修复焦点变化时按钮失效
+- 在单行模式下修复（textarea）样式更新+改进滚动到光标
+- fix(tlsf) 不使用 <assert.h>
+- 修复（imgbtn）如果只有中间，请考虑宽度==LV_SIZE_CONTENT。 img 已设置
+- fix(refr) 减少 lv_refr_area 中的嵌套级别
+- fix(txt) 增强 break_chars 的功能 (#2327)
+- 修复（pxp）：更新 SDK 2.10 的 RTOS 宏
+- 修复（vglite）：v8 更新
+- 修复（pxp）：v8 更新
+- fix(flex) 修复布局更新和失效问题
+- fix(flex) 修复空指针解引用
+- fix(obj, switch) 不发送 LV_EVENT_VALUE_CHANGED 两次
+- 修复（颜色）溢出 16 位颜色深度
+- fix(coords) 使用大坐标修复
+- 修复（图表）如果没有添加系列，则修复崩溃
+- 使用 LV_CHART_UPDATE_MODE_SHIFT 修复（图表）失效
+- 修复（对齐）修复 lv_obj_align_to G
+- 修复（表格）使表格单元格值更改无效
+- 修复（标签）删除重复的 lv_obj_refresh_self_size
+- 修复（绘制）子像素字体绘制中的下溢
+- 修复（滚动）不发送不必要的滚动结束事件
+
 
 ## v8.0.1 (14.06.2021)
+
+<details>
+<summary>查看原文</summary>
+<p>
+
 - docs(filesystem) update to v8 <a href="https://github.com/lvgl/lvgl/commit/7971ade4">7971ade4</a> 
 - fix(msgbox) create modals on top layer instead of act screen <a href="https://github.com/lvgl/lvgl/commit/5cf6303e">5cf6303e</a> 
 - fix(colowheel) disable LV_OBJ_FLAG_SCROLL_CHAIN by default <a href="https://github.com/lvgl/lvgl/commit/48d1c292">48d1c292</a> 
@@ -111,13 +192,83 @@
 - chore(deps): bump urllib3 from 1.26.4 to 1.26.5 in /docs <a href="https://github.com/lvgl/lvgl/commit/b2f77dfc">b2f77dfc</a> 
 - fix(docs) add docs about the default group <a href="https://github.com/lvgl/lvgl/commit/29bfe604">29bfe604</a> 
 
+</p>
+</details>
+
+
+- 文档（文件系统）更新到 v8 <a href="https://github.com/lvgl/lvgl/commit/7971ade4">7971ade4</a>
+- 修复（msgbox）在顶层而不是行为屏幕上创建模态<a href="https://github.com/lvgl/lvgl/commit/5cf6303e">5cf6303e</a>
+- 修复（colowheel）默认禁用 LV_OBJ_FLAG_SCROLL_CHAIN <a href="https://github.com/lvgl/lvgl/commit/48d1c292">48d1c292</a>
+- 文档（网格）错字修复（#2310）<a href="https://github.com/lvgl/lvgl/commit/69d109d2">69d109d2</a>
+- fix(arduino) 修复LVGL_Arduino.ino中my_touchpad_read的原型<a href="https://github.com/lvgl/lvgl/commit/1a62f7a6">1a62f7a6</a>
+- fix(meter) 修复针图像失效<a href="https://github.com/lvgl/lvgl/commit/54d8e817">54d8e817</a>
+- fix(mem) 为 tlsf 函数和类型添加 lv_ 前缀 <a href="https://github.com/lvgl/lvgl/commit/0d52b59c">0d52b59c</a>
+- fix(calendar) 修正今天的位置计算<a href="https://github.com/lvgl/lvgl/commit/ad05e196">ad05e196</a>
+- 修复（打字错误）将 LV_OBJ_FLAG_SNAPABLE 重命名为 LV_OBJ_FLAG_SNAPPABLE <a href="https://github.com/lvgl/lvgl/commit/e697807c">e697807c</a>
+- 文档（颜色）语言修复（#2302）<a href="https://github.com/lvgl/lvgl/commit/07ecc9f1">07ecc9f1</a>
+- 在 lv_tick_inc 调用测试中修复（tick）次要优化 <a href="https://github.com/lvgl/lvgl/commit/b4305df5">b4305df5</a>
+- 文档的拼写和其他语言修复 (#2293) <a href="https://github.com/lvgl/lvgl/commit/d0aaacaf">d0aaacaf</a>
+- 修复（主题）在 btnmatrix、msgbox 和 kayboard 按钮上显示禁用状态 <a href="https://github.com/lvgl/lvgl/commit/0be582b3">0be582b3</a>
+- 修复（滚动）保持对象上的滚动位置被删除 <a href="https://github.com/lvgl/lvgl/commit/52edbb46">52edbb46</a>
+- 修复（msgbox）处理 NULL btn 映射参数 <a href="https://github.com/lvgl/lvgl/commit/769c4a30">769c4a30</a>
+- fix(group) 允许重新聚焦对象 <a href="https://github.com/lvgl/lvgl/commit/1520208b">1520208b</a>
+- 文档（概述）拼写修复 <a href="https://github.com/lvgl/lvgl/commit/d2efb8c6">d2efb8c6</a>
+- 合并 https://github.com/lvgl/lvgl <a href="https://github.com/lvgl/lvgl/commit/45960838">45960838</a> 的分支“master”
+- feat(timer) 检查 lv_tick_inc 是否被调用 <a href="https://github.com/lvgl/lvgl/commit/aa6641a6">aa6641a6</a>
+- feat(docs) 在 GitHub 链接上添加视图 <a href="https://github.com/lvgl/lvgl/commit/a716ac6e">a716ac6e</a>
+- fix(theme) 修复默认主题中的开关样式<a href="https://github.com/lvgl/lvgl/commit/0c0dc8ea">0c0dc8ea</a>
+- 文档修复错字 <a href="https://github.com/lvgl/lvgl/commit/8ab80645">8ab80645</a>
+- 合并 https://github.com/lvgl/lvgl <a href="https://github.com/lvgl/lvgl/commit/e796448f">e796448f</a> 的分支“master”
+- feat(event) 将滚动动画传递给 LV_EVENT_SCROLL_BEGIN <a href="https://github.com/lvgl/lvgl/commit/ca54ecfe">ca54ecfe</a>
+- fix(tabview) 使用左右标签修复<a href="https://github.com/lvgl/lvgl/commit/17c57449">17c57449</a>
+- 杂务(docs) 强制文档重建 <a href="https://github.com/lvgl/lvgl/commit/4a0f4139">4a0f4139</a>
+- 杂务（docs）总是将 master 部署到 docs/master 以及 <a href="https://github.com/lvgl/lvgl/commit/6d05692d">6d05692d</a>
+- 修复（模板）更新 lv_objx_template 到 v8 <a href="https://github.com/lvgl/lvgl/commit/38bb8afc">38bb8afc</a>
+- docs(extra) 添加 extra/README.md <a href="https://github.com/lvgl/lvgl/commit/8cd504d5">8cd504d5</a>
+- 更新 CHANGELOG.md <a href="https://github.com/lvgl/lvgl/commit/48fd73d2">48fd73d2</a>
+- 更新 quick-overview.md (#2295) <a href="https://github.com/lvgl/lvgl/commit/5616471c">5616471c</a>
+- 修复（pxp）将 LV_COLOR_TRANSP 更改为 LV_COLOR_CHROMA_KEY 以兼容 v8 <a href="https://github.com/lvgl/lvgl/commit/81f3068d">81f3068d</a>
+- 添加 micropython 示例 (#2286) <a href="https://github.com/lvgl/lvgl/commit/c60ed68e">c60ed68e</a>
+- 文档（颜色）小修正 <a href="https://github.com/lvgl/lvgl/commit/ac8f4534">ac8f4534</a>
+- 修复（示例）恢复测试代码 <a href="https://github.com/lvgl/lvgl/commit/77e2c1ff">77e2c1ff</a>
+- 修复（绘制）与 32 位颜色深度的加法混合 <a href="https://github.com/lvgl/lvgl/commit/786db2af">786db2af</a>
+- docs(color) 更新颜色的文档 <a href="https://github.com/lvgl/lvgl/commit/9056b5ee">9056b5ee</a>
+- 合并 https://github.com/lvgl/lvgl <a href="https://github.com/lvgl/lvgl/commit/a711a1dd">a711a1dd</a> 的分支“master”
+- perf(refresh) 使用 2 个缓冲区优化等待 lv_disp_flush_ready 的位置 <a href="https://github.com/lvgl/lvgl/commit/d0172f14">d0172f14</a>
+- docs(lv_obj_style) 更新 add_style 和 remove_style 函数头 (#2287) <a href="https://github.com/lvgl/lvgl/commit/60f7bcbf">60f7bcbf</a>
+- 修复 spangroup 的内存泄漏 (#2285) <a href="https://github.com/lvgl/lvgl/commit/33e0926a">33e0926a</a>
+- 修复使 lv_img_cache.h 公开，因为缓存失效是公开的 <a href="https://github.com/lvgl/lvgl/commit/38ebcd81">38ebcd81</a>
+- 合并 https://github.com/lvgl/lvgl 的分支“master” <a href="https://github.com/lvgl/lvgl/commit/2b292495">2b292495</a>
+- fix(btnmamatrix) 修复焦点事件处理 <a href="https://github.com/lvgl/lvgl/commit/3b58ef14">3b58ef14</a>
+- 从 lvgl/dependabot/pip/docs/urllib3-1.26.5 <a href="https://github.com/lvgl/lvgl/commit/a2f45b26">a2f45b26</a> 合并拉取请求 #2280
+- 修复（标签）计算剪辑区域<a href="https://github.com/lvgl/lvgl/commit/57e211cc">57e211cc</a>
+- 苦差事（deps）：在/docs <a href="https://github.com/lvgl/lvgl/commit/b2f77dfc">b2f77dfc</a> 中将 urllib3 从 1.26.4 提升到 1.26.5
+- fix(docs) 添加关于默认组的文档 <a href="https://github.com/lvgl/lvgl/commit/29bfe604">29bfe604</a>
+
+
 ## v8.0.0 (01.06.2021)
+
+<details>
+<summary>查看原文</summary>
+<p>
 
 v8.0 brings many new features like simplified and more powerful scrolling, new layouts inspired by CSS Flexbox and Grid, simplified and improved widgets, more powerful events, hookable drawing, and more.
 
 v8 is a major change and therefore it's not backward compatible with v7. 
 
-### Directory structure
+</p>
+</details>
+
+v8.0 带来了许多新功能，例如简化且更强大的滚动、受 CSS Flexbox 和 Grid 启发的新布局、简化和改进的小部件、更强大的事件、可挂钩绘图等。
+
+v8 是一个重大变化，因此它不向后兼容 v7。
+
+### Directory structure（目录结构）
+
+<details>
+<summary>查看原文</summary>
+<p>
+
 - The `lv_` prefix is removed from the folder names
 - The `docs` is moved to the `lvgl` repository
 - The `examples` are moved to the `lvgl` repository
@@ -126,7 +277,24 @@ v8 is a major change and therefore it's not backward compatible with v7.
    - In `extra` we can have a lot and specific widgets
    - Good place for contributions
 
-### Widget changes
+</p>
+</details>
+
+- 从文件夹名称中删除了 `lv_` 前缀
+- `docs` 被移动到 `lvgl` 存储库
+- `examples` 被移动到 `lvgl` 存储库
+- 为复杂的小部件创建一个 `src/extra` 文件夹：
+    - 它使核心 LVGL 更精简
+    - 在`extra`中，我们可以有很多特定的小部件
+    - 贡献的好地方
+
+
+### Widget changes（部件更改）
+
+<details>
+<summary>查看原文</summary>
+<p>
+
 - `lv_cont` removed, layout features are moved to `lv_obj`
 - `lv_page` removed, scroll features are moved to `lv_obj`
 - `lv_objmask` the same can be achieved by events
@@ -135,27 +303,95 @@ v8 is a major change and therefore it's not backward compatible with v7.
 - `lv_animing` new widget for simple slideshow animations
 - \+ many minor changes and improvements
 
-### New scrolling
+</p>
+</details>
+
+- 删除了`lv_cont`，布局功能移到了`lv_obj`
+- 删除了`lv_page`，滚动功能移到了`lv_obj`
+- `lv_objmask` 同样可以通过事件来实现
+- 添加了 `lv_meter` 作为 `lv_linemeter` 和 `lv_gauge` 的联合
+- `lv_span` 新小部件模仿 HTML `<span>`
+- `lv_animing` 用于简单幻灯片动画的新小部件
+- \+ 许多小的变化和改进
+
+
+### New scrolling（新的滚动功能）
+
+<details>
+<summary>查看原文</summary>
+<p>
+
 - Support "elastic" scrolling when scrolled in
 - Support scroll chaining among any objects types (not only `lv_pages`s)
 - Remove `lv_drag`. Similar effect can be achieved by setting the position in `LV_EVENT_PRESSING`
 - Add snapping
 - Add snap stop to scroll max 1 snap point
 
-### New layouts
+</p>
+</details>
+
+- 滚动时支持“弹性”滚动
+- 支持任何对象类型之间的滚动链接（不仅是`lv_pages`s）
+- 删除`lv_drag`。 类似的效果可以通过在`LV_EVENT_PRESSING`中设置位置来实现
+- 添加捕捉
+- 添加捕捉停止以滚动最多 1 个捕捉点
+
+### New layouts（新的布局）
+
+<details>
+<summary>查看原文</summary>
+<p>
+
 - [CSS Grid](https://css-tricks.com/snippets/css/a-guide-to-grid/)-like layout support
 - [CSS Flexbox](https://css-tricks.com/snippets/css/a-guide-to-flexbox/)-like layout support
 
-### Styles
+</p>
+</details>
+
+- [CSS Grid](https://css-tricks.com/snippets/css/a-guide-to-grid/) 类似布局支持
+- [CSS Flexbox](https://css-tricks.com/snippets/css/a-guide-to-flexbox/) 类似布局支持
+
+
+### Styles（样式）
+
+<details>
+<summary>查看原文</summary>
+<p>
+
 - Optimize and simplify styles
 - State is saved in the object instead of the style property
 - Object size and position can be set in styles too
 
-### Events
+</p>
+</details>
+
+- 优化和简化样式
+- 状态保存在对象中而不是样式属性中
+- 对象大小和位置也可以在样式中设置
+
+### Events（事件）
+
+<details>
+<summary>查看原文</summary>
+<p>
+
 - Allow adding multiple events to an object
 - A `user_data` can be attached to the added events
 
-### Driver changes
+</p>
+</details>
+
+
+- 允许向一个对象添加多个事件
+- 一个 `user_data` 可以附加到添加的事件
+
+
+### Driver changes（驱动程序更改）
+
+<details>
+<summary>查看原文</summary>
+<p>
+
 - `lv_disp_drv_t`, `lv_indev_drv_t`, `lv_fs_drv_t` needs to be `static`
 - `...disp_buf...` is renamed to `draw_buf`. See an initialization example [here](https://github.com/lvgl/lv_sim_eclipse_sdl/blob/release/v8.0/main.c#L128-L141).
 - No partial update if two screen sized buffers are set
@@ -163,7 +399,25 @@ v8 is a major change and therefore it's not backward compatible with v7.
 - `hor_res` and `ver_res` need to be set in `disp_drv`
 - `indev_read_cb` returns `void`. To indicate that there is more that to read set `data->continue_reading = 1` in the `read_cb`
 
-### Other changes
+
+</p>
+</details>
+
+
+- `lv_disp_drv_t`、`lv_indev_drv_t`、`lv_fs_drv_t` 需要是`static`
+- `...disp_buf...` 重命名为 `draw_buf`。 请参阅[此处]（https://github.com/lvgl/lv_sim_eclipse_sdl/blob/release/v8.0/main.c#L128-L141）的初始化示例。
+- 如果设置了两个屏幕大小的缓冲区，则不会进行部分更新
+- `disp_drv->full_refresh = 1` 总是使整个显示重绘。
+- `hor_res` 和 `ver_res` 需要在 `disp_drv` 中设置
+- `indev_read_cb` 返回 `void`。 表示在 read_cb 中还有更多要读取的 set `data->continue_reading = 1`
+
+
+### Other changes（其他变化）
+
+<details>
+<summary>查看原文</summary>
+<p>
+
 - Remove the copy parameter from create functions
 - Simplified File system interface API
 - Use a more generic inheritance
@@ -173,12 +427,44 @@ v8 is a major change and therefore it's not backward compatible with v7.
 - `lv_pct(x)` can be used to set the size and position in percentage
 - There are many other changes in widgets that are not detailed here. Please refer to the documentation of the widgets.
 
-### New release policy
+</p>
+</details>
+
+
+- 从创建函数中删除复制参数
+- 简化的文件系统接口 API
+- 使用更通用的继承
+- 重新设计了内置主题
+- `lv_obj_align` 现在保存对齐并自动重新对齐对象，但不能用于对齐到父对象以外的对象
+- `lv_obj_align_to` 可以对齐到一个对象，但不保存对齐
+- `lv_pct(x)` 可用于以百分比设置大小和位置
+- 小部件中还有许多其他更改，此处未详细说明。 请参阅小部件的文档。
+
+
+### New release policy（新的发布政策）
+
+<details>
+<summary>查看原文</summary>
+<p>
+
 - We will follow [Release branches with GitLab flow](https://docs.gitlab.com/ee/topics/gitlab_flow.html#release-branches-with-gitlab-flow)
 - Minor releases are expected in every 3-4 month
 - `master` will always contain the latest changes
 
-### Migrating from v7 to v8
+</p>
+</details>
+
+- 我们将遵循[使用 GitLab 流程发布分支](https://docs.gitlab.com/ee/topics/gitlab_flow.html#release-branches-with-gitlab-flow)
+- 预计每 3-4 个月发布一次小版本
+- `master` 将始终包含最新的更改
+
+
+### Migrating from v7 to v8（从 v7 迁移到 v8）
+
+<details>
+<summary>查看原文</summary>
+<p>
+
 - First and foremost, create a new `lv_conf.h` based on `lv_conf_template.h`.
 - To try the new version it's recommended to use a simulator project and see the examples.
 - When migrating your project to v8
@@ -189,6 +475,21 @@ v8 is a major change and therefore it's not backward compatible with v7.
   - Use `lv_obj` instead of `lv_page`
   - See the changes in [Colors](https://docs.lvgl.io/8.0/overview/color.html)
   - The other parts are mainly minor renames and refactoring. See the functions' documentation for descriptions. 
+
+</p>
+</details>
+
+- 首先，基于 `lv_conf_template.h` 创建一个新的 `lv_conf.h`。
+- 要尝试新版本，建议使用模拟器项目并查看示例。
+- 将项目迁移到 v8 时
+   - 更新驱动程序如上所述
+   - 更新样式
+   - 更新事件
+   - 使用新布局而不是 `lv_cont` 功能
+   - 使用`lv_obj`代替`lv_page`
+   - 查看[颜色]中的变化(https://docs.lvgl.io/8.0/overview/color.html)
+   - 其他部分主要是小的重命名和重构。 有关说明，请参阅函数的文档。
+
 
 ## v7.11.0 (16.03.2021)
 
