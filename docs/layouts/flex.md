@@ -3,7 +3,7 @@
 :github_url: |github_link_base|/layouts/flex.md
 ```
 
-# Flex（Flex布局）
+# Flex（弹性布局）
 
 ## Overview（概述）
 
@@ -30,7 +30,7 @@ Flexbox（或简称 Flex）是 [CSS Flexbox](https://css-tricks.com/snippets/css
 
 请注意，LVGL 的 flex 布局功能需要通过 `lv_conf.h` 中的 `LV_USE_FLEX` 全局启用。
 
-## Terms（定义）
+## Terms（约定）
 
 <details>
 <summary>查看原文</summary>
