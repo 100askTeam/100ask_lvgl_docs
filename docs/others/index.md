@@ -2,7 +2,7 @@
 .. include:: /header.rst 
 :github_url: |github_link_base|/others/index.md
 ```
-# Others
+# Others（其他）
 
 
 ```eval_rst
