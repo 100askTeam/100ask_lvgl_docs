@@ -54,7 +54,7 @@ In the config file comments explain the meaning of the options. Be sure to set a
 
 在配置文件的注释中解释了选项的含义。请务必根据显示器的颜色深度至少设置“LV_COLOR_DEPTH”。
 
-## Initialization（名词: 初始化）
+## Initialization（初始化）
 
 <details>
 <summary>查看原文</summary>
