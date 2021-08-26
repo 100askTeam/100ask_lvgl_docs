@@ -2,7 +2,6 @@
 
 [【1】韦东山老师官方在线学习平台](https://www.100ask.net/page)
 
-
 [【2】单片机机工程师如何提升自己进阶嵌入式Linux？](https://mp.weixin.qq.com/s/T5JcyPcdVKhX7Q1E28Azcw)
 
 [【3】访问B站主页查看更多精彩内容](https://space.bilibili.com/275908810)
@@ -22,7 +21,7 @@
 ![app](index_img/app.png)
 
  
-# 添加老师
+## 添加老师交流
 
 打开手机微信扫一扫添加老师微信，欢迎一起交流！ :) 
 
