@@ -18,6 +18,7 @@
 - 2048小游戏
 - TODO...
 
-> 源码获取：[http://download.100ask.org/boards/Nxp/100ask_imx6ull_pro/index.html](http://download.100ask.org/boards/Nxp/100ask_imx6ull_pro/index.html)
+## IMX6ULL LVGL GUI DEMO源码
 
+[IMX6ULL-LVGL 源码git仓库(点击跳转)](https://gitee.com/weidongshan/imx6ull-lvgl)
 

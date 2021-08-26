@@ -19,4 +19,9 @@
 - 2048小游戏
 - TODO...
 
-> 源码获取：[http://download.100ask.org/boards/St/100ask_stm32mp157_pro/index.html](http://download.100ask.org/boards/St/100ask_stm32mp157_pro/index.html)
+##  STM32MP157 LVGL GUI DEMO源码
+
+[stm32mp157-lvgl 源码git仓库(点击跳转)](https://gitee.com/weidongshan/stm32mp157-lvgl)
+
+
+[stm32mp157-buildroot 源码git仓库(点击跳转)](https://gitee.com/weidongshan/Buildroot)

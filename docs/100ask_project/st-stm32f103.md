@@ -22,4 +22,6 @@
 - 系统主题切换
 - 板载硬件测试
 
-> 源码获取：[http://download.100ask.org/boards/St/100ask_stm32f103/index.html](http://download.100ask.org/boards/St/100ask_stm32f103/index.html)
+## STM32F103 LVGL GUI DEMO源码
+
+[stm32f103源码git仓库(点击跳转)](https://gitee.com/weidongshan/stm32f103-lvgl.git)
