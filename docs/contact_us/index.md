@@ -16,14 +16,10 @@
 
 ![wechat_applet](index_img/wechat_applet.jpg)
 
-【7】打开手机微信扫一扫，下载手机APP学习更方便！
-
-![app](index_img/app.png)
-
  
-## 添加老师交流
+# 加入学习圈子交流学习
 
-打开手机微信扫一扫添加老师微信，欢迎一起交流！ :) 
+打开手机微信扫一扫加入学习社群，欢迎一起交流！ :) 
 
-![WeChat](index_img/wechat.png)
+![equanzi](index_img/equanzi.jpg)
 
