@@ -17,9 +17,9 @@
 ![wechat_applet](index_img/wechat_applet.jpg)
 
  
-# 加入学习圈子交流学习
+# 添加微信交流学习
 
-打开手机微信扫一扫加入学习社群，欢迎一起交流！ :) 
+打开手机微信扫一扫添加微信，欢迎一起交流！
 
-![equanzi](index_img/equanzi.jpg)
+![equanzi](index_img/wechat.png)
 
