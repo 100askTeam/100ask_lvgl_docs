@@ -28,6 +28,7 @@
    overview/index
    widgets/index
    layouts/index
+   libs/index
    others/index
    CONTRIBUTING
    CHANGELOG
