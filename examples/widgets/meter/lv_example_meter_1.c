@@ -13,14 +13,14 @@ static void set_value(void * indic, int32_t v)
  */
 void lv_example_meter_1(void)
 {
-    meter = lv_meter_create(lv_scr_act());
+     meter = lv_meter_create(lv_scr_act());
     lv_obj_center(meter);
     lv_obj_set_size(meter, 200, 200);
 
     /*Add a scale first*/
     lv_meter_scale_t * scale = lv_meter_add_scale(meter);
-    lv_meter_set_scale_ticks(meter, scale, 41, 2, 10, lv_palette_main(LV_PALETTE_GREY));
-    lv_meter_set_scale_major_ticks(meter, scale, 8, 4, 15, lv_color_black(), 10);
+    lv_meter_set_scale_ticks(meter, scale, 51, 2, 10, lv_palette_main(LV_PALETTE_GREY));
+    lv_meter_set_scale_major_ticks(meter, scale, 10, 4, 15, lv_color_black(), 10);
 
     lv_meter_indicator_t * indic;
 
