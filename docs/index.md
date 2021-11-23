@@ -23,6 +23,7 @@
    :maxdepth: 2
    
    intro/index
+   examples
    get-started/index
    porting/index
    overview/index
