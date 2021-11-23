@@ -5,12 +5,12 @@
 static void event_handler(lv_event_t * e)
 {
     lv_obj_t * obj = lv_event_get_target(e);
-    LV_LOG_USER("Button %d clicked", (int)lv_obj_get_index(obj));
+    LV_LOG_USER("Button %d clicked", lv_obj_get_child_id(obj));
 }
 
 void lv_example_win_1(void)
 {
-    lv_obj_t * win = lv_win_create(lv_scr_act(), 40);
+    lv_obj_t * win = lv_win_create(lv_scr_act(), 60);
     lv_obj_t * btn;
     btn = lv_win_add_btn(win, LV_SYMBOL_LEFT, 40);
     lv_obj_add_event_cb(btn, event_handler, LV_EVENT_CLICKED, NULL);
