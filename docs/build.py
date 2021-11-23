@@ -5,6 +5,8 @@ import os
 import subprocess
 import re
 
+import example_list as ex
+
 langs = ['en']
 
 # Change to script directory for consistency
@@ -23,12 +25,18 @@ def cmd(s):
 
 # Get the current branch name
 status, br = subprocess.getstatusoutput("git branch | grep '*'")
+# _, gitcommit = subprocess.getstatusoutput("git rev-parse HEAD")
 br = re.sub('\* ', '', br)
+
+# Generate the list of examples
+ex.exec()
+
 urlpath = re.sub('release/', '', br)
 
 # Be sure the github links point to the right branch
 f = open("header.rst", "w")
 f.write(".. |github_link_base| replace:: https://github.com/lvgl/docs/blob/" + br)
+#f.write(".. |github_link_base| replace:: https://github.com/lvgl/lvgl/blob/"  + "/docs")
 f.close()
 
 base_html = "html_baseurl = 'https://docs.lvgl.io/" + urlpath + "/en/html/'"
