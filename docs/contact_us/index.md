@@ -17,9 +17,10 @@
 ![wechat_applet](index_img/wechat_applet.jpg)
 
  
-# 添加微信交流学习
+# 🔥加入技术交流群聊一起学习！
 
-打开手机微信扫一扫添加微信，欢迎一起交流！
+| | |
+| ---- | ---- |
+| ![qq](http://photos.100ask.net/lvgl/00_group_chat/lvgl_qq.png) | ![wechat](http://photos.100ask.net/lvgl/00_group_chat/lvgl_wechat.png) |
 
-![equanzi](index_img/wechat.png)
 
