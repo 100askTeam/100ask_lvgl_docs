@@ -19,7 +19,7 @@
  
 # 🔥加入技术交流群聊一起学习！
 
-| | |
+| QQ群 | 微信群 |
 | ---- | ---- |
 | ![qq](http://photos.100ask.net/lvgl/00_group_chat/lvgl_qq.png) | ![wechat](http://photos.100ask.net/lvgl/00_group_chat/lvgl_wechat.png) |
 
