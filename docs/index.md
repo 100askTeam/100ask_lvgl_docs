@@ -3,6 +3,12 @@
 :github_url: |github_link_base|/index.md
 ```
 
+```eval_rst
+
+PDF version: :download:`100ASK_LVGL_CN.pdf <100ASK_LVGL_CN.pdf>`
+
+```
+
 # 欢迎阅读百问网LVGL中文开发手册！
 
 <a href="https://www.100ask.net/index"><img src="_static/img/home_banner.png" style="width:100%"></a>
