@@ -35,7 +35,7 @@ jobs:
             !${{ env.pythonLocation }}/lib/python*/site-packages/setuptools*
           key: ${{ env.pythonLocation }}-${{ hashFiles('docs/requirements.txt') }}
       - name: Install Doxygen and Latex dependencies
-        run: sudo apt-get install doxygen texlive-xetex texlive-binaries texlive-lang-english latexmk fonts-freefont-otf
+        run: sudo apt-get install doxygen texlive-xetex texlive-binaries texlive-lang-english texlive-lang-chinese latexmk fonts-freefont-otf
       - name: Install requirements
         run: |
           pip install -r docs/requirements.txt
