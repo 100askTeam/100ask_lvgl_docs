@@ -16,9 +16,11 @@ LVGL (Light and Versatile Graphics Library) is a free and open-source graphics l
 
 LVGL(轻量级和通用图形库)是一个免费和开源的图形库，它提供了创建嵌入式GUI所需的一切，具有易于使用的图形元素，美丽的视觉效果和低内存占用。
 
-> LVGL的项目作者是来自匈牙利首都布达佩斯的 Gábor Kiss-Vámosi 。Kiss 在2009年开始写 LVGL(LittlevGL)，2016年将其重写并发布在 [GitHub](https://github.com/lvgl)] 上。
+--------------
 
->LVGL 的第一个版本于 2016 年在 GitHub 上发布，当时叫 LittlevGL而不是LVGL，后来作者统一修改为 LVGL 甚至连仓库地址都改了。 像一般的开源项目的那样，它是作为一个人的项目开始的。 从那时起，陆续有近 100 名贡献者参与了项目开发，使得 LVGL 逐渐成为最受欢迎的嵌入式图形库之一。
+*LVGL的项目作者是来自匈牙利首都布达佩斯的 Gábor Kiss-Vámosi 。Kiss 在2009年开始写 LVGL(LittlevGL)，2016年将其重写并发布在 [GitHub](https://github.com/lvgl)] 上。*
+
+*LVGL 的第一个版本于 2016 年在 GitHub 上发布，当时叫 LittlevGL而不是LVGL，后来作者统一修改为 LVGL 甚至连仓库地址都改了。 像一般的开源项目的那样，它是作为一个人的项目开始的。 从那时起，陆续有近 100 名贡献者参与了项目开发，使得 LVGL 逐渐成为最受欢迎的嵌入式图形库之一。*
 
 ## Key features （主要特性）
 
