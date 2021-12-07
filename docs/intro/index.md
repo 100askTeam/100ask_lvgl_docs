@@ -16,6 +16,9 @@ LVGL (Light and Versatile Graphics Library) is a free and open-source graphics l
 
 LVGL(轻量级和通用图形库)是一个免费和开源的图形库，它提供了创建嵌入式GUI所需的一切，具有易于使用的图形元素，美丽的视觉效果和低内存占用。
 
+> LVGL的项目作者是来自匈牙利首都布达佩斯的 Gábor Kiss-Vámosi 。Kiss 在2009年开始写 LVGL(LittlevGL)，2016年将其重写并发布在 [GitHub](https://github.com/lvgl)] 上。
+
+>LVGL 的第一个版本于 2016 年在 GitHub 上发布，当时叫 LittlevGL而不是LVGL，后来作者统一修改为 LVGL 甚至连仓库地址都改了。 像一般的开源项目的那样，它是作为一个人的项目开始的。 从那时起，陆续有近 100 名贡献者参与了项目开发，使得 LVGL 逐渐成为最受欢迎的嵌入式图形库之一。
 
 ## Key features （主要特性）
 
@@ -254,7 +257,7 @@ The core repositories follow the rules of [Semantic versioning](https://semver.o
 </p>
 </details>
 
-核心存储库遵循语义版本控制规则：
+LVGL库遵循[语义版本管理](https://semver.org/)：
 - 不兼容 API 更改的主要版本。 比如： v5.0.0, v6.0.0
 - 新的但向后兼容的功能的次要版本。 比如： v6.1.0, v6.2.0
 - 用于向后兼容错误修复的补丁版本。 比如： v6.1.1, v6.1.2
@@ -289,26 +292,17 @@ The core repositories have at least the following branches:
 <summary>查看原文</summary>
 <p>
 
-LVGL has 2 weeks release cycle. On every first and third Tuesday of a month:
-1. A major, minor or bug fix release is created (based on the new features) from the `master` branch
-2. `master` is merged into `release/vX`
-3. Immediately after the release `dev` is merged into `master` 
-4. In the upcoming 2 weeks the new features in `master` can be tested
-5. Bug fixes are merged directly into `master`
-6. After 2 weeks start again from the first point
+- Bug fixes: Released on demand even weekly
+- Minor releases: Every 3-4 months
+- Major releases: Approximately yearly
 
 
 </p>
 </details>
 
-LVGL 的发布周期为 2 周。每个月的第一个和第三个星期二：
-1. 从 `master` 分支创建主要、次要或错误修复版本（基于新功能）
-2. `master` 分支合并到 `release/vX`
-3. 发布后立即将 `dev` 合并到 `master`
-4. 在接下来的 2 周内可以测试 `master` 中的新功能
-5. Bug 修复直接合并到 `master`
-6. 2 周后从第一点重新开始
-
+- 错误修复：每周按需发布
+- 次要版本：每 3-4 个月
+- 主要版本：大约每年
 
 ### Tags（版本标签）
 
@@ -316,12 +310,21 @@ LVGL 的发布周期为 2 周。每个月的第一个和第三个星期二：
 <summary>查看原文</summary>
 <p>
 
-Tags like `vX.Y.Z` are created for every release.
+The core repositories have at least the following branches:
+- `master` latest version, patches are merged directly here. 
+- `release/vX.Y` stable versions of the minor releases
+- `fix/some-description` temporary branches for bug fixes
+- `feat/some-description` temporary branches for features
 
 </p>
 </details>
 
-为每个版本创建像 `vX.Y.Z` 这样的标签。
+核心存储库至少有以下分支：
+
+- `master` 最新版本，补丁直接在这里合并。
+- `release/vX.Y` 次要版本的稳定版本
+- `fix/some-description` 用于错误修复的临时分支
+- `feat/some-description` 用于特性的临时分支
 
 
 ### Changelog（变更日志）
@@ -336,6 +339,37 @@ The changes are recorded in [CHANGELOG.md](https://github.com/lvgl/lvgl/blob/mas
 </details>
 
 更改记录在 [CHANGELOG.md](https://github.com/lvgl/lvgl/blob/master/CHANGELOG.md) 中。
+
+### Version support
+
+<details>
+<summary>查看原文</summary>
+<p>
+
+Before v8 every minor release of major releases is supported for 1 year.
+Starting from v8, every minor release is supported for 1 year.
+
+| Version | Release date | Support end | Active |
+|---------|--------------|-------------|--------|
+| v5.3    | Feb 1, 2019  |Feb 1, 2020  | No     |
+| v6.1    | Nov 26, 2019 |Nov 26, 2020 | No     |
+| v7.11   | Mar 16, 2021 |Mar 16, 2022 | Yes    |
+| v8.0    | 1 Jun, 2021  |1 Jun, 2022  | Yes    |
+| v8.1    | In progress  |   |     |
+
+</p>
+</details>
+
+在v8之前，每个主要版本的次要版本都支持1年。从v8开始，每个次要版本都支持1年。
+
+| 版本 | 发布日期 | 支持结束 | 活跃 |
+|---------|--------------|-------------|--------|
+| v5.3    | 2019 年 2 月 1 日  | 2020 年 2 月 1 日  | No     |
+| v6.1    | 2019 年 11 月 26 日 | 2020 年 11 月 26 日 | No     |
+| v7.11   | 2021 年 3 月 16 日 | 2022 年 3 月 16 日 | Yes    |
+| v8.0    | 2021年6月1日  | 2022年6月1日  | Yes    |
+| v8.1    | 进行中  |   |     |
+
 
 ### Side projects
 
