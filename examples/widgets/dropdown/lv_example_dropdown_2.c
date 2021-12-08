@@ -10,7 +10,9 @@ void lv_example_dropdown_2(void)
     static const char * opts = "Apple\n"
                                "Banana\n"
                                "Orange\n"
-                               "Melon";
+                               "Melon\n"
+                               "Grape\n"
+                               "Raspberry";
 
     lv_obj_t * dd;
     dd = lv_dropdown_create(lv_scr_act());

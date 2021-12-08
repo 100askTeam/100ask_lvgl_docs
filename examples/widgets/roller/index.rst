@@ -1,3 +1,5 @@
+C
+^
 
 Simple Roller 
 """"""""""""""""
@@ -11,9 +13,7 @@ Styling the roller
 .. lv_example:: widgets/roller/lv_example_roller_2
   :language: c
 
-add fade mask to roller
-"""""""""""""""""""""""
+MicroPython
+^^^^^^^^^^^
 
-.. lv_example:: widgets/roller/lv_example_roller_3
-  :language: c
-
+No examples yet.

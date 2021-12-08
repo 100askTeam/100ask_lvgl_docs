@@ -1,7 +1,13 @@
+C
+^
 
-Span with custom styles
-""""""""""""""""""""""""
+span with custom style
+"""""""""""""""""""""
 
-.. lv_example:: widgets/span/lv_example_span_1
+.. lv_example:: lv_ex_widgets/lv_ex_span/lv_ex_span_1
   :language: c
 
+MicroPython
+^^^^^^^^^^^
+
+No examples yet.
