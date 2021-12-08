@@ -75,7 +75,6 @@ jobs:
         run: |
           git clone https://${{secrets.CODING_USERNAME}}:${{secrets.CODING_PASSWD}}@e.coding.net/weidongshan/sphinx_docs/100ask_lvgl_docs.git --branch master --single-branch master
           cp -r out_html/* master/8.1
-          cp -r out_html/* master/master
           ls
           cd master
           touch 8.1/.nojekyll && touch master/.nojekyll
