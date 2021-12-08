@@ -8,25 +8,26 @@
 <summary>查看原文</summary>
 <p>
 
-You can try out LVGL **using only your PC** (i.e. without any development boards). LVGL will run on a simulator environment on the PC where anyone can write and experiment the real LVGL applications.
+You can try out LVGL **using only your PC** (i.e. without any development boards). LVGL will run on a simulator environment on the PC where anyone can write and experiment with real LVGL applications.
 
-Using the simulator on the PC has the following advantages:
-- Hardware independent - Write code, run it on the PC and see the result on the PC monitor.
-- Cross-platform - Any Windows, Linux or MacOS system can run the PC simulator.  
-- Portability - the written code is portable, which means you can simply copy it when using an embedded hardware.
-- Easy Validation - The simulator is also very useful to report bugs because it means common platform for every user. So it's a good idea to reproduce a bug in the simulator and use the code snippet in the [Forum](https://forum.lvgl.io).
+Using the simulator on a PC has the following advantages:
+- Hardware independent - Write code, run it on the PC and see the result on a monitor.
+- Cross-platform - Any Windows, Linux or macOS system can run the PC simulator.  
+- Portability - The written code is portable, which means you can simply copy it when migrating to embedded hardware.
+- Easy Validation - The simulator is also very useful to report bugs because it provides a common platform for every user. So it's a good idea to reproduce a bug in the simulator and use that code snippet in the [Forum](https://forum.lvgl.io).
 
 </p>
 </details>
 
-您可以 **仅使用您的 PC** （即没有任何开发板）来试用 LVGL。 LVGL 将在 PC 上的模拟器环境中运行，任何人都可以在其中编写和试验真正的 LVGL 应用程序。
+您可以仅使用您的 PC **试用 LVGL（即没有任何开发板）。 LVGL 将在 PC 上的模拟器环境中运行，任何人都可以在其中编写和试验真实的 LVGL 应用程序。
 
-在PC上使用模拟器运行lvgl有以下优点：
+在 PC 上使用模拟器具有以下优点：
+- 独立于硬件 - 编写代码，在 PC 上运行并在监视器上查看结果。
+- 跨平台 - 任何 Windows、Linux 或 macOS 系统都可以运行 PC 模拟器。
+- 可移植性 - 编写的代码是可移植的，这意味着您可以在迁移到嵌入式硬件时简单地复制它。
+- 轻松验证 - 模拟器对于报告错误也非常有用，因为它为每个用户提供了一个通用平台。 因此，最好在模拟器中重现错误并
 
-- 独立于硬件 - 编写代码，在 PC 上运行它并在 PC 显示器上查看结果。
-- 跨平台 - 任何 Windows、Linux 或 MacOS 系统都可以运行 PC 模拟器。
-- 可移植性——编写的代码是可移植的，这意味着您可以在使用嵌入式硬件时简单地复制它。
-- Easy Validation - 模拟器对于报告错误也非常有用，因为它意味着每个用户的通用平台。所以最好在模拟器中重现一个错误并使用 [论坛](https://forum.lvgl.io) 中的代码片段。
+可以在 [论坛](https://forum.lvgl.io) 中使用你在pc模拟器写的代码片段。
 
 
 ## Select an IDE（选择适合的IDE）
@@ -38,7 +39,7 @@ Using the simulator on the PC has the following advantages:
 The simulator is ported to various IDEs (Integrated Development Environments). Choose your favorite IDE, read its README on GitHub, download the project, and load it to the IDE.
 
 - [Eclipse with SDL driver](https://github.com/lvgl/lv_sim_eclipse_sdl): Recommended on Linux and Mac
-- [CodeBlocks](https://github.com/lvgl/lv_sim_codeblocks_win): Recommended on Windows（简单方便推荐使用）
+- [CodeBlocks](https://github.com/lvgl/lv_sim_codeblocks_win): Recommended on Windows
 - [VisualStudio with SDL driver](https://github.com/lvgl/lv_sim_visual_studio_sdl): For Windows
 - [VSCode with SDL driver](https://github.com/lvgl/lv_sim_vscode_sdl): Recommended on Linux and Mac
 - [PlatformIO with SDL driver](https://github.com/lvgl/lv_platformio): Recommended on Linux and Mac
@@ -49,7 +50,7 @@ The simulator is ported to various IDEs (Integrated Development Environments). C
 模拟器被移植到各种 IDE（集成开发环境）。选择您最喜欢的 IDE，在 GitHub 上阅读其 README，下载项目，然后将其加载到 IDE。
 
 - [Eclipse with SDL driver](https://github.com/lvgl/lv_sim_eclipse_sdl): Linux 和 Mac
-- [CodeBlocks](https://github.com/lvgl/lv_sim_codeblocks_win): Windows
+- [CodeBlocks](https://github.com/lvgl/lv_sim_codeblocks_win): Windows （简单方便推荐使用）
 - [VisualStudio with SDL driver](https://github.com/lvgl/lv_sim_visual_studio_sdl): Windows
 - [VSCode with SDL driver](https://github.com/lvgl/lv_sim_vscode_sdl): Linux 和 Mac 
 - [PlatformIO with SDL driver](https://github.com/lvgl/lv_platformio): Linux 和 Mac 
@@ -58,8 +59,8 @@ The simulator is ported to various IDEs (Integrated Development Environments). C
 <summary>查看原文</summary>
 <p>
 
-You can use any IDE for the development but, for simplicity, the configuration for Eclipse CDT is what we'll focus on in this tutorial.
-The following section describes the set-up guide of Eclipse CDT in more details.
+You can use any IDE for development but, for simplicity, the configuration for Eclipse CDT is what we'll focus on in this tutorial.
+The following section describes the set-up guide of Eclipse CDT in more detail.
 
 **Note: If you are on Windows, it's usually better to use the Visual Studio or CodeBlocks projects instead. They work out of the box without requiring extra steps.**
 
