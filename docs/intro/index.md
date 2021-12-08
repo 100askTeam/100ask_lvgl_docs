@@ -53,13 +53,13 @@ LVGL的项目作者是来自匈牙利首都布达佩斯的 Gábor Kiss-Vámosi �
 </details>
 
 - 强大的构建块，例如按钮、图表、列表、滑块、图像等。
--带有动画、抗锯齿、不透明度、平滑滚动的高级图形
+- 带有动画、抗锯齿、不透明度、平滑滚动的高级图形
 - 各种输入设备，如触摸板、鼠标、键盘、编码器等。
 - 多语言支持 UTF-8 编码
 - 多显示器支持，即同时使用多个 TFT、单色显示器
 - 具有类似 CSS 样式的完全可定制的图形元素
 - 独立于硬件：与任何微控制器或显示器一起使用
--可扩展：能够以很少的内存运行（64 kB Flash，16 kB RAM）
+- 可扩展：能够以很少的内存运行（64 kB Flash，16 kB RAM）
 - 支持但不要求操作系统、外部存储器和 GPU
 - 即使具有高级图形效果，也可进行单帧缓冲区操作
 - 用 C 编写以获得最大的兼容性（C++ 兼容）
@@ -115,7 +115,7 @@ Basically, every modern controller which is able to drive a display is suitable 
 
 <ul>
 <li> 16、32 或 64 位微控制器或处理器</li>
-<li>&gt; 建议使用 16 MHz 时钟速度</li>
+<li> 建议使用 &gt;16 MHz 时钟速度</li>
 <li> 闪存/ROM： &gt; 64 kB 用于非常重要的组件 (&gt; 建议使用 180 kB)</li>
 <li> RAM: 
   <ul>
@@ -123,8 +123,8 @@ Basically, every modern controller which is able to drive a display is suitable 
     <li> 堆: &gt; 2kB (&gt; 建议使用 8 kB)</li>
     <li> 动态数据（堆）: &gt; 2 KB (&gt; 如果使用多个对象，建议使用 16 kB).
       在 <em>lv_conf.h</em> 文件中配置 <em>LV_MEM_SIZE</em> 生效。</li>
-    <li> 显示缓冲区：&gt; <em>“水平分辨率”</em>像素（推荐&gt; 10 &times; <em>10×“水平分辨率”</em>）</li>
-    <li>MCU 或外部显示控制器中的一个帧缓冲器</li>
+    <li> 显示缓冲区：&gt; <em>“水平分辨率”</em>像素（推荐 &gt;10 &times; <em>10×“ 水平分辨率”</em>）</li>
+    <li>MCU或外部显示控制器中的一个帧缓冲区</li>
 	</ul>
 </li>
 <li> C99 或更新的编译器</li>
@@ -134,8 +134,6 @@ Basically, every modern controller which is able to drive a display is suitable 
           <a href="https://www.geeksforgeeks.org/callbacks-in-c/">callbacks</a></li>
 </ul>
 <em>请注意，内存使用量可能因架构、编译器和构建选项而异。</em>
-
-
 
 ## License（许可证）
 
