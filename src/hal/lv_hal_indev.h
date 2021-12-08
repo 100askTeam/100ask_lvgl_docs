@@ -81,7 +81,7 @@ typedef struct {
     int16_t enc_diff; /**< For LV_INDEV_TYPE_ENCODER number of steps since the previous read*/
 
     lv_indev_state_t state; /**< LV_INDEV_STATE_REL or LV_INDEV_STATE_PR*/
-    bool continue_reading;  /**< Call the read callback until it's set to true*/
+    bool continue_reading;  /**< If set to true, the read callback is invoked again*/
 } lv_indev_data_t;
 
 /** Initialized by the user and registered by 'lv_indev_add()'*/
@@ -113,7 +113,7 @@ typedef struct _lv_indev_drv_t {
     /**< Drag throw slow-down in [%]. Greater value means faster slow-down*/
     uint8_t scroll_throw;
 
-    /**< At least this difference should between two points to evaluate as gesture*/
+    /**< At least this difference should be between two points to evaluate as gesture*/
     uint8_t gesture_min_velocity;
 
     /**< At least this difference should be to send a gesture*/
@@ -168,13 +168,13 @@ typedef struct _lv_indev_proc_t {
 
     uint32_t pr_timestamp;         /**< Pressed time stamp*/
     uint32_t longpr_rep_timestamp; /**< Long press repeat time stamp*/
-} lv_indev_proc_t;
+} _lv_indev_proc_t;
 
 /** The main input device descriptor with driver, runtime data ('proc') and some additional
  * information*/
 typedef struct _lv_indev_t {
-    lv_indev_drv_t * driver;
-    lv_indev_proc_t proc;
+    struct _lv_indev_drv_t * driver;
+    _lv_indev_proc_t proc;
     struct _lv_obj_t * cursor;     /**< Cursor for LV_INPUT_TYPE_POINTER*/
     struct _lv_group_t * group;    /**< Keypad destination group*/
     const lv_point_t * btn_points; /**< Array points assigned to the button ()screen will be pressed
@@ -187,31 +187,31 @@ typedef struct _lv_indev_t {
 
 /**
  * Initialize an input device driver with default values.
- * It is used to surly have known values in the fields ant not memory junk.
+ * It is used to surely have known values in the fields and not memory junk.
  * After it you can set the fields.
  * @param driver pointer to driver variable to initialize
  */
-void lv_indev_drv_init(lv_indev_drv_t * driver);
+void lv_indev_drv_init(struct _lv_indev_drv_t * driver);
 
 /**
  * Register an initialized input device driver.
  * @param driver pointer to an initialized 'lv_indev_drv_t' variable (can be local variable)
  * @return pointer to the new input device or NULL on error
  */
-lv_indev_t * lv_indev_drv_register(lv_indev_drv_t * driver);
+lv_indev_t * lv_indev_drv_register(struct _lv_indev_drv_t * driver);
 
 /**
  * Update the driver in run time.
- * @param indev pointer to a input device. (return value of `lv_indev_drv_register`)
+ * @param indev pointer to an input device. (return value of `lv_indev_drv_register`)
  * @param new_drv pointer to the new driver
  */
-void lv_indev_drv_update(lv_indev_t * indev, lv_indev_drv_t * new_drv);
+void lv_indev_drv_update(lv_indev_t * indev, struct _lv_indev_drv_t * new_drv);
 
 /**
  * Get the next input device.
  * @param indev pointer to the current input device. NULL to initialize.
- * @return the next input devise or NULL if no more. Give the first input device when the parameter
- * is NULL
+ * @return the next input device or NULL if there are no more. Provide the first input device when
+ * the parameter is NULL
  */
 lv_indev_t * lv_indev_get_next(lv_indev_t * indev);
 
