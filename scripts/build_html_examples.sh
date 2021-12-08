@@ -1,14 +1,14 @@
 #!/bin/bash
 set -e
 export PATH="/usr/lib/ccache:/usr/local/opt/ccache/libexec:$PATH"
-#CURRENT_REF="$(git rev-parse HEAD)"
+CURRENT_REF="$(git rev-parse HEAD)"
 rm -rf emscripten_builder
 git clone https://github.com/lvgl/lv_sim_emscripten.git emscripten_builder
 scripts/genexamplelist.sh > emscripten_builder/examplelist.c
 cd emscripten_builder
 git submodule update --init -- lvgl
 cd lvgl
-#git checkout $CURRENT_REF
+git checkout $CURRENT_REF
 cd ..
 git submodule update --init -- lv_drivers
 mkdir cmbuild
