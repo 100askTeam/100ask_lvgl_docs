@@ -66,19 +66,13 @@ An object's "box" is built from the following parts:
 
 LVGL 遵循 CSS 的 [border-box](https://developer.mozilla.org/en-US/docs/Web/CSS/box-sizing) 模型。
 对象的“盒子”由以下部分构成：
-- 边界框：元素的宽度/高度。
-- 边框宽度：边框的宽度。
-- 填充：对象两侧与其子对象之间的空间。
-- 内容：如果边界框减少了边框宽度和填充的大小，则内容区域的大小。
+- 边界(bounding)框：元素的宽度/高度围起来的区域。
+- 边框(border)宽度：边框的宽度。
+- 填充(padding)：对象两侧与其子对象之间的空间。
+- 内容(content)：如果边界框按边框宽度和填充的大小缩小，则显示其大小的内容区域。
 
 ![The box models of LVGL: The content area is smaller then the bounding box with the padding and border width](/misc/boxmodel.png)
 
-LVGL 遵循 CSS 的 [border-box](https://developer.mozilla.org/en-US/docs/Web/CSS/box-sizing) 模型。
-对象的“盒子”由以下部分构成：
-- 边界框：元素的宽度/高度。
-- 边框宽度：边框的宽度。
-- 填充：对象两侧与其子对象之间的空间。
-- 内容：如果边界框减少了边框宽度和填充的大小，则内容区域的大小。
 
 <details>
 <summary>查看原文</summary>
@@ -91,8 +85,9 @@ The outline is drawn outside of the bounding box.
 </p>
 </details>
 
-边框绘制在边界框内。在边界内 LVGL 保持“填充大小”来放置孩子。
-轮廓绘制在边界框之外。
+边框(border)绘制在边界(bounding)框内。在边界(border)内 LVGL 保持 “填充(padding)大小” 来放置孩子。
+
+轮廓(outline)绘制在边界框之外。
 
 ### Important notes（重要笔记）
 
