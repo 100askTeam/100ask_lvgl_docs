@@ -8,17 +8,15 @@
 <summary>查看原文</summary>
 <p>
 
-*Styles* are used to set the appearance of the objects. Styles in lvgl are heavily inspired by CSS. The concept in nutshell is as follows:
+*Styles* are used to set the appearance of objects. Styles in lvgl are heavily inspired by CSS. The concept in a nutshell is as follows:
+
 - A style is an `lv_style_t` variable which can hold properties like border width, text color and so on. It's similar to a `class` in CSS. 
-- Styles can be assigned to objects to change their appearance. During the assignment the target part (*pseudo element* in CSS) and target state (*pseudo class*) can be specified.
-For example one can add `style_blue` to the knob of a slider when it's in pressed state.
+- Styles can be assigned to objects to change their appearance. Upon assignment, the target part (*pseudo-element* in CSS) and target state (*pseudo class*) can be specified.For example one can add `style_blue` to the knob of a slider when it's in pressed state.
 - The same style can be used by any number of objects.
-- Styles can be cascaded which means multiple styles can be assigned to an object and each style can have different properties. 
-Therefore not all properties have to be specified in style. LVLG will look for a property until a style defines it or use a default if it's not spefied by any of the styles.
-For example `style_btn` can result in a default gray button and `style_btn_red` can add only a `background-color=red` to overwrite the background color.
-- Later added styles have higher precedence. It means if a property is specified in two styles the later added will be used.
-- Some properties (e.g. text color) can be inherited from the parent(s) if it's not specified in the object. 
-- Objects can have local styles that have higher precedence than "normal" styles.
+- Styles can be cascaded which means multiple styles may be assigned to an object and each style can have different properties. Therefore, not all properties have to be specified in a style. LVGL will search for a property until a style defines it or use a default if it's not specified by any of the styles.For example `style_btn` can result in a default gray button and `style_btn_red` can add only a `background-color=red` to overwrite the background color.
+- The most recently added style has higher precedence. This means if a property is specified in two styles the newest style in the object will be used.
+- Some properties (e.g. text color) can be inherited from a parent(s) if it's not specified in an object. 
+- Objects can also have local styles with higher precedence than "normal" styles.
 - Unlike CSS (where pseudo-classes describe different states, e.g. `:focus`), in LVGL a property is assigned to a given state. 
 - Transitions can be applied when the object changes state.
 
@@ -26,18 +24,11 @@ For example `style_btn` can result in a default gray button and `style_btn_red` 
 </details>
 
 *Styles* 用于设置对象的外观。 lvgl 中的样式很大程度上受到 CSS 的启发。简而言之，其概念如下：
+
 - 样式是一个 `lv_style_t` 变量，它可以保存边框宽度、文本颜色等属性。它类似于 CSS 中的“类”。
-- 可以将样式分配给对象以更改其外观。在赋值过程中，可以指定目标部分（CSS 中的*pseudo element*）和目标状态（*pseudo class*）。
-
-
-例如，当滑块处于按下状态时，可以将“style_blue”添加到滑块的旋钮。
+- 可以将样式分配给对象以更改其外观。在赋值过程中，可以指定目标部分（CSS 中的*pseudo element*）和目标状态（*pseudo class*）。例如，当滑块处于按下状态时，可以将“style_blue”添加到滑块的旋钮。
 - 任何数量的对象都可以使用相同的样式。
-- 样式可以级联，这意味着可以将多个样式分配给一个对象，并且每个样式可以具有不同的属性。
-
-
-因此，并非所有属性都必须在样式中指定。 LVLG 将寻找一个属性，直到一个样式定义它，或者如果它没有被任何样式指定，则使用默认值。
-
-例如，`style_btn` 可以导致默认的灰色按钮，而`style_btn_red` 只能添加一个`background-color=red` 来覆盖背景颜色。
+- 样式可以级联，这意味着可以将多个样式分配给一个对象，并且每个样式可以具有不同的属性。因此，并非所有属性都必须在样式中指定。 LVLG 将寻找一个属性，直到一个样式定义它，或者如果它没有被任何样式指定，则使用默认值。例如，`style_btn` 可以导致默认的灰色按钮，而`style_btn_red` 只能添加一个`background-color=red` 来覆盖背景颜色。
 - 后来添加的样式具有更高的优先级。这意味着如果在两种样式中指定了一个属性，则将使用稍后添加的样式。
 - 如果对象中未指定某些属性（例如文本颜色），则可以从父级继承。
 - 对象可以具有比“正常”样式具有更高优先级的本地样式。
@@ -95,8 +86,8 @@ If the property is not set even for the default state the default value will be 
 
 样式可以添加到任何状态和状态组合。
 例如，为默认和按下状态设置不同的背景颜色。
-如果属性未在状态中定义，则将使用最佳匹配状态的属性。通常这意味着使用带有“LV_STATE_DEFAULT”的属性。
-如果即使为默认状态也未设置该属性，则将使用默认值。 （见后）
+如果属性未在状态中定义，则将使用 **最佳匹配状态的属性** 。通常这意味着使用带有 `LV_STATE_DEFAULT` 的属性。
+如果是默认状态但是没有设置他的属性，那么将会使用默认值。 （见后）
 
 
 <details>
@@ -115,14 +106,14 @@ To determine which state's property to use let's take an example. Imagine the ba
 The pressed state has 0x0020 precedence which is higher than the default state's 0x0000 precedence, so gray color will be used.
 3. When the object is focused the same thing happens as in pressed state and red color will be used. (Focused state has higher precedence than default state).
 4. When the object is focused and pressed both gray and red would work, but the pressed state has higher precedence than focused so gray color will be used.
-5. It's possible to set e.g rose color for `LV_STATE_PRESSED | LV_STATE_FOCUSED`. 
+5. It's possible to set e.g rose color for AA`LV_STATE_PRESSED | LV_STATE_FOCUSED`. 
 In this case, this combined state has 0x0020 + 0x0002 = 0x0022 precedence, which is higher than the pressed state's precedence so rose color would be used.
 6. When the object is in checked state there is no property to set the background color for this state. So for lack of a better option, the object remains white from the default state's property.
 
 </p>
 </details>
 
-但是“最匹配的国家财产”到底是什么意思呢？
+但是 **“最佳匹配状态的属性”** 到底是什么意思呢？
 状态具有优先级，由它们的值显示（参见上面的列表）。更高的值意味着更高的优先级。
 为了确定使用哪个状态的属性，让我们举个例子。想象一下，背景颜色是这样定义的：
 - `LV_STATE_DEFAULT`：白色
@@ -134,7 +125,7 @@ In this case, this combined state has 0x0020 + 0x0002 = 0x0022 precedence, which
 按下状态的优先级为 0x0020，高于默认状态的 0x0000 优先级，因此将使用灰色。
 3. 当物体聚焦时，发生与按下状态相同的事情，将使用红色。 （焦点状态比默认状态具有更高的优先级）。
 4. 当物体聚焦并按下时，灰色和红色都可以工作，但按下状态的优先级高于聚焦状态，因此将使用灰色。
-5. 可以为`LV_STATE_PRESSED | 设置例如玫瑰色。 LV_STATE_FOCUSED`。
+5. 可以为 `LV_STATE_PRESSED | LV_STATE_FOCUSED` 设置例如玫瑰色。 。
 在这种情况下，此组合状态的优先级为 0x0020 + 0x0002 = 0x0022，高于按下状态的优先级，因此将使用玫瑰色。
 6. 当对象处于选中状态时，没有设置此状态的背景颜色的属性。因此，由于缺乏更好的选择，对象从默认状态的属性中保持白色。
 
@@ -189,18 +180,19 @@ When the button is pressed the light-gray color is a better match because it des
 </details>
 
 不需要在一种样式中设置所有属性。可以向对象添加更多样式，并让稍后添加的样式修改或扩展外观。
-例如，创建一个通用的灰色按钮样式并为红色按钮创建一个新的，其中只设置了新的背景颜色。
+例如，创建一个通用的灰色按钮样式并创建一个新的红色按钮，其中只设置了新的背景颜色。
 
-这很像在 CSS 中，当使用的类像 `<div class=".btn .btn-red">` 一样列出时。
+这与CSS中使用的类类似，如“<div class=“.btn.btn red”>”。
 
 后来添加的样式优先于之前设置的样式。所以在上面的灰色/红色按钮示例中，应该首先添加普通按钮样式，然后添加红色样式。
-但是，仍然考虑来自州的优先权。
-因此，让我们检查以下案例：
+然而，还要考虑 “最佳匹配状态的属性“ （优先级）。
+因此，让我们来研究以下情况：
+
 - 基本按钮样式定义了默认状态的深灰色和浅灰色按下状态
 - 红色按钮样式仅在默认状态下将背景颜色定义为红色
 
-在这种情况下，当按钮被释放（处于默认状态）时，它将是红色的，因为在最近添加的样式（红色）中找到了完美匹配。
-当按下按钮时，浅灰色更适合，因为它完美地描述了当前状态，所以按钮将是浅灰色。
+在这种情况下，当按钮被释放（处于默认状态）时，它将是红色的，因为在最近添加的样式（红色）中找到了最佳匹配。
+当按下按钮时，浅灰色更适合，因为它完美地描述了当前状态，所以按钮将是浅灰色（改变了最佳匹配状态的属性）。
 
 ## Inheritance（继承）
 
@@ -252,9 +244,10 @@ It means the all three parts of the slider can have their own styles. See later 
 </p>
 </details>
 
-对象可以有*部分*，它们可以有自己的样式。
+对象可以有 *部分(parts)* ，它们可以有自己的样式。
 
 LVGL 中存在以下预定义部分：
+
 - `LV_PART_MAIN` 类似矩形的背景*/
 - `LV_PART_SCROLLBAR` 滚动条
 - `LV_PART_INDICATOR` 指标，例如用于滑块、条、开关或复选框的勾选框
@@ -266,8 +259,9 @@ LVGL 中存在以下预定义部分：
 - `LV_PART_CUSTOM_FIRST` 可以从这里添加自定义部件。
 
 例如一个 [Slider](/widgets/core/slider) 包含三个部分：
+
 - 背景
-- 印度人
+- 指标
 - 旋钮
 
 
@@ -290,8 +284,8 @@ Property set functions looks like this: `lv_style_set_<property_name>(&style, <v
 </p>
 </details>
 
-样式存储在 `lv_style_t` 变量中。样式变量应该是“静态”、全局或动态分配的。
-换句话说，它们不能是函数中的局部变量，当函数存在时它们会被销毁。
+样式存储在 `lv_style_t` 变量中。样式变量应该是 `静态` 、全局或动态分配的。
+换句话说，它们不能是函数中的局部变量，当函数结束时它们会被销毁。
 在使用样式之前，它应该用 `lv_style_init(&my_style)` 进行初始化。
 初始化后，可以设置或添加样式属性。
 
@@ -362,9 +356,10 @@ To reset a style (free all its data) use
 </details>
 
 `lv_style_value_t` 有 3 个字段：
+
 - `num` 用于整数、布尔值和不透明度属性
-- 颜色属性的`color`
-- 指针属性的`ptr`
+- `color` 颜色属性
+- `ptr` 指针属性
 
 要重置样式（释放其所有数据），请使用
 
@@ -404,9 +399,10 @@ Using `lv_obj_add_style`:
 </p>
 </details>
 
-要向对象添加样式，请使用 `lv_obj_add_style(obj, &style, <selector>)`。 `<selector>` 是应添加样式的部分和状态的 OR 值。一些例子：
+要向对象添加样式，请使用 `lv_obj_add_style(obj, &style, <selector>)`。 `<selector>` 是应添加样式的部分和状态的 OR-ed 值，例如：
+
 - `LV_PART_MAIN | LV_STATE_DEFAULT`
-- `LV_STATE_PRESSED`：处于按下状态的主要部分。 `LV_PART_MAIN` 可以省略
+- `LV_STATE_PRESSED`：按下状态的主要部分。 `LV_PART_MAIN` 可以省略
 - `LV_PART_SCROLLBAR`：默认状态下的滚动条部分。 `LV_STATE_DEFAULT` 可以省略。
 - `LV_PART_SCROLLBAR | LV_STATE_SCROLLED`：对象滚动时的滚动条部分
 - `0` 与 `LV_PART_MAIN | 相同LV_STATE_DEFAULT`。
@@ -435,8 +431,11 @@ To remove specific styles use `lv_obj_remove_style(obj, style, selector)`. This 
 
 要从对象中删除所有样式，请使用 `lv_obj_remove_style_all(obj)`。
 
-要删除特定样式，请使用 `lv_obj_remove_style(obj, style, selector)`。仅当 `selector` 与 `lv_obj_add_style` 中使用的 `selector` 匹配时，此函数才会删除 `style`。
-`style` 可以是 `NULL` 以仅检查 `selector` 并删除所有匹配的样式。 `selector` 可以使用 `LV_STATE_ANY` 和 `LV_PART_ANY` 值来删除具有任何状态或部分的样式。
+要删除特定样式，请使用 `lv_obj_remove_style(obj, style, selector)`。
+
+仅当 `selector` 与 `lv_obj_add_style` 中使用的 `selector` 匹配时，此函数才会删除 `style`。
+
+`style` 可以是 `NULL` 只检查 `selector` 并删除所有匹配的样式。 `selector` 可以使用 `LV_STATE_ANY` 和 `LV_PART_ANY` 值来删除具有任何状态或部分的样式。
 
 
 </p>
@@ -458,6 +457,7 @@ To refresh all parts and properties use `lv_obj_refresh_style(obj, LV_PART_ANY, 
 </details>
 
 如果已分配给对象的样式发生更改（即添加或更改属性），则应通知使用该样式的对象。有 3 个选项可以执行此操作：
+
 1. 如果您知道更改的属性可以通过简单的重绘（例如颜色或不透明度更改）应用，只需调用 `lv_obj_invalidate(obj)` 或 `lv_obj_invalidate(lv_scr_act())`。
 2. 如果更改或添加了更复杂的样式属性，并且您知道哪些对象受该样式影响，则调用 `lv_obj_refresh_style(obj, part, property)`。
 要刷新所有部件和属性，请使用 `lv_obj_refresh_style(obj, LV_PART_ANY, LV_STYLE_PROP_ANY)`。
@@ -478,9 +478,11 @@ For example:
 </p>
 </details>
 
-要获得属性的最终值——考虑级联、继承、局部样式和转换（见下文）——可以使用这样的获取函数：
+要获取属性的最终值（考虑级联、继承、本地样式和转换（请参见下文），可以使用如下的 get 函数：
+
 `lv_obj_get_style_<property_name>(obj, <part>)`。
-这些函数使用对象的当前状态，如果没有更好的候选者，则返回默认值。
+
+这些函数使用对象的当前状态，如果没有更好的候选对象，则返回默认值。 
 例如：
 
 ```c
@@ -506,14 +508,13 @@ For example:
 </p>
 </details>
 
-除了“正常”样式，对象也可以存储本地样式。这个概念类似于 CSS 中的内联样式（例如`<div style="color:red">`），但做了一些修改。
+除了“普通” 样式外，对象还可以存储 **本地样式** 。这个概念类似于CSS中的内联样式（例如，`<div style=“color:red”>`），LVGL只是做了一些修改。
 
-所以本地样式就像普通样式，但它们不能在其他对象之间共享。如果使用，本地样式会自动分配，并在删除对象时释放。
-它们对于向对象添加本地自定义很有用。
+因此，本地样式与普通样式类似，但不能在其他对象之间共享。如果使用本地样式，将自动分配局部样式，并在删除对象时释放。本地样式对于向对象添加本地自定义很有用。
 
-与 CSS 不同，在 LVGL 中，可以将局部样式分配给状态 (*pseudo-classes*) 和部分 (*pseudo-elements*)。
+与CSS不同，在LVGL中，可以将局部样式指定给状态（*pseudo-classes(伪类)*）和部分（*pseudo-elements(伪元素)*）。
 
-要设置本地属性，请使用诸如 `lv_obj_set_style_local_<property_name>(obj, <value>, <selector>); 之类的函数
+要设置本地属性，请使用类似 `lv_obj_set_style_local_<property_name>(obj, <value>, <selector>) 的函数
 
 例如：
 
@@ -552,14 +553,15 @@ In the documentation of the widgets you will see sentences like "The widget use 
 </p>
 </details>
 
-在部件(widgets)的文档中，您将看到类似“小部件使用典型背景属性”这样的句子。 “典型的背景属性”与以下相关：
-- 背景
-- 边境
-- 大纲
-- 阴影
-- 填充
+在小部件的文档中，您将看到“小部件使用典型的背景属性”这样的句子。“典型背景属性”与以下相关：
+
+- 背景(Background)
+- 边界(Border)
+- 轮廓(Outline)
+- 阴影(Shadow)
+- 填充(Padding)
 - 宽度和高度变换
-- X 和 Y 平移
+- X和Y变换
 
 
 ## Transitions（过渡特效）
@@ -638,8 +640,8 @@ Theme initialization functions can have different prototype. This example shows 
 </p>
 </details>
 
-主题是样式的集合。如果有一个活动主题 LVGL 将它应用到每个创建的小部件上。
-这将为 UI 提供默认外观，然后可以通过添加更多样式进行修改。
+主题是风格的集合。如果存在活动主题，LVGL将其应用于每个创建的部件(对象)。
+这将为UI提供一个默认外观，然后可以通过添加更多样式对其进行修改。
 
 每个显示器都可以有不同的主题。例如，您可以在 TFT 上使用彩色主题，在辅助单色显示器上使用单色主题。
 
