@@ -20,7 +20,7 @@ Events are triggered in LVGL when something happens which might be interesting t
 当发生用户可能感兴趣的事情时，LVGL 中会触发事件，例如当一个对象
 - 被点击
 - 滚动
-- 改变了它的价值
+- 数值被改变
 - 重绘等。
 
 
@@ -108,7 +108,7 @@ More objects can use the same *event callback*.
 
 更多的对象可以使用相同的*事件回调*。
 
-## Remove event(s) from an object
+## Remove event(s) from an object(从对象中删除事件)
 
 <details>
 <summary>查看原文</summary>
@@ -203,7 +203,7 @@ The following event codes exist:
 - `LV_EVENT_FOCUSED` 对象被聚焦
 - `LV_EVENT_DEFOCUSED` 对象散焦
 - `LV_EVENT_LEAVE` 对象散焦但仍被选中
-- `LV_EVENT_HIT_TEST` 执行高级命中测试。使用 `lv_hit_test_info_t * a = lv_event_get_hit_test_info(e)` 并检查 `a->point` 是否可以点击对象。如果没有设置`a->res = false`
+- `LV_EVENT_HIT_TEST` 执行高级命中测试。使用 `lv_hit_test_info_t * a = lv_event_get_hit_test_info(e)` 并检查 `a->point` 是否可以点击对象。如果没有则 `a->res = false`
 
 ### Drawing events（绘图事件）
 
@@ -279,8 +279,8 @@ The following event codes exist:
 - `LV_EVENT_VALUE_CHANGED` 对象的值已更改（即滑块移动）
 - `LV_EVENT_INSERT` 正在向对象插入文本。事件数据是插入的`char *`。
 - `LV_EVENT_REFRESH` 通知对象刷新其上的某些内容（对于用户）
-- `LV_EVENT_READY` 一个进程已经完成
-- `LV_EVENT_CANCEL` 一个进程被取消
+- `LV_EVENT_READY` 一个过程已经完成
+- `LV_EVENT_CANCEL` 一个过程被取消
 
 ### Custom events（自定义事件）
 
@@ -361,8 +361,8 @@ lv_event_send(mbox, LV_EVENT_VALUE_CHANGED, &btn_id);
 </details>
 
 `lv_event_t` 是传递给事件回调的唯一参数，它包含有关事件的所有数据。可以从中获得以下值：
-- `lv_event_get_code(e)` 获取事件代码
-- `lv_event_get_target(e)` 获取事件发送到的对象
+- `lv_event_get_code(e)` 获取触发的事件代码
+- `lv_event_get_target(e)` 获取事件发送到(关联)的对象
 - `lv_event_get_original_target(e)` 获取事件最初发送到的对象（与 `lv_event_get_target` 不同，如果 [event bubbling](#event-bubbling) 被启用）
 - `lv_event_get_user_data(e)` 获取作为 `lv_obj_add_event_cb` 的最后一个参数传递的指针。
 - `lv_event_get_param(e)` 获取作为 `lv_event_send` 的最后一个参数传递的参数
