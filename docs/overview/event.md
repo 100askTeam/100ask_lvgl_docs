@@ -63,8 +63,7 @@ More events can be added to an object, like this:
 </p>
 </details>
 
-在示例中`LV_EVENT_CLICKED` 意味着只有点击事件会调用`my_event_cb`。有关所有选项，请参阅[事件代码列表](#event-codes)。
-`LV_EVENT_ALL` 可用于接收所有事件。
+在示例中 `LV_EVENT_CLICKED` 意味着只有当对象发生点击事件时，就会触发事件从而进入事件处理回调函数 `my_event_cb` 。有关所有选项，请参阅[事件代码列表](#event-codes)。`LV_EVENT_ALL` 可用于接收所有事件。
 
 `lv_obj_add_event_cb` 的最后一个参数是指向事件中可用的任何自定义数据的指针。稍后将更详细地描述。
 
@@ -86,7 +85,7 @@ Even the same event callback can be used on an object with different `user_data`
 </p>
 </details>
 
-即使是相同的事件回调也可以用于具有不同“user_data”的对象。例如：
+如果传入的用户数据不一样，一个对象可以绑定同一个事件回调函数多次。例如：
 
 ```c
 lv_obj_add_event_cb(obj, increment_on_click, LV_EVENT_CLICKED, &num1);
@@ -104,9 +103,10 @@ More objects can use the same *event callback*.
 </p>
 </details>
 
-事件将按照添加的顺序调用。
+这些事件将按照添加的顺序被调用。
 
-更多的对象可以使用相同的*事件回调*。
+更多的对象可以使用相同的 *事件回调*。
+
 
 ## Remove event(s) from an object(从对象中删除事件)
 
@@ -146,17 +146,20 @@ The following event codes exist:
 </details>
 
 事件代码可以分为以下几类：
-- 输入设备事件
-- 绘图事件
-- 其他活动
-- 特别活动
-- 自定义事件
+
+- 输入设备事件(Input device events)
+- 绘图事件(Drawing events)
+- 其他事件(Special events)
+- 特殊事件(Other events)
+- 自定义事件(Custom events)
+
+请查阅源码：lvgl/src/core/lv_event.h    (lv_event_code_t)
 
 所有对象（例如按钮/标签/滑块等），无论其类型如何，都会接收 *Input device*、*Drawing* 和 *Other* 事件。
 
 然而，*特殊事件* 特定于特定的小部件类型。查看 [widgets' 文档](/widgets/index) 了解何时发送，
 
-*自定义事件*由用户添加，因此这些事件永远不会由 LVGL 发送。
+*自定义事件* 由用户添加，因此这些事件永远不会由 LVGL 发送。
 
 存在以下事件代码：
 
@@ -295,9 +298,9 @@ And can be sent to any object with `lv_event_send(obj, MY_EVENT_1, &some_data)`
 </p>
 </details>
 
-任何自定义事件代码都可以通过`uint32_t MY_EVENT_1 = lv_event_register_id();`注册
+任何自定义事件代码都可以通过 `uint32_t MY_EVENT_1 = lv_event_register_id();` 注册
 
-并且可以使用`lv_event_send(obj, MY_EVENT_1, &some_data)`发送到任何对象
+并且可以使用 `lv_event_send(obj, MY_EVENT_1, &some_data)` 发送到任何对象
 
 ## Sending events（发送事件）
 
