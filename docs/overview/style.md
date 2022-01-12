@@ -495,26 +495,27 @@ lv_color_t color = lv_obj_get_style_bg_color(btn, LV_PART_MAIN);
 <summary>查看原文</summary>
 <p>
 
-Besides "normal" styles, the objects can store local styles too. This concept is similar to inline styles in CSS (e.g. `<div style="color:red">`) with some modification. 
+In addition to "normal" styles, objects can also store local styles. This concept is similar to inline styles in CSS (e.g. `<div style="color:red">`) with some modification. 
 
-So local styles are like normal styles but they can't be shared among other objects. If used, local styles are allocated automatically, and freed when the object is deleted.
-They are useful to add local customization to the object.
+Local styles are like normal styles, but they can't be shared among other objects. If used, local styles are allocated automatically, and freed when the object is deleted.
+They are useful to add local customization to an object.
 
-Unlike in CSS, in LVGL local styles can be assigned to states (*pseudo-classes*) and parts (*pseudo-elements*).
+Unlike in CSS, LVGL local styles can be assigned to states (*pseudo-classes*) and parts (*pseudo-elements*).
 
-To set a local property use functions like `lv_obj_set_style_local_<property_name>(obj, <value>, <selector>);`  
+To set a local property use functions like `lv_obj_set_style_<property_name>(obj, <value>, <selector>);`  
 For example:
 
 </p>
 </details>
 
-除了“普通” 样式外，对象还可以存储 **本地样式** 。这个概念类似于CSS中的内联样式（例如，`<div style=“color:red”>`），LVGL只是做了一些修改。
+除了“普通” 样式，对象还可以存储本地样式。这个概念类似于 CSS 中的内联样式（例如 `<div style="color:red">`），但做了一些修改。
 
-因此，本地样式与普通样式类似，但不能在其他对象之间共享。如果使用本地样式，将自动分配局部样式，并在删除对象时释放。本地样式对于向对象添加本地自定义很有用。
+本地样式与普通样式类似，但不能在其他对象之间共享。本地样式会自动分配空间，并在对象被删除时释放。
+本地样式在向对象添加本地自定义样式时很有用。
 
-与CSS不同，在LVGL中，可以将局部样式指定给状态（*pseudo-classes(伪类)*）和部分（*pseudo-elements(伪元素)*）。
+与 CSS 不同，LVGL 本地样式可以分配给状态（*pseudo-classes*）和部件（*pseudo-elements*）。
 
-要设置本地属性，请使用类似 `lv_obj_set_style_local_<property_name>(obj, <value>, <selector>) 的函数
+要设置本地属性，请使用 `lv_obj_set_style_<property_name>(obj, <value>, <selector>);`
 
 例如：
 
