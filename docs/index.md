@@ -48,5 +48,6 @@ PDF version: :download:`100ASK_LVGL_CN.pdf <100ASK_LVGL_CN.pdf>`
    CHANGELOG
    ROADMAP
    100ask_project/index
+   tools/index
    contact_us/index
 ```
