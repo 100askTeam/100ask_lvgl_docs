@@ -14,7 +14,7 @@
 
 ## 中文字体文件
 
-### 思源字体(简体中文)
+### 思源字体
 
 
 |  字体预览   |  下载字体  |
@@ -75,7 +75,7 @@ TODO
 ### lvgl官方在线转换工具
 lvgl官方提供的字体转换器已经非常好了，只要手里有字体文件之后就可以提取转换想要的字体。
 
-lvgl官方字体转换器地址： https://lvgl.io/tools/fontconverter
+lvgl官方字体转换器地址： [https://lvgl.io/tools/fontconverter](https://lvgl.io/tools/fontconverter)
 
 使用教程： TODO
 
