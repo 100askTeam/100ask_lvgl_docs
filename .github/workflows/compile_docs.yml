@@ -95,7 +95,7 @@ jobs:
           port: 22
           script: |
             ls -al
-            cd /root/100ask_lvgl_docs  && git pull
+            cd /home/100ask_lvgl_docs  && git pull
     # ===============================
       #- name: Deploy
       #  uses: JamesIves/github-pages-deploy-action@3.7.1
