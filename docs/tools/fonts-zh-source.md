@@ -14,6 +14,8 @@
 
 ## 中文字体文件
 
+中文使用unicode编码[^1]。
+
 ### 思源字体
 
 
@@ -76,7 +78,9 @@ TODO
 
 Unicode 是全球文字统一编码。它把世界上的各种文字的每一个字符指定唯一编码，实现跨语种、跨平台的应用。
 
-中文用户最常接触的是汉字 Unicode 编码。中文字符数量巨大，日常使用的汉字数量有数千个，再加上生僻字，数量达到数万个。这个表格将中文字符集的 Unicode 编码范围列出：
+中文用户最常接触的是汉字 Unicode 编码。中文字符数量巨大，日常使用的汉字数量有数千个，再加上生僻字，数量达到数万个。下面这个表格将中文字符集的 Unicode 编码范围列出[^2]：
+
+更详细的内容请参考： [中日韓統一表意文字](https://zh.wikipedia.org/wiki/%E4%B8%AD%E6%97%A5%E9%9F%93%E7%B5%B1%E4%B8%80%E8%A1%A8%E6%84%8F%E6%96%87%E5%AD%97)
 
 
 | **字符集**                                                   | **字数** | **Unicode 编码** |
@@ -104,9 +108,143 @@ Unicode 是全球文字统一编码。它把世界上的各种文字的每一个
 | 〇                                                           | 1字      | 3007             |
 
 
+
+### 拉丁字母 Unicode 编码范围
+
+基本拉丁字母共有95个字符，其中52个属于拉丁字母，剩下的43个属于基本字符。
+
+有33个字符被定义为“ASCII 标点及符号”，有时也被称为“ASCII 特殊字符”。
+
+下面这个表格将基本拉丁字母字符集的 Unicode 编码范围列出[^3]：
+
+更详细的内容请参考： [Unicode字符列表](https://zh.wikipedia.org/wiki/Unicode%E5%AD%97%E7%AC%A6%E5%88%97%E8%A1%A8)
+
+
+| 代码   | 显示 | 十进制 | 描述                                                         | #    |
+| :------ | :----: | :------ | :------------------------------------------------------------ | :---- |
+| U+0020 |      | &#032; | [空格](https://zh.wikipedia.org/wiki/空格)                   | 1    |
+| U+0021 | !    | &#033; | [叹号](https://zh.wikipedia.org/wiki/叹号)                   | 2    |
+| U+0022 | "    | &#034; | [双引号](https://zh.wikipedia.org/wiki/双引号)               | 3    |
+| U+0023 | #    | &#035; | [井号](https://zh.wikipedia.org/wiki/井號)                   | 4    |
+| U+0024 | $    | &#036; | 价钱/货币符号                                                | 5    |
+| U+0025 | %    | &#037; | [百分比符号](https://zh.wikipedia.org/wiki/百分比)           | 6    |
+| U+0026 | &    | &#038; | [&](https://zh.wikipedia.org/wiki/%26)                       | 7    |
+| U+0027 | '    | &#039; | [引号](https://zh.wikipedia.org/wiki/引號)                   | 8    |
+| U+0028 | (    | &#040; | [左圆括号](https://zh.wikipedia.org/wiki/圓括號)             | 9    |
+| U+0029 | )    | &#041; | [右圆括号](https://zh.wikipedia.org/wiki/圓括號)             | 10   |
+| U+002A | *    | &#042; | [星号](https://zh.wikipedia.org/wiki/星號)                   | 11   |
+| U+002B | +    | &#043; | [加号](https://zh.wikipedia.org/wiki/數學符號)               | 12   |
+| U+002C | ,    | &#044; | [逗号](https://zh.wikipedia.org/wiki/逗號)                   | 13   |
+| U+002D | -    | &#045; | 连字号/减号                                                  | 14   |
+| U+002E | .    | &#046; | [句号](https://zh.wikipedia.org/wiki/句號)                   | 15   |
+| U+002F | /    | &#047; | 正斜杠                                                       | 16   |
+| U+0030 | 0    | &#048; | [数字0](https://zh.wikipedia.org/wiki/0)                     | 17   |
+| U+0031 | 1    | &#049; | [数字1](https://zh.wikipedia.org/wiki/1)                     | 18   |
+| U+0032 | 2    | &#050; | [数字2](https://zh.wikipedia.org/wiki/2)                     | 19   |
+| U+0033 | 3    | &#051; | [数字3](https://zh.wikipedia.org/wiki/3)                     | 20   |
+| U+0034 | 4    | &#052; | [数字4](https://zh.wikipedia.org/wiki/4)                     | 21   |
+| U+0035 | 5    | &#053; | [数字5](https://zh.wikipedia.org/wiki/5)                     | 22   |
+| U+0036 | 6    | &#054; | [数字6](https://zh.wikipedia.org/wiki/6)                     | 23   |
+| U+0037 | 7    | &#055; | [数字7](https://zh.wikipedia.org/wiki/7)                     | 24   |
+| U+0038 | 8    | &#056; | [数字8](https://zh.wikipedia.org/wiki/8)                     | 25   |
+| U+0039 | 9    | &#057; | [数字9](https://zh.wikipedia.org/wiki/9)                     | 26   |
+| U+003A | :    | &#058; | [冒号](https://zh.wikipedia.org/wiki/冒號)                   | 27   |
+| U+003B | ;    | &#059; | [分号](https://zh.wikipedia.org/wiki/分號)                   | 28   |
+| U+003C | <    | &#060; | [小于符号](https://zh.wikipedia.org/wiki/數學符號)           | 29   |
+| U+003D | =    | &#061; | [等于号](https://zh.wikipedia.org/wiki/數學符號)             | 30   |
+| U+003E | >    | &#062; | [大于符号](https://zh.wikipedia.org/wiki/數學符號)           | 31   |
+| U+003F | ?    | &#063; | [问号](https://zh.wikipedia.org/wiki/問號)                   | 32   |
+| U+0040 | @    | &#064; | [英文“at”的简写符号](https://zh.wikipedia.org/wiki/英文)     | 33   |
+| U+0041 | A    | &#065; | [拉丁字母A](https://zh.wikipedia.org/wiki/A)                 | 34   |
+| U+0042 | B    | &#066; | [拉丁字母B](https://zh.wikipedia.org/wiki/B)                 | 35   |
+| U+0043 | C    | &#067; | [拉丁字母C](https://zh.wikipedia.org/wiki/C)                 | 36   |
+| U+0044 | D    | &#068; | [拉丁字母D](https://zh.wikipedia.org/wiki/D)                 | 37   |
+| U+0045 | E    | &#069; | [拉丁字母E](https://zh.wikipedia.org/wiki/E)                 | 38   |
+| U+0046 | F    | &#070; | [拉丁字母F](https://zh.wikipedia.org/wiki/F)                 | 39   |
+| U+0047 | G    | &#071; | [拉丁字母G](https://zh.wikipedia.org/wiki/G)                 | 40   |
+| U+0048 | H    | &#072; | [拉丁字母H](https://zh.wikipedia.org/wiki/H)                 | 41   |
+| U+0049 | I    | &#073; | [拉丁字母I](https://zh.wikipedia.org/wiki/I)                 | 42   |
+| U+004A | J    | &#074; | [拉丁字母J](https://zh.wikipedia.org/wiki/J)                 | 43   |
+| U+004B | K    | &#075; | [拉丁字母K](https://zh.wikipedia.org/wiki/K)                 | 44   |
+| U+004C | L    | &#076; | [拉丁字母L](https://zh.wikipedia.org/wiki/L)                 | 45   |
+| U+004D | M    | &#077; | [拉丁字母M](https://zh.wikipedia.org/wiki/M)                 | 46   |
+| U+004E | N    | &#078; | [拉丁字母N](https://zh.wikipedia.org/wiki/N)                 | 47   |
+| U+004F | O    | &#079; | [拉丁字母O](https://zh.wikipedia.org/wiki/O)                 | 48   |
+| U+0050 | P    | &#080; | [拉丁字母P](https://zh.wikipedia.org/wiki/P)                 | 49   |
+| U+0051 | Q    | &#081; | [拉丁字母Q](https://zh.wikipedia.org/wiki/Q)                 | 50   |
+| U+0052 | R    | &#082; | [拉丁字母R](https://zh.wikipedia.org/wiki/R)                 | 51   |
+| U+0053 | S    | &#083; | [拉丁字母S](https://zh.wikipedia.org/wiki/S)                 | 52   |
+| U+0054 | T    | &#084; | [拉丁字母T](https://zh.wikipedia.org/wiki/T)                 | 53   |
+| U+0055 | U    | &#085; | [拉丁字母U](https://zh.wikipedia.org/wiki/U)                 | 54   |
+| U+0056 | V    | &#086; | [拉丁字母V](https://zh.wikipedia.org/wiki/V)                 | 55   |
+| U+0057 | W    | &#087; | [拉丁字母W](https://zh.wikipedia.org/wiki/W)                 | 56   |
+| U+0058 | X    | &#088; | [拉丁字母X](https://zh.wikipedia.org/wiki/X)                 | 57   |
+| U+0059 | Y    | &#089; | [拉丁字母Y](https://zh.wikipedia.org/wiki/Y)                 | 58   |
+| U+005A | Z    | &#090; | [拉丁字母Z](https://zh.wikipedia.org/wiki/Z)                 | 59   |
+| U+005B | [    | &#091; | [左方括号](https://zh.wikipedia.org/wiki/括號)               | 60   |
+| U+005C | \    | &#092; | 反斜杠                                                       | 61   |
+| U+005D | ]    | &#093; | 右方括号                                                     | 62   |
+| U+005E | ^    | &#094; | [抑扬（重音）符号](https://zh.wikipedia.org/wiki/變音符號#變音符號的種類) | 63   |
+| U+005F | _    | &#095; | 下划线                                                       | 64   |
+| U+0060 | `    | &#096; | [重音符](https://zh.wikipedia.org/wiki/重音符)               | 65   |
+| U+0061 | a    | &#097; | 拉丁字母a                                                    | 66   |
+| U+0062 | b    | &#098; | 拉丁字母b                                                    | 67   |
+| U+0063 | c    | &#099; | 拉丁字母c                                                    | 68   |
+| U+0064 | d    | &#100; | 拉丁字母d                                                    | 69   |
+| U+0065 | e    | &#101; | 拉丁字母e                                                    | 70   |
+| U+0066 | f    | &#102; | 拉丁字母f                                                    | 71   |
+| U+0067 | g    | &#103; | 拉丁字母g                                                    | 72   |
+| U+0068 | h    | &#104; | 拉丁字母h                                                    | 73   |
+| U+0069 | i    | &#105; | 拉丁字母i                                                    | 74   |
+| U+006A | j    | &#106; | 拉丁字母j                                                    | 75   |
+| U+006B | k    | &#107; | 拉丁字母k                                                    | 76   |
+| U+006C | l    | &#108; | 拉丁字母l                                                    | 77   |
+| U+006D | m    | &#109; | 拉丁字母m                                                    | 78   |
+| U+006E | n    | &#110; | 拉丁字母n                                                    | 79   |
+| U+006F | o    | &#111; | 拉丁字母o                                                    | 80   |
+| U+0070 | p    | &#112; | 拉丁字母p                                                    | 81   |
+| U+0071 | q    | &#113; | 拉丁字母q                                                    | 82   |
+| U+0072 | r    | &#114; | 拉丁字母r                                                    | 83   |
+| U+0073 | s    | &#115; | 拉丁字母s                                                    | 84   |
+| U+0074 | t    | &#116; | 拉丁字母t                                                    | 85   |
+| U+0075 | u    | &#117; | 拉丁字母u                                                    | 86   |
+| U+0076 | v    | &#118; | 拉丁字母v                                                    | 87   |
+| U+0077 | w    | &#119; | 拉丁字母w                                                    | 88   |
+| U+0078 | x    | &#120; | 拉丁字母x                                                    | 89   |
+| U+0079 | y    | &#121; | 拉丁字母y                                                    | 90   |
+| U+007A | z    | &#122; | 拉丁字母z                                                    | 91   |
+| U+007B | {    | &#123; | [左花括号](https://zh.wikipedia.org/wiki/花括號)             | 92   |
+| U+007C | \|   | &#124; | [竖线](https://zh.wikipedia.org/wiki/豎線)                   | 93   |
+| U+007D | }    | &#125; | [右花括号](https://zh.wikipedia.org/wiki/花括號)             | 94   |
+| U+007E | ~    | &#126; | 波浪纹                                                       | 95   |
+| 代码   | 显示 | 十进制 | 描述                                                         | #    |
+
+
+综上所述，我们可以这样简单总结下来：
+
+|                            字符集                            | 字数 | Unicode 编码 |
+| :---------------------------------------------------------- | :--: | :---------- |
+| 数字0-9 | 10字 |    30-39     |
+| 小写英文字母 | 26字 |    61-7a     |
+| 大写英文字母 | 26字 |    41-5a     |
+| 标点及符号 | 32字 |   20-2F 3A-40 5B-60 7B-7E   |
+
+
+
+- 数字0-9： 0123456789
+- 小写英文字母： abcdefghijklmnopqrstuvwxyz
+- 大写英文字母： ABCDEFGHIJKLMNOPQRSTUVWXYZ
+- 标点及符号： !"#$%&'()*+,-./:;<=>?@[\]^_`{|}~
+
+```shell
+!"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~
+```
+
 ### ASCII码表
 
-ASCII 码使用指定的7 位或8 位二进制数组合来表示128 或256 种可能的字符。标准ASCII 码也叫基础ASCII码，使用7 位二进制数（剩下的1位二进制为0）来表示所有的大写和小写字母，数字0 到9、标点符号，以及在美式英语中使用的特殊控制字符。
+ASCII 码使用指定的7 位或8 位二进制数组合来表示128 或256 种可能的字符。标准ASCII 码也叫基础ASCII码，使用7 位二进制数（剩下的1位二进制为0）来表示所有的大写和小写字母，数字0 到9、标点符号，以及在美式英语中使用的特殊控制字符[^4]。
+
+更详细的内容请参考： [ASCII](https://zh.wikipedia.org/wiki/ASCII)
 
 | Bin(二进制) | Oct(八进制) | Dec(十进制) | Hex(十六进制) | 缩写/字符                   | 解释         |
 | ----------- | ----------- | ----------- | ------------- | --------------------------- | ------------ |
@@ -259,6 +397,15 @@ lvgl官方字体转换器地址： [https://lvgl.io/tools/fontconverter](https:/
 
 
 
+
+
+
+
+-----------------------------------
+
+[^1]: https://zh.wikipedia.org/wiki/Unicode
+[^2]: https://zh.wikipedia.org/wiki/%E4%B8%AD%E6%97%A5%E9%9F%93%E7%B5%B1%E4%B8%80%E8%A1%A8%E6%84%8F%E6%96%87%E5%AD%97
+[^3]: https://zh.wikipedia.org/wiki/Unicode%E5%AD%97%E7%AC%A6%E5%88%97%E8%A1%A8
 
 -----------------------------------
 
