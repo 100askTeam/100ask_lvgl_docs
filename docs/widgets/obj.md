@@ -35,9 +35,9 @@ The Base object can be directly used as a simple widget: it's nothing more than 
 
 在面向对象的思想中，`基础对象` 是 LVGL 中所有其他对象都继承自的基类。
 
-基础对象的功能可以与其他小部件一起使用。 例如`lv_obj_set_width(slider, 100)`
+基础对象的功能可以与其他小部件一起使用。 例如 `lv_obj_set_width(slider, 100);`
 
-基础对象可以直接用作一个简单的小部件：它只不过是一个矩形。 在 HTML 术语中，将其视为 `<div>`。
+基础对象可以直接用作一个简单的小部件：它只不过是一个矩形。 在 HTML 术语中，将其视为 **<\div\>**。
 
 ### Coordinates（坐标）
 
@@ -58,12 +58,12 @@ Only a small subset of coordinate settings is described here. To see all the fea
 <summary>查看原文</summary>
 <p>
 
-The object size can be modified on individual axes with `lv_obj_set_width(obj, new_width)` and `lv_obj_set_height(obj, new_height)`, or both axes can be modified at the same time with `lv_obj_set_size(obj, new_width, new_height)`.
+The object size can be modified on individual axes with `lv_obj_set_width(obj, new_width);` and `lv_obj_set_height(obj, new_height);`, or both axes can be modified at the same time with `lv_obj_set_size(obj, new_width, new_height);`.
  
 </p>
 </details>
 
-可以使用`lv_obj_set_width(obj, new_width)` 和`lv_obj_set_height(obj, new_height)` 设置或修改单个轴上的对象大小，或者可以同时修改两个轴，使用 `lv_obj_set_width(obj,new_set_width)` 设置或修改高度 。
+可以使用`lv_obj_set_width(obj, new_width);` 和`lv_obj_set_height(obj, new_height);` 设置或修改单个轴上的对象大小，或者可以同时修改两个轴，使用 `lv_obj_set_width(obj,new_set_width);` 设置或修改高度 。
 
 #### Position（位置）
 
@@ -71,12 +71,12 @@ The object size can be modified on individual axes with `lv_obj_set_width(obj, n
 <summary>查看原文</summary>
 <p>
 
-You can set the position relative to the parent with `lv_obj_set_x(obj, new_x)` and `lv_obj_set_y(obj, new_y)`, or both axes at the same time with `lv_obj_set_pos(obj, new_x, new_y)`.
+You can set the position relative to the parent with `lv_obj_set_x(obj, new_x);` and `lv_obj_set_y(obj, new_y);`, or both axes at the same time with `lv_obj_set_pos(obj, new_x, new_y);`.
  
 </p>
 </details>
 
-您可以使用 `lv_obj_set_x(obj, new_x)` 和 `lv_obj_set_y(obj, new_y)` 设置相对于父级的位置，或者使用`lv_obj_set_pos(obj, new_x, new_y)` 来同时设置两个轴的位置。
+您可以使用 `lv_obj_set_x(obj, new_x);` 和 `lv_obj_set_y(obj, new_y);` 设置相对于父级的位置，或者使用`lv_obj_set_pos(obj, new_x, new_y);` 来同时设置两个轴的位置。
 
 #### Alignment（对齐）
 
@@ -84,7 +84,7 @@ You can set the position relative to the parent with `lv_obj_set_x(obj, new_x)` 
 <summary>查看原文</summary>
 <p>
 
-You can align the object on its parent with `lv_obj_set_align(obj, LV_ALIGN_...)`. After this every x and y setting will be relative to the set alignment mode.
+You can align the object on its parent with `lv_obj_set_align(obj, LV_ALIGN_...);`. After this every x and y setting will be relative to the set alignment mode.
 For example, this will shift the object by 10;20 px from the center of its parent:
  
 </p>
@@ -105,18 +105,18 @@ lv_obj_align(obj, LV_ALIGN_CENTER, 10, 20);
 <summary>查看原文</summary>
 <p>
 
-To align one object to another use `lv_obj_align_to(obj_to_align, obj_referece, LV_ALIGN_..., x, y)`
+To align one object to another use `lv_obj_align_to(obj_to_align, obj_referece, LV_ALIGN_..., x, y);`
 
-For example, to align a text below an image: `lv_obj_align(text, image, LV_ALIGN_OUT_BOTTOM_MID, 0, 10)`.
+For example, to align a text below an image: `lv_obj_align(text, image, LV_ALIGN_OUT_BOTTOM_MID, 0, 10);`.
 
 The following align types exist:
  
 </p>
 </details>
 
-要将一个对象参照另一个对象对齐，请使用`lv_obj_align_to(obj_to_align, obj_referece, LV_ALIGN_..., x, y)`
+要将一个对象参照另一个对象对齐，请使用`lv_obj_align_to(obj_to_align, obj_referece, LV_ALIGN_..., x, y);`
 
-例如，让图片下方的文本参照图片对齐：`lv_obj_align(text, image, LV_ALIGN_OUT_BOTTOM_MID, 0, 10)`。
+例如，让图片下方的文本参照图片对齐：`lv_obj_align(text, image, LV_ALIGN_OUT_BOTTOM_MID, 0, 10);`。
 
 存在以下对齐类型：
 
@@ -129,9 +129,9 @@ The following align types exist:
 <summary>查看原文</summary>
 <p>
 
-You can set a new parent for an object with `lv_obj_set_parent(obj, new_parent)`. To get the current parent, use `lv_obj_get_parent(obj)`.
+You can set a new parent for an object with `lv_obj_set_parent(obj, new_parent);`. To get the current parent, use `lv_obj_get_parent(obj);`.
 
-To get a specific children of a parent use `lv_obj_get_child(parent, idx)`. Some examples for `idx`:
+To get a specific children of a parent use `lv_obj_get_child(parent, idx);`. Some examples for `idx`:
 - `0` get the child created first child
 - `1` get the child created second
 - `-1` get the child created last
@@ -141,9 +141,9 @@ The children can be iterated lke this
 </p>
 </details>
 
-您可以使用 `lv_obj_set_parent(obj, new_parent)` 为对象设置新的父级。要获取当前父级，请使用 `lv_obj_get_parent(obj)`。
+您可以使用 `lv_obj_set_parent(obj, new_parent);` 为对象设置新的父级。要获取当前父级，请使用 `lv_obj_get_parent(obj);`。
 
-要获取父母的特定孩子，请使用`lv_obj_get_child(parent, idx)`。 `idx` 的一些示例：
+要获取父母的特定孩子，请使用`lv_obj_get_child(parent, idx);`。 `idx` 的一些示例：
 
 - `0` 获取创建的第一个子项
 - `1` 获取创建的第二个子项
@@ -174,13 +174,13 @@ You can swap the position of two objects with `lv_obj_swap(obj1, obj2)`.
 </p>
 </details>
 
-`lv_obj_get_index(obj)` 返回对象在其父对象中的索引。 它相当于父对象拥有的孩子数量。
+`lv_obj_get_index(obj);` 返回对象在其父对象中的索引。 它相当于父对象拥有的孩子数量。
 
-您可以使用`lv_obj_move_foreground(obj)` 和`lv_obj_move_background(obj)` 将对象带到前台或将其发移到后台。
+您可以使用`lv_obj_move_foreground(obj);` 和`lv_obj_move_background(obj);` 将对象带到前台或将其发移到后台。
 
-您可以使用 `lv_obj_move_to_index(obj, index)` 更改对象在其父对象中的索引。
+您可以使用 `lv_obj_move_to_index(obj, index);` 更改对象在其父对象中的索引。
 
-你可以用 `lv_obj_swap(obj1, obj2)` 交换两个对象的位置(列表框中，它可用于对列表框项目进行排序。)。
+你可以用 `lv_obj_swap(obj1, obj2);` 交换两个对象的位置(列表框中，它可用于对列表框项目进行排序。)。
 
 ### Display and Screens(显示和屏幕)
 
@@ -201,11 +201,11 @@ To get an object's screen use the `lv_obj_get_screen(obj)` function.
 
 在 LVGL 中，对象层次结构的最高级别是 *display*，它代表显示设备（物理显示器或模拟器）的驱动程序。 一个显示器可以有一个或多个与其相关联的屏幕。 每个屏幕都包含图形小部件的对象层次结构，代表覆盖整个显示的布局。
 
-当你创建了一个像 `lv_obj_t * screen = lv_obj_create(NULL)` 这样的屏幕时，你可以用 `lv_scr_load(screen)` 激活它。 `lv_scr_act()` 函数为您提供指向活动屏幕的指针。
+当你创建了一个像 `lv_obj_t * screen = lv_obj_create(NULL);` 这样的屏幕时，你可以用 `lv_scr_load(screen);` 激活它。 `lv_scr_act()` 函数为您提供指向活动屏幕的指针。
 
 如果您有多个显示器，重要的是要知道，最后创建的显示器时指定了屏幕，或者是用 `lv_disp_set_default` 明确切换的。
 
-要获取对象的屏幕，请使用 `lv_obj_get_screen(obj)` 函数。
+要获取对象的屏幕，请使用 `lv_obj_get_screen(obj);` 函数。
 
 ### Events（事件）
 
@@ -223,9 +223,9 @@ Read the [Event overview](/overview/event) to learn more about events.
 </details>
 
 
-要为对象设置事件回调，请使用 `lv_obj_add_event_cb(obj, event_cb, LV_EVENT_..., user_data)` ，
+要为对象设置事件回调，请使用 `lv_obj_add_event_cb(obj, event_cb, LV_EVENT_..., user_data);` ，
 
-要手动向对象发送事件，请使用 `lv_event_send(obj, LV_EVENT_..., param)`
+要手动向对象发送事件，请使用 `lv_event_send(obj, LV_EVENT_..., param);`
 
 阅读 [事件概述](/overview/event) 页面，以了解有关事件的更多信息。
 
@@ -296,7 +296,7 @@ Some examples:
 </p>
 </details>
 
-有一些属性可以通过`lv_obj_add/clear_flag(obj, LV_OBJ_FLAG_...)`启用/禁用：
+有一些属性可以通过`lv_obj_add/clear_flag(obj, LV_OBJ_FLAG_...);`启用/禁用：
 
 - `LV_OBJ_FLAG_HIDDEN` 隐藏对象。 （就像它根本不存在一样）
 - `LV_OBJ_FLAG_CLICKABLE` 使输入设备可点击对象
@@ -358,9 +358,9 @@ Objects are added to a *group* with `lv_group_add_obj(group, obj)`, and you can 
 
 阅读 [输入设备概述](/overview/indev) 以了解有关 *Groups* 的更多信息。
 
-使用`lv_group_add_obj(group, obj)`将对象添加到*组*，您可以使用`lv_obj_get_group(obj)`查看对象属于哪个组。
+使用`lv_group_add_obj(group, obj);`将对象添加到*组*，您可以使用`lv_obj_get_group(obj);`查看对象属于哪个组。
 
-`lv_obj_is_focused(obj)` 返回对象当前是否聚焦在其组上。 如果对象未添加到组中，则将返回 `false`。
+`lv_obj_is_focused(obj);` 返回对象当前是否聚焦在其组上。 如果对象未添加到组中，则将返回 `false`。
 
 ### Extended click area（拓展的点击区域）
 
@@ -373,7 +373,7 @@ By default, the objects can be clicked only on their coordinates, however, this 
 </p>
 </details>
 
-默认情况下，只能在对象的坐标上单击对象，但是，可以使用 `lv_obj_set_ext_click_area(obj, size)` 扩展该区域。
+默认情况下，只能在对象的坐标上单击对象，但是，可以使用 `lv_obj_set_ext_click_area(obj, size);` 扩展该区域。
 
 ## Events（事件）
 
