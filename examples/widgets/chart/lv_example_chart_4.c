@@ -18,14 +18,14 @@ static void event_cb(lv_event_t * e)
         int32_t id = lv_chart_get_pressed_point(chart);
         if(id == LV_CHART_POINT_NONE) return;
 
-        LV_LOG_USER("Selected point %d\n", id);
+        LV_LOG_USER("Selected point %d", (int)id);
 
         lv_chart_series_t * ser = lv_chart_get_series_next(chart, NULL);
         while(ser) {
             lv_point_t p;
             lv_chart_get_point_pos_by_id(chart, ser, id, &p);
 
-            lv_coord_t * y_array = lv_chart_get_array(chart, ser);
+            lv_coord_t * y_array = lv_chart_get_y_array(chart, ser);
             lv_coord_t value = y_array[id];
 
             char buf[16];
@@ -45,16 +45,19 @@ static void event_cb(lv_event_t * e)
             a.y1 = chart->coords.y1 + p.y - 30;
             a.y2 = chart->coords.y1 + p.y - 10;
 
-            const lv_area_t * clip_area = lv_event_get_clip_area(e);
-            lv_draw_rect(&a, clip_area, &draw_rect_dsc);
+            lv_draw_ctx_t * draw_ctx = lv_event_get_draw_ctx(e);
+            lv_draw_rect(draw_ctx, &draw_rect_dsc, &a);
 
             ser = lv_chart_get_series_next(chart, ser);
         }
     }
+    else if(code == LV_EVENT_RELEASED) {
+        lv_obj_invalidate(chart);
+    }
 }
 
 /**
- * Add ticks and labels to the axis and demonstrate scrolling
+ * Show the value of the pressed points
  */
 void lv_example_chart_4(void)
 {

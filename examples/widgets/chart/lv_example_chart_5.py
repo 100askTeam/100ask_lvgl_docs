@@ -1,9 +1,5 @@
-#include "../../lv_examples.h"
-#if LV_USE_CHART && LV_USE_SLIDER && LV_BUILD_EXAMPLES
-
-static lv_obj_t * chart;
-/* Source: https://github.com/ankur219/ECG-Arrhythmia-classification/blob/642230149583adfae1e4bd26c6f0e1fd8af2be0e/sample.csv*/
-static const lv_coord_t ecg_sample[] = {
+# Source: https://github.com/ankur219/ECG-Arrhythmia-classification/blob/642230149583adfae1e4bd26c6f0e1fd8af2be0e/sample.csv
+ecg_sample = [
     -2, 2, 0, -15, -39, -63, -71, -68, -67, -69, -84, -95, -104, -107, -108, -107, -107, -107, -107, -114, -118, -117,
     -112, -100, -89, -83, -71, -64, -58, -58, -62, -62, -58, -51, -46, -39, -27, -10, 4, 7, 1, -3, 0, 14, 24, 30, 25, 19,
     13, 7, 12, 15, 18, 21, 13, 6, 9, 8, 17, 19, 13, 11, 11, 11, 23, 30, 37, 34, 25, 14, 15, 19, 28, 31, 26, 23, 25, 31,
@@ -44,56 +40,50 @@ static const lv_coord_t ecg_sample[] = {
     -202, -223, -235, -243, -237, -240, -256, -298, -345, -393, -432, -475, -518, -565, -596, -619, -623, -623, -614,
     -599, -583, -559, -524, -477, -425, -383, -357, -331, -301, -252, -198, -143, -96, -57, -29, -8, 10, 31, 45, 60, 65,
     70, 74, 76, 79, 82, 79, 75, 62,
-};
+]
 
-static void slider_x_event_cb(lv_event_t * e)
-{
-    lv_obj_t * obj = lv_event_get_target(e);
-    int32_t v = lv_slider_get_value(obj);
-    lv_chart_set_zoom_x(chart, v);
-}
+def slider_x_event_cb(e):
 
-static void slider_y_event_cb(lv_event_t * e)
-{
-    lv_obj_t * obj = lv_event_get_target(e);
-    int32_t v = lv_slider_get_value(obj);
-    lv_chart_set_zoom_y(chart, v);
-}
+    slider = e.get_target()
+    v = slider.get_value()
+    chart.set_zoom_x(v)
 
-/**
- * Display 1000 data points with zooming and scrolling.
- * See how the chart changes drawing mode (draw only vertical lines) when
- * the points get too crowded.
- */
-void lv_example_chart_5(void)
-{
-    /*Create a chart*/
-    chart = lv_chart_create(lv_scr_act());
-    lv_obj_set_size(chart, 200, 150);
-    lv_obj_align(chart, LV_ALIGN_CENTER, -30, -30);
-    lv_chart_set_range(chart, LV_CHART_AXIS_PRIMARY_Y, -1000, 1000);
+def slider_y_event_cb(e):
 
-    /*Do not display points on the data*/
-    lv_obj_set_style_size(chart, 0, LV_PART_INDICATOR);
+    slider = e.get_target()
+    v = slider.get_value()
+    chart.set_zoom_y(v)
 
-    lv_chart_series_t * ser = lv_chart_add_series(chart, lv_palette_main(LV_PALETTE_RED), LV_CHART_AXIS_PRIMARY_Y);
 
-    uint32_t pcnt = sizeof(ecg_sample) / sizeof(ecg_sample[0]);
-    lv_chart_set_point_count(chart, pcnt);
-    lv_chart_set_ext_y_array(chart, ser, (lv_coord_t *)ecg_sample);
+#
+# Display 1000 data points with zooming and scrolling.
+# See how the chart changes drawing mode (draw only vertical lines) when
+# the points get too crowded.
+ 
+# Create a chart
+chart = lv.chart(lv.scr_act())
+chart.set_size(200, 150)
+chart.align(lv.ALIGN.CENTER, -30, -30)
+chart.set_range(lv.chart.AXIS.PRIMARY_Y, -1000, 1000)
 
-    lv_obj_t * slider;
-    slider = lv_slider_create(lv_scr_act());
-    lv_slider_set_range(slider, LV_IMG_ZOOM_NONE, LV_IMG_ZOOM_NONE * 10);
-    lv_obj_add_event_cb(slider, slider_x_event_cb, LV_EVENT_VALUE_CHANGED, NULL);
-    lv_obj_set_size(slider, 200, 10);
-    lv_obj_align_to(slider, chart, LV_ALIGN_OUT_BOTTOM_MID, 0, 20);
+# Do not display points on the data
+chart.set_style_size(0, lv.PART.INDICATOR)
 
-    slider = lv_slider_create(lv_scr_act());
-    lv_slider_set_range(slider, LV_IMG_ZOOM_NONE, LV_IMG_ZOOM_NONE * 10);
-    lv_obj_add_event_cb(slider, slider_y_event_cb, LV_EVENT_VALUE_CHANGED, NULL);
-    lv_obj_set_size(slider, 10, 150);
-    lv_obj_align_to(slider, chart, LV_ALIGN_OUT_RIGHT_MID, 20, 0);
-}
+ser = chart.add_series(lv.palette_main(lv.PALETTE.RED), lv.chart.AXIS.PRIMARY_Y)
 
-#endif
+pcnt = len(ecg_sample)
+chart.set_point_count(pcnt)
+chart.set_ext_y_array(ser, ecg_sample)
+
+slider = lv.slider(lv.scr_act())
+slider.set_range(lv.IMG_ZOOM.NONE, lv.IMG_ZOOM.NONE * 10)
+slider.add_event_cb(slider_x_event_cb, lv.EVENT.VALUE_CHANGED, None)
+slider.set_size(200,10)
+slider.align_to(chart, lv.ALIGN.OUT_BOTTOM_MID, 0, 20)
+
+slider = lv.slider(lv.scr_act())
+slider.set_range(lv.IMG_ZOOM.NONE, lv.IMG_ZOOM.NONE * 10)
+slider.add_event_cb(slider_y_event_cb, lv.EVENT.VALUE_CHANGED, None)
+slider.set_size(10, 150)
+slider.align_to(chart, lv.ALIGN.OUT_RIGHT_MID, 20, 0)
+

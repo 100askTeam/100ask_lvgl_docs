@@ -14,44 +14,43 @@ static void event_cb(lv_event_t * e)
     if(code == LV_EVENT_VALUE_CHANGED) {
         last_id = lv_chart_get_pressed_point(obj);
         if(last_id != LV_CHART_POINT_NONE) {
-            lv_point_t p;
-            lv_chart_get_point_pos_by_id(obj, ser, last_id, &p);
-            lv_chart_set_cursor_point(obj, cursor, &p);
+            lv_chart_set_cursor_point(obj, cursor, NULL, last_id);
         }
     }
     else if(code == LV_EVENT_DRAW_PART_END) {
         lv_obj_draw_part_dsc_t * dsc = lv_event_get_draw_part_dsc(e);
-        if(dsc->part == LV_PART_CURSOR && dsc->p1 && dsc->p2 && dsc->p1->y == dsc->p2->y && last_id >= 0) {
-            lv_coord_t * data_array = lv_chart_get_array(chart, ser);
-            lv_coord_t v = data_array[last_id];
-            char buf[16];
-            lv_snprintf(buf, sizeof(buf), "%d", v);
+        if(!lv_obj_draw_part_check_type(dsc, &lv_chart_class, LV_CHART_DRAW_PART_CURSOR)) return;
+        if(dsc->p1 == NULL || dsc->p2 == NULL || dsc->p1->y != dsc->p2->y || last_id < 0) return;
 
-            lv_point_t size;
-            lv_txt_get_size(&size, buf, LV_FONT_DEFAULT, 0, 0, LV_COORD_MAX, LV_TEXT_FLAG_NONE);
+        lv_coord_t * data_array = lv_chart_get_y_array(chart, ser);
+        lv_coord_t v = data_array[last_id];
+        char buf[16];
+        lv_snprintf(buf, sizeof(buf), "%d", v);
 
-            lv_area_t a;
-            a.y2 = dsc->p1->y - 5;
-            a.y1 = a.y2 - size.y - 10;
-            a.x1 = dsc->p1->x + 10;
-            a.x2 = a.x1 + size.x + 10;
+        lv_point_t size;
+        lv_txt_get_size(&size, buf, LV_FONT_DEFAULT, 0, 0, LV_COORD_MAX, LV_TEXT_FLAG_NONE);
 
-            lv_draw_rect_dsc_t draw_rect_dsc;
-            lv_draw_rect_dsc_init(&draw_rect_dsc);
-            draw_rect_dsc.bg_color = lv_palette_main(LV_PALETTE_BLUE);
-            draw_rect_dsc.radius = 3;
+        lv_area_t a;
+        a.y2 = dsc->p1->y - 5;
+        a.y1 = a.y2 - size.y - 10;
+        a.x1 = dsc->p1->x + 10;
+        a.x2 = a.x1 + size.x + 10;
 
-            lv_draw_rect(&a, dsc->clip_area, &draw_rect_dsc);
+        lv_draw_rect_dsc_t draw_rect_dsc;
+        lv_draw_rect_dsc_init(&draw_rect_dsc);
+        draw_rect_dsc.bg_color = lv_palette_main(LV_PALETTE_BLUE);
+        draw_rect_dsc.radius = 3;
 
-            lv_draw_label_dsc_t draw_label_dsc;
-            lv_draw_label_dsc_init(&draw_label_dsc);
-            draw_label_dsc.color = lv_color_white();
-            a.x1 += 5;
-            a.x2 -= 5;
-            a.y1 += 5;
-            a.y2 -= 5;
-            lv_draw_label(&a, dsc->clip_area, &draw_label_dsc, buf, NULL);
-        }
+        lv_draw_rect(dsc->draw_ctx, &draw_rect_dsc, &a);
+
+        lv_draw_label_dsc_t draw_label_dsc;
+        lv_draw_label_dsc_init(&draw_label_dsc);
+        draw_label_dsc.color = lv_color_white();
+        a.x1 += 5;
+        a.x2 -= 5;
+        a.y1 += 5;
+        a.y2 -= 5;
+        lv_draw_label(dsc->draw_ctx, &draw_label_dsc, &a, buf, NULL);
     }
 }
 
@@ -65,7 +64,7 @@ void lv_example_chart_6(void)
     lv_obj_align(chart, LV_ALIGN_CENTER, 0, -10);
 
     lv_chart_set_axis_tick(chart, LV_CHART_AXIS_PRIMARY_Y, 10, 5, 6, 5, true, 40);
-    lv_chart_set_axis_tick(chart, LV_CHART_AXIS_X, 10, 5, 10, 1, true, 30);
+    lv_chart_set_axis_tick(chart, LV_CHART_AXIS_PRIMARY_X, 10, 5, 10, 1, true, 30);
 
     lv_obj_add_event_cb(chart, event_cb, LV_EVENT_ALL, NULL);
     lv_obj_refresh_ext_draw_size(chart);
