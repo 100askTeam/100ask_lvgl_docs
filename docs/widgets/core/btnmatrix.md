@@ -17,9 +17,9 @@ The Button matrix is added to the default group (if one is set). Besides the But
 </p>
 </details>
 
-Button Matrix 对象是一种在行和列中显示多个按钮的轻量级方法。 轻量级，因为按钮不是实际创建的，而是实时绘制的。 这样，一个按钮仅使用 8 个额外字节的内存，而不是普通 [Button](/widgets/core/btn) 对象的 ~100-150 字节加上 [Label](/widgets/ 核心/标签）对象。
+按钮矩阵(lv_btnmatrix) 对象是一种在行和列中显示多个按钮的轻量级方法。 轻量级，因为按钮不是实际创建的，而是实时绘制的。 这样，一个按钮仅使用 8 个额外字节的内存，而不是普通 [Button](/widgets/core/btn) 对象的 ~100-150 字节加上 [Label](/widgets/core/label) 对象。
 
-按钮矩阵被添加到默认组（如果设置了）。 此外，按钮矩阵是一个可编辑对象，允许选择和单击带有编码器导航的按钮。
+按钮矩阵将添加到默认组（如果已设置）。此外，按钮矩阵是一个可编辑的对象，允许通过编码器导航选择和单击按钮。
 
 ## Parts and Styles（零件和样式）
 
