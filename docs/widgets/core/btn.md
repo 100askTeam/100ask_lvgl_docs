@@ -68,7 +68,7 @@ Learn more about [Events](/overview/event).
 </p>
 </details>
 
-- 如果打开 `LV_OBJ_FLAG_CHECKABLE ` 当对象被点击时有切换(Toggle)选中状态效果，并且可以在 `LV_EVENT_VALUE_CHANGED` 事件类型中处理事件。
+- 如果打开了 `LV_OBJ_FLAG_CHECKABLE ` ，当对象被点击时有选中切换(Toggle)状态的效果，并且可以在 `LV_EVENT_VALUE_CHANGED` 事件类型中处理事件。
 
 
 详细了解 [事件](/overview/event)。

@@ -15,7 +15,7 @@ A label is the basic object type that is used to display text.
 </p>
 </details>
 
-标签是用于显示文本的基本对象类型。
+标签是用来显示文本的基本对象类型。
 
 ## Parts and Styles（部件和风格）
 
