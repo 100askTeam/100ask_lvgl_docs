@@ -17,11 +17,12 @@ An input device usually means:
 </p>
 </details>
 
-输入设备通常意味着：
-- 类似指针的输入设备，如触摸板或鼠标
-- 像普通键盘或简单数字键盘一样的键盘
+一般来说输入设备可以是：
+
+- 类似指针的输入设备，比如：触摸板或鼠标
+- 像普通键盘或简单数字键盘那样的键盘
 - 带左/右转和推动选项的编码器
-- 分配给屏幕上特定点的外部硬件按钮
+- 分配给屏幕外围特定点的外部硬件按钮
 
 
 <details>
@@ -34,7 +35,7 @@ An input device usually means:
 </p>
 </details>
 
-``` important:: 在进一步阅读之前，请阅读 Input devices 的 [Porting](/porting/indev) 部分
+``` important:: 在进一步阅读之前，请阅读输入设备(Input devices)的 [Porting](/porting/indev) 部分
 ```
 
 ## Pointers（光标）
@@ -73,7 +74,66 @@ For images, *clicking* is disabled by default.
 </details>
 
 请注意，光标对象应该有 `lv_obj_set_click(cursor_obj, false)`。
-对于图像，默认情况下禁用*单击*。
+
+对于图像，默认情况下禁用 *单击*。
+
+
+
+### Gestures (手势)
+<details>
+<summary>查看原文</summary>
+<p>
+
+Pointer input devives can detect basic gestures. By default, most of the widgets send the gestures to its parent, so finally the gestures can be detected on the screen object in a form of an `LV_EVENT_GESTURE` event. For example:
+ 
+</p>
+</details>
+
+
+指针输入设备可以检测基本手势。默认情况下，大多数部件(对象)会将手势发送给其父级([事件冒泡](https://www.bilibili.com/video/BV1Ya411r7K2?p=13))，因此我们最终可以在屏幕对象 (lv_scr_act()) 上设置回调函数，在 `LV_EVENT_GESTURE` 的事件类型检测处理手势事件。例如：
+
+
+```c
+void my_event(lv_event_t * e)
+{
+  lv_obj_t * screen = lv_event_get_current_target(e);
+  lv_dir_t dir = lv_indev_get_gesture_dir(lv_indev_act());
+  switch(dir) {
+    case LV_DIR_LEFT:
+      ...
+      break;
+    case LV_DIR_RIGHT:
+      ...
+      break;
+    case LV_DIR_TOP:
+      ...
+      break;
+    case LV_DIR_BOTTOM:
+      ...
+      break;
+  }
+}
+
+...
+
+lv_obj_add_event_cb(screen1, my_event, LV_EVENT_GESTURE, NULL);
+```
+
+<details>
+<summary>查看原文</summary>
+<p>
+
+To prevent passing the gesture event to the parent from an obejct use `lv_obj_clear_flag(obj, LV_OBJ_FLAG_GESTURE_BUBBLE)`.
+
+Note that, gestures are not triggered if an object is being scrolled.
+ 
+</p>
+</details>
+
+如果不想让将手势事件从对象传递给父对象，请使用 `lv_obj_clear_flag(obj, LV_OBJ_FLAG_GESTURE_BUBBLE);` 禁用 [事件冒泡](https://www.bilibili.com/video/BV1Ya411r7K2?p=13)。
+
+请注意，如果对象正在滚动，则不会触发手势。
+
 
 ## Keypad and encoder（键盘和编码器）
 
@@ -108,16 +168,20 @@ To associate a group with an input device use `lv_indev_set_group(indev, g)`, wh
 </p>
 </details>
 
-您想用键盘或编码器控制的对象需要添加到*组*。
-在每一组中，只有一个焦点对象接收按下的键或编码器的动作。
+您想用键盘或编码器控制的对象需要将其添加到*组(Groups)*，一般都会被添加进默认的 *组(Groups)*。
+
+在每一组中，同时只有一个焦点对象接收按下的键或编码器的动作。
+
 例如，如果[文本区域](/widgets/core/textarea) 被聚焦并且您在键盘上按下某个字母，则按键将被发送并插入到文本区域中。
+
 类似地，如果 [Slider](/widgets/core/slider) 获得焦点并且您按下向左或向右箭头，则滑块的值将被更改。
 
-您需要将输入设备与组关联。一个输入设备只能将按键发送给一组，但一组也可以从多个输入设备接收数据。
 
-要创建一个组使用 `lv_group_t * g = lv_group_create()` 并将一个对象添加到组中使用 `lv_group_add_obj(g, obj)`。
+将对象添加到 *组(Groups)* 还不够，我们还需要将输入设备与组关联。一个输入设备只能将按键发送给一组，但一组也可以从多个输入设备接收数据。
 
-要将组与输入设备相关联，请使用 `lv_indev_set_group(indev, g)`，其中 `indev` 是 `lv_indev_drv_register()` 的返回值
+- 要创建一个 *组(Groups)* 使用 `lv_group_t * g = lv_group_create();` 
+- 将一个对象添加到 *组(Groups)* 中使用 `lv_group_add_obj(g, obj);`。
+- 要将 *组(Groups)* 与输入设备相关联，请使用 `lv_indev_set_group(indev, g)`，其中 `indev` 是 `lv_indev_drv_register()` 的返回值
 
 #### Keys（按键）
 
@@ -143,8 +207,8 @@ There are some predefined keys which have special meaning:
 </details>
 
 有一些具有特殊含义的预定义键：
-- **LV_KEY_NEXT** 关注下一个对象
-- **LV_KEY_PREV** 关注上一个对象
+- **LV_KEY_NEXT** 聚焦到下一个对象
+- **LV_KEY_PREV** 聚焦到上一个对象
 - **LV_KEY_ENTER** 触发 `LV_EVENT_PRESSED/CLICKED/LONG_PRESSED` 等事件
 - **LV_KEY_UP** 增加值或向上移动
 - **LV_KEY_DOWN** 减少值或向下移动
@@ -153,8 +217,8 @@ There are some predefined keys which have special meaning:
 - **LV_KEY_ESC** 关闭或退出（例如关闭 [下拉列表](/widgets/core/dropdown)）
 - **LV_KEY_DEL** 删除（例如 [文本区域](/widgets/core/textarea) 中右侧的字符）
 - **LV_KEY_BACKSPACE** 删除左边的一个字符（例如在[文本区域](/widgets/core/textarea)）
-- **LV_KEY_HOME** 转到开头/顶部（例如在 [文本区域](/widgets/core/textarea)）
-- **LV_KEY_END** 转到最后（例如在 [文本区域](/widgets/core/textarea))）
+- **LV_KEY_HOME** 跳到开头/顶部（例如在 [文本区域](/widgets/core/textarea)）
+- **LV_KEY_END** 跳到最后（例如在 [文本区域](/widgets/core/textarea))）
 
 
 
@@ -172,10 +236,15 @@ With an encoder, you should use only `LV_KEY_LEFT`, `LV_KEY_RIGHT`, and `LV_KEY_
 </p>
 </details>
 
-最重要的特殊键是`LV_KEY_NEXT/PREV`、`LV_KEY_ENTER` 和`LV_KEY_UP/DOWN/LEFT/RIGHT`。
-在您的 `read_cb` 函数中，您应该将一些键转换为这些特殊键，以便​​在组中导航并与所选对象进行交互。
+最重要的特殊键是：
 
-通常，只使用“LV_KEY_LEFT/RIGHT”就足够了，因为大多数对象都可以用它们完全控制。
+- `LV_KEY_NEXT/PREV`
+- `LV_KEY_ENTER`
+- `LV_KEY_UP/DOWN/LEFT/RIGHT` 
+
+在您的 `read_cb` 函数中，应该优先考虑将一些键转换对应为这些特殊键，以便在组中导航并与所选对象进行交互。
+
+通常，只使用 `LV_KEY_LEFT/RIGHT` 就足够了，因为大多数对象都可以用它们完全控制。
 
 对于编码器，您应该只使用 `LV_KEY_LEFT`、`LV_KEY_RIGHT` 和 `LV_KEY_ENTER`。
 
