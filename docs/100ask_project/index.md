@@ -2,7 +2,7 @@
 .. include:: /header.rst 
 :github_url: |github_link_base|/100ask_project/index.md
 ```
-# ⭐项目实战
+# 项目实战
 
 ```eval_rst
 
