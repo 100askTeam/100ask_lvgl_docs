@@ -1,7 +1,8 @@
 ```eval_rst
 .. include:: /header.rst 
-:github_url: |github_link_base|/100ask_project/index.md
+:github_url: |github_link_base|/tools/index.md
 ```
+
 # 开发实用工具
 
 ```eval_rst
