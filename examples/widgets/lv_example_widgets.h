@@ -3,8 +3,8 @@
  *
  */
 
-#ifndef LV_EX_WIDGETS_H
-#define LV_EX_WIDGETS_H
+#ifndef LV_EXAMPLE_WIDGETS_H
+#define LV_EXAMPLE_WIDGETS_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -61,6 +61,7 @@ void lv_example_chart_8(void);
 void lv_example_chart_9(void);
 
 void lv_example_checkbox_1(void);
+void lv_example_checkbox_2(void);
 
 void lv_example_colorwheel_1(void);
 
@@ -87,6 +88,7 @@ void lv_example_led_1(void);
 void lv_example_line_1(void);
 
 void lv_example_list_1(void);
+void lv_example_list_2(void);
 
 void lv_example_menu_1(void);
 void lv_example_menu_2(void);
@@ -106,6 +108,7 @@ void lv_example_obj_2(void);
 
 void lv_example_roller_1(void);
 void lv_example_roller_2(void);
+void lv_example_roller_3(void);
 
 void lv_example_slider_1(void);
 void lv_example_slider_2(void);
@@ -121,6 +124,7 @@ void lv_example_table_1(void);
 void lv_example_table_2(void);
 
 void lv_example_tabview_1(void);
+void lv_example_tabview_2(void);
 
 void lv_example_textarea_1(void);
 void lv_example_textarea_2(void);

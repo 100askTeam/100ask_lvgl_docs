@@ -19,9 +19,9 @@ static void draw_event_cb(lv_event_t * e)
         lv_area_t sw_area;
         sw_area.x1 = dsc->draw_area->x2 - 50;
         sw_area.x2 = sw_area.x1 + 40;
-        sw_area.y1 =  dsc->draw_area->y1 + lv_area_get_height(dsc->draw_area) / 2 - 10;
+        sw_area.y1 = dsc->draw_area->y1 + lv_area_get_height(dsc->draw_area) / 2 - 10;
         sw_area.y2 = sw_area.y1 + 20;
-        lv_draw_rect(&sw_area, dsc->clip_area, &rect_dsc);
+        lv_draw_rect(dsc->draw_ctx, &rect_dsc, &sw_area);
 
         rect_dsc.bg_color = lv_color_white();
         if(chk) {
@@ -33,7 +33,7 @@ static void draw_event_cb(lv_event_t * e)
         }
         sw_area.y1 += 2;
         sw_area.y2 -= 2;
-        lv_draw_rect(&sw_area, dsc->clip_area, &rect_dsc);
+        lv_draw_rect(dsc->draw_ctx, &rect_dsc, &sw_area);
     }
 }
 
@@ -63,7 +63,7 @@ void lv_example_table_2(void)
     lv_obj_t * table = lv_table_create(lv_scr_act());
 
     /*Set a smaller height to the table. It'll make it scrollable*/
-    lv_obj_set_size(table, 150, 200);
+    lv_obj_set_size(table, LV_SIZE_CONTENT, 200);
 
     lv_table_set_col_width(table, 0, 150);
     lv_table_set_row_cnt(table, ITEM_CNT); /*Not required but avoids a lot of memory reallocation lv_table_set_set_value*/
@@ -74,7 +74,7 @@ void lv_example_table_2(void)
 
     uint32_t i;
     for(i = 0; i < ITEM_CNT; i++) {
-        lv_table_set_cell_value_fmt(table, i, 0, "Item %d", i + 1);
+        lv_table_set_cell_value_fmt(table, i, 0, "Item %"LV_PRIu32, i + 1);
     }
 
     lv_obj_align(table, LV_ALIGN_CENTER, 0, -20);
@@ -91,8 +91,8 @@ void lv_example_table_2(void)
     uint32_t elaps = lv_tick_elaps(t);
 
     lv_obj_t * label = lv_label_create(lv_scr_act());
-    lv_label_set_text_fmt(label, "%d items were created in %d ms\n"
-                                  "using %d bytes of memory",
+    lv_label_set_text_fmt(label, "%"LV_PRIu32" items were created in %"LV_PRIu32" ms\n"
+                                  "using %"LV_PRIu32" bytes of memory",
                                   ITEM_CNT, elaps, mem_used);
 
     lv_obj_align(label, LV_ALIGN_BOTTOM_MID, 0, -10);
