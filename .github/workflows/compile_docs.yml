@@ -3,7 +3,7 @@ on:
   push:
     branches:
     - master
-    - 'release/*'
+    - 'release/v8.2'
 env:
   EM_VERSION: 2.0.4
   EM_CACHE_FOLDER: 'emsdk-cache'
@@ -76,10 +76,10 @@ jobs:
       - name: Commit documentation changes
         run: |
           git clone https://${{secrets.CODING_USERNAME}}:${{secrets.CODING_PASSWD}}@e.coding.net/weidongshan/sphinx_docs/100ask_lvgl_docs.git --branch master --single-branch master
-          cp -r out_html/* master/8.1
+          cp -r out_html/* master/8.2
           ls
           cd master
-          touch 8.1/.nojekyll && touch master/.nojekyll
+          touch 8.2/.nojekyll && touch master/.nojekyll
           git config --local user.email "baiwenwang@100ask.com"
           git config --local user.name "www.100ask.org"
           git add .
