@@ -36,7 +36,9 @@ jobs:
             !${{ env.pythonLocation }}/lib/python*/site-packages/setuptools*
           key: ${{ env.pythonLocation }}-${{ hashFiles('docs/requirements.txt') }}
       - name: Install Doxygen and Latex dependencies
-        run: sudo apt-get install doxygen texlive-xetex texlive-binaries texlive-lang-english texlive-lang-chinese latexmk fonts-freefont-otf
+        run: |
+          sudo apt-get update
+          sudo apt-get install doxygen texlive-xetex texlive-binaries texlive-lang-english texlive-lang-chinese latexmk fonts-freefont-otf
       - name: Install requirements
         run: |
           pip install -r docs/requirements.txt
@@ -75,7 +77,6 @@ jobs:
         run: |
           git clone https://${{secrets.CODING_USERNAME}}:${{secrets.CODING_PASSWD}}@e.coding.net/weidongshan/sphinx_docs/100ask_lvgl_docs.git --branch master --single-branch master
           cp -r out_html/* master/8.1
-          cp -r out_html/* master/master
           ls
           cd master
           touch 8.1/.nojekyll && touch master/.nojekyll

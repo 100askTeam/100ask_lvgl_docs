@@ -3,7 +3,7 @@
 :github_url: |github_link_base|/100ask_project/nxp-imx6ull.md
 ```
 
-# ✨IMX6ULL LVGL GUI DEMO效果
+# IMX6ULL LVGL GUI DEMO效果
 ## IMX6ULL Linux LVGL GUI V2.0
 Linux lvgl gui 2.0和大家见面啦！
 - 全新的架构，功能更强大

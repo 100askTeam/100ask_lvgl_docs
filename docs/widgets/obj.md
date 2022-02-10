@@ -21,24 +21,23 @@ In object-oriented thinking, it is the base class from which all other objects i
 
 The functions and functionalities of the Base object can be used with other widgets too. For example `lv_obj_set_width(slider, 100)`
 
-The Base object can be directly used as a simple widget: it nothing else than a rectangle. In HTML terms, think of it as a `<div>`.
+The Base object can be directly used as a simple widget: it's nothing more than a rectangle. In HTML terms, think of it as a `<div>`.
  
 </p>
 </details>
 
-基础对象 "实现了屏幕上小部件的基本属性，例如。
+`基础对象` 实现了屏幕上小部件的基本属性，例如：
 - 坐标
 - 父对象
-- 子对象
+- 基于父对象的后代
 - 包含样式
-- 属性，如可点击、可滚动等。
+- 诸如 *Clickable*、*Scrollable* 等属性。
 
+在面向对象的思想中，`基础对象` 是 LVGL 中所有其他对象都继承自的基类。
 
-在面向对象的思维中，它是基类，LVGL中的所有其他对象都是从它那里继承的。
+基础对象的功能可以与其他小部件一起使用。 例如 `lv_obj_set_width(slider, 100);`
 
-Base 对象的功能和功能也可以与其他小部件一起使用。例如 lv_obj_set_width(slider, 100)
-
-Base 对象可以直接用作一个简单的小部件：它只不过是一个矩形。在 HTML 术语中，将其视为 <div>。
+基础对象可以直接用作一个简单的小部件：它只不过是一个矩形。 在 HTML 术语中，将其视为 **<\div\>**。
 
 ### Coordinates（坐标）
 
@@ -51,7 +50,7 @@ Only a small subset of coordinate settings is described here. To see all the fea
 </p>
 </details>
 
-此处仅描述了一小部分坐标设置。要查看 LVGL 的所有功能（填充、样式中的坐标、布局等），请访问 [坐标](/overview/coords) 页面。
+此处仅描述了一小部分坐标设置。要查看 LVGL 的所有功能（填充、样式中的坐标、布局等），请阅读 [坐标](/overview/coords) 页面了解。
 
 #### Size（大小）
 
@@ -59,12 +58,12 @@ Only a small subset of coordinate settings is described here. To see all the fea
 <summary>查看原文</summary>
 <p>
 
-The object size can be modified on individual axes with `lv_obj_set_width(obj, new_width)` and `lv_obj_set_height(obj, new_height)`, or both axes can be modified at the same time with `lv_obj_set_size(obj, new_width, new_height)`.
+The object size can be modified on individual axes with `lv_obj_set_width(obj, new_width);` and `lv_obj_set_height(obj, new_height);`, or both axes can be modified at the same time with `lv_obj_set_size(obj, new_width, new_height);`.
  
 </p>
 </details>
 
-可以使用`lv_obj_set_width(obj, new_width)` 和`lv_obj_set_height(obj, new_height)` 修改单个轴上的对象大小，或者可以同时修改两个轴，使用高度`lv_obj_set_width(obj,new_set_width)。
+可以使用`lv_obj_set_width(obj, new_width);` 和`lv_obj_set_height(obj, new_height);` 设置或修改单个轴上的对象大小，或者可以同时修改两个轴，使用 `lv_obj_set_width(obj,new_set_width);` 设置或修改高度 。
 
 #### Position（位置）
 
@@ -72,12 +71,12 @@ The object size can be modified on individual axes with `lv_obj_set_width(obj, n
 <summary>查看原文</summary>
 <p>
 
-You can set the position relative to the parent with `lv_obj_set_x(obj, new_x)` and `lv_obj_set_y(obj, new_y)`, or both axes at the same time with `lv_obj_set_pos(obj, new_x, new_y)`.
+You can set the position relative to the parent with `lv_obj_set_x(obj, new_x);` and `lv_obj_set_y(obj, new_y);`, or both axes at the same time with `lv_obj_set_pos(obj, new_x, new_y);`.
  
 </p>
 </details>
 
-您可以使用`lv_obj_set_x(obj, new_x)` 和`lv_obj_set_y(obj, new_y)` 设置相对于父级的位置，或者同时使用`lv_obj_set_pos(obj, new_x), _new 设置两个轴的位置。
+您可以使用 `lv_obj_set_x(obj, new_x);` 和 `lv_obj_set_y(obj, new_y);` 设置相对于父级的位置，或者使用`lv_obj_set_pos(obj, new_x, new_y);` 来同时设置两个轴的位置。
 
 #### Alignment（对齐）
 
@@ -85,13 +84,13 @@ You can set the position relative to the parent with `lv_obj_set_x(obj, new_x)` 
 <summary>查看原文</summary>
 <p>
 
-You can align the object on its parent with `lv_obj_set_align(obj, LV_ALIGN_...)`. After this every x and y setting will be ralitive to the set alignment mode. 
-For example a this will shift the object by 10;20 px from the center of its parent.
+You can align the object on its parent with `lv_obj_set_align(obj, LV_ALIGN_...);`. After this every x and y setting will be relative to the set alignment mode.
+For example, this will shift the object by 10;20 px from the center of its parent:
  
 </p>
 </details>
 
-您可以使用 `lv_obj_set_align(obj, LV_ALIGN_...)` 将对象与其父对象对齐。此后，每个 x 和 y 设置都将适用于设置对齐模式。例如，这会将对象从其父项的中心移动 10;20 像素。
+您可以使用 `lv_obj_set_align(obj, LV_ALIGN_...)` 将对象参照其父对象对齐。此后，每个 x 和 y 设置都将适用于设置对齐模式。例如，这会将对象从其父对象的中心移动 10(x)，20(y) 像素：
 
 ```c
 lv_obj_set_align(obj, LV_ALIGN_CENTER);
@@ -106,18 +105,18 @@ lv_obj_align(obj, LV_ALIGN_CENTER, 10, 20);
 <summary>查看原文</summary>
 <p>
 
-To align one object to another use `lv_obj_align_to(obj_to_align, obj_referece, LV_ALIGN_..., x, y)`
+To align one object to another use `lv_obj_align_to(obj_to_align, obj_referece, LV_ALIGN_..., x, y);`
 
-For example, to align a text below an image: `lv_obj_align(text, image, LV_ALIGN_OUT_BOTTOM_MID, 0, 10)`.
+For example, to align a text below an image: `lv_obj_align_to(text, image, LV_ALIGN_OUT_BOTTOM_MID, 0, 10);`.
 
 The following align types exist:
  
 </p>
 </details>
 
-要将一个对象与另一个对象对齐，请使用`lv_obj_align_to(obj_to_align, obj_referece, LV_ALIGN_..., x, y)`
+要将一个对象参照另一个对象对齐，请使用`lv_obj_align_to(obj_to_align, obj_referece, LV_ALIGN_..., x, y);`
 
-例如，要对齐图片下方的文本：`lv_obj_align(text, image, LV_ALIGN_OUT_BOTTOM_MID, 0, 10)`。
+例如，让图片下方的文本参照图片对齐：`lv_obj_align_to(text, image, LV_ALIGN_OUT_BOTTOM_MID, 0, 10);`。
 
 存在以下对齐类型：
 
@@ -130,9 +129,9 @@ The following align types exist:
 <summary>查看原文</summary>
 <p>
 
-You can set a new parent for an object with `lv_obj_set_parent(obj, new_parent)`. To get the current parent, use `lv_obj_get_parent(obj)`.
+You can set a new parent for an object with `lv_obj_set_parent(obj, new_parent);`. To get the current parent, use `lv_obj_get_parent(obj);`.
 
-To get a specific children of a parent use `lv_obj_get_child(parent, idx)`. Some examples for `idx`:
+To get a specific children of a parent use `lv_obj_get_child(parent, idx);`. Some examples for `idx`:
 - `0` get the child created first child
 - `1` get the child created second
 - `-1` get the child created last
@@ -142,13 +141,15 @@ The children can be iterated lke this
 </p>
 </details>
 
-您可以使用 `lv_obj_set_parent(obj, new_parent)` 为对象设置新的父级。要获取当前父级，请使用 `lv_obj_get_parent(obj)`。
+您可以使用 `lv_obj_set_parent(obj, new_parent);` 为对象设置新的父级。要获取当前父级，请使用 `lv_obj_get_parent(obj);`。
 
-要获取父母的特定孩子，请使用`lv_obj_get_child(parent, idx)`。 `idx` 的一些示例：
+要获取父母的特定孩子，请使用`lv_obj_get_child(parent, idx);`。 `idx` 的一些示例：
 
 - `0` 获取创建的第一个子项
 - `1` 获取创建的第二个子项
 - `-1` 获取最后创建的子项
+
+父级的孩子们可以这样迭代
 
 ```c
 uint32_t i;
@@ -162,37 +163,49 @@ for(i = 0; i < lv_obj_get_child_cnt(parent); i++) {
 <summary>查看原文</summary>
 <p>
 
-`lv_obj_get_child_id(obj)` returns the index of the object. That is how many younger children its parent has.
+`lv_obj_get_index(obj)` returns the index of the object in its parent. It is equivalent to the number of younger children in the parent.
 
 You can bring an object to the foreground or send it to the background with `lv_obj_move_foreground(obj)` and `lv_obj_move_background(obj)`.
+
+You can change the index of an object in its parent using  `lv_obj_move_to_index(obj, index)`. 
+
+You can swap the position of two objects with `lv_obj_swap(obj1, obj2)`.
  
 </p>
 </details>
 
-`lv_obj_get_child_id(obj)` 返回对象的索引。那就是它的父母有多少个年幼的孩子。
+`lv_obj_get_index(obj);` 返回对象在其父对象中的索引。 它相当于父对象拥有的孩子数量。
 
-您可以使用`lv_obj_move_foreground(obj)` 和`lv_obj_move_background(obj)` 将对象带到前台或将其发送到后台。
+您可以使用`lv_obj_move_foreground(obj);` 和`lv_obj_move_background(obj);` 将对象带到前台或将其发移到后台。
 
-### Screens（屏幕）
+您可以使用 `lv_obj_move_to_index(obj, index);` 更改对象在其父对象中的索引。
+
+你可以用 `lv_obj_swap(obj1, obj2);` 交换两个对象的位置(列表框中，它可用于对列表框项目进行排序。)。
+
+### Display and Screens(显示和屏幕)
 
 <details>
 <summary>查看原文</summary>
 <p>
 
-When you have created a screen like `lv_obj_t * screen = lv_obj_create(NULL)`, you can load it with `lv_scr_load(screen)`. The `lv_scr_act()` function gives you a pointer to the current screen.
+At the highest level of the LVGL object hierarchy is the *display* which represents the driver for a display device (physical display or simulator). A display can have one or more screens associated with it. Each screen contains a hierarchy of objects for graphical widgets representing a layout that covers the entire display.
 
-If you have multiple displays then it's important to know that these functions operate on the most-recently created or on the explicitly selected (with `lv_disp_set_default`) display.
+When you have created a screen like `lv_obj_t * screen = lv_obj_create(NULL)`, you can make it active with `lv_scr_load(screen)`. The `lv_scr_act()` function gives you a pointer to the active screen.
+
+If you have multiple displays, it's important to know that the screen functions operate on the most recently created display or the one explicitly selected with `lv_disp_set_default`.
 
 To get an object's screen use the `lv_obj_get_screen(obj)` function.
  
 </p>
 </details>
 
-当你创建了一个像 `lv_obj_t * screen = lv_obj_create(NULL)` 这样的屏幕后，你可以使用 `lv_scr_load(screen)` 加载它。 `lv_scr_act()` 函数为您提供指向当前屏幕的指针。
+在 LVGL 中，对象层次结构的最高级别是 *display*，它代表显示设备（物理显示器或模拟器）的驱动程序。 一个显示器可以有一个或多个与其相关联的屏幕。 每个屏幕都包含图形小部件的对象层次结构，代表覆盖整个显示的布局。
 
-如果您有多个显示器，那么重要的是要知道这些函数是在最近创建的还是在明确选择的（使用 `lv_disp_set_default`）显示器上运行的。
+当你创建了一个像 `lv_obj_t * screen = lv_obj_create(NULL);` 这样的屏幕时，你可以用 `lv_scr_load(screen);` 激活它。 `lv_scr_act()` 函数为您提供指向活动屏幕的指针。
 
-要获取对象的屏幕，请使用 `lv_obj_get_screen(obj)` 函数。
+如果您有多个显示器，重要的是要知道，最后创建的显示器时指定了屏幕，或者是用 `lv_disp_set_default` 明确切换的。
+
+要获取对象的屏幕，请使用 `lv_obj_get_screen(obj);` 函数。
 
 ### Events（事件）
 
@@ -204,17 +217,18 @@ To set an event callback for an object, use `lv_obj_add_event_cb(obj, event_cb, 
 
 To manually send an event to an object, use `lv_event_send(obj, LV_EVENT_..., param)`
 
-Read the [Event overview](/overview/event) to learn more about the events.
+Read the [Event overview](/overview/event) to learn more about events.
  
 </p>
 </details>
 
 
-要为对象设置事件回调，请使用`lv_obj_add_event_cb(obj, event_cb, LV_EVENT_..., user_data)`，
+要为对象设置事件回调，请使用 `lv_obj_add_event_cb(obj, event_cb, LV_EVENT_..., user_data);` ，
 
-要手动向对象发送事件，请使用`lv_event_send(obj, LV_EVENT_..., param)`
+要手动向对象发送事件，请使用 `lv_event_send(obj, LV_EVENT_..., param);`
 
-阅读 [事件概述](/overview/event) 以了解有关事件的更多信息。
+阅读 [事件概述](/overview/event) 页面，以了解有关事件的更多信息。
+
 
 ### Styles（样式）
 
@@ -224,18 +238,21 @@ Read the [Event overview](/overview/event) to learn more about the events.
 
 Be sure to read the [Style overview](/overview/style). Here only the most essential functions are described.
 
-A new style can be added to an object with `lv_obj_add_style(obj, &new_style, selector)` function. 
-`selector` is a combination of part and state(s). E.g. `LV_PART_SCROLLBAR | LV_STATE_PRESSED`.
+A new style can be added to an object with the `lv_obj_add_style(obj, &new_style, selector)` function. 
+`selector` is an ORed combination of part and state(s). E.g. `LV_PART_SCROLLBAR | LV_STATE_PRESSED`.
 
 The base objects use `LV_PART_MAIN` style properties and `LV_PART_SCROLLBAR` with the typical backgroud style properties. 
  
 </p>
 </details>
 
-请务必阅读 [样式概述](/overview/style)。这里只描述了最重要的功能。
+这里只介绍最基本的功能，请务必阅读[样式概述](/overview/style)页面详细了解。
 
-可以使用 `lv_obj_add_style(obj, &new_style, selector)` 函数向对象添加新样式。 
-`选择器` 是部件和状态的组合。例如。 `LV_PART_SCROLLBAR | LV_STATE_PRESSED`。
+可以使用 `lv_obj_add_style(obj, &new_style, selector)` 函数向对象添加新样式。
+
+`selector` 可以组合使用。 例如。 `LV_PART_SCROLLBAR | LV_STATE_PRESSED`。
+
+基本对象使用 `LV_PART_MAIN` 样式属性和带有典型背景样式属性的 `LV_PART_SCROLLBAR` 。
 
 ### Flags（宏开关）
 
@@ -246,7 +263,7 @@ The base objects use `LV_PART_MAIN` style properties and `LV_PART_SCROLLBAR` wit
 There are some attributes which can be enabled/disabled by `lv_obj_add/clear_flag(obj, LV_OBJ_FLAG_...)`:
 
 - `LV_OBJ_FLAG_HIDDEN`  Make the object hidden. (Like it wasn't there at all)
-- `LV_OBJ_FLAG_CLICKABLE`  Make the object clickable by the input devices
+- `LV_OBJ_FLAG_CLICKABLE`  Make the object clickable by input devices
 - `LV_OBJ_FLAG_CLICK_FOCUSABLE`  Add focused state to the object when clicked
 - `LV_OBJ_FLAG_CHECKABLE`  Toggle checked state when the object is clicked
 - `LV_OBJ_FLAG_SCROLLABLE`  Make the object scrollable
@@ -259,8 +276,8 @@ There are some attributes which can be enabled/disabled by `lv_obj_add/clear_fla
 - `LV_OBJ_FLAG_PRESS_LOCK` Keep the object pressed even if the press slid from the object
 - `LV_OBJ_FLAG_EVENT_BUBBLE` Propagate the events to the parent too
 - `LV_OBJ_FLAG_GESTURE_BUBBLE` Propagate the gestures to the parent
-- `LV_OBJ_FLAG_ADV_HITTEST` Allow performing more accurate hit (click) test. E.g. consider rounded corners.
-- `LV_OBJ_FLAG_IGNORE_LAYOUT` Make the object position-able by the layouts
+- `LV_OBJ_FLAG_ADV_HITTEST` Allow performing more accurate hit (click) test. E.g. accounting for rounded corners
+- `LV_OBJ_FLAG_IGNORE_LAYOUT` Make the object positionable by the layouts
 - `LV_OBJ_FLAG_FLOATING` Do not scroll the object when the parent scrolls and ignore layout
 
 - `LV_OBJ_FLAG_LAYOUT_1`  Custom flag, free to use by layouts
@@ -272,14 +289,14 @@ There are some attributes which can be enabled/disabled by `lv_obj_add/clear_fla
 - `LV_OBJ_FLAG_USER_1`  Custom flag, free to use by user
 - `LV_OBJ_FLAG_USER_2`  Custom flag, free to use by user
 - `LV_OBJ_FLAG_USER_3`  Custom flag, free to use by user
-- `LV_OBJ_FLAG_USER_4`  Custom flag, free to use by usersection.
+- `LV_OBJ_FLAG_USER_4`  Custom flag, free to use by user
 
 Some examples:
  
 </p>
 </details>
 
-有一些属性可以通过`lv_obj_add/clear_flag(obj, LV_OBJ_FLAG_...)`启用/禁用：
+有一些属性可以通过`lv_obj_add/clear_flag(obj, LV_OBJ_FLAG_...);`启用/禁用：
 
 - `LV_OBJ_FLAG_HIDDEN` 隐藏对象。 （就像它根本不存在一样）
 - `LV_OBJ_FLAG_CLICKABLE` 使输入设备可点击对象
@@ -309,14 +326,18 @@ Some examples:
 - `LV_OBJ_FLAG_USER_2` 自定义标志，用户免费使用
 - `LV_OBJ_FLAG_USER_3` 自定义标志，用户免费使用
 - `LV_OBJ_FLAG_USER_4` 自定义标志，由用户部分免费使用。
-一些例子：
+
+
+示例：
 
 ```c
+
 /*Hide on object*/
 lv_obj_add_flag(obj, LV_OBJ_FLAG_HIDDEN);
 
 /*Make an obejct non-clickable*/
 lv_obj_clear_flag(obj, LV_OBJ_FLAG_CLICKABLE);
+
 ```
 
 ### Groups
@@ -325,7 +346,7 @@ lv_obj_clear_flag(obj, LV_OBJ_FLAG_CLICKABLE);
 <summary>查看原文</summary>
 <p>
 
-Read the [Input devices overview](/overview/indev) to learn more about the *Groups*.
+Read the [Input devices overview](/overview/indev) to learn more about *Groups*.
 
 Objects are added to a *group* with `lv_group_add_obj(group, obj)`, and you can use `lv_obj_get_group(obj)` to see which group an object belongs to.
 
@@ -337,9 +358,9 @@ Objects are added to a *group* with `lv_group_add_obj(group, obj)`, and you can 
 
 阅读 [输入设备概述](/overview/indev) 以了解有关 *Groups* 的更多信息。
 
-使用`lv_group_add_obj(group, obj)`将对象添加到*组*，您可以使用`lv_obj_get_group(obj)`查看对象属于哪个组。
+使用`lv_group_add_obj(group, obj);`将对象添加到*组*，您可以使用`lv_obj_get_group(obj);`查看对象属于哪个组。
 
-`lv_obj_is_focused(obj)` 返回对象当前是否聚焦在其组上。 如果对象未添加到组中，则将返回 `false`。
+`lv_obj_is_focused(obj);` 返回对象当前是否聚焦在其组上。 如果对象未添加到组中，则将返回 `false`。
 
 ### Extended click area（拓展的点击区域）
 
@@ -352,7 +373,7 @@ By default, the objects can be clicked only on their coordinates, however, this 
 </p>
 </details>
 
-默认情况下，只能在对象的坐标上单击对象，但是，可以使用 `lv_obj_set_ext_click_area(obj, size)` 扩展该区域。
+默认情况下，只能在对象的坐标上单击对象，但是，可以使用 `lv_obj_set_ext_click_area(obj, size);` 扩展该区域。
 
 ## Events（事件）
 
@@ -403,15 +424,17 @@ Learn more about [Events](/overview/event).
 <summary>查看原文</summary>
 <p>
 
-If `LV_OBJ_FLAG_CHECKABLE` is enabled `LV_KEY_RIGHT` and `LV_KEY_UP` make the object checked, and `LV_KEY_LEFT` and `LV_KEY_DOWN` make it unchecked.
+If `LV_OBJ_FLAG_CHECKABLE` is enabled, `LV_KEY_RIGHT` and `LV_KEY_UP` make the object checked, and `LV_KEY_LEFT` and `LV_KEY_DOWN` make it unchecked.
 
-
-Learn more about [Keys](/overview/indev).
+If `LV_OBJ_FLAG_SCROLLABLE` is enabled, but the object is not editable (as declared by the widget class), the arrow keys (`LV_KEY_UP`, `LV_KEY_DOWN`, `LV_KEY_LEFT`, `LV_KEY_RIGHT`) scroll the object. If the object can only scroll vertically, `LV_KEY_LEFT` and `LV_KEY_RIGHT` will scroll up/down instead, making it compatible with an encoder input device. See [Input devices overview](/overview/indev) for more on encoder behaviors and the edit mode.
  
 </p>
 </details>
 
-如果启用了`LV_OBJ_FLAG_CHECKABLE`，则`LV_KEY_RIGHT` 和`LV_KEY_UP` 使对象被选中，而`LV_KEY_LEFT` 和`LV_KEY_DOWN` 使其不选中。
+如果启用了`LV_OBJ_FLAG_CHECKABLE`，则`LV_KEY_RIGHT` 和`LV_KEY_UP` 使对象被选中，而`LV_KEY_LEFT` 和`LV_KEY_DOWN` 使其取消选中。
+
+如果启用了“LV_OBJ_FLAG_SCROLLABLE”，但对象不可编辑（由小部件类声明），则箭头键（“LV_KEY_UP”、“LV_KEY_DOWN”、“LV_KEY_LEFT”、“LV_KEY_RIGHT”）滚动对象。 如果对象只能垂直滚动，`LV_KEY_LEFT` 和 `LV_KEY_RIGHT` 将改为向上/向下滚动，使其与编码器输入设备兼容。 有关编码器行为和编辑模式的更多信息，请参阅 [输入设备概述](/overview/indev)。
+
 
 了解有关 [Keys](/overview/indev) 的更多信息。
 

@@ -22,7 +22,14 @@ PDF version: :download:`100ASK_LVGL_CN.pdf <100ASK_LVGL_CN.pdf>`
     <a href="widgets/index.html"><img class="home-img" src="_static/img/home_5.png" alt="Take a look at the description of the available widgets"></a>
     <a href="CONTRIBUTING.html"><img class="home-img" src="_static/img/home_6.png" alt="Be part of the development of LVGL"></a>
 </div> 
- 
+
+# 百问网LVGL视频教程(韦东山·监制)
+
+教程基于lvgl v8.1版本，适配多个平台、多款板子。
+
+视频地址：[https://www.bilibili.com/video/BV1Ya411r7K2](https://www.bilibili.com/video/BV1Ya411r7K2)
+
+
 
 ```eval_rst
 .. toctree::
@@ -41,5 +48,6 @@ PDF version: :download:`100ASK_LVGL_CN.pdf <100ASK_LVGL_CN.pdf>`
    CHANGELOG
    ROADMAP
    100ask_project/index
+   tools/index
    contact_us/index
 ```
