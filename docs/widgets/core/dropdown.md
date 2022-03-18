@@ -24,11 +24,11 @@ The Drop-down list is added to the default group (if it is set). Besides the Dro
 
 下拉列表允许用户从列表中选择一个值。
 
-下拉列表默认关闭并显示单个值或预定义文本。
-激活后（通过单击下拉列表），将创建一个列表，用户可以从中选择一个选项。
-当用户选择一个新值时，该列表将再次被删除。
+下拉列表的选项表默认是关闭的，他可以选项可以是单个值或预定义文本。
+当单击下拉列表后，其将创建一个列表，用户可以从中选择一个选项。
+当用户选择了一个值后，该列表将再次被删除。
 
-下拉列表将添加到默认组（如果已设置）。 除了下拉列表是一个可编辑的对象，也允许选择带有编码器导航的选项。
+下拉列表将已经添加到默认组了。此外，下拉列表是一个可编辑的对象，允许通过编码器导航选项。
 
 ## Parts and Styles（部件和样式）
 
@@ -41,7 +41,7 @@ The Dropdown widget is built from the elements: "button" and "list" (both not re
 </p>
 </details>
 
-下拉小部件由以下元素构建：“按钮”和“列表”（均与按钮和列表小部件无关）
+下拉小部件由以下元素构建：“按钮”和“列表”（均与按钮和列表部件无关）
 
 ### Button（按钮）
 
@@ -57,10 +57,10 @@ The button goes to `LV_STATE_CHECKED` when its opened.
 </p>
 </details>
 
-- `LV_PART_MAIN` 按钮的背景。 对其上的文本使用典型的背景属性和文本属性。
-- `LV_PART_INDICATOR` 通常是一个箭头符号，可以是图像或文本（`LV_SYMBOL`）。
+- `LV_PART_MAIN` 按钮的背景。 对其上面的文本使用典型的背景属性和文本属性。
+- `LV_PART_INDICATOR` 通常是一个箭头符号，可以是图像或文本（`LV_SYMBOL...`）。
 
-按钮在打开时会转到“LV_STATE_CHECKED”。
+按钮在打开时，会设置为 “LV_STATE_CHECKED” 状态。
 
 ### List（列表）
 
@@ -83,17 +83,17 @@ Alternatively the theme can be extended with the new styles.
 </p>
 </details>
 
-- `LV_PART_MAIN` 列表本身。 使用典型的背景属性。 `max_height` 可用于限制列表的高度。
-- `LV_PART_SCROLLBAR` 滚动条背景、边框、阴影属性和宽度（对于它自己的宽度）以及右侧间距的右侧填充。
-- `LV_PART_SELECTED` 指的是当前按下、选中或按下+选中的选项。 还使用典型的背景属性。
+- `LV_PART_MAIN` 列表本身。 使用典型的背景属性。可通过设置 `max_height` 限制列表的高度。
+- `LV_PART_SCROLLBAR` 列表滚动条的背景、边框、阴影属性和宽度（对于它自己的宽度）以及右侧间距的右侧填充。
+- `LV_PART_SELECTED` 指的是当前按下、选中或按下+选中的选项。 也是使用典型的背景属性。
 
 由于下拉列表关闭时列表不存在，因此无法简单地向其添加样式。
-相反，应执行以下操作：
-1. 为`LV_EVENT_VALUE_CHANGED` 的按钮添加一个事件处理程序（在列表打开/关闭时触发）
-2.使用`lv_obj_t * list = lv_dropdown_get_list(dropdown)`
-3. `if(list != NULL) {/*将样式添加到列表中*/}`
+我们可以通过下面的方法实现：
+1. 当在列表打开/关闭时会触发 `LV_EVENT_VALUE_CHANGED` 事件类型
+2. 在事件处理回调函数中这样就获取到列表的指针 `lv_obj_t * list = lv_dropdown_get_list(dropdown)`
+3. 添加样式： `if(list != NULL) {/*将样式添加到列表中*/}`
 
-或者，可以使用新样式扩展主题。
+或者，可以使用自定义新样式扩展主题。
 
 ## Usage（用法）
 
@@ -117,14 +117,14 @@ You can select an option manually with `lv_dropdown_set_selected(dropdown, id)`,
 </p>
 </details>
 
-选项作为带有`lv_dropdown_set_options(dropdown, options)`的字符串传递给下拉列表。 选项应该用 `\n` 分隔。 例如：`"First\nSecond\nThird"`。 该字符串将保存在下拉列表中，因此它可以保存在局部变量中。
+可以通过这个函数 `lv_dropdown_set_options(dropdown, options)` 设置列表中的选项。 选项之间需要使用 `\n` 分隔开来，例如：`"First\nSecond\nThird"`，该字符串将保存在下拉列表开辟的空间中，因此在设置到列表之前它可以保存在局部变量中。
 
 `lv_dropdown_add_option(dropdown, "New option", pos)` 函数向 `pos` 索引插入一个新选项。
 
-为了节省内存，选项也可以使用`lv_dropdown_set_static_options(dropdown, options)`从静态（常量）字符串中设置。
-在这种情况下，当下拉列表存在且不能使用 `lv_dropdown_add_option` 时，选项字符串应该是活动的
+为了节省内存，选项也可以使用 `lv_dropdown_set_static_options(dropdown, options)` 从静态（常量）字符串中设置。
+在这种情况下，当下拉列表存在时，选项字符串应该处于活动状态，并且不能使用 `lv_dropdown_add_option` 插入新的选项。
 
-您可以使用 `lv_dropdown_set_selected(dropdown, id)` 手动选择一个选项，其中 `id` 是一个选项的索引。
+可以使用 `lv_dropdown_set_selected(dropdown, id)` 手动选择一个选项，其中 `id` 是一个选项的索引，选项从 `0` 开始索引。
 
 ### Get selected option（获取选择的选项）
 
@@ -139,9 +139,9 @@ The get the *index* of the selected option, use `lv_dropdown_get_selected(dropdo
 </p>
 </details>
 
-获取所选选项的*index*，使用`lv_dropdown_get_selected(dropdown)`。
+要获取所选中的选项的索引(*index*) ，可以使用 `lv_dropdown_get_selected(dropdown);`。
 
-`lv_dropdown_get_selected_str(dropdown, buf, buf_size)` 将所选选项的 *name* 复制到 `buf`。
+`lv_dropdown_get_selected_str(dropdown, buf, buf_size);` 将所选选项的 *name* 复制到 `buf`。
 
 ### Direction（方向）
 
@@ -156,9 +156,9 @@ If the list would be vertically out of the screen, it will be aligned to the edg
 </p>
 </details>
 
-列表可以在任何一侧创建。 默认的`LV_DIR_BOTTOM`可以通过`lv_dropdown_set_dir(dropdown, LV_DIR_LEFT/RIGHT/UP/BOTTOM)`函数进行修改。
+列表可以在任何一侧创建。 默认的 `LV_DIR_BOTTOM` 可以通过`lv_dropdown_set_dir(dropdown, LV_DIR_LEFT/RIGHT/UP/BOTTOM)` 函数进行修改。
 
-如果列表垂直于屏幕之外，它将与边缘对齐。
+如果列表展开会超出屏幕，他会自动进行调整。
 
 ### Symbol（符号）
 
@@ -175,7 +175,7 @@ If the direction of the drop-down list is  `LV_DIR_LEFT` the symbol will be show
 
 可以使用 `lv_dropdown_set_symbol(dropdown, LV_SYMBOL_...)` 将符号（通常是箭头）添加到下拉列表中
 
-如果下拉列表的方向是`LV_DIR_LEFT`，符号将显示在左侧，否则显示在右侧。
+如果下拉列表的方向是 `LV_DIR_LEFT`，符号将显示在左侧，否则显示在右侧，上下侧类似。
 
 ### Show selected（显示选中）
 
@@ -189,8 +189,8 @@ If the text is `NULL` the selected option is displayed on the button.
 </p>
 </details>
 
-主要部分可以显示所选选项或静态文本。 如果使用 `lv_dropdown_set_text(dropdown, "Some text")` 设置静态，无论选择哪个选项，它都会显示。
-如果文本为“NULL”，则所选选项将显示在按钮上。
+主要部分(LV_PART_MAIN)可以显示所选选项或静态文本。 如果使用 `lv_dropdown_set_text(dropdown, "Some text");` 设置内容，那么无论选择哪个选项，它都会只会显示你所设置的内容。
+如果文本为“NULL”，则所当前选选项将显示在按钮上。
 
 ### Manually open/close（手动打开/关闭）
 
@@ -203,7 +203,7 @@ To manually open or close the drop-down list the `lv_dropdown_open/close(dropdow
 </p>
 </details>
 
-要手动打开或关闭下拉列表，可以使用 `lv_dropdown_open/close(dropdown)` 函数。
+要手动打开或关闭下拉列表，可以使用 `lv_dropdown_open/close(dropdown);` 函数。
 
 ## Events（事件）
 
@@ -221,10 +221,10 @@ Learn more about [Events](/overview/event).
 </p>
 </details>
 
-除了[通用事件](../overview/event.html#generic-events)，下拉列表发送以下[特殊事件](../overview/event.html#special-events) ：
+除了[通用事件](../overview/event.html#generic-events)，下拉列表还可以发送以下[特殊事件](../overview/event.html#special-events) ：
 - `LV_EVENT_VALUE_CHANGED` 在选择新选项或打开/关闭列表时发送。
 
-参见 [Base object](/widgets/obj) 的事件。
+可以参考 [Base object](/widgets/obj) 的事件。
 
 详细了解 [事件](/overview/event)。
 
@@ -245,7 +245,7 @@ Learn more about [Keys](/overview/indev).
 
 - `LV_KEY_RIGHT/DOWN` 选择下一个选项。
 - `LV_KEY_LEFT/UP` 选择上一个选项。
-- `LY_KEY_ENTER` 应用选择的选项（发送`LV_EVENT_VALUE_CHANGED` 事件并关闭下拉列表）。
+- `LY_KEY_ENTER` 应用选择的选项（发送 `LV_EVENT_VALUE_CHANGED` 事件并关闭下拉列表）。
 
 了解有关 [Keys](/overview/indev) 的更多信息。
 
