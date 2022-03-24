@@ -19,11 +19,11 @@ Not only the end, but also the start value of the bar can be set, which changes 
 </p>
 </details>
 
-进度条对象有一个背景和一个指示器。 指标的宽度根据柱线的当前值设置。
+进度条对象有一个背景和一个指示器。 指示器的宽度根据进度条的当前值自动设置。
 
-如果对象的宽度小于其高度，则可以创建垂直条。
+如果设置进度条的宽度小于其高度，就可以创建出垂直摆放的进度条。
 
-不仅可以设置结束，还可以设置柱线的起始值，从而改变指标的开始位置。
+可以通过设置进度条的值，从而改变指标的开始位置。
 
 ## Parts and Styles（零件和样式）
 
@@ -37,11 +37,8 @@ Not only the end, but also the start value of the bar can be set, which changes 
 </p>
 </details>
 
-- `LV_PART_MAIN` 进度条的背景，它使用典型的背景样式属性。 添加填充会使指示器变小或变大。 如果值设置为“LV_ANIM_ON”，则“anim_time”样式属性设置动画时间。
-- `LV_PART_INDICATOR` 指标本身； 还使用所有典型的背景属性。
-
-- `LV_PART_MAIN` 进度条的背景，它使用的是样式属性的背景。补充补充。如果可以变小或变大值设置为“LV_ANIM_ON”，则“anim_time”样式属性设置动画时间。
-- `LV_PART_INDICATOR`指标本身；还使用所有典型的属性背景。
+- `LV_PART_MAIN` 进度条的背景，它使用典型的背景样式属性。 添加填充会让指示器变小或变大。 如果值设置为 `LV_ANIM_ON` ，则可以继续通过设置 `anim_time` 样式属性设置动画的时间。
+- `LV_PART_INDICATOR` 指示器本身； 也是使用所有典型的背景属性。
 
 
 ## Usage（用法）
