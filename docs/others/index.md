@@ -2,7 +2,7 @@
 .. include:: /header.rst 
 :github_url: |github_link_base|/others/index.md
 ```
-# Others（其他）
+# Others
 
 
 ```eval_rst
@@ -11,6 +11,7 @@
    :maxdepth: 1
    
    snapshot
-   
+   monkey
+   gridnav
 ```
 
