@@ -81,7 +81,7 @@ The bar can be one the following modes:
 
 进度条可以是以下模式之一：
 - `LV_BAR_MODE_NORMAL` 像上文所说的普通进度条(默认)
-- `LV_BAR_MODE_SYMMETRICAL` 从零值到当前值绘制指示器。当通过 'lv_bar_set_range' 设置的最小最大值是正负对称的时候才能看到效果。比如最大最小值设置为(-100, 100)，那么在此模式下，再通过 `lv_bar_set_value` 设置的时候，进度条会从0(而不是-100)开始生效新值。
+- `LV_BAR_MODE_SYMMETRICAL` 从零值到当前值绘制指示器。当通过 `lv_bar_set_range` 设置的最小最大值是 `(-x, y)`。比如最大最小值设置为 **(-100, 100)** ，那么在此模式下，再通过 `lv_bar_set_value` 设置的时候，进度条会从0(而不是-100)开始生效新值，并且会保留展示 (-100, 0) 这部分的区域。
 - `LV_BAR_MODE_RANGE` 也允许通过 `lv_bar_set_start_value(bar, new_value, LV_ANIM_ON/OFF)` 设置起始值。这样进度条的起始值可以不是0，而是你指定的数值([参考示例](#stripe-pattern-and-range-value))，但是这样设置的起始值必须小于可以设置的最大值。
 
 
