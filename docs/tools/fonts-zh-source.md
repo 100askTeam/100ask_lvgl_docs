@@ -18,6 +18,7 @@
 
 ### 思源字体
 
+- [Adobe开源字体github主页](https://github.com/adobe-fonts)
 
 |  字体预览   |  下载字体  |
 |  :----  | ----  |
@@ -71,7 +72,7 @@
 
 ### 更多字体
 
-TODO
+- [等宽字体](/tools/monospaced-font)
 
 ## 常用汉字
 

@@ -11,6 +11,7 @@
    :maxdepth: 2
 
    fonts-zh-source
+   monospaced-font
    lv-chinese-ime
 
 ```

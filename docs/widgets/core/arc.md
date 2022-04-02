@@ -2,7 +2,7 @@
 .. include:: /header.rst 
 :github_url: |github_link_base|/widgets/arc.md
 ```
-# Arc（弧） (lv_arc)
+# Arc（圆弧） (lv_arc)
 
 ## Overview（概述）
 
@@ -15,7 +15,7 @@ The Arc consists of a background and a foreground arc. The foregrond (indicator)
 </p>
 </details>
 
-弧由背景和前景弧组成。前景（指示器）可以进行触摸调整。
+圆弧由背景和前景弧组成。前景（指示器）可以进行触摸调整。
 
 ## Parts and Styles
 
@@ -31,10 +31,9 @@ Larger padding makes it larger, smaller padding makes it smaller.
 </p>
 </details>
 
-- `LV_PART_MAIN` 使用典型的背景样式属性绘制背景，使用圆弧样式属性绘制圆弧。 圆弧的大小和位置将遵循 *padding* 样式属性。
-- `LV_PART_INDICATOR` 使用 *arc* 样式属性绘制另一个圆弧。 它的填充值是相对于背景弧来解释的。
-- `LV_PART_KNOB` 使用所有背景属性和填充值在指标的末尾绘制一个句柄。 使用零填充，旋钮大小与指示器的宽度相同。
-较大的填充使其更大，较小的填充使其更小。
+- `LV_PART_MAIN` 圆弧的背景部分。使用典型的背景样式属性绘制背景，使用圆弧样式属性绘制圆弧。 圆弧的大小和位置可以通过 *padding* 样式调整。
+- `LV_PART_INDICATOR` 圆弧的指示器部分。使用 *arc* 样式属性绘制另一个圆弧。 它的填充值是相对于背景弧来设置的。
+- `LV_PART_KNOB` 圆弧的旋钮部分。使用所有背景属性和填充值在指标的末尾绘制一个旋钮。如果使用零填充，旋钮大小与指示器的宽度相同。较大的填充使其更大，较小的填充使其更小。
 
 ## Usage（用法）
 
@@ -52,16 +51,16 @@ The indicator arc is drawn on the main part's arc. This if the value is set to m
 To set the start and end angle of the background arc use the `lv_arc_set_bg_angles(arc, start_angle, end_angle)` functions or `lv_arc_set_bg_start/end_angle(arc, angle)`. 
 
 Zero degrees is at the middle right (3 o'clock) of the object and the degrees are increasing in clockwise direction.
-The angles should be in the [0;360] range.
+The angles should be in the [0;360] range. 
  
 </p>
 </details>
 
-可以使用 `lv_arc_set_value(arc, new_value)` 设置新值。
-该值在可以用`lv_arc_set_range(arc, min, max)`修改的范围（最小值和最大值）中解释。
-默认范围是 1..100。
+可以通过 `lv_arc_set_value(arc, new_value)` 设置一个数值。
+可以通过 `lv_arc_set_range(arc, min, max)` 指定数值的范围（最小值和最大值）。
+没有没有指定数值范围，将使用默认范围 (1-100)。
 
-指示弧绘制在主零件的弧上。 如果该值设置为最大值，则指示器弧将覆盖整个“背景”弧。
+指示器绘制在主零件的弧上。 如果该值设置为最大值，则指示器弧将覆盖整个“背景”弧。
 要设置背景弧的开始和结束角度，请使用 `lv_arc_set_bg_angles(arc, start_angle, end_angle)` 函数或 `lv_arc_set_bg_start/end_angle(arc, angle)`。
 
 零度位于对象的中间右侧（3 点钟方向），并且度数沿顺时针方向增加。
@@ -97,11 +96,11 @@ The mode can be set by `lv_arc_set_mode(arc, LV_ARC_MODE_...)` and used only if 
 </details>
 
 弧可以是以下模式之一：
-- `LV_ARC_MODE_NORMAL` 指标弧从最小值绘制到当前值。
-- `LV_ARC_MODE_REVERSE` 指标弧从最大值到当前值逆时针绘制。
-- `LV_ARC_MODE_SYMMETRICAL` 指标弧从中间点绘制到当前值。
+- `LV_ARC_MODE_NORMAL` 普通模式。指示器从最小值绘制到当前值。
+- `LV_ARC_MODE_REVERSE` 反向模式。指示器从最大值到当前值逆时针绘制。
+- `LV_ARC_MODE_SYMMETRICAL` 对称模式。指示器从中间点绘制到当前值。
 
-模式可以通过`lv_arc_set_mode(arc, LV_ARC_MODE_...)`设置，并且仅当角度由`lv_arc_set_value()`设置或通过手指调整弧度时使用。
+可以通过 `lv_arc_set_mode(arc, LV_ARC_MODE_...)` 设置模式，并且仅当角度由 `lv_arc_set_value()` 设置或通过手指调整弧度时使用。
 
 ### Change rate（变化率）
 
@@ -115,8 +114,8 @@ The change rate is defined in degree/second unit and can be set with `lv_arc_set
 </p>
 </details>
 
-如果弧被按下，当前值将根据设置的*变化率*以有限的速度设置。
-变化率以度/秒为单位定义，可以用`lv_arc_set_change_rage(arc, rate)`设置
+如果弧被按下，当前值将根据设置的 *变化率* 以有限的速度设置。
+变化率以 度/秒 为单位定义，可以用 `lv_arc_set_change_rage(arc, rate)` 设置
 
 ### Setting the indicator manually（手动设置指示器）
 
@@ -134,10 +133,10 @@ To make the arc non-adjustabe remove the style of the knob and make the object n
 </p>
 </details>
 
-也可以直接使用 `lv_arc_set_angles(arc, start_angle, end_angle)` 函数或 `lv_arc_set_start/end_angle(arc, start_angle)` 设置指标弧的角度。
+也可以直接使用 `lv_arc_set_angles(arc, start_angle, end_angle)` 函数或 `lv_arc_set_start/end_angle(arc, start_angle)` 设置指示器的角度。
 在这种情况下，设置的“值”和“模式”将被忽略。
 
-换句话说，设置角度和值是独立的。 您应该使用值和角度设置。 将两者混合可能会导致意外行为。
+换句话说，设置角度和值是独立的。将两者混合可能会获得未知的结果。
 
 要使圆弧不可调整，请移除旋钮的样式并使对象不可点击：
 
@@ -176,7 +175,7 @@ Learn more about [Events](/overview/event).
 </p>
 </details>
 
-- 按下/拖动圆弧以设置新值时发送“LV_EVENT_VALUE_CHANGED”。
+- 按下或拖动圆弧设置新值时发送会 `LV_EVENT_VALUE_CHANGED`
 - `LV_EVENT_DRAW_PART_BEGIN` 和 `LV_EVENT_DRAW_PART_END` 使用以下类型发送：
      - `LV_ARC_DRAW_PART_BACKGROUND` 背景弧。
          - `部分`：`LV_PART_MAIN`
