@@ -1,51 +1,30 @@
 ```eval_rst
 .. include:: /header.rst 
-:github_url: |github_link_base|/tools/fonts-zh-source.md
+:github_url: |github_link_base|/tools/monospaced-font.md
 ```
 
-# 显示中文
+# 等宽字体
 
-要在lvgl中使用中文显示，我们需要用到两个东西：字体文件和字体转换器。
+等宽字体（英语：Monospaced Font）是指字符宽度相同的电脑字体。与此相对，字符宽度不尽相同的电脑字体称为比例字体。[^1]
 
-字体文件我们可以使用开源的字体或者自己制作出来，准备好了字体文件之后使用字体转换器即可转换成可以在lvgl上使用的字体格式。
+在传统西文印刷中，比例字体可以提高单词的可读性。但因打字机及早期的电脑画面显示等由于技术的局限，无法进行字母宽度的比例调整，因此将每个字符都制作成一样的宽度，从而形成了等宽字体。在等宽字体中，字母“i”、“j”显得两侧余白较多，而字母“w”、“m”等的笔画显得相当拥挤。
 
-下面给提供了开源可免费商用的字体文件共大家使用，下载好字体文件之后，再使用字体转换器转换字体即可。
+但是随着图形用户界面主流的更新和电脑技术的提高，处理比例字体的局限性得到了突破，因此现在排版上显得比较自然的比例字体的使用已经相当普及。
+
+东亚语言中，方块字基本上都作为等宽字体处理，如各个地区的汉字、日语假名的全角字符、韩语谚文音节等字符都是等宽的。 但是一些中文、日文字体中，由于同时涵盖西文字符，因此也含有比例字体，造成一个字体中两种类型混合的局面。
+
+东亚文字的标点符号有时会随标准规定、挤压处理而存在宽度可变的情况；CSS中有一个font-variant-east-asian设定可以选择宽度策略。
+
+Windows简体中文操作系统中，旧版本的默认字体中易宋体全部是等宽字体，而Windows Vista的默认字体微软雅黑中，等宽中应属半角的西文部分是比例字体，全角字符是等宽字体。
 
 
-## 中文字体文件
-
-中文使用unicode编码[^1]。
-
-### 思源字体
+## 等宽字体文件下载
 
 - [Adobe开源字体github主页](https://github.com/adobe-fonts)
+- [Adobe开源等宽字体仓库](https://github.com/adobe-fonts/source-han-mono)
 
 |  字体预览   |  下载字体  |
 |  :----  | ----  |
-| ![SiYuanHeiTi-Bold](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanHeiTi-Bold.jpg)  | [SiYuanHeiTi-Bold](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanHeiTi-Bold.zip) |
-| ![SiYuanHeiTi-CN-VF](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanHeiTi-CN-VF.jpg)  | [SiYuanHeiTi-CN-VF](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanHeiTi-CN-VF.zip) |
-| ![SiYuanHeiTi-ExtraLight](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanHeiTi-ExtraLight.jpg)  | [SiYuanHeiTi-ExtraLight](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanHeiTi-ExtraLight.zip) |
-| ![SiYuanHeiTi-Heavy](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanHeiTi-Heavy.jpg)  | [SiYuanHeiTi-Heavy](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanHeiTi-Heavy.zip) |
-| ![SiYuanHeiTi-Light](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanHeiTi-Light.jpg)  | [SiYuanHeiTi-Light](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanHeiTi-Light.zip) |
-| ![SiYuanHeiTi-Medium](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanHeiTi-Medium.jpg)  | [SiYuanHeiTi-Medium](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanHeiTi-Medium.zip) |
-| ![SiYuanHeiTi-Normal](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanHeiTi-Normal.jpg)  | [SiYuanHeiTi-Normal](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanHeiTi-Normal.zip) |
-| ![SiYuanHeiTi-Regular](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanHeiTi-Regular.jpg)  | [SiYuanHeiTi-Regular](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanHeiTi-Regular.zip) |
-| ![SiYuanHeiTiGoogleBan](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanHeiTiGoogleBan.jpg)  | [SiYuanHeiTiGoogleBan](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanHeiTiGoogleBan.zip) |
-| ![SiYuanHeiTiJiuZiXing-Bold](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanHeiTiJiuZiXing-Bold.jpg)  | [SiYuanHeiTiJiuZiXing-Bold](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanHeiTiJiuZiXing-Bold.zip) |
-| ![SiYuanHeiTiJiuZiXing-ExtraLight](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanHeiTiJiuZiXing-ExtraLight.jpg)  | [SiYuanHeiTiJiuZiXing-ExtraLight](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanHeiTiJiuZiXing-ExtraLight.zip) |
-| ![SiYuanHeiTiJiuZiXing-Heavy](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanHeiTiJiuZiXing-Heavy.jpg)  | [SiYuanHeiTiJiuZiXing-Heavy](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanHeiTiJiuZiXing-Heavy.zip) |
-| ![SiYuanHeiTiJiuZiXing-Light](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanHeiTiJiuZiXing-Light.jpg)  | [SiYuanHeiTiJiuZiXing-Light](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanHeiTiJiuZiXing-Light.zip) |
-| ![SiYuanHeiTiJiuZiXing-Medium](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanHeiTiJiuZiXing-Medium.jpg)  | [SiYuanHeiTiJiuZiXing-Medium](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanHeiTiJiuZiXing-Medium.zip) |
-| ![SiYuanHeiTiJiuZiXing-Normal](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanHeiTiJiuZiXing-Normal.jpg)  | [SiYuanHeiTiJiuZiXing-Normal](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanHeiTiJiuZiXing-Normal.zip) |
-| ![SiYuanHeiTiJiuZiXing-Regular](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanHeiTiJiuZiXing-Regular.jpg)  | [SiYuanHeiTiJiuZiXing-Regular](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanHeiTiJiuZiXing-Regular.zip) |
-| ![SiYuanRouHei-Bold](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanRouHei-Bold.jpg)  | [SiYuanRouHei-Bold](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanRouHei-Bold.zip) |
-| ![SiYuanRouHei-ExtraLight](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanRouHei-ExtraLight.jpg)  | [SiYuanRouHei-ExtraLight](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanRouHei-ExtraLight.zip) |
-| ![SiYuanRouHei-Heavy](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanRouHei-Heavy.jpg)  | [SiYuanRouHei-Heavy](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanRouHei-Heavy.zip) |
-| ![SiYuanRouHei-IOS8](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanRouHei-IOS8.jpg)  | [SiYuanRouHei-IOS8](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanRouHei-IOS8.zip) |
-| ![SiYuanRouHei-Light](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanRouHei-Light.jpg)  | [SiYuanRouHei-Light](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanRouHei-Light.zip) |
-| ![SiYuanRouHei-Medium](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanRouHei-Medium.jpg)  | [SiYuanRouHei-Medium](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanRouHei-Medium.zip) |
-| ![SiYuanRouHei-Normal](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanRouHei-Normal.jpg)  | [SiYuanRouHei-Normal](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanRouHei-Normal.zip) |
-| ![SiYuanRouHei-Regular](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanRouHei-Regular.jpg)  | [SiYuanRouHei-Regular](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanRouHei-Regular.zip) |
 | ![SiYuanRouHeiDengKuanBan-Bold](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanRouHeiDengKuanBan-Bold.jpg)  | [SiYuanRouHeiDengKuanBan-Bold](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanRouHeiDengKuanBan-Bold.zip) |
 | ![SiYuanRouHeiDengKuanBan-ExtraLight](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanRouHeiDengKuanBan-ExtraLight.jpg)  | [SiYuanRouHeiDengKuanBan-ExtraLight](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanRouHeiDengKuanBan-ExtraLight.zip) |
 | ![SiYuanRouHeiDengKuanBan-Heavy](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanRouHeiDengKuanBan-Heavy.jpg)  | [SiYuanRouHeiDengKuanBan-Heavy](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanRouHeiDengKuanBan-Heavy.zip) |
@@ -53,14 +32,6 @@
 | ![SiYuanRouHeiDengKuanBan-Medium](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanRouHeiDengKuanBan-Medium.jpg)  | [SiYuanRouHeiDengKuanBan-Medium](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanRouHeiDengKuanBan-Medium.zip) |
 | ![SiYuanRouHeiDengKuanBan-Normal](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanRouHeiDengKuanBan-Normal.jpg)  | [SiYuanRouHeiDengKuanBan-Normal](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanRouHeiDengKuanBan-Normal.zip) |
 | ![SiYuanRouHeiDengKuanBan-Regular](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanRouHeiDengKuanBan-Regular.jpg)  | [SiYuanRouHeiDengKuanBan-Regular](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanRouHeiDengKuanBan-Regular.zip) |
-| ![SiYuanSongTiRegular](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanSongTiRegular.jpg)  | [SiYuanSongTiRegular](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanSongTiRegular.zip) |
-| ![SiYuanZhenHei-Bold](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanZhenHei-Bold.jpg)  | [SiYuanZhenHei-Bold](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanZhenHei-Bold.zip) |
-| ![SiYuanZhenHei-ExtraLight](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanZhenHei-ExtraLight.jpg)  | [SiYuanZhenHei-ExtraLight](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanZhenHei-ExtraLight.zip) |
-| ![SiYuanZhenHei-Heavy](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanZhenHei-Heavy.jpg)  | [SiYuanZhenHei-Heavy](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanZhenHei-Heavy.zip) |
-| ![SiYuanZhenHei-Light](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanZhenHei-Light.jpg)  | [SiYuanZhenHei-Light](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanZhenHei-Light.zip) |
-| ![SiYuanZhenHei-Medium](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanZhenHei-Medium.jpg)  | [SiYuanZhenHei-Medium](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanZhenHei-Medium.zip) |
-| ![SiYuanZhenHei-Normal](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanZhenHei-Normal.jpg)  | [SiYuanZhenHei-Normal](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanZhenHei-Normal.zip) |
-| ![SiYuanZhenHei-Regular](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanZhenHei-Regular.jpg)  | [SiYuanZhenHei-Regular](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanZhenHei-Regular.zip) |
 | ![SiYuanZhenHeiDengKuanBan-Bold](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanZhenHeiDengKuanBan-Bold.jpg)  | [SiYuanZhenHeiDengKuanBan-Bold](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanZhenHeiDengKuanBan-Bold.zip) |
 | ![SiYuanZhenHeiDengKuanBan-ExtraLight](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanZhenHeiDengKuanBan-ExtraLight.jpg)  | [SiYuanZhenHeiDengKuanBan-ExtraLight](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanZhenHeiDengKuanBan-ExtraLight.zip) |
 | ![SiYuanZhenHeiDengKuanBan-Heavy](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanZhenHeiDengKuanBan-Heavy.jpg)  | [SiYuanZhenHeiDengKuanBan-Heavy](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanZhenHeiDengKuanBan-Heavy.zip) |
@@ -70,9 +41,6 @@
 | ![SiYuanZhenHeiDengKuanBan-Regular](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanZhenHeiDengKuanBan-Regular.jpg)  | [SiYuanZhenHeiDengKuanBan-Regular](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanZhenHeiDengKuanBan-Regular.zip) |
 
 
-### 更多字体
-
-- [等宽字体](/tools/monospaced-font)
 
 ## 常用汉字
 
@@ -418,8 +386,6 @@ lvgl官方字体转换器地址： [https://lvgl.io/tools/fontconverter](https:/
 
 
 
-
-
 -----------------------------------
 
 本站提供的内容仅用于个人学习、研究或欣赏。我们不保证内容的正确性。通过使用本站内容随之而来的风险与本站无关！
@@ -429,8 +395,4 @@ lvgl官方字体转换器地址： [https://lvgl.io/tools/fontconverter](https:/
 本网站内容原作者如不愿意在本网站刊登内容，请及时通知本站，予以删除。
 
 
-
-[^1]: https://zh.wikipedia.org/wiki/Unicode
-[^2]: https://zh.wikipedia.org/wiki/%E4%B8%AD%E6%97%A5%E9%9F%93%E7%B5%B1%E4%B8%80%E8%A1%A8%E6%84%8F%E6%96%87%E5%AD%97
-[^3]: https://zh.wikipedia.org/wiki/Unicode%E5%AD%97%E7%AC%A6%E5%88%97%E8%A1%A8
-[^4]: https://zh.wikipedia.org/wiki/ASCII
+[^1]: https://zh.wikipedia.org/wiki/%E7%AD%89%E5%AE%BD%E5%AD%97%E4%BD%93
