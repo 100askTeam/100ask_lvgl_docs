@@ -20,8 +20,6 @@ Windows简体中文操作系统中，旧版本的默认字体中易宋体全部�
 
 ## 等宽字体文件下载
 
-- [Adobe开源字体github主页](https://github.com/adobe-fonts)
-- [Adobe开源等宽字体仓库](https://github.com/adobe-fonts/source-han-mono)
 
 |  字体预览   |  下载字体  |
 |  :----  | ----  |
@@ -41,6 +39,9 @@ Windows简体中文操作系统中，旧版本的默认字体中易宋体全部�
 | ![SiYuanZhenHeiDengKuanBan-Regular](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanZhenHeiDengKuanBan-Regular.jpg)  | [SiYuanZhenHeiDengKuanBan-Regular](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanZhenHeiDengKuanBan-Regular.zip) |
 
 
+## 更多字体
+- [Adobe开源字体github主页](https://github.com/adobe-fonts)
+- [Adobe开源等宽字体仓库](https://github.com/adobe-fonts/source-han-mono)
 
 ## 常用汉字
 
@@ -380,7 +381,6 @@ lvgl官方字体转换器地址： [https://lvgl.io/tools/fontconverter](https:/
 
 ### 使用教程
 [https://www.bilibili.com/video/BV1Ya411r7K2?p=15](https://www.bilibili.com/video/BV1Ya411r7K2?p=15)
-
 
 
 
