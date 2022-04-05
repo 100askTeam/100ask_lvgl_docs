@@ -21,6 +21,9 @@
 
 | QQ群 | 微信群 |
 | ---- | ---- |
-| ![qq](http://photos.100ask.net/lvgl/00_group_chat/lvgl_qq.png) | ![wechat](http://photos.100ask.net/lvgl/00_group_chat/lvgl_wechat.png) |
+| ![qq_group](http://photos.100ask.net/lvgl/00_aboutus/lvgl_qq_group.png) | ![wechat_group](http://photos.100ask.net/lvgl/00_aboutus/lvgl_wechat_group.png) |
 
 
+如果微信群过期或无法加入，请添加下面的微信备注： 进LVGL微信群
+
+![wechat](http://photos.100ask.net/lvgl/00_aboutus/lvgl_wechat.jpg)
