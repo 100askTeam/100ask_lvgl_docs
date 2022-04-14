@@ -26,7 +26,7 @@ The Base object can be directly used as a simple widget: it's nothing more than 
 </p>
 </details>
 
-`基础对象` 实现了屏幕上小部件的基本属性，例如：
+`基础对象` 实现了屏幕上组件的基本属性，例如：
 - 坐标
 - 父对象
 - 基于父对象的后代
@@ -35,9 +35,9 @@ The Base object can be directly used as a simple widget: it's nothing more than 
 
 在面向对象的思想中，`基础对象` 是 LVGL 中所有其他对象都继承自的基类。
 
-基础对象的功能可以与其他小部件一起使用。 例如 `lv_obj_set_width(slider, 100);`
+基础对象的功能可以与其他组件一起使用。 例如 `lv_obj_set_width(slider, 100);`
 
-基础对象可以直接用作一个简单的小部件：它只不过是一个矩形。 在 HTML 术语中，将其视为 **<\div\>**。
+基础对象可以直接用作一个简单的组件：它只不过是一个矩形。 在 HTML 术语中，将其视为 **<\div\>**。
 
 ### Coordinates（坐标）
 
@@ -199,7 +199,7 @@ To get an object's screen use the `lv_obj_get_screen(obj)` function.
 </p>
 </details>
 
-在 LVGL 中，对象层次结构的最高级别是 *display*，它代表显示设备（物理显示器或模拟器）的驱动程序。 一个显示器可以有一个或多个与其相关联的屏幕。 每个屏幕都包含图形小部件的对象层次结构，代表覆盖整个显示的布局。
+在 LVGL 中，对象层次结构的最高级别是 *display*，它代表显示设备（物理显示器或模拟器）的驱动程序。 一个显示器可以有一个或多个与其相关联的屏幕。 每个屏幕都包含图形组件的对象层次结构，代表覆盖整个显示的布局。
 
 当你创建了一个像 `lv_obj_t * screen = lv_obj_create(NULL);` 这样的屏幕时，你可以用 `lv_scr_load(screen);` 激活它。 `lv_scr_act()` 函数为您提供指向活动屏幕的指针。
 
@@ -319,8 +319,8 @@ Some examples:
 - `LV_OBJ_FLAG_LAYOUT_1` 自定义标志，可供布局免费使用
 - `LV_OBJ_FLAG_LAYOUT_2` 自定义标志，可供布局免费使用
 
-- `LV_OBJ_FLAG_WIDGET_1` 自定义标志，小部件免费使用
-- `LV_OBJ_FLAG_WIDGET_2` 自定义标志，小部件免费使用
+- `LV_OBJ_FLAG_WIDGET_1` 自定义标志，组件免费使用
+- `LV_OBJ_FLAG_WIDGET_2` 自定义标志，组件免费使用
 
 - `LV_OBJ_FLAG_USER_1` 自定义标志，用户免费使用
 - `LV_OBJ_FLAG_USER_2` 自定义标志，用户免费使用
@@ -433,7 +433,7 @@ If `LV_OBJ_FLAG_SCROLLABLE` is enabled, but the object is not editable (as decla
 
 如果启用了`LV_OBJ_FLAG_CHECKABLE`，则`LV_KEY_RIGHT` 和`LV_KEY_UP` 使对象被选中，而`LV_KEY_LEFT` 和`LV_KEY_DOWN` 使其取消选中。
 
-如果启用了“LV_OBJ_FLAG_SCROLLABLE”，但对象不可编辑（由小部件类声明），则箭头键（“LV_KEY_UP”、“LV_KEY_DOWN”、“LV_KEY_LEFT”、“LV_KEY_RIGHT”）滚动对象。 如果对象只能垂直滚动，`LV_KEY_LEFT` 和 `LV_KEY_RIGHT` 将改为向上/向下滚动，使其与编码器输入设备兼容。 有关编码器行为和编辑模式的更多信息，请参阅 [输入设备概述](/overview/indev)。
+如果启用了“LV_OBJ_FLAG_SCROLLABLE”，但对象不可编辑（由组件类声明），则箭头键（“LV_KEY_UP”、“LV_KEY_DOWN”、“LV_KEY_LEFT”、“LV_KEY_RIGHT”）滚动对象。 如果对象只能垂直滚动，`LV_KEY_LEFT` 和 `LV_KEY_RIGHT` 将改为向上/向下滚动，使其与编码器输入设备兼容。 有关编码器行为和编辑模式的更多信息，请参阅 [输入设备概述](/overview/indev)。
 
 
 了解有关 [Keys](/overview/indev) 的更多信息。

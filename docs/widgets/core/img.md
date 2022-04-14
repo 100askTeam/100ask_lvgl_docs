@@ -22,7 +22,7 @@ Using the [Image decoder interface](/overview/image.html#image-decoder) custom i
 
 使用[图像解码器接口](/overview/image.html#image-decoder) 也可以支持自定义图像格式。
 
-## Parts and Styles（部件和风格）
+## Parts and Styles（部分和风格）
 
 <details>
 <summary>查看原文</summary>

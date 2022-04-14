@@ -18,7 +18,7 @@ The Checkbox object is created from a "tick box" and a label. When the Chackbox 
 
 复选框 (Checkbox) 对象是从“勾选框”和标签创建的。当 Chackbox 被点击时，勾选框被切换。
 
-## Parts and Styles（部件和样式）
+## Parts and Styles（部分和样式）
 
 <details>
 <summary>查看原文</summary>

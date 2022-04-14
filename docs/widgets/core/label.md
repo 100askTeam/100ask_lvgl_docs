@@ -17,7 +17,7 @@ A label is the basic object type that is used to display text.
 
 标签是用来显示文本的基本对象类型。
 
-## Parts and Styles（部件和风格）
+## Parts and Styles（部分和风格）
 
 <details>
 <summary>查看原文</summary>
@@ -31,7 +31,7 @@ A label is the basic object type that is used to display text.
 </details>
 
 - `LV_PART_MAIN` 使用所有典型的背景属性和文本属性。 填充值可用于在文本和背景之间添加空间。
-- `LV_PART_SCROLLBAR` 当文本大于小部件的大小时显示的滚动条。
+- `LV_PART_SCROLLBAR` 当文本大于组件的大小时显示的滚动条。
 - `LV_PART_SELECTED` 告诉[所选文本](#text-selection) 的样式。 只能使用 `text_color` 和 `bg_color` 样式属性。
 
 ## Usage（用法）
@@ -162,7 +162,7 @@ The whole mechanism (click and select the text as you drag your finger/mouse) is
 </details>
 
 如果通过`LV_LABEL_TEXT_SELECTION` 启用，可以选择部分文本。 这与在 PC 上使用鼠标选择文本时类似。
-整个机制（在拖动手指/鼠标时单击并选择文本）在 [文本区域](/widgets/core/textarea) 中实现，而标签小部件仅允许手动选择文本
+整个机制（在拖动手指/鼠标时单击并选择文本）在 [文本区域](/widgets/core/textarea) 中实现，而标签组件仅允许手动选择文本
 `lv_label_get_text_selection_start(label, start_char_index)` 和 `lv_label_get_text_selection_start(label, end_char_index)`。
 
 ### Very long texts（非常长的文本）

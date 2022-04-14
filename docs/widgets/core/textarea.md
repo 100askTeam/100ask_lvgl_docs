@@ -25,7 +25,7 @@ One line mode and password modes are supported.
 
 支持单行模式和密码模式。
 
-## Parts and Styles（部件和样式）
+## Parts and Styles（部分和样式）
 
 <details>
 <summary>查看原文</summary>

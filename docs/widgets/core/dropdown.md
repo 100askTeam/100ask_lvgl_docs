@@ -30,7 +30,7 @@ The Drop-down list is added to the default group (if it is set). Besides the Dro
 
 下拉列表将已经添加到默认组了。此外，下拉列表是一个可编辑的对象，允许通过编码器导航选项。
 
-## Parts and Styles（部件和样式）
+## Parts and Styles（部分和样式）
 
 <details>
 <summary>查看原文</summary>
@@ -41,7 +41,7 @@ The Dropdown widget is built from the elements: "button" and "list" (both not re
 </p>
 </details>
 
-下拉小部件由以下元素构建：“按钮”和“列表”（均与按钮和列表部件无关）
+下拉组件由以下元素构建：“按钮”和“列表”（均与按钮和列表组件无关）
 
 ### Button（按钮）
 

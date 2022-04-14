@@ -19,7 +19,7 @@ The Table object is very lightweight because only the texts are stored. No real 
 
 表格是由包含文本的行、列和单元格构建的。表格对象非常轻量级，因为仅存储文本。没有为细胞创建真实的对象，但它们只是即时绘制的。
 
-## Parts and Styles（部件和样式）
+## Parts and Styles（部分和样式）
 
 <details>
 <summary>查看原文</summary>
