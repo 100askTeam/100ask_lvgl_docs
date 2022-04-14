@@ -17,7 +17,7 @@ The Slider object looks like a [Bar](/widgets/core/bar) supplemented with a knob
 
 滑动条对象看起来像是在 [进度条(bar)](/widgets/core/bar) 增加了一个可以调节的旋钮，使用时可以通过拖动旋钮来设置一个值。 就像进度条(bar)一样，Slider可以是垂直的或水平的(当设置进度条的宽度小于其高度，就可以创建出垂直摆放的滑动条)。
 
-## Parts and Styles（部件和样式）
+## Parts and Styles（部分和样式）
 
 <details>
 <summary>查看原文</summary>

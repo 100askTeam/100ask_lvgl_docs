@@ -18,8 +18,6 @@
 
 ### 思源字体
 
-- [Adobe开源字体github主页](https://github.com/adobe-fonts)
-
 |  字体预览   |  下载字体  |
 |  :----  | ----  |
 | ![SiYuanHeiTi-Bold](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanHeiTi-Bold.jpg)  | [SiYuanHeiTi-Bold](http://photos.100ask.net/lvgl/00_100ask_tools/fonts-zh-source/SiYuanHeiTi-Bold.zip) |
@@ -72,6 +70,7 @@
 
 ### 更多字体
 
+- [Adobe开源字体github主页](https://github.com/adobe-fonts)
 - [等宽字体](/tools/monospaced-font)
 
 ## 常用汉字
