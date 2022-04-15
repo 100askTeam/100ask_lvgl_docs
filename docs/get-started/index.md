@@ -4,8 +4,6 @@
 ```
 # Get started（开始）
 
-## Where to look first?(先去哪里看？)
-
 <details>
 <summary>查看原文</summary>
 <p>
