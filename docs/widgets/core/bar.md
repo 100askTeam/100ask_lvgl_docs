@@ -51,7 +51,7 @@ Not only the end, but also the start value of the bar can be set, which changes 
 
 A new value can be set by `lv_bar_set_value(bar, new_value, LV_ANIM_ON/OFF)`.
 The value is interpreted in a range (minimum and maximum values) which can be modified with `lv_bar_set_range(bar, min, max)`.
-The default range is 1..100.
+The default range is 0..100.
 
 The new value in `lv_bar_set_value` can be set with or without an animation depending on the last parameter (`LV_ANIM_ON/OFF`).
  
@@ -60,7 +60,7 @@ The new value in `lv_bar_set_value` can be set with or without an animation depe
 
 可以通过`lv_bar_set_value(bar, new_value, LV_ANIM_ON/OFF)` 设置新值。
 该值在可以使用 `lv_bar_set_range(bar, min, max)` 修改的范围（最小值和最大值）内进行解释。
-进度条默认的范围是 1..100。
+进度条默认的范围是 0..100。
 
 使用 `lv_bar_set_value` 设置的新值可以通过其最后的一个参数 (`LV_ANIM_ON/OFF`) 设置生效新值时的过渡动画。
 
@@ -82,7 +82,7 @@ The bar can be one the following modes:
 进度条可以是以下模式之一：
 - `LV_BAR_MODE_NORMAL` 像上文所说的普通进度条(默认)
 - `LV_BAR_MODE_SYMMETRICAL` 这个模式下可以指定负的最小范围。但是只能从零值到当前值绘制指示器。
-- `LV_BAR_MODE_RANGE` 这个模式下也可以指定负的最小范围。这样进度条的起始值可以不是0，而是你指定的数值([参考示例](#stripe-pattern-and-range-value))，但是这样设置的起始值必须小于可以设置的最大值。
+- `LV_BAR_MODE_RANGE` 这个模式下也可以指定负的最小范围。这样进度条的起始值可以不是0，而是你指定的数值([参考示例](#stripe-pattern-and-range-value))，但是这样设置的起始值(lv_bar_set_start_value)必须小于结束值(lv_bar_set_value)。
 
 
 ## Events（事件）
