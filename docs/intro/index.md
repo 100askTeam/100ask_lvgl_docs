@@ -52,21 +52,21 @@ LVGL的项目作者是来自匈牙利首都布达佩斯的 Gábor Kiss-Vámosi �
 </p>
 </details>
 
-- 强大的构建块，例如按钮、图表、列表、滑块、图像等。
-- 带有动画、抗锯齿、不透明度、平滑滚动的高级图形
-- 各种输入设备，如触摸板、鼠标、键盘、编码器等。
-- 多语言支持 UTF-8 编码
-- 多显示器支持，即同时使用多个 TFT、单色显示器
-- 具有类似 CSS 样式的完全可定制的图形元素
-- 独立于硬件：与任何微控制器或显示器一起使用
-- 可扩展：能够以很少的内存运行（64 kB Flash，16 kB RAM）
-- 支持但不要求操作系统、外部存储器和 GPU
-- 即使具有高级图形效果，也可进行单帧缓冲区操作
-- 用 C 编写以获得最大的兼容性（C++ 兼容）
-- 在没有嵌入式硬件的 PC 上启动嵌入式 GUI 设计的模拟器
-- 绑定到 MicroPython
-- 快速 GUI 设计的教程、示例、主题
-- 文档可在线获取并以 PDF 格式提供
+* 丰富且强大的模块化[图形组件](https://docs.lvgl.io/master/widgets/index.html)：按钮 (buttons)、图表 (charts)、列表 (lists)、滑动条 (sliders)、图片 (images) 等
+* 高级的图形引擎：动画、抗锯齿、透明度、平滑滚动、图层混合等效果
+* 支持多种[输入设备](https://docs.lvgl.io/master/overview/indev.html)：触摸屏、 键盘、编码器、按键等
+* 支持[多显示设备](https://docs.lvgl.io/master/overview/display.html)
+* 不依赖特定的硬件平台，可以在任何显示屏上运行
+* 配置可裁剪（最低资源占用：64 kB Flash，16 kB RAM）
+* 基于UTF-8的多语种支持，例如中文、日文、韩文、阿拉伯文等
+* 可以通过[类CSS](https://docs.lvgl.io/master/overview/style.html)的方式来设计、布局图形界面（例如：[Flexbox](https://docs.lvgl.io/master/layouts/flex.html)、[Grid](https://docs.lvgl.io/master/layouts/grid.html)）
+* 支持操作系统、外置内存、以及硬件加速（LVGL已内建支持STM32 DMA2D、NXP PXP和VGLite）
+* 即便仅有[单缓冲区(frame buffer)](https://docs.lvgl.io/master/porting/display.html)的情况下，也可保证渲染如丝般顺滑
+* 全部由C编写完成，并支持C++调用
+* 支持Micropython编程，参见：[LVGL API in Micropython](https://blog.lvgl.io/2019-02-20/micropython-bindings)
+* 支持[模拟器](https://docs.lvgl.io/master/get-started/platforms/pc-simulator.html)仿真，可以无硬件依托进行开发
+* 丰富详实的[例程](https://github.com/lvgl/lvgl/tree/master/examples)
+* 详尽的[文档](http://docs.lvgl.io/)以及API参考手册，可线上查阅或可下载为PDF格式
 - 在 MIT 许可下免费和开源
 
 
@@ -92,7 +92,7 @@ Basically, every modern controller which is able to drive a display is suitable 
 <li> 16, 32 or 64 bit microcontroller or processor</li>
 <li>&gt; 16 MHz clock speed is recommended</li>
 <li> Flash/ROM: &gt; 64 kB for the very essential components (&gt; 180 kB is recommended)</li>
-<li> RAM: 
+<li> RAM:
   <ul>
     <li> Static RAM usage: ~2 kB depending on the used features and object types</li>
     <li> Stack: &gt; 2kB (&gt; 8 kB is recommended)</li>
@@ -103,9 +103,9 @@ Basically, every modern controller which is able to drive a display is suitable 
 	</ul>
 </li>
 <li> C99 or newer compiler</li>
-<li> Basic C (or C++) knowledge: 
-          <a href="https://www.tutorialspoint.com/cprogramming/c_pointers.htm">pointers</a>, 
-          <a href="https://www.tutorialspoint.com/cprogramming/c_structures.htm">structs</a>, 
+<li> Basic C (or C++) knowledge:
+          <a href="https://www.tutorialspoint.com/cprogramming/c_pointers.htm">pointers</a>,
+          <a href="https://www.tutorialspoint.com/cprogramming/c_structures.htm">structs</a>,
           <a href="https://www.geeksforgeeks.org/callbacks-in-c/">callbacks</a>.</li>
 </ul>
 <em>Note that memory usage may vary depending on architecture, compiler and build options.</em>
@@ -133,7 +133,7 @@ Basically, every modern controller which is able to drive a display is suitable 
           <a href="https://www.tutorialspoint.com/cprogramming/c_structures.htm">structs</a>, 
           <a href="https://www.geeksforgeeks.org/callbacks-in-c/">callbacks</a></li>
 </ul>
-<em>请注意，内存使用量可能因架构、编译器和构建选项而异。</em>
+<em>*注意：资源占用情况与具体硬件平台、编译器等因素有关，上表中仅给出参考值*</em>
 
 ## License（许可证）
 
