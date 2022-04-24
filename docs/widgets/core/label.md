@@ -227,7 +227,7 @@ Learn more about [Keys](/overview/indev).
 
 对象类型不处理 *Keys*。
 
-了解有关 [键](/overview/indev) 的更多信息。
+了解有关 [按键](/overview/indev) 的更多信息。
 
 ## Example
 

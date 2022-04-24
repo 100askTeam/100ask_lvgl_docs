@@ -32,7 +32,7 @@ The Slider object looks like a [Bar](/widgets/core/bar) supplemented with a knob
 
 - `LV_PART_MAIN` 滑动条的背景。 使用所有典型的背景样式属性。 设置 `padding` 样式会使指标在相应方向上变小。
 - `LV_PART_INDICATOR` 显示滑动条当前状态的指示器。 也是使用所有典型的背景样式属性。
-- `LV_PART_KNOB` 旋钮(可以是原型或矩形)。 也是使用所有典型的背景属性。 默认情况下，旋钮是方形的（带有可选的圆角半径），边长等于滑动条的较小边。 可以通过设置 `padding` 样式调整旋钮的大小。 填充值也可以是不对称的。
+- `LV_PART_KNOB` 旋钮(可以是原形或矩形)。 也是使用所有典型的背景属性。 默认情况下，旋钮是方形的（带有可选的圆角半径），边长等于滑动条的较小边。 可以通过设置 `padding` 样式调整旋钮的大小。 填充值也可以是不对称的。
 
 
 ## Usage（用法）
@@ -45,14 +45,14 @@ The Slider object looks like a [Bar](/widgets/core/bar) supplemented with a knob
 
 To set an initial value use `lv_slider_set_value(slider, new_value, LV_ANIM_ON/OFF)`.  The animation time is set by the styles' `anim_time` property.
 
-To specify the range (min, max values), `lv_slider_set_range(slider, min , max)` can be used.
+To specify the range (min, max values), `lv_slider_set_range(slider, min, max)` can be used.
 
 </p>
 </details>
 
 要设置滑动条的初始值，请使用 `lv_slider_set_value(slider, new_value, LV_ANIM_ON/OFF)`。 动画时间由样式的 `anim_time` 属性设置。
 
-要指定滑动条的范围（最小值、最大值），可以使用 `lv_slider_set_range(slider, min , max)`。
+要指定滑动条的范围（最小值、最大值），可以使用 `lv_slider_set_range(slider, min, max)`。
 
 ### Modes（模式）
 
@@ -73,9 +73,9 @@ The mode can be changed with `lv_slider_set_mode(slider, LV_SLIDER_MODE_...)`
 与bar类似，滑动条可以是以下模式之一：
 - `LV_SLIDER_MODE_NORMAL` 像上面说的普通情况
 - `LV_SLIDER_MODE_SYMMETRICAL` 这个模式下可以指定负的最小范围。但是只能从零值到当前值绘制指示器。
-- `LV_SLIDER_MODE_RANGE` 在这个模式下也可以指定负的最小范围。这样滑动条的起始值可以不是0。可以使用 `lv_slider_set_value` 设置右侧的起始值，使用 `lv_slider_set_left_value` 设置左侧的起始值，两侧如果不设置将使用默认值0。要注意设置的起始值必须小于可以设置的最大值(对于左侧而言是大于可以设置的最小值)。
+- `LV_SLIDER_MODE_RANGE` 在这个模式下也可以指定负的最小范围。这样滑动条的起始值可以不是0，可以使用 `lv_slider_set_value` 设置结束值，使用 `lv_slider_set_left_value` 设置起始值，两侧如果不设置将使用默认值0。要注意设置的起始值必须小于结束值。
 
-可以使用 `lv_slider_set_mode(slider, LV_SLIDER_MODE_...)` 更改模式
+可以使用 `lv_slider_set_mode(slider, LV_SLIDER_MODE_...)` 更改模式。
 
 ### Knob-only mode（仅旋钮模式）
 
