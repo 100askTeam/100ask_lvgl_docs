@@ -125,13 +125,13 @@ Learn more about [Events](/overview/event).
      - `LV_SLIDER_DRAW_PART_KNOB` 滑动条的主（右）旋钮
          - `部分`：`LV_PART_KNOB`
          - `draw_area`：指示器的区域
-         -`rect_dsc`
-         -`id`：0
+         - `rect_dsc`
+         - `id`：0
      - `LV_SLIDER_DRAW_PART_KNOB`滑块的左侧旋钮
          - `部分`：`LV_PART_KNOB`
          - `draw_area`：指标的区域
-         -`rect_dsc`
-         -`id`：1
+         - `rect_dsc`
+         - `id`：1
 
 也可以查看 [Bar](/widgets/core/bar) 的事件。
 
