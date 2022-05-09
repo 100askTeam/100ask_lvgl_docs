@@ -13,6 +13,7 @@
    fonts-zh-source
    monospaced-font
    lv-chinese-ime
+   lv_lib_100ask
 
 ```
 
