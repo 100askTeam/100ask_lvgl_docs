@@ -143,8 +143,9 @@ To make the arc non-adjustabe remove the style of the knob and make the object n
 static void arc_event_cb(lv_event_t * e)
 {
     lv_obj_t * arc = lv_event_get_target(e);
-    
+
 	lv_arc_set_bg_angles(arc, 0, lv_arc_get_value(arc));
+    lv_arc_set_angles(arc, 0, lv_arc_get_value(arc));
 }
 
 .....
