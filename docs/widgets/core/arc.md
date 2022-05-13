@@ -137,15 +137,7 @@ To make the arc non-adjustabe remove the style of the knob and make the object n
 也可以直接使用 `lv_arc_set_angles(arc, start_angle, end_angle)` 函数或 `lv_arc_set_start/end_angle(arc, start_angle)` 设置指示器的角度(零度位于对象的中间右侧（3 点钟方向），并且度数沿顺时针方向增加。)。
 在这种情况下，设置的 “值” 和 “模式” 将被忽略。
 
-换句话说，角度和值的设置是独立的。两者混合可能会导致意外行为。比如：
-
-```c
-lv_arc_set_value(arc, lv_arc_get_value(arc));
-
-// 或
-lv_arc_set_bg_start_angle(arc, 0);
-lv_arc_set_bg_end_angle(arc, lv_arc_get_value(arc));
-```
+换句话说，角度和值的设置是独立的。你应该只使用其中一个。两者混合可能会导致意外行为。
 
 要使圆弧不可调整，请移除旋钮的样式并使对象不可点击：
 
