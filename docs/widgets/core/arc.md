@@ -57,10 +57,11 @@ The angles should be in the [0;360] range.
 </details>
 
 可以通过 `lv_arc_set_value(arc, new_value)` 设置一个数值。
-可以通过 `lv_arc_set_range(arc, min, max)` 指定数值的范围（最小值和最大值）。
-没有没有指定数值范围，将使用默认范围 (1-100)。
 
-指示器绘制在主零件的弧上。 如果该值设置为最大值，则指示器弧将覆盖整个“背景”弧。
+可以通过 `lv_arc_set_range(arc, min, max)` 指定数值的范围（最小值和最大值）。
+如果没有指定数值范围，将使用默认范围 (1-100)。
+
+指示器绘制在 LV_PART_MAIN 部分的弧上面。 如果指示器的值设置为最大值，则指示器弧将呈现一个闭合的狐(也就是圆形)。
 要设置背景弧的开始和结束角度，请使用 `lv_arc_set_bg_angles(arc, start_angle, end_angle)` 函数或 `lv_arc_set_bg_start/end_angle(arc, angle)`。
 
 零度位于对象的中间右侧（3 点钟方向），并且度数沿顺时针方向增加。
@@ -126,17 +127,25 @@ The change rate is defined in degree/second unit and can be set with `lv_arc_set
 It also possible to set the angles of the indicator arc directly with `lv_arc_set_angles(arc, start_angle, end_angle)` function or `lv_arc_set_start/end_angle(arc, start_angle)`.
 In this case the set "value" and "mode" is ignored.
 
-In other words, settings angles and values are independent. You should use either value and angle settings. Mixing the two might result in unintended behavior. 
+In other words, the angle and value settings are independent. You should exclusively use one or the other. Mixing the two might result in unintended behavior.
 
 To make the arc non-adjustabe remove the style of the knob and make the object non-clickable:
  
 </p>
 </details>
 
-也可以直接使用 `lv_arc_set_angles(arc, start_angle, end_angle)` 函数或 `lv_arc_set_start/end_angle(arc, start_angle)` 设置指示器的角度。
-在这种情况下，设置的“值”和“模式”将被忽略。
+也可以直接使用 `lv_arc_set_angles(arc, start_angle, end_angle)` 函数或 `lv_arc_set_start/end_angle(arc, start_angle)` 设置指示器的角度(零度位于对象的中间右侧（3 点钟方向），并且度数沿顺时针方向增加。)。
+在这种情况下，设置的 “值” 和 “模式” 将被忽略。
 
-换句话说，设置角度和值是独立的。将两者混合可能会获得未知的结果。
+换句话说，角度和值的设置是独立的。两者混合可能会导致意外行为。比如：
+
+```c
+lv_arc_set_value(arc, lv_arc_get_value(arc));
+
+// 或
+lv_arc_set_bg_start_angle(arc, 0);
+lv_arc_set_bg_end_angle(arc, lv_arc_get_value(arc));
+```
 
 要使圆弧不可调整，请移除旋钮的样式并使对象不可点击：
 
