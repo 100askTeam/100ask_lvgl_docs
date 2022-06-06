@@ -164,7 +164,7 @@ For example let's there is 400 px remaining space and 4 object with grow:
 
 `A` and `B` will have 100 px size, and `C` will have 200 px size.
 
-Flex grow can be set on a child with `lv_obj_set_flex_flow(child, value)`. `value` needs to be &gt; 1 or 0 to disable grow on the child.
+Flex grow can be set on a child with `lv_obj_set_flex_grow(child, value)`. `value` needs to be &gt; 1 or 0 to disable grow on the child.
 
 </p>
 </details>
@@ -177,7 +177,7 @@ Flex Growth 可用于让一个或多个孩子填充轨道上的可用空间。 �
 
 `A` 和 `B` 的大小为 100 px，而 `C` 的大小为 200 px。
 
-可以使用 `lv_obj_set_flex_flow(child, value)` 在子节点上设置 Flex 增长。 `value` 需要 &gt; 1 或 0 禁用在孩子身上生长。
+可以使用 `lv_obj_set_flex_grow(child, value)` 在子节点上设置 Flex 增长。 `value` 需要 &gt; 1 或 0 禁用在孩子身上生长。
 
 ## Style interface（样式接口）
 
