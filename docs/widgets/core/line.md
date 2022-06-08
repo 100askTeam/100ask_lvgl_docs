@@ -15,7 +15,7 @@ The Line object is capable of drawing straight lines between a set of points.
 </p>
 </details>
 
-线条(Line)对象能够在一组点之间绘制直线。
+线条(Line)组件能在给出的一组点之间绘制出相连的直线。
 
 ## Parts and Styles（零件和样式）
 
@@ -32,7 +32,7 @@ The Line object is capable of drawing straight lines between a set of points.
 
 ## Usage（用法）
 
-### Set points（设置点）
+### Set points(设置点)
 
 <details>
 <summary>查看原文</summary>
@@ -43,7 +43,7 @@ The points have to be stored in an `lv_point_t` array and passed to the object b
 </p>
 </details>
 
-点必须存储在一个 `lv_point_t` 数组中，并通过 `lv_line_set_points(lines, point_array, point_cnt)` 函数传递给对象。
+点必须存储在 `lv_point_t` 类型的数组中，并通过 `lv_line_set_points(lines, point_array, point_cnt)` 函数将数组传递给line对象。
 
 ### Auto-size（自动调整大小）
 
@@ -56,9 +56,9 @@ By default the Line's width and height are set to `LV_SIZE_CONTENT`. This means 
 </p>
 </details>
 
-默认情况下，线条的宽度和高度被设置为 `LV_SIZE_CONTENT` 。也就是它会根据给出的点设置其大小来适应所有的点。如果设置了尺寸，线上的有些部分可能不可见。
+默认情况下，线条的宽度和高度被设置为 `LV_SIZE_CONTENT` 。也就是它会根据给出的点自动调整其大小来适应所有点的分布。如果你设置了宽、高，那么线条上的有些部分可能会不可见。
 
-### Invert y（反转 y）
+### Invert y(反转 y轴)
 
 <details>
 <summary>查看原文</summary>
@@ -70,7 +70,9 @@ By default, the *y == 0* point is in the top of the object. It might be conter-i
 </p>
 </details>
 
-默认情况下，*y == 0* 点是在物体的顶部。这在某些情况下可能是不直观，所以可以用 `lv_line_set_y_invert(line, true)` 来反转 y 坐标。在这种情况下，*y == 0* 将是物体的底部。默认情况下，*y invert* 是禁用的。
+默认情况下，*y == 0* 点是在line对象的顶部最左侧。这在某些情况下可能是不直观的(LCD坐标系)，这时候可以使用 `lv_line_set_y_invert(line, true)` 函数来反转 y 坐标。在这种情况下，*y == 0* 将是物体的底部最左侧(直角坐标系)。
+
+默认不反转y轴。
 
 ## Events（事件）
 
@@ -106,7 +108,7 @@ Learn more about [Keys](/overview/indev).
 </p>
 </details>
 
-线条对象不会响应处理按键(以及触摸)。
+线条对象不响应处理按键(以及触摸)。
 
 了解有关 [键](/overview/indev) 的更多信息。
 
