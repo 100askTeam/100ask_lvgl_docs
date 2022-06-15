@@ -25,7 +25,7 @@ PDF version: :download:`100ASK_LVGL_CN.pdf <100ASK_LVGL_CN.pdf>`
 
 # 百问网LVGL视频教程(韦东山·监制)
 
-教程基于lvgl v8.1版本，适配多个平台、多款板子。
+教程基于lvgl v8.2版本，适配多个平台、多款板子。
 
 视频地址：[https://www.bilibili.com/video/BV1Ya411r7K2](https://www.bilibili.com/video/BV1Ya411r7K2)
 
