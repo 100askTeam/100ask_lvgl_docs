@@ -9,6 +9,7 @@ cd emscripten_builder
 git submodule update --init -- lvgl
 cd lvgl
 #git checkout $CURRENT_REF
+git checkout 1ed64044562a02931a8148007d89b1b6b0596351
 cd ..
 git submodule update --init -- lv_drivers
 mkdir cmbuild
