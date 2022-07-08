@@ -1,4 +1,4 @@
-#!/usr/bin/env python3.7
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
 # LVGL documentation build configuration file, created by
@@ -18,14 +18,16 @@
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
 import os
-import sys
 import subprocess
+import sys
+
 sys.path.insert(0, os.path.abspath('./_ext'))
+
+from subprocess import PIPE, Popen
 
 import recommonmark
 from recommonmark.transform import AutoStructify
 from sphinx.builders.html import StandaloneHTMLBuilder
-from subprocess import Popen, PIPE
 
 # -- General configuration ------------------------------------------------
 
@@ -65,9 +67,9 @@ source_suffix = ['.rst', '.md']
 master_doc = 'index'
 
 # General information about the project.
-project = '百问网LVGL中文教程文档'
-copyright = '2008-2021 深圳百问网科技有限公司 All Rights Reserved'
-author = 'www.100ask.org'
+project = 'LVGL'
+copyright = '2021, LVGL Kft'
+author = 'LVGL community'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -83,13 +85,13 @@ version = subprocess.run(["../scripts/find_version.sh"], capture_output=True).st
 #
 # This is also used if you do content translation via gettext catalogs.
 # Usually you set "language" from the command line for these cases.
-language = 'zh_CN'
+language = None
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This patterns also effect to html_static_path and html_extra_path
 exclude_patterns = ['_build', 'doxygen_html', 'Thumbs.db', '.DS_Store',
-                    'README.md', 'lv_examples', 'out_html' ]
+                    'README.md', 'lv_examples', 'out_html', 'env' ]
 
 # The name of the Pygments (syntax highlighting) style to use.
 pygments_style = 'sphinx'
@@ -114,8 +116,22 @@ html_theme_options = {
     'logo_only': True,
 }
 # For site map generation
-html_baseurl = 'https://docs.lvgl.io/master/en/html/'
+html_baseurl = f"https://docs.lvgl.io/{os.environ['LVGL_URLPATH']}/en/html/"
+
 sitemap_url_scheme = "{link}"
+
+#lvgl_github_url = f"https://github.com/lvgl/lvgl/blob/{os.environ['LVGL_GITCOMMIT']}/docs"
+
+#extlinks = {'github_link_base': (github_url + '%s', github_url)}
+
+html_context = {
+    'github_version': os.environ['LVGL_GITCOMMIT'],
+    'github_user': 'lvgl',
+    'github_repo': 'lvgl',
+    'display_github': True,
+    'conf_py_path': '/docs/'
+}
+
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
@@ -134,13 +150,17 @@ html_sidebars = {
     ]
 }
 
+html_js_files = [
+    'js/custom.js'
+]
+
 html_favicon = 'favicon.png'
-html_logo = 'logo_100ask.png'
+html_logo = 'logo_lvgl.png'
 
 # -- Options for HTMLHelp output ------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = '100ASKLVGLdocs'
+htmlhelp_basename = 'LVGLdoc'
 
 html_last_updated_fmt = ''
 
@@ -176,7 +196,6 @@ latex_elements = {
 \usepackage{fontspec}
 \setmonofont{DejaVu Sans Mono}
 \usepackage{silence}
-\usepackage{ctex}
 \WarningsOff*
 ''',
 }
@@ -185,8 +204,8 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, '100ASK_LVGL_CN.tex', '百问网LVGL中文手册' + version,
-     'www.100ask.net', 'manual'),
+    (master_doc, 'LVGL.tex', 'LVGL Documentation ' + version,
+     'LVGL community', 'manual'),
 ]
 
 
@@ -195,7 +214,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'lvgl', '百问网LVGL中文手册' + version,
+    (master_doc, 'lvgl', 'LVGL Documentation ' + version,
      [author], 1)
 ]
 
@@ -206,8 +225,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'LVGL', '百问网LVGL中文手册' + version,
-     author, 'Contributors of www.100ask.org', 'One line description of project.',
+    (master_doc, 'LVGL', 'LVGL Documentation ' + version,
+     author, 'Contributors of LVGL', 'One line description of project.',
      'Miscellaneous'),
 ]
 
@@ -225,7 +244,8 @@ StandaloneHTMLBuilder.supported_image_types = [
 
 smartquotes = False
 
-#_, repo_commit_hash = subprocess.getstatusoutput("git rev-parse HEAD")
+_, repo_commit_hash = subprocess.getstatusoutput("git rev-parse HEAD")
+
 
 # Example configuration for intersphinx: refer to the Python standard library.
 

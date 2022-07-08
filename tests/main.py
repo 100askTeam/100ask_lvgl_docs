@@ -20,7 +20,8 @@ build_only_options = {
 }
 
 test_options = {
-    'OPTIONS_TEST': 'Test config, 32 bit color depth',
+    'OPTIONS_TEST_SYSHEAP': 'Test config, system heap, 32 bit color depth',
+    'OPTIONS_TEST_DEFHEAP': 'Test config, LVGL heap, 32 bit color depth',
 }
 
 
@@ -122,7 +123,7 @@ def run_tests(options_name):
 
     os.chdir(get_build_dir(options_name))
     subprocess.check_call(
-        ['ctest', '--parallel', str(os.cpu_count()), '--output-on-failure'])
+        ['ctest', '--timeout', '30', '--parallel', str(os.cpu_count()), '--output-on-failure'])
 
 
 def generate_code_coverage_report():
@@ -163,7 +164,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         description='Build and/or run LVGL tests.', epilog=epilog)
     parser.add_argument('--build-options', nargs=1,
-                        help='''the build option name to build or run. When 
+                        help='''the build option name to build or run. When
                         omitted all build configurations are used.
                         ''')
     parser.add_argument('--clean', action='store_true', default=False,

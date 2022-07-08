@@ -1,79 +1,66 @@
-```eval_rst
-.. include:: /header.rst 
-:github_url: |github_link_base|/porting/project.md
-```
 
-# Set-up a project（设置项目）
+# Set up a project
 
-## Get the library（获取LVGL图形库）
-
-<details>
-<summary>查看原文</summary>
-<p>
+## Get the library
 
 LVGL is available on GitHub: [https://github.com/lvgl/lvgl](https://github.com/lvgl/lvgl).
 
-You can clone it or download the latest version of the library from GitHub.
+You can clone it or [Download](https://github.com/lvgl/lvgl/archive/refs/heads/master.zip) the latest version of the library from GitHub.
 
-The graphics library itself is the **lvgl** directory which should be copied into your project.
+## Add lvgl to your project
 
-</p>
-</details>
+The graphics library itself is the `lvgl` directory. It contains a couple of folders but to use `lvgl` you only need `.c` and `.h` files from the `src` folder.
 
-LVGL 可在 GitHub 上获得：[https://github.com/lvgl/lvgl](https://github.com/lvgl/lvgl)。
+### Automatically add files
+If your IDE automatically adds the files from the folders copied to the project folder (as Eclipse or VSCode does), you can simply copy the `lvgl` folder as it is into your project.
 
-您可以克隆它或从 GitHub 下载最新版本的库。
+### Make and CMake
+LVGL also supports `make` and `CMake` build systems out of the box. To add LVGL to your Makefile based build system add these lines to your main Makefile:
+```make
+LVGL_DIR_NAME ?= lvgl     #The name of the lvgl folder (change this if you have renamed it)
+LVGL_DIR ?= ${shell pwd}  #The path where the lvgl folder is
+include $(LVGL_DIR)/$(LVGL_DIR_NAME)/lvgl.mk
+```
 
-图形库本身是 **lvgl** 目录，应将其复制到您的项目中。
+For integration with CMake take a look this section of the [Documentation](/get-started/platforms/cmake).
 
-## Configuration file（修改配置文件）
+### Other platforms and tools
+The [Get started](/get-started/index.html) section contains many platform specific descriptions e.g. for ESP32, Arduino, NXP, RT-Thread, NuttX, etc.
 
-<details>
-<summary>查看原文</summary>
-<p>
+### Demos and Examples
 
-There is a configuration header file for LVGL called **lv_conf.h**. In this you can set the library's basic behavior, disable unused modules and features, adjust the size of memory buffers in compile-time, etc.
+The `lvgl` folder also contains an `examples` and a `demos` folder. If you needed to add the source files manually to your project, you can do the same with the source files of these two folders too. `make` and `CMake` handles the examples and demos, so no extra action required in these cases.
 
-Copy **lvgl/lv_conf_template.h** next to the *lvgl* directory and rename it to *lv_conf.h*. Open the file and change the `#if 0` at the beginning to `#if 1` to enable its content.
+## Configuration file
 
-*lv_conf.h* can be copied to another place as well but then you should add `LV_CONF_INCLUDE_SIMPLE` define to your compiler options (e.g. `-DLV_CONF_INCLUDE_SIMPLE` for gcc compiler) and set the include path manually. 
+There is a configuration header file for LVGL called **lv_conf.h**. You modify this header to set the library's basic behavior, disable unused modules and features, adjust the size of memory buffers in compile-time, etc.
+
+To get `lv_conf.h` **copy lvgl/lv_conf_template.h** next to the `lvgl` directory and rename it to *lv_conf.h*. Open the file and change the `#if 0` at the beginning to `#if 1` to enable its content. So the layout of the files should look like this:
+```
+|-lvgl
+|-lv_conf.h
+|-other files and folders
+```
+
+Comments in the config file explain the meaning of the options. Be sure to set at least `LV_COLOR_DEPTH` according to your display's color depth. Note that, the examples and demos explicitly need to be enabled in `lv_conf.h`.
+
+Alternatively, `lv_conf.h` can be copied to another place but then you should add the `LV_CONF_INCLUDE_SIMPLE` define to your compiler options (e.g. `-DLV_CONF_INCLUDE_SIMPLE` for GCC compiler) and set the include path manually (e.g. `-I../include/gui`).
 In this case LVGL will attempt to include `lv_conf.h` simply with `#include "lv_conf.h"`.
 
-In the config file comments explain the meaning of the options. Be sure to set at least `LV_COLOR_DEPTH` according to your display's color depth.
+You can even use a different name for `lv_conf.h`. The custom path can be set via the `LV_CONF_PATH` define.
+For example `-DLV_CONF_PATH="/home/joe/my_project/my_custom_conf.h"`
 
-</p>
-</details>
+If `LV_CONF_SKIP` is defined, LVGL will not try to include `lv_conf.h`. Instead you can pass the config defines using build options. For example `"-DLV_COLOR_DEPTH=32 -DLV_USE_BTN=1"`. The unset options will get a default value which is the same as the ones in `lv_conf_template.h`.
+
+LVGL also can be used via `Kconfig` and `menuconfig`.  You can use `lv_conf.h` together with Kconfig, but keep in mind that the value from `lv_conf.h` or build settings (`-D...`) overwrite the values set in Kconfig. To ignore the configs from `lv_conf.h` simply remove its content, or define `LV_CONF_SKIP`. 
 
 
-有一个名为 **lv_conf.h** 的 LVGL 配置头文件。在这里，您可以设置库的基本行为、禁用未使用的模块和功能、在编译时调整内存缓冲区的大小等。
+## Initialization
 
-复制 *lvgl* 目录旁边的 **lvgl/lv_conf_template.h** 并将其重命名为 *lv_conf.h*。打开文件并将开头的“#if 0”更改为“#if 1”以启用其内容。
-
-*lv_conf.h* 也可以复制到另一个地方，但是你应该添加 `LV_CONF_INCLUDE_SIMPLE` 定义到你的编译器选项（例如 `-DLV_CONF_INCLUDE_SIMPLE` 用于 gcc 编译器）并手动设置包含路径。
-在这种情况下，LVGL 将尝试使用 `#include "lv_conf.h"` 简单地包含 `lv_conf.h`。
-
-在配置文件的注释中解释了选项的含义。请务必根据显示器的颜色深度至少设置“LV_COLOR_DEPTH”。
-
-## Initialization（初始化）
-
-<details>
-<summary>查看原文</summary>
-<p>
-
-To use the graphics library you have to initialize it and the other components too. The order of the initialization is:
+To use the graphics library you have to initialize it and setup required components. The order of the initialization is:
 
 1. Call `lv_init()`.
 2. Initialize your drivers.
-3. Register the display and input devices drivers in LVGL.  Lear more about [Display](/porting/display) and [Input device](/porting/indev) registration.
-4. Call `lv_tick_inc(x)` every `x` milliseconds in an interrupt to tell the elapsed time. [Learn more](/porting/tick).
-5. Call `lv_timer_handler()` every few milliseconds to handle LVGL related tasks. [Learn more](/porting/task-handler).
-
-</p>
-</details>
-
-要使用图形库，您必须初始化它和其他组件。初始化的顺序是：
-1. 调用`lv_init()`。
-2. 初始化您的驱动程序。
-3. 在 LVGL 中注册显示和输入设备驱动程序。详细了解 [Display](/porting/display) 和 [Input device](/porting/indev) 注册。
-4. 在中断中每隔 `x` 毫秒调用 `lv_tick_inc(x)` 以告知经过的时间。 [了解更多](/porting/tick)。
-5. 每隔几毫秒调用`lv_timer_handler()`来处理LVGL相关的任务。 [了解更多](/porting/task-handler)。
+3. Register the display and input devices drivers in LVGL.  Learn more about [Display](/porting/display) and [Input device](/porting/indev) registration.
+4. Call `lv_tick_inc(x)` every `x` milliseconds in an interrupt to report the elapsed time to LVGL. [Learn more](/porting/tick).
+5. Call `lv_timer_handler()` every few milliseconds to handle LVGL related tasks. [Learn more](/porting/timer-handler).

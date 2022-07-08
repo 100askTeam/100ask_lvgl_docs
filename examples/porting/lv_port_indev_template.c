@@ -3,13 +3,14 @@
  *
  */
 
- /*Copy this file as "lv_port_indev.c" and set this value to "1" to enable content*/
+/*Copy this file as "lv_port_indev.c" and set this value to "1" to enable content*/
 #if 0
 
 /*********************
  *      INCLUDES
  *********************/
 #include "lv_port_indev_template.h"
+#include "../../lvgl.h"
 
 /*********************
  *      DEFINES
@@ -38,7 +39,7 @@ static void keypad_read(lv_indev_drv_t * indev_drv, lv_indev_data_t * data);
 static uint32_t keypad_get_key(void);
 
 static void encoder_init(void);
-static bool encoder_read(lv_indev_drv_t * indev_drv, lv_indev_data_t * data);
+static void encoder_read(lv_indev_drv_t * indev_drv, lv_indev_data_t * data);
 static void encoder_handler(void);
 
 static void button_init(void);
@@ -99,7 +100,7 @@ void lv_port_indev_init(void)
      * Mouse
      * -----------------*/
 
-    /*Initialize your touchpad if you have*/
+    /*Initialize your mouse if you have*/
     mouse_init();
 
     /*Register a mouse input device*/
@@ -109,7 +110,7 @@ void lv_port_indev_init(void)
     indev_mouse = lv_indev_drv_register(&indev_drv);
 
     /*Set cursor. For simplicity set a HOME symbol now.*/
-    lv_obj_t * mouse_cursor = lv_img_create(lv_disp_get_scr_act(NULL), NULL);
+    lv_obj_t * mouse_cursor = lv_img_create(lv_scr_act());
     lv_img_set_src(mouse_cursor, LV_SYMBOL_HOME);
     lv_indev_set_cursor(indev_mouse, mouse_cursor);
 
@@ -164,8 +165,8 @@ void lv_port_indev_init(void)
 
     /*Assign buttons to points on the screen*/
     static const lv_point_t btn_points[2] = {
-            {10, 10},   /*Button 0 -> x:10; y:10*/
-            {40, 100},  /*Button 1 -> x:40; y:100*/
+        {10, 10},   /*Button 0 -> x:10; y:10*/
+        {40, 100},  /*Button 1 -> x:40; y:100*/
     };
     lv_indev_set_button_points(indev_button, btn_points);
 }
@@ -194,7 +195,8 @@ static void touchpad_read(lv_indev_drv_t * indev_drv, lv_indev_data_t * data)
     if(touchpad_is_pressed()) {
         touchpad_get_xy(&last_x, &last_y);
         data->state = LV_INDEV_STATE_PR;
-    } else {
+    }
+    else {
         data->state = LV_INDEV_STATE_REL;
     }
 
@@ -239,7 +241,8 @@ static void mouse_read(lv_indev_drv_t * indev_drv, lv_indev_data_t * data)
     /*Get whether the mouse button is pressed or released*/
     if(mouse_is_pressed()) {
         data->state = LV_INDEV_STATE_PR;
-    } else {
+    }
+    else {
         data->state = LV_INDEV_STATE_REL;
     }
 }
@@ -286,25 +289,26 @@ static void keypad_read(lv_indev_drv_t * indev_drv, lv_indev_data_t * data)
 
         /*Translate the keys to LVGL control characters according to your key definitions*/
         switch(act_key) {
-        case 1:
-            act_key = LV_KEY_NEXT;
-            break;
-        case 2:
-            act_key = LV_KEY_PREV;
-            break;
-        case 3:
-            act_key = LV_KEY_LEFT;
-            break;
-        case 4:
-            act_key = LV_KEY_RIGHT;
-            break;
-        case 5:
-            act_key = LV_KEY_ENTER;
-            break;
+            case 1:
+                act_key = LV_KEY_NEXT;
+                break;
+            case 2:
+                act_key = LV_KEY_PREV;
+                break;
+            case 3:
+                act_key = LV_KEY_LEFT;
+                break;
+            case 4:
+                act_key = LV_KEY_RIGHT;
+                break;
+            case 5:
+                act_key = LV_KEY_ENTER;
+                break;
         }
 
         last_key = act_key;
-    } else {
+    }
+    else {
         data->state = LV_INDEV_STATE_REL;
     }
 
@@ -368,7 +372,8 @@ static void button_read(lv_indev_drv_t * indev_drv, lv_indev_data_t * data)
     if(btn_act >= 0) {
         data->state = LV_INDEV_STATE_PR;
         last_btn = btn_act;
-    } else {
+    }
+    else {
         data->state = LV_INDEV_STATE_REL;
     }
 
