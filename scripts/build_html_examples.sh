@@ -8,7 +8,7 @@ scripts/genexamplelist.sh > emscripten_builder/examplelist.c
 cd emscripten_builder
 git submodule update --init -- lvgl
 cd lvgl
-git checkout $CURRENT_REF
+#git checkout $CURRENT_REF
 cd ..
 git submodule update --init -- lv_drivers
 mkdir cmbuild
