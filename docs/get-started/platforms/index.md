@@ -12,6 +12,5 @@
    arduino
    tasmota-berry
    cmake
-   mdk
 ```
 

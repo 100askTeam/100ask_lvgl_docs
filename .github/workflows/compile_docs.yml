@@ -76,8 +76,8 @@ jobs:
       - name: Commit documentation changes
         run: |
           git clone https://${{secrets.CODING_USERNAME}}:${{secrets.CODING_PASSWD}}@e.coding.net/weidongshan/sphinx_docs/100ask_lvgl_docs.git --branch master --single-branch master
-          rm -rf master/9.0/*
-          cp -r out_html/* master/9.0
+          rm -rf master/8.3/*
+          cp -r out_html/* master/8.3
           ls
           cd master
           touch master/.nojekyll
