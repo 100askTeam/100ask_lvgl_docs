@@ -19,11 +19,11 @@ One line mode and password modes are supported.
 </p>
 </details>
 
-文本框是一个 [Base object](widgets/obj)，上面有一个 [Label](/widgets/core/label) 和一个光标。
-可以向其中添加文本或字符。
-长行被换行，当文本变得足够长时，可以滚动文本框。
+文本框是一个 [基础对象](/widgets/obj)，其上面有一个 [标签(Label)](/widgets/core/label) 和一个光标(cursor)。
+我们可以向文本框中添加文本或字符。
+长行会被换行，当文本内容变得足够长时(文本框可视区域容纳不下时)，可以滚动文本框。
 
-支持单行模式和密码模式。
+支持单行输入模式和密码输入模式。
 
 ## Parts and Styles（部分和样式）
 
@@ -42,14 +42,13 @@ The `anim_time` style property sets the cursor's blink time.
 </p>
 </details>
 
-- `LV_PART_MAIN` 文本框的背景。使用所有典型的背景样式属性和与文本相关的样式属性（包括“text_align”）将文本向左、向右或居中对齐。
-- `LV_PART_SCROLLBAR` 文本过长时显示的滚动条。
-- `LV_PART_SELECTED` 确定[选定文本](/widgets/core/label.html#text-selection) 的样式。只能使用 `text_color` 和 `bg_color` 样式属性。 `bg_color` 应该直接设置在文本框的标签上。
-- `LV_PART_CURSOR` 标记字符插入的位置。光标的区域始终是当前字符的边界框。
-可以通过向“LV_PART_CURSOR”的样式添加背景颜色和背景不透明度来创建块光标。创建行光标使光标保持透明并设置左边框。
-`anim_time` 样式属性设置光标的闪烁时间。
-- `LV_PART_TEXTAREA_PLACEHOLDER` 文本框独有，允许设置占位符文本的样式。
-- 
+- `LV_PART_MAIN` 文本框的背景。使用所有组件都有的典型的背景样式属性和与文本相关的样式属性（包括 `text_align` ）将文本向左、向右或居中对齐。
+- `LV_PART_SCROLLBAR` 文本内容过长时显示的滚动条。
+- `LV_PART_SELECTED` 确定[选定文本](/widgets/core/label.html#text-selection) 的样式。只能使用 `text_color` 和 `bg_color` 样式属性。 `bg_color` 会直接应用在文本框的标签上。
+- `LV_PART_CURSOR` 字符插入位置的光标。光标的区域始终是当前字符的边界框。可以通过 `anim_time` 样式属性设置光标的闪烁时间。
+- `LV_PART_TEXTAREA_PLACEHOLDER` 文本占位符，文本框独有的部分。可以通过这部分设置文本占位符的样式。
+
+
 ## Usage（用法）
 
 ### Add text（添加文本）
@@ -70,14 +69,14 @@ To add wide characters like `'á'`, `'ß'` or CJK characters use `lv_textarea_ad
 </p>
 </details>
 
-您可以使用以下命令在当前光标位置插入文本或字符：
+您可以使用以下命令在光标的当前位置插入文本或字符：
 
 - `lv_textarea_add_char(textarea, 'c')`
 - `lv_textarea_add_text(textarea, "插入此文本")`
 
 要添加宽字符，如 `'á'`、`'ß'` 或 CJK 字符，请使用 `lv_textarea_add_text(ta, "á")`。
 
-`lv_textarea_set_text(ta, "New text")` 改变整个文本。
+`lv_textarea_set_text(ta, "New text")` 会改变(清除再覆盖)文本框中的所有内容。
 
 ### Placeholder（占位符）
 
@@ -90,7 +89,7 @@ A placeholder text can be specified - which is displayed when the Text area is e
 </p>
 </details>
 
-可以指定占位符文本 - 当文本框为空时显示 - 使用`lv_textarea_set_placeholder_text(ta, "Placeholder text")`
+您可以通过 `lv_textarea_set_placeholder_text(ta, "Placeholder text")` 指定占位符文本，当文本框的内容为空时，所设置的占位符文本将会展示出来。
 
 ### Delete character（删除字符）
 
@@ -104,8 +103,8 @@ To delete from the right use `lv_textarea_del_char_forward(textarea)`
 </p>
 </details>
 
-要删除当前光标位置左侧的字符，请使用'lv_textarea_del_char（textarea）`。
-要从右侧删除，请使用'lv\u textarea\u del\u char\u forward（textarea）`
+要删除光标左侧的字符，请使用 `v_textarea_del_char(textarea)` 。
+要从光标右侧删除字符，请使用 `lv_textarea_del_char_forward(textarea)` 
 
 ### Move the cursor（移动光标）
 
@@ -128,17 +127,20 @@ If `lv_textarea_set_cursor_click_pos(textarea, true)` is applied the cursor will
 </p>
 </details>
 
-光标位置可以像`lv_textarea_set_cursor_pos(textarea, 10)`一样直接修改。
-`0` 位置表示“在第一个字符之前”，
-`LV_TA_CURSOR_LAST` 表示“在最后一个字符之后”
+光标的位置可以使用函数 `lv_textarea_set_cursor_pos(textarea, 10)` 直接修改。
+第二个参数为你要指定的光标的位置，要注意的是：
 
-您可以使用
-- `lv_textarea_cursor_right(textarea)`
-- `lv_textarea_cursor_left(textarea)`
-- `lv_textarea_cursor_up(textarea)`
-- `lv_textarea_cursor_down(textarea)`
+- `0` 表示将光标移动到 “第一个字符之前”，
+- `LV_TA_CURSOR_LAST` 表示将光标移动到 “最后一个字符之后”
 
-如果应用`lv_textarea_set_cursor_click_pos(textarea, true)`，则光标将跳转到单击文本框的位置。
+您可以使用下面这些接口函数修改光标位置：
+
+- `lv_textarea_cursor_up(textarea)` 上
+- `lv_textarea_cursor_down(textarea)` 下
+- `lv_textarea_cursor_left(textarea)` 左
+- `lv_textarea_cursor_right(textarea)`  右
+
+如果设置了 `lv_textarea_set_cursor_click_pos(textarea, true)` 那光标会跟随触摸跳转位置(在文本框范围内)
 
 ### Hide the cursor（隐藏光标）
 
@@ -151,7 +153,7 @@ The cursor is always visible, however it can be a good idea to style it to be vi
 </p>
 </details>
 
-一般情况下光标始终可见，但最好将其样式设置为仅在“LV_STATE_FOCUSED”状态下可见。
+一般情况下光标始终可见，但最好将其样式设置为仅在 `LV_STATE_FOCUSED` 状态下(聚焦状态)可见。
 
 ### One line mode（单行模式）
 
@@ -165,8 +167,8 @@ In this mode the height is set automatically to show only one line, line break c
 </p>
 </details>
 
-可以使用 `lv_textarea_set_one_line(textarea, true)` 将文本框配置为单行。
-在此模式下，高度自动设置为仅显示一行，忽略换行符，并禁用自动换行。
+可以使用 `lv_textarea_set_one_line(textarea, true)` 将文本框配置为单行输入模式。
+在这个模式下，高度自动设置为仅显示一行，忽略换行符，并禁用自动换行。
 
 ### Password mode（密码模式）
 
@@ -186,14 +188,14 @@ The visibility time can be adjusted with `LV_TEXTAREA_DEF_PWD_SHOW_TIME)` in `lv
 </p>
 </details>
 
-文本框支持密码模式，可以通过 `lv_textarea_set_password_mode(textarea, true)` 启用。
+文本框支持密码模式，可以通过 `lv_textarea_set_password_mode(textarea, true)` 启用该模式。
 
-如果字体中存在 `•` ([Bullet, U+2022](http://www.fileformat.info/info/unicode/char/2022/index.htm)) 字符，则将输入的字符转换为该字符 一段时间后或输入新字符时。
+如果字体中存在 `•` ([Bullet, U+2022](http://www.fileformat.info/info/unicode/char/2022/index.htm)) 字符，则将输入的字符会在一定时间后或者输入新字符时自动转换为该字符。
 如果 `•` 不存在，`*` 将被使用。
 
-在密码模式下`lv_textarea_get_text(textarea)` 返回输入的实际文本，而不是项目符号字符。
+在密码模式下 `lv_textarea_get_text(textarea)` 返回的是输入的实际文本，而不是 `•` 字符。
 
-可见时间可以通过 `lv_conf.h` 中的 `LV_TEXTAREA_DEF_PWD_SHOW_TIME)` 进行调整。
+密码模式下，实际输入文本的可见时间可以通过 `lv_conf.h` 中的 `LV_TEXTAREA_DEF_PWD_SHOW_TIME)` 进行调整。
 
 ### Accepted characters（字符白名单）
 
@@ -207,7 +209,7 @@ Other characters will be ignored.
 </p>
 </details>
 
-您可以使用 `lv_textarae_set_accepted_chars(textarea, "0123456789.+-")` 设置接受字符列表。其他字符将被忽略。
+您可以使用 `lv_textarae_set_accepted_chars(textarea, "0123456789.+-")` 设置可接受字符列表(白名单)。输入其他字符将被忽略。
 
 ### Max text length（设置文本长度）
 
@@ -220,7 +222,7 @@ The maximum number of characters can be limited with `lv_textarea_set_max_length
 </p>
 </details>
 
-可以使用`lv_textarea_set_max_length(textarea, max_char_num)` 限制最大字符数
+可以使用 `lv_textarea_set_max_length(textarea, max_char_num)` 设置文本框可容纳的最大字符数
 
 ### Very long texts（超长文本）
 
@@ -236,10 +238,10 @@ Using `LV_LABEL_LONG_TXT_HINT` the scrolling and drawing will as fast as with "n
 </p>
 </details>
 
-如果文本框中有很长的文本（例如 > 20k 个字符），滚动和绘制可能会很慢。
-但是，通过在`lv_conf.h` 中启用`LV_LABEL_LONG_TXT_HINT 1`，性能可以得到极大的提高。
-这将保存有关标签的一些附加信息以加快其绘制速度。
-使用 `LV_LABEL_LONG_TXT_HINT` 滚动和绘图将与“普通”短文本一样快。
+如果文本框中有很长的文本（例如 > 20k 个字符），可能会导致滚动和绘制速度很慢。
+但是，如果在 `lv_conf.h` 中启用 `LV_LABEL_LONG_TXT_HINT 1`，那么这个问题可以得到很好的改善。
+这将会保存有关标签(label)的一些附加信息以加快其绘制速度。
+使用 `LV_LABEL_LONG_TXT_HINT` 后，滚动和绘制速度将与 “普通” 的短文本一样快。
 
 ### Select text（选择文本）
 
@@ -253,7 +255,7 @@ This works much like when you select text on your PC with your mouse.
 </p>
 </details>
 
-如果启用了`lv_textarea_set_text_selection(textarea, true)`，则可以选择文本的任何部分。这与您使用鼠标在 PC 上选择文本非常相似。
+如果使用函数 `lv_textarea_set_text_selection(textarea, true)` 启用文本选择功能，则可以选择文本的任何部分。这和我们使用鼠标在电脑上选择文字非常相似。
 
 ## Events（事件）
 
@@ -274,11 +276,11 @@ Learn more about [Events](/overview/event).
 </p>
 </details>
 
-- `LV_EVENT_INSERT` 在插入字符或文本之前发送。
-事件参数是即将插入的文本。 `lv_textarea_set_insert_replace(textarea, "New text")` 替换要插入的文本。
-新文本不能位于当事件回调存在时被销毁的局部变量中。 `""` 表示不插入任何内容。
-- `LV_EVENT_VALUE_CHANGED` 当文本框的内容改变时发送。
-- `LV_EVENT_APPLY` 在按下 `LV_KEY_ENTER` 时发送（或（发送）到一行文本框。
+- `LV_EVENT_INSERT` 在插入字符或文本之前发送该事件。
+事件参数是即将插入的文本。可以通过接口 `lv_textarea_set_insert_replace(textarea, "New text")` 将要计划插入的文本替换为其他文本。
+注意替换的新文本不能时局部变量，也就是不能在回调函数直接创建局部变量保存新文本。 `""` 表示不插入任何内容。
+- `LV_EVENT_VALUE_CHANGED` 当文本框的内容被改变时发送该事件。
+- `LV_EVENT_APPLY` 在按下 `LV_KEY_ENTER` 时发送到单行文本框。
 
 参见 [Base object](/widgets/obj) 的事件。
 
@@ -301,7 +303,7 @@ Learn more about [Keys](/overview/indev).
 - `LV_KEY_UP/DOWN/LEFT/RIGHT` 移动光标
 - `任意字符` 将字符添加到当前光标位置
 
-了解有关 [键](/overview/indev) 的更多信息。
+了解有关 [按键](/overview/indev) 的更多信息。
 
 ## Example
 
