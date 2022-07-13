@@ -44,7 +44,7 @@ The `anim_time` style property sets the cursor's blink time.
 
 - `LV_PART_MAIN` 文本框的背景。使用所有组件都有的典型的背景样式属性和与文本相关的样式属性（包括 `text_align` ）将文本向左、向右或居中对齐。
 - `LV_PART_SCROLLBAR` 文本内容过长时显示的滚动条。
-- `LV_PART_SELECTED` 确定[选定文本](/widgets/core/label.html#text-selection) 的样式。只能使用 `text_color` 和 `bg_color` 样式属性。 `bg_color` 会直接应用在文本框的标签上。
+- `LV_PART_SELECTED` 确定[选定文本](/widgets/core/label.html#text-selection) (label)的样式。只能使用 `text_color` 和 `bg_color` 样式属性。 `bg_color` 会直接应用在文本框的标签上。
 - `LV_PART_CURSOR` 字符插入位置的光标。光标的区域始终是当前字符的边界框。可以通过 `anim_time` 样式属性设置光标的闪烁时间。
 - `LV_PART_TEXTAREA_PLACEHOLDER` 文本占位符，文本框独有的部分。可以通过这部分设置文本占位符的样式。
 
