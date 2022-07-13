@@ -17,9 +17,9 @@ The Button matrix is added to the default group (if one is set). Besides the But
 </p>
 </details>
 
-按钮矩阵(lv_btnmatrix) 对象是一种在行和列中显示多个按钮的轻量级方法。 轻量级，因为按钮不是实际创建的，而是实时绘制的。 这样，一个按钮仅使用 8 个额外字节的内存，而不是普通 [Button](/widgets/core/btn) 对象的 ~100-150 字节加上 [Label](/widgets/core/label) 对象。
+按钮矩阵(lv_btnmatrix)组件是一种在行和列中显示多个按钮的轻量级实现方式。按钮不是实际创建出来的，而是实时绘制出来的，所以轻量级，因为这样一个按钮仅使用 8 个字节的内存，而不是普通 [Button](/widgets/core/btn) 组件那样：~100-150 字节再加上 [Label](/widgets/core/label) 组件的内存占用。
 
-按钮矩阵将添加到默认组（如果已设置）。此外，按钮矩阵是一个可编辑的对象，允许通过编码器导航选择和单击按钮。
+按钮矩阵添加到默认组（如果之前已设置了组）。此外，按钮矩阵是一个可编辑的对象，可以通过编码器导航选择和单击按钮。
 
 ## Parts and Styles（零件和样式）
 
@@ -33,8 +33,8 @@ The Button matrix is added to the default group (if one is set). Besides the But
 </p>
 </details>
 
-- `LV_PART_MAIN` 按钮矩阵的背景，使用典型的背景样式属性。 `pad_row` 和 `pad_column` 设置按钮之间的空间。
-- `LV_PART_ITEMS` 除了翻译和转换之外，按钮都使用文本和典型的背景样式属性。
+- `LV_PART_MAIN` 按钮矩阵的背景，使用所有组件默认都有的典型的背景样式属性。可通过 `pad_row` 和 `pad_column` 设置按钮之间的空间。
+- `LV_PART_ITEMS` 除了转变之外，按钮都使用文本和典型的背景样式属性。
 
 ## Usage（用法）
 
@@ -55,13 +55,13 @@ So in the example the first row will have 2 buttons each with 50% width and a se
 </p>
 </details>
 
-每个按钮上都可以有文字。 要指定它们，需要使用称为 *map* 的描述符字符串数组。
-地图可以用`lv_btnmatrix_set_map(btnm, my_map)`设置。
-映射的声明应该类似于 `const char * map[] = {"btn1", "btn2", "btn3", NULL}`。
-请注意，最后一个元素必须是 `NULL` 或空字符串 (`""`)！
+每个按钮上都可以有文字。要指定按钮的文字，需要使用称为 *map* 的描述符按钮布局的字符串数组。
+map 可以使用 `lv_btnmatrix_set_map(btnm, my_map)` 接口设置。
+map 的格式： `const char * map[] = {"btn1", "btn2", "btn3", NULL}`。
+请注意，map 数组的最后一个元素必须是 `NULL` 或空字符串 (`""`)！
 
-在地图中使用`"\n"` 插入**换行符**。 例如。 `{"btn1", "btn2", "\n", "btn3", ""}`。 每行按钮的宽度都会自动计算。
-因此，在示例中，第一行将有 2 个按钮，每个按钮的宽度为 50%，第二行将有 1 个按钮的宽度为 100%。
+在 map 中使用 `"\n"` 插入**换行符**。 例如。 `{"btn1", "btn2", "\n", "btn3", ""}`。 每行按钮的宽度都会自动计算平均分配(默认)。
+因此，在上面的示例中，第一行将有 2 个按钮，每个按钮的宽度为 50%，第二行将有 1 个按钮的宽度为 100%。
 
 ### Control buttons（控制按钮）
 
@@ -90,8 +90,8 @@ By default all flags are disabled.
 </p>
 </details>
 
-可以使用 `lv_btnmatrix_set_btn_width(btnm, btn_id, width)` 相对于同一行中的另一个按钮设置按钮的宽度
-例如。在一行中有两个按钮：*btnA, width = 1* 和 *btnB, width = 2*，*btnA* 将有 33% 的宽度，*btnB* 将有 66% 的宽度。
+可以使用 `lv_btnmatrix_set_btn_width(btnm, btn_id, width)` 接口设置相对于同一行中的另一个按钮的宽度。
+例如。在一行中有两个按钮这样设置：*btnA, width = 1* 和 *btnB, width = 2*，这样*btnA* 将有 33% 的宽度，*btnB* 将有 66% 的宽度。
 它类似于 [`flex-grow`](https://developer.mozilla.org/en-US/docs/Web/CSS/flex-grow) 属性在 CSS 中的工作方式。
 宽度必须在 \[1..7\] 范围内，默认宽度为 1。
 
@@ -99,12 +99,12 @@ By default all flags are disabled.
 - `LV_BTNMATRIX_CTRL_HIDDEN` 隐藏按钮（隐藏的按钮仍然占用布局中的空间，它们只是不可见或不可点击）
 - `LV_BTNMATRIX_CTRL_NO_REPEAT` 长按按钮时禁用重复
 - `LV_BTNMATRIX_CTRL_DISABLED` 使按钮被禁用，就像普通对象上的 `LV_STATE_DISABLED`
-- `LV_BTNMATRIX_CTRL_CHECKABLE` 启用按钮切换。 IE。 `LV_STATE_CHECHED` 将在按钮被点击时添加/删除
-- `LV_BTNMATRIX_CTRL_CHECKED` 检查按钮。它将使用`LV_STATE_CHECHKED` 样式。
-- `LV_BTNMATRIX_CTRL_CLICK_TRIG` 启用：在点击时发送 LV_EVENT_VALUE_CHANGE，禁用：在按下时发送 LV_EVENT_VALUE_CHANGE*/
-- `LV_BTNMATRIX_CTRL_RECOLOR` 使用 `#` 启用按钮文本的重新着色。例如。 `“它是#ff0000 红色#”`
-- `LV_BTNMATRIX_CTRL_CUSTOM_1` 自定义免费使用标志
-- `LV_BTNMATRIX_CTRL_CUSTOM_2` 自定义免费使用标志
+- `LV_BTNMATRIX_CTRL_CHECKABLE` 启用按钮切换。也就是 `LV_STATE_CHECHED` 将在按钮被点击时添加/删除
+- `LV_BTNMATRIX_CTRL_CHECKED` 检查按钮。它将使用 `LV_STATE_CHECHKED` 的样式。
+- `LV_BTNMATRIX_CTRL_CLICK_TRIG` 启用：在点击时发送 **LV_EVENT_VALUE_CHANGE** ；禁用：在按下时发送 **LV_EVENT_VALUE_CHANGE**
+- `LV_BTNMATRIX_CTRL_RECOLOR` 使用 `#` 启用按钮文本的重新着色。例如 `"It's #ff0000 red btn#"`
+- `LV_BTNMATRIX_CTRL_CUSTOM_1` 可自定义使用的标志
+- `LV_BTNMATRIX_CTRL_CUSTOM_2` 可自定义使用的标志
 
 默认情况下，所有标志都被禁用。
 
@@ -126,10 +126,10 @@ The number of elements should be equal to the number of buttons (excluding newli
 </p>
 </details>
 
-要设置或清除按钮的控件属性，请使用 `lv_btnmatrix_set_btn_ctrl(btnm, btn_id, LV_BTNM_CTRL_...)` 和
+要设置或清除按钮的控制属性，请使用 `lv_btnmatrix_set_btn_ctrl(btnm, btn_id, LV_BTNM_CTRL_...)` 和
 `lv_btnmatrix_clear_btn_ctrl(btnm, btn_id, LV_BTNMATRIX_CTRL_...)` 分别。 更多 `LV_BTNM_CTRL_...` 值可以被 OR-ed
 
-要为按钮矩阵的所有按钮设置/清除相同的控件属性，请使用 `lv_btnmatrix_set_btn_ctrl_all(btnm, btn_id, LV_BTNM_CTRL_...)` 和
+要为按钮矩阵的所有按钮设置/清除相同的控制属性，请使用 `lv_btnmatrix_set_btn_ctrl_all(btnm, btn_id, LV_BTNM_CTRL_...)` 和
 `lv_btnmatrix_clear_btn_ctrl_all(btnm, btn_id, LV_BTNMATRIX_CTRL_...)`。
 
 设置按钮矩阵的控制图（类似于文本的图），使用`lv_btnmatrix_set_ctrl_map(btnm, ctrl_map)`。
@@ -147,7 +147,7 @@ The "One check" feature can be enabled with `lv_btnmatrix_set_one_check(btnm, tr
 </p>
 </details>
 
-可以使用 `lv_btnmatrix_set_one_check(btnm, true)` 启用“一次检查”功能，以允许一次只检查一个按钮。
+可以使用 `lv_btnmatrix_set_one_check(btnm, true)` 启用 “一次检查” 功能，这样按钮只能被检查一次(检查过或者点击过的按钮会被标记出来)。
 
 ## Events（事件）
 
@@ -166,7 +166,7 @@ The "One check" feature can be enabled with `lv_btnmatrix_set_one_check(btnm, tr
 </p>
 </details>
 
-- `LV_EVENT_VALUE_CHANGED` 按下/释放按钮或长按后重复时发送。 事件参数设置为按下/释放按钮的 ID。
+- `LV_EVENT_VALUE_CHANGED` 按下/释放按钮或长按时发送。事件参数设置为按下/释放按钮的ID。
 - 为以下类型发送`LV_EVENT_DRAW_PART_BEGIN`和`LV_EVENT_DRAW_PART_END`：
      - `LV_BTNMATRIX_DRAW_PART_BTN` 单个按钮。
          - `部分`：`LV_PART_ITEMS`
@@ -190,12 +190,12 @@ Learn more about [Events](/overview/event).
 </p>
 </details>
 
-参见 [Base object](/widgets/obj) 的事件。
+参见 [基础对象](/widgets/obj) 的事件。
 
 
 `lv_btnmatrix_get_selected_btn(btnm)` 返回最近释放或聚焦的按钮的索引，如果没有这样的按钮，则返回 `LV_BTNMATRIX_BTN_NONE`。
 
-`lv_btnmatrix_get_btn_text(btnm, btn_id)` 返回指向 `btn_id`th 按钮文本的指针。
+`lv_btnmatrix_get_btn_text(btnm, btn_id)` 返回索引为 `btn_id` 的按钮的文本的指针。
 
 详细了解 [事件](/overview/event)。
 
@@ -213,10 +213,10 @@ Learn more about [Keys](/overview/indev).
 </p>
 </details>
 
-- `LV_KEY_RIGHT/UP/LEFT/RIGHT` 在按钮之间导航以选择一个
-- `LV_KEY_ENTER` 按下/释放所选按钮
+- `LV_KEY_RIGHT/UP/LEFT/RIGHT` 在按钮矩阵的按钮之间导航来选中不同的按钮。
+- `LV_KEY_ENTER` 按下/释放所选按钮。
 
-了解有关 [Keys](/overview/indev) 的更多信息。
+了解有关 [按键](/overview/indev) 的更多信息。
 
 ## Example
 
