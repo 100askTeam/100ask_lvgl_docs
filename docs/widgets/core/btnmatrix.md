@@ -132,9 +132,9 @@ The number of elements should be equal to the number of buttons (excluding newli
 要为按钮矩阵的所有按钮设置/清除相同的控制属性，请使用 `lv_btnmatrix_set_btn_ctrl_all(btnm, btn_id, LV_BTNM_CTRL_...)` 和
 `lv_btnmatrix_clear_btn_ctrl_all(btnm, btn_id, LV_BTNMATRIX_CTRL_...)`。
 
-设置按钮矩阵的控制图（类似于文本的图），使用`lv_btnmatrix_set_ctrl_map(btnm, ctrl_map)`。
-`ctrl_map` 的元素应该看起来像 `ctrl_map[0] = width | LV_BTNM_CTRL_NO_REPEAT | LV_BTNM_CTRL_CHECHKABLE`。
-元素的数量应该等于按钮的数量（不包括换行符）。
+我们可以写一个数组来一次单独设置多个或者所有的按钮，这有点像一个控制表，这里称其为 `ctrl_map` ，我们可以使用 `lv_btnmatrix_set_ctrl_map(btnm, ctrl_map)` 将控制表添加到按钮矩阵中。
+`ctrl_map` 中的元素的格式：`ctrl_map[0] = width | LV_BTNM_CTRL_NO_REPEAT | LV_BTNM_CTRL_CHECHKABLE` ，也就是我们可以添加多个属性。
+元素的数量应该等于(可以小于，但是不应该超出)按钮的数量(不包括换行符)。
 
 ### One check（一次检查）
 
@@ -147,7 +147,7 @@ The "One check" feature can be enabled with `lv_btnmatrix_set_one_check(btnm, tr
 </p>
 </details>
 
-可以使用 `lv_btnmatrix_set_one_check(btnm, true)` 启用 “一次检查” 功能，这样按钮只能被检查一次(检查过或者点击过的按钮会被标记出来)。
+可以使用 `lv_btnmatrix_set_one_check(btnm, true)` 启用 “一次检查” 功能，这样按钮只能被检查一次(点击过或者检查过的按钮会被标记出来)。
 
 ## Events（事件）
 
@@ -193,7 +193,7 @@ Learn more about [Events](/overview/event).
 参见 [基础对象](/widgets/obj) 的事件。
 
 
-`lv_btnmatrix_get_selected_btn(btnm)` 返回最近释放或聚焦的按钮的索引，如果没有这样的按钮，则返回 `LV_BTNMATRIX_BTN_NONE`。
+`lv_btnmatrix_get_selected_btn(btnm)` 返回最后被释放或聚焦的按钮的索引值，如果没有这样的按钮，则返回 `LV_BTNMATRIX_BTN_NONE`。
 
 `lv_btnmatrix_get_btn_text(btnm, btn_id)` 返回索引为 `btn_id` 的按钮的文本的指针。
 
