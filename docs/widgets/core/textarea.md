@@ -76,7 +76,7 @@ To add wide characters like `'á'`, `'ß'` or CJK characters use `lv_textarea_ad
 
 要添加宽字符，如 `'á'`、`'ß'` 或 CJK 字符，请使用 `lv_textarea_add_text(ta, "á")`。
 
-`lv_textarea_set_text(ta, "New text")` 会改变(清除再覆盖)文本框中的所有内容。
+`lv_textarea_set_text(ta, "New text")` 会改变(清空再覆盖)文本框中的所有内容。
 
 ### Placeholder（占位符）
 
@@ -103,7 +103,7 @@ To delete from the right use `lv_textarea_del_char_forward(textarea)`
 </p>
 </details>
 
-要删除光标左侧的字符，请使用 `v_textarea_del_char(textarea)` 。
+要删除光标左侧的字符，请使用 `lv_textarea_del_char(textarea)` 。
 要从光标右侧删除字符，请使用 `lv_textarea_del_char_forward(textarea)` 
 
 ### Move the cursor（移动光标）
@@ -131,7 +131,7 @@ If `lv_textarea_set_cursor_click_pos(textarea, true)` is applied the cursor will
 第二个参数为你要指定的光标的位置，要注意的是：
 
 - `0` 表示将光标移动到 “第一个字符之前”，
-- `LV_TA_CURSOR_LAST` 表示将光标移动到 “最后一个字符之后”
+- `LV_TEXTAREA_CURSOR_LAST ` 表示将光标移动到 “最后一个字符之后”
 
 您可以使用下面这些接口函数修改光标位置：
 
@@ -195,7 +195,7 @@ The visibility time can be adjusted with `LV_TEXTAREA_DEF_PWD_SHOW_TIME)` in `lv
 
 在密码模式下 `lv_textarea_get_text(textarea)` 返回的是输入的实际文本，而不是 `•` 字符。
 
-密码模式下，实际输入文本的可见时间可以通过 `lv_conf.h` 中的 `LV_TEXTAREA_DEF_PWD_SHOW_TIME)` 进行调整。
+密码模式下，实际输入文本的可见时间可以通过 `lv_conf.h` 中的 `LV_TEXTAREA_DEF_PWD_SHOW_TIME` 进行调整。
 
 ### Accepted characters（字符白名单）
 
@@ -209,7 +209,7 @@ Other characters will be ignored.
 </p>
 </details>
 
-您可以使用 `lv_textarae_set_accepted_chars(textarea, "0123456789.+-")` 设置可接受字符列表(白名单)。输入其他字符将被忽略。
+您可以使用 `lv_textarea_set_accepted_chars(textarea, "0123456789.+-")` 设置可接受字符列表(白名单)。输入其他字符将被忽略。
 
 ### Max text length（设置文本长度）
 
