@@ -147,7 +147,7 @@ The "One check" feature can be enabled with `lv_btnmatrix_set_one_check(btnm, tr
 </p>
 </details>
 
-可以使用 `lv_btnmatrix_set_one_check(btnm, true)` 启用 “一次检查” 功能，这样按钮只能被检查一次(点击过或者检查过的按钮会被标记出来)。
+可以使用 `lv_btnmatrix_set_one_check(btnm, true)` 启用 “一次检查” 功能，这样一次只能检查一个按钮(我们就能知道最后点击的是哪个按钮)。
 
 ## Events（事件）
 
