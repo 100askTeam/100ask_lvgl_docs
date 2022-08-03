@@ -55,3 +55,8 @@ Cached reading is also supported if `LV_FS_..._CACHE_SIZE` is set to not `0` val
 你可以通过设置 `LV_FS_..._PATH` 来指定一个工作目录，比如：`"/home/joe/projects/"` 。 实际的文件/目录路径将附加到它上面， 比如：访问 `"/home/joe/projects/file.txt"` 时，直接写 `"file.txt"` 即可。
 
 lvgl的文件系统抽象接口支持设置文件访问缓冲区，可以通过设置 `LV_FS_..._CACHE_SIZE` 的值来指定缓冲区的大小(默认是0)，这样的好处是可以减少对从存储设备的实际操作次数，提高效率。
+
+------------------
+
+## 拓展阅读
+- [open和fopen有什么区别？](https://forums.100ask.net/t/topic/424/2)
