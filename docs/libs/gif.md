@@ -84,6 +84,12 @@ To decode and display a GIF animation the following amount of RAM is required:
 - `LV_COLOR_DEPTH 16`：4 x 图像宽度 x 图像高度
 - `LV_COLOR_DEPTH 32`：5 x 图像宽度 x 图像高度
 
+
+## 拓展阅读
+
+- [GIF图象格式](https://baike.baidu.com/item/GIF/217778)
+
+
 ## Example
 ```eval_rst
 .. include:: ../../examples/libs/gif/index.rst

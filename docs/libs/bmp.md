@@ -57,6 +57,12 @@ lv_img_set_src(my_img, "S:path/to/picture.bmp");
 - 不支持调色板。
 - 因为不是整个图像被读入后不能进行缩放或旋转。
 
+
+-----
+## 拓展阅读
+
+- [BMP图象格式](https://baike.baidu.com/item/BMP%E6%A0%BC%E5%BC%8F/3427000)
+
 ## Example
 ```eval_rst
 

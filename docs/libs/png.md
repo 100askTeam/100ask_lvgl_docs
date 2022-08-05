@@ -33,6 +33,13 @@ PNG解码器会对整个PNG图像解码，所以在解码过程中需要RAM为�
 
 由于解码 PNG 图像可能需要大量时间，这时候 LVGL 的图像缓存功能就能派上用场了( `lv_conf.h` 中的 `LV_IMG_CACHE_DEF_SIZE`)。
 
+
+-----------
+## 拓展阅读
+
+- [PNG图象格式](https://baike.baidu.com/item/PNG)
+
+
 ## Example
 ```eval_rst
 

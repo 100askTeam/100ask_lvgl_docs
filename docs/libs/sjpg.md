@@ -150,6 +150,11 @@ Output:
 All good!
 ```
 
+----
+## 拓展阅读
+
+- [JPG图象格式](https://baike.baidu.com/item/JPEG%E6%A0%BC%E5%BC%8F)
+
 ## Example
 ```eval_rst
 
