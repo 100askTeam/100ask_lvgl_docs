@@ -75,7 +75,8 @@ jobs:
       # ===============================
       - name: Commit documentation changes
         run: |
-          git clone https://${{secrets.CODING_USERNAME}}:${{secrets.CODING_PASSWD}}@e.coding.net/weidongshan/sphinx_docs/100ask_lvgl_docs.git --branch master --single-branch master
+          #git clone https://${{secrets.CODING_USERNAME}}:${{secrets.CODING_PASSWD}}@e.coding.net/weidongshan/sphinx_docs/100ask_lvgl_docs.git --branch master --single-branch master
+          git clone https://${{secrets.CODING_USERNAME}}:${{secrets.CODING_PASSWD}}@e.coding.net/weidongshan/sphinx_docs/100ask_lvgl_docs.git --branch master --single-branch master --depth=1
           cp -r out_html/* master/8.2
           ls
           cd master
