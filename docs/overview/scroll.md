@@ -155,7 +155,7 @@ The following values are possible for the direction:
 - `LV_DIR_BOTTOM` only scroll down
 - `LV_DIR_RIGHT` only scroll right
 - `LV_DIR_HOR` only scroll horizontally
-- `LV_DIR_TOP` only scroll vertically
+- `LV_DIR_VER` only scroll vertically
 - `LV_DIR_ALL` scroll any directions
 
 OR-ed values are also possible. E.g. `LV_DIR_TOP | LV_DIR_LEFT`.
@@ -174,7 +174,7 @@ OR-ed values are also possible. E.g. `LV_DIR_TOP | LV_DIR_LEFT`.
 - `LV_DIR_BOTTOM` 只向下滚动
 - `LV_DIR_RIGHT` 只向右滚动
 - `LV_DIR_HOR` 只能水平滚动
-- `LV_DIR_TOP` 只能垂直滚动
+- `LV_DIR_VER` 只能垂直滚动
 - `LV_DIR_ALL` 滚动任何方向
 
 可以用同时设置使用多个值（OR-ed）。例如。 `LV_DIR_TOP | LV_DIR_LEFT`。
