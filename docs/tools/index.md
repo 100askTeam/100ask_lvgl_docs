@@ -12,6 +12,7 @@
 
    fonts-zh-source
    monospaced-font
+   unicode2utf-8
    lv-chinese-ime
    lv_lib_100ask
 
