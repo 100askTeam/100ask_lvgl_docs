@@ -172,7 +172,7 @@ html_js_files = [
 ]
 
 html_favicon = 'favicon.png'
-html_logo = 'logo_lvgl.png'
+html_logo = 'logo_100ask.png'
 
 # -- Options for HTMLHelp output ------------------------------------------
 
