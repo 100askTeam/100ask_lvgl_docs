@@ -1,0 +1,20 @@
+lvgl/CMakeFiles/lvgl.dir/src/osal/lv_rtthread.c.o: \
+  /home/100ask/work_100ask/lvgl_work/lvgl/emscripten_builder/lvgl/src/osal/lv_rtthread.c \
+  /home/100ask/work_100ask/lvgl_work/lvgl/emscripten_builder/lvgl/src/osal/lv_os.h \
+  /home/100ask/work_100ask/lvgl_work/lvgl/emscripten_builder/lvgl/src/osal/../lv_conf_internal.h \
+  /home/100ask/work_100ask/lvgl_work/lvgl/emscripten_builder/lvgl/src/osal/../lv_conf_kconfig.h \
+  /home/100ask/work_100ask/lvgl_work/lvgl/emscripten_builder/lv_conf.h \
+  /home/100ask/work_100ask/lvgl_work/lvgl/emscripten_builder/lvgl/src/osal/../misc/lv_types.h \
+  /home/100ask/work_100ask/lvgl_work/lvgl/emscripten_builder/lvgl/src/osal/../misc/../lv_conf_internal.h \
+  /home/100ask/work_100ask/lvgl_work/emsdk/upstream/lib/clang/18/include/stdint.h \
+  /home/100ask/work_100ask/lvgl_work/emsdk/upstream/emscripten/cache/sysroot/include/stdint.h \
+  /home/100ask/work_100ask/lvgl_work/emsdk/upstream/emscripten/cache/sysroot/include/bits/alltypes.h \
+  /home/100ask/work_100ask/lvgl_work/emsdk/upstream/emscripten/cache/sysroot/include/bits/stdint.h \
+  /home/100ask/work_100ask/lvgl_work/emsdk/upstream/lib/clang/18/include/stddef.h \
+  /home/100ask/work_100ask/lvgl_work/emsdk/upstream/lib/clang/18/include/__stddef_ptrdiff_t.h \
+  /home/100ask/work_100ask/lvgl_work/emsdk/upstream/lib/clang/18/include/__stddef_size_t.h \
+  /home/100ask/work_100ask/lvgl_work/emsdk/upstream/lib/clang/18/include/__stddef_wchar_t.h \
+  /home/100ask/work_100ask/lvgl_work/emsdk/upstream/lib/clang/18/include/__stddef_null.h \
+  /home/100ask/work_100ask/lvgl_work/emsdk/upstream/lib/clang/18/include/__stddef_max_align_t.h \
+  /home/100ask/work_100ask/lvgl_work/emsdk/upstream/lib/clang/18/include/__stddef_offsetof.h \
+  /home/100ask/work_100ask/lvgl_work/lvgl/emscripten_builder/lvgl/src/osal/lv_os_none.h

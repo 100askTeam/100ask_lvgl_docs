@@ -1,0 +1,10 @@
+prefix="/home/100ask/work_100ask/lvgl_work/emsdk/upstream/emscripten/cache/sysroot"
+includedir="${prefix}/include/lvgl"
+libdir=${prefix}/lib
+
+Name: lvgl
+Description: Light and Versatile Graphics Library
+URL: https://lvgl.io/
+Version: 9.0.1-dev
+Cflags: -I${includedir}
+Libs: -L${libdir} -llvgl

@@ -1,0 +1,30 @@
+lvgl/CMakeFiles/lvgl.dir/src/stdlib/builtin/lv_sprintf_builtin.c.o: \
+  /home/100ask/work_100ask/lvgl_work/lvgl/emscripten_builder/lvgl/src/stdlib/builtin/lv_sprintf_builtin.c \
+  /home/100ask/work_100ask/lvgl_work/lvgl/emscripten_builder/lvgl/src/stdlib/builtin/../../lv_conf_internal.h \
+  /home/100ask/work_100ask/lvgl_work/lvgl/emscripten_builder/lvgl/src/stdlib/builtin/../../lv_conf_kconfig.h \
+  /home/100ask/work_100ask/lvgl_work/lvgl/emscripten_builder/lv_conf.h \
+  /home/100ask/work_100ask/lvgl_work/lvgl/emscripten_builder/lvgl/src/stdlib/builtin/../lv_sprintf.h \
+  /home/100ask/work_100ask/lvgl_work/emsdk/upstream/lib/clang/18/include/inttypes.h \
+  /home/100ask/work_100ask/lvgl_work/emsdk/upstream/emscripten/cache/sysroot/include/inttypes.h \
+  /home/100ask/work_100ask/lvgl_work/emsdk/upstream/emscripten/cache/sysroot/include/features.h \
+  /home/100ask/work_100ask/lvgl_work/emsdk/upstream/lib/clang/18/include/stdint.h \
+  /home/100ask/work_100ask/lvgl_work/emsdk/upstream/emscripten/cache/sysroot/include/stdint.h \
+  /home/100ask/work_100ask/lvgl_work/emsdk/upstream/emscripten/cache/sysroot/include/bits/alltypes.h \
+  /home/100ask/work_100ask/lvgl_work/emsdk/upstream/emscripten/cache/sysroot/include/bits/stdint.h \
+  /home/100ask/work_100ask/lvgl_work/emsdk/upstream/lib/clang/18/include/stdbool.h \
+  /home/100ask/work_100ask/lvgl_work/emsdk/upstream/emscripten/cache/sysroot/include/compat/stdarg.h \
+  /home/100ask/work_100ask/lvgl_work/emsdk/upstream/lib/clang/18/include/stdarg.h \
+  /home/100ask/work_100ask/lvgl_work/emsdk/upstream/lib/clang/18/include/__stdarg___gnuc_va_list.h \
+  /home/100ask/work_100ask/lvgl_work/emsdk/upstream/lib/clang/18/include/__stdarg_va_list.h \
+  /home/100ask/work_100ask/lvgl_work/emsdk/upstream/lib/clang/18/include/__stdarg_va_arg.h \
+  /home/100ask/work_100ask/lvgl_work/emsdk/upstream/lib/clang/18/include/__stdarg___va_copy.h \
+  /home/100ask/work_100ask/lvgl_work/emsdk/upstream/lib/clang/18/include/__stdarg_va_copy.h \
+  /home/100ask/work_100ask/lvgl_work/emsdk/upstream/lib/clang/18/include/stddef.h \
+  /home/100ask/work_100ask/lvgl_work/emsdk/upstream/lib/clang/18/include/__stddef_ptrdiff_t.h \
+  /home/100ask/work_100ask/lvgl_work/emsdk/upstream/lib/clang/18/include/__stddef_size_t.h \
+  /home/100ask/work_100ask/lvgl_work/emsdk/upstream/lib/clang/18/include/__stddef_wchar_t.h \
+  /home/100ask/work_100ask/lvgl_work/emsdk/upstream/lib/clang/18/include/__stddef_null.h \
+  /home/100ask/work_100ask/lvgl_work/emsdk/upstream/lib/clang/18/include/__stddef_max_align_t.h \
+  /home/100ask/work_100ask/lvgl_work/emsdk/upstream/lib/clang/18/include/__stddef_offsetof.h \
+  /home/100ask/work_100ask/lvgl_work/lvgl/emscripten_builder/lvgl/src/stdlib/builtin/../../misc/lv_types.h \
+  /home/100ask/work_100ask/lvgl_work/lvgl/emscripten_builder/lvgl/src/stdlib/builtin/../../misc/../lv_conf_internal.h

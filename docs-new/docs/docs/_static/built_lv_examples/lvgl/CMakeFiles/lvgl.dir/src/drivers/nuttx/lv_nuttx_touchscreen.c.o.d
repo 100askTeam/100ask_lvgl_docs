@@ -1,0 +1,32 @@
+lvgl/CMakeFiles/lvgl.dir/src/drivers/nuttx/lv_nuttx_touchscreen.c.o: \
+  /home/100ask/work_100ask/lvgl_work/lvgl/emscripten_builder/lvgl/src/drivers/nuttx/lv_nuttx_touchscreen.c \
+  /home/100ask/work_100ask/lvgl_work/lvgl/emscripten_builder/lvgl/src/drivers/nuttx/lv_nuttx_touchscreen.h \
+  /home/100ask/work_100ask/lvgl_work/lvgl/emscripten_builder/lvgl/src/drivers/nuttx/../../indev/lv_indev.h \
+  /home/100ask/work_100ask/lvgl_work/lvgl/emscripten_builder/lvgl/src/drivers/nuttx/../../indev/../core/lv_group.h \
+  /home/100ask/work_100ask/lvgl_work/lvgl/emscripten_builder/lvgl/src/drivers/nuttx/../../indev/../core/../lv_conf_internal.h \
+  /home/100ask/work_100ask/lvgl_work/lvgl/emscripten_builder/lvgl/src/drivers/nuttx/../../indev/../core/../lv_conf_kconfig.h \
+  /home/100ask/work_100ask/lvgl_work/lvgl/emscripten_builder/lv_conf.h \
+  /home/100ask/work_100ask/lvgl_work/emsdk/upstream/lib/clang/18/include/stdint.h \
+  /home/100ask/work_100ask/lvgl_work/emsdk/upstream/emscripten/cache/sysroot/include/stdint.h \
+  /home/100ask/work_100ask/lvgl_work/emsdk/upstream/emscripten/cache/sysroot/include/bits/alltypes.h \
+  /home/100ask/work_100ask/lvgl_work/emsdk/upstream/emscripten/cache/sysroot/include/bits/stdint.h \
+  /home/100ask/work_100ask/lvgl_work/emsdk/upstream/lib/clang/18/include/stdbool.h \
+  /home/100ask/work_100ask/lvgl_work/lvgl/emscripten_builder/lvgl/src/drivers/nuttx/../../indev/../core/../misc/lv_types.h \
+  /home/100ask/work_100ask/lvgl_work/lvgl/emscripten_builder/lvgl/src/drivers/nuttx/../../indev/../core/../misc/../lv_conf_internal.h \
+  /home/100ask/work_100ask/lvgl_work/lvgl/emscripten_builder/lvgl/src/drivers/nuttx/../../indev/../core/../misc/lv_ll.h \
+  /home/100ask/work_100ask/lvgl_work/emsdk/upstream/lib/clang/18/include/stddef.h \
+  /home/100ask/work_100ask/lvgl_work/emsdk/upstream/lib/clang/18/include/__stddef_ptrdiff_t.h \
+  /home/100ask/work_100ask/lvgl_work/emsdk/upstream/lib/clang/18/include/__stddef_size_t.h \
+  /home/100ask/work_100ask/lvgl_work/emsdk/upstream/lib/clang/18/include/__stddef_wchar_t.h \
+  /home/100ask/work_100ask/lvgl_work/emsdk/upstream/lib/clang/18/include/__stddef_null.h \
+  /home/100ask/work_100ask/lvgl_work/emsdk/upstream/lib/clang/18/include/__stddef_max_align_t.h \
+  /home/100ask/work_100ask/lvgl_work/emsdk/upstream/lib/clang/18/include/__stddef_offsetof.h \
+  /home/100ask/work_100ask/lvgl_work/lvgl/emscripten_builder/lvgl/src/drivers/nuttx/../../indev/../misc/lv_area.h \
+  /home/100ask/work_100ask/lvgl_work/lvgl/emscripten_builder/lvgl/src/drivers/nuttx/../../indev/../misc/../lv_conf_internal.h \
+  /home/100ask/work_100ask/lvgl_work/lvgl/emscripten_builder/lvgl/src/drivers/nuttx/../../indev/../misc/lv_types.h \
+  /home/100ask/work_100ask/lvgl_work/lvgl/emscripten_builder/lvgl/src/drivers/nuttx/../../indev/../misc/lv_timer.h \
+  /home/100ask/work_100ask/lvgl_work/lvgl/emscripten_builder/lvgl/src/drivers/nuttx/../../indev/../misc/../tick/lv_tick.h \
+  /home/100ask/work_100ask/lvgl_work/lvgl/emscripten_builder/lvgl/src/drivers/nuttx/../../indev/../misc/../tick/../lv_conf_internal.h \
+  /home/100ask/work_100ask/lvgl_work/lvgl/emscripten_builder/lvgl/src/drivers/nuttx/../../indev/../misc/lv_ll.h \
+  /home/100ask/work_100ask/lvgl_work/lvgl/emscripten_builder/lvgl/src/drivers/nuttx/../../indev/../misc/lv_event.h \
+  /home/100ask/work_100ask/lvgl_work/lvgl/emscripten_builder/lvgl/src/drivers/nuttx/../../indev/../misc/lv_array.h

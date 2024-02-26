@@ -9409,7 +9409,6 @@ static LV_ATTRIBUTE_LARGE_CONST const uint8_t glyph_bitmap[] = {
     0x0, 0x0
 };
 
-
 /*---------------------
  *  GLYPH DESCRIPTION
  *--------------------*/
@@ -9605,7 +9604,6 @@ static const lv_font_fmt_txt_cmap_t cmaps[] = {
 /*-----------------
  *    KERNING
  *----------------*/
-
 
 /*Map glyph_ids to kern left classes*/
 static const uint8_t kern_left_class_mapping[] = {
@@ -10033,7 +10031,6 @@ static const int8_t kern_class_values[] = {
     0, 0, 0, 0, 0
 };
 
-
 /*Collect the kern class' data in one place*/
 static const lv_font_fmt_txt_kern_classes_t kern_classes = {
     .class_pair_values   = kern_class_values,
@@ -10049,7 +10046,7 @@ static const lv_font_fmt_txt_kern_classes_t kern_classes = {
 
 #if LVGL_VERSION_MAJOR >= 8
 /*Store all the custom data of the font*/
-static  lv_font_fmt_txt_glyph_cache_t cache;
+
 static const lv_font_fmt_txt_dsc_t font_dsc = {
 #else
 static lv_font_fmt_txt_dsc_t font_dsc = {
@@ -10063,11 +10060,8 @@ static lv_font_fmt_txt_dsc_t font_dsc = {
     .bpp = 4,
     .kern_classes = 1,
     .bitmap_format = 0,
-#if LVGL_VERSION_MAJOR >= 8
-    .cache = &cache
-#endif
-};
 
+};
 
 /*-----------------
  *  PUBLIC FONT
@@ -10093,7 +10087,4 @@ lv_font_t lv_font_montserrat_42 = {
     .dsc = &font_dsc           /*The custom font data. Will be accessed by `get_glyph_bitmap/dsc` */
 };
 
-
-
 #endif /*#if LV_FONT_MONTSERRAT_42*/
-

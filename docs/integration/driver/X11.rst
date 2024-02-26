@@ -1,0 +1,279 @@
+================================================
+X11 Display/Inputs driver（X11显示/输入驱动程序）
+================================================
+
+Overview（概览）
+----------------
+
+.. raw:: html
+
+   <details>
+     <summary>显示原文</summary>
+
+| The **X11** display/input `driver <https://github.com/lvgl/lvgl/src/drivers/x11>`__ offers support for simulating the LVGL display and keyboard/mouse inputs in an X11 desktop window.
+| It is an alternative to **Wayland**, **XCB**, **SDL** or **Qt**.
+
+The main purpose for this driver is for testing/debugging the LVGL application in a **Linux** simulation window.
+
+.. raw:: html
+
+   </details>
+   <br>
+
+
+X11显示/输入驱动程序提供对在X11桌面窗口中模拟LVGL显示和键盘/鼠标输入的支持。它是Wayland、XCB、SDL或Qt的备选方案。
+
+该驱动程序的主要目的是在Linux模拟窗口中进行LVGL应用程序的测试和调试。
+
+
+Prerequisites（先决条件）
+-------------------------
+
+.. raw:: html
+
+   <details>
+     <summary>显示原文</summary>
+
+The X11 driver uses XLib to access the linux window manager.
+
+1. Install XLib: ``sudo apt-get install libx11-6`` (should be installed already)
+2. Install XLib development package: ``sudo apt-get install libx11-dev``
+
+.. raw:: html
+
+   </details>
+   <br>
+
+
+X11驱动程序使用XLib来访问Linux窗口管理器。
+
+1. 安装XLib： ``sudo apt-get install libx11-6``（应该已经安装）
+2. 安装XLib开发包： ``sudo apt-get install libx11-dev``
+
+
+Configure X11 driver（配置X11驱动程序）
+--------------------------------------
+
+.. raw:: html
+
+   <details>
+     <summary>显示原文</summary>
+
+1. Enable the X11 driver support in lv_conf.h, by cmake compiler define or by KConfig
+    .. code:: c
+
+        #define LV_USE_X11  1
+
+2. Optional configuration options:
+    -  Direct Exit
+        .. code:: c
+
+            #define LV_X11_DIRECT_EXIT  1 /*preferred default - ends the application automatically if last window has been closed*/
+            // or
+            #define LV_X11_DIRECT_EXIT  0 /*application is responsible for ending the application (e.g. by own LV_EVENT_DELETE handler*/
+
+
+    -  Double buffering
+        .. code:: c
+
+            #define LV_X11_DOUBLE_BUFFER  1 /*preferred default*/
+            // or
+            #define LV_X11_DOUBLE_BUFFER  0 /*not recommended*/
+
+    - Render mode
+        .. code:: c
+
+            #define LV_X11_RENDER_MODE_PARTIAL 1  /*LV_DISPLAY_RENDER_MODE_PARTIAL, preferred default*/
+            // or
+            #define LV_X11_RENDER_MODE_DIRECT  1  /*LV_DISPLAY_RENDER_MODE_DIRECT, not recommended for X11 driver*/
+            // or
+            #define LV_X11_RENDER_MODE_DULL    1  /*LV_DISPLAY_RENDER_MODE_FULL, not recommended for X11 driver*/
+
+.. raw:: html
+
+   </details>
+   <br>
+
+
+1. 在lv_conf.h中启用X11驱动程序支持，通过cmake编译定义或通过KConfig
+   .. code:: c
+
+       #define LV_USE_X11  1
+
+2. 可选配置选项:
+   - 直接退出
+       .. code:: c
+
+           #define LV_X11_DIRECT_EXIT  1 /*首选默认 - 如果最后一个窗口已关闭，则自动结束应用程序*/
+           // 或
+           #define LV_X11_DIRECT_EXIT  0 /*应用程序负责结束应用程序(例如通过自己的LV_EVENT_DELETE处理程序*/
+
+   - 双缓冲
+       .. code:: c
+
+           #define LV_X11_DOUBLE_BUFFER  1 /*首选默认*/
+           // 或
+           #define LV_X11_DOUBLE_BUFFER  0 /*不推荐*/
+
+   - 渲染模式
+       .. code:: c
+
+           #define LV_X11_RENDER_MODE_PARTIAL 1  /*LV_DISPLAY_RENDER_MODE_PARTIAL, 首选默认*/
+           // 或
+           #define LV_X11_RENDER_MODE_DIRECT  1  /*LV_DISPLAY_RENDER_MODE_DIRECT, 不推荐用于X11驱动程序*/
+           // 或
+           #define LV_X11_RENDER_MODE_DULL    1  /*LV_DISPLAY_RENDER_MODE_FULL, 不推荐用于X11驱动程序*/
+
+
+Usage（用法）
+-------------
+
+.. raw:: html
+
+   <details>
+     <summary>显示原文</summary>
+
+| The minimal initialisation opening a window and enabling keyboard/mouse support
+| (e.g. in main.c, LV_X11_DIRECT_EXIT must be 1):
+
+.. code:: c
+
+    int main(int argc, char ** argv)
+    {
+        ...
+
+        /* initialize X11 display driver */
+        lv_display_t * disp = lv_x11_window_create("LVGL X11 Simulation", monitor_hor_res, monitor_ver_res);
+
+        /* initialize X11 input drivers (for keyboard, mouse & mousewheel) */
+        lv_x11_inputs_create(disp, NULL);
+
+        ...
+
+        while(true)
+        {
+            ...
+
+            /* Periodically call the lv_task handler */
+            lv_task_handler();
+        }
+    }
+
+| Full initialisation with mouse pointer symbol and own application exit handling
+| (dependent on LV_X11_DIRECT_EXIT (can be 1 or 0))
+
+.. code:: c
+
+    bool terminated = false;
+
+    #if !LV_X11_DIRECT_EXIT
+    static void on_close_cb(lv_event_t * e)
+    {
+        ...
+
+        terminate = true;
+    }
+    #endif
+
+    int main(int argc, char ** argv)
+    {
+        ...
+
+        /* initialize X11 display driver */
+        lv_display_t * disp = lv_x11_window_create("LVGL X11 Simulation", monitor_hor_res, monitor_ver_res);
+        lv_display_add_event_cb(disp, on_close_cb, LV_EVENT_DELETE, disp);
+
+        /* initialize X11 input drivers (for keyboard, mouse & mousewheel) */
+        LV_IMG_DECLARE(my_mouse_cursor_icon);
+        lv_x11_inputs_create(disp, &my_mouse_cursor_icon);
+
+        #if !LV_X11_DIRECT_EXIT
+        /* set optional window close callback to enable application cleanup and exit */
+        lv_x11_window_set_close_cb(disp, on_close_cb, disp);
+        #endif
+
+        ...
+
+        while(!terminated)
+        {
+            ...
+
+            /* Periodically call the lv_task handler */
+            lv_task_handler();
+        }
+    }
+
+.. raw:: html
+
+   </details>
+   <br>
+
+
+最小化的初始化，打开一个窗口并启用键盘/鼠标支持（例如，在main.c中，LV_X11_DIRECT_EXIT必须为1）：
+
+.. code:: c
+    int main(int argc, char ** argv)
+    {
+        ...
+
+        /* 初始化X11显示驱动 */
+        lv_display_t * disp = lv_x11_window_create("LVGL X11模拟", monitor_hor_res, monitor_ver_res);
+
+        /* 初始化X11输入驱动（键盘、鼠标和鼠标滚轮） */
+        lv_x11_inputs_create(disp, NULL);
+
+        ...
+
+        while(true)
+        {
+            ...
+
+            /* 定期调用lv_task处理程序 */
+            lv_task_handler();
+        }
+    }
+
+
+完整的初始化，带有鼠标指针符号和自定义应用程序退出处理（取决于LV_X11_DIRECT_EXIT（可以为1或0））：
+
+.. code:: c
+    bool terminated = false;
+
+    #if !LV_X11_DIRECT_EXIT
+    static void on_close_cb(lv_event_t * e)
+    {
+        ...
+
+        terminated = true;
+    }
+    #endif
+
+    int main(int argc, char ** argv)
+    {
+        ...
+
+        /* 初始化X11显示驱动 */
+        lv_display_t * disp = lv_x11_window_create("LVGL X11模拟", monitor_hor_res, monitor_ver_res);
+        lv_display_add_event_cb(disp, on_close_cb, LV_EVENT_DELETE, disp);
+
+        /* 初始化X11输入驱动（键盘、鼠标和鼠标滚轮） */
+        LV_IMG_DECLARE(my_mouse_cursor_icon);
+        lv_x11_inputs_create(disp, &my_mouse_cursor_icon);
+
+        #if !LV_X11_DIRECT_EXIT
+        /* 设置可选的窗口关闭回调以启用应用程序清理和退出 */
+        lv_x11_window_set_close_cb(disp, on_close_cb, disp);
+        #endif
+
+        ...
+
+        while(!terminated)
+        {
+            ...
+
+            /* 定期调用lv_task处理程序 */
+            lv_task_handler();
+        }
+    }
+
+

@@ -8,10 +8,8 @@ scripts/genexamplelist.sh > emscripten_builder/examplelist.c
 cd emscripten_builder
 git submodule update --init -- lvgl
 cd lvgl
-#git checkout $CURRENT_REF
-git checkout 1ed64044562a02931a8148007d89b1b6b0596351
+git checkout $CURRENT_REF
 cd ..
-git submodule update --init -- lv_drivers
 mkdir cmbuild
 cd cmbuild
 emcmake cmake .. -DLVGL_CHOSEN_DEMO=lv_example_noop -DCMAKE_C_COMPILER_LAUNCHER=ccache -DCMAKE_CXX_COMPILER_LAUNCHER=ccache
