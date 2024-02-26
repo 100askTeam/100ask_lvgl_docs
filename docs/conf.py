@@ -42,7 +42,6 @@ extensions = [
     'sphinx_sitemap',
     'lv_example',
     'sphinx_rtd_dark_mode',
-    'sphinx_togglebutton',
     'link_roles'
 ]
 
