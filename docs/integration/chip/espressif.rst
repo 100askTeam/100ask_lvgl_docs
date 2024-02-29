@@ -156,7 +156,7 @@ When you are ready to configure LVGL, launch the configuration menu with
    <br>
 
 
-当你准备配置LVGL时，在项目根目录中使用 ``idf.py menuconfig``命令打开配置菜单，进入 ``Component config``，然后进入 ``LVGL configuration``。
+当你准备配置LVGL时，在项目根目录中使用 ``idf.py menuconfig`` 命令打开配置菜单，进入 ``Component config``，然后进入 ``LVGL configuration``。
 
 
 Using lvgl_esp32_drivers in ESP-IDF project（在ESP-IDF项目中使用lvgl_esp32_drivers）
@@ -184,7 +184,7 @@ When your project is a git repository you can include
    <br>
 
 
-你还可以将 ``lvgl_esp32_drivers``添加为一个 "组件"。这个组件应该位于你项目根目录下名为 "components" 的文件夹中。
+你还可以将 ``lvgl_esp32_drivers`` 添加为一个 "组件"。这个组件应该位于你项目根目录下名为 "components" 的文件夹中。
 
 当你的项目是一个git仓库时，你可以将 ``lvgl_esp32_drivers`` 作为一个git子模块加入：
 

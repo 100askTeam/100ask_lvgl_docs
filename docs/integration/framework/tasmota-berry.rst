@@ -97,7 +97,7 @@ Berry 具有以下优势：
 - 简单：语法简单自然，支持垃圾回收，并易于使用 FFI（外部函数接口）。
 - 节省 RAM：通过编译时对象构建，大多数常量对象都存储在只读代码数据段中，因此解释器在启动时使用的 RAM 非常低。
 
-有关所有功能的详细信息，请参阅 Berry 参考手册 `<https://github.com/berry-lang/berry/wiki/Reference>`__。
+有关所有功能的详细信息，请参阅 `Berry 参考手册 <https://github.com/berry-lang/berry/wiki/Reference>`__。
 
 
 --------------

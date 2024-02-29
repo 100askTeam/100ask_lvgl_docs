@@ -16,7 +16,7 @@ in a similar fashion to any other Eclipse-based IDE.
    <br>
 
 
-LVGL可以以与其他基于Eclipse的集成开发环境相似的方式添加到 `STM32CubeIDE <https://www.st.com/en/development-tools/stm32cubeide.html>`__中。
+LVGL可以以与其他基于Eclipse的集成开发环境相似的方式添加到 `STM32CubeIDE <https://www.st.com/en/development-tools/stm32cubeide.html>`__ 中。
 
 
 Including LVGL in a Project（在项目中包含LVGL）
@@ -48,14 +48,14 @@ project to create the ``lv_conf.h`` file, and initialise the display.
 
 
 - 在STM32CubeIDE中创建或打开一个项目。
-- 将整个LVGL文件夹复制到 *[project_folder]/Drivers/lvgl*目录下。
-- 在STM32CubeIDE的 **项目资源管理器**窗格中，右键单击您复制的LVGL文件夹（可能需要先刷新视图才能看到），然后选择 **添加/移除包含路径...**。如果这个选项没有出现或无法使用，您可以在 **项目** -> **属性**菜单中查看项目的包含路径，然后导航到 **C/C++构建** -> **设置** -> **包含路径**，确保LVGL目录已列出。
+- 将整个LVGL文件夹复制到 *[project_folder]/Drivers/lvgl* 目录下。
+- 在STM32CubeIDE的 **项目资源管理器** 窗格中，右键单击您复制的LVGL文件夹（可能需要先刷新视图才能看到），然后选择 **添加/移除包含路径...**。如果这个选项没有出现或无法使用，您可以在 **项目** -> **属性** 菜单中查看项目的包含路径，然后导航到 **C/C++ 构建** -> **设置** -> **包含路径**，确保LVGL目录已列出。
 
-现在源文件已包含在您的项目中，请按照 `移植 <https://docs.lvgl.io/master/porting/project.html>`__您的项目的说明，创建 ``lv_conf.h``文件并初始化显示。
+现在源文件已包含在您的项目中，请按照 `移植 <https://docs.lvgl.io/master/porting/project.html>`__ 您的项目的说明，创建 ``lv_conf.h`` 文件并初始化显示。
 
 
-Bare Metal Example（裸金属实例）
---------------------------------
+Bare Metal Example（裸机示例）
+-----------------------------
 
 .. raw:: html
 
@@ -179,7 +179,7 @@ the *main.c* file. \* Create some frame buffer(s) as global variables:
    <br>
 
 
-使用STM32CubeIDE和HAL的最简示例。\* 在使用设备配置工具的 **引脚配置和设置**中，选择 **系统核心** -> **SYS**并确保 **时间基准源**设置为 **SysTick**。\* 配置任何其他外设（包括LCD面板），并在 *main.c*中对它们进行初始化。\* 在 *main.c*文件中 ``#include "lvgl.h"``。 \* 创建一些帧缓冲区作为全局变量：
+使用STM32CubeIDE和HAL的最简示例。 \* 在使用设备配置工具的 **引脚配置和设置** 中，选择 **系统核心** -> **SYS** 并确保 **时间基准源** 设置为 **SysTick** 。 \* 配置任何其他外设（包括LCD面板），并在 *main.c* 中对它们进行初始化。 \* 在 *main.c* 文件中 ``#include "lvgl.h"``。 \* 创建一些帧缓冲区作为全局变量：
 
 .. code:: c
 
@@ -188,7 +188,7 @@ the *main.c* file. \* Create some frame buffer(s) as global variables:
    static lv_color_t buf_1[BUFF_SIZE]; //TODO: 选择一个缓冲区大小。 DISPLAY_WIDTH * 10是一个建议。
    static lv_color_t buf_2[BUFF_SIZE];
 
-- 在您的``main()``函数中，初始化CPU，外设和LCD面板后，调用:cpp:func:`lv_init` 初始化LVGL。然后，您可以使用:cpp:func:`lv_display_create` 创建显示驱动程序，并使用:cpp:func:`lv_display_set_buffers`注册帧缓冲区。
+- 在您的 ``main()`` 函数中，初始化CPU，外设和LCD面板后，调用 :cpp:func:`lv_init` 初始化LVGL。然后，您可以使用 :cpp:func:`lv_display_create` 创建显示驱动程序，并使用 :cpp:func:`lv_display_set_buffers` 注册帧缓冲区。
 
 .. code:: c
 
@@ -212,7 +212,7 @@ the *main.c* file. \* Create some frame buffer(s) as global variables:
    lv_obj_set_size(spinner, 64, 64);
    lv_obj_align(spinner, LV_ALIGN_BOTTOM_MID, 0, 0);
 
-- 在您的``while(1)``循环中添加对:cpp:func:`lv_timer_handler`的调用：
+- 在您的 ``while(1)`` 循环中添加对 :cpp:func:`lv_timer_handler` 的调用：
 
 .. code:: c
 
@@ -223,7 +223,7 @@ the *main.c* file. \* Create some frame buffer(s) as global variables:
      HAL_Delay(5);
    }
 
-- 在:cpp:func:`SysTick_Handler` 函数中添加对:cpp:func:`lv_tick_inc` 的调用。打开 *stm32xxxx_it.c*文件（名称将取决于您的具体MCU），并更新:cpp:func:`SysTick_Handler`函数：
+- 在 :cpp:func:`SysTick_Handler` 函数中添加对 :cpp:func:`lv_tick_inc` 的调用。打开 *stm32xxxx_it.c* 文件（名称将取决于您的具体MCU），并更新 :cpp:func:`SysTick_Handler` 函数：
 
 .. code:: c
 
@@ -391,7 +391,7 @@ variables:
    static lv_color_t buf_1[BUFF_SIZE]; //TODO：根据您的系统声明适当的BUFF_SIZE。
    static lv_color_t buf_2[BUFF_SIZE];
 
-- 在您的 ``main``函数中，在初始化外设（SPI，GPIO，LCD）之后，使用:cpp:func:`lv_init` 初始化LVGL，使用:cpp:func:`lv_display_create` 创建新的显示驱动程序，使用:cpp:func:`lv_display_set_buffers`注册帧缓冲区。
+- 在您的 ``main`` 函数中，在初始化外设（SPI，GPIO，LCD）之后，使用 :cpp:func:`lv_init` 初始化LVGL，使用 :cpp:func:`lv_display_create` 创建新的显示驱动程序，使用 :cpp:func:`lv_display_set_buffers` 注册帧缓冲区。
 
 .. code:: c
 
@@ -415,7 +415,7 @@ variables:
    lv_obj_set_size(spinner, 64, 64);
    lv_obj_align(spinner, LV_ALIGN_BOTTOM_MID, 0, 0);
 
-- 创建两个线程来调用:cpp:func:`lv_timer_handler` 和:cpp:func:`lv_tick_inc`。对于CMSISv1，您将需要两个 ``osThreadId``句柄。在这种情况下，它们不一定要在全局范围内访问，但是STM32Cube代码生成默认情况下是如此。如果您正在使用CMSIS和STM32Cube代码生成，它应该类似于以下示例：
+- 创建两个线程来调用 :cpp:func:`lv_timer_handler` 和 :cpp:func:`lv_tick_inc`。对于CMSISv1，您将需要两个 ``osThreadId`` 句柄。在这种情况下，它们不一定要在全局范围内访问，但是STM32Cube代码生成默认情况下是如此。如果您正在使用CMSIS和STM32Cube代码生成，它应该类似于以下示例：
 
 .. code:: c
 
@@ -454,7 +454,7 @@ variables:
      }
    }
 
-- 最后，创建 ``my_flush_cb``函数来将帧缓冲区输出到LCD。此函数的具体细节将取决于您使用的MCU功能。以下是一个典型MCU接口的示例。
+- 最后，创建 ``my_flush_cb`` 函数来将帧缓冲区输出到LCD。此函数的具体细节将取决于您使用的MCU功能。以下是一个典型MCU接口的示例。
 
 .. code:: c
 

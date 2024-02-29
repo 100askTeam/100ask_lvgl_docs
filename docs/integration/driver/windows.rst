@@ -29,7 +29,7 @@ Here are the **differences** for simulator mode and application mode.
    <br>
 
 
-**模拟器模式**和 **应用程序模式**的区别如下：
+**模拟器模式** 和 **应用程序模式** 的区别如下：
 
 - 模拟器模式下支持模拟LVGL的显示和键盘/鼠标输入，用于在Windows模拟窗口中测试/调试LVGL应用程序。
 - 应用程序模式下支持在LVGL下开发标准的Windows桌面应用程序。

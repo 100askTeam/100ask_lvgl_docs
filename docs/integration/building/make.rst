@@ -16,4 +16,4 @@ LVGL can be easily integrated into any Makefile project by adding ``include lvgl
    </details>
    <br>
 
-LVGL可以通过将 ``include lvgl/lvgl.mk``添加到主 ``Makefile``中，轻松集成到任何Makefile项目中。
+LVGL可以通过将 ``include lvgl/lvgl.mk`` 添加到主 ``Makefile`` 中，轻松集成到任何Makefile项目中。

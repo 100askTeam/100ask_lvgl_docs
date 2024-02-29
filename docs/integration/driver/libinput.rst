@@ -59,7 +59,7 @@ installed (usually ``libxkbcommon-dev``).
    <br>
 
 
-你已经安装了libinput的开发版本（通常是"libinput-dev"）。如果你的输入设备需要quirks，请确保它们也被安装了（通常位于"/usr/share/libinput/*.quirks"）。为了测试你的设备是否正确设置为与libinput一起使用，你可以运行"libinput list-devices"。
+你已经安装了libinput的开发版本（通常是 ``libinput-dev``）。如果你的输入设备需要quirks，请确保它们也被安装了（通常位于 ``/usr/share/libinput/*.quirks``）。为了测试你的设备是否正确设置为与libinput一起使用，你可以运行 ``libinput list-devices``。
 
 .. code:: console
 
@@ -77,7 +77,7 @@ installed (usually ``libxkbcommon-dev``).
 
 如果你的设备没有显示出来，你可能需要配置udev和适当的udev规则来连接它。
 
-另外，如果你想要完整的键盘支持，包括字母和修饰键，你将需要安装libxkbcommon的开发版本（通常是"libxkbcommon-dev"）。
+另外，如果你想要完整的键盘支持，包括字母和修饰键，你将需要安装libxkbcommon的开发版本（通常是 ``libxkbcommon-dev``）。
 
 
 Configuring the driver（配置驱动程序）
@@ -112,15 +112,17 @@ To find the right key map values, you may use the ``setxkbmap -query`` command.
 在lv_conf.h中启用libinput驱动程序支持，可以通过cmake编译器定义或KConfig进行。
 
 .. code:: c
+
     #define LV_USE_LIBINPUT    1
 
 需要单独启用完整键盘支持。
 
 .. code:: c
+
     #define LV_LIBINPUT_XKB            1
     #define LV_LIBINPUT_XKB_KEY_MAP    { .rules = NULL, .model = "pc101", .layout = "us", .variant = NULL, .options = NULL }
-
-要找到正确的按键映射值，您可以使用 ``setxkbmap -query``命令。
+    
+要找到正确的按键映射值，您可以使用 ``setxkbmap -query`` 命令。
 
 
 Usage（用法）
@@ -167,21 +169,21 @@ If you want to connect a keyboard device to a textarea, create a dedicated input
    <br>
 
 
-通过libinput驱动程序设置输入设备，您只需要使用对应的设备类型（“LV_INDEV_TYPE_POINTER”或“LV_INDEV_TYPE_KEYPAD”）和设备节点路径（例如“/dev/input/event5”）调用“lv_libinput_create”函数。
+通过libinput驱动程序设置输入设备，您只需要使用对应的设备类型（ ``LV_INDEV_TYPE_POINTER`` 或 ``LV_INDEV_TYPE_KEYPAD``）和设备节点路径（例如 ``/dev/input/event5``）调用 ``lv_libinput_create`` 函数。
 
 .. code:: c
 
     lv_indev_t *indev = lv_libinput_create(LV_INDEV_TYPE_POINTER, "/dev/input/event5");
 
-请注意，libinput驱动程序将触摸屏设备视为（绝对）指针设备，需要使用“LV_INDEV_TYPE_POINTER”。
+请注意，libinput驱动程序将触摸屏设备视为（绝对）指针设备，需要使用 ``LV_INDEV_TYPE_POINTER``。
 
-根据您的系统，设备节点路径可能在重新启动后不稳定。如果是这种情况，您可以使用“lv_libinput_find_dev”来查找具有特定功能的第一个设备。
+根据您的系统，设备节点路径可能在重新启动后不稳定。如果是这种情况，您可以使用 ``lv_libinput_find_dev``来查找具有特定功能的第一个设备。
 
 .. code:: c
 
     char *path = lv_libinput_find_dev(LV_LIBINPUT_CAPABILITY_TOUCH, true);
 
-第二个参数控制是否重新扫描所有设备。如果您连接了许多设备，这可能会变得相当缓慢。因此，在连续多次调用此方法时，只在第一次调用时指定“true”。如果要查找所有具有特定功能的设备，请使用“lv_libinput_find_devs”。
+第二个参数控制是否重新扫描所有设备。如果您连接了许多设备，这可能会变得相当缓慢。因此，在连续多次调用此方法时，只在第一次调用时指定 ``true`` 。如果要查找所有具有特定功能的设备，请使用 ``lv_libinput_find_devs``。
 
 如果要将键盘设备连接到文本区域，请创建一个专用的输入组，并将其设置在indev和textarea上。
 

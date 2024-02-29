@@ -26,10 +26,10 @@ a command or pixel data to the controller via SPI or parallel bus. Typically the
    <br>
 
 
-ILI9341是一款262,144色单芯片SOC驱动器，用于分辨率为240RGBx320点的a-TFT液晶显示器，包括720通道源驱动器、320通道栅极驱动器、240RGBx320点的图形显示数据的172,800字节GRAM和电源电路。
+`ILI9341 <https://www.buydisplay.com/download/ic/ILI9341.pdf>`__ 是一款262,144色单芯片SOC驱动器，用于分辨率为240RGBx320点的a-TFT液晶显示器，包括720通道源驱动器、320通道栅极驱动器、240RGBx320点的图形显示数据的172,800字节GRAM和电源电路。
 ILI9341支持并行的8-/9-/16-/18-bit数据总线MCU接口，6-/16-/18-bit数据总线RGB接口和3-/4线串行外设接口（SPI）。
 
-ILI9341 LCD控制器驱动是一款平台无关的驱动器，基于通用MIPI驱动器。它实现了显示初始化，支持显示旋转并实现了显示刷新回调。用户只需实现两个特定于平台的功能，通过SPI或并行总线向控制器发送命令或像素数据。通常情况下，这些是通过调用给定平台上的适当SDK库函数来实现的。
+ILI9341 LCD控制器 `driver <https://github.com/lvgl/lvgl/src/drivers/display/ili9341>`__ is a platform-agnostic driver, based on the `generic MIPI driver <https://github.com/lvgl/lvgl/doc/integration/drivers/display/gen_mipi.rst>`__ 是一款平台无关的驱动器，基于通用MIPI驱动器。它实现了显示初始化，支持显示旋转并实现了显示刷新回调。用户只需实现两个特定于平台的功能，通过SPI或并行总线向控制器发送命令或像素数据。通常情况下，这些是通过调用给定平台上的适当SDK库函数来实现的。
 
 
 Prerequisites（先决条件）
@@ -77,7 +77,7 @@ Enable the ILI9341 driver support in lv_conf.h, by cmake compiler define or by K
 
 	#define LV_USE_ILI9341  1
 
-   、
+
 Usage（用法）
 -------------
 
@@ -130,13 +130,14 @@ For additional details and a working example see the `generic MIPI driver docume
 您需要实现两个与平台相关的函数：
 
 .. code:: c
-	/* 向LCD发送短命令。此功能应等待事务结束。 */
+
+	/* Send short command to the LCD. This function shall wait until the transaction finishes. */
 	int32_t my_lcd_send_cmd(lv_display_t *disp, const uint8_t *cmd, size_t cmd_size, const uint8_t *param, size_t param_size)
 	{
 		...
 	}
 
-	/* 向LCD发送大量像素数据。必要时，此功能必须进行字节交换。此功能可以在后台进行传输。 */
+	/* Send large array of pixel data to the LCD. If necessary, this function has to do the byte-swapping. This function can do the transfer in the background. */
 	int32_t my_lcd_send_color(lv_display_t *disp, const uint8_t *cmd, size_t cmd_size, uint8_t *param, size_t param_size)
 	{
 		...
@@ -145,15 +146,16 @@ For additional details and a working example see the `generic MIPI driver docume
 要创建基于ILI9341驱动的显示器，请使用以下函数：
 
 .. code:: c
+
 	/**
-	* 使用ILI9341驱动程序创建LCD显示器
-	* @param hor_res       水平分辨率
-	* @param ver_res       垂直分辨率
-	* @param flags         默认配置设置（镜像，RGB顺序等）
-	* @param send_cmd      向LCD控制器发送命令的与平台相关的函数（通常使用轮询传输）
-	* @param send_color    向LCD控制器发送像素数据的与平台相关函数（通常使用DMA传输：必须实现就绪回调）
-	* @return              指向创建的显示器的指针
-	*/
+	 * Create an LCD display with ILI9341 driver
+	 * @param hor_res       horizontal resolution
+	 * @param ver_res       vertical resolution
+	 * @param flags         default configuration settings (mirror, RGB ordering, etc.)
+	 * @param send_cmd      platform-dependent function to send a command to the LCD controller (usually uses polling transfer)
+	 * @param send_color    platform-dependent function to send pixel data to the LCD controller (usually uses DMA transfer: must implement a 'ready' callback)
+	 * @return              pointer to the created display
+	 */
 	lv_display_t * lv_ili9341_create(uint32_t hor_res, uint32_t ver_res, lv_lcd_flag_t flags,
 									lv_ili9341_send_cmd_cb_t send_cmd_cb, lv_ili9341_send_color_cb_t send_color_cb);
 

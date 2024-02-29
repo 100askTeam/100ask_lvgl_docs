@@ -29,7 +29,7 @@ Using the simulator on a PC has the following advantages:
    <br>
 
 
-**您可以使用仅您的个人电脑**（即没有任何开发板）来尝试 LVGL。
+**您可以使用仅您的个人电脑** （即没有任何开发板）来尝试 LVGL。
 LVGL 将在个人电脑的模拟器环境中运行，任何人都可以编写和试验真正的 LVGL 应用程序。
 
 使用个人电脑上的模拟器具有以下优点：
@@ -208,7 +208,7 @@ On **Linux** X11 is even easier to install by terminal:
 
 在 **Linux** 上，通过终端安装 X11 更为简单：
 
-1. 安装 XLib： ``sudo apt-get install libx11-6``（应该已经安装）
+1. 安装 XLib： ``sudo apt-get install libx11-6`` （应该已经安装）
 2. 安装 XLib 开发包： ``sudo apt-get install libx11-dev``
 
 
@@ -245,10 +245,10 @@ MinGW（ `64 位版本 <https://www.mingw-w64.org/downloads/#msys2>`__）。
 安装 MinGW 后，请按照以下步骤添加 SDL2：
 
 1. 下载 SDL 的开发库。前往 https://www.libsdl.org/download-2.0.php 并下载 *Development Libraries: SDL2-devel-2.0.5-mingw.tar.gz*
-2. 解压文件，然后进入 x86_64-w64-mingw32 目录（对于 64 位 MinGW）或 i686-w64-mingw32（对于 32 位 MinGW）
-3. 将 *mingw32/include/SDL2 文件夹复制到 C:/MinGW/…/x86_64-w64-mingw32/include*
-4. 将 *mingw32/lib/ 的内容复制到 C:/MinGW/…/x86_64-w64-mingw32/lib*
-5. 将 *mingw32/bin/SDL2.dll 复制到 {eclipse_workspace}/pc_simulator/Debug/_*。这步可以在安装 Eclipse 之后进行。
+2. 解压文件，然后进入 *x86_64-w64-mingw32* 目录（对于 64 位 MinGW）或 *i686-w64-mingw32*（对于 32 位 MinGW）
+3. 将 *mingw32/include/SDL2* 文件夹复制到 *C:/MinGW/…/x86_64-w64-mingw32/include*
+4. 将 *mingw32/lib/* 的内容复制到 *C:/MinGW/…/x86_64-w64-mingw32/lib*
+5. 将 *mingw32/bin/SDL2.dll* 复制到 *{eclipse_workspace}/pc_simulator/Debug/_*。这步可以在安装 Eclipse 之后进行。
 
 :注意: 如果你正在使用 **Microsoft Visual Studio** 而不是 Eclipse，那么你不必安装 MinGW。
 
@@ -274,8 +274,7 @@ get started with SDL.
 
 在 OSX 上，你可以通过 brew 轻松安装 SDL2： ``brew install sdl2``
 
-如果某些功能不起作用，请参考 这个教程 `<http://lazyfoo.net/tutorials/SDL/01_hello_SDL/index.php>`__
-以开始使用 SDL。
+如果某些功能不起作用，请参考 `这个教程 <http://lazyfoo.net/tutorials/SDL/01_hello_SDL/index.php>`__ 以开始使用 SDL。
 
 
 Pre-configured project（预配置的项目）

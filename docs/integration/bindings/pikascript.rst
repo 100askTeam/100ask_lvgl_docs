@@ -39,7 +39,7 @@ your arguments .
    <br>
 
 
-``PikaScript <https://github.com/pikasTech/pikascript>`__
+`PikaScript <https://github.com/pikasTech/pikascript>`__
 
 是一个专为微控制器设计的 Python 解释器，它支持常见 Python3 语法的子集。
 
@@ -291,7 +291,7 @@ PikaScript具有独特的C模块智能绑定工具。
        lv_arc_set_angles(lv_obj, start, end);
    }
 
-要使用该模块，只需 ``import pika_lvgl``，预编译器将自动扫描main.py并绑定 ``pika_lvgl``模块。
+要使用该模块，只需 ``import pika_lvgl``，预编译器将自动扫描main.py并绑定 ``pika_lvgl`` 模块。
 
 ::
 

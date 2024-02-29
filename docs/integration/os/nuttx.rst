@@ -95,7 +95,7 @@ in C.
 
 尽管NuttX有自己的图形库名为 `NX <https://cwiki.apache.org/confluence/pages/viewpage.action?pageId=139629474>`__，
 但LVGL是一个很好的替代选择，因为用户可以找到更多具有吸引力的演示，并且可以重用以前项目的代码。
-LVGL是一个基于 `面向对象组件`的 `<https://blog.lvgl.io/2018-12-13/extend-lvgl-objects>`__高级GUI库，
+LVGL是一个基于 `面向对象组件的 <https://blog.lvgl.io/2018-12-13/extend-lvgl-objects>`__ 高级GUI库，
 非常适合像NuttX这样具有高级功能的RTOS。LVGL是用C语言编写的，其API也是用C语言编写的。
 
 
@@ -179,8 +179,8 @@ as an example because it is a very popular board.
    <br>
 
 
-`NuttX主线 <https://github.com/apache/incubator-nuttx>`__中有很多支持LVGL的板卡。
-让我们以 `STM32F429IDISCOVERY <https://www.st.com/en/evaluation-tools/32f429idiscovery.html>`__为例，
+`NuttX主线 <https://github.com/apache/incubator-nuttx>`__ 中有很多支持LVGL的板卡。
+让我们以 `STM32F429IDISCOVERY <https://www.st.com/en/evaluation-tools/32f429idiscovery.html>`__ 为例，
 因为它是一个非常受欢迎的板卡。
 
 
@@ -245,7 +245,7 @@ flash on your board:
    </details>
    <br>
 
-如果一切正常，您现在应该拥有名为 ``nuttx.bin``的文件，可以将其刷写到您的板卡上：
+如果一切正常，您现在应该拥有名为 ``nuttx.bin`` 的文件，可以将其刷写到您的板卡上：
 
 
 .. code:: shell

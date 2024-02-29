@@ -157,9 +157,9 @@ lvgljs
    <br>
 
 
-- `在SDL模拟器上构建Ubuntu的说明，请参考此链接：<https://github.com/lvgl/lv_binding_js/blob/master/doc/build/build-ubuntu-arm.md>`__
-- `在SDL模拟器上构建macOS x86的说明，请参考此链接：<https://github.com/lvgl/lv_binding_js/blob/master/doc/build/build-macos-x86-simulator.md>`__
-- `在ARM平台上构建Ubuntu的说明，请参考此链接：<https://github.com/lvgl/lv_binding_js/blob/master/doc/build/build-ubuntu-x86-simulator.md>`__
+- `在SDL模拟器上构建Ubuntu的说明，请参考此链接: <https://github.com/lvgl/lv_binding_js/blob/master/doc/build/build-ubuntu-arm.md>`__
+- `在SDL模拟器上构建macOS x86的说明，请参考此链接: <https://github.com/lvgl/lv_binding_js/blob/master/doc/build/build-macos-x86-simulator.md>`__
+- `在ARM平台上构建Ubuntu的说明，请参考此链接: <https://github.com/lvgl/lv_binding_js/blob/master/doc/build/build-ubuntu-x86-simulator.md>`__
 
 
 JS Bundle（JS捆绑）
@@ -180,7 +180,7 @@ JS Bundle（JS捆绑）
 
 
 -  `JS捆绑构建
-   注意<https://github.com/lvgl/lv_binding_js/blob/master/doc/build/js-bundle.md>`__
+   注意 <https://github.com/lvgl/lv_binding_js/blob/master/doc/build/js-bundle.md>`__
 
 
 Components（部件）

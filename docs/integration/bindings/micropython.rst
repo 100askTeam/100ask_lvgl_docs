@@ -71,7 +71,7 @@ Highlights of Micropython（MicroPython的亮点）
   - `CircuitPython <https://github.com/adafruit/circuitpython>`__
   - `MicroPython_ESP32_psRAM_LoBo <https://github.com/loboris/MicroPython_ESP32_psRAM_LoBo>`__
 
-- **嵌入式定向**: 自带专为嵌入式系统设计的模块，比如用于访问底层硬件的 `machine module <https://docs.micropython.org/en/latest/library/machine.html#classes>`__（I/O引脚、ADC、UART、SPI、I2C、RTC、定时器等）。
+- **嵌入式定向**: 自带专为嵌入式系统设计的模块，比如用于访问底层硬件的 `machine module <https://docs.micropython.org/en/latest/library/machine.html#classes>`__ （I/O引脚、ADC、UART、SPI、I2C、RTC、定时器等）。
 
 
 Why Micropython + LVGL?（为什么选择Micropython + LVGL？）
@@ -93,7 +93,7 @@ LVGL is implemented in C and its APIs are in C.
    <br>
 
 
-Micropython没有一个好的本地高级GUI库。 LVGL是一个面向对象的组件化高级GUI库，似乎是将其映射到高级语言（如Python）的一个自然选择。
+Micropython `没有一个好的本地高级GUI库 <https://forum.micropython.org/viewtopic.php?f=18&t=5543>`__。 LVGL是一个 `面向对象的组件化 <https://blog.lvgl.io/2018-12-13/extend-lvgl-objects>`__ 高级GUI库，似乎是将其映射到高级语言（如Python）的一个自然选择。
 LVGL是用C实现的，其API也是用C编写的。
 
 
@@ -151,7 +151,7 @@ Micropython + LVGL could be used for:（Micropython + LVGL可以用于：）
 - 快速原型GUI。
 - 缩短GUI更改和微调周期。
 - 通过定义可重用的组合对象，以更抽象的方式建模GUI，充分利用Python的语言特性，如继承，闭包，列表推导，生成器，异常处理，任意精度整数等。
-- 使LVGL能够覆盖更广泛的受众群体。不需要了解C语言即可在嵌入式系统上创建漂亮的GUI。这与 `CircuitPython vision <https://learn.adafruit.com/welcome-to-circuitpython/what-is-circuitpython>`__非常契合。
+- 使LVGL能够覆盖更广泛的受众群体。不需要了解C语言即可在嵌入式系统上创建漂亮的GUI。这与 `CircuitPython vision <https://learn.adafruit.com/welcome-to-circuitpython/what-is-circuitpython>`__ 非常契合。
   CircuitPython的设计考虑了教育因素，使新用户或无经验用户更容易入门嵌入式开发。
 - 创建与LVGL在较高层次上交互的工具（例如拖放式设计师）。
 
@@ -184,11 +184,6 @@ Let's dive right into an example!
 A simple example（一个简单的例子）
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. raw:: html
-
-   <details>
-     <summary>显示原文</summary>
-
 .. code:: python
 
    # Initialize
@@ -202,26 +197,6 @@ A simple example（一个简单的例子）
    label = lv.label(btn)
    label.set_text('Hello World!')
    lv.screen_load(scr)
-
-.. raw:: html
-
-   </details>
-   <br>
-
-
-.. code:: python
-  # 初始化
-  import display_driver
-  import lvgl as lv
-
-  # 创建一个带标签的按钮
-  scr = lv.obj()
-  btn = lv.button(scr)
-  btn.align(lv.ALIGN.CENTER, 0, 0)
-  label = lv.label(btn)
-  label.set_text('Hello World!')
-  lv.screen_load(scr)
-
 
 How can I use it?（如何使用它？）
 --------------------------------
@@ -251,9 +226,9 @@ Many `LVGL examples <https://docs.lvgl.io/master/examples.html>`__ are available
 
 如果你想在不下载任何东西的情况下尝试LVGL + Micropython，你可以使用我们的在线模拟器！它是一个完全功能的LVGL + Micropython，在浏览器中运行，可以让你编辑Python脚本并运行。
 
-`点击这里在在线模拟器上进行实验<https://sim.lvgl.io/>`__
+`点击这里在在线模拟器上进行实验 <https://sim.lvgl.io/>`__
 
-许多 `LVGL示例<https://docs.lvgl.io/master/examples.html>`__也适用于Micropython。只需点击链接！
+许多 `LVGL示例 <https://docs.lvgl.io/master/examples.html>`__ 也适用于Micropython。只需点击链接！
 
 
 PC Simulator（PC 模拟器）
@@ -514,9 +489,9 @@ Solve The Problem（解决问题）
    <br>
 
 
-- 用 `(LV_GLOBAL_DEFAULT()->_var)`替换全局/静态局部变量
-- 在使用 `LV_GLOBAL_DEFAULT`的文件中包含 `lv_global.h`
-- 在 `lv_global.h`中的 `lv_global_t`中添加 `_var`
+- 用 `(LV_GLOBAL_DEFAULT()->_var)` 替换全局/静态局部变量
+- 在使用 `LV_GLOBAL_DEFAULT` 的文件中包含 `lv_global.h`
+- 在 `lv_global.h` 中的 `lv_global_t` 中添加  `_var`
 
 
 Example（例子）
@@ -540,7 +515,7 @@ More Information（更多信息）
    <br>
 
 
-- `在 README 中 <https://github.com/lvgl/lv_binding_micropython#memory-management> `__
+- `在README中 <https://github.com/lvgl/lv_binding_micropython#memory-management> `__
 - `在博客中 <https://blog.lvgl.io/2019-02-20/micropython-bindings#i-need-to-allocate-a-littlevgl-struct-such-as-style-color-etc-how-can-i-do-that-how-do-i-allocatedeallocate-memory-for-it>`__
 
 
@@ -603,32 +578,32 @@ In practice it's also possible to mix these options, for example provide a struc
 
 因此，我们为LVGL C API定义了一个 **回调规范**，该规范要求按照某种方式定义lvgl标头文件。根据该规范声明的回调函数将允许绑定在注册回调时在函数指针旁边注册一个Micropython对象，并在调用回调时访问该对象。
 
-- 基本思想是我们有一个名为 ``void * user_data``的字段，Micropython绑定会自动使用它来保存回调的 *Micropython可调用对象*。在注册函数指针时必须提供此字段，并将其提供给回调函数本身。
-- 尽管称为 ``user_data`` ，但并不希望用户读/写该字段。相反，Micropython的粘合代码使用 ``user_data``自动跟踪Micropython可调用对象。在注册回调时，粘合代码会更新它，并在调用回调时使用它，以调用原始可调用对象。
+- 基本思想是我们有一个名为 ``void * user_data`` 的字段，Micropython绑定会自动使用它来保存回调的 *Micropython可调用对象*。在注册函数指针时必须提供此字段，并将其提供给回调函数本身。
+- 尽管称为 ``user_data`` ，但并不希望用户读/写该字段。相反，Micropython的粘合代码使用 ``user_data`` 自动跟踪Micropython可调用对象。在注册回调时，粘合代码会更新它，并在调用回调时使用它，以调用原始可调用对象。
 
 在LVGL C API中定义回调的几个选项：
 
-- 选项1：将 ``user_data``放入结构体中
+- 选项1：将 ``user_data`` 放入结构体中
 
-  - 有一个包含名为 ``void * user_data``的字段的结构体
+  - 有一个包含名为 ``void * user_data`` 的字段的结构体
 
-    - 将该结构体的指针作为回调注册函数的 **第一个**参数提供
-    - 将该结构体的指针作为回调本身的 **第一个**参数提供
+    - 将该结构体的指针作为回调注册函数的 **第一个** 参数提供
+    - 将该结构体的指针作为回调本身的 **第一个** 参数提供
 
-- 选项2：将 ``user_data``作为函数参数
+- 选项2：将 ``user_data`` 作为函数参数
 
-  - 在注册函数的 **最后**一个参数中提供一个称为 ``void * user_data``的参数
+  - 在注册函数的 **最后** 一个参数中提供一个称为 ``void * user_data`` 的参数
 
-    - 回调本身将接收 ``void *``作为 **最后**一个参数
+    - 回调本身将接收 ``void *`` 作为 **最后** 一个参数
 
-- 选项3：回调和 ``user_data``都是结构字段
+- 选项3：回调和 ``user_data`` 都是结构字段
 
-  - API公开了一个具有函数指针成员和 ``user_data``成员的结构
+  - API公开了一个具有函数指针成员和 ``user_data`` 成员的结构
 
-    - 函数指针成员接收相同的结构作为其 **第一个**参数
+    - 函数指针成员接收相同的结构作为其 **第一个** 参数
 
-实际上，可以混合使用这些选项，例如在注册回调时提供一个结构体指针（选项1），并在调用回调时提供 ``user_data``参数（选项2），
-**只要在调用回调时传递了注册时使用的相同``user_data``即可**。
+实际上，可以混合使用这些选项，例如在注册回调时提供一个结构体指针（选项1），并在调用回调时提供 ``user_data`` 参数（选项2），
+**只要在调用回调时传递了注册时使用的相同 ``user_data`` 即可**。
 
 
 Examples（例子）

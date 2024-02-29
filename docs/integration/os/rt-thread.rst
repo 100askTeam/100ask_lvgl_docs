@@ -29,10 +29,10 @@ effects, and so on.
    <br>
 
 
-`RT-Thread <https://www.rt-thread.io/>`__是一个开源 `<https://github.com/RT-Thread/rt-thread>`__、中立、基于社区的实时操作系统（RTOS）。
-RT-Thread有 **标准版**和 **Nano版**。
+`RT-Thread <https://www.rt-thread.io/>`__ 是一个开源 `<https://github.com/RT-Thread/rt-thread>`__ 中立、基于社区的实时操作系统（RTOS）。
+RT-Thread有 **标准版** 和 **Nano版**。
 对于资源受限的微控制器（MCU）系统，Nano版只需要3 KB的Flash和1.2 KB的RAM内存资源，并可使用易于使用的工具进行定制。
-对于资源丰富的IoT设备，RT-Thread可以使用 **在线软件包管理工具**和 **系统配置工具**，实现直观的快速模块化切割，无缝导入丰富的软件包；
+对于资源丰富的IoT设备，RT-Thread可以使用 **在线软件包管理工具** 和 **系统配置工具**，实现直观的快速模块化切割，无缝导入丰富的软件包；
 从而实现像Android的图形界面和触摸滑动效果、智能语音交互效果等复杂功能。
 
 
@@ -100,7 +100,7 @@ RT-Thread project.
 `中文文档 <https://www.rt-thread.org/document/site/#/rt-thread-version/rt-thread-standard/packages-manual/lvgl-docs/introduction>`__
 
 LVGL已在RT-Thread中注册为
-`软件包 <https://packages.rt-thread.org/en/detail.html?package=LVGL>`。通过使用
+`软件包 <https://packages.rt-thread.org/en/detail.html?package=LVGL>`__ 通过使用
 `Env工具 <https://www.rt-thread.io/download.html?download=Env>`__ 或
 `RT-Thread Studio IDE <https://www.rt-thread.io/download.html?download=Studio>`__，
 RT-Thread用户可以轻松下载LVGL源代码并将其与RT-Thread项目结合。

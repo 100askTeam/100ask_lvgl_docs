@@ -26,8 +26,8 @@ growing open source ecosystem.
    <br>
 
 
-Zephyr `<https://zephyrproject.org/>`__是一个 `开源
- <https://github.com/zephyrproject-rtos/zephyr>`__的实时操作系统（RTOS），它易于部署、安全、可连接和管理。
+`Zephyr <https://zephyrproject.org/>`__ 是一个 `开源
+ <https://github.com/zephyrproject-rtos/zephyr>`__ 的实时操作系统（RTOS），它易于部署、安全、可连接和管理。
  它拥有一套不断增长的软件库，可用于各种应用和行业领域，如工业物联网、可穿戴设备、机器学习等。
  Zephyr的构建重点在于广泛的芯片组支持、安全性、可靠性、长期支持发布和不断增长的开源生态系统。
 
@@ -115,7 +115,7 @@ board, which allows for running the application on your posix compliant host sys
    <br>
 
 
-选择板卡后，您可以为其构建LVGL演示之一。在此，我们使用的是 :code:`native_posix`板卡，
+选择板卡后，您可以为其构建LVGL演示之一。在此，我们使用的是 :code:`native_posix` 板卡，
 它允许在符合POSIX标准的主机系统上运行应用程序：
 
 
@@ -192,8 +192,7 @@ Shell
    <details>
      <summary>显示原文</summary>
 
-Zephyr includes a powerful shell implementation that can be enabled with the Kconfig symbols
-:code:`CONFIG_SHELL` and :code:`CONFIG_LV_Z_SHELL` (the demos from above have it enabled by default).
+Zephyr includes a powerful shell implementation that can be enabled with the Kconfig symbols:code:`CONFIG_SHELL` and :code:`CONFIG_LV_Z_SHELL` (the demos from above have it enabled by default).
 
 The shell offers enabling/disabling of LVGL monkeys:
 
@@ -203,8 +202,7 @@ The shell offers enabling/disabling of LVGL monkeys:
    <br>
 
 
-Zephyr包含了一个强大的shell实现，可以通过Kconfig符号
-:code:`CONFIG_SHELL`和 :code:`CONFIG_LV_Z_SHELL`（上面的演示默认启用了它们）来启用。  
+Zephyr包含了一个强大的shell实现，可以通过Kconfig符号 :code:`CONFIG_SHELL` 和 :code:`CONFIG_LV_Z_SHELL` （上面的演示默认启用了它们）来启用。  
   
 shell提供了启用/禁用LVGL猴子的功能：
 
@@ -251,7 +249,7 @@ For more details refer to the `shell documentation <https://docs.zephyrproject.o
    <br>
 
 
-更多详细信息，请参阅`shell文档 <https://docs.zephyrproject.org/latest/services/shell/index.html>`__。
+更多详细信息， `请参阅shell文档 <https://docs.zephyrproject.org/latest/services/shell/index.html>`__ 。
 
 
 Devicetree（设备树）
@@ -290,9 +288,9 @@ Zephyr使用devicetree描述语言来创建和管理LVGL输入设备。
 - `指针输入 <https://docs.zephyrproject.org/latest/build/dts/api/bindings/input/zephyr,lvgl-pointer-input.html>`__
 - `编码器输入 <https://docs.zephyrproject.org/latest/build/dts/api/bindings/input/zephyr,lvgl-encoder-input.html>`__
 
-这些设备本质上缓冲了由 :code:`input phandle`指向的设备生成的 :code:`input_event`，
+这些设备本质上缓冲了由 :code:`input phandle` 指向的设备生成的 :code:`input_event`，
 如果留空，则绑定会捕获所有事件，而不管其来源如何。
-您不必自己实例化或管理设备，它们在应用程序启动并在执行 :code:`main()`之前创建。
+您不必自己实例化或管理设备，它们在应用程序启动并在执行 :code:`main()` 之前创建。
 
 大多数板卡或带有显示屏或显示连接器的挡板都已经声明了指针输入设备：
 
@@ -318,7 +316,7 @@ Example with the encoder device to assign a :code:`lv_group_t`:
    <br>
 
 
-您可以通过访问底层的lvgl :code:`lv_indev_t`来进行配置。以下是一个示例，使用编码器设备分配一个 :code:`lv_group_t`：
+您可以通过访问底层的lvgl :code:`lv_indev_t` 来进行配置。以下是一个示例，使用编码器设备分配一个 :code:`lv_group_t`：
 
 
 .. code:: c
@@ -372,7 +370,7 @@ the footprint of your application.
 
 Overlays can be used to enable/disable features for specific boards or build
 targets. For more information refer to the
-`application development guide <https://docs.zephyrproject.org/latest/develop/application/index.html#application-configuration>`__.
+`application development guide <https://docs.zephyrproject.org/latest/develop/application/index.html#application-configuration>`__。
 
 .. raw:: html
 
@@ -381,7 +379,7 @@ targets. For more information refer to the
 
 
 可以通过Overlays启用或禁用特定板卡或构建目标的特性。
-更多信息请参阅`应用程序开发指南 `<https://docs.zephyrproject.org/latest/develop/application/index.html#application-configuration>`__。  
+更多信息请参阅 `应用程序开发指南 <https://docs.zephyrproject.org/latest/develop/application/index.html#application-configuration>`__。  
   
 
 Where can I find more information?（在哪里可以找到更多信息？ ）

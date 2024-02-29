@@ -37,9 +37,9 @@ set, and provides a common framework for chip-specific display controllers.
    <br>
 
 
-来自维基百科：
+来自 `维基百科 <https://en.wikipedia.org/wiki/MIPI_Alliance>`__：
 
-MIPI联盟是一个全球性的商业联盟，致力于开发移动生态系统的技术规范，特别是智能手机，但也包括移动相关行业。MIPI于2003年由Arm、Intel、Nokia、三星、STMicroelectronics和Texas Instruments共同创立。
+	`MIPI 联盟 <https://www.mipi.org/>`__ 是一个全球性的商业联盟，致力于开发移动生态系统的技术规范，特别是智能手机，但也包括移动相关行业。MIPI于2003年由Arm、Intel、Nokia、三星、STMicroelectronics和Texas Instruments共同创立。
 
 MIPI联盟发表了一系列与显示设备相关的规范，包括Display Bus Interface (DBI)、Display Serial Interface (DSI)和Display Command Set (DCS)等。通常提到兼容MIPI的显示器时，人们会想到带有DSI串行接口的设备。但是，DBI规范中还包括其他一些传统接口，如SPI和8080兼容的并行接口，这些接口通常用于将LCD显示器与微控制器进行接口连接。此外，DCS规范包含了一套标准的命令集，被许多传统TFT LCD控制器所支持，包括流行的Sitronix（ST7735、ST7789、ST7796）和Ilitek（ILI9341）SOC。
 
@@ -47,7 +47,7 @@ DCS命令集提供了一个通用接口，可以配置显示方向、颜色分�
 
 重要的是要理解，这个通用的MIPI LCD驱动程序不是用于带有DSI接口的显示器的硬件驱动程序。相反，它实现了MIPI DCS命令集，并为芯片特定的显示控制器提供了一个共同的框架。
 
-提示：
+.. 提示::
 尽管这是一个通用驱动程序，但它可以用于支持没有特定驱动程序的兼容芯片。
 
 
@@ -100,7 +100,7 @@ Enable the generic MIPI LCD driver support in lv_conf.h, by cmake compiler defin
 	#define LV_USE_GENERIC_MIPI  1
 
 .. note::
-	:c:macro:`LV_USE_GENERIC_MIPI`会在启用兼容驱动程序时自动启用。
+	:c:macro:`LV_USE_GENERIC_MIPI` 会在启用兼容驱动程序时自动启用。
 
 
 Usage（用法）
@@ -278,9 +278,10 @@ Example（例子）
 
 .. note::
 	您可以在STM32CubeIDE和ST HAL库中找到STM32F746的回调的实际实现。
-	这里 `<https://github.com/lvgl/lvgl/doc/integration/drivers/display/lcd_stm32_hal.rst>`__。
+	`这里 <https://github.com/lvgl/lvgl/doc/integration/drivers/display/lcd_stm32_hal.rst>`__。
 
 .. code:: c
+
 	#include "src/drivers/display/st7789/lv_st7789.h"
 
 	#define LCD_H_RES		240
@@ -289,20 +290,22 @@ Example（例子）
 
 	lv_display_t *my_disp;
 
-	/* 初始化LCD I/O总线，重置LCD */
+	...
+
+	/* Initialize LCD I/O bus, reset LCD */
 	static int32_t my_lcd_io_init(void)
 	{
 		...
 		return HAL_OK;
 	}
 
-	/* 发送命令到LCD控制器 */
+	/* Send command to the LCD controller */
 	static void my_lcd_send_cmd(lv_display_t *disp, const uint8_t *cmd, size_t cmd_size, const uint8_t *param, size_t param_size)
 	{
 		...
 	}
 
-	/* 发送像素数据到LCD控制器 */
+	/* Send pixel data to the LCD controller */
 	static void my_lcd_send_color(lv_display_t *disp, const uint8_t *cmd, size_t cmd_size, uint8_t *param, size_t param_size)
 	{
 		...
@@ -312,20 +315,20 @@ Example（例子）
 	{
 		...
 
-		/* 初始化LVGL */
+		/* Initialize LVGL */
 		lv_init();
 
-		/* 初始化LCD总线I/O */
+		/* Initialize LCD bus I/O */
 		if (my_lcd_io_init() != 0)
 			return;
 
-		/* 创建LVGL显示对象和LCD显示驱动程序 */
+		/* Create the LVGL display object and the LCD display driver */
 		my_disp = lv_lcd_generic_mipi_create(LCD_H_RES, LCD_V_RES, LV_LCD_FLAG_NONE, my_lcd_send_cmd, my_lcd_send_color);
 
-		/* 将显示方向设置为横向 */
+		/* Set display orientation to landscape */
 		lv_display_set_rotation(my_disp, LV_DISPLAY_ROTATION_90);
 
-		/* 配置绘制缓冲区等 */
+		/* Configure draw buffers, etc. */
 		lv_color_t * buf1 = NULL;
 		lv_color_t * buf2 = NULL;
 
@@ -333,10 +336,10 @@ Example（例子）
 
 		buf1 = lv_malloc(buf_size);
 		if(buf1 == NULL) {
-			LV_LOG_ERROR("显示绘制缓冲区分配失败");
+			LV_LOG_ERROR("display draw buffer malloc failed");
 			return;
 		}
-		/* 根据需要分配辅助缓冲区 */
+		/* Allocate secondary buffer if needed */
 		...
 
 		lv_display_set_buffers(my_disp, buf1, buf2, buf_size, LV_DISPLAY_RENDER_MODE_PARTIAL);
@@ -346,11 +349,10 @@ Example（例子）
 		while(true) {
 			...
 
-			/* 定期调用lv_timer处理程序 */
+			/* Periodically call the lv_timer handler */
 			lv_timer_handler();
 		}
 	}
-
 
 
 Advanced topics（高级主题）
@@ -382,7 +384,7 @@ You can pass multiple flags by ORing them together, e.g., :c:macro:`LV_LCD_FLAG_
    <br>
 
 
-`:cpp:func:`lv_lcd_generic_mipi_create()` 函数的第三个参数是一个标志数组。如果默认设置不适用，可以使用它来配置面板的方向和RGB顺序。特别是，通用MIPI驱动程序接受以下标志：
+:cpp:func:`lv_lcd_generic_mipi_create()` 函数的第三个参数是一个标志数组。如果默认设置不适用，可以使用它来配置面板的方向和RGB顺序。特别是，通用MIPI驱动程序接受以下标志：
 
 .. code:: c
 
@@ -436,7 +438,7 @@ See an actual example of sending a command list `here <https://github.com/lvgl/l
 尽管特定芯片的驱动程序尽力正确初始化LCD控制器，但不同的TFT面板可能需要不同的配置。
 特别是正确的伽马设置对于良好的色彩再现非常关键。不幸的是，找到一组良好的参数并不容易。通常面板制造商会提供一些示例代码和建议的寄存器设置。
 
-您可以使用 ``my_lcd_send_cmd()``函数将任意命令发送到LCD控制器。然而，为了更容易发送大量的参数，通用的MIPI驱动程序支持向控制器发送自定义命令列表。命令必须放入一个'uint8_t'数组中：
+您可以使用 ``my_lcd_send_cmd()`` 函数将任意命令发送到LCD控制器。然而，为了更容易发送大量的参数，通用的MIPI驱动程序支持向控制器发送自定义命令列表。命令必须放入一个'uint8_t'数组中：
 
 .. code:: c
 
@@ -451,7 +453,7 @@ See an actual example of sending a command list `here <https://github.com/lvgl/l
 
 	lv_lcd_generic_mipi_send_cmd_list(my_disp, init_cmd_list);
 
-您可以使用伪命令``LV_LCD_CMD_DELAY_MS``在命令之间添加延迟，后面必须是以10ms为单位给出的延迟值。要终止命令列表，您必须使用值为 ``LV_LCD_CMD_EOF``的延迟，如上所示。
+您可以使用伪命令 ``LV_LCD_CMD_DELAY_MS`` 在命令之间添加延迟，后面必须是以10ms为单位给出的延迟值。要终止命令列表，您必须使用值为 ``LV_LCD_CMD_EOF`` 的延迟，如上所示。
 
-在此处可以看到发送命令列表的实际示例 `here <https://github.com/lvgl/lvgl/src/drivers/display/st7789/lv_st7789.c>`__.
+在此处可以看到发送命令列表的实际示例 `这里 <https://github.com/lvgl/lvgl/src/drivers/display/st7789/lv_st7789.c>`__.
 

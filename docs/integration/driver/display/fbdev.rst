@@ -39,7 +39,7 @@ Your system has a framebuffer device configured (usually under ``/dev/fb0``).
    <br>
 
 
-您的系统已配置了一个帧缓冲设备（通常位于“/dev/fb0”下）。
+您的系统已配置了一个帧缓冲设备（通常位于 ``/dev/fb0`` 下）。
 
 
 Configuring the driver（配置驱动程序）
@@ -98,13 +98,13 @@ be enabled unless really needed.
    <br>
 
 
-搭建基于帧缓冲显示的方法如下：首先使用 ``lv_linux_fbdev_create``创建一个显示器。然后在显示器上设置帧缓冲设备节点（通常为 ``/dev/fb0``）。
+搭建基于帧缓冲显示的方法如下：首先使用 ``lv_linux_fbdev_create`` 创建一个显示器。然后在显示器上设置帧缓冲设备节点（通常为 ``/dev/fb0``）。
 
 .. code:: c
 
 	lv_display_t *disp = lv_linux_fbdev_create();
 	lv_linux_fbdev_set_file(disp, "/dev/fb0");
 
-如果你的屏幕保持黑屏或只绘制部分内容，可以尝试启用直接渲染模式（ ``LV_DISPLAY_RENDER_MODE_DIRECT``）。此外，你还可以使用 ``lv_linux_fbdev_set_force_refresh(true)``来激活强制刷新模式。然而，这通常会带来性能影响，除非确实需要，否则不应启用。
+如果你的屏幕保持黑屏或只绘制部分内容，可以尝试启用直接渲染模式（ ``LV_DISPLAY_RENDER_MODE_DIRECT``）。此外，你还可以使用 ``lv_linux_fbdev_set_force_refresh(true)`` 来激活强制刷新模式。然而，这通常会带来性能影响，除非确实需要，否则不应启用。
 
 

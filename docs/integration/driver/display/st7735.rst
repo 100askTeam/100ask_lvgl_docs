@@ -28,10 +28,10 @@ a command or pixel data to the controller via SPI or parallel bus. Typically the
    <br>
 
 
-ST7735S是一款用于262K色彩、图形类型TFT-LCD的单芯片控制器/驱动器。它包含396个源码线和162个网线驱动电路。该芯片可以直接连接到外部微处理器，并接受串行外围接口（SPI）、8位/9位/16位/18位并行接口。显示数据可以存储在132 x 162 x 18位的芯片内显示数据RAM中。
+`ST7735S <https://www.buydisplay.com/download/ic/ST7735S.pdf>`__ 是一款用于262K色彩、图形类型TFT-LCD的单芯片控制器/驱动器。它包含396个源码线和162个网线驱动电路。该芯片可以直接连接到外部微处理器，并接受串行外围接口（SPI）、8位/9位/16位/18位并行接口。显示数据可以存储在132 x 162 x 18位的芯片内显示数据RAM中。
 它可以在没有外部操作时钟的情况下执行显示数据RAM读写操作，以最小化功耗。此外，由于集成了驱动液晶所需的电源电路，可以使用更少的元件构建显示系统。
 
-ST7735 LCD控制器驱动是一个与平台无关的驱动程序，基于通用的MIPI驱动程序。它实现了显示初始化，支持显示旋转，并实现了显示刷新回调函数。用户只需要实现两个特定于平台的函数，通过SPI或并行总线向控制器发送命令或像素数据。通常，这些函数通过调用给定平台上适当的SDK库函数来实现。
+ST7735 LCD控制器 `driver <https://github.com/lvgl/lvgl/src/drivers/display/st7735>`__ is a platform-agnostic driver, based on the `generic MIPI driver <https://github.com/lvgl/lvgl/doc/integration/drivers/display/gen_mipi.rst>`__ 是一个与平台无关的驱动程序，基于通用的MIPI驱动程序。它实现了显示初始化，支持显示旋转，并实现了显示刷新回调函数。用户只需要实现两个特定于平台的函数，通过SPI或并行总线向控制器发送命令或像素数据。通常，这些函数通过调用给定平台上适当的SDK库函数来实现。
 
 
 Prerequisites（先决条件）
