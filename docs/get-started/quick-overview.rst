@@ -20,7 +20,7 @@ after that.
    <br>
 
 
-在这里您可以了解有关 LVGL 的最重要的事情。 您应该先阅读本文以获得大致印象，然后再阅读详细的:ref:`porting` 和 :ref:`overview` 部分。
+在这里您可以了解有关 LVGL 的最重要的事情。 您应该先阅读本文以获得大致印象，然后再阅读详细的 :ref:`porting` 和 :ref:`overview` 部分。
 
 
 Get started in a simulator（从模拟器开始）
@@ -47,7 +47,7 @@ experience with LVGL immediately.
 
 强烈建议您先在lvgl模拟器上开始学习实验，而不是立即将 LVGL 移植到嵌入式硬件。
 
-LVGL 已适配到许多 IDE，以确保您能找到自己喜欢的一种模拟器开发环境。转到 :ref:`模拟器` 部分以获取可以在您的 PC 上运行的即用型项目。通过这种方式，您可以暂时节省移植时间并立即获得一些使用 LVGL 的经验。(这是非常有用的！)
+LVGL 已适配到许多 IDE，以确保您能找到自己喜欢的一种模拟器开发环境。转到 :ref:`simulator` 部分以获取可以在您的 PC 上运行的即用型项目。通过这种方式，您可以暂时节省移植时间并立即获得一些使用 LVGL 的经验。(这是非常有用的！)
 
 
 Add LVGL into your project（将 LVGL 添加到您的项目中）
@@ -82,18 +82,12 @@ If you would rather try LVGL on your own project follow these steps:
 
 如果您更愿意在自己的项目中尝试 LVGL，请按照以下步骤操作：
 
-- 使用git命令 ``git clone https://github.com/lvgl/lvgl.git``从 GitHub 下载或克隆库。
-
+- 使用git命令 ``git clone https://github.com/lvgl/lvgl.git`` 从 GitHub `下载 <https://github.com/lvgl/lvgl/archive/master.zip>`__ 或克隆库。
 - 将 ``lvgl`` 文件夹复制到您的项目中。
-
 - 将 ``lvgl/lv_conf_template.h`` 作为 ``lv_conf.h`` 复制到 ``lvgl`` 文件夹旁边，将其第一个的 ``#if 0`` 更改为 ``1`` 以使能文件的内容并修改设置 :c:macro:`LV_COLOR_DEPTH` 宏。
-
 - 在需要使用 LVGL 相关函数的文件中包含 ``lvgl/lvgl.h``。
-
-- 在计时器或任务中每 ``x`` 毫秒调用一次 :cpp:expr:`lv_tick_inc(x)` (``x``  应该在 1 到 10 之间)。 LVGL 的内部时序需要它。或者，使用注册 ``tick_get_cb`` :cpp:func:`lv_tick_set_cb`以便LVGL可以直接检索当前时间。
-
-- 调用:cpp:func:`lv_init` (初始化lvgl库)
-
+- 在计时器或任务中每 ``x`` 毫秒调用一次 :cpp:expr:`lv_tick_inc(x)` (``x``  应该在 1 到 10 之间)。 LVGL 的内部时序需要它。或者，使用 :cpp:func:`lv_tick_set_cb` 注册 ``tick_get_cb`` ，以便LVGL可以直接检索当前时间。
+- 调用 :cpp:func:`lv_init` (初始化lvgl库)
 - 创建一个显示。
 
 
@@ -217,7 +211,7 @@ section.
 
 在主函数 ``while(1)`` 循环或操作系统任务中每隔几毫秒定期调用 :cpp:func:`lv_timer_handler` 。 如果需要，它将重绘屏幕，处理输入设备，动画等。
 
-有关更详细的指南，请转到 :ref:`移植`部分。
+有关更详细的指南，请转到 :ref:`porting` 部分。
 
 
 Learn the basics（学习基础知识）
@@ -288,7 +282,7 @@ related header file
    <br>
 
 
-按钮、标签、滑块、图表等图形元素称为对象或小部件。转到 :ref:`部件` 以查看可用小部件的完整列表。
+按钮、标签、滑块、图表等图形元素称为对象或小部件。转到 :ref:`widgets` 以查看可用小部件的完整列表。
 
 每个对象都有一个创建它的父对象。例如，如果在按钮上创建标签，则该按钮是标签的父级。
 
@@ -298,9 +292,9 @@ related header file
 
 Screen 是“根”父级。您可以拥有任意数量的屏幕。
 
-要获取当前屏幕调用 :cpp:func:`lv_screen_active`，并使用 :cpp:expr:`lv_screen_load(scr1)`加载屏幕。
-
-您可以使用 ``lv_<type>_create(parent)``创建一个新对象。它将返回一个 :cpp:type:`lv_obj_t` ``*`` 变量，该变量可用作对象的引用以设置其参数。
+要获取当前屏幕调用 :cpp:func:`lv_screen_active`，并使用 :cpp:expr:`lv_screen_load(scr1)` 加载屏幕。
+ 
+您可以使用 ``lv_<type>_create(parent)`` 创建一个新对象。它将返回一个 :cpp:type:`lv_obj_t` ``*`` 变量，该变量可用作对象的引用以设置其参数。
 
 For example（例如）:
 
@@ -390,7 +384,7 @@ To learn all features of the events go to the :ref:`events` section.
        printf("Clicked\n");
    }
 
-:cpp:enumerator:`LV_EVENT_CLICKED` 可以代替:cpp:enumerator:`LV_EVENT_ALL` 调用任何事件的回调。
+:cpp:enumerator:`LV_EVENT_CLICKED` 可以代替 :cpp:enumerator:`LV_EVENT_ALL` 调用任何事件的回调。
 
 从 :cpp:expr:`lv_event_t * e` 中，可以使用以下命令检索当前事件代码：
 
@@ -404,7 +398,7 @@ To learn all features of the events go to the :ref:`events` section.
 
    lv_obj_t * obj = lv_event_get_target(e);
 
-要了解事件的所有功能，请转到 :ref:`事件` 部分。
+要了解事件的所有功能，请转到 :ref:`events` 部分。
 
 
 .. _quick-overview_parts:
@@ -433,7 +427,7 @@ Read the widgets' documentation to learn which parts each uses.
    <br>
 
 
-部件可能由一个或多个 *部分* 构建。例如，一个按钮只有一个名为 :cpp:enumerator:`LV_PART_MAIN`的部分。但是， :ref:`lv_slider(滑块)`  具有 :cpp:enumerator:`LV_PART_MAIN`、 :cpp:enumerator:`LV_PART_INDICATOR` 和 :cpp:enumerator:`LV_PART_KNOB`。
+部件可能由一个或多个 *部分* 构建。例如，一个按钮只有一个名为 :cpp:enumerator:`LV_PART_MAIN` 的部分。但是， :ref:`lv_slider(滑块)`  具有 :cpp:enumerator:`LV_PART_MAIN`、 :cpp:enumerator:`LV_PART_INDICATOR` 和 :cpp:enumerator:`LV_PART_KNOB`。
 
 通过使用零件，你可以将不同的样式应用于小装置。（见下文）
 
@@ -491,9 +485,9 @@ LVGL 对象可以处于以下状态的组合：
 - :cpp:enumerator:`LV_STATE_SCROLLED`: 正在滚动
 - :cpp:enumerator:`LV_STATE_DISABLED`: 禁用
 
-例如，如果你按下一个对象，它会自动进入:cpp:enumerator:`LV_STATE_FOCUSED` 和 :cpp:enumerator:`LV_STATE_PRESSED` 状态，当你释放它时， :cpp:enumerator:`LV_STATE_PRESSED` 状态将被移除，保持活动状态。
+例如，如果你按下一个对象，它会自动进入 :cpp:enumerator:`LV_STATE_FOCUSED` 和 :cpp:enumerator:`LV_STATE_PRESSED` 状态，当你释放它时， :cpp:enumerator:`LV_STATE_PRESSED` 状态将被移除，保持活动状态。
 
-要检查对象是否处于给定状态，请使用``lv_obj_has_state(obj, LV_STATE_...)``。如果对象当时处于该状态，它将返回 ``true`` 。
+要检查对象是否处于给定状态，请使用 ``lv_obj_has_state(obj, LV_STATE_...)``。如果对象当时处于该状态，它将返回 ``true`` 。
 
 要手动添加或删除状态，请使用下面的函数：
 
@@ -530,7 +524,7 @@ configure the style. For example:
 
 样式实例包含背景颜色、边框等属性 宽度、字体等，用于描述对象的外观。
 
-样式用 :cpp:struct:`lv_style_t` 变量表示。只有他们的指针 保存在对象中，因此需要将它们定义为静态或全局。 在使用样式之前，需要使用:cpp:expr:`lv_style_init(&style1)` 对其进行初始化。之后，可以将属性添加到 配置样式。例如：
+样式用 :cpp:struct:`lv_style_t` 变量表示。只有他们的指针 保存在对象中，因此需要将它们定义为静态或全局。 在使用样式之前，需要使用  :cpp:expr:`lv_style_init(&style1)` 对其进行初始化。之后，可以将属性添加到 配置样式。例如：
 
 
 .. code:: c
@@ -619,7 +613,7 @@ For :cpp:enumerator:`LV_STATE_DEFAULT` and :cpp:enumerator:`LV_PART_MAIN` simply
    <br>
 
 
-对于 :cpp:enumerator:`LV_STATE_DEFAULT` 和:cpp:enumerator:`LV_PART_MAIN` 只需写下 ``0``:
+对于 :cpp:enumerator:`LV_STATE_DEFAULT` 和 :cpp:enumerator:`LV_PART_MAIN` 只需写下 ``0``:
 
 
 .. code:: c
@@ -673,7 +667,7 @@ style which resides inside the object and is used only by the object:
    <br>
 
 
-如果没有为当前状态设置属性，则将使用带有:cpp:enumerator:`LV_STATE_DEFAULT`的样式。如果即使在默认状态下也未定义该属性，则使用默认值。
+如果没有为当前状态设置属性，则将使用带有 :cpp:enumerator:`LV_STATE_DEFAULT` 的样式。如果即使在默认状态下也未定义该属性，则使用默认值。
 
 一些属性（通常是与文本相关的）可以被继承。这意味着如果一个属性没有在一个对象中设置，它也会在它的父级中搜索。 例如，您可以在屏幕样式中设置一次字体，该屏幕上的所有文本都会默认继承它。
 
@@ -697,7 +691,7 @@ To learn all the features of styles see the :ref:`styles` section.
    <br>
 
 
-要了解样式的所有功能，请参阅 :ref:`样式概述` 部分。
+要了解样式的所有功能，请参阅 :ref:`styles` 部分。
 
 
 .. _quick-overview_themes:
@@ -724,7 +718,7 @@ The theme for your application is a compile time configuration set in
 
 主题是对象的默认样式。创建对象时，将自动应用来自主题的样式。
 
-应用程序的主题是在 ``lv_conf.h``中设置的编译时配置。
+应用程序的主题是在 ``lv_conf.h`` 中设置的编译时配置。
 
 
 .. _quick-overview_examples:
@@ -752,7 +746,7 @@ Learn more about :ref:`micropython`.
    <br>
 
 
-了解有关 :ref:` Micropython `的更多信息。
+了解有关 :ref:`micropython` 的更多信息。
 
 
 .. code:: python
