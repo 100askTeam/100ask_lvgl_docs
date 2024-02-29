@@ -110,20 +110,20 @@ Basically, every modern controller which is able to drive a display is suitable 
 
 基本上，每个能够驱动显示器的现代控制器都适合运行 LVGL。 最低要求是：
 
-- 16、32 或 64 位微控制器或处理器
-- 建议使用 >16 MHz 时钟速度
-- 闪存/ROM： > 64 kB 用于非常重要的组件 (> 建议使用 180 kB)
-- RAM:
- - 静态 RAM 使用量：~2 kB，取决于使用的功能和对象类型
- - 堆: > 2kB (> 建议使用 8 kB)
- - 动态数据（堆）: > 2 KB (> 如果使用多个对象，建议使用 16 kB). 在 lv_conf.h 文件中配置 LV_MEM_SIZE 生效。
- - 显示缓冲区：> “水平分辨率”像素（推荐 >10 × 10×“ 水平分辨率”）
- - MCU或外部显示控制器中的一个帧缓冲区
-- C99 或更新的编译器
-- 具备基本的 C（或 C++）知识：
- - `pointers <https://www.tutorialspoint.com/cprogramming/c_pointers.htm>`_,
- - `structs <https://www.tutorialspoint.com/cprogramming/c_structures.htm>`_, 
- - `callbacks <https://www.geeksforgeeks.org/callbacks-in-c/>`_.
+* 16、32 或 64 位微控制器或处理器
+* 建议使用 >16 MHz 时钟速度
+* 闪存/ROM： > 64 kB 用于非常重要的组件 (> 建议使用 180 kB)
+* RAM:
+    * 静态 RAM 使用量：~2 kB，取决于使用的功能和对象类型
+    * 堆: > 2kB (> 建议使用 8 kB)
+    * 动态数据（堆）: > 2 KB (> 如果使用多个对象，建议使用 16 kB). 在 lv_conf.h 文件中配置 LV_MEM_SIZE 生效。
+    * 显示缓冲区：> “水平分辨率”像素（推荐 >10 × 10×“ 水平分辨率”）
+    * MCU或外部显示控制器中的一个帧缓冲区
+* C99 或更新的编译器
+* 具备基本的 C（或 C++）知识：
+    * `pointers <https://www.tutorialspoint.com/cprogramming/c_pointers.htm>`_。
+    * `structs <https://www.tutorialspoint.com/cprogramming/c_structures.htm>`_。
+    * `callbacks <https://www.geeksforgeeks.org/callbacks-in-c/>`_。
 :注意: *资源占用情况与具体硬件平台、编译器等因素有关，上表中仅给出参考值.*
 
 
@@ -157,7 +157,7 @@ LVGL 项目（包括所有存储库）在 `MIT license <https://github.com/lvgl/
 
 尽管您可以免费获得 LVGL，但它背后的工作量很大。它由一群志愿者创建，他们在空闲时间为您提供。
 
-为了使 LVGL 项目可持续，请考虑为该项目做 :ref:`贡献` 。您可以从 :ref:`多种投稿方式` 中进行选择，例如简单地写一条关于您正在使用 LVGL 的推文、修复错误、翻译文档，甚至成为维护者。
+为了使 LVGL 项目可持续，请考虑为该项目做 :ref:`contributing` 。您可以从多种投稿方式中进行选择，例如简单地写一条关于您正在使用 LVGL 的推文、修复错误、翻译文档，甚至成为维护者。
 
 
 Repository layout（仓库布局）
@@ -238,13 +238,11 @@ Tags like `vX.Y.Z` are created for every release.
 
 LVGL库遵循 `语义版本管理 <https://semver.org/>`_:
 
-- 不兼容 API 更改的主要版本。 比如： v5.0.0, v6.0.0
+* 不兼容 API 更改的主要版本。 比如： v5.0.0, v6.0.0
+* 新的但向后兼容的功能的次要版本。 比如： v6.1.0, v6.2.0
+* 用于向后兼容错误修复的补丁版本。 比如： v6.1.1, v6.1.2
 
-- 新的但向后兼容的功能的次要版本。 比如： v6.1.0, v6.2.0
-
-- 用于向后兼容错误修复的补丁版本。 比如： v6.1.1, v6.1.2
-
-- 为每个版本创建诸如 `vX.Y.Z` 之类的标签。
+* 为每个版本创建诸如 `vX.Y.Z` 之类的标签。
 
 
 Release cycle（发布周期）
@@ -265,11 +263,9 @@ Release cycle（发布周期）
    <br>
 
 
-- 错误修复：每周按需发布
-
-- 次要版本：每 3-4 个月
-
-- 主要版本：大约每年
+* 错误修复：每周按需发布
+* 次要版本：每 3-4 个月
+* 主要版本：大约每年
 
 
 Branches（分支）
@@ -293,6 +289,14 @@ The core repositories have at least the following branches:
    <br>
 
 
+核心存储库至少有以下分支：
+
+* `master`: 最新版本，此处直接合并补丁。
+* `release/vX.Y`: 次要版本的稳定版本
+* `fix/some-description`: 错误修复的临时分支
+* `feat/some-description`: 功能的临时分支
+
+
 Changelog（变更日志）
 ^^^^^^^^^^^^^^^^^^^^
 
@@ -309,7 +313,7 @@ The changes are recorded in :ref:`changelog`.
    <br>
 
 
-更改记录在 :ref:`CHANGELOG.md `中。
+更改记录在 :ref:`changelog` 中。
 
 
 Version support（版本支持）
@@ -352,29 +356,31 @@ Starting from v8, every minor release is supported for 1 year.
 
 在v8之前，每个主要版本的次要版本都支持1年。从v8开始，每个次要版本都支持1年。
 
-+---------+--------------+--------------+--------+
-| 版本 | 发布日期 | 支持结束  | 活跃 |
-+=========+==============+==============+========+
-|v5.3     | 2019 年 2 月 1 日 | 2020 年 2 月 1 日  | No     |
-+---------+--------------+--------------+--------+
+
++---------+---------------------+--------------------+--------+
+| 版本    | 发布日期             | 支持结束            | 活跃   |
++=========+=====================+====================+========+
+|v5.3     | 2019 年 2 月 1 日   | 2020 年 2 月 1 日   | No     |
++---------+---------------------+--------------------+--------+
 |v6.1     | 2019 年 11 月 26 日 | 2020 年 11 月 26 日 | No     |
-+---------+--------------+--------------+--------+
-|v7.11    | 2021 年 3 月 16 日 | 2022 年 3 月 16 日 | No     |
-+---------+--------------+--------------+--------+
-|v8.0     | 2021年6月1日 | 2022年6月1日  | No     |
-+---------+--------------+--------------+--------+
++---------+---------------------+--------------------+--------+
+|v7.11    | 2021 年 3 月 16 日  | 2022 年 3 月 16 日  | No     |
++---------+---------------------+--------------------+--------+
+|v8.0     | 2021年6月1日        | 2022年6月1日        | No     |
++---------+---------------------+--------------------+--------+
 |v8.1     | 2021 年 11 月 10 日 | 2022 年 11 月 10 日 | No     |
-+---------+--------------+--------------+--------+
-|v8.2     | 2022年1月31日 | 2023年1月31日 | No     |
-+---------+--------------+--------------+--------+
-|v8.3     | 2022年7月6日 | 2025年7月6日| Yes    |
-+---------+--------------+--------------+--------+
-|v9.0     |进行中                           |
-+---------+--------------------------------------+
++---------+---------------------+--------------------+--------+
+|v8.2     | 2022年1月31日       | 2023年1月31日       | No     |
++---------+---------------------+--------------------+--------+
+|v8.3     | 2022年7月6日        | 2025年7月6日        | Yes    |
++---------+---------------------+--------------------+--------+
+|v9.0     | 进行中                                            |
++---------+---------------------------------------------------+
+
 
 
 FAQ（常见问题）
----
+---------------
 
 Where can I ask questions?（我可以在哪里提问？）
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -476,7 +482,7 @@ LVGL 只需要一个简单的驱动程序函数即可将像素阵列复制到显
 * 甚至 LED 矩阵
 * 或任何其他可以控制像素颜色/状态的显示器
 
-请参阅 :ref:`显示接口` 部分以了解更多信息。
+请参阅 :ref:`display_interface` 部分以了解更多信息。
 
 
 LVGL doesn't start, randomly crashes or nothing is drawn on the display. What can be the problem?（LVGL未启动、随机崩溃或显示器上未绘制任何内容。问题出在哪里？）
@@ -502,14 +508,13 @@ LVGL doesn't start, randomly crashes or nothing is drawn on the display. What ca
    <br>
 
 
-请尝试增加 :c:宏:`LV_MEM_SIZE`.。
-
-* 请确保:cpp:type:`lv_display_t`、 :cpp:type:`lv_indev_t` 和 :cpp:type:`lv_fs_drv_t` 是全局的或 `static`。
+* 请尝试增加 :c:macro:`LV_MEM_SIZE`。
+* 请确保 :cpp:type:`lv_display_t`, :cpp:type:`lv_indev_t` 和 :cpp:type:`lv_fs_drv_t` 是全局的或 `static`。
 * 确保您的显示器在没有LVGL的情况下工作。例如：启动时把它漆成红色。
 * 启用 :ref:`logging`
 * 启用 ``lv_conf.h`` (`LV_USE_ASSERT_...`)中的断言
 * 如果您使用RTOS
-    * 增加调用 :cpp:func:`lv_timer_handler`的任务的堆栈大小
+    * 增加调用 :cpp:func:`lv_timer_handler` 的任务的堆栈大小
     * 请确保您使用了如下所述的互斥： :ref:`os_interrupt`
 
 
@@ -531,7 +536,7 @@ Learn more in the :ref:`tick` and :ref:`timer` sections.
    <br>
 
 
-确保你在中断中调用了 :cpp:expr:`lv_tick_inc(x)` ，在你的主 ``while(1)``中调用了 :cpp:func:`lv_timer_handler` 。
+确保你在中断中调用了 :cpp:expr:`lv_tick_inc(x)` ，在你的主 ``while(1)`` 中调用了 :cpp:func:`lv_timer_handler` 。
 
 在 :ref:`tick` 和 :ref:`timer` sections部分了解更多信息。
 
@@ -614,7 +619,7 @@ Probably LVGL's color format is not compatible with your display's color format.
    <br>
 
 
-可能 LVGL 的颜色格式与您的显示器的颜色格式不兼容。 检查 lv_conf.h 中的 LV_COLOR_DEPTH。
+可能 LVGL 的颜色格式与您的显示器的颜色格式不兼容。 检查 *lv_conf.h* 中的 :c:macro:`LV_COLOR_DEPTH` 。
 
 
 How to speed up my UI?（如何加速我的用户界面？）
@@ -709,5 +714,5 @@ See the :ref:`os_interrupt` section to learn more.
    <br>
 
 
-要使用任务可以相互中断（抢占式）的操作系统，您应该使用互斥锁保护与 LVGL 相关的函数调用。 请参阅 :ref:`操作系统和中断`部分以了解更多信息。
+要使用任务可以相互中断（抢占式）的操作系统，您应该使用互斥锁保护与 LVGL 相关的函数调用。 请参阅 :ref:`os_interrupt` 部分以了解更多信息。
 
