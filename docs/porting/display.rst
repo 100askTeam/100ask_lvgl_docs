@@ -126,8 +126,7 @@ Draw buffers（绘制缓冲区）
    <details>
      <summary>显示原文</summary>
 
-The draw buffers can be set with
-:cpp:expr:`lv_display_set_buffers(display, buf1, buf2, buf_size_byte, render_mode)`
+The draw buffers can be set with :cpp:expr:`lv_display_set_buffers(display, buf1, buf2, buf_size_byte, render_mode)`
 
 -  ``buf1`` a buffer where LVGL can render
 -  ``buf2`` a second optional buffer (see more details below)
@@ -170,8 +169,8 @@ Example:
 -  ``render_mode``
 
 -  :cpp:enumerator:`LV_DISPLAY_RENDER_MODE_PARTIAL` 使用缓冲区呈现屏幕以较小的部分进行。这样，缓冲区可以更小显示用于节省 RAM。至少 1/10 的屏幕大小缓冲区是推荐。在 ``flush_cb`` 渲染图像中需要复制到显示器的给定区域。在此模式下，如果按下按钮 只有按钮的区域将被重新绘制。
--  :cpp:enumerator:`LV_DISPLAY_RENDER_MODE_DIRECT`缓冲区必须是 screen size 和 LVGL 将渲染到缓冲区。这样，缓冲区始终包含整个图像。如果两个缓冲区被使用，渲染区域会自动复制到冲洗后的其他缓冲区。因此，由于 ``flush_cb``中的这一点，通常只需更改帧缓冲器地址。如果按下按钮 只有按钮的区域将被重新绘制。
--  :cpp:enumerator:`LV_DISPLAY_RENDER_MODE_FULL` 缓冲区必须是 screen size 和 LVGL 将始终重绘整个屏幕，即使只有 1 像素已更改。如果两个屏幕大小的绘制缓冲区 前提是LVGL的显示处理工作方式类似于“传统”双缓冲。这意味着 ``flush_cb``回调只需要更新帧缓冲区到 ``px_map`` 参数的地址。
+-  :cpp:enumerator:`LV_DISPLAY_RENDER_MODE_DIRECT` 缓冲区必须是 screen size 和 LVGL 将渲染到缓冲区。这样，缓冲区始终包含整个图像。如果两个缓冲区被使用，渲染区域会自动复制到冲洗后的其他缓冲区。因此，由于 ``flush_cb``中的这一点，通常只需更改帧缓冲器地址。如果按下按钮 只有按钮的区域将被重新绘制。
+-  :cpp:enumerator:`LV_DISPLAY_RENDER_MODE_FULL` 缓冲区必须是 screen size 和 LVGL 将始终重绘整个屏幕，即使只有 1 像素已更改。如果两个屏幕大小的绘制缓冲区 前提是LVGL的显示处理工作方式类似于“传统”双缓冲。这意味着 ``flush_cb`` 回调只需要更新帧缓冲区到 ``px_map`` 参数的地址。
 
 例如：
 
@@ -201,7 +200,7 @@ display) before drawing something new into it.
    <br>
 
 
-如果只使用一个缓冲区，LVGL 将屏幕内容绘制到该绘制缓冲区中并通过 ``flush_cb``将其发送到显示器。 然后需要等待，直到调用:cpp:expr:`lv_display_flush_ready`（即缓冲区的内容被发送到显示），然后在其中绘制新内容。
+如果只使用一个缓冲区，LVGL 将屏幕内容绘制到该绘制缓冲区中并通过 ``flush_cb`` 将其发送到显示器。 然后需要等待，直到调用 :cpp:expr:`lv_display_flush_ready`（即缓冲区的内容被发送到显示），然后在其中绘制新内容。
 
 Two buffers（两个缓冲区）
 ^^^^^^^^^^^^^^^^^^^^^^^^
@@ -254,9 +253,9 @@ of the active area can be set with
    <br>
 
 
-要在创建后设置显示器的分辨率，请使用:cpp:expr:`lv_display_set_resolution(display, hor_res, ver_res)`
+要在创建后设置显示器的分辨率，请使用 :cpp:expr:`lv_display_set_resolution(display, hor_res, ver_res)`
 
-对于 LVGL，不强制要求使用整个显示器，但在某些物理分辨率很重要。例如触摸板仍然看到整个分辨率，并且需要将值转换为活动 LVGL 显示区域。所以物理分辨率和偏移量的有效区域可以用:cpp:expr:`lv_display_set_physical_resolution(disp, hor_res, ver_res)` 和 :cpp:expr:`lv_display_set_offset(disp, x, y)`进行设置
+对于 LVGL，不强制要求使用整个显示器，但在某些物理分辨率很重要。例如触摸板仍然看到整个分辨率，并且需要将值转换为活动 LVGL 显示区域。所以物理分辨率和偏移量的有效区域可以用 :cpp:expr:`lv_display_set_physical_resolution(disp, hor_res, ver_res)` 和 :cpp:expr:`lv_display_set_offset(disp, x, y)` 进行设置
 
 
 Flush wait callback（刷新等待回调）
@@ -319,7 +318,7 @@ reconfiguring the hardware. In lack of hardware display rotation support
 
 LVGL 支持以 90 度为增量旋转显示器。您可以选择是要软件轮换还是硬件轮换。
 
-可以使用 ``lv_display_set_rotation(disp, LV_DISPLAY_ROTATION_0/90/180/270)``更改显示器的方向。 LVGL 将在内部交换水平和垂直分辨率 根据设定的度数。更改旋转时，:cpp:expr:`LV_EVENT_SIZE_CHANGED` 被发送到显示器以允许重新配置硬件。在缺少硬件显示旋转支持的情况下，可以使用:cpp:expr:`lv_draw_sw_rotate` 来旋转 ``flush_cb``中的缓冲区。
+可以使用 ``lv_display_set_rotation(disp, LV_DISPLAY_ROTATION_0/90/180/270)`` 更改显示器的方向。 LVGL 将在内部交换水平和垂直分辨率 根据设定的度数。更改旋转时，:cpp:expr:`LV_EVENT_SIZE_CHANGED` 被发送到显示器以允许重新配置硬件。在缺少硬件显示旋转支持的情况下，可以使用 :cpp:expr:`lv_draw_sw_rotate` 来旋转 ``flush_cb`` 中的缓冲区。
 
 
 Color format（颜色格式）
@@ -353,14 +352,14 @@ selected color format.
    <br>
 
 
-显示器的默认颜色格式是根据 :c:macro:`LV_COLOR_DEPTH`(请参阅 ``lv_conf.h``)
+显示器的默认颜色格式是根据 :c:macro:`LV_COLOR_DEPTH` (请参阅 ``lv_conf.h``)
 
 - :c:macro:`LV_COLOR_DEPTH` ``32``: XRGB8888 (4 bytes/pixel)
 - :c:macro:`LV_COLOR_DEPTH` ``24``: RGB888 (3 bytes/pixel)
 - :c:macro:`LV_COLOR_DEPTH` ``16``: RGB565 (2 bytes/pixel)
 - :c:macro:`LV_COLOR_DEPTH` ``8``: L8 (1 bytes/pixel) Not supported yet
 
-可以用:cpp:expr:`lv_display_set_color_depth(display, LV_COLOR_FORMAT_...)`。 此外，默认值 :c:macro:`LV_COLOR_FORMAT_ARGB8888` 可以是用作井。
+可以用 :cpp:expr:`lv_display_set_color_depth(display, LV_COLOR_FORMAT_...)`。 此外，默认值 :c:macro:`LV_COLOR_FORMAT_ARGB8888` 可以是用作井。
 
 绘制缓冲区应足够大，以便于任何选定的颜色格式。
 
@@ -400,7 +399,7 @@ to
 
 如果是 RGB565 颜色格式，则可能需要交换 2 个字节 因为 SPI、I2C 或 8 位并行端口外设以错误的顺序发送它们。
 
-理想的解决方案是配置硬件以处理具有不同字节顺序的 16 位数据， 但是，如果不可能，可以在 ``flush_cb`` 中调用 :cpp:expr:`lv_draw_sw_rgb565_swap(buf, buf_size_in_px)`来交换字节。
+理想的解决方案是配置硬件以处理具有不同字节顺序的 16 位数据， 但是，如果不可能，可以在 ``flush_cb`` 中调用 :cpp:expr:`lv_draw_sw_rgb565_swap(buf, buf_size_in_px)` 来交换字节。
 
 如果你愿意，你也可以编写自己的函数，或者使用汇编指令来 尽可能快的字节交换。
 
@@ -431,7 +430,7 @@ be stored in display object.
    <br>
 
 
-使用:cpp:expr:`lv_display_set_user_data(disp, p)`指向自定义数据的指针可以 存储在显示对象中。
+使用 :cpp:expr:`lv_display_set_user_data(disp, p)` 指向自定义数据的指针可以 存储在显示对象中。
 
 
 Decoupling the display refresh timer
@@ -478,7 +477,7 @@ consistent with the refresh period of the display to ensure that the statistical
    <br>
 
 
-通常，脏区（又称无效区）会被检查并重新绘制每 :c:macro:`LV_DEF_REFR_PERIOD` 毫秒（设置在 ``lv_conf.h``中）。 但是，在某些情况下，您可能需要对显示时间进行更多控制刷新发生，例如将渲染与 VSYNC 同步或 TE 信号。
+通常，脏区（又称无效区）会被检查并重新绘制每 :c:macro:`LV_DEF_REFR_PERIOD` 毫秒（设置在 ``lv_conf.h`` 中）。 但是，在某些情况下，您可能需要对显示时间进行更多控制刷新发生，例如将渲染与 VSYNC 同步或 TE 信号。
 
 您可以通过以下方式执行此操作：  
 
@@ -492,7 +491,7 @@ consistent with the refresh period of the display to ensure that the statistical
    /*Call this anywhere you want to refresh the dirty areas*/
    _lv_display_refr_timer(NULL);
 
-如果您有多个显示器，请调用 :cpp:expr:`lv_display_set_default(disp1)`在 :cpp:expr:`_lv_display_refr_timer(NULL)`之前选择要刷新的显示器。
+如果您有多个显示器，请调用 :cpp:expr:`lv_display_set_default(disp1)` 在 :cpp:expr:`_lv_display_refr_timer(NULL)` 之前选择要刷新的显示器。
 
 
 .. 注意::  :cpp:func:`lv_timer_handler` 和 :cpp:func:`_lv_display_refr_timer` 不能同时运行。.
@@ -522,9 +521,9 @@ The parameter of :cpp:func:`lv_refr_now` is a display to refresh. If ``NULL`` is
    <br>
 
 
-通常，无效区域（标记为重绘）在每个中的:cpp:func:`lv_timer_handler`中呈现 :cpp:macro:`LV_DEF_REFR_PERIOD` 毫秒。但是，通过使用:cpp:func:`lv_refr_now（display）`，您可以要求LVGL立即重新绘制无效区域。刷新将发生在 :cpp:func:`lv_refr_now`中，这可能需要更长的时间。
+通常，无效区域（标记为重绘）在每个中的 :cpp:func:`lv_timer_handler` 中呈现 :cpp:macro:`LV_DEF_REFR_PERIOD` 毫秒。但是，通过使用 :cpp:func:`lv_refr_now（display）`，您可以要求LVGL立即重新绘制无效区域。刷新将发生在 :cpp:func:`lv_refr_now` 中，这可能需要更长的时间。
 
-:cpp:func:`lv_refr_now`的参数是要刷新的显示。如果设置了 ``NULL`` ，则将更新默认显示。
+:cpp:func:`lv_refr_now` 的参数是要刷新的显示。如果设置了 ``NULL`` ，则将更新默认显示。
 
 
 Events（事件）
@@ -563,15 +562,15 @@ an event handler to a display. The following events are sent:
 
 :cpp:expr:`lv_display_add_event_cb(disp, event_cb, LV_EVENT_..., user_data)` 添加显示的事件处理程序。将发送以下事件：
 
-- :cpp:enumerator:`LV_EVENT_INVALIDATE_AREA` 区域无效（标记为重绘）。:cpp:expr:`lv_event_get_param(e)` 返回一个指向 :cpp:struct:`lv_area_t`的指针变量，该变量具有无效的区域的坐标。该区域如果需要，可以自由修改以采用它的特殊要求显示。通常需要与单色显示器一起使用，以一次使 ``N x 8``行或列失效。
+- :cpp:enumerator:`LV_EVENT_INVALIDATE_AREA` 区域无效（标记为重绘）。:cpp:expr:`lv_event_get_param(e)` 返回一个指向 :cpp:struct:`lv_area_t` 的指针变量，该变量具有无效的区域的坐标。该区域如果需要，可以自由修改以采用它的特殊要求显示。通常需要与单色显示器一起使用，以一次使 ``N x 8`` 行或列失效。
 - :cpp:enumerator:`LV_EVENT_REFR_REQUEST`: 在发生需要重绘的事情时发送。
 - :cpp:enumerator:`LV_EVENT_REFR_START`: 刷新周期开始时发送。即使没有什么可重绘的，也会发送。
 - :cpp:enumerator:`LV_EVENT_REFR_READY`: 在刷新准备就绪时发送（渲染并调用 ``flush_cb`` ）。即使没有发生重绘，也会发送。
 - :cpp:enumerator:`LV_EVENT_RENDER_START`: 在渲染开始时发送。
 - :cpp:enumerator:`LV_EVENT_RENDER_READY`: 在渲染准备就绪时发送（在调用 ``flush_cb`` ）
 - :cpp:enumerator:`LV_EVENT_FLUSH_START`: 在调用 ``flush_cb`` 之前发送。
-- :cpp:enumerator:`LV_EVENT_FLUSH_READY`: 在返回 ``flush_cb``时发送。
-- :cpp:enumerator:`LV_EVENT_RESOLUTION_CHANGED`: 在决议更改到期时发送:cpp:func:`lv_display_set_resolution` 或 :cpp:func:`lv_display_set_rotation`。
+- :cpp:enumerator:`LV_EVENT_FLUSH_READY`: 在返回 ``flush_cb`` 时发送。
+- :cpp:enumerator:`LV_EVENT_RESOLUTION_CHANGED`: 在决议更改到期时发送 :cpp:func:`lv_display_set_resolution` 或 :cpp:func:`lv_display_set_rotation`。
 
 
 Further reading（深入学习）
@@ -597,7 +596,7 @@ Further reading（深入学习）
 
 - `lv_port_disp_template.c <https://github.com/lvgl/lvgl/blob/master/examples/porting/lv_port_disp_template.c>`__ 获取您自己的驱动程序的模板。
 - :ref:`Drawing <drawing>` 了解更多关于渲染在 LVGL 中是如何工作的。
-- :ref:`显示器的功能` ，以了解有关更高级别显示功能的更多信息。
+- :ref:`display_features` ，以了解有关更高级别显示功能的更多信息。
 
 API
 ***

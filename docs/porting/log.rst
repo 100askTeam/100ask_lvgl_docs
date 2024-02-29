@@ -81,7 +81,7 @@ If your system supports ``printf``, you just need to enable
    <br>
 
 
-如果你的系统支持 ``printf``，你只需要在 ``lv_conf.h`` 中启用:c:macro:`LV_LOG_PRINTF` 就可以发送带有 ``printf``的日志。
+如果你的系统支持 ``printf``，你只需要在 ``lv_conf.h`` 中启用 :c:macro:`LV_LOG_PRINTF` 就可以发送带有 ``printf`` 的日志。
 
 
 Custom log function（自定义日志功能）
@@ -103,7 +103,7 @@ For example:
    <br>
 
 
-如果你不能使用 ``printf`` 或者想使用自定义函数来记录日志，你可以使用 :cpp:func:`lv_log_register_print_cb`注册一个“记录器”回调。
+如果你不能使用 ``printf`` 或者想使用自定义函数来记录日志，你可以使用 :cpp:func:`lv_log_register_print_cb` 注册一个“记录器”回调。
 
 例如：
 
@@ -144,7 +144,7 @@ functions. Here:
    <br>
 
 
-您还可以通过 ``LV_LOG_TRACE/INFO/WARN/ERROR/USER(text)``和 ``LV_LOG(text)`` 函数使用日志模块。这里：
+您还可以通过 ``LV_LOG_TRACE/INFO/WARN/ERROR/USER(text)`` 和 ``LV_LOG(text)`` 函数使用日志模块。这里：
 
 
 -  ``LV_LOG_TRACE/INFO/WARN/ERROR/USER(text)`` append following information to your ``text``

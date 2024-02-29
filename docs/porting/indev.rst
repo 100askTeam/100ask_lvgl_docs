@@ -148,7 +148,7 @@ To use a keyboard/keypad:
 要使用键盘/小键盘：
 
 - 注册一个带有 :cpp:enumerator:`LV_INDEV_TYPE_KEYPAD` 类型的 ``read_cb`` 函数。
-- 必须创建一个对象组： ``lv_group_t * g = lv_group_create()``并且对象必须使用 :cpp:expr:`lv_group_add_obj(g, obj)`添加到其中
+- 必须创建一个对象组： ``lv_group_t * g = lv_group_create()`` 并且对象必须使用 :cpp:expr:`lv_group_add_obj(g, obj)` 添加到其中
 - 创建的组必须分配给输入设备： :cpp:expr:`lv_indev_set_group(indev, g)`
 - 使用 ``LV_KEY_...`` 在组中的对象之间导航。有关可用密钥，请参阅 ``lv_core/lv_group.h`` 。
 
@@ -266,10 +266,10 @@ specified in ``indev_drv.long_press_repeat_time``.
 
 - :cpp:enumerator:`LV_KEY_ENTER`: 将模拟按下或按下编码器按钮
 - :cpp:enumerator:`LV_KEY_LEFT`: 将模拟向左转动编码器
-- :cpp:enumerator:`LV_KEY_RIGHT`:将模拟向右旋转编码器
+- :cpp:enumerator:`LV_KEY_RIGHT`: 将模拟向右旋转编码器
 - 其他键将传递给聚焦的小部件
 
-如果您按住这些键，它将模拟编码器随周期前进，并在 ``indev_drv.long_press_repeat_time``中指定。
+如果您按住这些键，它将模拟编码器随周期前进，并在 ``indev_drv.long_press_repeat_time`` 中指定。
 
 
 .. code:: c
@@ -339,10 +339,10 @@ a press/release action at the first index of the ``points_array`` will be perfor
 
 *按钮* 表示屏幕旁边的外部“硬件”按钮，这些按钮分配给屏幕的特定坐标。 如果按下按钮，它将模拟按下指定坐标。 （类似于触摸板）
 
-要将按钮分配给坐标，请使用 ``lv_indev_set_button_points(my_indev, points_array)``。 ``points_array``应该看起来像 ``const lv_point_t points_array[] = { {12,30},{60,90}, ...}``
+要将按钮分配给坐标，请使用 ``lv_indev_set_button_points(my_indev, points_array)``。 ``points_array`` 应该看起来像 ``const lv_point_t points_array[] = { {12,30},{60,90}, ...}``
 
 :重要: The points_array can't go out of scope. Either declare it as a global variable
-            or as a static variable inside a function.`
+            or as a static variable inside a function。
 
 .. code:: c
 
@@ -398,13 +398,13 @@ The default value of the following parameters can be changed in :cpp:type:`lv_in
    <br>
 
 
-以下参数的默认值可以在 :cpp:type:`lv_indev_t`中更改：
+以下参数的默认值可以在 :cpp:type:`lv_indev_t` 中更改：
 
 - ``scroll_limit`` 在实际滚动对象之前要滑动的像素数。
 - ``scroll_throw`` 滚动投掷（动量）减慢 [%]。更大的价值意味着更快的减速。
 - ``long_press_time`` 按下发送 :cpp:enumerator:`LV_EVENT_LONG_PRESSED` 的时间（以毫秒为单位）
 - ``long_press_repeat_time`` 发送 :cpp:enumerator:`LV_EVENT_LONG_PRESSED_REPEAT` 的间隔（以毫秒为单位）
-- ``read_timer`` 指向读取输入设备的 ``lv_timer`` 的指针。它的参数可以通过lv_timer_...()函数改变。  ``lv_conf.h`` 中的 :c:macro:`LV_DEF_REFR_PERIOD`设置默认读取周期。
+- ``read_timer`` 指向读取输入设备的 ``lv_timer`` 的指针。它的参数可以通过 ``lv_timer_...()`` 函数改变。  ``lv_conf.h`` 中的 :c:macro:`LV_DEF_REFR_PERIOD` 设置默认读取周期。
 
 
 Feedback（回调处理）
@@ -426,7 +426,7 @@ feedback for the user, e.g. to play a sound on :cpp:enumerator:`LV_EVENT_CLICKED
    <br>
 
 
-除了 ``read_cb`` 一个 ``feedback_cb`` 回调也可以在:cpp:type:`lv_indev_t`中指定。 ``feedback_cb`` 在输入设备发送任何类型的事件时被调用（与其类型无关）。这允许为用户生成反馈，例如在 :cpp:enumerator:`LV_EVENT_CLICKED`上播放声音。
+除了 ``read_cb`` 一个 ``feedback_cb`` 回调也可以在 :cpp:type:`lv_indev_t` 中指定。 ``feedback_cb`` 在输入设备发送任何类型的事件时被调用（与其类型无关）。这允许为用户生成反馈，例如在 :cpp:enumerator:`LV_EVENT_CLICKED` 上播放声音。
 
 
 Associating with a display（与显示器关联）
@@ -515,7 +515,7 @@ You can do this in the following way:
    <br>
 
 
-通常，输入事件每 :c:macro:`LV_DEF_REFR_PERIOD`毫秒读取一次（在 ``lv_conf.h``中设置）。但是，在某些情况下，您可能会需要更好地控制何时读取输入设备。例如，您可能需要通过轮询文件描述符 （FD） 来读取它。
+通常，输入事件每 :c:macro:`LV_DEF_REFR_PERIOD` 毫秒读取一次（在 ``lv_conf.h`` 中设置）。但是，在某些情况下，您可能会需要更好地控制何时读取输入设备。例如，您可能需要通过轮询文件描述符 （FD） 来读取它。
 
 您可以通过以下方式执行此操作：
 
@@ -529,7 +529,8 @@ You can do this in the following way:
    /*Call this anywhere you want to read the input device*/
    lv_indev_read(indev);
 
-.. 注意:: 不能同时运行:cpp:func:`lv_indev_read`，:cpp:functionc:`lv_timer_handler`和:cpp:func:`_lv_display_refr_timer`。
+
+.. 注意:: 不能同时运行 :cpp:func:`lv_indev_read`，:cpp:functionc:`lv_timer_handler` 和 :cpp:func:`_lv_display_refr_timer`。
 
 .. 注意:: 对于处于事件驱动模式的设备，将忽略 `data->continue_reading` 。
 
@@ -552,7 +553,7 @@ Further reading（深入学习）
 
 
 - `lv_port_indev_template.c <https://github.com/lvgl/lvgl/blob/master/examples/porting/lv_port_indev_template.c>`__  用于您自己的驱动程序的模板。
-- `INdev features <indev>` 以了解有关更高级别输入设备功能的更多信息。
+- `INdev features <indev>`  以了解有关更高级别输入设备功能的更多信息。
 
 
 API

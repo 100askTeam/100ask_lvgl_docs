@@ -45,7 +45,7 @@ files in the ``src`` folder.
    <br>
 
 
-图形库本身就是 ``lvgl`` 目录。它包含一个几个文件夹，但要使用 ``lvgl`` ，您只需要文件夹中的 ``.c`` and ``.h``文件。
+图形库本身就是 ``lvgl`` 目录。它包含一个几个文件夹，但要使用 ``lvgl`` ，您只需要文件夹中的 ``.c`` and ``.h`` 文件。
 
 
 Automatically add files（自动添加文件）
@@ -148,7 +148,7 @@ action required in these cases.
    <br>
 
 
-该 ``lvgl`` 文件夹还包含一个 ``examples`` 和一个 ``demos``文件夹。如果您需要手动将源文件添加到您的项目中， 您也可以对这两个文件夹的源文件执行相同的操作。 ``make`` 和 ``CMake`` 并处理示例和演示，因此无需额外在这些情况下需要采取的行动。
+该 ``lvgl`` 文件夹还包含一个 ``examples`` 和一个 ``demos`` 文件夹。如果您需要手动将源文件添加到您的项目中， 您也可以对这两个文件夹的源文件执行相同的操作。 ``make`` 和 ``CMake`` 并处理示例和演示，因此无需额外在这些情况下需要采取的行动。
 
 
 Configuration file（修改配置文件）
@@ -219,7 +219,7 @@ For example:
 
 有一个名为 **lv_conf.h** 的 LVGL 配置头文件。您可以修改此标头以设置库的基本行为、禁用未使用的模块和功能、在编译时调整内存缓冲区的大小等。
 
-要获取 ``lv_conf.h``，复制 lvgl 目录旁边的 **lvgl/lv_conf_template.h ** 并将其重命名为 lv_conf.h。打开文件并将开头的“#if 0”更改为“#if 1”以启用其内容。因此，文件的布局应如下所示：
+要获取 ``lv_conf.h``，复制 lvgl 目录旁边的 **lvgl/lv_conf_template.h** 并将其重命名为 lv_conf.h。打开文件并将开头的 ``#if 0`` 更改为 ``#if 1`` 以启用其内容。因此，文件的布局应如下所示：
 
 ::
 
@@ -227,15 +227,15 @@ For example:
    |-lv_conf.h
    |-other files and folders
 
-配置文件中的注释解释了选项的含义。确定至少 :c:macro:`LV_COLOR_DEPTH` 根据显示器的颜色进行设置深度。请注意，明确需要启用示例和演示在 `lv_conf.h``中。
+配置文件中的注释解释了选项的含义。确定至少 :c:macro:`LV_COLOR_DEPTH` 根据显示器的颜色进行设置深度。请注意，明确需要启用示例和演示在 ``lv_conf.h`` 中。
 
-或者， ``lv_conf.h``  可以复制到另一个地方，但随后你应该将:c:macro:`LV_CONF_INCLUDE_SIMPLE` 定义添加到编译器中选项（例如 ``-DLV_CONF_INCLUDE_SIMPLE``  对于GCC编译器），并手动包含路径（例如 ``-I../include/gui`` ）。在本例中为 LVGL 将尝试简单地将 ``lv_conf.h`` 包含在 ``#include "lv_conf.h"``。
+或者， ``lv_conf.h``  可以复制到另一个地方，但随后你应该将 :c:macro:`LV_CONF_INCLUDE_SIMPLE` 定义添加到编译器中选项（例如 ``-DLV_CONF_INCLUDE_SIMPLE``  对于GCC编译器），并手动包含路径（例如 ``-I../include/gui`` ）。在本例中为 LVGL 将尝试简单地将 ``lv_conf.h`` 包含在 ``#include "lv_conf.h"``。
 
-您甚至可以为 ``lv_conf.h``使用不同的名称。自定义路径可以通过 :c:macro:`LV_CONF_PATH` 定义进行设置。例如 ``-DLV_CONF_PATH="/home/joe/my_project/my_custom_conf.h"``。
+您甚至可以为 ``lv_conf.h`` 使用不同的名称。自定义路径可以通过 :c:macro:`LV_CONF_PATH` 定义进行设置。例如 ``-DLV_CONF_PATH="/home/joe/my_project/my_custom_conf.h"``。
 
-如果 :c:macro:`LV_CONF_SKIP` 已定义，则 LVGL 不会尝试包含 ``lv_conf.h``。相反，您可以使用 build 传递配置定义选项。例如 ``"-DLV_COLOR_DEPTH=32 -DLV_USE_BUTTON=1"``。未设置 options 将获得一个默认值，该值与 ``lv_conf_template.h``的内容相同。
+如果 :c:macro:`LV_CONF_SKIP` 已定义，则 LVGL 不会尝试包含 ``lv_conf.h``。相反，您可以使用 build 传递配置定义选项。例如 ``"-DLV_COLOR_DEPTH=32 -DLV_USE_BUTTON=1"``。未设置 options 将获得一个默认值，该值与 ``lv_conf_template.h`` 的内容相同。
 
-LVGL 也可以通过 ``Kconfig`` 和 ``menuconfig`` 使用。您也可以 ``lv_conf.h`` 与 Kconfig 一起使用，但请记住，值从 ``lv_conf.h`` 或 生成设置 (``-D...``) 覆盖值在 Kconfig 中设置。要忽略配置，只需删除 ``lv_conf.h`` 其内容，或定义:c:macro:`LV_CONF_SKIP`。
+LVGL 也可以通过 ``Kconfig`` 和 ``menuconfig`` 使用。您也可以 ``lv_conf.h`` 与 Kconfig 一起使用，但请记住，值从 ``lv_conf.h`` 或 生成设置 (``-D...``) 覆盖值在 Kconfig 中设置。要忽略配置，只需删除 ``lv_conf.h`` 其内容，或定义 :c:macro:`LV_CONF_SKIP`。
 
 要启用多实例功能，需要在 ``lv_conf.h`` 文件中设置 :c:macro:`LV_GLOBAL_CUSTOM` , 并使用 ``__thread`` 或 ``pthread_key_t`` 为 :cpp:func:`lv_global_default` 提供自定义函数。 它将允许通过存储全局变量来运行多个 LVGL 实例 在 TLS（线程本地存储）中。
 
@@ -280,12 +280,8 @@ components. The order of the initialization is:
 
 要使用图形库，您必须对其进行初始化并进行必要的设置其他组件。初始化的顺序为：
 
-1. 调用lv_init()。
-
+1. 调用 :cpp:func:`lv_init`。
 2. 初始化您的驱动程序。
-
 3. 在 LVGL 中注册显示和输入设备驱动程序。详细了解 `显示 </porting/display>`__ 和 `输入设备 </porting/indev>`__ 注册。
-
 4. 在中断中每隔 ``x`` 毫秒调用 :cpp:expr:`lv_tick_inc(x)` 以告知经过的时间。  `了解更多 </porting/tick>`__。
-
 5. 每隔几毫秒调用`lv_timer_handler` 来处理LVGL相关的任务。 `了解更多 </porting/timer-handler>`__ 。

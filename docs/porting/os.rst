@@ -25,9 +25,9 @@ In *lv_timer*. Learn more in :ref:`timer`.
 
 但是，在以下情况下调用 LVGL 相关函数是有效的：
 
-- 在 *事件* 中。在 :ref:`事件` 中了解更多信息。
+- 在 *事件* 中。在 :ref:`events` 中了解更多信息。
 
-- 在 *lv_timer* 中。在 :ref:`计时器` 中了解更多信息。
+- 在 *lv_timer* 中。在 :ref:`timer` 中了解更多信息。
 
 
 Tasks and threads（任务和线程）
@@ -112,7 +112,7 @@ interrupt, and periodically check it in an LVGL timer (which is run by
    <br>
 
 
-尽量避免从中断处理程序调用 LVGL 函数（除了:cpp:func:`lv_tick_inc`  和 :cpp:func:`lv_display_flush_ready`）。但是如果你需要这样做，你必须在 :cpp:func:`lv_timer_handler` 运行时禁用使用 LVGL 函数的中断。 
+尽量避免从中断处理程序调用 LVGL 函数（除了 :cpp:func:`lv_tick_inc`  和 :cpp:func:`lv_display_flush_ready`）。但是如果你需要这样做，你必须在 :cpp:func:`lv_timer_handler` 运行时禁用使用 LVGL 函数的中断。 
 
-这是一种更好的方法，只需在中断，并在LVGL计时器中定期检查它（由 :cpp:func:`lv_timer_handler`运行）。
+这是一种更好的方法，只需在中断，并在LVGL计时器中定期检查它（由 :cpp:func:`lv_timer_handler` 运行）。
 

@@ -26,7 +26,7 @@ Example:
 
 要处理 LVGL 的任务，您需要以下列方式之一定期调用 :cpp:func:`lv_timer_handler`：
 
--  *main()* 函数的*while(1)* 
+-  *main()* 函数的 *while(1)* 
 - 定时器定期中断（比 :cpp:func:`lv_tick_inc` 优先级低）
 - 定期执行操作系统任务
 

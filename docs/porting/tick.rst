@@ -25,7 +25,7 @@ For example:
 
 LVGL 需要一个系统滴答来了解动画和其他任务所用的时间。
 
-如果要使用自定义函数来 :cpp:func:`lv_tick_get` ，你可以使用 :cpp:func:`lv_tick_set_cb`注册“tick_get_cb”。
+如果要使用自定义函数来 :cpp:func:`lv_tick_get` ，你可以使用 :cpp:func:`lv_tick_set_cb` 注册“tick_get_cb”。
 
 例如：
 
