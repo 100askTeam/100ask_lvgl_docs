@@ -34,7 +34,9 @@ In short this means: - Explicitly set coordinates are stored in styles
 
 LVGL的许多其他部分一样，坐标设置的概念受到CSS的启发。LVGL并不完全实现了CSS，但实现了一个类似的子集（有时进行了微小调整）。
 
-简而言之，这意味着： - 明确定义的坐标被存储在样式中（大小、位置、布局等）
+简而言之，这意味着：
+
+- 明确定义的坐标被存储在样式中（大小、位置、布局等）
 
 - 支持最小宽度、最大宽度、最小高度、最大高度
 - 有像素、百分比和“内容”单位
@@ -68,10 +70,9 @@ Units（单位）
 
 
 - 像素：表示在屏幕上的位置。整数始终代表像素单位。
-   例如:cpp:expr:`lv_obj_set_x(btn, 10)` （设置按钮的横坐标为10个像素）
+   例如 :cpp:expr:`lv_obj_set_x(btn, 10)` （设置按钮的横坐标为10个像素）
 
-- 百分比：对象大小相对于其父级（属性有关）的百分比。
-   :cpp:expr:`lv_pct(value)` 将一个值转换为百分比。例如:cpp:expr:`lv_obj_set_width(btn, lv_pct(50))` （将按钮的宽度设置为父级宽度的50%）
+- 百分比：对象大小相对于其父级（属性有关）的百分比。 :cpp:expr:`lv_pct(value)` 将一个值转换为百分比。例如 :cpp:expr:`lv_obj_set_width(btn, lv_pct(50))` （将按钮的宽度设置为父级宽度的50%）
 
 - :c:macro:`LV_SIZE_CONTENT`：特殊值，将对象的宽度/高度设置为包含所有子元素。类似于CSS中的 ``auto``。
    例如 :cpp:expr:`lv_obj_set_width(btn, LV_SIZE_CONTENT)`（将按钮的宽度设置为自适应内容宽度）
@@ -102,7 +103,7 @@ model. An object's "box" is built from the following parts:
    <br>
 
 
-LVGL遵循CSS的 `border-box <https://developer.mozilla.org/en-US/docs/Web/CSS/box-sizing>`__模型。一个对象的“框”由以下部分组成：
+LVGL遵循CSS的 `border-box <https://developer.mozilla.org/en-US/docs/Web/CSS/box-sizing>`__ 模型。一个对象的“框”由以下部分组成：
 
 - 边界框：元素的宽度/高度。
 - 边框宽度：边框的宽度。
@@ -188,9 +189,9 @@ the screen of ``obj``.
 
 LVGL不会立即重新计算所有坐标变化，这样做是为了提高性能。相反，对象会被标记为"dirty"，在重新绘制屏幕之前，LVGL会检查是否有任何"dirty"对象。如果有，则会刷新它们的位置、大小和布局。
 
-换句话说，如果您需要获取对象的坐标，并且坐标刚刚发生了变化，LVGL需要强制重新计算坐标。要做到这一点，请调用：cpp:func:`lv_obj_update_layout`。
+换句话说，如果您需要获取对象的坐标，并且坐标刚刚发生了变化，LVGL需要强制重新计算坐标。要做到这一点，请调用 :cpp:func:`lv_obj_update_layout`。
 
-大小和位置可能取决于父级或布局。因此，:cpp:func:`lv_obj_update_layout`会重新计算 ``obj``屏幕上所有对象的坐标。
+大小和位置可能取决于父级或布局。因此，:cpp:func:`lv_obj_update_layout` 会重新计算 ``obj`` 屏幕上所有对象的坐标。
 
 
 .. _coord_removing styles:
@@ -247,7 +248,7 @@ For example:
 根据 :ref:`coord_using_styles` 部分的描述，
 坐标也可以通过样式属性进行设置。更准确地说，
 实际上每个与样式坐标相关的属性都被以样式属性的方式存储在内部。
-如果你使用 :cpp:expr:`lv_obj_set_x(obj, 20)`，LVGL会将 ``x=20``保存在对象的本地样式中。
+如果你使用 :cpp:expr:`lv_obj_set_x(obj, 20)`，LVGL会将 ``x=20`` 保存在对象的本地样式中。
 
 这是一个内部机制，在你使用LVGL时并不太重要。
 然而，有一个情况下你需要注意实现方式。
@@ -325,7 +326,7 @@ Percentage values are calculated from the parent's content area size.
    lv_obj_set_y(obj, 20);
    lv_obj_set_pos(obj, 10, 20);    //或者使用一个函数
 
-默认情况下，x和y坐标是从父元素的内容区域的左上角测量的。例如，如果父元素的每一边都有五个像素的填充，那么上面的代码会把 ``obj``放置在(15, 25)，因为内容区域在填充之后开始。
+默认情况下，x和y坐标是从父元素的内容区域的左上角测量的。例如，如果父元素的每一边都有五个像素的填充，那么上面的代码会把 ``obj`` 放置在(15, 25)，因为内容区域在填充之后开始。
 
 百分比值是通过父元素的内容区域大小来计算的。
 
@@ -640,8 +641,8 @@ complex features can be used via styles.
 
 - 它使得同时设置多个对象的宽度/高度等变得容易。比如，使所有滑块的尺寸为100x10像素。
 - 它也使得在一个地方修改数值成为可能。
-- 这些数值可以部分地被其他样式覆盖。例如， ``style_btn`` 默认将对象的宽度设置为 ``100x50``，但添加 ``style_full_width``仅覆盖对象的宽度。
-- 对象的位置或大小可以根据状态而有所不同。例如，在 :cpp:enumerator:`LV_STATE_DEFAULT`状态下宽度为100像素，在 :cpp:enumerator:`LV_STATE_PRESSED`状态下为120像素。
+- 这些数值可以部分地被其他样式覆盖。例如， ``style_btn`` 默认将对象的宽度设置为 ``100x50``，但添加 ``style_full_width`` 仅覆盖对象的宽度。
+- 对象的位置或大小可以根据状态而有所不同。例如，在 :cpp:enumerator:`LV_STATE_DEFAULT` 状态下宽度为100像素，在 :cpp:enumerator:`LV_STATE_PRESSED` 状态下为120像素。
 - 样式过渡可以用于使坐标变化平滑。
 
 以下是使用样式设置对象大小的一些示例代码：
@@ -827,7 +828,7 @@ This code enlarges a button when it's pressed:
 
 对象的大小可以相对于当前大小进行改变。变换后的宽度和高度会分别加在对象的两侧。这意味着，一个变换后的宽度为10px会使对象的宽度增加20个像素。
 
-与位置翻译不同，大小转换并不会使对象“实际”变大。换句话说，滚动条、布局和:c:macro:`LV_SIZE_CONTENT`不会对变换后的大小做出反应。因此，大小转换 “只是” 一种视觉效果。
+与位置翻译不同，大小转换并不会使对象“实际”变大。换句话说，滚动条、布局和 :c:macro:`LV_SIZE_CONTENT` 不会对变换后的大小做出反应。因此，大小转换 “只是” 一种视觉效果。
 
 下面的代码会在按钮被按下时放大：
 
@@ -884,7 +885,7 @@ the parent's content area.
    <br>
 
 
-与CSS类似，LVGL也支持 ``min-width``、 ``max-width``、 ``min-height``和 ``max-height``。这些限制了对象的大小，防止其变得比这些值更小/更大。如果通过百分比或`:c:macro:`LV_SIZE_CONTENT`来设置大小，它们尤其有用。
+与CSS类似，LVGL也支持 ``min-width``、 ``max-width``、 ``min-height``和 ``max-height``。这些限制了对象的大小，防止其变得比这些值更小/更大。如果通过百分比或 :c:macro:`LV_SIZE_CONTENT` 来设置大小，它们尤其有用。
 
 .. code:: c
 

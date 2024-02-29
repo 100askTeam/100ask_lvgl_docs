@@ -41,16 +41,25 @@ border width, text color and so on. It's similar to a ``class`` in CSS.
 
 
 "Styles" 用于设置对象的外观。lvgl中的样式受到CSS的启发。简而言之，概念如下：
+
 - 样式是一个:cpp:type:`lv_style_t`变量，它可以保存诸如边框宽度、文字颜色等属性。类似于CSS中的 ``class``。
+
 - 样式可以分配给对象以改变它们的外观。在分配时，可以指定目标部分（CSS中的伪元素）和目标状态（伪类）。例如，当滑块处于按下状态时，可以为其添加 ``style_blue``。
+
 - 同样的样式可以被任意数量的对象使用。
+
 - 样式可以被级联，这意味着可以将多个样式分配给一个对象，每个样式可以具有不同的属性。因此，并非所有的属性都必须在一个样式中指定。
   LVGL将在样式中搜索属性，直到找到定义该属性的样式，或者如果没有任何样式指定，则使用默认值。
-  例如， ``style_btn``可以生成默认的灰色按钮，而 ``style_btn_red``可以仅添加 ``background-color=red``覆盖背景颜色。
+  例如， ``style_btn`` 可以生成默认的灰色按钮，而 ``style_btn_red``可以仅添加 ``background-color=red`` 覆盖背景颜色。
+
 - 最近添加的样式具有更高的优先级。这意味着，如果一个属性在两个样式中都指定了，对象中最新的样式将被使用。
+
 - 一些属性（例如文字颜色）可以从父级继承，如果没有在对象中指定的话。
+
 - 对象也可以具有优先级比“正常”样式更高的本地样式。
-- 与CSS不同（在CSS中，伪类描述不同的状态，例如 ``:focus``），在LVGL中，属性分配给了给定的状态。
+
+- 与CSS不同（在CSS中，伪类描述不同的状态，例如 ``:focus`` ），在LVGL中，属性分配给了给定的状态。
+
 - 当对象更改状态时，可以应用过渡效果。
 
 
@@ -533,15 +542,15 @@ Using :cpp:func:`lv_obj_add_style`:
    <br>
 
 
-为了给对象添加样式，请使用 ``lv_obj_add_style(obj, &style, <selector>)``。 ``<selector>``是一个按位或运算的值，用于指定要添加样式的部分和状态。下面是一些示例：
+为了给对象添加样式，请使用 ``lv_obj_add_style(obj, &style, <selector>)``。 ``<selector>`` 是一个按位或运算的值，用于指定要添加样式的部分和状态。下面是一些示例：
 
 - :cpp:expr:`LV_PART_MAIN | LV_STATE_DEFAULT`
-- :cpp:enumerator:`LV_STATE_PRESSED` ：按下状态下的主要部分。可以省略:cpp:enumerator:`LV_PART_MAIN`。
-- :cpp:enumerator:`LV_PART_SCROLLBAR` ：默认状态下的滚动条部分。可以省略:cpp:enumerator:`LV_STATE_DEFAULT`。
+- :cpp:enumerator:`LV_STATE_PRESSED` ：按下状态下的主要部分。可以省略 :cpp:enumerator:`LV_PART_MAIN`。
+- :cpp:enumerator:`LV_PART_SCROLLBAR` ：默认状态下的滚动条部分。可以省略 :cpp:enumerator:`LV_STATE_DEFAULT`。
 - :cpp:expr:`LV_PART_SCROLLBAR | LV_STATE_SCROLLED`：当对象被滚动时的滚动条部分。
 - :cpp:expr:`LV_PART_INDICATOR | LV_STATE_PRESSED | LV_STATE_CHECKED`：对象被按下和选中时的指示器部分。
 
-使用:cpp:func:`lv_obj_add_style`：
+使用 :cpp:func:`lv_obj_add_style`：
 
 .. code:: c
 
@@ -582,11 +591,11 @@ Using :cpp:func:`lv_obj_replace_style`:
 
 
 使用下列语句来替换对象的特定样式：:cpp:expr:`lv_obj_replace_style(obj, old_style, new_style, selector)`。
-此函数仅在 ``selector``匹配 ``lv_obj_add_style``中使用的 ``selector``时，才会将 ``old_style``替换为 ``new_style``。
-两种样式，即 ``old_style``和 ``new_style``都不能为 ``NULL``（添加和删除分别存在不同的函数）。
-如果 ``obj``的样式中存在多个 ``old_style``和 ``selector``的组合，所有出现的情况都将被替换。函数的返回值指示是否至少进行了一次成功替换。
+此函数仅在 ``selector`` 匹配 ``lv_obj_add_style`` 中使用的 ``selector`` 时，才会将 ``old_style`` 替换为 ``new_style``。
+两种样式，即 ``old_style`` 和 ``new_style`` 都不能为 ``NULL``（添加和删除分别存在不同的函数）。
+如果 ``obj`` 的样式中存在多个 ``old_style`` 和 ``selector`` 的组合，所有出现的情况都将被替换。函数的返回值指示是否至少进行了一次成功替换。
 
-使用:cpp:func:`lv_obj_replace_style`：
+使用 :cpp:func:`lv_obj_replace_style`：
 
 .. code:: c
 
@@ -618,12 +627,12 @@ any state or part.
    <br>
 
  
-从对象中删除所有样式，请使用:cpp:expr:`lv_obj_remove_style_all(obj)`。
+从对象中删除所有样式，请使用 :cpp:expr:`lv_obj_remove_style_all(obj)`。
 
-要删除特定的样式，请使用:cpp:expr:`lv_obj_remove_style(obj, style, selector)`。
-此函数将仅在``selector``与:cpp:func:`lv_obj_add_style` 中使用的 ``selector``匹配时删除 ``style``。
-``style``可以是 ``NULL``，以仅检查 ``selector``并删除所有匹配的样式。
-``selector``可以使用:cpp:enumerator:`LV_STATE_ANY` 和:cpp:enumerator:`LV_PART_ANY`值，从任何状态或部件中删除样式。
+要删除特定的样式，请使用 :cpp:expr:`lv_obj_remove_style(obj, style, selector)`。
+此函数将仅在 ``selector`` 与 :cpp:func:`lv_obj_add_style` 中使用的 ``selector`` 匹配时删除 ``style``。
+``style`` 可以是 ``NULL``，以仅检查 ``selector`` 并删除所有匹配的样式。
+``selector`` 可以使用 :cpp:enumerator:`LV_STATE_ANY` 和 :cpp:enumerator:`LV_PART_ANY` 值，从任何状态或部件中删除样式。
 
 
 Report style changes（通知样式更改）
@@ -658,7 +667,7 @@ notified. There are 3 options to do this:
 
 1. 如果你知道改变的属性可以通过简单的重绘来应用（例如颜色或不透明度的变化），只需调用： `lv_obj_invalidate(obj)` 或者 `lv_obj_invalidate(lv_screen_active())`。
 2. 如果更改或添加了更复杂的样式属性，并且你知道哪些对象受到该样式的影响，请调用： `lv_obj_refresh_style(obj, part, property)`。要刷新所有部件和属性，请使用： `lv_obj_refresh_style(obj, LV_PART_ANY, LV_STYLE_PROP_ANY)`。
-3. 要让LVGL检查所有对象以查看它们是否使用了样式，并在需要时刷新它们，请调用： `lv_obj_report_style_change(&style)`。如果 `style`是 `NULL`，则所有对象将收到有关样式更改的通知。
+3. 要让LVGL检查所有对象以查看它们是否使用了样式，并在需要时刷新它们，请调用： `lv_obj_report_style_change(&style)`。如果 `style` 是 `NULL`，则所有对象将收到有关样式更改的通知。
 
 
 Get a property's value on an object（获取对象的属性值）
@@ -766,7 +775,7 @@ For the full list of style properties click
    <br>
 
 
-点击这里获取完整的样式属性列表:ref:`here <style_properties>`。
+点击这里获取完整的样式属性列表 :ref:`here <style_properties>`。
 
 
 Typical background properties（典型的背景属性）
@@ -873,7 +882,7 @@ initialized and added to a style:
 过渡属性可以为每个状态定义。例如，在默认状态下设置500毫秒的过渡时间意味着当对象进入默认状态时，将应用500毫秒的过渡时间。
 在按下状态下设置100毫秒的过渡时间，则在进入按下状态时会有100毫秒的过渡。这个例子的配置意味着迅速进入按下状态，然后慢慢返回默认状态。
 
-为了描述一个过渡，需要初始化一个`:cpp:struct:`lv_transition_dsc_t`变量，并将其添加到一个样式中：
+为了描述一个过渡，需要初始化一个 :cpp:struct:`lv_transition_dsc_t`变量，并将其添加到一个样式中：
 
 .. code:: c
    /*只保存其指针，所以必须是静态的、全局的或者动态分配的*/
@@ -934,11 +943,11 @@ The click area of the widget is also transformed accordingly.
    <br>
 
 
-如果 ``opa``、 ``blend_mode``、 ``transform_angle``或 ``transform_zoom``属性被设置为它们的非默认值，LVGL将为小部件及其所有子级创建一个快照，以便将整个小部件与设置的不透明度、混合模式和变换属性混合在一起。
+如果 ``opa``、 ``blend_mode``、 ``transform_angle`` 或 ``transform_zoom`` 属性被设置为它们的非默认值，LVGL将为小部件及其所有子级创建一个快照，以便将整个小部件与设置的不透明度、混合模式和变换属性混合在一起。
 
-这些属性仅在小部件的``MAIN``部分上产生作用。
+这些属性仅在小部件的 ``MAIN`` 部分上产生作用。
 
-创建的快照称为“中间层”或简称为“层”。如果只有 ``opa``和/或 ``blend_mode``设置为非默认值，LVGL可以从较小的块构建图层。这些块的大小可以通过 ``lv_conf.h``中的以下属性配置：
+创建的快照称为“中间层”或简称为“层”。如果只有 ``opa`` 和/或 ``blend_mode`` 设置为非默认值，LVGL可以从较小的块构建图层。这些块的大小可以通过 ``lv_conf.h`` 中的以下属性配置：
 
 - :cpp:enumerator:`LV_LAYER_SIMPLE_BUF_SIZE`: [字节] 的理想目标缓冲区大小。LVGL将尝试分配此内存大小。
 - :cpp:enumerator:`LV_LAYER_SIMPLE_FALLBACK_BUF_SIZE`: [字节] 如果无法分配 :cpp:enumerator:`LV_LAYER_SIMPLE_BUF_SIZE`，则使用该大小。
@@ -1050,7 +1059,7 @@ There is an example for it below.
 
 内置主题可以进行扩展。如果创建了自定义主题，则可以选择父主题。父主题的样式将在自定义主题的样式之前添加。可以通过这种方式链接任意数量的主题。例如，默认主题 -> 自定义主题 -> 深色主题。
 
-:cpp:expr:`lv_theme_set_parent(new_theme, base_theme)` 用 ``new_theme``扩展了 ``base_theme``。
+:cpp:expr:`lv_theme_set_parent(new_theme, base_theme)` 用 ``new_theme`` 扩展了 ``base_theme``。
 
 下面有一个示例。
 

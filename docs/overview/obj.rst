@@ -27,7 +27,7 @@ object.
    <br>
 
 
-在LVGL中，用户界面的 **基本构建块**是对象，也称为*Widgets*。例如，一个 :ref:`按钮 <lv_button>`、:ref:`标签 <lv_label>`、:ref:`图像 <lv_image>`、:ref:`列表 <lv_list>`、:ref:`图表 <lv_chart>` 或者 :ref:`文本区域 <lv_textarea>`。
+在LVGL中，用户界面的 **基本构建块** 是对象，也称为 *Widgets*。例如，一个 :ref:`按钮 <lv_button>`、:ref:`标签 <lv_label>`、:ref:`图像 <lv_image>`、:ref:`列表 <lv_list>`、:ref:`图表 <lv_chart>` 或者 :ref:`文本区域 <lv_textarea>`。
 
 您可以在这里查看所有的 :ref:`对象类型 <widgets>`。
 
@@ -82,7 +82,7 @@ To see all the available functions visit the :ref:`Base object's documentation <
 - 事件处理程序
 - 等等
 
-您可以使用``lv_obj_set_...``和``lv_obj_get_...``函数设置/获取这些属性。例如：
+您可以使用 ``lv_obj_set_...`` 和 ``lv_obj_get_...`` 函数设置/获取这些属性。例如：
 
 .. code:: c
 
@@ -328,29 +328,29 @@ some time. The delay is expressed in milliseconds.
 
 UI可以根据设备的当前环境进行创建。例如，可以根据当前连接的传感器创建仪表、图表、条形图和滑块。
 
-每个小部件都有自己的 **create**函数，原型如下：
+每个小部件都有自己的 **create** 函数，原型如下：
 
 .. code:: c
 
    lv_obj_t * lv_<widget>_create(lv_obj_t * parent, <如果有其他参数>);
 
-通常，创建函数只有一个 *parent*参数，指示在哪个对象上创建新的小部件。
+通常，创建函数只有一个 *parent* 参数，指示在哪个对象上创建新的小部件。
 
 返回值是指向创建的对象的指针，类型为:cpp:type:`lv_obj_t` ``*``。
 
-有一个通用的 **delete**函数适用于所有对象类型。它删除对象及其所有子对象。
+有一个通用的 **delete** 函数适用于所有对象类型。它删除对象及其所有子对象。
 
 .. code:: c
 
    void lv_obj_delete(lv_obj_t * obj);
 
-:cpp:func:`lv_obj_del`会立即删除对象。如果出于任何原因无法立即删除对象，可以使用
-:cpp:expr:`lv_obj_delete_async(obj)` ，它会在下一次调用:cpp:func:`lv_timer_handler`时执行删除操作。
-这在子对象的:cpp:enumerator:`LV_EVENT_DELETE`处理程序中删除父对象时很有用。
+:cpp:func:`lv_obj_del` 会立即删除对象。如果出于任何原因无法立即删除对象，可以使用
+:cpp:expr:`lv_obj_delete_async(obj)` ，它会在下一次调用 :cpp:func:`lv_timer_handler` 时执行删除操作。
+这在子对象的 :cpp:enumerator:`LV_EVENT_DELETE` 处理程序中删除父对象时很有用。
 
-可以使用:cpp:expr:`lv_obj_clean(obj)`删除对象的所有子对象（但不包括对象本身）。
+可以使用 :cpp:expr:`lv_obj_clean(obj)` 删除对象的所有子对象（但不包括对象本身）。
 
-可以使用:cpp:expr:`lv_obj_delete_delayed(obj, 1000)`在一定时间后删除对象。延迟以毫秒为单位表示。
+可以使用 :cpp:expr:`lv_obj_delete_delayed(obj, 1000)` 在一定时间后删除对象。延迟以毫秒为单位表示。
 
 
 .. _objects_screens:
@@ -388,7 +388,7 @@ Screens can be created with any object type. For example, a
 
    lv_obj_t * scr1 = lv_obj_create(NULL);
 
-屏幕可以使用任何对象类型创建。例如，可以使用:ref:`Base object <lv_obj>` 或者图像来创建壁纸。
+屏幕可以使用任何对象类型创建。例如，可以使用 :ref:`Base object <lv_obj>` 或者图像来创建壁纸。
 
 
 Get the active screen（获取活动屏幕）
@@ -433,7 +433,7 @@ To load a new screen, use :cpp:expr:`lv_screen_load(scr1)`.
    <br>
 
 
-使用:cpp:expr:`lv_screen_load(scr1)`来加载新的屏幕。
+使用 :cpp:expr:`lv_screen_load(scr1)` 来加载新的屏幕。
 
 
 Layers（层）
@@ -444,7 +444,7 @@ Layers（层）
    <details>
      <summary>显示原文</summary>
 
-使用:cpp:expr:`lv_screen_load(scr1)`来加载新的屏幕。
+Use:cpp:expr:`lv_screen_load(scr1)` to load the new screen.
 There are two automatically generated layers:
 
 - top layer
@@ -469,17 +469,17 @@ about layers.
    <br>
 
 
-使用:cpp:expr:`lv_screen_load(scr1)` to load the new screen.
+使用 :cpp:expr:`lv_screen_load(scr1)` 来加载新的屏幕。
 自动生成两个图层：
 
 - 顶层
 - 系统层
 
-它们与屏幕独立，将显示在每个屏幕上。 *顶层*位于屏幕上每个对象之上， *系统层*位于 *顶层*之上。您可以自由地向 *顶层*添加任何弹出窗口。但是， *系统层*受到系统级别的限制（例如，鼠标光标将与:cpp:func:`lv_indev_set_cursor`一起放置在那里）。
+它们与屏幕独立，将显示在每个屏幕上。 *顶层* 位于屏幕上每个对象之上， *系统层* 位于 *顶层* 之上。您可以自由地向 *顶层* 添加任何弹出窗口。但是， *系统层* 受到系统级别的限制（例如，鼠标光标将与 :cpp:func:`lv_indev_set_cursor` 一起放置在那里）。
 
-:cpp:func:`lv_layer_top` 和:cpp:func:`lv_layer_sys`函数返回指向顶层和系统层的指针。
+:cpp:func:`lv_layer_top` 和 :cpp:func:`lv_layer_sys` 函数返回指向顶层和系统层的指针。
 
-阅读:ref:`Layer overview <layers>`部分，以了解更多关于图层的信息。
+阅读 :ref:`Layer overview <layers>` 部分，以了解更多关于图层的信息。
 
 
 Load screen with animation（用动画加载屏幕）
@@ -513,17 +513,17 @@ during the screen animation.
    <br>
 
 
-可以使用:cpp:expr:`lv_screen_load_anim(scr, transition_type, time, delay, auto_del)`来加载一个带动画的新屏幕。存在以下过渡类型：
+可以使用 :cpp:expr:`lv_screen_load_anim(scr, transition_type, time, delay, auto_del)` 来加载一个带动画的新屏幕。存在以下过渡类型：
 
-- :cpp:enumerator:`LV_SCR_LOAD_ANIM_NONE`: 在``delay``毫秒后立即切换
-- :cpp:enumerator:`LV_SCR_LOAD_ANIM_OVER_LEFT`, :cpp:enumerator:`LV_SCR_LOAD_ANIM_OVER_RIGHT`, :cpp:enumerator:`LV_SCR_LOAD_ANIM_OVER_TOP` 和:cpp:enumerator:`LV_SCR_LOAD_ANIM_OVER_BOTTOM`：将新屏幕沿着给定方向移动到当前屏幕上方
-- :cpp:enumerator:`LV_SCR_LOAD_ANIM_OUT_LEFT`, :cpp:enumerator:`LV_SCR_LOAD_ANIM_OUT_RIGHT`, :cpp:enumerator:`LV_SCR_LOAD_ANIM_OUT_TOP` 和:cpp:enumerator:`LV_SCR_LOAD_ANIM_OUT_BOTTOM`：将旧屏幕沿着给定方向移出到当前屏幕外
-- :cpp:enumerator:`LV_SCR_LOAD_ANIM_MOVE_LEFT`, :cpp:enumerator:`LV_SCR_LOAD_ANIM_MOVE_RIGHT`, :cpp:enumerator:`LV_SCR_LOAD_ANIM_MOVE_TOP` 和:cpp:enumerator:`LV_SCR_LOAD_ANIM_MOVE_BOTTOM`：将当前屏幕和新屏幕都沿着给定方向移动
-- :cpp:enumerator:`LV_SCR_LOAD_ANIM_FADE_IN` 和:cpp:enumerator:`LV_SCR_LOAD_ANIM_FADE_OUT`：将新屏幕渐变到旧屏幕上，或反之亦然
+- :cpp:enumerator:`LV_SCR_LOAD_ANIM_NONE`: 在 ``delay`` 毫秒后立即切换
+- :cpp:enumerator:`LV_SCR_LOAD_ANIM_OVER_LEFT`, :cpp:enumerator:`LV_SCR_LOAD_ANIM_OVER_RIGHT`, :cpp:enumerator:`LV_SCR_LOAD_ANIM_OVER_TOP` 和 :cpp:enumerator:`LV_SCR_LOAD_ANIM_OVER_BOTTOM`：将新屏幕沿着给定方向移动到当前屏幕上方
+- :cpp:enumerator:`LV_SCR_LOAD_ANIM_OUT_LEFT`, :cpp:enumerator:`LV_SCR_LOAD_ANIM_OUT_RIGHT`, :cpp:enumerator:`LV_SCR_LOAD_ANIM_OUT_TOP` 和 :cpp:enumerator:`LV_SCR_LOAD_ANIM_OUT_BOTTOM`：将旧屏幕沿着给定方向移出到当前屏幕外
+- :cpp:enumerator:`LV_SCR_LOAD_ANIM_MOVE_LEFT`, :cpp:enumerator:`LV_SCR_LOAD_ANIM_MOVE_RIGHT`, :cpp:enumerator:`LV_SCR_LOAD_ANIM_MOVE_TOP` 和 :cpp:enumerator:`LV_SCR_LOAD_ANIM_MOVE_BOTTOM`：将当前屏幕和新屏幕都沿着给定方向移动
+- :cpp:enumerator:`LV_SCR_LOAD_ANIM_FADE_IN` 和 :cpp:enumerator:`LV_SCR_LOAD_ANIM_FADE_OUT`：将新屏幕渐变到旧屏幕上，或反之亦然
 
-将 ``auto_del``设置为 ``true``将在动画完成后自动删除旧屏幕。
+将 ``auto_del`` 设置为 ``true`` 将在动画完成后自动删除旧屏幕。
 
-新屏幕将在 ``delay``时间后动画开始时变为活动状态（由:cpp:func:`lv_screen_active`返回）。在屏幕动画期间，所有输入都将被禁用。
+新屏幕将在 ``delay`` 时间后动画开始时变为活动状态（由 :cpp:func:`lv_screen_active` 返回）。在屏幕动画期间，所有输入都将被禁用。
 
 
 Handling multiple displays（处理多个显示器）
@@ -550,11 +550,11 @@ Visit :ref:`display_multi_display_support` to learn more.
    <br>
 
 
-屏幕是在当前选定的 *默认显示器*上创建的。 *默认显示器*是最后使用:cpp:func:`lv_display_create` 注册的显示器。您还可以使用:cpp:expr:`lv_display_set_default(disp)`显式地选择新的默认显示器。
+屏幕是在当前选定的 *默认显示器* 上创建的。 *默认显示器* 是最后使用 :cpp:func:`lv_display_create` 注册的显示器。您还可以使用 :cpp:expr:`lv_display_set_default(disp)` 显式地选择新的默认显示器。
 
-:cpp:func:`lv_screen_active` ，:cpp:func:`lv_screen_load` 和:cpp:func:`lv_screen_load_anim`操作默认显示器。
+:cpp:func:`lv_screen_active` ，:cpp:func:`lv_screen_load` 和 :cpp:func:`lv_screen_load_anim` 操作默认显示器。
 
-请访问:ref:`display_multi_display_support`以了解更多信息。
+请访问 :ref:`display_multi_display_support` 以了解更多信息。
 
 
 .. _objects_parts:
@@ -593,7 +593,7 @@ widgets. They are described in more detail in the
    <br>
 
 
-部件嵌入式由多个部分组成。例如，一个:ref:`Base object <lv_obj>`使用主要部分和滚动条部分，而一个:ref:`Slider <lv_slider>`使用主要部分、指示器部分和旋钮部分。部件类似于CSS中的 *伪元素*。
+部件嵌入式由多个部分组成。例如，一个 :ref:`Base object <lv_obj>` 使用主要部分和滚动条部分，而一个 :ref:`Slider <lv_slider>` 使用主要部分、指示器部分和旋钮部分。部件类似于CSS中的 *伪元素*。
 
 LVGL中存在以下预定义的部分：
 
@@ -606,7 +606,7 @@ LVGL中存在以下预定义的部分：
 - :cpp:enumerator:`LV_PART_CURSOR`：标记特定位置，例如文本区域或图表的光标
 - :cpp:enumerator:`LV_PART_CUSTOM_FIRST`：可以从这里添加自定义部分。
 
-部件的主要目的是允许对部件的"组件"进行样式设置。在:ref:`Style overview <styles>`部分中对它们进行了更详细的描述。
+部件的主要目的是允许对部件的"组件"进行样式设置。在 :ref:`Style overview <styles>` 部分中对它们进行了更详细的描述。
 
 
 .. _objects_states:
@@ -672,7 +672,7 @@ To learn more about the states read the related section of the
 要设置或清除给定的状态（但保持其他状态不变），可以使用 ``lv_obj_add/remove_state(obj, LV_STATE_...)``。
 在这两种情况下，也可以使用按位或运算符来组合状态值。例如： ``lv_obj_add_state(obj, part, LV_STATE_PRESSED | LV_PRESSED_CHECKED)``。
 
-要了解更多关于状态的内容，请阅读:ref:`样式概述 <styles>`中的相关部分。
+要了解更多关于状态的内容，请阅读 :ref:`Style overview <styles>` 中的相关部分。
 
 
 .. _objects_snapshot:
@@ -694,7 +694,7 @@ children. Check details in :ref:`snapshot`.
    <br>
 
 
-一个对象和其子对象的快照图像可以一起生成。在:ref:`snapshot`中查看详情。
+一个对象和其子对象的快照图像可以一起生成。在 :ref:`snapshot` 中查看详情。
 
 
 .. _objects_api:

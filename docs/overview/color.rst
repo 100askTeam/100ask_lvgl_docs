@@ -24,7 +24,7 @@ This type and format is used in almost all APIs regardless to :cpp:expr:`LV_COLO
 
 颜色模块处理所有与颜色相关的功能，如改变颜色深度、从十六进制代码创建颜色、在颜色深度之间转换、混合颜色等。
 
-类型 :cpp:type:`lv_color_t` 用于以RGB888格式存储颜色。无论 :cpp:expr:`LV_COLOR_DEPTH`如何，几乎所有 API 中都使用此类型和格式。
+类型 :cpp:type:`lv_color_t` 用于以RGB888格式存储颜色。无论 :cpp:expr:`LV_COLOR_DEPTH` 如何，几乎所有 API 中都使用此类型和格式。
 
 
 .. _color_create:
@@ -268,7 +268,7 @@ mixing *ratio*.
    <br>
 
 
-描述不透明度时，创建了`:cpp:type:`lv_opa_t`类型，该类型由`uint8_t`创建。
+描述不透明度时，创建了 :cpp:type:`lv_opa_t` 类型，该类型由 `uint8_t` 创建。
 还引入了一些特殊目的的定义：
 
 -  :cpp:enumerator:`LV_OPA_TRANSP` 值为0，表示完全透明，使颜色完全透明
@@ -277,7 +277,7 @@ mixing *ratio*.
 -  :cpp:enumerator:`LV_OPA_90` 值为229，表示颜色几乎完全覆盖
 -  :cpp:enumerator:`LV_OPA_COVER` 值为255，表示颜色完全覆盖（完全不透明）
 
-您还可以在`:cpp:func:`lv_color_mix`中使用 `LV_OPA_*`` 定义作为混合的 *比例*。
+您还可以在 :cpp:func:`lv_color_mix` 中使用 ``LV_OPA_*`` 定义作为混合的 *比例*。
 
 
 .. _color_api:

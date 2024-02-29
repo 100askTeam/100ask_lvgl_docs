@@ -46,7 +46,7 @@ functions in LVGL. For example :cpp:expr:`lv_obj_set_x(obj, value)` or
    <br>
 
 
-该原型与LVGL中的大多数属性*set*函数兼容。例如 :cpp:expr:`lv_obj_set_x(obj, value)` or
+该原型与LVGL中的大多数属性 *set* 函数兼容。例如 :cpp:expr:`lv_obj_set_x(obj, value)` or
 :cpp:expr:`lv_obj_set_width(obj, value)`
 
 
@@ -150,7 +150,7 @@ will remove any existing animations for such a pair.
    <br>
 
 
-你可以同时对同一个变量应用多种不同的动画。例如，使用:cpp:func:`lv_obj_set_x`和 :cpp:func:`lv_obj_set_y` 
+你可以同时对同一个变量应用多种不同的动画。例如，使用 :cpp:func:`lv_obj_set_x` 和 :cpp:func:`lv_obj_set_y` 
 来同时设置 x 和 y 坐标的动画。然而，同一个变量和函数对只能存在一个动画，:cpp:func:`lv_anim_start`
  会移除任何给定变量和函数对的现有动画。
 
@@ -230,7 +230,7 @@ pixels so *20* means *20 px/sec* speed.
 :cpp:expr:`lv_anim_speed_to_time(speed, start, end)` 函数计算以给定
 速度从起始值达到终止值所需的时间（以毫秒为单位）。速度的单位是 *单位/秒* 。
 例如，:cpp:expr:`lv_anim_speed_to_time(20, 0, 100)` 将得到5000毫秒。
-例如，在:cpp:func:`lv_obj_set_x`的情况下， *单位* 是像素，所以 *20* 表示 *20 像素/秒* 的速度。  
+例如，在 :cpp:func:`lv_obj_set_x` 的情况下， *单位* 是像素，所以 *20* 表示 *20 像素/秒* 的速度。  
 
 
 .. _animations_delete:
@@ -252,7 +252,7 @@ provide the animated variable and its animator function.
    <br>
 
 
-如果您提供动画变量及其动画器函数，您可以使用 :cpp:expr:`lv_anim_delete(var, func)`删除动画。
+如果您提供动画变量及其动画器函数，您可以使用 :cpp:expr:`lv_anim_delete(var, func)` 删除动画。
 
 
 .. _animations_timeline:
@@ -289,11 +289,11 @@ timeline.
 
 时间线是多个动画的集合，使得创建复杂的复合动画变得容易。
 
-首先，创建一个动画元素，但不要调用:cpp:func:`lv_anim_start`。
+首先，创建一个动画元素，但不要调用 :cpp:func:`lv_anim_start`。
 
-其次，通过调用:cpp:func:`lv_anim_timeline_create`创建一个动画时间线对象。
+其次，通过调用 :cpp:func:`lv_anim_timeline_create` 创建一个动画时间线对象。
 
-第三，通过调用:cpp:expr:`lv_anim_timeline_add(at, start_time, &a)`.将动画元素添加到动画时间线中。 ``start_time``是动画在时间线上的开始时间。请注意， ``start_time``将覆盖 ``delay``的值。
+第三，通过调用 :cpp:expr:`lv_anim_timeline_add(at, start_time, &a)`.将动画元素添加到动画时间线中。 ``start_time``是动画在时间线上的开始时间。请注意， ``start_time``将覆盖 ``delay``的值。
 
 最后，调用 :cpp:expr:`lv_anim_timeline_start(at)` 来启动动画时间线。
 

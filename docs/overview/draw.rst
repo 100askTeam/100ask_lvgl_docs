@@ -135,11 +135,11 @@ LVGL刷新屏幕的步骤如下：
    - 部分超出父级的区域会被裁剪到父级的区域。
    - 在其他屏幕上的对象不会添加。
 
-3. 每隔一段时间（在 ``lv_conf.h``中设置的：c:macro:`LV_DEF_REFR_PERIOD`）进行以下操作：
+3. 每隔一段时间（在 ``lv_conf.h`` 中设置的 :c:macro:`LV_DEF_REFR_PERIOD`）进行以下操作：
 
    - LVGL检查无效区域，并将相邻或相交的区域合并。
    - 如果第一个合并的区域小于“绘制缓冲区”，则将该区域的内容简单地呈现到“绘制缓冲区”中。如果该区域无法容纳到缓冲区中，则尽可能多地绘制到“绘制缓冲区”中。
-   - 渲染完区域后，从显示驱动程序调用 ``flush_cb``来刷新显示。
+   - 渲染完区域后，从显示驱动程序调用 ``flush_cb`` 来刷新显示。
    - 如果区域超过了缓冲区的大小，则继续渲染剩余部分。
    - 对于剩余的合并区域，重复相同的过程。
 
@@ -147,9 +147,9 @@ LVGL刷新屏幕的步骤如下：
 
 关于绘制机制，缓冲区模式之间的区别如下：
 
-1. **单缓冲区** - LVGL在开始重绘下一部分之前需要等待:cpp:func:`lv_display_flush_ready`（从``flush_cb``中调用）。
-2. **双缓冲区** - LVGL可以在第一个缓冲区被发送给 ``flush_cb``后立即绘制到第二个缓冲区，因为刷新应该由DMA（或类似的硬件）在后台进行。
-3. **双缓冲技术** - ``flush_cb``应该仅交换帧缓冲区的地址。
+1. **单缓冲区** - LVGL在开始重绘下一部分之前需要等待 :cpp:func:`lv_display_flush_ready`（从 ``flush_cb`` 中调用）。
+2. **双缓冲区** - LVGL可以在第一个缓冲区被发送给 ``flush_cb`` 后立即绘制到第二个缓冲区，因为刷新应该由DMA（或类似的硬件）在后台进行。
+3. **双缓冲技术** - ``flush_cb`` 应该仅交换帧缓冲区的地址。
 
 
 .. _drawing_masking:
@@ -223,21 +223,21 @@ Masks are used to create almost every basic primitive:
    <br>
 
 
-*遮罩*是LVGL绘图引擎的基本概念。使用LVGL时不需要了解这里描述的机制，但如果您想自定义绘图，了解绘图工作原理可能会很有趣。了解遮罩对于自定义绘图非常有用。
+*遮罩* 是LVGL绘图引擎的基本概念。使用LVGL时不需要了解这里描述的机制，但如果您想自定义绘图，了解绘图工作原理可能会很有趣。了解遮罩对于自定义绘图非常有用。
 
 为了学习遮罩，我们首先来看一下绘图的步骤。LVGL执行以下步骤来渲染任何形状、图像或文本。它可以被视为一个绘图管道。
 
-1. **准备绘图描述符**：从对象的样式（例如：cpp:struct:`lv_draw_rect_dsc_t`）创建绘图描述符。这给我们提供了绘图的参数，例如颜色、宽度、不透明度、字体、半径等。
-2. **调用绘图函数**：使用绘图描述符和其他一些参数（例如：cpp:func:`lv_draw_rect`）调用绘图函数。它将把基本形状渲染到当前的绘图缓冲区。
+1. **准备绘图描述符**：从对象的样式（例如 :cpp:struct:`lv_draw_rect_dsc_t`）创建绘图描述符。这给我们提供了绘图的参数，例如颜色、宽度、不透明度、字体、半径等。
+2. **调用绘图函数**：使用绘图描述符和其他一些参数（例如 :cpp:func:`lv_draw_rect`）调用绘图函数。它将把基本形状渲染到当前的绘图缓冲区。
 3. **创建遮罩**：如果形状非常简单，不需要遮罩，就转到步骤#5。否则，在绘图函数中创建所需的遮罩（例如圆角矩形遮罩）。
-4. **计算所有添加的遮罩**：它将不透明度值与创建的遮罩的“形状”合成到 *遮罩缓冲区*中。例如，对于“线遮罩”，根据遮罩的参数，保持缓冲区的一侧不变（默认为255），将其余部分设置为0，表示应该移除该侧。
+4. **计算所有添加的遮罩**：它将不透明度值与创建的遮罩的“形状”合成到 *遮罩缓冲区* 中。例如，对于“线遮罩”，根据遮罩的参数，保持缓冲区的一侧不变（默认为255），将其余部分设置为0，表示应该移除该侧。
 5. **混合颜色或图像**：在混合过程中，处理遮罩（使某些像素透明或不透明）、混合模式（添加、减去等）和颜色/图像的不透明度。
 
 LVGL具有以下内置的遮罩类型，可以实时计算和应用：
 
-- :cpp:enumerator:`LV_DRAW_MASK_TYPE_LINE`： 从线条中删除一侧（上、下、左或右）。:cpp:func:`lv_draw_line`使用了它的四个实例。基本上，每个（倾斜）线条都由四个线遮罩组成，形成一个矩形。
+- :cpp:enumerator:`LV_DRAW_MASK_TYPE_LINE`： 从线条中删除一侧（上、下、左或右）。:cpp:func:`lv_draw_line` 使用了它的四个实例。基本上，每个（倾斜）线条都由四个线遮罩组成，形成一个矩形。
 - :cpp:enumerator:`LV_DRAW_MASK_TYPE_RADIUS`： 根据半径将矩形的内部或外部的角删除，从而创建出圆角过渡效果。将半径设置为较大的值（:c:macro:`LV_RADIUS_CIRCLE`），也可用于创建圆。
-- :cpp:enumerator:`LV_DRAW_MASK_TYPE_ANGLE`： 删除一个圆形扇区。:cpp:func:`lv_draw_arc`使用它来删除“空”扇区。
+- :cpp:enumerator:`LV_DRAW_MASK_TYPE_ANGLE`： 删除一个圆形扇区。:cpp:func:`lv_draw_arc` 使用它来删除“空”扇区。
 - :cpp:enumerator:`LV_DRAW_MASK_TYPE_FADE`：创建一个垂直渐变（改变不透明度）。
 - :cpp:enumerator:`LV_DRAW_MASK_TYPE_MAP`：遮罩存储在位图数组中，并应用必要的部分。
 
@@ -300,11 +300,11 @@ needs to be valid while in use.
 - :cpp:type:`lv_draw_mask_fade_param_t`
 - :cpp:type:`lv_draw_mask_map_param_t`
 
-1. 使用``lv_draw_mask_<type>_init``初始化遮罩参数。查看``lv_draw_mask.h``获取整体API。
-2. 用 ``int16_t mask_id =`` :cpp:expr:`lv_draw_mask_add(&param, ptr)`将遮罩参数添加到绘图引擎。 ``ptr``可以是任何用来标识遮罩的指针（如果未使用则为 ``NULL``）。
+1. 使用 ``lv_draw_mask_<type>_init`` 初始化遮罩参数。查看 ``lv_draw_mask.h`` 获取整体API。
+2. 用 ``int16_t mask_id =`` :cpp:expr:`lv_draw_mask_add(&param, ptr)` 将遮罩参数添加到绘图引擎。 ``ptr`` 可以是任何用来标识遮罩的指针（如果未使用则为 ``NULL``）。
 3. 调用绘图函数
-4. 用:cpp:expr:`lv_draw_mask_remove_id(mask_id)`或 :cpp:expr:`lv_draw_mask_remove_custom(ptr)`从绘图引擎中移除遮罩。
-5. 用:cpp:expr:`lv_draw_mask_free_param(&param)`释放参数。
+4. 用 :cpp:expr:`lv_draw_mask_remove_id(mask_id)` 或 :cpp:expr:`lv_draw_mask_remove_custom(ptr)` 从绘图引擎中移除遮罩。
+5. 用 :cpp:expr:`lv_draw_mask_free_param(&param)` 释放参数。
 
 一个参数可以被添加和移除任意次数，但当不再需要时需要释放。
 
@@ -346,7 +346,7 @@ Each of these events is described in detail below.
 为了确保很高的灵活性，LVGL在绘制过程中发送了大量事件，其中包含参数，告诉LVGL即将要绘制什么。
 这些参数的一些字段可以被修改以绘制其他内容，或者可以手动添加任何自定义的绘图操作。
 
-对于这一点的一个很好的应用案例是 :ref:`Button matrix <lv_buttonmatrix>`部件。
+对于这一点的一个很好的应用案例是 :ref:`Button matrix <lv_buttonmatrix>` 部件。
 默认情况下，它的按钮可以在不同状态下进行样式设置，但无法逐个设置按钮的样式。
 然而，对于每个按钮都会发送一个事件，例如，您可以告诉LVGL在特定按钮上使用不同的颜色，或者在某些按钮上手动绘制图像。
 
@@ -444,7 +444,7 @@ well and it's also a good place to remove any masks created in
    <br>
 
 
-当主要绘图完成时调用。您可以在这里绘制任何内容，同时这也是在:cpp:enumerator:`LV_EVENT_DRAW_MAIN_BEGIN`中创建的任何遮罩进行移除的好地方。
+当主要绘图完成时调用。您可以在这里绘制任何内容，同时这也是在 :cpp:enumerator:`LV_EVENT_DRAW_MAIN_BEGIN` 中创建的任何遮罩进行移除的好地方。
 
 .. _drawing_hooks_post:
 
@@ -472,7 +472,7 @@ on a limited area.
 
 绘制后事件在对象的所有子对象绘制完成后被调用。例如，LVGL使用绘制后阶段来绘制滚动条，因为它们应该位于所有子对象的上方。
 
-可以使用:cpp:expr:`lv_event_get_draw_ctx(event)`来获取当前的绘制上下文，在该结构中包含了剪辑区域。绘制函数需要使用剪辑区域限制绘制的区域。
+可以使用 :cpp:expr:`lv_event_get_draw_ctx(event)` 来获取当前的绘制上下文，在该结构中包含了剪辑区域。绘制函数需要使用剪辑区域限制绘制的区域。
 
 
 LV_EVENT_DRAW_POST_BEGIN
@@ -531,7 +531,7 @@ Called when post drawing has finished. If masks were not removed in
    <br>
 
 
-在绘制完成后调用。如果在:cpp:enumerator:`LV_EVENT_DRAW_MAIN_END` 事件中没有移除遮罩，则应在此处移除。
+在绘制完成后调用。如果在 :cpp:enumerator:`LV_EVENT_DRAW_MAIN_END` 事件中没有移除遮罩，则应在此处移除。
 
 
 .. _drawing_hooks_parts:
@@ -597,9 +597,9 @@ documentation.
 
 当LVGL绘制对象的一部分时（例如滑块的指示器，表格的单元格或按钮矩阵的按钮），它在绘制该部分之前和之后发送事件，并携带一些绘制的上下文信息。这样可以通过掩码、额外绘制或更改LVGL计划用于绘制的参数，在非常低的级别上更改部分。
 
-在这些事件中，使用:cpp:struct:`lv_obj_draw_part_dsc_t`结构来描述绘制的上下文。并非所有的部分和小部件都设置了所有字段。要查看哪些字段为小部件设置了，请参考小部件的文档。
+在这些事件中，使用 :cpp:struct:`lv_obj_draw_part_dsc_t` 结构来描述绘制的上下文。并非所有的部分和小部件都设置了所有字段。要查看哪些字段为小部件设置了，请参考小部件的文档。
 
-:cpp:struct:`lv_obj_draw_part_dsc_t`有以下字段：
+:cpp:struct:`lv_obj_draw_part_dsc_t` 有以下字段：
 
 .. code:: c
 
@@ -630,7 +630,7 @@ documentation.
         const void * sub_part_ptr;    /**< 指向部分中某个内容的指针。例如图表系列 */
     } lv_obj_draw_part_dsc_t;
 
-可以使用:cpp:expr:`lv_event_get_draw_part_dsc(event)`来获取指向:cpp:struct:`lv_obj_draw_part_dsc_t`的指针。
+可以使用 :cpp:expr:`lv_event_get_draw_part_dsc(event)` 来获取指向 :cpp:struct:`lv_obj_draw_part_dsc_t` 的指针。
 
 
 LV_EVENT_DRAW_PART_BEGIN
@@ -650,7 +650,7 @@ descriptors (e.g.  ``rect_dsc``), or add masks.
    <br>
 
 
-开始绘制一个零件。这是修改绘图描述符（例如``rect_dsc``）或添加遮罩的好地方。
+开始绘制一个零件。这是修改绘图描述符（例如 ``rect_dsc``）或添加遮罩的好地方。
 
 
 LV_EVENT_DRAW_PART_END
@@ -728,7 +728,7 @@ about it.
 
 这个事件用于检查一个对象是否完全覆盖了一个区域。
 
-:cpp:expr:`lv_event_get_cover_area(event)` 返回一个指针，指向要检查的区域，而:cpp:expr:`lv_event_set_cover_res(event, res)`可以用来设置这些结果中的一个：
+:cpp:expr:`lv_event_get_cover_area(event)` 返回一个指针，指向要检查的区域，而 :cpp:expr:`lv_event_set_cover_res(event, res)` 可以用来设置这些结果中的一个：
 
 - :cpp:enumerator:`LV_COVER_RES_COVER`：该区域被对象完全覆盖
 - :cpp:enumerator:`LV_COVER_RES_NOT_COVER`：该区域未被对象覆盖
@@ -775,7 +775,7 @@ You can simply set the required draw area with
 
 如果您需要在小部件的外部绘制，请告诉LVGL以便提供额外的绘制空间。假设您创建了一个事件，在滑块的旋钮上方写入当前值。在这种情况下，LVGL需要知道滑块的绘制区域应该比文本所需的大小更大。
 
-您可以使用:cpp:expr:`lv_event_set_ext_draw_size(e, size)`来简单设置所需的绘制区域。
+您可以使用 :cpp:expr:`lv_event_set_ext_draw_size(e, size)` 来简单设置所需的绘制区域。
 
 
 .. _drawing_api:

@@ -192,11 +192,11 @@ The following event codes exist:
 
 事件代码可以分为以下类别：- 输入设备事件 - 绘图事件 - 其他事件 - 特殊事件 - 自定义事件
 
-所有对象（如按钮/标签/滑块等）无论其类型，都会接收*输入设备*、*绘图*和*其他*事件。
+所有对象（如按钮/标签/滑块等）无论其类型，都会接收 *输入设备*、 *绘图* 和 *其他* 事件。
 
-然而，*特殊事件*是特定于特定部件类型的。请参阅:ref:`部件文档<widgets>`以了解它们何时被发送。
+然而， *特殊事件* 是特定于特定部件类型的。请参阅 :ref:`widgets' documentation <widgets>` 以了解它们何时被发送。
 
-*自定义事件*是用户添加的，并且永远不会被LVGL发送。
+*自定义事件* 是用户添加的，并且永远不会被LVGL发送。
 
 存在以下事件代码：  
 
@@ -280,8 +280,8 @@ Drawing events（绘图事件）
    <br>
 
 
-- :cpp:enumerator:`LV_EVENT_COVER_CHECK`: 检查对象是否完全覆盖了一个区域。事件参数是:cpp:type:`lv_cover_check_info_t *`。
-- :cpp:enumerator:`LV_EVENT_REFR_EXT_DRAW_SIZE`: 获取对象周围所需的额外绘制区域（例如用于阴影）。事件参数是:cpp:type:`int32_t *`来存储大小。
+- :cpp:enumerator:`LV_EVENT_COVER_CHECK`: 检查对象是否完全覆盖了一个区域。事件参数是 :cpp:type:`lv_cover_check_info_t *`。
+- :cpp:enumerator:`LV_EVENT_REFR_EXT_DRAW_SIZE`: 获取对象周围所需的额外绘制区域（例如用于阴影）。事件参数是 :cpp:type:`int32_t *` 来存储大小。
 - :cpp:enumerator:`LV_EVENT_DRAW_MAIN_BEGIN`: 开始主绘制阶段
 - :cpp:enumerator:`LV_EVENT_DRAW_MAIN`: 执行主绘制
 - :cpp:enumerator:`LV_EVENT_DRAW_MAIN_END`: 结束主绘制阶段
@@ -433,7 +433,7 @@ The same works for display and input devices with
    <br>
 
 
-手动发送事件到对象，使用以下代码：cpp:expr:`lv_obj_send_event(obj, <EVENT_CODE>, &some_data)`。
+手动发送事件到对象，使用以下代码 :cpp:expr:`lv_obj_send_event(obj, <EVENT_CODE>, &some_data)`。
 
 例如，这可以用于通过模拟按钮按下来手动关闭消息框（尽管有更简单的方法来做到这一点）：
 
@@ -470,7 +470,7 @@ user notify an object to refresh itself. Some examples:
    <br>
 
 
-:cpp:enumerator:`LV_EVENT_REFRESH`是一个特殊事件，因为它被设计用来让用户通知对象刷新自身。一些例子包括：
+:cpp:enumerator:`LV_EVENT_REFRESH` 是一个特殊事件，因为它被设计用来让用户通知对象刷新自身。一些例子包括：
 
 - 通知标签根据一个或多个变量刷新其文本（比如当前时间）
 - 当语言发生变化时刷新标签
@@ -501,13 +501,13 @@ contains all data about the event. The following values can be gotten from it:
    <br>
 
 
-:cpp:type:`lv_event_t`是传递给事件回调函数的唯一参数，它包含了该事件的所有数据。可以从中获取以下值：
+:cpp:type:`lv_event_t` 是传递给事件回调函数的唯一参数，它包含了该事件的所有数据。可以从中获取以下值：
 
 - :cpp:expr:`lv_event_get_code(e)`：获取事件代码
-- :cpp:expr:`lv_event_get_current_target(e)`：获取发送事件的对象。即，正在被调用事件处理器的对象。
-- :cpp:expr:`lv_event_get_target(e)`： 获取最初触发事件的对象（如果启用了:ref:`事件冒泡<events_bubbling>`，则与:cpp:func:`lv_event_get_target`不同）
-- :cpp:expr:`lv_event_get_user_data(e)`： 获取作为:cpp:func:`lv_obj_add_event`的最后一个参数传递的指针。
-- :cpp:expr:`lv_event_get_param(e)`： 获取作为:cpp:func:`lv_event_send`的最后一个参数传递的参数。
+- :cpp:expr:`lv_event_get_current_target(e)`：获取发送事件的对象。即，正在被调用事件处理器的对象。 
+- :cpp:expr:`lv_event_get_target(e)`： 获取最初触发事件的对象（如果启用了 :ref:`event bubbling <events_bubbling>` ，则与 :cpp:func:`lv_event_get_target` 不同）
+- :cpp:expr:`lv_event_get_user_data(e)`： 获取作为 :cpp:func:`lv_obj_add_event` 的最后一个参数传递的指针。
+- :cpp:expr:`lv_event_get_param(e)`： 获取作为 :cpp:func:`lv_event_send` 的最后一个参数传递的参数。
 
 
 .. _events_bubbling:

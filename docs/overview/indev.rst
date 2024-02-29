@@ -83,7 +83,7 @@ Note that the cursor object should have
   lv_image_set_src(cursor_obj, &mouse_cursor_icon);            /*  设置图片源  */
   lv_indev_set_cursor(mouse_indev, cursor_obj);                /*  将图片对象与驱动程序连接  */
 
-注意，光标对象应该有这样的设置 `lv_obj_remove_flag(cursor_obj, LV_OBJ_FLAG_CLICKABLE)`。对于图片，默认情况下是不能 *点击*的。
+注意，光标对象应该有这样的设置 `lv_obj_remove_flag(cursor_obj, LV_OBJ_FLAG_CLICKABLE)`。对于图片，默认情况下是不能 *点击* 的。
 
 
 .. _indev_gestures:
@@ -297,7 +297,7 @@ and :cpp:enumerator:`LV_KEY_ENTER`.
 
 - :cpp:enumerator:`LV_KEY_NEXT`：焦点移至下一个对象
 - :cpp:enumerator:`LV_KEY_PREV`：焦点移至上一个对象
-- :cpp:enumerator:`LV_KEY_ENTER`：触发 :cpp:enumerator:`LV_EVENT_PRESSED` 、:cpp:enumerator:`LV_EVENT_CLICKED` 或:cpp:enumerator:`LV_EVENT_LONG_PRESSED`等事件
+- :cpp:enumerator:`LV_KEY_ENTER`：触发 :cpp:enumerator:`LV_EVENT_PRESSED` 、:cpp:enumerator:`LV_EVENT_CLICKED` 或 :cpp:enumerator:`LV_EVENT_LONG_PRESSED` 等事件
 - :cpp:enumerator:`LV_KEY_UP`：增加值或向上移动
 - :cpp:enumerator:`LV_KEY_DOWN`：减少值或向下移动
 - :cpp:enumerator:`LV_KEY_RIGHT`：增加值或向右移动
@@ -358,14 +358,14 @@ meaning (e.g. :ref:`Button <lv_button>`), a long press is required.
 
 
 由于键盘有大量按键，因此可以轻松使用键盘在对象之间导航并对其进行编辑。但是编码器的“按键”数量有限，因此使用默认选项进行导航很困难。
-*导航*和 *编辑*模式被用来避免这一问题。
+*导航* 和 *编辑* 模式被用来避免这一问题。
 
-在 *导航*模式下，编码器的 :cpp:enumerator:`LV_KEY_LEFT` 或 :cpp:enumerator:`LV_KEY_RIGHT` 被转换为 :cpp:enumerator:`LV_KEY_NEXT` 或 :cpp:enumerator:`LV_KEY_PREV`。
-因此，可以通过旋转编码器选择下一个或上一个对象。按下 :cpp:enumerator:`LV_KEY_ENTER` 将切换到 *编辑*模式。
+在 *导航* 模式下，编码器的 :cpp:enumerator:`LV_KEY_LEFT` 或 :cpp:enumerator:`LV_KEY_RIGHT` 被转换为 :cpp:enumerator:`LV_KEY_NEXT` 或 :cpp:enumerator:`LV_KEY_PREV`。
+因此，可以通过旋转编码器选择下一个或上一个对象。按下 :cpp:enumerator:`LV_KEY_ENTER` 将切换到 *编辑* 模式。
 
-在 *编辑*模式下，通常使用 :cpp:enumerator:`LV_KEY_NEXT` 和 :cpp:enumerator:`LV_KEY_PREV` 来修改对象。
-根据对象的类型，短按或长按 :cpp:enumerator:`LV_KEY_ENTER` 可切换回 *导航*模式。
-通常，无法按压的对象（比如 :ref:`滑块<lv_slider>`）在短按时会离开 *编辑*模式。
+在 *编辑* 模式下，通常使用 :cpp:enumerator:`LV_KEY_NEXT` 和 :cpp:enumerator:`LV_KEY_PREV` 来修改对象。
+根据对象的类型，短按或长按 :cpp:enumerator:`LV_KEY_ENTER` 可切换回 *导航* 模式。
+通常，无法按压的对象（比如 :ref:`滑块<lv_slider>`）在短按时会离开 *编辑* 模式。
 但是需要在有短按功能的对象上进行长按，比如 :ref:`按钮<lv_button>`。
 
 
@@ -391,9 +391,9 @@ with :cpp:expr:`lv_indev_set_group(my_indev, g)`.
    <br>
 
 
-交互式小部件，比如按钮、复选框、滑块等，可以自动添加到默认组中。只需创建一个组:cpp:expr:`lv_group_t * g = lv_group_create()`并将默认组设为:g:cpp:expr:`lv_group_set_default(g)`。
+交互式小部件，比如按钮、复选框、滑块等，可以自动添加到默认组中。只需创建一个组 :cpp:expr:`lv_group_t * g = lv_group_create()` 并将默认组设为 :g:cpp:expr:`lv_group_set_default(g)`。
 
-不要忘记用:cpp:expr:`lv_indev_set_group(my_indev, g)`将一个或多个输入设备分配给默认组。
+不要忘记用 :cpp:expr:`lv_indev_set_group(my_indev, g)` 将一个或多个输入设备分配给默认组。
 
 
 Styling（风格样式）
@@ -421,9 +421,9 @@ For a more detailed description read the
    <br>
 
 
-如果通过触控板点击或通过编码器或键盘输入来聚焦一个对象，它会进入 `LV_STATE_FOCUSED` 状态。因此，聚焦的样式将被应用于该对象。
+如果通过触控板点击或通过编码器或键盘输入来聚焦一个对象，它会进入 :cpp:enumerator:`LV_STATE_FOCUSED` 状态。因此，聚焦的样式将被应用于该对象。
 
-如果一个对象切换到编辑模式，它会进入 `LV_STATE_FOCUSED | LV_STATE_EDITED` 状态，因此这些样式属性将会显示出来。
+如果一个对象切换到编辑模式，它会进入:cpp:expr:`LV_STATE_FOCUSED | LV_STATE_EDITED` 状态，因此这些样式属性将会显示出来。
 
 要获取更详细的描述，请阅读 `Style（样式）<https://docs.lvgl.io/master/overview/style.html>`__ 部分。
 

@@ -15,19 +15,17 @@ In LVGL "layers" can be interpreted in various ways:
 2. Permanent screen-sized layers can be also used
 3. For some draw operations LVGL renders a widget and all its children into a buffer (a.k.a. layer) first
 
+.. raw:: html
+
+   </details>
+   <br>
+
 
 在LVGL中，“层”可以有各种不同的解释：
 
 1. 控件创建的顺序自然地创建了控件的层次结构
 2. 也可以使用永久的屏幕大小的层
 3. 对于一些绘制操作，LVGL首先将一个控件及其所有子控件渲染到一个缓冲区（也称为层）中
-
-
-.. raw:: html
-
-   </details>
-   <br>
-
 
 
 .. _layers_creation:
@@ -195,19 +193,19 @@ always visible.
    <br>
 
 
-LVGL使用两个特殊的图层，分别是 ``layer_top`` 和 ``layer_sys``。这两个图层在显示器的所有屏幕上是可见且共享的。但是，它们不会在多个物理显示器之间共享。 ``layer_top``始终位于默认屏幕(:cpp:func:`lv_screen_active`)的顶部， ``layer_sys``位于 ``layer_top``的顶部。
+LVGL使用两个特殊的图层，分别是 ``layer_top`` 和 ``layer_sys``。这两个图层在显示器的所有屏幕上是可见且共享的。但是，它们不会在多个物理显示器之间共享。 ``layer_top`` 始终位于默认屏幕(:cpp:func:`lv_screen_active`)的顶部， ``layer_sys`` 位于 ``layer_top`` 的顶部。
 
-要获取这些图层，请使用:cpp:func:`lv_layer_top`和:cpp:func:`lv_layer_sys`。
+要获取这些图层，请使用 :cpp:func:`lv_layer_top`和:cpp:func:`lv_layer_sys`。
 
 这些图层和其他任何小部件一样工作，即可以设置样式、滚动，并且可以在上面创建任何类型的小部件。
 
-用户可以使用``layer_top``创建一些在各个地方都可见的内容。例如，菜单栏、弹出窗口等。如果启用了 ``click``属性，则 ``layer_top``将吸收所有用户点击事件，并作为模态框工作。
+用户可以使用 ``layer_top`` 创建一些在各个地方都可见的内容。例如，菜单栏、弹出窗口等。如果启用了 ``click`` 属性，则 ``layer_top`` 将吸收所有用户点击事件，并作为模态框工作。
 
 .. code:: c
 
    lv_obj_add_flag(lv_layer_top(), LV_OBJ_FLAG_CLICKABLE);
 
-``layer_sys``在LVGL中也用于类似的目的。例如，它将鼠标指针放在所有图层之上，以确保其始终可见。
+``layer_sys`` 在LVGL中也用于类似的目的。例如，它将鼠标指针放在所有图层之上，以确保其始终可见。
 
 
 .. _layers_bottom:
@@ -283,11 +281,12 @@ If there is no memory for a new chunk, LVGL will try allocating layer when an ot
 
 
 以下样式属性会触发创建“简单层”：
+
 - ``opa_layered``
 - ``bitmap_mask_src``
 - ``blend_mode``
 
-在这种情况下，小部件将被切割成大小为 ``LV_DRAW_SW_LAYER_SIMPLE_BUF_SIZE``的块。
+在这种情况下，小部件将被切割成大小为 ``LV_DRAW_SW_LAYER_SIMPLE_BUF_SIZE`` 的块。
 
 如果没有足够的内存来创建一个新的块，LVGL 将尝试在另一个块被渲染并释放时分配图层。
 

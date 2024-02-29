@@ -30,7 +30,7 @@ stroke; diagonal scrolling is not possible.
 
 在LVGL中，滚动非常直观：如果一个对象超出了其父级内容区域（不包括填充的大小），父级就会变成可滚动的，并且会出现滚动条。就是这样。
 
-任何对象都可以是可滚动的，包括 ``lv_obj``, ``lv_image``, ``lv_button``, ``lv_meter``等等。
+任何对象都可以是可滚动的，包括 ``lv_obj``, ``lv_image``, ``lv_button``, ``lv_meter`` 等等。
 
 对象可以在一个操作中水平或垂直滚动；无法进行对角线滚动。
 
@@ -62,7 +62,7 @@ following ``mode``\ (s) exist:
    <br>
 
 
-滚动条的显示方式根据配置的 ``mode``来确定。存在以下几种 ``mode``：
+滚动条的显示方式根据配置的 ``mode`` 来确定。存在以下几种 ``mode``：
 
 - :cpp:enumerator:`LV_SCROLLBAR_MODE_OFF`：从不显示滚动条
 - :cpp:enumerator:`LV_SCROLLBAR_MODE_ON`：始终显示滚动条
@@ -126,7 +126,7 @@ base direction.
    <br>
 
 
-滚动条有其专用的部分，称为:cpp:enumerator:`LV_PART_SCROLLBAR`。例如，滚动条可以像这样变成红色：
+滚动条有其专用的部分，称为 :cpp:enumerator:`LV_PART_SCROLLBAR`。例如，滚动条可以像这样变成红色：
 
 .. code:: c
 
@@ -138,7 +138,7 @@ base direction.
 
    lv_obj_add_style(obj, &style_red, LV_PART_SCROLLBAR);
 
-当对象被滚动时，对象进入:cpp:enumerator:`LV_STATE_SCROLLED`状态。这允许当滚动时，向滚动条或对象本身添加不同的样式。此代码使对象被滚动时滚动条变蓝色：
+当对象被滚动时，对象进入 :cpp:enumerator:`LV_STATE_SCROLLED` 状态。这允许当滚动时，向滚动条或对象本身添加不同的样式。此代码使对象被滚动时滚动条变蓝色：
 
 .. code:: c
 
@@ -150,10 +150,10 @@ base direction.
 
    lv_obj_add_style(obj, &style_blue, LV_STATE_SCROLLED | LV_PART_SCROLLBAR);
 
-如果:cpp:enumerator:`LV_PART_SCROLLBAR` 的基本方向是RTL(:c:macro:`LV_BASE_DIR_RTL`) ，垂直滚动条将被放置在左侧。请注意， ``base_dir``样式属性是继承的。
-因此，它可以直接在对象的:cpp:enumerator:`LV_PART_SCROLLBAR`部分上设置，或者在对象的或任何父级的主要部分上设置，以使滚动条继承基本方向。
+如果 :cpp:enumerator:`LV_PART_SCROLLBAR` 的基本方向是RTL(:c:macro:`LV_BASE_DIR_RTL`) ，垂直滚动条将被放置在左侧。请注意， ``base_dir`` 样式属性是继承的。
+因此，它可以直接在对象的 :cpp:enumerator:`LV_PART_SCROLLBAR` 部分上设置，或者在对象的或任何父级的主要部分上设置，以使滚动条继承基本方向。
 
-``pad_left/right/top/bottom``设置滚动条周围的间距， ``width``设置滚动条的宽度。
+``pad_left/right/top/bottom`` 设置滚动条周围的间距， ``width`` 设置滚动条的宽度。
 
 
 .. _scroll_events:
@@ -181,7 +181,7 @@ The following events are related to scrolling:
 
 以下事件与滚动相关：
 
-- :cpp:enumerator:`LV_EVENT_SCROLL_BEGIN`: 滚动开始。事件参数为 ``NULL``或包含滚动动画描述符的 ``lv_anim_t *``，如果需要，可以对其进行修改。
+- :cpp:enumerator:`LV_EVENT_SCROLL_BEGIN`: 滚动开始。事件参数为 ``NULL`` 或包含滚动动画描述符的 ``lv_anim_t *``，如果需要，可以对其进行修改。
 - :cpp:enumerator:`LV_EVENT_SCROLL_END`: 滚动结束。
 - :cpp:enumerator:`LV_EVENT_SCROLL`: 发生滚动。在每次位置变化时触发。滚动事件。
 
@@ -246,11 +246,11 @@ OR-ed values are also possible. E.g. :cpp:expr:`LV_DIR_TOP | LV_DIR_LEFT`.
    <br>
 
 
-可以使用:cpp:expr:`lv_obj_remove_flag(obj, LV_OBJ_FLAG_SCROLLABLE)`来使对象不可滚动。
+可以使用 :cpp:expr:`lv_obj_remove_flag(obj, LV_OBJ_FLAG_SCROLLABLE)` 来使对象不可滚动。
 
 不可滚动的对象仍然可以将滚动（链）传播到它们的父级。
 
-滚动的方向可以通过 ``lv_obj_set_scroll_dir(obj, LV_DIR_...)``来控制。
+滚动的方向可以通过 ``lv_obj_set_scroll_dir(obj, LV_DIR_...)`` 来控制。
 
 以下值可以用于指定方向：
 
@@ -292,7 +292,7 @@ parent(s) won't be scrolled.
 
 如果一个对象无法进一步滚动（例如，其内容已经到达最底部位置），额外的滚动将传递给其父级。如果在该方向上可以滚动父级，则父级将被滚动。它会继续传递给祖父和曾祖父级。
 
-滚动传播被称为“滚动链”，可以使用 ``LV_OBJ_FLAG_SCROLL_CHAIN_HOR/VER``标志来启用/禁用它。如果禁用了链式滚动，传播将停止在该对象上，并且父级将不会滚动。
+滚动传播被称为“滚动链”，可以使用 ``LV_OBJ_FLAG_SCROLL_CHAIN_HOR/VER`` 标志来启用/禁用它。如果禁用了链式滚动，传播将停止在该对象上，并且父级将不会滚动。
 
 
 Scroll momentum（滚动惯性效果）
@@ -307,8 +307,7 @@ When the user scrolls an object and releases it, LVGL can emulate
 inertial momentum for the scrolling. It's like the object was thrown and
 scrolling slows down smoothly.
 
-The scroll momentum can be enabled/disabled with the
-:cpp:enumerator:`LV_OBJ_FLAG_SCROLL_MOMENTUM` flag.
+The scroll momentum can be enabled/disabled with the :cpp:enumerator:`LV_OBJ_FLAG_SCROLL_MOMENTUM` flag.
 
 .. raw:: html
 
@@ -318,7 +317,7 @@ The scroll momentum can be enabled/disabled with the
 
 当用户滚动一个对象并释放时，LVGL可以模拟滚动的惯性动量。就像物体被扔出去一样，滚动平稳地减速。
 
-滚动动量可以通过设置:cpp:enumerator:`LV_OBJ_FLAG_SCROLL_MOMENTUM`标志来启用/禁用。
+滚动动量可以通过设置 :cpp:enumerator:`LV_OBJ_FLAG_SCROLL_MOMENTUM` 标志来启用/禁用。
 
 
 Elastic scroll（弹性卷轴效果）
@@ -347,7 +346,7 @@ position.
 
 通常情况下，对象不能滚动超出其内容的极限。也就是说，内容的顶部不能低于对象的顶部。
 
-然而，使用:cpp:enumerator:`LV_OBJ_FLAG_SCROLL_ELASTIC`会在用户“过度滚动”内容时添加一种花哨的效果。
+然而，使用 :cpp:enumerator:`LV_OBJ_FLAG_SCROLL_ELASTIC` 会在用户“过度滚动”内容时添加一种花哨的效果。
 滚动会减速，并且内容可以在对象内滚动。当释放对象时，其中滚动的内容将被动画回到有效位置。
 
 
@@ -386,7 +385,7 @@ Under the hood the following happens:
    <br>
 
 
-这个对象的子项可以根据特定规则进行对齐。当滚动结束时，子项可以通过`:cpp:enumerator:`LV_OBJ_FLAG_SNAPPABLE`标志单独进行对齐。
+这个对象的子项可以根据特定规则进行对齐。当滚动结束时，子项可以通过 :cpp:enumerator:`LV_OBJ_FLAG_SNAPPABLE` 标志单独进行对齐。
 
 一个对象可以以四种方式对齐被捕获的子项：
 
@@ -426,9 +425,9 @@ This feature can be enabled by the :cpp:enumerator:`LV_OBJ_FLAG_SCROLL_ONE` flag
    <br>
 
 
-“滚动一个”功能告诉LVGL一次仅允许滚动一个可对齐的子对象。这需要将子对象设置为可对齐，并设置一个与:cpp:enumerator:`LV_SCROLL_SNAP_NONE`不同的滚动对齐方式。
+“滚动一个”功能告诉LVGL一次仅允许滚动一个可对齐的子对象。这需要将子对象设置为可对齐，并设置一个与 :cpp:enumerator:`LV_SCROLL_SNAP_NONE` 不同的滚动对齐方式。
 
-可以通过设置:cpp:enumerator:`LV_OBJ_FLAG_SCROLL_ONE`标志来启用此功能。
+可以通过设置 :cpp:enumerator:`LV_OBJ_FLAG_SCROLL_ONE` 标志来启用此功能。
 
 
 Scroll on focus（滚动焦点）
@@ -510,7 +509,7 @@ functions:
 
 以下API函数允许手动滚动对象：
 
-- ``lv_obj_scroll_by(obj, x, y, LV_ANIM_ON/OFF)`` 通过 ``x``和 ``y``的值滚动
+- ``lv_obj_scroll_by(obj, x, y, LV_ANIM_ON/OFF)`` 通过 ``x`` 和 ``y`` 的值滚动
 - ``lv_obj_scroll_to(obj, x, y, LV_ANIM_ON/OFF)`` 滚动以将给定坐标带到左上角
 - ``lv_obj_scroll_to_x(obj, x, LV_ANIM_ON/OFF)`` 滚动以将给定坐标带到左侧
 - ``lv_obj_scroll_to_y(obj, y, LV_ANIM_ON/OFF)`` 滚动以将给定坐标带到顶部
@@ -532,8 +531,8 @@ functions:
 
 使用这些函数可以从不同轴检索滚动坐标：
 
-- ``lv_obj_get_scroll_x(obj)`` 获取对象的``x``坐标
-- ``lv_obj_get_scroll_y(obj)`` 获取对象的``y``坐标
+- ``lv_obj_get_scroll_x(obj)`` 获取对象的 ``x`` 坐标
+- ``lv_obj_get_scroll_y(obj)`` 获取对象的 ``y`` 坐标
 - ``lv_obj_get_scroll_top(obj)`` 从顶部获取滚动坐标
 - ``lv_obj_get_scroll_bottom(obj)`` 从底部获取滚动坐标
 - ``lv_obj_get_scroll_left(obj)`` 从左侧获取滚动坐标
@@ -593,7 +592,7 @@ an object. Here is an example to see how to handle the event:
 
 这意味着不仅子对象可以使一个对象可滚动，而且更大的自尺寸也可以。
 
-LVGL使用:cpp:enumerator:`LV_EVENT_GET_SELF_SIZE`事件来获取一个对象的自尺寸。下面是一个处理该事件的示例：
+LVGL使用 :cpp:enumerator:`LV_EVENT_GET_SELF_SIZE` 事件来获取一个对象的自尺寸。下面是一个处理该事件的示例：
 
 .. code:: c
 

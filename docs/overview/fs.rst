@@ -21,7 +21,7 @@ drive letter. For example, if an SD card is associated with the letter
 
 
 LVGL有一个“文件系统”抽象模块，可以让你连接任何类型的文件系统。文件系统通过分配的驱动器号来识别。
-例如，如果SD卡与字母 ``'S'``关联，可以使用 ``"S:path/to/file.txt"`` 来访问文件。
+例如，如果SD卡与字母 ``'S'`` 关联，可以使用 ``"S:path/to/file.txt"`` 来访问文件。
 
 
 Ready to use drivers（准备使用驱动程序）
@@ -43,7 +43,7 @@ Learn more :ref:`here <libs_filesystem>`.
 
 
 LVGL包含了对POSIX、标准C、Windows和 `FATFS <http://elm-chan.org/fsw/ff/00index_e.html>`__ API的预置驱动程序。
-了解更多信息，请参阅:ref:`这里 <libs_filesystem>`。
+了解更多信息，请参阅 :ref:`这里 <libs_filesystem>`。
 
 
 Adding a driver（添加驱动程序）
@@ -94,7 +94,7 @@ supported.
    <br>
 
 
-添加驱动程序时，需要像下面这样初始化一个:cpp:type:`lv_fs_drv_t` 类型的变量。
+添加驱动程序时，需要像下面这样初始化一个 :cpp:type:`lv_fs_drv_t` 类型的变量。
 :cpp:type:`lv_fs_drv_t` 变量需要是静态的、全局的或者动态分配的，不能是局部变量。
 
 .. code:: c
@@ -161,10 +161,10 @@ related callbacks. (see below)
 
    void * (*open_cb)(lv_fs_drv_t * drv, const char * path, lv_fs_mode_t mode);
 
-``path``是驱动器字母后的路径（例如"S:path/to/file.txt" -> "path/to/file.txt"）。
-``mode`` 可以是:cpp:enumerator: `LV_FS_MODE_WR`或:cpp:enumerator:`LV_FS_MODE_RD`，用于进行写入或读取打开。
+``path`` 是驱动器字母后的路径（例如"S:path/to/file.txt" -> "path/to/file.txt"）。
+``mode`` 可以是:cpp:enumerator: `LV_FS_MODE_WR` 或 :cpp:enumerator:`LV_FS_MODE_RD`，用于进行写入或读取打开。
 
-返回值是指向描述打开文件的 *文件对象*的指针，如果存在任何问题（例如文件未找到），则返回 ``NULL``。
+返回值是指向描述打开文件的 *文件对象* 的指针，如果存在任何问题（例如文件未找到），则返回 ``NULL``。
 返回的文件对象将传递给其他与文件系统相关的回调函数（见下文）。
 
 
@@ -285,7 +285,7 @@ practice to insert a ``'/'`` in front of each directory name.
 
    lv_fs_close(&f);
 
-在 :cpp:func:`lv_fs_open`中的模式可以是 :cpp:enumerator:`LV_FS_MODE_WR` ，用于仅打开写入，或:cpp:enumerator:`LV_FS_MODE_RD` ``|`` :cpp:enumerator:`LV_FS_MODE_WR` 用于两者都可以
+在 :cpp:func:`lv_fs_open` 中的模式可以是 :cpp:enumerator:`LV_FS_MODE_WR` ，用于仅打开写入，或 :cpp:enumerator:`LV_FS_MODE_RD` ``|`` :cpp:enumerator:`LV_FS_MODE_WR` 用于两者都可以
 
 该示例显示如何读取目录的内容。如何标记结果中的目录是由驱动程序决定的，但在每个目录名称前面加上 ``'/'`` 可能是一个很好的做法。
 
@@ -340,7 +340,7 @@ To use files in image widgets the following callbacks are required:
    <br>
 
 
-:ref:`Image <lv_image>`对象也可以从文件中打开（除了编译程序中存储的变量）。
+:ref:`Image <lv_image>` 对象也可以从文件中打开（除了编译程序中存储的变量）。
 
 要在图像小部件中使用文件，需要以下回调函数：
 

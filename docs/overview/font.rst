@@ -37,16 +37,17 @@ compared to *format = LV_FONT_GLYPH_FORMAT_A1*.
    <br>
 
 
-在LVGL中，字体是由位图和其他必要的信息组成，用于绘制单个字母（字形）的图像。字体存储在 `lv_font_t`变量中，并可以在样式的 `text_font`字段中设置。例如：
+在LVGL中，字体是由位图和其他必要的信息组成，用于绘制单个字母（字形）的图像。字体存储在 `lv_font_t` 变量中，并可以在样式的 `text_font` 字段中设置。例如：
 
 .. code:: c
-lv_style_set_text_font(&my_style, &lv_font_montserrat_28);  /*设置一个更大的字体*/
+
+   lv_style_set_text_font(&my_style, &lv_font_montserrat_28);  /*Set a larger font*/
  
-字体有一个 **格式**属性，描述了字形绘制数据的存储方式。它有两个分类： `传统简单格式`和 `高级格式`。在传统简单格式中，字体存储在一个简单的位图数组中。在高级格式中，字体以不同的方式存储，例如 `矢量图`、 `SVG`等。
+字体有一个 **格式** 属性，描述了字形绘制数据的存储方式。它有两个分类： `传统简单格式` 和 `高级格式`。在传统简单格式中，字体存储在一个简单的位图数组中。在高级格式中，字体以不同的方式存储，例如 `矢量图`、 `SVG` 等。
 
 在传统简单格式中，存储的像素值决定了像素的不透明度。这样，通过更高的位深度（每像素位数），字母的边缘可以更加平滑。可能的位深度值为1、2、4和8（更高的值意味着更好的质量）。
 
-格式属性还影响存储字体所需的内存量。例如， *format = LV_FONT_GLYPH_FORMAT_A4* 的字体大小大约是 *format = LV_FONT_GLYPH_FORMAT_A1*的四倍。
+格式属性还影响存储字体所需的内存量。例如， *format = LV_FONT_GLYPH_FORMAT_A4* 的字体大小大约是 *format = LV_FONT_GLYPH_FORMAT_A1* 的四倍。
 
 
 Unicode support（支持Unicode编码）
@@ -77,7 +78,7 @@ If all works well, a ✓ character should be displayed.
    <br>
 
 
-LVGL支持**UTF-8**编码的Unicode字符。您的编辑器需要配置为以UTF-8格式保存代码/文本（通常这是默认设置），并确保在 *lv_conf.h*中将:c:macro:`LV_TXT_ENC` 设置为:c:macro:`LV_TXT_ENC_UTF8`（这是默认值）。
+LVGL支持 **UTF-8** 编码的Unicode字符。您的编辑器需要配置为以UTF-8格式保存代码/文本（通常这是默认设置），并确保在 *lv_conf.h* 中将 :c:macro:`LV_TXT_ENC` 设置为 :c:macro:`LV_TXT_ENC_UTF8`（这是默认值）。
 
 要进行测试，请尝试以下代码：
 
@@ -106,7 +107,7 @@ enabled in ``lv_conf.h`` with *LV_FONT\_…* defines.
    <br>
 
 
-有几种不同大小的内置字体可在 ``lv_conf.h`` 中通过 *LV_FONT_…*定义启用。
+有几种不同大小的内置字体可在 ``lv_conf.h`` 中通过 *LV_FONT_…* 定义启用。
 
 
 Normal fonts（普通字体）
@@ -228,9 +229,9 @@ Or more symbols together:
 -  :c:macro:`LV_FONT_UNSCII_8`: 8 像素像素完美的字体，仅包含 ASCII 字符
 -  :c:macro:`LV_FONT_UNSCII_16`: 16 像素像素完美的字体，仅包含 ASCII 字符
 
-内置字体是**全局变量**，名称如 :cpp:var:`lv_font_montserrat_16` 代表高度为 16 像素的字体。要在样式中使用它们，只需添加一个指向字体变量的指针，如上所示。
+内置字体是 **全局变量**，名称如 :cpp:var:`lv_font_montserrat_16` 代表高度为 16 像素的字体。要在样式中使用它们，只需添加一个指向字体变量的指针，如上所示。
 
-具有*bpp = 4*的内置字体包含ASCII字符，并使用 `Montserrat <https://fonts.google.com/specimen/Montserrat>`__ 字体。
+具有 *bpp = 4* 的内置字体包含ASCII字符，并使用 `Montserrat <https://fonts.google.com/specimen/Montserrat>`__ 字体。
 
 除ASCII范围外，还从 `FontAwesome <https://fontawesome.com/>`__ 字体中添加了以下符号。
 
@@ -339,7 +340,7 @@ LVGL不仅支持RTL文本，还支持混合（也称为双向，BiDi）文本渲
 - ``lv_buttonmatrix``：从右到左显示按钮
 - ``lv_list``：在右侧显示图标
 - ``lv_dropdown``：将选项对齐到右侧
-- ``lv_table``， ``lv_buttonmatrix``， ``lv_keyboard``， ``lv_tabview``， ``lv_dropdown``， ``lv_roller``中的文本是经过"BiDi处理"以正确显示
+- ``lv_table``， ``lv_buttonmatrix``， ``lv_keyboard``， ``lv_tabview``， ``lv_dropdown``， ``lv_roller`` 中的文本是经过"BiDi处理"以正确显示
 
 
 Arabic and Persian support(阿拉伯语和波斯语支持)
@@ -371,15 +372,15 @@ However, there are some limitations:
 
 
 有一些特殊规则来显示阿拉伯和波斯字符：
-字符的*形式*取决于其在文本中的位置。当字符处于孤立、开始、中间或结尾位置时，需要使用相同字母的不同形式。除此之外，还应考虑一些连词规则。
+字符的 *形式* 取决于其在文本中的位置。当字符处于孤立、开始、中间或结尾位置时，需要使用相同字母的不同形式。除此之外，还应考虑一些连词规则。
 
-如果启用了宏命令`:c:macro:`LV_USE_ARABIC_PERSIAN_CHARS`，LVGL将支持这些规则。
+如果启用了宏命令  :c:macro:`LV_USE_ARABIC_PERSIAN_CHARS`，LVGL将支持这些规则。
 
 然而，存在一些限制：
 
 - 仅支持显示文本（例如标签），在文本输入框（例如文本区域）中不支持此功能。
 - 静态文本（即常量）不会被处理。例如，由函数 :cpp:func:`lv_label_set_text` 设置的文本将会被"阿拉伯处理"，但:cpp:func:`lv_label_set_text_static`不会。
-- 文本获取函数（例如`:cpp:func:`lv_label_get_text`）将返回处理后的文本。
+- 文本获取函数（例如 :cpp:func:`lv_label_get_text`）将返回处理后的文本。
 
 
 Subpixel rendering（亚像素渲染）
@@ -422,12 +423,12 @@ however this can be swapped by setting :c:macro:`LV_SUBPX_BGR`  ``1`` in
 
 要进行子像素渲染，需要使用特殊设置生成字体:
 
-- 在在线转换器中勾选 ``Subpixel``框
-- 在命令行工具中使用 ``--lcd``标志。请注意，生成的字体需要大约三倍的内存。
+- 在在线转换器中勾选 ``Subpixel`` 框
+- 在命令行工具中使用 ``--lcd`` 标志。请注意，生成的字体需要大约三倍的内存。
 
 子像素渲染仅在像素的颜色通道具有水平布局时起作用。
 也就是说，R、G、B通道相邻而不是重叠。颜色通道的顺序也需要与库设置相匹配。
-默认情况下，LVGL假定是 ``RGB`` 顺序，但可以通过在 *lv_conf.h*中设置 :c:macro:`LV_SUBPX_BGR`  ``1`` 来进行交换。
+默认情况下，LVGL假定是 ``RGB`` 顺序，但可以通过在 *lv_conf.h* 中设置 :c:macro:`LV_SUBPX_BGR`  ``1`` 来进行交换。
 
 
 .. _fonts_compressed:
@@ -463,7 +464,7 @@ because
 字体位图可以通过以下方式压缩：
 
 - 在在线转换器中勾选 ``压缩`` 复选框
-- 在离线转换器中不使用 ``--no-compress``标志（默认情况下会应用压缩）
+- 在离线转换器中不使用 ``--no-compress`` 标志（默认情况下会应用压缩）
 
 对于较大的字体和较高的位深度，压缩效果更好。然而，压缩字体的渲染速度会慢大约30%。因此，建议只对用户界面中最大的字体进行压缩，因为：
 
@@ -544,21 +545,20 @@ To make fonts globally available (like the built-in fonts), add them to
 
 有几种方法可以向您的项目添加新字体：
 
-1. 最简单的方法是使用 `在线字体转换器<https://lvgl.io/tools/fontconverter>`__。
-   设置参数，点击 *转换*按钮，将字体复制到您的项目中
+1. 最简单的方法是使用 `在线字体转换器<https://lvgl.io/tools/fontconverter>`__ 。
+   设置参数，点击 *转换* 按钮，将字体复制到您的项目中
    并使用它。 **请务必仔细阅读该网站提供的步骤
    否则在转换过程中会出现错误。**
-2. 使用 `离线字体转换器<https://github.com/lvgl/lv_font_conv>`__。
+2. 使用 `离线字体转换器<https://github.com/lvgl/lv_font_conv>`__ 。
    （需要安装Node.js）
 3. 如果您想要创建类似于内置字体
    （Montserrat字体和符号）但是大小和/或范围不同的字体，可以使用
-   ``lvgl/scripts/built_in_font``文件夹中的 ``built_in_font_gen.py``脚本。（这需要安装Python和
-   ``lv_font_conv``）
+   ``lvgl/scripts/built_in_font``文件夹中的 ``built_in_font_gen.py`` 脚本。（这需要安装Python和 ``lv_font_conv``）
 
-要在文件中声明字体，请使用:cpp:expr:`LV_FONT_DECLARE(my_font_name)`。
+要在文件中声明字体，请使用 :cpp:expr:`LV_FONT_DECLARE(my_font_name)`。
 
 要使字体在全局范围内可用（类似于内置字体），请将它们添加到
-*lv_conf.h*文件中的:c:macro:`LV_FONT_CUSTOM_DECLARE`。
+*lv_conf.h* 文件中的 :c:macro:`LV_FONT_CUSTOM_DECLARE`。
 
 
 Add new symbols（添加新符号）
@@ -596,10 +596,10 @@ The built-in symbols are created from the `FontAwesome <https://fontawesome.com/
 2. 打开 `在线字体转换器 <https://lvgl.io/tools/fontconverter>`__。
    添加 `FontAwesome.woff <https://lvgl.io/assets/others/FontAwesome5-Solid+Brands+Regular.woff>`__。
 3. 设置参数，如名称、大小、BPP。您将使用此名称在代码中声明和使用字体。
-4. 将符号的Unicode ID添加到范围字段中。例如 ``0xf287``表示USB符号。更多符号可以用 ``,``列举出来。
+4. 将符号的Unicode ID添加到范围字段中。例如 ``0xf287`` 表示USB符号。更多符号可以用 ``,`` 列举出来。
 5. 转换字体，并将生成的源代码复制到您的项目中。
-   确保编译字体的.c文件。
-6. 使用 ``extern lv_font_t my_font_name;``声明字体，或者简单地使用:cpp:expr:`LV_FONT_DECLARE(my_font_name)`.
+   确保编译字体的.c文件。 
+6. 使用 ``extern lv_font_t my_font_name;`` 声明字体，或者简单地使用 :cpp:expr:`LV_FONT_DECLARE(my_font_name)`.
 
 
 **Using the symbol**（使用符号）
@@ -626,12 +626,12 @@ The built-in symbols are created from the `FontAwesome <https://fontawesome.com/
    <br>
 
 
-1. 转换Unicode值为UTF8，例如在 `这个网站<http://www.ltg.ed.ac.uk/~richard/utf-8.cgi?input=f287&mode=hex>`__上。
-对于 ``0xf287``， *Hex UTF-8 bytes*为 ``EF 8A 87``。
-2. 从UTF8值创建一个 ``define``字符串： ``#define MY_USB_SYMBOL "\xEF\x8A\x87"``
+1. 转换Unicode值为UTF8，例如在 `这个网站<http://www.ltg.ed.ac.uk/~richard/utf-8.cgi?input=f287&mode=hex>`__ 上。
+对于 ``0xf287``， *Hex UTF-8 bytes* 为 ``EF 8A 87``。
+2. 从UTF8值创建一个 ``define`` 字符串： ``#define MY_USB_SYMBOL "\xEF\x8A\x87"``
 3. 创建一个标签并设置文本。例如：:cpp:expr:`lv_label_set_text(label, MY_USB_SYMBOL)`
 
-:note: :cpp:expr:`lv_label_set_text(label, MY_USB_SYMBOL)`在 ``style.text.font``属性中定义的字体中搜索此符号。
+:note: :cpp:expr:`lv_label_set_text(label, MY_USB_SYMBOL)` 在 ``style.text.font`` 属性中定义的字体中搜索此符号。
 要使用该符号，您可能需要更改字体。例如 ``style.text.font = my_font_name``
 
 
@@ -727,30 +727,35 @@ Example
    <br>
 
 
-:cpp:func:`lv_binfont_create_from_buffer`可以用来从内存缓冲区加载字体。
+:cpp:func:`lv_binfont_create_from_buffer` 可以用来从内存缓冲区加载字体。
 这个函数可能会用来从外部文件系统加载字体，这是LVGL不支持的。
 字体需要具有与从文件加载时相同的格式。
 
-:注意: 要从缓冲区加载字体，需要启用 :ref:`LVGL's filesystem <overview_file_system>`并添加MEMFS驱动。
+:注意: 要从缓冲区加载字体，需要启用 :ref:`LVGL's filesystem <overview_file_system>` 并添加MEMFS驱动。
 
 示例
 
 .. code:: c
+
    lv_font_t *my_font;
    uint8_t *buf;
    uint32_t bufsize;
 
-   /* 从外部文件系统将字体文件读入缓冲区 */
+   /*Read font file into the buffer from the external file system*/
    ...
 
-   /* 从缓冲区加载字体 */
-   my_font = lv_binfont_create_from_buffer((void *)buf, bufsize);
+   /*Load font from the buffer*/
+   my_font = lv_binfont_create_from_buffer((void *)buf, buf));
    if(my_font == NULL) return;
-   /* 使用字体 */
+   /*Use the font*/
 
-   /* 如果不再需要，释放字体 */
+   /*Free the font if not required anymore*/
    lv_binfont_destroy(my_font);
 
+.. raw:: html
+
+   </details>
+   <br>
 
 
 Add a new font engine（添加新的字体引擎）
@@ -825,9 +830,9 @@ To do this, a custom :cpp:type:`lv_font_t` variable needs to be created:
 
 
 LVGL的字体接口设计非常灵活，但即使如此，你也可以在LVGL的内部引擎之外添加自己的字体引擎。
-例如，你可以使用 `FreeType <https://www.freetype.org/>`__实时渲染TTF字体的字形，或者使用外部flash来存储字体的位图，并在库需要时读取它们。
+例如，你可以使用 `FreeType <https://www.freetype.org/>`__ 实时渲染TTF字体的字形，或者使用外部flash来存储字体的位图，并在库需要时读取它们。
 
-可以在 `lv_freetype <https://github.com/lvgl/lv_lib_freetype>`__存储库中找到一个可直接使用的FreeType。
+可以在 `lv_freetype <https://github.com/lvgl/lv_lib_freetype>`__ 存储库中找到一个可直接使用的FreeType。
 
 要实现这一点，需要创建一个自定义的 :cpp:type:`lv_font_t` 变量：
 

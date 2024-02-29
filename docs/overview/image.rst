@@ -79,7 +79,7 @@ into the resulting executable like any other constant data.
    <br>
 
 
-在变量中存储的图像主要由下面几个字段组成的:cpp:struct:`lv_image_dsc_t`结构体：
+在变量中存储的图像主要由下面几个字段组成的 :cpp:struct:`lv_image_dsc_t` 结构体：
 
 - **头部**：
 
@@ -89,7 +89,7 @@ into the resulting executable like any other constant data.
   - *always zero*：总是为零的3比特
   - *reserved*：保留未来使用
 - **数据**：指向存储图像本身的数组的指针
-- **data_size**： ``数据``的长度，以字节为单位
+- **data_size**： ``数据`` 的长度，以字节为单位
 
 这些通常以C文件的形式存储在项目中。它们像其他常量数据一样被链接进最终生成的可执行文件中。
 
@@ -124,12 +124,12 @@ easier to replace without needing to rebuild the main program.
 
 
 为了处理文件，你需要给LVGL添加一个存储 *驱动器*。简而言之，
-一个 *驱动器*是一系列函数（ *打开*、 *读取*、 *关闭*等）
+一个 *驱动器* 是一系列函数（ *打开*、 *读取*、 *关闭* 等）
 注册到LVGL中以执行文件操作。你可以添加一个标准文件系统的接口
 （例如SD卡上的FAT32），或者你可以创建自己的简易文件系统
-来从SPI Flash存储器读取数据。无论哪种情况， *驱动器*
+来从SPI Flash存储器读取数据。无论哪种情况， *驱动器* 
 只是一个抽象，用来读取和/或写入数据到存储器。查看
-:ref:`文件系统 <overview_file_system>`部分以了解更多。
+:ref:`File system <overview_file_system>` 部分以了解更多。
 
 存储为文件的图像不会链接到最终的可执行文件中，
 必须在绘制之前读入RAM。因此，它们不像在编译时链接的图像那样
@@ -287,13 +287,13 @@ https://lvgl.io/tools/imageconverter
 
 通过在线转换器将图像添加到LVGL非常简单。
 
-1. 首先，您需要选择一个*BMP*、*PNG*或*JPG*图像。
+1. 首先，您需要选择一个*BMP*、*PNG* 或 *JPG* 图像。
 2. 给图像一个在LVGL中使用的名称。
 3. 选择 :ref:`颜色格式 <overview_image_color_formats>`。
 4. 选择您想要的图像类型。选择二进制将生成一个
-   必须单独存储并使用 :ref:`文件支持 <overview_image_files>`读取的 ``.bin``文件。
+   必须单独存储并使用 :ref:`文件支持 <overview_image_files>` 读取的 ``.bin`` 文件。
    选择变量将生成一个标准的C文件，可以链接到您的项目中。
-5. 点击 *转换*按钮。转换完成后，您的
+5. 点击 *转换* 按钮。转换完成后，您的
    浏览器将自动下载生成的文件。
 
 在生成的C数组（变量）中，所有颜色深度
@@ -470,6 +470,7 @@ The following formats are understood by the built-in decoder:
 你可以添加任意数量的图像解码器。当需要绘制一个图像时，库会尝试所有注册的图像解码器，直到找到一个能够打开该图像的解码器，即一个知道那种格式的解码器。
 
 内置解码器理解以下格式：
+
 - ``LV_COLOR_FORMAT_I1``
 - ``LV_COLOR_FORMAT_I2``
 - ``LV_COLOR_FORMAT_I4``
@@ -510,13 +511,13 @@ to *True color* according to the format described in the :ref:`overview_image_co
    <br>
 
 
-创建自定义图像最简单的方法是使用在线图像转换器，并选择 ``Raw``或 ``Raw with alpha`` 格式。这样做只会简单地将你上传的二进制文件的每个字节作为图像“位图”写入。
+创建自定义图像最简单的方法是使用在线图像转换器，并选择 ``Raw`` 或 ``Raw with alpha`` 格式。这样做只会简单地将你上传的二进制文件的每个字节作为图像“位图”写入。
 然后你需要附加一个图像解码器，它会解析该位图并生成真正的、可渲染的位图。
 
-``header.cf``将分别是:cpp:enumerator:`LV_COLOR_FORMAT_RAW` ，:cpp:enumerator:`LV_COLOR_FORMAT_RAW_ALPHA`。
+``header.cf`` 将分别是 :cpp:enumerator:`LV_COLOR_FORMAT_RAW` ，:cpp:enumerator:`LV_COLOR_FORMAT_RAW_ALPHA`。
 根据你的需求，你应该选择正确的格式：一个完全不透明的图像，使用alpha通道。
 
-解码后，这些 *raw*格式会被库视为 *True color*。换句话说，图像解码器必须根据:ref:`overview_image_color_formats`章节中描述的格式，将 *Raw*图像解码为 *True color*。
+解码后，这些 *raw* 格式会被库视为 *True color* 。换句话说，图像解码器必须根据 :ref:`overview_image_color_formats` 章节中描述的格式，将 *Raw* 图像解码为 *True color*。
 
 
 Register an image decoder（注册图像解码器）
@@ -722,12 +723,12 @@ So in summary:
 
 总结一下：
 
-- 在 ``decoder_info``函数中，您应该收集有关图像的一些基本信息，并将其存储在 ``header``中。
-- 在 ``decoder_open``函数中，您应该尝试打开指向 ``dsc->src``的图像源。它的类型已经是 ``dsc->src_type == LV_IMG_SRC_FILE/VARIABLE``。
-  如果该格式/类型不受解码器支持，返回 ``LV_RESULT_INVALID``。然而，如果可以打开图像，应将指向解码图像的指针设置在 ``dsc->decoded``中。
-  如果已知格式，但不想解码整个图像（例如没有足够的内存），请设置 ``dsc->decoded = NULL``，并使用 ``decoder_get_area``来获取图像区域的像素。
-- 在 ``decoder_close``函数中，应该释放所有分配的资源。
-- ``decoder_get_area``函数是可选的。在这种情况下，您应该在 ``decoder_open``函数中解码整个图像并将图像数据存储在 ``dsc->decoded``中。
+- 在 ``decoder_info`` 函数中，您应该收集有关图像的一些基本信息，并将其存储在 ``header`` 中。
+- 在 ``decoder_open`` 函数中，您应该尝试打开指向 ``dsc->src`` 的图像源。它的类型已经是 ``dsc->src_type == LV_IMG_SRC_FILE/VARIABLE``。
+  如果该格式/类型不受解码器支持，返回 ``LV_RESULT_INVALID``。然而，如果可以打开图像，应将指向解码图像的指针设置在 ``dsc->decoded`` 中。
+  如果已知格式，但不想解码整个图像（例如没有足够的内存），请设置 ``dsc->decoded = NULL``，并使用 ``decoder_get_area`` 来获取图像区域的像素。
+- 在 ``decoder_close`` 函数中，应该释放所有分配的资源。
+- ``decoder_get_area`` 函数是可选的。在这种情况下，您应该在 ``decoder_open`` 函数中解码整个图像并将图像数据存储在 ``dsc->decoded`` 中。
   解码整个图像需要额外的内存和一些计算开销。
 
 
@@ -766,9 +767,9 @@ images to tell color of the image.
    <br>
 
 
-LVGL会自动使用注册的图像解码器，如果您尝试绘制原始图像（即使用 ``lv_image``对象），但您也可以手动使用它们。创建一个:cpp:type:`lv_image_decoder_dsc_t` 变量来描述解码会话，并调用:cpp:func:`lv_image_decoder_open`。
+LVGL会自动使用注册的图像解码器，如果您尝试绘制原始图像（即使用 ``lv_image`` 对象），但您也可以手动使用它们。创建一个 :cpp:type:`lv_image_decoder_dsc_t` 变量来描述解码会话，并调用 :cpp:func:`lv_image_decoder_open`。
 
-``color``参数仅适用于 ``LV_COLOR_FORMAT_A1/2/4/8``图像，用于定义图像的颜色。
+``color`` 参数仅适用于 ``LV_COLOR_FORMAT_A1/2/4/8`` 图像，用于定义图像的颜色。
 
 .. code:: c
   lv_result_t res;
@@ -888,73 +889,79 @@ See the detailed code below:
 - 步长对齐和预乘后处理示例：
 
 .. code:: c
-  /* 定义后处理状态 */
-  typedef enum {
-    IMAGE_PROCESS_STATE_NONE = 0,
-    IMAGE_PROCESS_STATE_STRIDE_ALIGNED = 1 << 0,
-    IMAGE_PROCESS_STATE_PREMULTIPLIED_ALPHA = 1 << 1,
-  } image_process_state_t;
 
-  lv_result_t my_image_post_process(lv_image_decoder_dsc_t *dsc)
-  {
-    lv_color_format_t color_format = dsc->header.cf;
-    lv_result_t res = LV_RESULT_OK;
+   /* Define post-processing state */
+   typedef enum {
+     IMAGE_PROCESS_STATE_NONE = 0,
+     IMAGE_PROCESS_STATE_STRIDE_ALIGNED = 1 << 0,
+     IMAGE_PROCESS_STATE_PREMULTIPLIED_ALPHA = 1 << 1,
+   } image_process_state_t;
 
-    if(color_format == LV_COLOR_FORMAT_ARGB8888) {
-      lv_cache_lock();
-      lv_cache_entry_t *entry = dsc->cache_entry;
+   lv_result_t my_image_post_process(lv_image_decoder_dsc_t * dsc)
+   {
+     lv_color_format_t color_format = dsc->header.cf;
+     lv_result_t res = LV_RESULT_OK;
 
-      if(!(entry->process_state & IMAGE_PROCESS_STATE_PREMULTIPLIED_ALPHA)) {
-        lv_draw_buf_premultiply(dsc->decoded);
-        LV_LOG_USER("预乘 alpha 完成");
+     if(color_format == LV_COLOR_FORMAT_ARGB8888) {
+       lv_cache_lock();
+       lv_cache_entry_t * entry = dsc->cache_entry;
 
-        entry->process_state |= IMAGE_PROCESS_STATE_PREMULTIPLIED_ALPHA;
-      }
+       if(!(entry->process_state & IMAGE_PROCESS_STATE_PREMULTIPLIED_ALPHA)) {
+         lv_draw_buf_premultiply(dsc->decoded);
+         LV_LOG_USER("premultiplied alpha OK");
 
-      if(!(entry->process_state & IMAGE_PROCESS_STATE_STRIDE_ALIGNED)) {
-        uint32_t stride_expect = lv_draw_buf_width_to_stride(decoded->header.w, decoded->header.cf);
-        if(decoded->header.stride != stride_expect) {
-            LV_LOG_WARN("步长不匹配");
-            lv_draw_buf_t *aligned = lv_draw_buf_adjust_stride(decoded, stride_expect);
-            if(aligned == NULL) {
-                LV_LOG_ERROR("调整步长时内存不足。");
-                return NULL;
-            }
+         entry->process_state |= IMAGE_PROCESS_STATE_PREMULTIPLIED_ALPHA;
+       }
 
-            decoded = aligned;
-        }
+       if(!(entry->process_state & IMAGE_PROCESS_STATE_STRIDE_ALIGNED)) {
+          uint32_t stride_expect = lv_draw_buf_width_to_stride(decoded->header.w, decoded->header.cf);
+          if(decoded->header.stride != stride_expect) {
+              LV_LOG_WARN("Stride mismatch");
+              lv_draw_buf_t * aligned = lv_draw_buf_adjust_stride(decoded, stride_expect);
+              if(aligned == NULL) {
+                  LV_LOG_ERROR("No memory for Stride adjust.");
+                  return NULL;
+              }
 
-        entry->process_state |= IMAGE_PROCESS_STATE_STRIDE_ALIGNED;
-      }
+              decoded = aligned;
+          }
 
-  alloc_failed:
-      lv_cache_unlock();
-    }
+          entry->process_state |= IMAGE_PROCESS_STATE_STRIDE_ALIGNED;
+       }
 
-    return res;
-  }
+   alloc_failed:
+       lv_cache_unlock();
+     }
 
+     return res;
+   }
 
 - GPU 绘制单元示例：
 
 .. code:: c
-  void gpu_draw_image(lv_draw_unit_t *draw_unit, const lv_draw_image_dsc_t *draw_dsc, const lv_area_t *coords)
+
+  void gpu_draw_image(lv_draw_unit_t * draw_unit, const lv_draw_image_dsc_t * draw_dsc, const lv_area_t * coords)
   {
     ...
     lv_image_decoder_dsc_t decoder_dsc;
     lv_result_t res = lv_image_decoder_open(&decoder_dsc, draw_dsc->src, NULL);
     if(res != LV_RESULT_OK) {
-      LV_LOG_ERROR("打开图像失败");
+      LV_LOG_ERROR("Failed to open image");
       return;
     }
 
     res = my_image_post_process(&decoder_dsc);
     if(res != LV_RESULT_OK) {
-      LV_LOG_ERROR("后处理图像失败");
+      LV_LOG_ERROR("Failed to post-process image");
       return;
     }
     ...
   }
+
+.. raw:: html
+
+   </details>
+   <br>
 
 
 .. _overview_image_caching:
@@ -990,7 +997,7 @@ a relatively fast storage medium.
 
 有时候打开一张图片可能需要很长时间。连续解码PNG/JPEG图像或者从慢速的外部存储加载图像，都是低效的，会对用户体验产生不利影响。
 
-因此，LVGL对图像数据进行了缓存。缓存的意思是，一些图像会被保持打开状态，这样LVGL可以迅速从 ``dsc->decoded``访问它们，而不需要再次解码。
+因此，LVGL对图像数据进行了缓存。缓存的意思是，一些图像会被保持打开状态，这样LVGL可以迅速从 ``dsc->decoded`` 访问它们，而不需要再次解码。
 
 当然，缓存图像在资源上是非常密集的，因为它使用了更多的RAM来存储解码后的图像。LVGL尽量优化了这一过程（见下文），但你仍然需要评估这是否对你的平台有利。
 如果你有一个深度嵌入式的目标平台，从相对快速的存储介质解码小图像的话，图像缓存可能并不值得。
@@ -1065,12 +1072,12 @@ and lowest life value will be dropped.
 
 为了决定关闭哪个图像，LVGL 使用了它之前对打开图像所需时间的测量。缓存项中那些打开较慢的图像被认为更有价值，并且尽可能长时间地保留在缓存中。
 
-如果你想要或需要覆盖 LVGL 的测量结果，你可以在缓存条目中手动设置*权重*值， `cache_entry->weight = time_ms` 来给出更高或更低的值。（保持不变以让 LVGL 控制它。）
+如果你想要或需要覆盖 LVGL 的测量结果，你可以在缓存条目中手动设置 *权重* 值， `cache_entry->weight = time_ms` 来给出更高或更低的值。（保持不变以让 LVGL 控制它。）
 
-每个缓存条目都有一个 *"生命周期"* 值。每次通过缓存打开图像时，所有条目的 *生命周期* 值会根据它们的 *权重*值增加，使它们变得更老。
-当缓存中的图像被使用时，其 *使用计数*（usage_count）的值会增加，以使其变得更活跃。
+每个缓存条目都有一个 *"生命周期"* 值。每次通过缓存打开图像时，所有条目的 *生命周期* 值会根据它们的 *权重* 值增加，使它们变得更老。
+当缓存中的图像被使用时，其 *使用计数* （usage_count）的值会增加，以使其变得更活跃。
 
-如果缓存中没有更多空间，那么 *使用计数（usage_count）== 0*且生命周期值最低的条目将被丢弃。
+如果缓存中没有更多空间，那么 *使用计数（usage_count）== 0* 且生命周期值最低的条目将被丢弃。
 
 
 Memory usage（内存使用情况）
@@ -1122,10 +1129,10 @@ To do this, use :cpp:expr:`lv_cache_invalidate(lv_cache_find(&my_png, LV_CACHE_S
    <br>
 
 
-假设你已经将一个PNG图像加载到了一个名为 ``my_png``的:cpp:struct:`lv_image_dsc_t`变量中，并在一个 ``lv_image``对象中使用它。
+假设你已经将一个PNG图像加载到了一个名为 ``my_png`` 的 :cpp:struct:`lv_image_dsc_t` 变量中，并在一个 ``lv_image`` 对象中使用它。
 如果图像已经被缓存了，并且你改变了底层的PNG文件，你需要通知LVGL重新缓存该图像。否则，就没有简单的方式来检测到底层文件的改变，LVGL仍然会从缓存中绘制旧的图像。
 
-要实现这一点，使用:cpp:expr:`lv_cache_invalidate(lv_cache_find(&my_png, LV_CACHE_SRC_TYPE_PTR, 0, 0));`。
+要实现这一点，使用 :cpp:expr:`lv_cache_invalidate(lv_cache_find(&my_png, LV_CACHE_SRC_TYPE_PTR, 0, 0));`。
 
 
 Custom cache algorithm（自定义缓存算法）
