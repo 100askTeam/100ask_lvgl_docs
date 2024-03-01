@@ -197,7 +197,7 @@ same way for the other repositories.
 
 这些说明描述了主 ``lvgl`` 存储库，但它对于其他存储库的工作方式相同。
 
-1. Fork `lvgl repository <https://github.com/lvgl/lvgl>`__ 存储库。为此，请单击右上角的“Fork”按钮。它将把lvgl 存储库“复制” ``lvgl``到您的 GitHub 帐户 ( https://github.com/<YOUR_NAME>?tab=repositories)
+1. Fork `lvgl repository <https://github.com/lvgl/lvgl>`__ 存储库。为此，请单击右上角的“Fork”按钮。它将把lvgl 存储库“复制” ``lvgl`` 到您的 GitHub 帐户  (``https://github.com/<YOUR_NAME>?tab=repositories``)
 
 2. 克隆您的Fork存储库。
 
@@ -207,7 +207,7 @@ same way for the other repositories.
 
 5. 单击“新建拉取请求”按钮，从 ``lvgl`` 存储库页面在 GitHub 上创建 PR (``https://github.com/<YOUR_NAME>/lvgl``) 。单击 *“New pull request”* 按钮。不要忘记选择您添加更改的分支。
 
-6. 设置基础分支。这意味着您想要合并更新的位置。在 ``lvgl`` 存储库中，修复和新功能都会转到 ``master``分支。
+6. 设置基础分支。这意味着您想要合并更新的位置。在 ``lvgl`` 存储库中，修复和新功能都会转到 ``master`` 分支。
 
 7. 描述更新内容。如果适用，欢迎提供示例代码。
 
@@ -309,7 +309,7 @@ Some examples:
 - ``test`` 与测试相关的任何内容（新的和更新的测试或 CI 操作）
 - ``chore`` 任何会使变更日志变得嘈杂的细微格式或样式更改
 
-``<scope>`` 是受提交影响的模块、文件或子系统。通常是一个词，可以自由选择。例如``img``, ``layout``, ``txt``, ``anim``。范围可以省略。
+``<scope>`` 是受提交影响的模块、文件或子系统。通常是一个词，可以自由选择。例如 ``img``, ``layout``, ``txt``, ``anim``。范围可以省略。
 
 ``<subject>`` 包含更改的简短描述：
 
