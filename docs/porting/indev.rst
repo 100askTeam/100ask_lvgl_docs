@@ -366,7 +366,7 @@ a press/release action at the first index of the ``points_array`` will be perfor
 
 当上例中的 ``button_read`` 回调将 ``data->btn_id`` 更改为 ``0``
 
-将在 ``points_array``的第一索引处执行新闻发布动作(``{12,30}``)。
+将在 ``points_array`` 的第一索引处执行新闻发布动作(``{12,30}``)。
 
 
 .. _porting_indev_other_features:
@@ -553,7 +553,7 @@ Further reading（深入学习）
 
 
 - `lv_port_indev_template.c <https://github.com/lvgl/lvgl/blob/master/examples/porting/lv_port_indev_template.c>`__  用于您自己的驱动程序的模板。
-- `INdev features <indev>`  以了解有关更高级别输入设备功能的更多信息。
+- `INdev features <indev>` 以了解有关更高级别输入设备功能的更多信息。
 
 
 API

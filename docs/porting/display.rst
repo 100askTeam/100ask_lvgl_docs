@@ -161,7 +161,7 @@ Example:
    <br>
 
 
-绘制缓冲区可以用:cpp:expr:`lv_display_set_buffers(display, buf1, buf2, buf_size_byte, render_mode)`进行设置
+绘制缓冲区可以用 :cpp:expr:`lv_display_set_buffers(display, buf1, buf2, buf_size_byte, render_mode)`进行设置
 
 -  ``buf1`` LVGL 可以渲染的缓冲区
 -  ``buf2`` 第二个可选缓冲区（请参阅下面的更多详细信息）
