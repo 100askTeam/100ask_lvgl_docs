@@ -37,7 +37,7 @@ with :c:macro:`LV_USE_GRID` in ``lv_conf.h``.
 
 要使对象成为网格容器，请调用 :cpp:expr:`lv_obj_set_layout(obj, LV_LAYOUT_GRID)`。
 
-请注意，LVGL 的网格布局功能需要通过 ``lv_conf.h``中的 :c:macro:`LV_USE_GRID` 全局启用。
+请注意，LVGL 的网格布局功能需要通过 ``lv_conf.h`` 中的 :c:macro:`LV_USE_GRID` 全局启用。
 
 
 Terms（约定）
@@ -173,8 +173,7 @@ involve from the start cell. Must be ``>= 1``.
 
 默认情况下，子项不会添加到网格中。 它们需要手动添加到单元格中。
 
-为此调用
-:cpp:expr:`lv_obj_set_grid_cell(child, column_align, column_pos, column_span, row_align, row_pos, row_span)`。
+为此调用 :cpp:expr:`lv_obj_set_grid_cell(child, column_align, column_pos, column_span, row_align, row_pos, row_span)`。
 
 ``column_align`` 和 ``row_align`` 确定如何在其单元格中对齐子项。 可能的值为：
 
@@ -184,9 +183,9 @@ involve from the start cell. Must be ``>= 1``.
 
 :cpp:enumerator:`LV_GRID_ALIGN_CENTER`: 只是居中
 
- ``column_pos`` 和 ``row_pos``表示应该放置项目中单元格的从零开始的索引。
+ ``column_pos`` 和 ``row_pos`` 表示应该放置项目中单元格的从零开始的索引。
 
-``column_span``和 ``row_span`` 表示该项目应该从起始单元格开始包含多少个轨道。 必须 ``>= 1``。
+``column_span`` 和 ``row_span`` 表示该项目应该从起始单元格开始包含多少个轨道。 必须 ``>= 1``。
 
 
 .. _grid_align:
@@ -239,7 +238,7 @@ To set the track's alignment use
 
 :cpp:enumerator:`LV_GRID_ALIGN_SPACE_BETWEEN`: 项目均匀分布在轨道中：第一个项目在开始线上，最后一个项目在结束线上。不适用于 ``track_cross_place``。
 
-要设置轨道的对齐方式，请使用:cpp:expr:`lv_obj_set_grid_align(obj, column_align, row_align)`。
+要设置轨道的对齐方式，请使用 :cpp:expr:`lv_obj_set_grid_align(obj, column_align, row_align)`。
 
 
 .. _grid_subgrid:

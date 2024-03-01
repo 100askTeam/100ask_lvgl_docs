@@ -35,9 +35,9 @@ Flexbox（或简称 Flex）是 `CSS Flexbox <https://css-tricks.com/snippets/css
 
 它可以将项目排列成行或列（轨道），处理环绕，调整项目和轨道之间的间距，处理 grow 以使项目填充剩余空间的最小/最大宽度和高度。
 
-要使对象 flex 容器调用:cpp:expr:`lv_obj_set_layout(obj, LV_LAYOUT_FLEX)`。
+要使对象 flex 容器调用 :cpp:expr:`lv_obj_set_layout(obj, LV_LAYOUT_FLEX)`。
 
-请注意，LVGL 的 flex 布局功能需要通过 ``lv_conf.h``中的 :c:macro:`LV_USE_FLEX` 全局启用。
+请注意，LVGL 的 flex 布局功能需要通过 ``lv_conf.h`` 中的 :c:macro:`LV_USE_FLEX` 全局启用。
 
 
 Terms（约定）
@@ -180,9 +180,9 @@ The possible values are:
    <br>
 
 
-要管理孩子的位置，请使用:cpp:expr:`lv_obj_set_flex_align(obj,  main_place, cross_place, track_cross_place)`
+要管理孩子的位置，请使用 :cpp:expr:`lv_obj_set_flex_align(obj,  main_place, cross_place, track_cross_place)`
 
-- ``main_place`` 确定如何在主轴上的轨道中分布项目。 例如。 将 :cpp:enumerator:`LV_FLEX_FLOW_ROW_WRAP`上的项目向右刷新。 （它在 CSS 中称为 ``justify-content`` ）
+- ``main_place`` 确定如何在主轴上的轨道中分布项目。 例如。 将 :cpp:enumerator:`LV_FLEX_FLOW_ROW_WRAP` 上的项目向右刷新。 （它在 CSS 中称为 ``justify-content`` ）
 - ``cross_place`` 确定如何在横轴上的轨道中分布项目。 例如。 如果项目具有不同的高度，则将它们放置在轨道的底部。 （在 CSS 中称为 ``align-items`` ）
 - ``track_cross_place`` 确定如何分配轨道（在 CSS 中称为  ``align-content`` ）
 
@@ -303,7 +303,6 @@ objects: :cpp:expr:`lv_style_set_pad_column(&row_container_style,0)`
 要修改对象之间插入的最小空间 flexbox ， 可以在 Flex 容器样式上设置以下属性：
 
 -  ``pad_row`` 设置行之间的内边距。
-
 -  ``pad_column`` 设置列之间的内边距。
 
 例如，如果您不希望在您的 对象：:cpp:expr:`lv_style_set_pad_column(&row_container_style,0)`
@@ -337,8 +336,7 @@ placed from right to left.
    <br>
 
 
-如果容器的基本方向设置为
-:cpp:enumerator:`LV_BASE_DIR_RTL` :cpp:enumerator:`LV_FLEX_ALIGN_START` 和 :cpp:enumerator:`LV_FLEX_ALIGN_END` 的含义在 ``ROW`` 布局上交换。 IE。 ``START`` 表示正确。
+如果容器的基本方向设置为 :cpp:enumerator:`LV_BASE_DIR_RTL` :cpp:enumerator:`LV_FLEX_ALIGN_START` 和 :cpp:enumerator:`LV_FLEX_ALIGN_END` 的含义在 ``ROW`` 布局上交换。 IE。 ``START`` 表示正确。
 
  ``ROW`` 布局上的项目和 ``COLUMN`` 布局的轨道将从右到左放置。
 
@@ -360,7 +358,7 @@ You can force Flex to put an item into a new line with
    <br>
 
 
-您可以使用:cpp:expr:`lv_obj_add_flag(child, LV_OBJ_FLAG_FLEX_IN_NEW_TRACK)`强制 Flex 将项目放入新行。
+您可以使用 :cpp:expr:`lv_obj_add_flag(child, LV_OBJ_FLAG_FLEX_IN_NEW_TRACK)` 强制 Flex 将项目放入新行。
 
 
 .. _flex_example:
