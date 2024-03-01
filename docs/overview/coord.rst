@@ -75,7 +75,8 @@ Units（单位）
 - 百分比：对象大小相对于其父级（属性有关）的百分比。 :cpp:expr:`lv_pct(value)` 将一个值转换为百分比。例如 :cpp:expr:`lv_obj_set_width(btn, lv_pct(50))` （将按钮的宽度设置为父级宽度的50%）
 
 - :c:macro:`LV_SIZE_CONTENT`：特殊值，将对象的宽度/高度设置为包含所有子元素。类似于CSS中的 ``auto``。
-   例如 :cpp:expr:`lv_obj_set_width(btn, LV_SIZE_CONTENT)`（将按钮的宽度设置为自适应内容宽度）
+
+例如 :cpp:expr:`lv_obj_set_width(btn, LV_SIZE_CONTENT)`（将按钮的宽度设置为自适应内容宽度）
 
 
 .. _coord_boxing_model:

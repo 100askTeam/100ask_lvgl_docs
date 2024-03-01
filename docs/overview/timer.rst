@@ -74,7 +74,7 @@ For example:
    <br>
 
 
-要创建一个新定时器，使用 :cpp:expr:`lv_timer_create(timer_cb, period_ms, user_data)`。这将创建一个 :cpp:type:`lv_timer_t` ``*``变量，可以稍后用来修改定时器的参数。 :cpp:func:`lv_timer_create_basic` 也可以使用。这允许您在不指定任何参数的情况下创建一个新定时器。
+要创建一个新定时器，使用 :cpp:expr:`lv_timer_create(timer_cb, period_ms, user_data)`。这将创建一个 :cpp:type:`lv_timer_t` ``*`` 变量，可以稍后用来修改定时器的参数。 :cpp:func:`lv_timer_create_basic` 也可以使用。这允许您在不指定任何参数的情况下创建一个新定时器。
  
 定时器回调函数应该有一个 ``void (*lv_timer_cb_t)(lv_timer_t *)`` 原型。
 

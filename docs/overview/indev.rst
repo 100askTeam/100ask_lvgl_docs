@@ -425,7 +425,7 @@ For a more detailed description read the
 
 如果一个对象切换到编辑模式，它会进入:cpp:expr:`LV_STATE_FOCUSED | LV_STATE_EDITED` 状态，因此这些样式属性将会显示出来。
 
-要获取更详细的描述，请阅读 `Style（样式）<https://docs.lvgl.io/master/overview/style.html>`__ 部分。
+要获取更详细的描述，请阅读 `Style <https://docs.lvgl.io/master/overview/style.html>`__ 部分。
 
 
 .. _indev_api:

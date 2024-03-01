@@ -83,7 +83,7 @@ into the resulting executable like any other constant data.
 
 - **头部**：
 
-  - *cf*：颜色格式。请参见:ref:`下方 <overview_image_color_formats>`
+  - *cf*：颜色格式。请参见 :ref:`below <overview_image_color_formats>`
   - *w*：像素宽度（<= 2048）
   - *h*：像素高度（<= 2048）
   - *always zero*：总是为零的3比特
@@ -287,7 +287,7 @@ https://lvgl.io/tools/imageconverter
 
 通过在线转换器将图像添加到LVGL非常简单。
 
-1. 首先，您需要选择一个*BMP*、*PNG* 或 *JPG* 图像。
+1. 首先，您需要选择一个 *BMP*、*PNG* 或 *JPG* 图像。
 2. 给图像一个在LVGL中使用的名称。
 3. 选择 :ref:`颜色格式 <overview_image_color_formats>`。
 4. 选择您想要的图像类型。选择二进制将生成一个

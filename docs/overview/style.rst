@@ -42,7 +42,7 @@ border width, text color and so on. It's similar to a ``class`` in CSS.
 
 "Styles" 用于设置对象的外观。lvgl中的样式受到CSS的启发。简而言之，概念如下：
 
-- 样式是一个:cpp:type:`lv_style_t`变量，它可以保存诸如边框宽度、文字颜色等属性。类似于CSS中的 ``class``。
+- 样式是一个 :cpp:type:`lv_style_t` 变量，它可以保存诸如边框宽度、文字颜色等属性。类似于CSS中的 ``class``。
 
 - 样式可以分配给对象以改变它们的外观。在分配时，可以指定目标部分（CSS中的伪元素）和目标状态（伪类）。例如，当滑块处于按下状态时，可以为其添加 ``style_blue``。
 
@@ -50,7 +50,7 @@ border width, text color and so on. It's similar to a ``class`` in CSS.
 
 - 样式可以被级联，这意味着可以将多个样式分配给一个对象，每个样式可以具有不同的属性。因此，并非所有的属性都必须在一个样式中指定。
   LVGL将在样式中搜索属性，直到找到定义该属性的样式，或者如果没有任何样式指定，则使用默认值。
-  例如， ``style_btn`` 可以生成默认的灰色按钮，而 ``style_btn_red``可以仅添加 ``background-color=red`` 覆盖背景颜色。
+  例如， ``style_btn`` 可以生成默认的灰色按钮，而 ``style_btn_red`` 可以仅添加 ``background-color=red`` 覆盖背景颜色。
 
 - 最近添加的样式具有更高的优先级。这意味着，如果一个属性在两个样式中都指定了，对象中最新的样式将被使用。
 
@@ -592,8 +592,7 @@ Using :cpp:func:`lv_obj_replace_style`:
 
 使用下列语句来替换对象的特定样式：:cpp:expr:`lv_obj_replace_style(obj, old_style, new_style, selector)`。
 此函数仅在 ``selector`` 匹配 ``lv_obj_add_style`` 中使用的 ``selector`` 时，才会将 ``old_style`` 替换为 ``new_style``。
-两种样式，即 ``old_style`` 和 ``new_style`` 都不能为 ``NULL``（添加和删除分别存在不同的函数）。
-如果 ``obj`` 的样式中存在多个 ``old_style`` 和 ``selector`` 的组合，所有出现的情况都将被替换。函数的返回值指示是否至少进行了一次成功替换。
+两种样式，即 ``old_style`` 和 ``new_style`` 都不能为 ``NULL`` （添加和删除分别存在不同的函数）。 如果 ``obj`` 的样式中存在多个 ``old_style`` 和 ``selector`` 的组合，所有出现的情况都将被替换。函数的返回值指示是否至少进行了一次成功替换。
 
 使用 :cpp:func:`lv_obj_replace_style`：
 
@@ -882,13 +881,14 @@ initialized and added to a style:
 过渡属性可以为每个状态定义。例如，在默认状态下设置500毫秒的过渡时间意味着当对象进入默认状态时，将应用500毫秒的过渡时间。
 在按下状态下设置100毫秒的过渡时间，则在进入按下状态时会有100毫秒的过渡。这个例子的配置意味着迅速进入按下状态，然后慢慢返回默认状态。
 
-为了描述一个过渡，需要初始化一个 :cpp:struct:`lv_transition_dsc_t`变量，并将其添加到一个样式中：
+为了描述一个过渡，需要初始化一个 :cpp:struct:`lv_transition_dsc_t` 变量，并将其添加到一个样式中：
 
 .. code:: c
-   /*只保存其指针，所以必须是静态的、全局的或者动态分配的*/
+
+   /*Only its pointer is saved so must static, global or dynamically allocated */
    static const lv_style_prop_t trans_props[] = {
-                                             LV_STYLE_BG_OPA, LV_STYLE_BG_COLOR,
-                                             0, /*结束标记*/
+                                               LV_STYLE_BG_OPA, LV_STYLE_BG_COLOR,
+                                               0, /*End marker*/
    };
 
    static lv_style_transition_dsc_t trans1;

@@ -155,14 +155,14 @@ related callbacks. (see below)
    <br>
 
 
-``open_cb``的原型如下：
+``open_cb`` 的原型如下：
 
 .. code:: c
 
    void * (*open_cb)(lv_fs_drv_t * drv, const char * path, lv_fs_mode_t mode);
 
 ``path`` 是驱动器字母后的路径（例如"S:path/to/file.txt" -> "path/to/file.txt"）。
-``mode`` 可以是:cpp:enumerator: `LV_FS_MODE_WR` 或 :cpp:enumerator:`LV_FS_MODE_RD`，用于进行写入或读取打开。
+``mode`` 可以是 :cpp:enumerator:`LV_FS_MODE_WR` 或 :cpp:enumerator:`LV_FS_MODE_RD`，用于进行写入或读取打开。
 
 返回值是指向描述打开文件的 *文件对象* 的指针，如果存在任何问题（例如文件未找到），则返回 ``NULL``。
 返回的文件对象将传递给其他与文件系统相关的回调函数（见下文）。

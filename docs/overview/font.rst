@@ -78,7 +78,7 @@ If all works well, a ✓ character should be displayed.
    <br>
 
 
-LVGL支持 **UTF-8** 编码的Unicode字符。您的编辑器需要配置为以UTF-8格式保存代码/文本（通常这是默认设置），并确保在 *lv_conf.h* 中将 :c:macro:`LV_TXT_ENC` 设置为 :c:macro:`LV_TXT_ENC_UTF8`（这是默认值）。
+LVGL支持 **UTF-8** 编码的Unicode字符。您的编辑器需要配置为以UTF-8格式保存代码/文本（通常这是默认设置），并确保在 *lv_conf.h* 中将 :c:macro:`LV_TXT_ENC` 设置为 :c:macro:`LV_TXT_ENC_UTF8` （这是默认值）。
 
 要进行测试，请尝试以下代码：
 
@@ -545,15 +545,15 @@ To make fonts globally available (like the built-in fonts), add them to
 
 有几种方法可以向您的项目添加新字体：
 
-1. 最简单的方法是使用 `在线字体转换器<https://lvgl.io/tools/fontconverter>`__ 。
+1. 最简单的方法是使用 `在线字体转换器 <https://lvgl.io/tools/fontconverter>`__ 。
    设置参数，点击 *转换* 按钮，将字体复制到您的项目中
    并使用它。 **请务必仔细阅读该网站提供的步骤
    否则在转换过程中会出现错误。**
-2. 使用 `离线字体转换器<https://github.com/lvgl/lv_font_conv>`__ 。
+2. 使用 `离线字体转换器 <https://github.com/lvgl/lv_font_conv>`__ 。
    （需要安装Node.js）
 3. 如果您想要创建类似于内置字体
    （Montserrat字体和符号）但是大小和/或范围不同的字体，可以使用
-   ``lvgl/scripts/built_in_font``文件夹中的 ``built_in_font_gen.py`` 脚本。（这需要安装Python和 ``lv_font_conv``）
+   ``lvgl/scripts/built_in_font`` 文件夹中的 ``built_in_font_gen.py`` 脚本。（这需要安装Python和 ``lv_font_conv``）
 
 要在文件中声明字体，请使用 :cpp:expr:`LV_FONT_DECLARE(my_font_name)`。
 
@@ -602,7 +602,7 @@ The built-in symbols are created from the `FontAwesome <https://fontawesome.com/
 6. 使用 ``extern lv_font_t my_font_name;`` 声明字体，或者简单地使用 :cpp:expr:`LV_FONT_DECLARE(my_font_name)`.
 
 
-**Using the symbol**（使用符号）
+**Using the symbol** （使用符号）
 
 .. raw:: html
 
@@ -626,7 +626,7 @@ The built-in symbols are created from the `FontAwesome <https://fontawesome.com/
    <br>
 
 
-1. 转换Unicode值为UTF8，例如在 `这个网站<http://www.ltg.ed.ac.uk/~richard/utf-8.cgi?input=f287&mode=hex>`__ 上。
+1. 转换Unicode值为UTF8，例如在 `这个网站 <http://www.ltg.ed.ac.uk/~richard/utf-8.cgi?input=f287&mode=hex>`__ 上。
 对于 ``0xf287``， *Hex UTF-8 bytes* 为 ``EF 8A 87``。
 2. 从UTF8值创建一个 ``define`` 字符串： ``#define MY_USB_SYMBOL "\xEF\x8A\x87"``
 3. 创建一个标签并设置文本。例如：:cpp:expr:`lv_label_set_text(label, MY_USB_SYMBOL)`
