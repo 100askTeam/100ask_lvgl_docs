@@ -252,19 +252,19 @@ To learn more refer to the documentation of `MicroPython <integration/bindings/m
 
 为了支持自动生成绑定，LVGL C API 必须遵循一些编码约定：
 
-- 使用 ``enum``\ s 代替宏。如果不可避免地使用 ``define``\s在 ``define``之后使用 :cpp:expr:`LV_export_CONST_INT（defined_value）` 导出它们。
-- 在函数参数中，使用 ``type name[]`` 数组参数的声明而不是 :cpp:expr:`type * name`类型
+- 使用 ``enum``\ s 代替宏。如果不可避免地使用 ``define``\s在 ``define`` 之后使用 :cpp:expr:`LV_export_CONST_INT（defined_value）` 导出它们。
+- 在函数参数中，使用 ``type name[]`` 数组参数的声明而不是 :cpp:expr:`type * name` 类型
 - 使用类型化指针而不是 :cpp:expr:`void *` 指针
 - 小部件构造函数必须遵循该 ``lv_<widget_name>_create(lv_obj_t * parent)`` 模式。
 - Widget 成员函数必须以 ``lv_<widget_name>``  开头并且应该首先接收 :cpp:expr:`lv_obj_t *` ，该参数是指向 widget 对象本身的指针。
 - ``struct`` API 应遵循小部件的规定。即接收一个指向 ``struct`` 的指针作为第一个参数，并且名称的前缀struct也应该用作函数名称的前缀（例如 :cpp:expr:`lv_display_set_default(lv_display_t * disp)`）
 - 不属于公共API的函数和 ``struct``\ s 必须以下划线开头，才能将它们标记为“private”。
 - 参数也必须在 H 文件中命名。
--  ``malloc`` 不要写入静态或全局变量。而是在 ``lv_global_t``结构中声明变量，并在使用时 ``lv_global_t`` 用 :cpp:expr:`(LV_GLOBAL_DEFAULT()->variable)` 标记该变量。
+-  ``malloc`` 不要写入静态或全局变量。而是在 ``lv_global_t`` 结构中声明变量，并在使用时 ``lv_global_t`` 用 :cpp:expr:`(LV_GLOBAL_DEFAULT()->variable)` 标记该变量。
 - 要注册和使用回调，需要遵循以下操作之一。
 
    - 将指向 a 的指针struct作为注册函数和回调的第一个参数传递。 那 ``struct`` 必须包含 ``void * user_data`` 字段。
-   - 注册函数的最后一个参数必须是 ``void * user_data`` ，并且 ``user_data``需要作为回调的最后一个参数传递。
+   - 注册函数的最后一个参数必须是 ``void * user_data`` ，并且 ``user_data`` 需要作为回调的最后一个参数传递。
 
 
 要了解更多信息，请参阅 `MicroPython <integration/bindings/micropython>`__ 的文档。
