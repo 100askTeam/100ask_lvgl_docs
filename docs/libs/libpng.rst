@@ -63,11 +63,11 @@ The decoded image is stored in RGBA pixel format.
    <br>
 
 
-在 ``lv_conf.h``中启用:c:macro:`LV_USE_LIBPNG` 。
+在 ``lv_conf.h`` 中启用 :c:macro:`LV_USE_LIBPNG` 。
 
 请参阅以下示例。
 
-应该注意，这个解码器的每个图象需要消耗 ``宽x高x4``字节的RAM，
+应该注意，这个解码器的每个图象需要消耗 ``宽x高x4`` 字节的RAM，
 
 它需要与 :ref:`overview_image_caching` 功能相结合，以确保内存使用在合理的范围内。
 

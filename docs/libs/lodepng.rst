@@ -40,9 +40,9 @@ PNG解码器让我们可以在 LVGL 中使用 PNG 图像。
 
 :注意: 需要注册文件系统驱动程序才能从文件中打开图像。阅读有关它的 :ref:`overview_file_system` 更多信息，或者仅在 ``lv_conf.h`` 中使用 ``LV_USE_FS_...`` 启用一个
 
-对整个PNG图像进行解码，因此需要 ``宽x高x 4``字节的空闲RAM空间。解码后的图像以RGBA像素格式存储。
+对整个PNG图像进行解码，因此需要 ``宽x高x 4`` 字节的空闲RAM空间。解码后的图像以RGBA像素格式存储。
 
-由于解码 PNG 图像可能需要大量时间，这时候 LVGL :ref:`的图像缓存` 功能就能派上用场了( lv_conf.h 中的 LV_IMG_CACHE_DEF_SIZE)。
+由于解码 PNG 图像可能需要大量时间，这时候 LVGL :ref:`overview_image_caching` 功能就能派上用场了( lv_conf.h 中的 LV_IMG_CACHE_DEF_SIZE)。
 
 
 Compress PNG files（压缩PNG文件）

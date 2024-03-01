@@ -66,7 +66,7 @@ given build system.
 
 构建三星的 Rlottie C++ 兼容编译器，并可选地需要 CMake 3.14 或更高版本。
 
-要在桌面上构建，您可以按照 Rlottie 的 `README <https://github.com/Samsung/rlottie/blob/master/README.md>`__中的说明进行操作。
+要在桌面上构建，您可以按照 Rlottie 的 `README <https://github.com/Samsung/rlottie/blob/master/README.md>`__ 中的说明进行操作。
 
 在最基本的情况下，它看起来像这样：
 
@@ -111,7 +111,7 @@ function and the animation will be scaled accordingly.
    <br>
 
 
-您可以使用来自文件或原始数据（文本）的动画。无论哪种情况 首先，您需要在 ``lv_conf.h``中启用 :c:macro:`LV_USE_RLOTTIE` 。
+您可以使用来自文件或原始数据（文本）的动画。无论哪种情况 首先，您需要在 ``lv_conf.h`` 中启用 :c:macro:`LV_USE_RLOTTIE` 。
 
 在 *create* 函数中设置对象的 ``width`` 和 ``height`` ，动画将相应地缩放。
 
@@ -287,9 +287,9 @@ LVGL 提供了两个功能来控制动画模式：:cpp:func:`lv_rlottie_set_play
 
 默认动画模式是 **循环向前播放** 。
 
-如果不启用循环，则在:cpp:enumerator:`LV_EVENT_READY` 没有循环，动画就无法取得更大的进步。
+如果不启用循环，则在 :cpp:enumerator:`LV_EVENT_READY` 没有循环，动画就无法取得更大的进步。
 
-为了获得动画中的帧数或当前帧索引，可以将 :c:struct:`lv_obj_t`实例强制转换为 :c:struct:` lv_rlottie_t`实例并检查 ``current_frame`` 和 ``total_frames`` 成员。
+为了获得动画中的帧数或当前帧索引，可以将 :c:struct:`lv_obj_t` 实例强制转换为 :c:struct:` lv_rlottie_t` 实例并检查 ``current_frame`` 和 ``total_frames`` 成员。
 
 
 ESP-IDF Example（ESP-IDF 示例）
@@ -586,7 +586,7 @@ IDF) with the appropriate :cpp:expr:`MALLOC_CAP` call - for SPIRAM usage this is
 
 :cpp:expr:`lv_alloc/realloc` 不使用SPIRAM。鉴于内存使用率高的 lottie 动画，建议尽可能多地从内部转移，尽可能将 DRAM 放入 SPIRAM 中。为此，SPIRAM 需要在给定乐鑫芯片的 menuconfig 选项中启用。
 
-可能有更好的解决方案，但就目前而言， 建议对 LVGL 组件进行本地修改您的乐鑫项目。这就像将 `lv_rlottie.c`` 中的:cpp:expr:`lv_alloc/lv_realloc` 调用与 :cpp:expr:`heap_caps_malloc` 交换一样简单（用于 IDF） 与适当的 :cpp:expr:`MALLOC_CAP` 调用 - 对于 SPIRAM 的使用，这是:cpp:expr:`MALLOC_CAP_SPIRAM`。
+可能有更好的解决方案，但就目前而言， 建议对 LVGL 组件进行本地修改您的乐鑫项目。这就像将 `lv_rlottie.c` 中的 :cpp:expr:`lv_alloc/lv_realloc` 调用与 :cpp:expr:`heap_caps_malloc` 交换一样简单（用于 IDF） 与适当的 :cpp:expr:`MALLOC_CAP` 调用 - 对于 SPIRAM 的使用，这是 :cpp:expr:`MALLOC_CAP_SPIRAM`。
 
 .. code:: c
 

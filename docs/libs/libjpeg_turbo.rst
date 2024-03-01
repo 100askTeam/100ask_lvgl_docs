@@ -69,11 +69,11 @@ and it needs to be combined with the :ref:`overview_image_caching` feature to en
    <br>
 
 
-在 ``lv_conf.h``中启用 :c:macro:`LV_USE_LIBJPEG_TURBO` 。
+在 ``lv_conf.h`` 中启用 :c:macro:`LV_USE_LIBJPEG_TURBO` 。
 
 请参阅以下示例。
 
-应当注意，该解码器的每个图像需要消耗 ``图像宽度x图像高度x3``字节的RAM，
+应当注意，该解码器的每个图像需要消耗 ``图像宽度x图像高度x3`` 字节的RAM，
 
 它需要与 :ref:`overview_image_caching` 功能相结合，以确保内存使用在合理的范围内。
 

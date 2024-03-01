@@ -82,7 +82,7 @@ enable one in ``lv_conf.h`` with ``LV_USE_FS_...`` config.
    <br>
 
 
-如果在 ``lv_conf.h``中由:c:mmacro:`lv_USE_TJPGD`LVGL启用将注册一个新的自动图像解码器，因此可以直接使用 JPEG 文件作为图像源。
+如果在 ``lv_conf.h`` 中由 :c:mmacro:`lv_USE_TJPGD` LVGL启用将注册一个新的自动图像解码器，因此可以直接使用 JPEG 文件作为图像源。
 
 例如：
 
@@ -90,7 +90,7 @@ enable one in ``lv_conf.h`` with ``LV_USE_FS_...`` config.
 
    lv_image_set_src(my_img, "S:path/to/picture.jpg");
 
-:注意: 需要注册文件系统驱动程序才能打开映像文件。阅读更多关于 :ref:`文件系统的信息`，或者只是使用 ``LV_USE_FS_...`` 在 ``lv_conf.h`` 启用一个配置。
+:注意: 需要注册文件系统驱动程序才能打开映像文件。阅读更多关于 :ref:`overview_file_system` ，或者只是使用 ``LV_USE_FS_...`` 在 ``lv_conf.h`` 启用一个配置。
 
 
 Converter（转换器）

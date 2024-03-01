@@ -46,7 +46,7 @@ bmp图的像素是按需读取的（不是加载整个图像），因此使用 B
 
    lv_image_set_src(my_img, "S:path/to/picture.bmp");
 
-注意，需要注册文件系统驱动程序才能从文件系统中打开bmp图像，里阅读了解更多信息 :ref:`overview_file_system` ，或直接在 ``lv_conf.h`` 中打开其中一个类似 ``LV_USE_FS_...``的宏。
+注意，需要注册文件系统驱动程序才能从文件系统中打开bmp图像，里阅读了解更多信息 :ref:`overview_file_system` ，或直接在 ``lv_conf.h`` 中打开其中一个类似 ``LV_USE_FS_...`` 的宏。
 
 
 .. _bmp_limitations:

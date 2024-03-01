@@ -209,7 +209,7 @@ please refer to example code.
 
 默认情况下，FreeType 扩展不使用 LVGL 的文件系统。你 可以像往常一样在操作系统上简单地传递字体的路径 或平台。
 
-如果希望 FreeType 使用 lvgl 的内存分配和文件系统接口，即可启用 :c:macro:`LV_FREETYPE_USE_LVGL_PORT`在 ``lv_conf.h``里 ，方便统一管理。
+如果希望 FreeType 使用 lvgl 的内存分配和文件系统接口，即可启用 :c:macro:`LV_FREETYPE_USE_LVGL_PORT` 在 ``lv_conf.h`` 里 ，方便统一管理。
 
 字体样式支持 *斜体* 和 **粗体** 处理 软件，并可参考以下值进行设置：
 
@@ -219,7 +219,7 @@ please refer to example code.
 
 它们可以 combined.eg：:cpp:expr:`LV_FREETYPE_FONT_STYLE_BOLD | LV_FREETYPE_FONT_STYLE_ITALIC`。
 
-使用:cpp:func:`lv_freetype_font_create` 函数创建字体。到删除字体，使用:cpp:func:`lv_freetype_font_delete`。为了更详细的使用，请参阅示例代码。
+使用 :cpp:func:`lv_freetype_font_create` 函数创建字体。到删除字体，使用 :cpp:func:`lv_freetype_font_delete`。为了更详细的使用，请参阅示例代码。
 
 
 .. _freetype_example:
@@ -248,7 +248,7 @@ Learn more（了解更多信息）
 
 FreeType `教程 <https://www.freetype.org/freetype2/docs/tutorial/step1.html>`__
 
-LVGL的:ref:`添加新字体`
+LVGL的 :ref:`add_font`
 
 
 .. _freetype_api:

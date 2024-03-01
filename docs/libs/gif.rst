@@ -30,9 +30,9 @@ GIF解码器让我们可以在 LVGL 中使用 GIF 图像。
 
 详细介绍： https://github.com/lecram/gifdec 。
 
-如果在``lv_conf.h``中启用了 :c:macro:`LV_USE_GIF`后，可以使用 :cpp:expr:`lv_gif_create(parent)` 创建 gif 组件，这与 lv_img_create 非常相似。
-
-:cpp:expr:`lv_gif_set_src(obj, src)`的工作方式与 :cpp:func:`lv_image_set_src`非常相似。作为源，它还接受图像作为变量 (:c:struct:`lv_image_dsc_t`) 或文件。
+如果在 ``lv_conf.h`` 中启用了 :c:macro:`LV_USE_GIF` 后，可以使用 :cpp:expr:`lv_gif_create(parent)` 创建 gif 组件，这与 lv_img_create 非常相似。
+ 
+:cpp:expr:`lv_gif_set_src(obj, src)` 的工作方式与 :cpp:func:`lv_image_set_src` 非常相似。作为源，它还接受图像作为变量 (:c:struct:`lv_image_dsc_t`) 或文件。
 
 
 Convert GIF files to C array（将 GIF 文件转换为 C 数组）
@@ -53,7 +53,7 @@ format and "C array" Output format.
    <br>
 
 
-要将 GIF 文件转换为字节值的数组，请使用 `LVGL'的在线转换器 <https://lvgl.io/tools/imageconverter>`__。选择 “RAW” 颜色格式和 “C array” 输出格式。
+要将 GIF 文件转换为字节值的数组，请使用 `LVGL的在线转换器 <https://lvgl.io/tools/imageconverter>`__。选择 “RAW” 颜色格式和 “C array” 输出格式。
 
 
 Use GIF images from file（使用GIF文件）
@@ -86,7 +86,7 @@ enable one in ``lv_conf.h`` with ``LV_USE_FS_...``
 
    lv_gif_set_src(obj, "S:path/to/example.gif");
 
-注意，需要注册文件系统驱动程序才能从文件中打开图像。阅读 :ref:`overview_file_system` 关于文件系统的更多信息，或直接在 ``lv_conf.h`` 中打开其中一个类似 ``LV_USE_FS_...``的宏。
+注意，需要注册文件系统驱动程序才能从文件中打开图像。阅读 :ref:`overview_file_system` 关于文件系统的更多信息，或直接在 ``lv_conf.h`` 中打开其中一个类似 ``LV_USE_FS_...`` 的宏。
 
 
 Memory requirements（内存要求）
