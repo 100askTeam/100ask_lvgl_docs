@@ -59,4 +59,4 @@ are learning to use LVGL:
 .. toctree::
     :maxdepth: 2
 
-    quick-overview（快速概览）
+    quick-overview
