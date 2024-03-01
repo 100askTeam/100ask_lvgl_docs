@@ -412,7 +412,7 @@ Some examples:
    <br>
 
 
-有一些属性可以通过 ``lv_obj_add/remove_flag(obj, LV_OBJ_FLAG_...)`` 和 ``lv_obj_set_flag(obj, LV_OBJ_FLAG_..., true/false)``启用/禁用：
+有一些属性可以通过 ``lv_obj_add/remove_flag(obj, LV_OBJ_FLAG_...)`` 和 ``lv_obj_set_flag(obj, LV_OBJ_FLAG_..., true/false)`` 启用/禁用：
 
 -  :cpp:enumerator:`LV_OBJ_FLAG_HIDDEN` 隐藏对象。 （就像它根本不存在一样）
 -  :cpp:enumerator:`LV_OBJ_FLAG_CLICKABLE` 使输入设备可点击对象

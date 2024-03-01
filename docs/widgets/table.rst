@@ -256,7 +256,7 @@ Learn more about :ref:`indev_keys`.
 
 - ``LV_KEY_RIGHT/LEFT/UP/DOWN/`` 选择一个单元格。
 
-请注意，与往常一样，:cpp:enumerator:`LV_KEY_ENTER` 的状态被转换为 ``LV_EVENT_PRESSED/PRESSING/RELEASED `` 等。
+请注意，与往常一样，:cpp:enumerator:`LV_KEY_ENTER` 的状态被转换为 ``LV_EVENT_PRESSED/PRESSING/RELEASED`` 等。
 
 :cpp:expr:`lv_table_get_selected_cell(table, &row, &col)` 可用于获取当前选定的单元格。行和列将设置为 :c:macro:`LV_TABLE_CELL_NONE` 未选择任何单元格。
 

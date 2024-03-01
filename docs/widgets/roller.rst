@@ -161,7 +161,7 @@ Learn more about :ref:`events`.
    <br>
 
 
-- 在选中选项是会触发 :cpp:enumerator:`LV_EVENT_VALUE_CHANGED`（按照逻辑来说只要你滚动了滚轮中的选项都会触发此事件类型）。
+- 在选中选项是会触发 :cpp:enumerator:`LV_EVENT_VALUE_CHANGED` （按照逻辑来说只要你滚动了滚轮中的选项都会触发此事件类型）。
 
 可以参考 :ref:`基本对象 <lv_obj>` 的事件。
 
