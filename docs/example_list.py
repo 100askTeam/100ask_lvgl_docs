@@ -144,7 +144,7 @@ def exec(temp_directory):
     # fout.write("\n")
 
     fout.write('.. _examples:\n\n')
-    write_header(0, 'Examples', fout)
+    write_header(0, 'Examples（示例）', fout)
 
     for h in h1:
         write_header(1, h1[h], fout)
