@@ -62,8 +62,8 @@ So pay extra attention to these:
 
 所以要格外注意这些：
 
-- :cpp:func:`lv_display_set_buffers(display, buf1, buf2, buf_size_byte, mode)` 或多或少与 v8 中的 ``lv_disp_draw_buf_init(&draw_buf_dsc, buf1, buf2, buf_size_px)`` 相同，但是在v9 中， **冲区大小以字节为单位设置**。
-- 在 v9 中 无论 ``lv_conf_template.h``如何， ``lv_color_t`` 始终是 RGB888，.
+- :cpp:func:`lv_display_set_buffers(display, buf1, buf2, buf_size_byte, mode)` 或多或少与 v8 中的 ``lv_disp_draw_buf_init(&draw_buf_dsc, buf1, buf2, buf_size_px)`` 相同，但是在v9 中， **缓冲区大小以字节为单位设置**。
+- 在 v9 中 无论 ``lv_conf_template.h`` 如何， ``lv_color_t`` 始终是 RGB888，.
 - ``lv_conf.h`` 已经改变了很多，所有不要忘记更新它 ``lv_conf_template.h``
 - 确保 ``<stdint.h>`` **不包含** 在 ``lv_conf.h``。 在 v9 中，我们有一些组装部件以获得更好的性能，随机包含会弄乱组装部件。
 - 在线图像转换器尚未更新。直到使用 `LVGLImage.py <https://github.com/lvgl/lvgl/blob/master/scripts/LVGLImage.py>`__ 。
@@ -98,7 +98,7 @@ Main new features（主要新功能）
 
 - 支持 RGB888 的运行时显示颜色格式调整
 - 内置支持 ``pthread``, ``FreeRTOS`` 以及渲染期间使用的其他（RT）操作系统
-- 内置支持 LVGL、C 库和其他 ``stdlib``s
+- 内置支持 LVGL、C 库和其他 ``stdlib`` s
 - 更好的并行渲染架构。请参阅 :ref:`此处的详细信息 <porting_draw>`
 - 内置显示和触摸驱动程序：SDL、Linux 帧缓冲区、NuttX LCD 和触摸驱动程序、ST7789 和 ILI9341 驱动程序均可用，更多内容即将推出
 - :ref:`observer` 允许将数据绑定到 UI 元素并创建统一且易于维护的 API
@@ -253,11 +253,11 @@ Display API（显示API）
 -  ``monitor_cb`` 被删除并且 ``LV_EVENT_RENDER_READY`` 触发事件。
 - 不是显示背景颜色和图像，而 ``lv_layer_bottom()`` 添加可以设置任何颜色或可以创建任何小部件的位置。
 - 可以在运行时通过调用 ``lv_display_set_color_format(disp, LV_COLOR_FORMAT_...)`` 在显示中调整目标颜色格式。
--  ``LV_COLOR_16_SWAP`` 已删除，如果需要 在 ``flush_cb``交换， ``lv_draw_sw_rgb565_swap()`` 可以手动调用。
--  ``disp_drv.scr_transp`` 已被删除并且 ``lv_display_set_color_format(disp, LV_COLOR_FORMAT_NATIVE_ALPHA)``可以替代使用。
+-  ``LV_COLOR_16_SWAP`` 已删除，如果需要 在 ``flush_cb`` 交换， ``lv_draw_sw_rgb565_swap()`` 可以手动调用。
+-  ``disp_drv.scr_transp`` 已被删除并且 ``lv_display_set_color_format(disp, LV_COLOR_FORMAT_NATIVE_ALPHA)`` 可以替代使用。
 -  ``set_px_cb`` 已删除。您可以将渲染的图像转换为 ``flush_cb``.
 
-有关更多详细信息，请查看文档 `here /porting/display>`__ 和 `here /overview/display>`__。
+有关更多详细信息，请查看文档 `here /porting/display>`__ 和 `here /overview/display>`__ 。
 
 
 Indev API（独立开发API）
@@ -336,5 +336,5 @@ For Other v8.3.x releases visit the `Changelog in the release/v8.3 branch <https
    <br>
 
 
-对于其他 v8.3.x 版本，请访问 `release/v8.3 分支中的变更日志。 <https://github.com/lvgl/lvgl/blob/release/v8.3/docs/CHANGELOG.md>`__ .
+对于其他 v8.3.x 版本，请访问 `release/v8.3 分支中的变更日志。 <https://github.com/lvgl/lvgl/blob/release/v8.3/docs/CHANGELOG.md>`__ 
 
