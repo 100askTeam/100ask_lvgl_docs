@@ -24,9 +24,9 @@ factors: the size of the font file and the size of the dictionary.
 
 
 拼音输入法（Pinyin IME）提供了API，支持键盘对象使用中文拼音输入法（中文输入），它支持26键和9键输入模式。
-您可以将 ``lv_ime_pinyin``视为键盘对象的拼音输入法插件。
+您可以将 ``lv_ime_pinyin`` 视为键盘对象的拼音输入法插件。
 
-通常情况下，可以运行:ref:`lv_keyboard`的环境也可以运行 ``lv_ime_pinyin``。
+通常情况下，可以运行 :ref:`lv_keyboard` 的环境也可以运行 ``lv_ime_pinyin``。
 有两个主要影响因素：字体文件的大小和字典的大小。
 
 
@@ -65,12 +65,12 @@ the keyboard and dictionary at any time.
    <br>
 
 
-在 ``lv_conf.h``中启用:c:macro:`LV_USE_IME_PINYIN`。
+在 ``lv_conf.h`` 中启用 :c:macro:`LV_USE_IME_PINYIN`。
 
-首先使用:cpp:expr:`lv_ime_pinyin_create(lv_screen_active())` 创建一个拼音输入法插件，然后使用:cpp:expr:`lv_ime_pinyin_set_keyboard(pinyin_ime, kb)`将你创建的 ``keyboard``添加到拼音输入法插件中。
-你可以使用:cpp:expr:`lv_ime_pinyin_set_dict(pinyin_ime, your_dict)`来使用自定义字典（如果你起初不想使用内置字典，可以在``lv_conf.h``中禁用:c:macro:`LV_IME_PINYIN_USE_DEFAULT_DICT`，这样可以节省大量的内存空间）。
+首先使用 :cpp:expr:`lv_ime_pinyin_create(lv_screen_active())` 创建一个拼音输入法插件，然后使用 :cpp:expr:`lv_ime_pinyin_set_keyboard(pinyin_ime, kb)` 将你创建的 ``keyboard`` 添加到拼音输入法插件中。
+你可以使用 :cpp:expr:`lv_ime_pinyin_set_dict(pinyin_ime, your_dict)` 来使用自定义字典（如果你起初不想使用内置字典，可以在 ``lv_conf.h`` 中禁用 :c:macro:`LV_IME_PINYIN_USE_DEFAULT_DICT`，这样可以节省大量的内存空间）。
 
-内置的词库是基于 **LV_FONT_SIMSUN_16_CJK**字体库定制的，目前只有超过 ``1,000``个最常用的CJK基本字，因此推荐使用自定义字体和词库。
+内置的词库是基于 **LV_FONT_SIMSUN_16_CJK** 字体库定制的，目前只有超过 ``1,000`` 个最常用的CJK基本字，因此推荐使用自定义字体和词库。
 
 在使用拼音输入法插件的过程中，你可以随时更改键盘和字典。
 
@@ -103,7 +103,7 @@ Then, write a dictionary in the following format.
 
 自定义词典非常简单。
 
-首先，在 ``lv_conf.h``中将:c:macro:`LV_IME_PINYIN_USE_DEFAULT_DICT`设置为 ``0``。
+首先，在 ``lv_conf.h`` 中将 :c:macro:`LV_IME_PINYIN_USE_DEFAULT_DICT` 设置为 ``0``。
 
 然后，按照以下格式编写词典。
 
@@ -148,9 +148,10 @@ properly.
 
 
 每个拼音音节的排列顺序非常重要。你需要根据汉语拼音音节表定制自己的词库。
-你可以阅读这里的内容了解汉语拼音音节和音节表。然后，根据以下格式编写你自己的词典：
+你可以阅读 `这里 <https://baike.baidu.com/item/%E6%B1%89%E8%AF%AD%E6%8B%BC%E9%9F%B3%E9%9F%B3%E8%8A%82/9167981>`__ 的内容了解汉语拼音音节和音节表。然后，根据以下格式编写你自己的词典：
 
 .. code:: c
+
    lv_100ask_pinyin_dict_t your_pinyin_dict[] = {
                { "a", "啊阿呵吖" },
                { "ai", "埃挨哎唉哀皑蔼矮碍爱隘癌艾" },
@@ -163,8 +164,7 @@ properly.
                { "zuo", "昨左佐做作坐座撮琢柞"},
                {NULL, NULL}
 
-
-**最后一项**必须以 ``{null, null}``结尾，否则它将无法正常工作。
+**最后一项** 必须以 ``{null, null}`` 结尾，否则它将无法正常工作。
 
 
 .. _ime_pinyin_apply_new_dictionary:

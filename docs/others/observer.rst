@@ -90,7 +90,8 @@ A typical use case looks like this:
 一个典型的用例如下:
 
 .. code:: c
-    // 这是一个全局变量
+
+    //It's a global variable
     lv_subject_t my_subject;
 
     /*-------
@@ -101,7 +102,7 @@ A typical use case looks like this:
 
     void main(void)
     {
-        // 将subject初始化为带有默认值10的整数
+        //Initialize the subject as integer with the default value of 10
         lv_subject_init_int(&my_subject, 10);
 
         some_module_init();
@@ -113,7 +114,7 @@ A typical use case looks like this:
 
     extern lv_subject_t some_subject;
 
-    // 当相关subject的值改变时将被调用
+    //Will be called when the related subject's value changes
     static void some_observer_cb(lv_observer_t * observer, lv_subject_t * subject)
     {
         int32_t v = lv_subject_get_int(subject);
@@ -122,7 +123,7 @@ A typical use case looks like this:
 
     void some_module_init(void)
     {
-        //订阅一个subject
+        //Subscribe to a subject
         lv_subject_add_observer(&some_subject, some_observer_cb, NULL);
     }
 
@@ -134,7 +135,7 @@ A typical use case looks like this:
 
     void some_event(void)
     {
-        // 将subject的值设置为30。它将通知“some_observer_cb”
+        //Set the subject's value to 30. It will notify `some_observer_cb`
         lv_subject_set_int(&some_subject, 30);
     }
 
@@ -169,7 +170,7 @@ The following initializations exist for types:
    <br>
 
 
-主题必须是静态或全局的:cpp:type:`lv_subject_t` 类型的变量。
+主题必须是静态或全局的 :cpp:type:`lv_subject_t` 类型的变量。
 
 要初始化主题，请使用 :cpp:expr:`lv_subject_init_<type>(&subject, params, init_value)`。
 存在以下类型的初始化:
@@ -380,11 +381,6 @@ To unsubscribe from a subject with all widgets you can use:
    <br>
 
 
-.. raw:: html
-
-   <details>
-     <summary>显示原文</summary>
-
 .. code:: c
 
     lv_observer_remove(observer)
@@ -483,8 +479,7 @@ The above Voltage/Current measurement example looks like this in the practice:
 
 .. code:: c
     static lv_subject_t * subject_list[3] = {&subject_1, &subject_2, &subject_3};
-    lv_subject_init_group(&subject_all, subject_list, 3);  /*最后一个参数是元素的数量*/
-
+    lv_subject_init_group(&subject_all, subject_list, 3);  /*The last parameter is the number of elements*/
 
 可以以常规方式向主题组中添加观察者。
 诀窍在于，组中的任何元素一旦被通知，组主题也会被通知。
@@ -492,15 +487,16 @@ The above Voltage/Current measurement example looks like this in the practice:
 上面的电压/电流测量示例在实际中看起来像这样：
 
 .. code:: c
+
     lv_obj_t * label = lv_label_create(lv_screen_active());
 
-    lv_subject_t subject_mode;  //电压或电流
-    lv_subject_t subject_value; //测量值
-    lv_subject_t subject_unit;  //单位
-    lv_subject_t subject_all;   //它将成为主题组
-    lv_subject_t * subject_list[3] = {&subject_mode, &subject_value, &subject_unit};  //组的元素
+    lv_subject_t subject_mode;  //Voltage or Current
+    lv_subject_t subject_value; //Measured value
+    lv_subject_t subject_unit;  //The unit
+    lv_subject_t subject_all;   //It will be the subject group
+    lv_subject_t * subject_list[3] = {&subject_mode, &subject_value, &subject_unit};  //The elements of the group
 
-    lv_subject_init_int(&subject_mode, 0); //假设0为电压，1为电流
+    lv_subject_init_int(&subject_mode, 0); //Let's say 0 is Voltage, 1 is Current
     lv_subject_init_int(&subject_value, 0);
     lv_subject_init_pointer(&subject_unit, "V");
     lv_subject_init_group(&subject_all, subject_list, 3);
@@ -520,7 +516,7 @@ The above Voltage/Current measurement example looks like this in the practice:
         int32_t value = lv_subject_get_int(subject_value);
         const char * unit = lv_subject_get_pointer(subject_unit);
 
-        lv_label_set_text_fmt(label, "%s: %d %s", mode ? "电流" : "电压", value, unit);
+        lv_label_set_text_fmt(label, "%s: %d %s", mode ? "Current" : "Voltage", value, unit);
     }
 
 

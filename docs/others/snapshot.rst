@@ -51,10 +51,10 @@ Note, only following color formats are supported for now:
 
 注意，目前仅支持以下颜色格式：
 
-- cpp:enumerator:`LV_COLOR_FORMAT_RGB565`
-- cpp:enumerator:`LV_COLOR_FORMAT_RGB888`
-- cpp:enumerator:`LV_COLOR_FORMAT_XRGB8888` 
-- cpp:enumerator:`LV_COLOR_FORMAT_ARGB8888`
+- :cpp:enumerator:`LV_COLOR_FORMAT_RGB565`
+- :cpp:enumerator:`LV_COLOR_FORMAT_RGB888`
+- :cpp:enumerator:`LV_COLOR_FORMAT_XRGB8888` 
+- :cpp:enumerator:`LV_COLOR_FORMAT_ARGB8888`
 
 
 Free the Image（释放图像）
@@ -143,10 +143,10 @@ fails, destroy the existing draw buffer and call `lv_snapshot_take` directly.
 ``lv_result_t lv_snapshot_take_to_draw_buf(lv_obj_t * obj, lv_color_format_t cf, lv_draw_buf_t * draw_buf);``
 来处理这种情况。创建和销毁绘制缓冲区是调用者的责任。
 
-如果快照生成成功，图像描述符将会被更新，并且图像数据将会存储到提供的 ``buf``中。
+如果快照生成成功，图像描述符将会被更新，并且图像数据将会存储到提供的 ``buf`` 中。
 
 需要注意的是，如果提供的缓冲区不够大，快照可能会失败，这可能发生在对象大小发生变化时。建议使用API
-:cpp:func:`lv_snapshot_reshape_draw_buf`来预先准备缓冲区，如果失败，销毁现有的绘制缓冲区并直接调用 `lv_snapshot_take`。
+:cpp:func:`lv_snapshot_reshape_draw_buf` 来预先准备缓冲区，如果失败，销毁现有的绘制缓冲区并直接调用 `lv_snapshot_take`。
 
 
 .. _snapshot_example:

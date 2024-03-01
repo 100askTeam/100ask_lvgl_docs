@@ -29,10 +29,10 @@ enabled.
    <br>
 
 
-``lv_file_explorer``提供了一个API来浏览文件系统的内容。 ``lv_file_explorer``只提供了文件浏览功能，但不提供实际的文件操作功能。换句话说，你不能像在电脑上那样点击一个图片文件来打开和查看图片。 
-``lv_file_explorer``会告诉你当前点击的文件的完整路径和名称。文件操作功能需要用户自己实现。
+``lv_file_explorer`` 提供了一个API来浏览文件系统的内容。 ``lv_file_explorer`` 只提供了文件浏览功能，但不提供实际的文件操作功能。换句话说，你不能像在电脑上那样点击一个图片文件来打开和查看图片。 
+``lv_file_explorer`` 会告诉你当前点击的文件的完整路径和名称。文件操作功能需要用户自己实现。
 
-``lv_file_explorer``中的文件列表是基于 ``lv_table``，快速访问栏是基于 ``lv_list``。因此，需要确保 ``lv_table``和 ``lv_list``处于启用状态。
+``lv_file_explorer`` 中的文件列表是基于 ``lv_table``，快速访问栏是基于 ``lv_list``。因此，需要确保 ``lv_table`` 和 ``lv_list`` 处于启用状态。
 
 
 .. _file_explorer_usage:
@@ -57,9 +57,9 @@ customize the style like widget.
    <br>
 
 
-启用 ``lv_conf.h``中的:c:macro:`LV_USE_FILE_EXPLORER`。
+启用 ``lv_conf.h`` 中的 :c:macro:`LV_USE_FILE_EXPLORER`。
 
-首先使用:cpp:expr:`lv_file_explorer_create(lv_screen_active())`来创建一个文件浏览器，其默认大小为屏幕大小。
+首先使用 :cpp:expr:`lv_file_explorer_create(lv_screen_active())` 来创建一个文件浏览器，其默认大小为屏幕大小。
 之后，您可以像小部件一样自定义样式。
 
 
@@ -97,10 +97,10 @@ bar are fixed. Currently, there are the following items:
    <br>
 
 
-快速访问栏是可选的。您可以在 ``lv_conf.h``中关闭`:c:macro:`LV_FILE_EXPLORER_QUICK_ACCESS`，这样快速访问栏就不会被创建。这可以节省一些内存，但并不多。
+快速访问栏是可选的。您可以在 ``lv_conf.h`` 中关闭 :c:macro:`LV_FILE_EXPLORER_QUICK_ACCESS`，这样快速访问栏就不会被创建。这可以节省一些内存，但并不多。
 创建快速访问栏后，可以通过单击浏览区域左上角的按钮来隐藏它，对于小屏幕设备非常有用。
 
-您可以使用`:cpp:expr:`lv_file_explorer_set_quick_access_path(file_explorer, LV_FILE_EXPLORER_QA_XX, "path")`来设置快速访问栏的路径。
+您可以使用 :cpp:expr:`lv_file_explorer_set_quick_access_path(file_explorer, LV_FILE_EXPLORER_QA_XX, "path")` 来设置快速访问栏的路径。
 快速访问栏的项目是固定的。目前有以下项目：
 
 -  :cpp:enumerator:`LV_FILE_EXPLORER_QA_HOME`
@@ -141,7 +141,7 @@ default sorting to :cpp:enumerator:`LV_EXPLORER_SORT_NONE`. The default is
    <br>
 
 
-你可以使用`:cpp:expr:`lv_file_explorer_set_sort(file_explorer, LV_EXPLORER_SORT_XX)`来设置排序方法。
+你可以使用 :cpp:expr:`lv_file_explorer_set_sort(file_explorer, LV_EXPLORER_SORT_XX)` 来设置排序方法。
 
 以下是几种排序方法：
 
@@ -212,7 +212,7 @@ through functions such as :cpp:func:`strcpy` and :cpp:func:`strcat` for later us
        }
    }
 
-您也可以使用类似于 :cpp:func:`strcpy` 和 :cpp:func:`strcat` 的函数，将获取到的 **路径**和 **文件**名保存在数组中，以供以后使用。
+您也可以使用类似于 :cpp:func:`strcpy` 和 :cpp:func:`strcat` 的函数，将获取到的 **路径** 和 **文件** 名保存在数组中，以供以后使用。
 
 
 .. _file_explorer_example:

@@ -58,7 +58,7 @@ Two APIs are provided to get/set widget properties. It can be enabled by setting
    <br>
 
 
-提供了两个API来获取/设置小部件属性。可以通过在 `lv_conf.h`中将`:c:macro:`LV_USE_OBJ_PROPERTY`设置为 `1`来启用。
+提供了两个API来获取/设置小部件属性。可以通过在 `lv_conf.h` 中将 :c:macro:`LV_USE_OBJ_PROPERTY` 设置为 `1` 来启用。
 
 .. code:: c
 
@@ -99,11 +99,11 @@ Note that :cpp:type:`lv_style_prop_t` is also valid property ID.
 
 .. raw:: html
 
-   <details>
-     <summary>显示原文</summary>
+   </details>
+   <br>
 
 
-:cpp:type:`lv_prop_id_t` 用于标识要获取/设置的属性。:cpp:type:`lv_property_t`是在 ``lv_obj_property.h``中定义的枚举值，按照部件类进行分组。
+:cpp:type:`lv_prop_id_t` 用于标识要获取/设置的属性。:cpp:type:`lv_property_t` 是在 ``lv_obj_property.h`` 中定义的枚举值，按照部件类进行分组。
 您可以按照相同规则并使用辅助宏 :c:macro:`LV_PROPERTY_ID` 来添加自己的部件属性标识。请确保该标识在所有部件中是唯一的。
 
 属性标识是一个32位的值。高4位表示属性值类型，低28位表示属性标识ID。

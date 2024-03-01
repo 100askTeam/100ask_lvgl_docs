@@ -92,7 +92,7 @@ To add the gridnav feature to an object use
    <br>
 
 
-要给对象添加gridnav功能，请使用：cpp:expr:`lv_gridnav_add(cont, flags)`。
+要给对象添加gridnav功能，请使用 :cpp:expr:`lv_gridnav_add(cont, flags)`。
 
 ``flags`` 控制gridnav的行为：
 
@@ -100,7 +100,7 @@ To add the gridnav feature to an object use
 - :cpp:enumerator:`LV_GRIDNAV_CTRL_ROLLOVER`：如果在某个方向上没有下一个/上一个对象，焦点将转移到下一行/上一行的对象（在左/右键上）或第一行/最后一行的对象（在上/下键上）
 - :cpp:enumerator:`LV_GRIDNAV_CTRL_SCROLL_FIRST`：如果按下箭头并且焦点对象可以在该方向上滚动，则它将滚动而不是转到下一个/上一个对象。如果没有更多的滚动空间，则正常情况下将对下一个/上一个对象进行聚焦
 
-cpp:expr:`lv_gridnav_remove(cont)` 从对象中移除gridnav。
+:cpp:expr:`lv_gridnav_remove(cont)` 从对象中移除gridnav。
 
 
 Focusable objects（可以聚焦的对象）

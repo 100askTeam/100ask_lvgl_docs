@@ -1,8 +1,8 @@
 .. _others:
 
-======
-Others
-======
+==============
+Others（其他）
+==============
 
 .. toctree::
     :maxdepth: 1

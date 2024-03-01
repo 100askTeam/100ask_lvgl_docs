@@ -33,12 +33,12 @@ easily.
    <br>
 
 
-碎片（Fragment）是一个从Android的 `开发者指南 <https://developer.android.com/guide/fragments>`__上复制过来的概念。
+碎片（Fragment）是一个从Android的 `开发者指南 <https://developer.android.com/guide/fragments>`__ 上复制过来的概念。
 
 它表示你的应用程序界面的可重用部分。一个碎片定义和管理自己的布局，有自己的生命周期，并且可以处理自己的事件。就像Android的碎片必须由一个活动或另一个碎片托管一样，LVGL中的碎片也需要由一个对象或另一个碎片托管。
 碎片的视图层次结构成为宿主的视图层次结构的一部分，或者依附于宿主的视图层次结构上。
 
-这个概念与iOS上的 `UiViewController <https://developer.apple.com/documentation/uikit/uiviewcontroller>`__也有一些相似之处。
+这个概念与iOS上的 `UiViewController <https://developer.apple.com/documentation/uikit/uiviewcontroller>`__ 也有一些相似之处。
 
 碎片管理器（Fragment Manager）是一个持有对附加的碎片的引用的管理器，它有一个内部堆栈来实现导航。您可以使用碎片管理器轻松构建导航堆栈或多窗格应用程序。
 
@@ -61,7 +61,7 @@ Enable :c:macro:`LV_USE_FRAGMENT` in ``lv_conf.h``.
    <br>
 
 
-在 `lv_conf.h` 中启用 :c:macro:`LV_USE_FRAGMENT`宏。
+在 `lv_conf.h` 中启用 :c:macro:`LV_USE_FRAGMENT` 宏。
 
 
 Create Fragment Class（创建片段类）

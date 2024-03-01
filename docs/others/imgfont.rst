@@ -20,9 +20,9 @@ Supported image formats: determined by enabled LVGL :ref:`image decoders <overvi
    <br>
 
 
-使用 **label**或 **span**对象以:cpp:type:`lv_imgfont`绘制图像。这通常用于在文本中显示Unicode表情符号图标。
+使用 **label** 或 **span** 对象以 :cpp:type:`lv_imgfont` 绘制图像。这通常用于在文本中显示Unicode表情符号图标。
 
-支持的图像格式：由启用的LVGL:ref:`图像解码器<overview_image_decoder>`决定。
+支持的图像格式：由启用的LVGL  :ref:`image decoders <overview_image_decoder>` 决定。
 
 
 .. _lv_imgfont_usage:
@@ -55,7 +55,7 @@ To destroy the *imgfont* that is no longer used, use :cpp:expr:`lv_imgfont_destr
    <br>
 
 
-启用:c:macro:`LV_USE_IMGFONT` 在 ``lv_conf.h`` 中。
+启用 :c:macro:`LV_USE_IMGFONT` 在 ``lv_conf.h`` 中。
 
 要创建一个新的 *imgfont*，使用 :cpp:expr:`lv_imgfont_create(height, path_cb, user_data)`。
 
