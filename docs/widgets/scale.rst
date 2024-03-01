@@ -109,9 +109,9 @@ and :cpp:expr:`lv_obj_set_style_length(scale, 5, LV_PART_ITEMS);` for minor tick
 
 使用 :cpp:expr:`lv_scale_set_total_tick_count(scale, total_tick_count)` 设置总刻度数。然后使用 :cpp:expr:`lv_scale_set_major_tick_every(scale, nth_tick)`，将主要刻度线配置为每 N 个刻度线。
 
-主要刻度上的标签可以配置lv_scale_set_label_show（刻度、show_label）、 如果应绘制标签，则将 show_label 设置为 true，如果应绘制标签，则将 设置为 true，将标签设置为隐藏标签。 如果需要在主要刻度中不需要数值，则可以设置文本 以 lv_scale_set_text_src（scale， custom_labels） 作为最后一个元素， 即静态字符 * custom_labels[3] = {“One”， “Two”， NULL};。NULL
+主要刻度上的标签可以配置lv_scale_set_label_show（刻度、show_label）、 如果应绘制标签，则将 show_label 设置为 true，如果应绘制标签，则将 设置为 true，将标签设置为隐藏标签。 如果需要在主要刻度中不需要数值，则可以设置文本 以 lv_scale_set_text_src（scale， custom_labels） 作为最后一个元素， 即静态字符 * custom_labels[3] = {“One”， “Two”， NULL};。
 
-可以使用 :cpp:expr:`lv_scale_set_label_show(scale, show_label)`配置主要刻度线的标签、 如果要绘制标签，则设置 `show_label` 为 true，如果要隐藏标签，则设置 :cpp:expr:`false`。如果需要在主要刻度线中使用文本而不是数值，可以使用 :cpp:expr:`false` 设置。使用 :cpp:expr:`lv_scale_set_text_src(scale, custom_labels)`，将 ``NULL`` 作为最后一个元素、 即 :cpp:expr:`static char * custom_labels[3] = {"One", "Two", NULL};`。
+可以使用 :cpp:expr:`lv_scale_set_label_show(scale, show_label)` 配置主要刻度线的标签、 如果要绘制标签，则设置 `show_label` 为 true，如果要隐藏标签，则设置 :cpp:expr:`false`。如果需要在主要刻度线中使用文本而不是数值，可以使用 :cpp:expr:`false` 设置。使用 :cpp:expr:`lv_scale_set_text_src(scale, custom_labels)`，将 ``NULL`` 作为最后一个元素、 即 :cpp:expr:`static char * custom_labels[3] = {"One", "Two", NULL};`。
 
 刻度线的长度可通过 :cpp:enumerator:`LV_PART_INDICATOR` 上的 length 样式属性配置。和 :cpp:enumerator:`LV_PART_ITEMS` 上的长度样式属性配置主要刻度线和次要刻度线，例如使用本地样式： :cpp:expr:`lv_obj_set_style_length(scale, 5, LV_PART_INDICATOR);` 用于大刻度线 和 :cpp:expr:`lv_obj_set_style_length(scale, 5, LV_PART_ITEMS);` 用于小刻度线。
 
@@ -145,9 +145,9 @@ For lines (main line, major and minor ticks) the following properties can be con
    <br>
 
 
-部分是小调和大调范围之间的空间。它们可以使用:cpp:expr:`lv_scale_add_section(scale)` 创建，它会处理一个 :cpp:type:`lv_scale_section_t` 指针。
+部分是小调和大调范围之间的空间。它们可以使用 :cpp:expr:`lv_scale_add_section(scale)` 创建，它会处理一个 :cpp:type:`lv_scale_section_t` 指针。
 
-该部分的范围配置为 :cpp:expr:`lv_scale_section_set_range(section, minor_range, major_range)` 。 比例截面的三个部分中每个部分的样式都可以用 :cpp:expr:`lv_scale_section_set_style(section, PART, style_pointer)`设置，其中 `PART` 可以是 ， 也可以是:cpp:enumerator:`LV_PART_MAIN`, :cpp:enumerator:`LV_PART_ITEMS` 或 :cpp:enumerator:`LV_PART_INDICATOR`, :cpp:expr:`style_pointer`  ， :cpp:type:`lv_style_t` 应该指向全局变量或静态变量。
+该部分的范围配置为 :cpp:expr:`lv_scale_section_set_range(section, minor_range, major_range)` 。 比例截面的三个部分中每个部分的样式都可以用 :cpp:expr:`lv_scale_section_set_style(section, PART, style_pointer)`设置，其中 `PART` 可以是 ， 也可以是 :cpp:enumerator:`LV_PART_MAIN`, :cpp:enumerator:`LV_PART_ITEMS` 或 :cpp:enumerator:`LV_PART_INDICATOR`, :cpp:expr:`style_pointer`  ， :cpp:type:`lv_style_t` 应该指向全局变量或静态变量。
 
 对于标签，可以配置以下属性：:cpp:func:`lv_style_set_text_font`, :cpp:func:`lv_style_set_text_color`, :cpp:func:`lv_style_set_text_letter_space`, :cpp:func:`lv_style_set_text_opa`。
 

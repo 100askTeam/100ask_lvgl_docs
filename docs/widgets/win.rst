@@ -111,9 +111,9 @@ title.
    <br>
 
 
-可以使用 :cpp:expr:`lv_win_add_title(win, "The title")`将任意数量的文本（但通常只有一个）添加到标题中。
+可以使用 :cpp:expr:`lv_win_add_title(win, "The title")` 将任意数量的文本（但通常只有一个）添加到标题中。
 
-可以使用:cpp:expr:`lv_win_add_button(win, icon, button_width)`将控制按钮添加到窗口的标题 。 ``icon`` 可以是任何图像源， ``button_width`` 是按钮的宽度。
+可以使用 :cpp:expr:`lv_win_add_button(win, icon, button_width)` 将控制按钮添加到窗口的标题 。 ``icon`` 可以是任何图像源， ``button_width`` 是按钮的宽度。
 
 标题和按钮将按照函数调用的顺序添加。因此，添加一个按钮、一个文本和另外两个按钮将导致左侧有一个按钮、一个标题和右侧有两个按钮。标题的宽度设置为占据标题上的所有剩余空间。换句话说：它将标题后添加的所有按钮推到右侧。
 
@@ -163,9 +163,9 @@ Learn more about :ref:`events`.
    <br>
 
 
-窗口不会发送特殊事件，但是可以手动将事件添加到 :cpp:func:`lv_win_add_button`的返回值中。
+窗口不会发送特殊事件，但是可以手动将事件添加到 :cpp:func:`lv_win_add_button` 的返回值中。
 
-了解有关 :ref:`事件`的更多信息。
+了解有关 :ref:`events` 的更多信息。
 
 
 .. _lv_win_keys:
@@ -190,7 +190,7 @@ Learn more about :ref:`indev_keys`.
 
 窗口不处理任何 *按键* 。
 
-了解有关 :ref:`indev_按键` 的更多信息。
+了解有关 :ref:`indev_keys` 的更多信息。
 
 
 .. _lv_win_example:

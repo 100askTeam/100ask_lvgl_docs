@@ -25,7 +25,7 @@ set to :cpp:enumerator:`LV_SIZE_CONTENT`
    <br>
 
 
-与 :ref:`基础对象 <lv_obj>`相比，按钮没有新功能。 它们可用于语义目的，并且默认设置略有不同。
+与 :ref:`Base object <lv_obj>` 相比，按钮没有新功能。 它们可用于语义目的，并且默认设置略有不同。
 
 默认情况下，按钮在以下方面与基础对象不同：
 
@@ -73,7 +73,7 @@ There are no new features compared to :ref:`Base object <lv_obj>`.
    </details> 
    <br>
 
-与 :ref:`基础对象 <lv_obj>`相比，没有新功能。
+与 :ref:`Base object <lv_obj>` 相比，没有新功能。
 
 
 .. _lv_button_events:
@@ -100,7 +100,7 @@ Learn more about :ref:`events`.
 
 - 如果打开了  :cpp:enumerator:`LV_OBJ_FLAG_CHECKABLE`  ，当对象被点击时有选中切换(Toggle)状态的效果，并且可以在 :cpp:enumerator:`LV_EVENT_VALUE_CHANGED` 事件类型中处理事件。
 
-详细了解更多 :ref:`事件`。
+详细了解更多 :ref:`events`。
 
 
 .. _lv_button_keys:
@@ -127,11 +127,11 @@ Learn more about :ref:`indev_keys`.
    <br>
 
 
-请注意， :cpp:enumerator:`LV_KEY_ENTER` 的状态被转换为:cpp:enumerator:`LV_EVENT_PRESSED`, :cpp:enumerator:`LV_EVENT_PRESSING` 和:cpp:enumerator:`LV_EVENT_RELEASED` 等。
+请注意， :cpp:enumerator:`LV_KEY_ENTER` 的状态被转换为 :cpp:enumerator:`LV_EVENT_PRESSED`, :cpp:enumerator:`LV_EVENT_PRESSING` 和 :cpp:enumerator:`LV_EVENT_RELEASED` 等。
 
-参见:ref:`基础对象 <lv_obj>` 的事件。
+参见 :ref:`Base object <lv_obj>` 的事件。
 
-了解有关 :ref:`indev_按键`的更多信息。
+了解有关 :ref:`indev_keys` 的更多信息。
 
 
 .. _lv_button_example:

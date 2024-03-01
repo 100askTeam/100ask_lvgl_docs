@@ -119,7 +119,7 @@ use :cpp:expr:`lv_keyboard_set_textarea(kb, ta)`.
    <br>
 
 
-你可以将:ref:`文本框 <lv_textarea>` 分配给键盘绑定，之后点击键盘上的按钮就能更改文本框中的内容。可以通过 :cpp:expr:`lv_keyboard_set_textarea(kb, ta)` 函数将文本框分配给键盘绑定。
+你可以将 :ref:`Text area <lv_textarea>` 分配给键盘绑定，之后点击键盘上的按钮就能更改文本框中的内容。可以通过 :cpp:expr:`lv_keyboard_set_textarea(kb, ta)` 函数将文本框分配给键盘绑定。
 
 
 Key Popovers（按键弹出提示）
@@ -152,7 +152,7 @@ selecting additional characters such as accents yet.
    <br>
 
 
-这个效果就像常见的安卓和iOS键盘上的效果：按下按键时会有在相应的按键之上弹出该按键提示当前按下的按钮。调用函数 :cpp:expr:`lv_keyboard_set_popovers(kb, true)`即可得到这样得效果。默认控制map默认的配置是只在有text的按键上显示弹出提示框，而不会在空格键(space)上显示。如果使用自定义的按键map，请为所有要显示弹出框的按键设置 :cpp:enumerator:`LV_BUTTONMATRIX_CTRL_POPOVER` 标志。
+这个效果就像常见的安卓和iOS键盘上的效果：按下按键时会有在相应的按键之上弹出该按键提示当前按下的按钮。调用函数 :cpp:expr:`lv_keyboard_set_popovers(kb, true)` 即可得到这样得效果。默认控制map默认的配置是只在有text的按键上显示弹出提示框，而不会在空格键(space)上显示。如果使用自定义的按键map，请为所有要显示弹出框的按键设置 :cpp:enumerator:`LV_BUTTONMATRIX_CTRL_POPOVER` 标志。
 
 请注意，顶行中的按键的弹出窗口将被绘制在超过键盘的边界之外。因此，建议在键盘顶部保留额外的可用空间，或确保在其顶部边界附近的任何其他组件(对象)之后再添加或者创建键盘，来确保弹出窗口不被这些组件遮挡。
 
@@ -192,7 +192,7 @@ with the original map:
    <br>
 
 
-您可以使用:cpp:expr:`lv_keyboard_set_map(kb, LV_KEYBOARD_MODE_..., kb_map, kb_ctrl)`函数为键盘指定新的map（布局）。
+您可以使用 :cpp:expr:`lv_keyboard_set_map(kb, LV_KEYBOARD_MODE_..., kb_map, kb_ctrl)` 函数为键盘指定新的map（布局）。
 
 看 :ref:`按钮矩阵 <lv_buttonmatrix>` ，了解详细信息创建新的map（布局）和Ctrl。
 
@@ -250,7 +250,7 @@ Learn more about :ref:`events`.
 
 :注意: 在 8.0 及更高版本中，向键盘添加事件处理程序不会删除默认事件处理程序。 此行为与 v7 不同，在 v7 中，添加事件处理程序将始终替换前一个事件处理程序。
 
-详细了解更多 :ref:`事件`。
+详细了解更多 :ref:`events`。
 
 
 .. _lv_keyboard_keys:
@@ -279,7 +279,7 @@ Learn more about :ref:`indev_keys`.
 -  ``LV_KEY_RIGHT/UP/LEFT/RIGHT`` 在按钮和导航之间选择一个。
 -  :cpp:enumerator:`LV_KEY_ENTER` 按下/松开所选按钮。
 
-了解有关 :ref:`indev_按键`的更多信息。
+了解有关 :ref:`indev_keys` 的更多信息。
 
 
 .. _lv_keyboard_example:

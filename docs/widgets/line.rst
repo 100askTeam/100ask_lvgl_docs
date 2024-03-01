@@ -74,9 +74,9 @@ values do not automatically expand the bounding box.
    <br>
 
 
-点必须存储在 :cpp:struct:`lv_point_precise_t` 类型的数组中，并通过 :cpp:expr:`lv_line_set_points(lines, point_array, point_cnt)`函数将数组传递给line对象。
+点必须存储在 :cpp:struct:`lv_point_precise_t` 类型的数组中，并通过 :cpp:expr:`lv_line_set_points(lines, point_array, point_cnt)` 函数将数组传递给line对象。
 
-它们的坐标可以指定为原始像素坐标 （例如 ``{5, 10}``），或使用 :cpp:expr:`lv_pct(x)`作为线条边界框的百分比。在后一种情况下，线的宽度/高度可能需要显式使用 ``lv_obj_set_width/height``， 作为百分比值不会自动展开边界框。
+它们的坐标可以指定为原始像素坐标 （例如 ``{5, 10}``），或使用 :cpp:expr:`lv_pct(x)` 作为线条边界框的百分比。在后一种情况下，线的宽度/高度可能需要显式使用 ``lv_obj_set_width/height``， 作为百分比值不会自动展开边界框。
 
 Auto-size（自动调整大小）
 ------------------------
@@ -118,7 +118,7 @@ be the bottom of the object. *y invert* is disabled by default.
    <br>
 
 
-默认情况下，*y == 0* 点是在line对象的顶部最左侧。这在某些情况下可能是不直观的(LCD坐标系)，这时候可以使用 :cpp:expr:`lv_line_set_y_invert(line, true)`函数来反转y坐标 。在这种情况下， *y == 0* 将是物体的底部最左侧(直角坐标系)。
+默认情况下，*y == 0* 点是在line对象的顶部最左侧。这在某些情况下可能是不直观的(LCD坐标系)，这时候可以使用 :cpp:expr:`lv_line_set_y_invert(line, true)` 函数来反转y坐标 。在这种情况下， *y == 0* 将是物体的底部最左侧(直角坐标系)。
 
 默认不反转 *y轴*。
 
@@ -150,7 +150,7 @@ Learn more about :ref:`events`.
 
 另请参阅 :ref:`基本对象 <lv_obj>` 的事件。
 
-详细了解更多 :ref:`事件`。
+详细了解更多 :ref:`events`。
 
 
 .. _lv_line_keys:
@@ -175,7 +175,7 @@ Learn more about :ref:`indev_keys`.
 
 线条对象不响应处理 *按键*(以及触摸)。
 
-了解有关 :ref:`indev_按键`的更多信息。
+了解有关 :ref:`indev_keys` 的更多信息。
 
 .. _lv_line_example:
 

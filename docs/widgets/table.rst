@@ -117,7 +117,7 @@ To explicitly set number of rows and columns use
    <br>
 
 
-要明确设置行数和列数，请使用:cpp:expr:`lv_table_set_row_count(table, row_cnt)` 和 :cpp:expr:`lv_table_set_column_count(table, col_cnt)`
+要明确设置行数和列数，请使用 :cpp:expr:`lv_table_set_row_count(table, row_cnt)` 和 :cpp:expr:`lv_table_set_column_count(table, col_cnt)`
 
 
 Width and Height（宽度和高度）
@@ -141,7 +141,7 @@ padding etc) and the number of rows.
    <br>
 
 
-列的宽度可以通过:cpp:expr:`lv_table_set_column_width(table, col_id, width)`设置。 Table 对象的总宽度将设置为列宽的总和。
+列的宽度可以通过 :cpp:expr:`lv_table_set_column_width(table, col_id, width)` 设置。 Table 对象的总宽度将设置为列宽的总和。
 
 高度是根据单元格样式（字体、填充等）和行数自动计算的。
 
@@ -164,7 +164,7 @@ To merge more adjacent cells call this function for each cell.
    <br>
 
 
-单元格可以使用 :cpp:expr:`lv_table_add_cell_ctrl(table, row, col, LV_TABLE_CELL_CTRL_MERGE_RIGHT)`进行水平合并。 要合并更多相邻单元格，请为每个单元格调用此函数。
+单元格可以使用 :cpp:expr:`lv_table_add_cell_ctrl(table, row, col, LV_TABLE_CELL_CTRL_MERGE_RIGHT)` 进行水平合并。 要合并更多相邻单元格，请为每个单元格调用此函数。
 
 
 Scroll（滚动）
@@ -221,7 +221,7 @@ Learn more about :ref:`events`.
 
 参见 :ref:`Base object <lv_obj>` 的事件。
 
-详细了解更多 :ref:`事件`。
+详细了解更多 :ref:`events`。
 
 
 .. _lv_table_keys:
@@ -252,15 +252,15 @@ Learn more about :ref:`indev_keys`.
    <br>
 
 
-以下*按键*由表处理：
+以下 *按键* 由表处理：
 
-- ``LV_KEY_RIGHT/LEFT/UP/DOWN/``选择一个单元格。
+- ``LV_KEY_RIGHT/LEFT/UP/DOWN/`` 选择一个单元格。
 
-请注意，与往常一样，:cpp:enumerator:`LV_KEY_ENTER` 的状态被转换为 ``LV_EVENT_PRESSED/PRESSING/RELEASED ``等。
+请注意，与往常一样，:cpp:enumerator:`LV_KEY_ENTER` 的状态被转换为 ``LV_EVENT_PRESSED/PRESSING/RELEASED `` 等。
 
-:cpp:expr:`lv_table_get_selected_cell(table, &row, &col)` 可用于获取当前选定的单元格。行和列将设置为:c:macro:`LV_TABLE_CELL_NONE` 未选择任何单元格。
+:cpp:expr:`lv_table_get_selected_cell(table, &row, &col)` 可用于获取当前选定的单元格。行和列将设置为 :c:macro:`LV_TABLE_CELL_NONE` 未选择任何单元格。
 
-了解有关 :ref:`indev_按键`的更多信息。
+了解有关 :ref:`indev_keys` 的更多信息。
 
 
 .. _lv_table_example:

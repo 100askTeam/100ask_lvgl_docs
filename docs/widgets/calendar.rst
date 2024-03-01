@@ -71,7 +71,7 @@ calendar 对象使用后台下的按钮矩阵对象将日期排列到矩阵中�
 - :cpp:enumerator:`LV_PART_ITEMS` 指日期和日期名称。设置按钮矩阵控制标志以区分 按钮，并添加自定义抽屉事件，按如下方式修改按钮的属性：
 
   - 日期名称没有边框，没有背景，用灰色绘制
-  - 上个月和下个月的天数有:cpp:enumerator:`LV_BUTTONMATRIX_CTRL_DISABLED` 标志
+  - 上个月和下个月的天数有 :cpp:enumerator:`LV_BUTTONMATRIX_CTRL_DISABLED` 标志
   - 今天与主题的原色有较厚的边框 - 突出显示的日子与主题的原色有一些不透明。
 
 日期名称没有边框，没有背景，用灰色绘制
@@ -121,7 +121,7 @@ To set the current date (today), use the
    <br>
 
 
-要设置当前日期（今天），请使用:cpp:expr:`lv_calendar_set_today_date(calendar, year, month, day)` 功能。 ``月`` 需要在 1..12 范围并且 ``日`` 在 1..31 范围内。
+要设置当前日期（今天），请使用 :cpp:expr:`lv_calendar_set_today_date(calendar, year, month, day)` 功能。 ``月`` 需要在 1..12 范围并且 ``日`` 在 1..31 范围内。
 
 
 Shown date（显示日期）
@@ -141,7 +141,7 @@ To set the shown date, use
    <br>
 
 
-要设置显示的日期，请使用:cpp:expr:`lv_calendar_set_shown_date(calendar, year, month)`
+要设置显示的日期，请使用 :cpp:expr:`lv_calendar_set_shown_date(calendar, year, month)`
 
 
 Highlighted days（重要日子）
@@ -164,7 +164,7 @@ or global variable.
    <br>
 
 
-突出显示的日期列表应存储在:cpp:struct:`lv_calendar_date_t` 数组，通过:cpp:expr:`lv_calendar_set_highlighted_dates(calendar, highlighted_dates, date_num)`加载。 只有数组的指针将被保存，因此数组应该是静态的或全局变量。
+突出显示的日期列表应存储在 :cpp:struct:`lv_calendar_date_t` 数组，通过 :cpp:expr:`lv_calendar_set_highlighted_dates(calendar, highlighted_dates, date_num)` 加载。 只有数组的指针将被保存，因此数组应该是静态的或全局变量。
 
 
 Name of the days（日期名称）
@@ -187,7 +187,7 @@ global or constant variables.
    <br>
 
 
-可以使用:cpp:expr:`lv_calendar_set_day_names(calendar, day_names)` 调整日期的名称，其中 ``day_names``看起来像 ``const char * day_names[7] = {"Su", "Mo", ...};`` 只有保存日期名称的指针，因此元素应该是静态的， 全局变量或常量变量。
+可以使用 :cpp:expr:`lv_calendar_set_day_names(calendar, day_names)` 调整日期的名称，其中 ``day_names`` 看起来像 ``const char * day_names[7] = {"Su", "Mo", ...};`` 只有保存日期名称的指针，因此元素应该是静态的， 全局变量或常量变量。
 
 
 Custom year list（自定义年份列表）
@@ -209,7 +209,7 @@ or can be generated dynamically into a buffer as well.
    <br>
 
 
-使用 :cpp:expr:`lv_calendar_header_dropdown_set_year_list(calendar, years_list)`设置自定义年份列表，其中 ``years_list`` 是指向自定义年份列表的指针。它可以是一个常量字符串像 ``static const char * years = "2023\n2022\n2021\n2020\n2019";``，或者也可以动态生成到缓冲区中。
+使用 :cpp:expr:`lv_calendar_header_dropdown_set_year_list(calendar, years_list)` 设置自定义年份列表，其中 ``years_list`` 是指向自定义年份列表的指针。它可以是一个常量字符串像 ``static const char * years = "2023\n2022\n2021\n2020\n2019";``，或者也可以动态生成到缓冲区中。
 
 
 .. _lv_calendar_events:
@@ -235,9 +235,9 @@ Learn more about :ref:`events`.
    <br>
 
 
--  :cpp:enumerator:`LV_EVENT_VALUE_CHANGED` 如果单击日期，则发送。:cpp:expr:`lv_calendar_get_pressed_date(calendar, &date)` 将 ``date`` 设置为当前按下的日期。如果存在，则返回:cpp:enumerator:`LV_RES_OK` 有效的按下日期，否则 :cpp:enumerator:`LV_RES_INVALID`。
+-  :cpp:enumerator:`LV_EVENT_VALUE_CHANGED` 如果单击日期，则发送。:cpp:expr:`lv_calendar_get_pressed_date(calendar, &date)` 将 ``date`` 设置为当前按下的日期。如果存在，则返回 :cpp:enumerator:`LV_RES_OK` 有效的按下日期，否则 :cpp:enumerator:`LV_RES_INVALID`。
 
-详细了解更多:ref:`events`。
+详细了解更多 :ref:`events`。
 
 
 .. _lv_calendar_keys:
@@ -264,7 +264,7 @@ Learn more about :ref:`indev_keys`.
 -  ``LV_KEY_RIGHT/UP/LEFT/RIGHT`` 在按钮之间导航到日期
 -  :cpp:enumerator:`LV_KEY_ENTER` 按下/松开所选日期
 
-详细了解更多 :ref:`indev_按键`。
+详细了解更多 :ref:`indev_keys`。
 
 
 .. _lv_calendar_header:

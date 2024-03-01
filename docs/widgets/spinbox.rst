@@ -77,7 +77,7 @@ to the left, the :cpp:expr:`lv_spinbox_set_digit_step_direction(spinbox, LV_DIR_
 
 - :cpp:expr:`lv_spinbox_set_value(spinbox, 1234)` 在 Spinbox 上设置一个新值。
 - :cpp:expr:`lv_spinbox_increment(spinbox)` 和  :cpp:expr:`lv_spinbox_decrement(spinbox)` 根据当前选择的数字递增/递减 Spinbox 的值。
-- :cpp:expr:`lv_spinbox_set_range(spinbox, -1000, 2500)` 设置范围。如果值由:cpp:func:`lv_spinbox_set_value`， *Keys*,\ ``lv_spinbox_increment/decrement`` 键更改，则将遵循此范围。 
+- :cpp:expr:`lv_spinbox_set_range(spinbox, -1000, 2500)` 设置范围。如果值由 :cpp:func:`lv_spinbox_set_value`， *Keys*,\ ``lv_spinbox_increment/decrement`` 键更改，则将遵循此范围。 
 - :cpp:expr:`lv_spinbox_set_step(spinbox, 100)` 设置要更改的数字 递增/递减。只能设置 10 的倍数，而不能设置例如 3。 
 - :cpp:expr:`lv_spinbox_set_cursor_pos(spinbox, 1)` 将光标设置为特定的数字在increment/decrement递增/递减时更改。例如，位置“0”将光标设置为最低有效数字。
 
@@ -103,7 +103,7 @@ the number of digits before the decimal point. If 0, no decimal point is display
    <br>
 
 
-:cpp:expr:`lv_spinbox_set_digit_format(spinbox, digit_count, separator_position)`设置数字格式。 ``digit_count`` 是位不包括小数点分隔符和符号。  ``separator_position``是小数点前的位数。如果为 0，则不显示小数点。
+:cpp:expr:`lv_spinbox_set_digit_format(spinbox, digit_count, separator_position)` 设置数字格式。 ``digit_count`` 是位不包括小数点分隔符和符号。  ``separator_position`` 是小数点前的位数。如果为 0，则不显示小数点。
 
 
 Rollover（翻转）
@@ -154,7 +154,7 @@ Learn more about :ref:`events`.
 
 另请参阅 :ref:`文本区域 <lv_textarea>` 的事件。
 
-详细了解更多 :ref:`事件`。
+详细了解更多 :ref:`events`。
 
 
 .. _lv_spinbox_keys:

@@ -67,7 +67,7 @@ background color, border color, and shadow color.
    <br>
 
 
-您可以使用 :cpp:expr:`lv_led_set_color(led, lv_color_hex(0xff0080))`设置 LED 的颜色。这将用作背景颜色、边框颜色和阴影颜色。
+您可以使用 :cpp:expr:`lv_led_set_color(led, lv_color_hex(0xff0080))` 设置 LED 的颜色。这将用作背景颜色、边框颜色和阴影颜色。
 
 
 Brightness（亮度）
@@ -132,7 +132,7 @@ Learn more about :ref:`events`.
 
 另请参阅 :ref:`基础对象 <lv_obj>` 的事件。
 
-了解有关 :ref:`事件` 的更多内容。
+了解有关 :ref:`events` 的更多内容。
 
 
 .. _lv_led_keys:
@@ -157,7 +157,7 @@ Learn more about :ref:`indev_keys`.
 
 对象类型不处理任何 *按键* 。
 
-了解有关 :ref:`indev_按键`的更多内容。
+了解有关 :ref:`indev_keys` 的更多内容。
 
 
 .. _lv_led_example:

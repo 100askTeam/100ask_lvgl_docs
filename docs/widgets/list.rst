@@ -29,7 +29,7 @@ and Texts can be added
 Parts and Styles（零件和样式）
 *****************************
 
-**Background**（背景）
+**Background** （背景）
 
 .. raw:: html
 
@@ -48,9 +48,9 @@ Parts and Styles（零件和样式）
 
 
 - :cpp:enumerator:`LV_PART_MAIN` 使用所有典型背景属性的列表的主要部分
-- :cpp:enumerator:`LV_PART_SCROLLBAR` 滚动条。有关详细信息，请参阅:ref:`基本对象 <lv_obj>` 文档。
+- :cpp:enumerator:`LV_PART_SCROLLBAR` 滚动条。有关详细信息，请参阅 :ref:`基本对象 <lv_obj>` 文档。
 
-**按钮和文本** 请参阅 :ref:`按钮 <lv_button>`\ 's 和 :ref:`标签 <lv_label>`\ 's 的文档。
+**按钮和文本** 请参阅 :ref:`按钮 <lv_button>`\ 和 :ref:`标签 <lv_label>`\ 的文档。
 
 
 .. _lv_list_usage:
@@ -128,7 +128,7 @@ Learn more about :ref:`events`.
 
 列表不会发送任何特殊事件，但会像往常一样由按钮发送。
 
-详细了解更多 :ref:`事件`。
+详细了解更多 :ref:`events`。
 
 
 .. _lv_list_keys:
@@ -153,7 +153,7 @@ Learn more about :ref:`indev_keys`.
 
 对象类型不处理任何 *按键*。
 
-了解有关 :ref:`indev_按键`的更多信息。
+了解有关 :ref:`indev_keys` 的更多信息。
 
 
 .. _lv_list_example:

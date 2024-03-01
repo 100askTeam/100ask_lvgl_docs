@@ -152,7 +152,7 @@ Learn more about :ref:`events`.
 
 另请参阅 :ref:`基本对象 <lv_obj>` 的事件。
 
-详细了解更多 :ref:`事件`。
+详细了解更多 :ref:`events`。
 
 
 .. _lv_checkbox_keys:
@@ -189,7 +189,7 @@ Learn more about :ref:`indev_keys`.
 
 请注意，像往常一样，:cpp:enumerator:`LV_KEY_ENTER` 的状态被转换为 ``LV_EVENT_PRESSED/PRESSING/RELEASED`` 等。
 
-了解有关 :ref:`indev_按键` 的更多信息。
+了解有关 :ref:`indev_keys`的更多信息。
 
 
 .. _lv_checkbox_example:

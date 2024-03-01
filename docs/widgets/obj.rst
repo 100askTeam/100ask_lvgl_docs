@@ -95,7 +95,7 @@ the same time with :cpp:expr:`lv_obj_set_size(obj, new_width, new_height)`.
    <br>
 
 
-可以使用 :cpp:expr:`lv_obj_set_width(obj, new_width)`  和 :cpp:expr:`lv_obj_set_height(obj, new_height)` 设置或修改单个轴上的对象大小，或者可以同时修改两个轴，使用 :cpp:expr:`lv_obj_set_size(obj, new_width, new_height)`设置或修改高度 。
+可以使用 :cpp:expr:`lv_obj_set_width(obj, new_width)`  和 :cpp:expr:`lv_obj_set_height(obj, new_height)` 设置或修改单个轴上的对象大小，或者可以同时修改两个轴，使用 :cpp:expr:`lv_obj_set_size(obj, new_width, new_height)` 设置或修改高度 。
 
 
 .. _lv_obj_position:
@@ -118,7 +118,7 @@ axes at the same time with :cpp:expr:`lv_obj_set_pos(obj, new_x, new_y)`.
    <br>
 
 
-您可以使用 :cpp:expr:`lv_obj_set_x(obj, new_x)` 和  :cpp:expr:`lv_obj_set_y(obj, new_y)` 设置相对于父级的位置，或者使用 :cpp:expr:`lv_obj_set_pos(obj, new_x, new_y)`来同时设置两个轴的位置。
+您可以使用 :cpp:expr:`lv_obj_set_x(obj, new_x)` 和  :cpp:expr:`lv_obj_set_y(obj, new_y)` 设置相对于父级的位置，或者使用 :cpp:expr:`lv_obj_set_pos(obj, new_x, new_y)` 来同时设置两个轴的位置。
 
 
 .. _lv_obj_alignment:
@@ -158,7 +158,7 @@ The following align types exist: |image1|
    <br>
 
 
-您可以使用 :cpp:expr:`lv_obj_set_align(obj, LV_ALIGN_...)`将对象参照其父对象对齐。此后，每个 x 和 y 设置都将适用于设置对齐模式。例如，这会将对象从其父对象的中心移动 10(x)，20(y) 像素：
+您可以使用 :cpp:expr:`lv_obj_set_align(obj, LV_ALIGN_...)` 将对象参照其父对象对齐。此后，每个 x 和 y 设置都将适用于设置对齐模式。例如，这会将对象从其父对象的中心移动 10(x)，20(y) 像素：
 
 .. code:: c
 
@@ -168,7 +168,7 @@ The following align types exist: |image1|
    //Or in one function
    lv_obj_align(obj, LV_ALIGN_CENTER, 10, 20);
 
-要将一个对象参照另一个对象对齐，请使用:cpp:expr:`lv_obj_align_to(obj_to_align, obj_reference, LV_ALIGN_..., x, y)`
+要将一个对象参照另一个对象对齐，请使用 :cpp:expr:`lv_obj_align_to(obj_to_align, obj_reference, LV_ALIGN_..., x, y)`
 
 例如，让图片下方的文本参照图片对齐：:cpp:expr:`lv_obj_align_to(text, image, LV_ALIGN_OUT_BOTTOM_MID, 0, 10)`。
 
@@ -224,14 +224,12 @@ You can swap the position of two objects with
    <br>
 
 
-您可以使用:cpp:expr:`lv_obj_set_parent(obj, new_parent)`为对象设置新的父级。要获取当前父级，请使用 :cpp:expr:`lv_obj_get_parent(obj)`。
+您可以使用 :cpp:expr:`lv_obj_set_parent(obj, new_parent)` 为对象设置新的父级。要获取当前父级，请使用 :cpp:expr:`lv_obj_get_parent(obj)`。
 
-要获取父母的特定孩子，请使用:cpp:expr:`lv_obj_get_child(parent, idx)`。 ``idx``的一些示例：
+要获取父母的特定孩子，请使用 :cpp:expr:`lv_obj_get_child(parent, idx)`。 ``idx`` 的一些示例：
  
 - ``0`` 获取创建的第一个子项
-
 - ``1`` 获取创建的第二个子项
-
 - ``-1`` 获取最后创建的子项
 
 父级的孩子们可以这样迭代:
@@ -246,9 +244,9 @@ You can swap the position of two objects with
 
 :cpp:expr:`lv_obj_get_index(obj)` 返回对象在其父对象中的索引。 它相当于父对象拥有的孩子数量。
 
-您可以使用 :cpp:expr:`lv_obj_move_foreground(obj)` 和:cpp:expr:`lv_obj_move_background(obj)`将对象带到前台或将其发移到后台。
+您可以使用 :cpp:expr:`lv_obj_move_foreground(obj)` 和 :cpp:expr:`lv_obj_move_background(obj)` 将对象带到前台或将其发移到后台。
 
-您可以使用 :cpp:expr:`lv_obj_move_to_index(obj, index)`更改对象在其父对象中的索引。
+您可以使用 :cpp:expr:`lv_obj_move_to_index(obj, index)` 更改对象在其父对象中的索引。
 
 你可以用 :cpp:expr:`lv_obj_swap(obj1, obj2)`; 交换两个对象的位置(列表框中，它可用于对列表框项目进行排序。)。
 
@@ -288,7 +286,7 @@ To get an object's screen use the :cpp:expr:`lv_obj_get_screen(obj)` function.
 
 在 LVGL 中，对象层次结构的最高级别是 display，它代表显示设备（物理显示器或模拟器）的驱动程序。 一个显示器可以有一个或多个与其相关联的屏幕。 每个屏幕都包含图形组件的对象层次结构，代表覆盖整个显示的布局。
 
-当你创建了一个像 ``lv_obj_t * screen = lv_obj_create(NULL)``这样的屏幕时，你可以用 :cpp:expr:`lv_screen_load(screen)`激活它。 :cpp:func:`lv_screen_active` 函数为您提供指向活动屏幕的指针。
+当你创建了一个像 ``lv_obj_t * screen = lv_obj_create(NULL)`` 这样的屏幕时，你可以用 :cpp:expr:`lv_screen_load(screen)` 激活它。 :cpp:func:`lv_screen_active` 函数为您提供指向活动屏幕的指针。
 
 如果您有多个显示器，重要的是要知道，最后创建的显示器时指定了屏幕，或者是用 :cpp:func:`lv_display_set_default` 明确切换的。
 
@@ -322,7 +320,7 @@ events.
 
 要为对象设置事件回调，请使用 :cpp:expr:`lv_obj_add_event_cb(obj, event_cb, LV_EVENT_..., user_data)` ，
 
-要手动向对象发送事件，请使用:cpp:expr:`lv_event_send(obj, LV_EVENT_..., param)`;
+要手动向对象发送事件，请使用 :cpp:expr:`lv_event_send(obj, LV_EVENT_..., param)`;
 
 阅读 :ref:`事件概述 <events>` 页面，以了解有关事件的更多信息。
 
@@ -356,7 +354,7 @@ The base objects use :cpp:enumerator:`LV_PART_MAIN` style properties and
 
 这里只介绍最基本的功能，请务必阅读 :ref:`样式概述 <styles>`。页面详细了解。
 
-可以使用 :cpp:expr:`lv_obj_add_style(obj, &new_style, selector)` 函数向对象添加新样式。 ``selector`` 可以组合使用。 例如:cpp:expr:`LV_PART_SCROLLBAR | LV_STATE_PRESSED`。
+可以使用 :cpp:expr:`lv_obj_add_style(obj, &new_style, selector)` 函数向对象添加新样式。 ``selector`` 可以组合使用。 例如 :cpp:expr:`LV_PART_SCROLLBAR | LV_STATE_PRESSED`。
 
 基本对象使用 :cpp:enumerator:`LV_PART_MAIN` 样式属性和带有典型背景样式属性的 :cpp:enumerator:`LV_PART_SCROLLBAR` 。
 
@@ -488,7 +486,7 @@ be returned.
 
 阅读 :ref:`输入设备概述 <indev>` 以了解有关 Groups 的更多信息。
 
-使用:cpp:expr:`lv_group_add_obj(group, obj)`将对象添加到组，您可以使用 :cpp:expr:`lv_obj_get_group(obj)` 查看对象属于哪个组。
+使用 :cpp:expr:`lv_group_add_obj(group, obj)` 将对象添加到组，您可以使用 :cpp:expr:`lv_obj_get_group(obj)` 查看对象属于哪个组。
 
 :cpp:expr:`lv_obj_is_focused(obj)` 返回对象当前是否聚焦在其组上。 如果对象未添加到组中，则将返回 ``false`` 。
 
@@ -540,7 +538,7 @@ Learn more about :ref:`events`.
 
 -  :cpp:enumerator:`LV_EVENT_VALUE_CHANGED` 当标志是 :cpp:enumerator:`LV_OBJ_FLAG_CHECKABLE` 启用并单击对象（在转换到/从选中状态转换时）
 
-详细了解更多:ref:`事件`。
+详细了解更多 :ref:`events`。
 
 
 .. _lv_obj_keys:
@@ -577,9 +575,9 @@ Learn more about :ref:`indev_keys`.
 
 如果启用了 :cpp:enumerator:`LV_OBJ_FLAG_CHECKABLE` ，则 :cpp:enumerator:`LV_KEY_RIGHT` 和 :cpp:enumerator:`LV_KEY_UP` 使对象被选中，而 :cpp:enumerator:`LV_KEY_LEFT` 和 :cpp:enumerator:`LV_KEY_DOWN` 使其取消选中。
 
-如果启用了:cpp:enumerator:`LV_OBJ_FLAG_SCROLLABLE` ，但对象不可编辑（由组件类声明），则箭头键(:cpp:enumerator:`LV_KEY_UP`, :cpp:enumerator:`LV_KEY_DOWN`, :cpp:enumerator:`LV_KEY_LEFT`, :cpp:enumerator:`LV_KEY_RIGHT`) 滚动对象。 如果对象只能垂直滚动，:cpp:enumerator:`LV_KEY_RIGHT` 和:cpp:enumerator:`LV_KEY_LEFT` 将改为向上/向下滚动，使其与编码器输入设备兼容。 有关编码器行为和编辑模式的更多信息，请参阅 :ref:` 输入设备概述 <indev>` 。
+如果启用了 :cpp:enumerator:`LV_OBJ_FLAG_SCROLLABLE` ，但对象不可编辑（由组件类声明），则箭头键(:cpp:enumerator:`LV_KEY_UP`, :cpp:enumerator:`LV_KEY_DOWN`, :cpp:enumerator:`LV_KEY_LEFT`, :cpp:enumerator:`LV_KEY_RIGHT`) 滚动对象。 如果对象只能垂直滚动，:cpp:enumerator:`LV_KEY_RIGHT` 和 :cpp:enumerator:`LV_KEY_LEFT` 将改为向上/向下滚动，使其与编码器输入设备兼容。 有关编码器行为和编辑模式的更多信息，请参阅 :ref:`输入设备概述 <indev>` 。
 
-了解有关 :ref:`indev_按键`的更多信息。
+了解有关 :ref:`indev_keys` 的更多信息。
 
 
 .. _lv_obj_example:

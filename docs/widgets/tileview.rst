@@ -83,13 +83,18 @@ can be created.
    </details> 
    <br>
 
-:cpp:expr:`lv_tileview_add_tile(tileview, row_id, col_id, dir)`创建一个新的第 ``row_id``\ th 行和 ``col_id``\ th 列上的瓦片 ``目录``可以是 ``LV_DIR_LEFT/RIGHT/TOP/BOTTOM/HOR/VER/ALL`` 或 OR-ed 值以启用通过滑动向给定方向移动到相邻的图块。
+:cpp:expr:`lv_tileview_add_tile(tileview, row_id, col_id, dir)` 创建一个新的第 ``row_id``\ th 行和 ``col_id``\ th 列上的瓦片 ``目录`` 可以是 ``LV_DIR_LEFT/RIGHT/TOP/BOTTOM/HOR/VER/ALL`` 或 OR-ed 值以启用通过滑动向给定方向移动到相邻的图块。
 
-返回的值是可以在其 ``lv_obj_t *``上创建选项卡内容的值。
+返回的值是可以在其 ``lv_obj_t *`` 上创建选项卡内容的值。
 
 
 Change tile（更改平铺显示）
 --------------------------
+
+.. raw:: html
+
+   <details>
+     <summary>显示原文</summary>
 
 The Tile view can scroll to a tile with
 :cpp:expr:`lv_tileview_set_tile(tileview, tile_obj, LV_ANIM_ON/OFF)` or
@@ -101,7 +106,7 @@ The Tile view can scroll to a tile with
    <br>
 
 
-Tile 视图可以使用:cpp:expr:`lv_tileview_set_tile(tileview, tile_obj, LV_ANIM_ON/OFF)` 或 :cpp:expr:`lv_tileview_set_tile_by_index(tileview, col_id, row_id, LV_ANIM_ON/OFF)`滚动到图块
+Tile 视图可以使用 :cpp:expr:`lv_tileview_set_tile(tileview, tile_obj, LV_ANIM_ON/OFF)` 或 :cpp:expr:`lv_tileview_set_tile_by_index(tileview, col_id, row_id, LV_ANIM_ON/OFF)` 滚动到图块
 
 
 .. _lv_tileview_events:
@@ -149,7 +154,7 @@ Learn more about :ref:`indev_keys`.
 
 平铺视图不处理任何 *按键*。
 
-了解有关 :ref:`indev_按键` 的更多信息。
+了解有关 :ref:`indev_keys` 的更多信息。
 
 
 .. _lv_tileview_example:

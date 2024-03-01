@@ -125,7 +125,7 @@ Learn more about :ref:`indev_keys`.
 
 对象类型不处理任何键。
 
-了解有关密钥的更多信息。
+了解有关 :ref:`indev_keys` 的更多信息。
   
 .. _lv_animimg_example:
 

@@ -80,11 +80,11 @@ list in the :ref:`Color formats <overview_image_color_formats>` section.
    <br>
 
 
-Canvas 需要一个缓冲区来存储绘制的图像。 要为 Canvas 分配缓冲区，请使用:cpp:expr:`lv_canvas_set_buffer(canvas, buffer, width, height, LV_COLOR_FORMAT_...)`。 其中 ``buffer``  是一个静态缓冲区（不仅仅是一个局部变量）来保存画布的图像。例如，对于100x50 ARGB888缓冲区：
+Canvas 需要一个缓冲区来存储绘制的图像。 要为 Canvas 分配缓冲区，请使用 :cpp:expr:`lv_canvas_set_buffer(canvas, buffer, width, height, LV_COLOR_FORMAT_...)`。 其中 ``buffer``  是一个静态缓冲区（不仅仅是一个局部变量）来保存画布的图像。例如，对于100x50 ARGB888缓冲区：
 
 ``static uint8_t buffer[100 * 50 * 4]``。或者您可以使用 ``static uint8_t buffer[LV_CANVAS_BUF_SIZE(width, height, bit_per_pixel, stride_in_bytes)]``。
 
-画布支持所有内置颜色格式，如 :cpp:enumerator:`LV_COLOR_FORMAT_ARGB8888`或 :cpp:enumerator:`LV_COLOR_FORMAT_I2`。 请参阅 :ref:` 颜色格式 <overview_image_color_formats>` 部分中的完整列表。
+画布支持所有内置颜色格式，如 :cpp:enumerator:`LV_COLOR_FORMAT_ARGB8888` 或 :cpp:enumerator:`LV_COLOR_FORMAT_I2`。 请参阅 :ref:`Color formats <overview_image_color_formats>` 部分中的完整列表。
 
 
 Indexed colors（颜色索引）
@@ -105,7 +105,7 @@ sets pixels with *index=3* to red.
    <br>
 
 
-对于 ``LV_COLOR_FORMAT_I1/2/4/8`` 颜色格式，调色板需要用:cpp:expr:`lv_canvas_set_palette(canvas, 3, lv_color_hex(0xff0000))`初始化。 它将 *index=3* 的像素设置为红色
+对于 ``LV_COLOR_FORMAT_I1/2/4/8`` 颜色格式，调色板需要用 :cpp:expr:`lv_canvas_set_palette(canvas, 3, lv_color_hex(0xff0000))` 初始化。 它将 *index=3* 的像素设置为红色
 
 
 Drawing（画画）
@@ -144,15 +144,15 @@ The draw function can draw to any color format to which LVGL can render. Typical
    <br>
 
 
-要在画布上设置像素，请使用:cpp:expr:`lv_canvas_set_px_color(canvas, x, y, color, opa)`。 具有 ``LV_COLOR_FORMAT_I1/2/4/8`` 颜色的索引需要像这样的颜色 ``lv_color_from_int(13);``作为传递。它作为一种颜色通过索引13。
+要在画布上设置像素，请使用 :cpp:expr:`lv_canvas_set_px_color(canvas, x, y, color, opa)`。 具有 ``LV_COLOR_FORMAT_I1/2/4/8`` 颜色的索引需要像这样的颜色 ``lv_color_from_int(13);`` 作为传递。它作为一种颜色通过索引13。
 
 :cpp:expr:`lv_canvas_fill_bg(canvas, lv_color_hex(0x00ff00), LV_OPA_50)` 将整个画布填充为蓝色，不透明度为 50%。 请注意，如果当前颜色格式不支持颜色(例如 :cpp:enumerator:`LV_COLOR_FORMAT_A8`)，则颜色将被忽略。 同样，如果不支持不透明度(例如 :cpp:enumerator:`LV_COLOR_FORMAT_RGB565`)，它将被忽略。
 
-可以使用:cpp:expr:`lv_canvas_copy_buf(canvas, buffer_to_copy, x, y, width, height)`将像素数组复制到画布。 缓冲区和画布的颜色格式需要匹配。
+可以使用 :cpp:expr:`lv_canvas_copy_buf(canvas, buffer_to_copy, x, y, width, height)` 将像素数组复制到画布。 缓冲区和画布的颜色格式需要匹配。
 
 要在画布上绘制内容，请直接使用 LVGL 的绘制函数。有关更多详细信息，请参阅示例。
 
-draw 函数可以绘制为 LVGL 可以渲染的任何颜色格式。通常表示:cpp:enumerator:`LV_COLOR_FORMAT_RGB565`, :cpp:enumerator:`LV_COLOR_FORMAT_RGB888`, :cpp:enumerator:`LV_COLOR_FORMAT_XRGB888`, 和 :cpp:enumerator:`LV_COLOR_FORMAT_ARGB8888`.
+draw 函数可以绘制为 LVGL 可以渲染的任何颜色格式。通常表示 :cpp:enumerator:`LV_COLOR_FORMAT_RGB565`, :cpp:enumerator:`LV_COLOR_FORMAT_RGB888`, :cpp:enumerator:`LV_COLOR_FORMAT_XRGB888`, 和 :cpp:enumerator:`LV_COLOR_FORMAT_ARGB8888`.
 
 
 .. _lv_canvas_events:
@@ -180,9 +180,9 @@ Learn more about :ref:`events`.
 
 画布对象不会发送特殊事件。
 
-也可以查看:ref:`lv_image` 的事件。
+也可以查看 :ref:`lv_image` 的事件。
 
-详细了解更多 :ref:`事件`。
+详细了解更多 :ref:`events`。
 
 
 .. _lv_canvas_keys:
@@ -207,7 +207,7 @@ Learn more about :ref:`indev_keys`.
 
 对象类型不处理 *Keys*。
 
-了解有关 :ref:`indev_按键` 的更多信息
+了解有关 :ref:`indev_keys` 的更多信息
 
 
 .. _lv_canvas_example:

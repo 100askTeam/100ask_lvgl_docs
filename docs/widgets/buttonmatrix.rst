@@ -55,7 +55,7 @@ Parts and Styles（零件和样式）
    <br>
 
 
--  :cpp:enumerator:`LV_PART_MAIN` 按钮矩阵的背景，使用所有组件默认都有的典型的背景样式属性。可通过 ``pad_row`` 和 ``pad_column``设置按钮之间的空间。
+-  :cpp:enumerator:`LV_PART_MAIN` 按钮矩阵的背景，使用所有组件默认都有的典型的背景样式属性。可通过 ``pad_row`` 和 ``pad_column`` 设置按钮之间的空间。
 -  :cpp:enumerator:`LV_PART_ITEMS` 除了转变之外，按钮都使用文本和典型的背景样式属性。
 
 
@@ -91,7 +91,7 @@ have 2 buttons each with 50% width and a second row with 1 button having
    <br>
 
 
-每个按钮上都可以有文字。要指定按钮的文字，需要使用称为 *map*的描述符按钮布局的字符串数组。 map 可以使用:cpp:expr:`lv_buttonmatrix_set_map(buttonm, my_map)`接口设置。 map 的格式： :cpp:expr:`const char * map[] = {"button1", "button2", "button3", NULL}`。 请注意，map 数组的最后一个元素必须是 ``NULL``  或空字符串(``""``)!
+每个按钮上都可以有文字。要指定按钮的文字，需要使用称为 *map* 的描述符按钮布局的字符串数组。 map 可以使用 :cpp:expr:`lv_buttonmatrix_set_map(buttonm, my_map)` 接口设置。 map 的格式： :cpp:expr:`const char * map[] = {"button1", "button2", "button3", NULL}`。 请注意，map 数组的最后一个元素必须是 ``NULL``  或空字符串(``""``)!
 
 在 map 中使用 ``"\n"`` 插入 **换行符**。 例如。 ``{"button1", "button2", "\n", "button3", ""}``。 每行按钮的宽度都会自动计算平均分配(默认)。 因此，在上面的示例中，第一行将有 2 个按钮，每个按钮的宽度为 50%，第二行将有 1 个按钮的宽度为 100%。
 
@@ -166,11 +166,11 @@ The number of elements should be equal to the number of buttons
 
 默认情况下，所有标志都被禁用。
 
-要设置或清除按钮的控制属性，请使用:cpp:expr:`lv_buttonmatrix_set_button_ctrl(buttonm, button_id, LV_BUTTONMATRIX_CTRL_...)` 和 :cpp:expr:`lv_buttonmatrix_clear_button_ctrl(buttonm, button_id, LV_BUTTONMATRIX_CTRL_...)` 分别。 更多  ``LV_BUTTONMATRIX_CTRL_...`` 值可以被 OR-ed
+要设置或清除按钮的控制属性，请使用 :cpp:expr:`lv_buttonmatrix_set_button_ctrl(buttonm, button_id, LV_BUTTONMATRIX_CTRL_...)` 和 :cpp:expr:`lv_buttonmatrix_clear_button_ctrl(buttonm, button_id, LV_BUTTONMATRIX_CTRL_...)` 分别。 更多  ``LV_BUTTONMATRIX_CTRL_...`` 值可以被 OR-ed
 
-要为按钮矩阵的所有按钮设置/清除相同的控制属性，请使用 :cpp:expr:`lv_buttonmatrix_set_button_ctrl_all(buttonm, LV_BUTTONMATRIX_CTRL_...)`和 :cpp:expr:`lv_buttonmatrix_clear_button_ctrl_all(buttonm, LV_BUTTONMATRIX_CTRL_...)`。
+要为按钮矩阵的所有按钮设置/清除相同的控制属性，请使用 :cpp:expr:`lv_buttonmatrix_set_button_ctrl_all(buttonm, LV_BUTTONMATRIX_CTRL_...)` 和 :cpp:expr:`lv_buttonmatrix_clear_button_ctrl_all(buttonm, LV_BUTTONMATRIX_CTRL_...)`。
 
-我们可以写一个数组来一次单独设置多个或者所有的按钮，这有点像一个控制表，这里称其为 ``ctrl_map`` ，我们可以使用 :cpp:expr:`lv_buttonmatrix_set_ctrl_map(buttonm, ctrl_map)`将控制表添加到按钮矩阵中。 ``ctrl_map`` 中的元素的格式:cpp:expr:`ctrl_map[0] = width | LV_BUTTONMATRIX_CTRL_NO_REPEAT |  LV_BUTTONMATRIX_CTRL_CHECHKABLE`，也就是我们可以添加多个属性。 元素的数量应该等于(可以小于，但是不应该超出)按钮的数量(不包括换行符)。
+我们可以写一个数组来一次单独设置多个或者所有的按钮，这有点像一个控制表，这里称其为 ``ctrl_map`` ，我们可以使用 :cpp:expr:`lv_buttonmatrix_set_ctrl_map(buttonm, ctrl_map)` 将控制表添加到按钮矩阵中。 ``ctrl_map`` 中的元素的格式 :cpp:expr:`ctrl_map[0] = width | LV_BUTTONMATRIX_CTRL_NO_REPEAT |  LV_BUTTONMATRIX_CTRL_CHECHKABLE`，也就是我们可以添加多个属性。 元素的数量应该等于(可以小于，但是不应该超出)按钮的数量(不包括换行符)。
 
 
 One check（一次检查）
@@ -270,9 +270,9 @@ Learn more about :ref:`indev_keys`.
 -  ``LV_KEY_RIGHT/UP/LEFT/RIGHT`` 在按钮矩阵的按钮之间导航来选中不同的按钮。
 -  :cpp:enumerator:`LV_KEY_ENTER` 按下/释放所选按钮。
 
-请注意，长按编码器的按钮矩阵可能意味着进入/退出编辑模式，只需长按一个按钮即可以重复。为了避免这种矛盾，建议添加:cpp:expr:`lv_buttonmatrix_set_button_ctrl_all(buttonm, LV_BUTTONMATRIX_CTRL_CLICK_TRIG | LV_BUTTONMATRIX_CTRL_NO_REPEAT)`到按钮矩阵（如果与编码器一起使用）。这样，按下的按钮重复功能被禁用，并且在离开编辑模式时，选择按钮不会被激活。
+请注意，长按编码器的按钮矩阵可能意味着进入/退出编辑模式，只需长按一个按钮即可以重复。为了避免这种矛盾，建议添加 :cpp:expr:`lv_buttonmatrix_set_button_ctrl_all(buttonm, LV_BUTTONMATRIX_CTRL_CLICK_TRIG | LV_BUTTONMATRIX_CTRL_NO_REPEAT)` 到按钮矩阵（如果与编码器一起使用）。这样，按下的按钮重复功能被禁用，并且在离开编辑模式时，选择按钮不会被激活。
 
-了解有关 :ref:`indev_按键`的更多信息。
+了解有关 :ref:`indev_keys` 的更多信息。
 
 
 .. _lv_buttonmatrix_example:

@@ -134,7 +134,7 @@ A placeholder text can be specified
    <br>
 
 
-您可以通过 :cpp:expr:`lv_textarea_set_placeholder_text(ta, "Placeholder text")`指定占位符文本，当文本框的内容为空时，所设置的占位符文本将会展示出来。
+您可以通过 :cpp:expr:`lv_textarea_set_placeholder_text(ta, "Placeholder text")` 指定占位符文本，当文本框的内容为空时，所设置的占位符文本将会展示出来。
 
 
 Delete character（删除字符）
@@ -190,14 +190,14 @@ cursor will jump to the position where the Text area was clicked.
    <br>
 
 
-光标的位置可以使用函数:cpp:expr:`lv_textarea_set_cursor_pos(textarea, 10)`直接修改。 第二个参数为你要指定的光标的位置，要注意的是： ``0`` 表示将光标移动到 “第一个字符之前”，:cpp:enumerator:`LV_TA_CURSOR_LAST` 表示将光标移动到 “最后一个字符之后”
+光标的位置可以使用函数 :cpp:expr:`lv_textarea_set_cursor_pos(textarea, 10)` 直接修改。 第二个参数为你要指定的光标的位置，要注意的是： ``0`` 表示将光标移动到 “第一个字符之前”，:cpp:enumerator:`LV_TA_CURSOR_LAST` 表示将光标移动到 “最后一个字符之后”
 
 您可以使用下面这些接口函数修改光标位置：
 
-- :cpp:expr:`lv_textarea_cursor_right(textarea)`上
-- :cpp:expr:`lv_textarea_cursor_left(textarea)`下
-- :cpp:expr:`lv_textarea_cursor_up(textarea)`左
-- :cpp:expr:`lv_textarea_cursor_down(textarea)`右
+- :cpp:expr:`lv_textarea_cursor_right(textarea)` 上
+- :cpp:expr:`lv_textarea_cursor_left(textarea)` 下
+- :cpp:expr:`lv_textarea_cursor_up(textarea)` 左
+- :cpp:expr:`lv_textarea_cursor_down(textarea)` 右
 
 如果设置了 :cpp:expr:`lv_textarea_set_cursor_click_pos(textarea, true)` 那光标会跟随触摸跳转位置(在文本框范围内)
 
@@ -279,7 +279,7 @@ The visibility time can be adjusted with :c:macro:`LV_TEXTAREA_DEF_PWD_SHOW_TIME
 
 在密码模式下 :cpp:expr:`lv_textarea_get_text(textarea)` 返回的是输入的实际文本，而不是 ``•`` 字符。
 
-密码模式下，实际输入文本的可见时间可以通过 ``lv_conf.h``中的 :c:macro:`LV_TEXTAREA_DEF_PWD_SHOW_TIME`进行调整。
+密码模式下，实际输入文本的可见时间可以通过 ``lv_conf.h`` 中的 :c:macro:`LV_TEXTAREA_DEF_PWD_SHOW_TIME` 进行调整。
 
 
 Accepted characters（字符白名单）
@@ -300,7 +300,7 @@ characters will be ignored.
    <br>
 
 
-您可以使用 :cpp:expr:`lv_textarea_set_accepted_chars(textarea, "0123456789.+-")`设置可接受字符列表(白名单)。输入其他字符将被忽略。
+您可以使用 :cpp:expr:`lv_textarea_set_accepted_chars(textarea, "0123456789.+-")` 设置可接受字符列表(白名单)。输入其他字符将被忽略。
 
 
 Max text length（设置文本长度）
@@ -320,7 +320,7 @@ The maximum number of characters can be limited with
    <br>
 
 
-可以使用 :cpp:expr:`lv_textarea_set_max_length(textarea, max_char_num)`设置文本框可容纳的最大字符数
+可以使用 :cpp:expr:`lv_textarea_set_max_length(textarea, max_char_num)` 设置文本框可容纳的最大字符数
 
 
 Very long texts（超长文本）
@@ -365,7 +365,7 @@ when you select text on your PC with your mouse.
    <br>
 
 
-如果使用函数 :cpp:expr:`lv_textarea_set_text_selection(textarea, true)`启用文本选择功能，则可以选择文本的任何部分。这和我们使用鼠标在电脑上选择文字非常相似。
+如果使用函数 :cpp:expr:`lv_textarea_set_text_selection(textarea, true)` 启用文本选择功能，则可以选择文本的任何部分。这和我们使用鼠标在电脑上选择文字非常相似。
 
 
 .. _lv_textarea_events:
@@ -405,7 +405,7 @@ Learn more about :ref:`events`.
 
 参见 :ref:`Base object <lv_obj>` 的事件。
 
-详细了解更多 :ref:`事件`。
+详细了解更多 :ref:`events`。
 
 
 .. _lv_textarea_keys:
@@ -432,7 +432,7 @@ Learn more about :ref:`indev_keys`.
 -  ``LV_KEY_UP/DOWN/LEFT/RIGHT`` 移动光标
 -  ``任意字符`` 将字符添加到当前光标位置
 
-了解有关 :ref:`indev_按键` 的更多信息。
+了解有关 :ref:`indev_keys` 的更多信息。
 
 
 .. _lv_textarea_example:

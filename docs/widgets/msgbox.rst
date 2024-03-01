@@ -176,9 +176,9 @@ Learn more about :ref:`events`.
    <br>
 
 
--  :cpp:enumerator:`LV_EVENT_VALUE_CHANGED`如果其中一个按钮是 点击。 :cpp:enumerator:`LV_OBJ_FLAG_EVENT_BUBBLE`在按钮上启用，因此您可以将事件添加到消息框本身。在事件处理程序中， :cpp:expr:`lv_event_get_target(e)`  将返回按钮矩阵 ，:cpp:expr:`lv_event_get_current_target(e)` 将返回消息框。:cpp:expr:`lv_msgbox_get_active_button(msgbox)` 和 :cpp:expr:`lv_msgbox_get_active_button_text(msgbox)`  可用于获取单击按钮的索引和文本。
+-  :cpp:enumerator:`LV_EVENT_VALUE_CHANGED` 如果其中一个按钮是 点击。 :cpp:enumerator:`LV_OBJ_FLAG_EVENT_BUBBLE` 在按钮上启用，因此您可以将事件添加到消息框本身。在事件处理程序中， :cpp:expr:`lv_event_get_target(e)`  将返回按钮矩阵 ，:cpp:expr:`lv_event_get_current_target(e)` 将返回消息框。:cpp:expr:`lv_msgbox_get_active_button(msgbox)` 和 :cpp:expr:`lv_msgbox_get_active_button_text(msgbox)`  可用于获取单击按钮的索引和文本。
 
-详细了解更多 :ref:`事件`。
+详细了解更多 :ref:`events`。
 
 
 .. _lv_msgbox_keys:
@@ -204,7 +204,7 @@ Learn more about :ref:`indev_keys`.
 
 按键对关闭按钮和按钮矩阵有影响。您可以添加它们如果需要，手动添加到组中。。
 
-了解有关 :ref:`indev_按键`的更多信息。
+了解有关 :ref:`indev_keys` 的更多信息。
 
 
 .. _lv_msgbox_example:

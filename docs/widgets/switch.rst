@@ -54,7 +54,7 @@ Parts and Styles（零件和样式）
 
 开关包括以下3个零件：
  
--  :cpp:enumerator:`LV_PART_MAIN` 背景。 修改其 ``padding``会让下面的(指示器和旋钮)在相应方向上的大小发生变化。
+-  :cpp:enumerator:`LV_PART_MAIN` 背景。 修改其 ``padding`` 会让下面的(指示器和旋钮)在相应方向上的大小发生变化。
 
 -  :cpp:enumerator:`LV_PART_INDICATOR` 显示开关状态的指示器。
 
@@ -92,7 +92,7 @@ Call :cpp:expr:`lv_obj_add_state(obj, LV_STATE_CHECKED)` to turn it on, or
 
 要获取开关的当前状态（ ``true`` 处于打开状态），请使用 :cpp:expr:`lv_obj_has_state（obj，lv_state_CHECKED）`
 
-调用 :cpp:expr:`lv_obj_add_state（obj，lv_state_CHECKED）`将其打开，或 :cpp:expr:`lv_obj_remove_state（obj，lv_state_CHECKED）`以将其关闭。
+调用 :cpp:expr:`lv_obj_add_state（obj，lv_state_CHECKED）` 将其打开，或 :cpp:expr:`lv_obj_remove_state（obj，lv_state_CHECKED）` 以将其关闭。
 
 
 .. _lv_switch_events:
@@ -121,7 +121,7 @@ Learn more about :ref:`events`.
 
 参见 :ref:`Base object <lv_obj>` 的事件。
 
-详细了解更多 :ref:`事件`。
+详细了解更多 :ref:`events`。
 
 
 .. _lv_switch_keys:
@@ -150,7 +150,7 @@ Learn more about :ref:`indev_keys`.
 -  ``LV_KEY_DOWN/LEFT`` 关
 -  :cpp:enumerator:`LV_KEY_ENTER` 切换开关
 
-了解有关 :ref:`indev_按键`的更多信息。
+了解有关 :ref:`indev_keys` 的更多信息。
 
 
 .. _lv_switch_example:

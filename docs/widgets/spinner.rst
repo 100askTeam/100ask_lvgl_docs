@@ -69,9 +69,9 @@ of one revulation and the length of he arc can be customized.
    <br>
 
 
-若要创建旋转器，请使用:cpp:expr:`lv_spinner_create(parent)`。
+若要创建旋转器，请使用 :cpp:expr:`lv_spinner_create(parent)`。
 
-使用:cpp:expr:`lv_spinner_set_anim_params(spinner, spin_duration, angle)` 持续时间一个转速和弧的长度可以定制。。
+使用 :cpp:expr:`lv_spinner_set_anim_params(spinner, spin_duration, angle)` 持续时间一个转速和弧的长度可以定制。。
 
 
 .. _lv_spinner_events:
@@ -125,7 +125,7 @@ Learn more about :ref:`indev_keys`.
 
 对象类型不处理任何 *按键* 。
 
-了解有关 :ref:`indev_按键`的更多信息。
+了解有关 :ref:`indev_keys` 的更多信息。
 
 
 .. _lv_spinner_example:

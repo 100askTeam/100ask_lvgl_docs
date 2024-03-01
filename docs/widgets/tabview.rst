@@ -108,7 +108,7 @@ the tab's content can be created.
    <br>
 
 
-可以使用 :cpp:expr:`lv_tabview_add_tab(tabview, "Tab name")`添加新选项卡。 这将返回指向 :ref:`lv_obj` 对象的指针，其可以创建选项卡的内容。
+可以使用 :cpp:expr:`lv_tabview_add_tab(tabview, "Tab name")` 添加新选项卡。 这将返回指向 :ref:`lv_obj` 对象的指针，其可以创建选项卡的内容。
 
 
 Rename tabs（重命名选项卡）
@@ -245,9 +245,9 @@ Learn more about :ref:`events`.
    <br>
 
 
--  :cpp:enumerator:`LV_EVENT_VALUE_CHANGED` 通过滑动选择新选项卡时发送或单击选项卡按钮。 :cpp:expr:`lv_tabview_get_tab_active(tabview)`返回当前选项卡从零开始的索引。
+-  :cpp:enumerator:`LV_EVENT_VALUE_CHANGED` 通过滑动选择新选项卡时发送或单击选项卡按钮。 :cpp:expr:`lv_tabview_get_tab_active(tabview)` 返回当前选项卡从零开始的索引。
 
-详细了解更多 :ref:`事件`。
+详细了解更多 :ref:`events`。
 
 
 .. _lv_tabview_keys:
@@ -273,7 +273,7 @@ Learn more about :ref:`indev_keys`.
 
 按键仅对 Tab 键有效。 如果需要，请手动添加到组。
 
-了解有关 :ref:`indev_按键` 的更多信息。
+了解有关 :ref:`indev_keys` 的更多信息。
 
 
 .. _lv_tabview_example:

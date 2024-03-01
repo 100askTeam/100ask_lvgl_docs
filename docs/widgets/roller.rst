@@ -49,7 +49,7 @@ Parts and Styles
    <br>
 
 
--  :cpp:enumerator:`LV_PART_MAIN` 滚轮的背景使用了所有典型的背景属性和文本样式属性。 可以通过 ``style_text_line_space`` 调整选项之间的间隔。 当滚轮滚动并且没有完全停在一个选项上时，它将按照样式中指定的 ``anim_time``值(毫秒)自动滚动到前进方向最近的有效选项。
+-  :cpp:enumerator:`LV_PART_MAIN` 滚轮的背景使用了所有典型的背景属性和文本样式属性。 可以通过 ``style_text_line_space`` 调整选项之间的间隔。 当滚轮滚动并且没有完全停在一个选项上时，它将按照样式中指定的 ``anim_time`` 值(毫秒)自动滚动到前进方向最近的有效选项。
 -  :cpp:enumerator:`LV_PART_SELECTED` 中间选中的选项。 除了典型的背景属性之外，它还使用文本样式属性来更改所选区域中文本的外观。
 
 
@@ -83,7 +83,7 @@ where *id* is the index of an option.
    <br>
 
 
-可以通过这个函数:cpp:expr:`lv_roller_set_options(roller, options, LV_ROLLER_MODE_NORMAL)`设置 Roller 中的选项。 选项之间要用 ``\n``分隔。 例如： ``"First\nSecond\nThird"``。
+可以通过这个函数 :cpp:expr:`lv_roller_set_options(roller, options, LV_ROLLER_MODE_NORMAL)` 设置 Roller 中的选项。 选项之间要用 ``\n`` 分隔。 例如： ``"First\nSecond\nThird"``。
 
 参数 :cpp:enumerator:`LV_ROLLER_MODE_NORMAL` 是设置为正常模式（滚轮在选项结束时结束）
 参数 :cpp:enumerator:`LV_ROLLER_MODE_INFINITE` 是设置为无限模式（滚轮可以永远滚动）
@@ -111,7 +111,7 @@ To get the *index* of the currently selected option use :cpp:expr:`lv_roller_get
 
 要获取所选中的选项的索引(index) ，可以使用函数 :cpp:expr:`lv_roller_get_selected(roller)`。
 
-函数:cpp:expr:`lv_roller_get_selected_str(roller, buf, buf_size)` 会将所选选项的内容复制到 ``buf``
+函数 :cpp:expr:`lv_roller_get_selected_str(roller, buf, buf_size)` 会将所选选项的内容复制到 ``buf``
 
 
 Visible rows（可见行）
@@ -134,7 +134,7 @@ to be called again.
    <br>
 
 
-可见行数可以通过 :cpp:expr:`lv_roller_set_visible_row_count(roller, num)`进行调整。
+可见行数可以通过 :cpp:expr:`lv_roller_set_visible_row_count(roller, num)` 进行调整。
 
 此函数会根据滚轮当前样式的高度（字体、行距、边框宽度等）进行调整。如果滚轮的字体、行距、边框宽度等发生变化，则需要再次调用此函数以重新进行调整。
 
@@ -161,11 +161,11 @@ Learn more about :ref:`events`.
    <br>
 
 
-- 在选中选项是会触发:cpp:enumerator:`LV_EVENT_VALUE_CHANGED`（按照逻辑来说只要你滚动了滚轮中的选项都会触发此事件类型）。
+- 在选中选项是会触发 :cpp:enumerator:`LV_EVENT_VALUE_CHANGED`（按照逻辑来说只要你滚动了滚轮中的选项都会触发此事件类型）。
 
 可以参考 :ref:`基本对象 <lv_obj>` 的事件。
 
-详细了解更多 :ref:`事件`。
+详细了解更多 :ref:`events`。
 
 
 .. _lv_roller_keys:

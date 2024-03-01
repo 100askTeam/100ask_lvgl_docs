@@ -105,11 +105,11 @@ specified in the style. It enables to use of light-weight monochrome
 
 要设置图像的来源，请使用 :cpp:expr:`lv_image_set_src(img, src)`。
 
-要从 PNG、JPG 或 BMP 图像生成像素数组，请使用  `在线图像转换工具 <https://lvgl.io/tools/imageconverter>`__ 并使用其指针设置转换后的图像：  :cpp:expr:`lv_image_set_src(img1, &converted_img_var)` 要使该变量在 C 文件中可见，您需要使用 :cpp:macro:`LV_IMAGE_DECLARE(converted_img_var)`声明它。
+要从 PNG、JPG 或 BMP 图像生成像素数组，请使用  `在线图像转换工具 <https://lvgl.io/tools/imageconverter>`__ 并使用其指针设置转换后的图像：  :cpp:expr:`lv_image_set_src(img1, &converted_img_var)` 要使该变量在 C 文件中可见，您需要使用 :cpp:macro:`LV_IMAGE_DECLARE(converted_img_var)` 声明它。
 
 要使用外部文件，您还需要使用在线转换器工具转换图像文件，但现在您应该选择二进制输出格式。 您还需要使用 LVGL 的文件系统模块，并为基本文件操作注册一个具有一些功能的驱动程序。 转到 :ref:`文件系统 <overview_file_system>` 了解更多信息。 要设置来自文件的图像，请使用 :cpp:expr:`lv_image_set_src(img, "S:folder1/my_img.bin")`。
 
-您还可以设置类似于 :ref:`标签 <lv_label>`. 的符号。 在这种情况下，图像将根据样式中指定的 *font* 呈现为文本。 它允许使用轻量级单色“字母”而不是真实图像。 你可以设置像 :cpp:expr:`lv_image_set_src(img1, LV_SYMBOL_OK)`这样的符号。
+您还可以设置类似于 :ref:`标签 <lv_label>`. 的符号。 在这种情况下，图像将根据样式中指定的 *font* 呈现为文本。 它允许使用轻量级单色“字母”而不是真实图像。 你可以设置像 :cpp:expr:`lv_image_set_src(img1, LV_SYMBOL_OK)` 这样的符号。
 
 
 
@@ -242,7 +242,7 @@ or a "running image" effect can be created by :ref:`Animating <animations>` the 
    <br>
 
 
-使用 :cpp:expr:`lv_image_set_offset_x(img, x_ofs)` 和 :cpp:expr:`lv_image_set_offset_y(img, y_ofs)`，您可以向显示的图像。如果对象尺寸小于图像源大小的情况下非常有用。使用偏移参数，可以创建一个 `纹理图集 <https://en.wikipedia.org/wiki/Texture_atlas>`__或 "运行图像 "效果，可以通过 :ref:`Animating <animations>` 的 x 或 y 偏移量来创建。
+使用 :cpp:expr:`lv_image_set_offset_x(img, x_ofs)` 和 :cpp:expr:`lv_image_set_offset_y(img, y_ofs)`，您可以向显示的图像。如果对象尺寸小于图像源大小的情况下非常有用。使用偏移参数，可以创建一个 `纹理图集 <https://en.wikipedia.org/wiki/Texture_atlas>`__ 或 "运行图像 "效果，可以通过 :ref:`Animating <animations>` 的 x 或 y 偏移量来创建。
 
 
 Transformations（转换）
@@ -304,7 +304,7 @@ differences are that pure image widget transformation
 
 要旋转图像，请使用 :cpp:expr:`lv_image_set_rotation(img, angle)`。角度有 0.1 度精度，所以对于45.8°将设置458。
 
-默认情况下，旋转的枢轴点是图像的中心。 它可以用:cpp:expr:`lv_image_set_pivot(img, pivot_x, pivot_y)`更改。 ``0;0`` 是左上角。
+默认情况下，旋转的枢轴点是图像的中心。 它可以用 :cpp:expr:`lv_image_set_pivot(img, pivot_x, pivot_y)` 更改。 ``0;0`` 是左上角。
 
 转换的质量可以用 :cpp:expr:`lv_image_set_antialias(img, true)`.进行调整。启用抗锯齿转换质量更高，但速度较慢。
 
@@ -384,7 +384,7 @@ The alignment can be set by :cpp:func:`lv_image_set_align`
 - :cpp:enumerator:`LV_IMAGE_ALIGN_STRETCH`
 - :cpp:enumerator:`LV_IMAGE_ALIGN_TILE`
 
-该 ``offset`` 值在图像源对齐后应用。例如，设置 ``y=-10`` 和 :cpp:enumerator:`LV_IMAGE_ALIGN_CENTER`将使图像源从小部件的中心向上移动一点。
+该 ``offset`` 值在图像源对齐后应用。例如，设置 ``y=-10`` 和 :cpp:enumerator:`LV_IMAGE_ALIGN_CENTER` 将使图像源从小部件的中心向上移动一点。
 
 或者自动缩放或平铺图像
 
@@ -420,7 +420,7 @@ Learn more about :ref:`events`.
 
 参见 :ref:`基本对象 <lv_obj>` 的事件。
 
-详细了解更多 :ref:`事件`。
+详细了解更多 :ref:`events`。
 
 
 .. _lv_image_keys:
@@ -445,7 +445,7 @@ Learn more about :ref:`indev_keys`.
 
 对象类型不处理 *Keys* 。
 
-了解有关 :ref:`indev_按键`的更多信息。
+了解有关 :ref:`indev_keys` 的更多信息。
 
 .. _lv_image_example:
 

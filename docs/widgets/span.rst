@@ -74,7 +74,7 @@ style(eg:set text, changed the font size, del span).
    <br>
 
 
-spangroup 对象使用 span 来描述文本和文本样式。所以 首先，我们需要使用 . 然后使用 ``lv_span_t * span = lv_spangroup_new_span(spangroup)`` 创建 `span`描述符。跨度的样式是使用 ``style``其成员配置为使用普通样式对象， 例如：::cpp:expr:`lv_style_set_text_color(&span->style, lv_palette_main(LV_PALETTE_RED))`。
+spangroup 对象使用 span 来描述文本和文本样式。所以 首先，我们需要使用 . 然后使用 ``lv_span_t * span = lv_spangroup_new_span(spangroup)`` 创建 `span` 描述符。跨度的样式是使用 ``style`` 其成员配置为使用普通样式对象， 例如：:cpp:expr:`lv_style_set_text_color(&span->style, lv_palette_main(LV_PALETTE_RED))`。
 
 
 Retrieving a span child（检索 span 子项）
@@ -106,9 +106,9 @@ the last (or most recent) child.
 
 Spangroups 存储其子对象的方式与普通对象不同，因此子项的正常功能将不起作用。
 
-:cpp:expr:`lv_spangroup_get_child(spangroup, id)` 将返回指向 ``id`` 索引处的子跨度。此外， ``id`` 可以对指数负数从跨组的末尾开始， ``-1`` 最小的孩子在哪里， ``-2``是第二年轻的孩子，等等。
+:cpp:expr:`lv_spangroup_get_child(spangroup, id)` 将返回指向 ``id`` 索引处的子跨度。此外， ``id`` 可以对指数负数从跨组的末尾开始， ``-1`` 最小的孩子在哪里， ``-2`` 是第二年轻的孩子，等等。
 
-例如 ``lv_span_t* span = lv_spangroup_get_child(spangroup, 0)``将``lv_span_t* span = lv_spangroup_get_child(spangroup, -1)`` 返回 spangroup 的第一个子项。 ``lv_span_t* span = lv_spangroup_get_child(spangroup, -1)`` 将返回最后一个（或最近）的孩子。
+例如 ``lv_span_t* span = lv_spangroup_get_child(spangroup, 0)`` 将 ``lv_span_t* span = lv_spangroup_get_child(spangroup, -1)`` 返回 spangroup 的第一个子项。 ``lv_span_t* span = lv_spangroup_get_child(spangroup, -1)`` 将返回最后一个（或最近）的孩子。
 
 
 Child Count（子项计数）
@@ -130,7 +130,7 @@ E.g. ``uint32_t size = lv_spangroup_get_span_count(spangroup)``
    <br>
 
 
-使用函数:cpp:expr:`lv_spangroup_get_span_count(spangroup)` 返回组正在维护的跨度数。
+使用函数 :cpp:expr:`lv_spangroup_get_span_count(spangroup)` 返回组正在维护的跨度数。
 
 例如 ``uint32_t size = lv_spangroup_get_span_count(spangroup)``
 
@@ -197,7 +197,7 @@ spangroup 可以设置为以下模式之一：
 - :cpp:enumerator:`LV_SPAN_MODE_EXPAND` 将对象大小扩展到文本大小，但保留在一行上。
 - :cpp:enumerator:`LV_SPAN_MODE_BREAK` 保持宽度，打破太长的线条并自动扩展高度。
 
-使用函数:cpp:expr:`lv_spangroup_set_mode(spangroup, LV_SPAN_MODE_BREAK)` 设置为对象模式。
+使用函数 :cpp:expr:`lv_spangroup_set_mode(spangroup, LV_SPAN_MODE_BREAK)` 设置为对象模式。
 
 
 Overflow（溢出）
@@ -269,7 +269,7 @@ indicate no limit.
    <br>
 
 
-使用函数 :cpp:expr:`lv_spangroup_set_max_lines(spangroup, 10)` 设置最大数量 在:cpp:enumerator::`LV_SPAN_MODE_BREAK` 模式下显示的行数，负值表示没有限制。
+使用函数 :cpp:expr:`lv_spangroup_set_max_lines(spangroup, 10)` 设置最大数量 在 :cpp:enumerator::`LV_SPAN_MODE_BREAK` 模式下显示的行数，负值表示没有限制。
 
 
 .. _lv_span_events:
@@ -294,7 +294,7 @@ Learn more about :ref:`events`.
 
 此小组件不会发送任何特殊事件。
 
-详细了解更多 :ref:`事件`。
+详细了解更多 :ref:`events`。
 
 
 .. _lv_span_keys:
@@ -319,7 +319,7 @@ Learn more about :ref:`indev_keys`.
 
 对象类型不处理任何 *按键*。
 
-了解有关 :ref:`indev_按键`的更多信息。
+了解有关 :ref:`indev_keys` 的更多信息。
 
  
 .. _lv_span_example:

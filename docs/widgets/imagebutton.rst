@@ -91,9 +91,9 @@ they will be used in pressed state instead of the released images.
    <br>
 
 
-若要将图像设置为状态，请使用:cpp:expr:`lv_imagebutton_set_src(imagebutton, LV_IMAGEBUTTON_STATE_..., src_left, src_center, src_right)`。
+若要将图像设置为状态，请使用 :cpp:expr:`lv_imagebutton_set_src(imagebutton, LV_IMAGEBUTTON_STATE_..., src_left, src_center, src_right)`。
 
-图像源的工作方式与 `图片对象 </widgets/image>`__中所述的工作方式相同，只是“图像”按钮不支持“符号”。任何来源都可以为 ``NULL``。
+图像源的工作方式与 `图片对象 </widgets/image>`__ 中所述的工作方式相同，只是“图像”按钮不支持“符号”。任何来源都可以为 ``NULL``。
 
 可能的状态包括：
 
@@ -104,7 +104,7 @@ they will be used in pressed state instead of the released images.
 - :cpp:enumerator:`LV_IMAGEBUTTON_STATE_CHECKED_PRESSED`
 - :cpp:enumerator:`LV_IMAGEBUTTON_STATE_CHECKED_DISABLED`
 
-如果仅在 :cpp:enumerator:`LV_IMAGEBUTTON_STATE_RELEASED` 中设置源，则这些源也将在其他状态使用。如果设置例如 :cpp:enumerator:`LV_IMAGEBUTTON_STATE_PRESSED`它们将在按下状态下使用，而不是在发布的图像中使用。
+如果仅在 :cpp:enumerator:`LV_IMAGEBUTTON_STATE_RELEASED` 中设置源，则这些源也将在其他状态使用。如果设置例如 :cpp:enumerator:`LV_IMAGEBUTTON_STATE_PRESSED` 它们将在按下状态下使用，而不是在发布的图像中使用。
 
 
 States（状态）
@@ -152,7 +152,7 @@ Learn more about :ref:`events`.
 
 -  :cpp:enumerator:`LV_EVENT_VALUE_CHANGED` 切换按钮时发送。
 
-详细了解更多 :ref:`事件`。
+详细了解更多 :ref:`events`。
 
 
 .. _lv_imagebutton_keys:
@@ -180,7 +180,7 @@ Learn more about :ref:`indev_keys`.
    <br>
 
 
--  ``LV_KEY_RIGHT/UP`` 如果 :cpp:enumerator:`LV_OBJ_FLAG_CHECKABLE`已启用，则转到切换状态。
+-  ``LV_KEY_RIGHT/UP`` 如果 :cpp:enumerator:`LV_OBJ_FLAG_CHECKABLE` 已启用，则转到切换状态。
 -  ``LV_KEY_LEFT/DOWN`` 如果 :cpp:enumerator:`LV_OBJ_FLAG_CHECKABLE` 已启用，则转到非切换状态。
 -  :cpp:enumerator:`LV_KEY_ENTER` 点击按钮
 

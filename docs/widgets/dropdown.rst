@@ -118,11 +118,11 @@ Alternatively the theme can be extended with the new styles.
    <br>
 
 
--  :cpp:enumerator:`LV_PART_MAIN` 列表本身。 使用典型的背景属性。可通过设置 ``max_height``限制列表的高度。
+-  :cpp:enumerator:`LV_PART_MAIN` 列表本身。 使用典型的背景属性。可通过设置 ``max_height`` 限制列表的高度。
 -  :cpp:enumerator:`LV_PART_SCROLLBAR` 列表滚动条的背景、边框、阴影属性和宽度（对于它自己的宽度）以及右侧间距的右侧填充。
 -  :cpp:enumerator:`LV_PART_SELECTED` 指的是当前按下、选中或按下+选中的选项。 也是使用典型的背景属性。
 
-列表在打开/关闭时隐藏/显示。若要向其添加样式，请使用:cpp:expr:`lv_dropdown_get_list(dropdown)` 获取列表对象。例如：
+列表在打开/关闭时隐藏/显示。若要向其添加样式，请使用 :cpp:expr:`lv_dropdown_get_list(dropdown)` 获取列表对象。例如：
 
 .. code:: c
 
@@ -174,13 +174,13 @@ an option.
    <br>
 
 
-可以通过这个函数 :cpp:expr:`lv_dropdown_set_options(dropdown, options)`设置列表中的选项。 选项之间需要使用 ``\n`` 分隔开来，例如： ``"First\nSecond\nThird"`` ，该字符串将保存在下拉列表开辟的空间中，因此在设置到列表之前它可以保存在局部变量中。
+可以通过这个函数 :cpp:expr:`lv_dropdown_set_options(dropdown, options)` 设置列表中的选项。 选项之间需要使用 ``\n`` 分隔开来，例如： ``"First\nSecond\nThird"`` ，该字符串将保存在下拉列表开辟的空间中，因此在设置到列表之前它可以保存在局部变量中。
 
-:cpp:expr:`lv_dropdown_add_option(dropdown, "New option", pos)`函数向 ``pos`` 索引插入一个新选项。
+:cpp:expr:`lv_dropdown_add_option(dropdown, "New option", pos)` 函数向 ``pos`` 索引插入一个新选项。
 
 为了节省内存，选项也可以使用 :cpp:expr:`lv_dropdown_set_static_options(dropdown, options)` 从静态（常量）字符串中设置。 在这种情况下，当下拉列表存在时，选项字符串应该处于活动状态，并且不能使用 :cpp:func:`lv_dropdown_add_option` 插入新的选项。
 
-可以使用 :cpp:expr:`lv_dropdown_set_selected(dropdown, id)`手动选择一个选项，其中 ``id`` 是一个选项的索引，选项从 0 开始索引。
+可以使用 :cpp:expr:`lv_dropdown_set_selected(dropdown, id)` 手动选择一个选项，其中 ``id`` 是一个选项的索引，选项从 0 开始索引。
 
 
 Get selected option（获取选择的选项）
@@ -253,7 +253,7 @@ will be shown on the left, otherwise on the right.
    <br>
 
 
-可以使用:cpp:expr:`lv_dropdown_set_symbol(dropdown, LV_SYMBOL_...)` 将符号（通常是箭头）添加到下拉列表中
+可以使用 :cpp:expr:`lv_dropdown_set_symbol(dropdown, LV_SYMBOL_...)` 将符号（通常是箭头）添加到下拉列表中
 
 如果下拉列表的方向是 :cpp:enumerator:`LV_DIR_LEFT` ，符号将显示在左侧，否则显示在右侧，上下侧类似。
 
@@ -334,9 +334,9 @@ Learn more about :ref:`events`.
 - :cpp:enumerator:`LV_EVENT_CANCEL` 列表关闭时发送
 - :cpp:enumerator:`LV_EVENT_READY` 打开列表时发送
 
-可以参考:ref:`基本事件 <lv_obj>` 的事件。
+可以参考 :ref:`Base object <lv_obj>` 的事件。
 
-详细了解更多 :ref:`事件`。
+详细了解更多 :ref:`events`。
 
 
 .. _lv_dropdown_keys:
@@ -366,7 +366,7 @@ Learn more about :ref:`indev_keys`.
 -  ``LV_KEY_LEFT/UP`` 选择上一个选项。
 -  :cpp:enumerator:`LV_KEY_ENTER` 应用选择的选项（发送 :cpp:enumerator:`LV_EVENT_VALUE_CHANGED` 事件并关闭下拉列表）。
 
-了解有关 :ref:`indev_按键`的更多信息。
+了解有关 :ref:`indev_keys` 的更多信息。
 
 
 .. _lv_dropdown_example:

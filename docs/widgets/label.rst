@@ -50,7 +50,7 @@ Parts and Styles（零件和样式）
 
 - :cpp:enumerator:`LV_PART_MAIN` 使用所有典型的背景属性和文本属性。 填充值可用于在文本和背景之间添加空间。
 - :cpp:enumerator:`LV_PART_SCROLLBAR` 当文本大于组件的大小时显示的滚动条。
-- :cpp:enumerator:`LV_PART_SELECTED` 告诉:ref:`选中文本 <lv_label_text_selection>`的样式。 只能使用 ``text_color`` 和 ``bg_color`` 样式属性。
+- :cpp:enumerator:`LV_PART_SELECTED` 告诉 :ref:`selected text <lv_label_text_selection>` 的样式。 只能使用 ``text_color`` 和 ``bg_color`` 样式属性。
 
 
 .. _lv_label_usage:
@@ -94,7 +94,7 @@ stored in ROM memory, which is always accessible.
 
 使用 :cpp:expr:`lv_label_set_text_fmt(label, "Value: %d", 15)`  printf 格式可用于设置文本。
 
-标签能够显示来自静态字符缓冲区的文本。 为此，请使用 :cpp:expr:`lv_label_set_text_static(label, "Text")`。 在这种情况下，文本不存储在动态内存中，而是直接使用给定的缓冲区。 这意味着数组不能是在函数退出时超出范围的局部变量。 常量字符串可以安全地与 :cpp:func:`lv_label_set_text_static` 一起使用（除非与 :cpp:enumerator:`LV_LABEL_LONG_DOT`一起使用，因为它会就地修改缓冲区），因为它们存储在 ROM 内存中，始终可以访问。
+标签能够显示来自静态字符缓冲区的文本。 为此，请使用 :cpp:expr:`lv_label_set_text_static(label, "Text")`。 在这种情况下，文本不存储在动态内存中，而是直接使用给定的缓冲区。 这意味着数组不能是在函数退出时超出范围的局部变量。 常量字符串可以安全地与 :cpp:func:`lv_label_set_text_static` 一起使用（除非与 :cpp:enumerator:`LV_LABEL_LONG_DOT` 一起使用，因为它会就地修改缓冲区），因为它们存储在 ROM 内存中，始终可以访问。
 
 
 .. _lv_label_newline:
@@ -173,7 +173,7 @@ this implementation detail is unnoticed. This is not the case with
 
 您可以使用 :cpp:expr:`lv_label_set_long_mode(label, LV_LABEL_LONG_...)` 指定长模式
 
-请注意， :cpp:enumerator:`LV_LABEL_LONG_DOT` 就地操作文本缓冲区以添加/删除点。 当使用 :cpp:func:`lv_label_set_text` 或 :cpp:func:`lv_label_set_array_text` 时，会分配一个单独的缓冲区，并且不会注意到此实现细节。 :cpp:func:`lv_label_set_text_static`不是这种情况。 如果你打算使用:cpp:enumerator:`LV_LABEL_LONG_DOT`，你传递给 :cpp:func:`lv_label_set_text_static`的缓冲区必须是可写的。
+请注意， :cpp:enumerator:`LV_LABEL_LONG_DOT` 就地操作文本缓冲区以添加/删除点。 当使用 :cpp:func:`lv_label_set_text` 或 :cpp:func:`lv_label_set_array_text` 时，会分配一个单独的缓冲区，并且不会注意到此实现细节。 :cpp:func:`lv_label_set_text_static` 不是这种情况。 如果你打算使用 :cpp:enumerator:`LV_LABEL_LONG_DOT`，你传递给 :cpp:func:`lv_label_set_text_static` 的缓冲区必须是可写的。
 
 
 .. _lv_label_text_selection:
@@ -251,7 +251,7 @@ feature, set ``LV_LABEL_LONG_TXT_HINT   1`` in ``lv_conf.h``.
    <br>
 
 
-LVGL 可以通过保存一些额外的数据（~12 字节）来有效地处理很长（例如 > 40k 个字符）的标签以加快绘图速度。 要启用此功能，请在 ``lv_conf.h``中设置 ``LV_LABEL_LONG_TXT_HINT   1`` 。
+LVGL 可以通过保存一些额外的数据（~12 字节）来有效地处理很长（例如 > 40k 个字符）的标签以加快绘图速度。 要启用此功能，请在 ``lv_conf.h`` 中设置 ``LV_LABEL_LONG_TXT_HINT   1`` 。
 
 
 .. _lv_label_custom_scrolling_animations:
@@ -276,7 +276,7 @@ It will be treated as a template which will be used to create the scroll animati
    <br>
 
 
-滚动动画的某些方面在长模式下:cpp:enumerator:`LV_LABEL_LONG_SCROLL` 和 :cpp:enumerator:`LV_LABEL_LONG_SCROLL_CIRCULAR` 可以是通过设置样式的 animation 属性进行自定义，使用:cpp:func:`lv_style_set_anim`。
+滚动动画的某些方面在长模式下 :cpp:enumerator:`LV_LABEL_LONG_SCROLL` 和 :cpp:enumerator:`LV_LABEL_LONG_SCROLL_CIRCULAR` 可以是通过设置样式的 animation 属性进行自定义，使用 :cpp:func:`lv_style_set_anim`。
 
 它将被视为一个模板，将用于创建滚动动画。
 
@@ -300,7 +300,7 @@ the :ref:`fonts` section to learn more about the symbols.
    <br>
 
 
-标签可以在字母旁边显示符号（或单独显示）。 阅读 :ref:`字体` 部分以了解有关符号的更多信息。
+标签可以在字母旁边显示符号（或单独显示）。 阅读 :ref:`fonts` 部分以了解有关符号的更多信息。
 
 
 .. _lv_label_events:
@@ -327,9 +327,9 @@ Learn more about :ref:`events`.
 
 标签不发送特殊事件。
 
-另请参阅:ref:`基本对象 <lv_obj>` 的事件。
+另请参阅 :ref:`基本对象 <lv_obj>` 的事件。
 
-详细了解更多 :ref:`事件`。
+详细了解更多 :ref:`events`。
 
 
 .. _lv_label_keys:
@@ -354,7 +354,7 @@ Learn more about :ref:`indev_keys`.
 
 对象类型不处理 *按键* 。
 
-了解有关 :ref:`indev_按键`的更多信息。
+了解有关 :ref:`indev_keys` 的更多信息。
 
 
 .. _lv_label_example:

@@ -121,7 +121,7 @@ The mode can be changed with :cpp:expr:`lv_slider_set_mode(slider, LV_SLIDER_MOD
 
 - :cpp:enumerator:`LV_SLIDER_SYMMETRICAL` 这个模式下可以指定负的最小范围。但是只能从零值到当前值绘制指示器。
 
-- :cpp:enumerator:`LV_SLIDER_RANGE` 在这个模式下也可以指定负的最小范围。这样滑动条的起始值可以不是0，使用:cpp:expr:`lv_bar_set_start_value(bar, new_value, LV_ANIM_ON/OFF)`设置起始值。要注意设置的起始值必须小于结束值。
+- :cpp:enumerator:`LV_SLIDER_RANGE` 在这个模式下也可以指定负的最小范围。这样滑动条的起始值可以不是0，使用 :cpp:expr:`lv_bar_set_start_value(bar, new_value, LV_ANIM_ON/OFF)` 设置起始值。要注意设置的起始值必须小于结束值。
 
 可以使用 :cpp:expr:`lv_slider_set_mode(slider, LV_SLIDER_MODE_...)` 更改模式。
 
@@ -149,9 +149,9 @@ The extended click area (set by :cpp:expr:`lv_obj_set_ext_click_area(slider, val
    <br>
 
 
-通常，可以通过拖动旋钮或单击滑动条来调整滑动条的值。 在后一种情况下，旋钮会移动到单击的点，指示器也会相应更改。在某些情况下，需要将滑动条设置为仅对拖动旋钮做出反应，可以通过添加 :cpp:enumerator:`LV_OBJ_FLAG_ADV_HITTEST`: :cpp:expr:`lv_obj_add_flag(slider, LV_OBJ_FLAG_ADV_HITTEST)`来启用此功能。
+通常，可以通过拖动旋钮或单击滑动条来调整滑动条的值。 在后一种情况下，旋钮会移动到单击的点，指示器也会相应更改。在某些情况下，需要将滑动条设置为仅对拖动旋钮做出反应，可以通过添加 :cpp:enumerator:`LV_OBJ_FLAG_ADV_HITTEST` :cpp:expr:`lv_obj_add_flag(slider, LV_OBJ_FLAG_ADV_HITTEST)` 来启用此功能。
 
-扩展的单击区域(由:cpp:expr:`lv_obj_set_ext_click_area(slider, value)`设置)增加到旋钮的单击区域。
+扩展的单击区域(由 :cpp:expr:`lv_obj_set_ext_click_area(slider, value)` 设置)增加到旋钮的单击区域。
 
 
 .. _lv_slider_events:
@@ -185,7 +185,7 @@ Learn more about :ref:`events`.
 
 也可以查看 `Bar </widgets/bar>`__ 的事件。
 
-详细了解更多:ref:`事件`。
+详细了解更多 :ref:`events`。
 
 
 .. _lv_slider_keys:
@@ -212,7 +212,7 @@ Learn more about :ref:`indev_keys`.
 -  ``LV_KEY_UP/RIGHT`` 将滑动条的值增加 1
 -  ``LV_KEY_DOWN/LEFT`` 将滑动条的值减 1
 
-了解有关 *按键* 的更多信息。
+了解有关 :ref:`indev_keys` 的更多信息。
 
 
 .. _lv_slider_example:
