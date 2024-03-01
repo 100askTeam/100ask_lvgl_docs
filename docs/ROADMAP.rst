@@ -66,9 +66,9 @@ Naming and API（命名和API）
 - |check| 重新考虑图像颜色格式。
 - |check| 更一致的名称： `remove/clear/delete/del`, `offset/ofs`, `add/create/register`, `id/idx/index`, `middle/mid/center`, `img/image`, `txt/text`, `opa/opacity/alpha`, `scr/screen`, `disp, display`, `finished/complete/completed/ready`, `buf/buffer`,  `..._cb`, `angle/rotation`, `zoom/scale`, `has`, `is`, `enable`
 - |check| 更新画布 API `链接 <https://github.com/lvgl/lvgl/issues/3393>`__
-- |check| `LV_STYLE_PROP_INHERIT` -> `LV_STYLE_PROP_FLAG_INHERITABLE`
+- |check| `LV_STYLE_PROP_INHERIT` -> `LV_STYLE_PROP_FLAG_INHERITABLE` `链接 <https://github.com/lvgl/lvgl/pull/3390#discussion_r885915769>`__
 - |check| 将 `disp_drv->direct_mode/full_refresh` 替换为枚举。
-- |check| 考虑扁平目录结构。例如， `额外/小部件`到 `小部件``。
+- |check| 考虑扁平目录结构。例如， `额外/小部件` 到 `小部件`。
 - |check| 尽可能在 API 中使用 `uint32_t` 和 `int32_t` 。考虑将 `int32_t` 硬编码为 `int32_t` 。
 - |check| 要定义新的 stdlib API，请使用定义 `LV_USE_CUSTOM_...` 并让用户在某处实现 `lv_...`   函数（而不是定义自定义函数的名称）  (请参阅 `此处 <https://github.com/lvgl/lvgl/issues/3481#issuecomment-1206434501>`__)。
 - |check| 带 alpha 的渐变
@@ -115,7 +115,7 @@ Architecture（结构）
    <br>
 
 
-- |check| 考虑合并新驱动程序 API 中的 `lv_disp_drv_t`, `lv_disp_t`, `lv_disp_draw_buf_t`, `lv_draw_ctx_t`和 `struct`'s 结构（或仅其中一些）
+- |check| 考虑合并新驱动程序 API 中的 `lv_disp_drv_t`, `lv_disp_t`, `lv_disp_draw_buf_t`, `lv_draw_ctx_t` 和 `struct`'s 结构（或仅其中一些）
 - |check| 新的驱动架构#2720
 - |check| `draw_ctx->buffer_convert`?(参见 `此处 <https://github.com/lvgl/lvgl/issues/3379#issuecomment-1147954592>`__) 还删除 16 SWAPPED 颜色格式吗？ ( `看这里 <https://github.com/lvgl/lvgl/issues/3379#issuecomment-1140886258>`__ )
 - |check| 重新考虑面具。应该有一个独立于绘图引擎的通用高级掩模 API。  `第4059章 <https://github.com/lvgl/lvgl/issues/4059>`__
@@ -130,8 +130,8 @@ Architecture（结构）
 - |check| 以字节为单位限制图像缓存大小，而不是图像数量
 - |check| lv_draw_buf 用于统一步幅、缓冲区和缓存失效管理。 `4241 <https://github.com/lvgl/lvgl/pull/4241>`__
 - |check| 通过 ThorVG 添加矢量图形支持
-- |check| SVG 支持：集成 SVG 渲染库4388 `4388 <https://github.com/lvgl/lvgl/issues/4388>`__
-- |check| 引入可选float支持。 `4648 <https://github.com/lvgl/lvgl/issues/4648>`__
+- |check| SVG 支持：集成 SVG 渲染库 `4388 <https://github.com/lvgl/lvgl/issues/4388>`__
+- |check| 引入可选 ``float`` 支持。 `4648 <https://github.com/lvgl/lvgl/issues/4648>`__
 - |check| 引入 3D GPU 的支持层（OpenGL、SDL、Vulkan 等）。 `4622 <https://github.com/lvgl/lvgl/issues/4622>`__
 
 
@@ -179,7 +179,7 @@ Widgets（部件）
 
 - |check| 通用秤小部件/支持
 - |check| `lv_img`: 重新考虑图像尺寸模型（当图像尺寸不满足要求时）：居中、左上角、缩放、平铺还是其他？
-- |check| `lv_tabview` 用真正的按钮替换按钮矩阵以获得更大的灵活性(参见 `此处 <https://forum.lvgl.io/t/linear-meter-bar-with-ticks/10986>`__ and #4043)
+- |check| `lv_tabview` 用真正的按钮替换按钮矩阵以获得更大的灵活性(参见 `此处 <https://forum.lvgl.io/t/linear-meter-bar-with-ticks/10986>`__ 和 第4043章)
 - |check| 禁用的小部件应该吸收 indev 操作而不发送事件。 `第3860章 <https://github.com/lvgl/lvgl/issues/3860>`__
 
 
@@ -389,7 +389,7 @@ Others（其他）
 - |uncheck| 圆形布局。第2871章
 - |uncheck| 考虑 `交错动画 <https://greensock.com/docs/v3/Staggers>`__。
 - |uncheck| 添加自定义 indev 类型。看 `此处 <https://github.com/lvgl/lvgl/issues/3298#issuecomment-1616706654>`__。
-- |uncheck| 如果使用 `lv_obj_get_width/height/x/y/etc`获取坐标，则自动重新计算布局
+- |uncheck| 如果使用 `lv_obj_get_width/height/x/y/etc` 获取坐标，则自动重新计算布局
 
 
 Ideas（想法）
@@ -431,7 +431,7 @@ Ideas（想法）
 - `lv_array`: 尽可能用数组替换链表（数组更快并且使用更少的内存）
 - 重新考虑如何处理 UTF-8 字符（也允许不同的编码）和 Bidi。也许为文本塑造创建一个抽象。
 - 考虑直接二进制字体格式支持
-- 改善团体。 `讨论 <https://forum.lvgl.io/t/lv-group-tabindex/2927/3>`__。重新考虑聚焦逻辑。允许不选择任何小部件（在网络上这是可能的）。保持 `lv_obj_t`中的编辑状态(参见 `此处 <https://github.com/lvgl/lvgl/issues/3646>`__ )。支持滑块左旋钮对焦(参见 `此处 <https://github.com/lvgl/lvgl/issues/3246>`__ )。
+- 改善团体。 `讨论 <https://forum.lvgl.io/t/lv-group-tabindex/2927/3>`__。重新考虑聚焦逻辑。允许不选择任何小部件（在网络上这是可能的）。保持 `lv_obj_t` 中的编辑状态(参见 `此处 <https://github.com/lvgl/lvgl/issues/3646>`__ )。支持滑块左旋钮对焦(参见 `此处 <https://github.com/lvgl/lvgl/issues/3246>`__ )。
 - 加快字体解压速度
 - 支持更大图像：添加对大图像的支持#1892
 - 函数式编程支持，纯视图？(参见 `此处 <https://www.freecodecamp.org/news/the-revolution-of-pure-views-aed339db7da4/>`__ )
