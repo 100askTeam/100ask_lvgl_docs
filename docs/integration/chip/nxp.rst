@@ -663,8 +663,8 @@ Advanced configuration:（高级配置：）
   如果 GPU 空闲，则将刷新带有任何待处理任务的队列到 GPU。绘制任务的完成状态将异步发送给主 LVGL 线程。
 
 
-Features supported:
-^^^^^^^^^^^^^^^^^^^
+Features supported:（支持的功能：）
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. raw:: html
 
