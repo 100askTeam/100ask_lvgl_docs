@@ -52,7 +52,7 @@ call :cpp:func:`lv_qrcode_update` again to regenerate the QR code.
 
 使用 :cpp:func:`lv_qrcode_create` 创建qrcode对象，并使用 :cpp:func:`lv_qrcode_update` 以生成二维码。
 
-如果需要重新修改尺寸和颜色，请使用 :cpp:func:`lv_qrcode_set_size` 和 :cpp:function:`lv_6rcode_set_dark_color` 或 
+如果需要重新修改尺寸和颜色，请使用 :cpp:func:`lv_qrcode_set_size` 和 :cpp:func:`lv_qrcode_set_dark_color` 或 
 :cpp:func:`lv_qrcode_set_light_color`，以及再次调用 :cpp:func:`lv_qrcode_update` 以重新生成QR代码。
 
 

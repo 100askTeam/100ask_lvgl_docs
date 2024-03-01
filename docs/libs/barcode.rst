@@ -53,7 +53,7 @@ the barcode.
 
 :cpp:func:`lv_barcode_create` 用于创建条形码对象，:cpp:func:`lv_barcode_update` 用于生成条形码。
 
-调用 :cpp:func:`lv_barcode_set_scale` 调整缩放，调用 :cpp:func:`lv_barcode_set_dark_color` 和 :cpp:func:` lv_barcode _set_light_color` 调整颜色，调用 :cpp:func:`lv_barcode_set_direction` 将设置显示方向，并再次调用 :cpp:func:`lv_barcode_update` 以重新生成条形码。
+调用 :cpp:func:`lv_barcode_set_scale` 调整缩放，调用 :cpp:func:`lv_barcode_set_dark_color` 和 :cpp:func:`lv_barcode_set_light_color` 将设置显示方向，并再次调用 :cpp:func:`lv_barcode_update` 以重新生成条形码。
 
 
 Notes（笔记）
