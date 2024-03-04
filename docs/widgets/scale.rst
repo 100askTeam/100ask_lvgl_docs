@@ -20,7 +20,7 @@ Scale allows you to have a linear scale with ranges and sections with custom sty
    <br>
 
 
-缩放允许您拥有具有自定义样式的范围和部分的线性缩放。
+标尺允许您拥有具有自定义样式的范围和部分的线性标尺。
 
 
 .. _lv_scale_parts_and_styles:
@@ -46,7 +46,7 @@ The scale widget is divided in the following three parts:
    <br>
 
 
-比例小部件分为以下三个部分：
+标尺控件分为以下三个部分：
 
 - :cpp:enumerator:`LV_PART_MAIN` 主线。请参阅示例图像中的蓝线。
 - :cpp:enumerator:`LV_PART_ITEMS` 轻微的蜱虫。请参阅示例图像中的红色小刻度。
@@ -147,7 +147,7 @@ For lines (main line, major and minor ticks) the following properties can be con
 
 部分是小调和大调范围之间的空间。它们可以使用 :cpp:expr:`lv_scale_add_section(scale)` 创建，它会处理一个 :cpp:type:`lv_scale_section_t` 指针。
 
-该部分的范围配置为 :cpp:expr:`lv_scale_section_set_range(section, minor_range, major_range)` 。 比例截面的三个部分中每个部分的样式都可以用 :cpp:expr:`lv_scale_section_set_style(section, PART, style_pointer)`设置，其中 `PART` 可以是 ， 也可以是 :cpp:enumerator:`LV_PART_MAIN`, :cpp:enumerator:`LV_PART_ITEMS` 或 :cpp:enumerator:`LV_PART_INDICATOR`, :cpp:expr:`style_pointer`  ， :cpp:type:`lv_style_t` 应该指向全局变量或静态变量。
+该部分的范围配置为 :cpp:expr:`lv_scale_section_set_range(section, minor_range, major_range)` 。 标尺截面的三个部分中每个部分的样式都可以用 :cpp:expr:`lv_scale_section_set_style(section, PART, style_pointer)`设置，其中 `PART` 可以是 ， 也可以是 :cpp:enumerator:`LV_PART_MAIN`, :cpp:enumerator:`LV_PART_ITEMS` 或 :cpp:enumerator:`LV_PART_INDICATOR`, :cpp:expr:`style_pointer`  ， :cpp:type:`lv_style_t` 应该指向全局变量或静态变量。
 
 对于标签，可以配置以下属性：:cpp:func:`lv_style_set_text_font`, :cpp:func:`lv_style_set_text_color`, :cpp:func:`lv_style_set_text_letter_space`, :cpp:func:`lv_style_set_text_opa`。
 
@@ -171,7 +171,7 @@ No events supported by this widget.
    <br>
 
 
-此小组件不支持任何事件。
+此控件不支持任何事件。
 
 
 .. _lv_scale_keys:
@@ -192,7 +192,7 @@ No keys supported by this widget.
    <br>
 
 
-此小组件不支持任何按键。
+此控件不支持任何按键。
 
 
 .. _lv_scale_example:
