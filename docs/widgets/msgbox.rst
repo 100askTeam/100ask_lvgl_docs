@@ -59,7 +59,7 @@ widgets' documentation for details.
    <br>
 
 
-消息框是从其他小部件构建的，因此您可以选中这些小部件的文档了解详细信息。
+消息框是从其他控件构建的，因此您可以选中这些控件的文档了解详细信息。
 
 - 背景： :ref:`lv_obj`
 - 关闭按钮： :ref:`lv_button`

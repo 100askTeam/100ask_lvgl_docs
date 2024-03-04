@@ -1,7 +1,7 @@
 .. _widgets:
 
 ===============
-Widgets（部件）
+Widgets（控件）
 ===============
 
 .. toctree::

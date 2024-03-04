@@ -55,7 +55,7 @@ The Dropdown widget is built from the elements: "button" and "list"
    <br>
 
 
-下拉组件由以下元素构建：“按钮”和“列表”（均与按钮和列表组件无关）
+下拉组件由以下元素构建：“按钮”和“列表”（均与按钮和列表控件无关）
 
 
 Button

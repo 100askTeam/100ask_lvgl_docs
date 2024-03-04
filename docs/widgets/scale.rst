@@ -1,7 +1,7 @@
 .. _lv_scale:
 
 =========================
-Scale （比例）(lv_scale)
+Scale （标尺）(lv_scale)
 =========================
 
 Overview（概述）

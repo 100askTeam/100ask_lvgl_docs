@@ -169,7 +169,7 @@ can add any widgets to the page.
    <br>
 
 
-:cpp:expr:`lv_menu_page_create(menu, title)` 创建一个新的空菜单页。你可以向页面添加任何小部件。
+:cpp:expr:`lv_menu_page_create(menu, title)` 创建一个新的空菜单页。你可以向页面添加任何控件。
 
 
 Set a menu page in the main area（在主区域设置菜单页面）

@@ -36,7 +36,7 @@ more than a rectangle. In HTML terms, think of it as a ``<div>``.
    <br>
 
 
-基础对象 实现了屏幕上组件的基本属性，例如：
+基础对象 实现了屏幕上控件的基本属性，例如：
 
 - 坐标
 - 父对象
@@ -46,9 +46,9 @@ more than a rectangle. In HTML terms, think of it as a ``<div>``.
 
 在面向对象的思想中，基础对象 是 LVGL 中所有其他对象都继承自的基类。
 
-基础对象的功能可以与其他组件一起使用。 例如 :cpp:expr:`lv_obj_set_width(slider, 100)`
+基础对象的功能可以与其他控件一起使用。 例如 :cpp:expr:`lv_obj_set_width(slider, 100)`
 
-基础对象可以直接用作一个简单的组件：它只不过是一个矩形。 在 HTML 术语中，将其视为 ``<div>``。
+基础对象可以直接用作一个简单的控件：它只不过是一个矩形。 在 HTML 术语中，将其视为 ``<div>``。
 
 
 .. _lv_obj_coordinates:
@@ -284,7 +284,7 @@ To get an object's screen use the :cpp:expr:`lv_obj_get_screen(obj)` function.
    <br>
 
 
-在 LVGL 中，对象层次结构的最高级别是 display，它代表显示设备（物理显示器或模拟器）的驱动程序。 一个显示器可以有一个或多个与其相关联的屏幕。 每个屏幕都包含图形组件的对象层次结构，代表覆盖整个显示的布局。
+在 LVGL 中，对象层次结构的最高级别是 display，它代表显示设备（物理显示器或模拟器）的驱动程序。 一个显示器可以有一个或多个与其相关联的屏幕。 每个屏幕都包含图形控件的对象层次结构，代表覆盖整个显示的布局。
 
 当你创建了一个像 ``lv_obj_t * screen = lv_obj_create(NULL)`` 这样的屏幕时，你可以用 :cpp:expr:`lv_screen_load(screen)` 激活它。 :cpp:func:`lv_screen_active` 函数为您提供指向活动屏幕的指针。
 
