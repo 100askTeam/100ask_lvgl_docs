@@ -48,6 +48,7 @@ So pay extra attention to these:
 - Run time dithering is rendering due its complexity and lack of GPU support. Smaller dithered and tiled images can be used as background images as a replacement.
 - STM32's DMA2D (Chrom-ART) support is removed for now. It will be added again when an official partnership starts with ST too.
 - SJPG was removed as the original TJPGD support decoding tile-by-tile. (typically a tile is 8x8 pixels)
+- ``LV_COLOR_DEPTH 8`` is not supported yet. In v8 it meant RGB332, in v9 it will be used for L8.
 
 .. raw:: html
 
@@ -70,7 +71,7 @@ So pay extra attention to these:
 - 由于其复杂性和缺乏 GPU 支持，运行时抖动正在渲染。较小的抖动和平铺图像可以用作背景图像作为替代。
 - STM32 的 DMA2D (Chrom-ART) 支持暂时被删除。当与 ST 建立正式合作伙伴关系时，也会再次添加它。
 - SJPG 被删除，因为原来的 TJPGD 支持逐图块解码。（通常一个图块是 8x8 像素）
-
+- 还不支持 ``LV_COLOR_DEPTH 8`` 。在v8中，它意味着RGB332，在v9中，它将用于L8。
 
 Main new features（主要新功能）
 ------------------------------
