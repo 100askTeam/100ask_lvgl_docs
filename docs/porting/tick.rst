@@ -9,13 +9,30 @@ Tick interface（心跳接口）
    <details>
      <summary>显示原文</summary>
 
-LVGL needs a system tick to know elapsed time for animations and other
+LVGL needs a system tick to know the elapsed time for animations and other
 tasks.
 
-If you want to use a custom function to :cpp:func:`lv_tick_get`, you can
-register a "tick_get_cb" with :cpp:func:`lv_tick_set_cb`.
+There are two ways to provide the tick to LVGL:
 
-For example:
+1. Call ``lv_tick_set_cb(my_get_milliseconds_function);``: `my_get_milliseconds_function` needs to tell how many milliseconds have elapsed since start up. Most of the platforms have built-in functions that can be used as they are. For example
+
+   - SDL: ``lv_tick_set_cb(SDL_GetTicks);``
+   - Arduino: ``lv_tick_set_cb(millis);``
+   - FreeRTOS: ``lv_tick_set_cb(xTaskGetTickCount);``
+   - STM32: ``lv_tick_set_cb(HAL_GetTick);``
+   - ESP32: ``lv_tick_set_cb(my_tick_get_cb);``, where ``my_tick_get_cb`` is a wrapper for ``esp_timer_get_time() / 1000;``
+
+2. Call ``lv_tick_inc(x)`` periodically, where ``x`` is the elapsed milliseconds since the last call. ``lv_tick_inc`` should be called from a high priority interrupt.
+
+The ticks (milliseconds)  should be independent from any other activities of the MCU.
+
+For example this works, but LVGL's timing will be incorrect as the execution time of ``lv_timer_handler`` is not considered:
+
+.. code:: c
+   // Bad idea
+   lv_timer_handler();
+   lv_tick_inc(5);
+   my_delay_ms(5);
 
 .. raw:: html
 
@@ -23,61 +40,23 @@ For example:
    <br>
 
 
-LVGL 需要一个系统滴答来了解动画和其他任务所用的时间。
+LVGL 需要一个系统滴答时钟来了解动画和其他任务所用的时间。
 
-如果要使用自定义函数来 :cpp:func:`lv_tick_get` ，你可以使用 :cpp:func:`lv_tick_set_cb` 注册“tick_get_cb”。
+有两种方法可以向 LVGL 提供刻度：
 
-例如：
+1. 调用 ``lv_tick_set_cb(my_get_milliseconds_function);``： `my_get_milliseconds_function` 需要告知自启动以来已经过去了多少毫秒。大多数平台都有内置功能，可以直接使用。例如
 
+   - SDL: ``lv_tick_set_cb(SDL_GetTicks);``
+   - Arduino: ``lv_tick_set_cb(millis);``
+   - FreeRTOS: ``lv_tick_set_cb(xTaskGetTickCount);``
+   - STM32: ``lv_tick_set_cb(HAL_GetTick);``
+   - ESP32: ``lv_tick_set_cb(my_tick_get_cb);``, 哪里 ``my_tick_get_cb`` 是包装器 ``esp_timer_get_time() / 1000;``
 
-.. code:: c
+2. 定期调用 ``lv_tick_inc(x)`` 其中 ``x`` 是自上次调用以来经过的毫秒数。 ``lv_tick_inc`` 应从高优先级中断调用。
 
-   lv_tick_set_cb(SDL_GetTicks);
+刻度（毫秒）应独立于 MCU 的任何其他活动。
 
-
-.. raw:: html
-
-   <details>
-     <summary>显示原文</summary>
-
-You need to call the :cpp:expr:`lv_tick_inc(tick_period)` function periodically
-and provide the call period in milliseconds. For example,
-:cpp:expr:`lv_tick_inc(1)` when calling every millisecond.
-
-:cpp:func:`lv_tick_inc` should be called in a higher priority routine than
-:cpp:func:`lv_task_handler` (e.g. in an interrupt) to precisely know the
-elapsed milliseconds even if the execution of :cpp:func:`lv_task_handler` takes
-more time.
-
-With FreeRTOS :cpp:func:`lv_tick_inc` can be called in ``vApplicationTickHook``.
-
-On Linux based operating systems (e.g. on Raspberry Pi) :cpp:func:`lv_tick_inc`
-can be called in a thread like below:
-
-.. raw:: html
-
-   </details> 
-   <br>
-
-
-您需要定期调用 :cpp:expr:`lv_tick_inc(tick_period)` 函数并提供以毫秒为单位的调用周期。例如，:cpp:expr:`lv_tick_inc(1)` 每毫秒调用一次。
-
-:cpp:func:`lv_tick_inc` 应该在比 :cpp:func:`lv_task_handler` 更高优先级的例程中调用（例如在中断中），以精确知道经过的毫秒数，即使 :cpp:func:`lv_task_handler` 的执行需要更多时间。
-
-使用 FreeRTOS，可以在 ``vApplicationTickHook`` 中调用 :cpp:func:`lv_tick_inc` 。
-
-在基于 Linux 的操作系统（例如在 Raspberry Pi 上）可以在如下线程中调用 :cpp:func:`lv_tick_inc`：
-
-
-.. code:: c
-
-   void * tick_thread (void *args)
-   {
-         while(1) {
-           usleep(5*1000);   /*Sleep for 5 millisecond*/
-           lv_tick_inc(5);      /*Tell LVGL that 5 milliseconds were elapsed*/
-       }
-   }
+例如，这可行，但 LVGL 的计时将不正确，因为 ``lv_timer_handler`` 未考虑 的执行时间：
 
 API
 ---
