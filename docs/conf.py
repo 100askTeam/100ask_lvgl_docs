@@ -86,13 +86,13 @@ version = ''
 #
 # This is also used if you do content translation via gettext catalogs.
 # Usually you set "language" from the command line for these cases.
-language = 'en'
+language = 'zh_CN'
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This patterns also effect to html_static_path and html_extra_path
 exclude_patterns = ['_build', 'doxygen_html', 'Thumbs.db', '.DS_Store',
-                    'README.md', 'lv_examples', 'out_html', 'env', '_ext', 'examples']
+                    'README.md', 'README_*','lv_examples', 'out_html', 'env', '_ext', 'examples']
 
 # The name of the Pygments (syntax highlighting) style to use.
 pygments_style = 'sphinx'
@@ -132,7 +132,7 @@ html_theme_options = {
 
 
 # For site map generation
-html_baseurl = f"https://docs.lvgl.io/{os.environ['LVGL_URLPATH']}/"
+html_baseurl = f"https://lvgl.100ask.net/{os.environ['LVGL_URLPATH']}/"
 
 sitemap_url_scheme = "{link}"
 
@@ -142,8 +142,8 @@ sitemap_url_scheme = "{link}"
 
 html_context = {
     'github_version': os.environ['LVGL_GITCOMMIT'],
-    'github_user': 'lvgl',
-    'github_repo': 'lvgl',
+    'github_user': '100askTeam',
+    'github_repo': '100ask_lvgl_docs',
     'display_github': True,
     'conf_py_path': '/docs/'
 }

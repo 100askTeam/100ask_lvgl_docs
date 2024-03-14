@@ -15,6 +15,7 @@ import doc_builder
 import shutil
 import tempfile
 import config_builder
+import add_translation
 
 # due to the modifications that take place to the documentation files
 # when the documentaation builds it is better to copy the source files to a
@@ -134,6 +135,9 @@ with open(os.path.join(temp_directory, 'Doxyfile'), 'wb') as f:
 
 print("Generate the list of examples")
 ex.exec(temp_directory)
+
+print("Add translation")
+add_translation.exec(temp_directory)
 
 print("Running doxygen")
 cmd('cd "{0}" && doxygen Doxyfile'.format(temp_directory))
