@@ -72,6 +72,10 @@ To set the image in a state, use the
 The image sources work the same as described in the `Image object </widgets/image>`__
 except that "Symbols" are not supported by the Image button. Any of the sources can ``NULL``.
 
+If only ``src_center`` is specified, the width of the widget will be set automatically to the
+width of the image. However, if all three sources are set, the width needs to be set by the user
+(using e.g. :cpp:expr:`lv_obj_set_width`) and the center image will be tiled to fill the given size.
+
 The possible states are:
 
 - :cpp:enumerator:`LV_IMAGEBUTTON_STATE_RELEASED`
@@ -95,6 +99,8 @@ they will be used in pressed state instead of the released images.
 
 图像源的工作方式与 `图片对象 </widgets/image>`__ 中所述的工作方式相同，只是“图像”按钮不支持“符号”。任何来源都可以为 ``NULL``。
 
+如果仅 ``src_center`` 指定，则小部件的宽度将自动设置为图像的宽度。但是，如果设置了所有三个源，则需要由用户设置宽度（例如使用 :cpp:expr:`lv_obj_set_width` ），并且中心图像将平铺以填充给定大小。
+
 可能的状态包括：
 
 - :cpp:enumerator:`LV_IMAGEBUTTON_STATE_RELEASED`
@@ -116,7 +122,7 @@ States（状态）
      <summary>显示原文</summary>
 
 
-Instead of the regular :cpp:func:`lv_obj_add_state` and :cpp:func:`lv_obj_remove_state` functions, 
+Instead of the regular :cpp:func:`lv_obj_add_state` and :cpp:func:`lv_obj_remove_state` functions,
 the :cpp:expr:`lv_imagebutton_set_state(imagebutton, LV_IMAGEBUTTON_STATE_...)` function should be
 used to manually set a state.
 
@@ -126,7 +132,7 @@ used to manually set a state.
    <br>
 
 
-代替常规的 :cpp:func:`lv_obj_add_state` 和 :cpp:func:`lv_obj_remove_state` 函数，应使用 :cpp:expr:`lv_imagebutton_set_state(imagebutton, LV_IMAGEBUTTON_STATE_...)` 函数手动设置状态。
+应使用 :cpp:expr:`lv_imagebutton_set_state(imagebutton, LV_IMAGEBUTTON_STATE_...)` 函数来手动设置状态，而不是常规的 :cpp:func:`lv_obj_add_state` 和 :cpp:func:`lv_obj_remove_state` 函数。
 
 
 .. _lv_imagebutton_events:
