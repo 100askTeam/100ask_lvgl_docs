@@ -99,7 +99,6 @@ installed, follow these configuration steps:
 2. Go to ``lvgl`` and copy ``lv_conf_template.h`` as ``lv_conf.h`` into the Arduino Libraries directory next to the ``lvgl`` library folder.
 3. Open ``lv_conf.h`` and change the first ``#if 0`` to ``#if 1`` to enable the content of the file
 4. Set the color depth of you display in :c:macro:`LV_COLOR_DEPTH`
-5. Set :c:macro:`LV_TICK_CUSTOM`
 
 Finally the layout with ``lv_conf.h`` should look like this:
 
@@ -115,7 +114,6 @@ LVGL 有一个名为 ``lv_conf.h`` 的配置文件。当安装 LVGL 时，请遵
 2. 进入 ``lvgl`` 并复制 ``lv_conf_template.h`` 为 ``lv_conf.h`` 到 Arduino 库目录中，该文件应位于 ``lvgl`` 库文件夹旁边。
 3. 打开 ``lv_conf.h`` 并将第一行的 ``#if 0`` 更改为 ``#if 1`` 以启用文件内容
 4. 在 :c:macro:`LV_COLOR_DEPTH` 中设置显示器的颜色深度
-5. 设置 :c:macro:`LV_TICK_CUSTOM`
 
 最后，使用 ``lv_conf.h`` 的布局应如下所示：
 
