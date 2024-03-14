@@ -190,7 +190,7 @@ Usage（用法）
         while (1)
         {
             uint32_t time_till_next = lv_timer_handler();
-            Sleep(time_till_next);
+            lv_delay_ms(time_till_next);
         }
 
         return 0;
