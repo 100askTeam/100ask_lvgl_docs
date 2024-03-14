@@ -1296,8 +1296,7 @@ margin properties in HTML.
 margin_top
 ~~~~~~~~~~
 
-Sets the margin on the top. The object will keep this space from its
-siblings in layouts.
+Sets the margin on the top. The object will keep this space from its siblings in layouts. 
 
 .. raw:: html
 
@@ -2799,7 +2798,7 @@ Ext. draw Yes
 shadow_offset_x
 ~~~~~~~~~~~~
 
-Set an offset on the shadow in pixels in X direction.
+Set an offset on the shadow in pixels in X direction. 
 
 .. raw:: html
 
@@ -2852,7 +2851,7 @@ Ext. draw Yes
 shadow_offset_y
 ~~~~~~~~~~~~
 
-Set an offset on the shadow in pixels in Y direction.
+Set an offset on the shadow in pixels in Y direction. 
 
 .. raw:: html
 
@@ -3404,8 +3403,7 @@ Ext. draw No
 line_rounded
 ~~~~~~~~~~~~
 
-Make the end points of the lines rounded. ``true``: rounded, ``false``:
-perpendicular line ending
+Make the end points of the lines rounded. ``true``: rounded, ``false``: perpendicular line ending 
 
 .. raw:: html
 
@@ -3622,8 +3620,7 @@ Ext. draw Yes
 arc_rounded
 ~~~~~~~~~~~
 
-Make the end points of the arcs rounded. ``true``: rounded, ``false``:
-perpendicular line ending
+Make the end points of the arcs rounded. ``true``: rounded, ``false``: perpendicular line ending 
 
 .. raw:: html
 
@@ -3952,7 +3949,7 @@ Ext. draw No
 text_font
 ~~~~~~~~~
 
-Set the font of the text (a pointer :cpp:type:`lv_font_t` ``*``).
+Set the font of the text (a pointer `lv_font_t *`). 
 
 .. raw:: html
 
