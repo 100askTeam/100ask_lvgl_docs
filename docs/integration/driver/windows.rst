@@ -96,9 +96,11 @@ Prerequisites（先决条件）
    <details>
      <summary>显示原文</summary>
 
-The tested minimum Windows OS requirement for this driver is Windows XP RTM.
+The minimum Windows OS requirement for this driver is Windows Vista RTM.
 
-According to the Windows GDI API this driver used. Maybe the minimum Windows OS requirement for this driver is Windows 2000 RTM.
+If you use Windows API shim libraries like `YY-Thunks <https://github.com/Chuyu-Team/YY-Thunks>`__, the tested minimum Windows OS requirement for this driver is Windows XP RTM.
+
+According to the Windows GDI API this driver used. Maybe the minimum Windows OS requirement limitation for this driver is Windows 2000 RTM.
 
 .. raw:: html
 
@@ -106,9 +108,11 @@ According to the Windows GDI API this driver used. Maybe the minimum Windows OS 
    <br>
 
 
-这个驱动程序被测试的最低 Windows 操作系统要求是 Windows XP RTM。
+此驱动程序的最低Windows操作系统要求是Windows Vista RTM。
 
-根据 Windows GDI API 所使用的驱动程序。也许这个驱动程序的最低 Windows 操作系统要求是 Windows 2000 RTM。
+如果使用Windows API填充程序库，如 `YY-Thunks <https://github.com/Chuyu-Team/YY-Thunks>`__ ，此驱动程序测试的最低Windows操作系统要求是Windows XP RTM。
+
+根据Windows GDI API此驱动程序使用。也许这个驱动程序的最低Windows操作系统要求限制是Windows 2000 RTM。
 
 
 Configure Windows driver（配置Windows驱动程序）
