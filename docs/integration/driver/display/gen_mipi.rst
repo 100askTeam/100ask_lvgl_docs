@@ -17,16 +17,14 @@ From the `Wikipedia <https://en.wikipedia.org/wiki/MIPI_Alliance>`__:
 	STMicroelectronics and Texas Instruments.
 
 MIPI Allience published a series of specifications related to display devices, including DBI (Display Bus Interface), DSI (Display Serial Interface) and DCS
-Display Command Set). Usually when one talks about a MIPI-compatible display, one thinks of a device with a DSI serial interface. However, the DBI specification
-includes a number of other, legacy interfaces, like SPI and a 8080-compatible parallel interface, which are often used to interface LCD displays to microcontrollers.
+Display Command Set). Usually when one talks about a MIPI-compatible display, one thinks of a device with a DSI serial interface. However, the Display Bus Interface specification
+includes a number of other, legacy interfaces, like SPI serial, or i8080-compatible parallel interface, which are often used to interface LCD displays to lower-end microcontrollers.
 Furthermore, the DCS specification contains a standard command set, which is supported by a large number of legacy TFT LCD controllers, including the popular Sitronix
-(ST7735, ST7789, ST7796) and Ilitek (ILI9341) SOCs.
+(ST7735, ST7789, ST7796) and Ilitek (ILI9341) SOCs. These commands provide a common interface to configure display orientation, color resolution, various power modes, and provide generic video memory access. On top of that standard command set each LCD controller chip has a number of vendor-specific commands to configure voltage generator levels, timings, or gamma curves.
 
-The DCS command set provides a common interface to configure display orientation, color resolution, various power modes, and provide generic video memory access. On top
-of that standard command set each LCD controller chip has a number of vendor-specific commands to configure voltage generator levels, timings, or gamma curves.
+.. note::
 
-It is important to understand that this generic MIPI LCD driver is not a hardware driver for displays with DSI interface. Instead, it implements the MIPI DCS command
-set, and provides a common framework for chip-specific display controllers.
+	It is important to understand that this generic MIPI LCD driver is not a hardware driver for displays with the DSI ("MIPI") serial interface. Instead, it implements the MIPI DCS command set used in many LCD controllers with an SPI or i8080 bus, and provides a common framework for chip-specific display controllers.
 
 .. tip::
 	Although this is a generic driver, it can be used to support compatible chips which do not have a specific driver.
@@ -41,11 +39,13 @@ set, and provides a common framework for chip-specific display controllers.
 
 	`MIPI 联盟 <https://www.mipi.org/>`__ 是一个全球性的商业联盟，致力于开发移动生态系统的技术规范，特别是智能手机，但也包括移动相关行业。MIPI于2003年由Arm、Intel、Nokia、三星、STMicroelectronics和Texas Instruments共同创立。
 
-MIPI联盟发表了一系列与显示设备相关的规范，包括Display Bus Interface (DBI)、Display Serial Interface (DSI)和Display Command Set (DCS)等。通常提到兼容MIPI的显示器时，人们会想到带有DSI串行接口的设备。但是，DBI规范中还包括其他一些传统接口，如SPI和8080兼容的并行接口，这些接口通常用于将LCD显示器与微控制器进行接口连接。此外，DCS规范包含了一套标准的命令集，被许多传统TFT LCD控制器所支持，包括流行的Sitronix（ST7735、ST7789、ST7796）和Ilitek（ILI9341）SOC。
+MIPI联盟发表了一系列与显示设备相关的规范，包括Display Bus Interface (DBI)、Display Serial Interface (DSI)和Display Command Set (DCS)等。通常提到兼容MIPI的显示器时，人们会想到带有DSI串行接口的设备。但是，Display Bus Interface规范中还包括其他一些传统接口，如SPI串口和i8080兼容的并行接口，这些接口通常用于将LCD显示器与低端微控制器进行接口连接。此外，DCS规范包含了一套标准的命令集，被许多传统TFT LCD控制器所支持，包括流行的Sitronix（ST7735、ST7789、ST7796）和Ilitek（ILI9341）SOC。
 
-DCS命令集提供了一个通用接口，可以配置显示方向、颜色分辨率、各种电源模式，并提供通用的视频存储器访问。在这个标准命令集的基础上，每个LCD控制器芯片还有一些供应商特定的命令，用于配置电压发生器电平、时序或伽玛曲线。
+这些命令集提供了一个通用接口，可以配置显示方向、颜色分辨率、各种电源模式，并提供通用的视频存储器访问。在这个标准命令集的基础上，每个LCD控制器芯片还有一些供应商特定的命令，用于配置电压发生器电平、时序或伽玛曲线。
 
-重要的是要理解，这个通用的MIPI LCD驱动程序不是用于带有DSI接口的显示器的硬件驱动程序。相反，它实现了MIPI DCS命令集，并为芯片特定的显示控制器提供了一个共同的框架。
+.. 注释::
+
+重要的是要理解，此通用MIPI LCD驱动程序不是具有DSI（“MIPI”）串行接口的显示器的硬件驱动程序。相反，它通过SPI或i8080总线实现了许多LCD控制器中使用的MIPI DCS命令集，并为芯片特定的显示控制器提供了通用框架。
 
 .. 提示::
 尽管这是一个通用驱动程序，但它可以用于支持没有特定驱动程序的兼容芯片。
@@ -85,7 +85,7 @@ Enable the generic MIPI LCD driver support in lv_conf.h, by cmake compiler defin
 	#define LV_USE_GENERIC_MIPI  1
 
 .. note::
-	:c:macro:`LV_USE_GENERIC_MIPI` is automatically enabled when a compatible driver is enabled.
+	``LV_USE_GENERIC_MIPI`` is automatically enabled when a compatible driver is enabled.
 
 .. raw:: html
 
@@ -100,7 +100,7 @@ Enable the generic MIPI LCD driver support in lv_conf.h, by cmake compiler defin
 	#define LV_USE_GENERIC_MIPI  1
 
 .. note::
-	:c:macro:`LV_USE_GENERIC_MIPI` 会在启用兼容驱动程序时自动启用。
+	``LV_USE_GENERIC_MIPI``会在启用兼容驱动程序时自动启用。
 
 
 Usage（用法）
@@ -193,8 +193,7 @@ Example（例子）
      <summary>显示原文</summary>
 
 .. note::
-	You can find the actual implementation of the callbacks on an STM32F746 using STM32CubeIDE and the ST HAL libraries
-	`here <https://github.com/lvgl/lvgl/doc/integration/drivers/display/lcd_stm32_hal.rst>`__.
+	You can find a step-by-step guide and the actual implementation of the callbacks on an STM32F746 using STM32CubeIDE and the ST HAL libraries here: :ref:`lcd_stm32_guide`
 
 .. code:: c
 
@@ -277,8 +276,7 @@ Example（例子）
 
 
 .. note::
-	您可以在STM32CubeIDE和ST HAL库中找到STM32F746的回调的实际实现。
-	`这里 <https://github.com/lvgl/lvgl/doc/integration/drivers/display/lcd_stm32_hal.rst>`__。
+	您可以在以下位置找到使用STM32CubIDE和ST HAL库的STM32F746上回调的分步指南和实际实现这里：:ref:`lcd_stm32_guide`
 
 .. code:: c
 

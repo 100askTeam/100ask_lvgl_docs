@@ -309,7 +309,7 @@ variables:
    osThreadId lvgl_timerHandle;
 
    /* definition and creation of lvgl_tick */
-   osThreadDef(lvgl_tick, LGVLTick, osPriorityNormal, 0, 1024);
+   osThreadDef(lvgl_tick, LVGLTick, osPriorityNormal, 0, 1024);
    lvgl_tickHandle = osThreadCreate(osThread(lvgl_tick), NULL);
 
    //LVGL update timer
@@ -424,7 +424,7 @@ variables:
    osThreadId lvgl_timerHandle;
 
    /*定义并创建lvgl_tick*/
-   osThreadDef(lvgl_tick, LGVLTick, osPriorityNormal, 0, 1024);
+   osThreadDef(lvgl_tick, LVGLTick, osPriorityNormal, 0, 1024);
    lvgl_tickHandle = osThreadCreate(osThread(lvgl_tick), NULL);
 
    //LVGL更新定时器

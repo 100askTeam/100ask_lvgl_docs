@@ -121,6 +121,10 @@ To create an ILI9341-based display use the function
 
 For additional details and a working example see the `generic MIPI driver documentation <https://github.com/lvgl/lvgl/doc/integration/drivers/display/gen_mipi.rst>`__.
 
+.. note::
+
+	You can find a step-by-step guide and the actual implementation of the callbacks on an STM32F746 using STM32CubeIDE and the ST HAL libraries here: :ref:`lcd_stm32_guide`
+
 .. raw:: html
 
    </details>
@@ -162,4 +166,7 @@ For additional details and a working example see the `generic MIPI driver docume
 
 有关更多详细信息和工作示例，请参阅`通用MIPI驱动程序文档 `<https://github.com/lvgl/lvgl/doc/integration/drivers/display/gen_mipi.rst>`__.
 
+.. 注释::
+
+您可以在以下位置找到使用STM32CubIDE和ST HAL库的STM32F746上回调的分步指南和实际实现这里：:ref:`lcd_stm32_guide`
 
