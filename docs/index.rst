@@ -31,3 +31,4 @@
     CODING_STYLE
     CHANGELOG
     ROADMAP
+    extra/index
