@@ -16,6 +16,7 @@ Arm-2D是一个托管在Github上的开源项目，更多信息请参考：https
 *******
 
 总的来说：
+
 - 你可以在 ``lv_conf.h`` 中将宏 :c:macro:`LV_USE_DRAW_ARM2D_SYNC` 设置为 ``1``、将宏 :c::macro:`LV_DRAW_SW_ASM` 设置为 ``LV_DRAW_SW_ASM_HELIUM`` 来为LVGL开启Arm-2D同步加速模式。
 - 你可以在 ``lv_conf.h`` 中将宏 :c:macro:`LV_USE_DRAW_ARM2D_ASYNC` 设置为 ``1`` 为LVGL开启Arm-2D的异步加速模式。
 
