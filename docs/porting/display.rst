@@ -310,6 +310,17 @@ reconfiguring the hardware. In lack of hardware display rotation support
 :cpp:expr:`lv_draw_sw_rotate` can be used to rotate the buffer in the
 ``flush_cb``.
 
+:cpp:expr:`lv_display_rotate_area(display, &area)` rotates the rendered area
+according to the current rotation settings of the display.
+
+Note that in :cpp:enumerator:`LV_DISPLAY_RENDER_MODE_DIRECT` the small changed areas
+are rendered directly in the frame buffer so they cannot be
+rotated later. Therefore in direct mode only the whole frame buffer can be rotated.
+The same is true for :cpp:enumerator:`LV_DISPLAY_RENDER_MODE_FULL`.
+
+In the case of :cpp:enumerator:`LV_DISPLAY_RENDER_MODE_PARTIAL`the small rendered areas
+can be rotated on their own before flushing to the frame buffer.
+
 .. raw:: html
 
    </details>
@@ -320,6 +331,11 @@ LVGL 支持以 90 度为增量旋转显示器。您可以选择是要软件轮�
 
 可以使用 ``lv_display_set_rotation(disp, LV_DISPLAY_ROTATION_0/90/180/270)`` 更改显示器的方向。 LVGL 将在内部交换水平和垂直分辨率 根据设定的度数。更改旋转时，:cpp:expr:`LV_EVENT_SIZE_CHANGED` 被发送到显示器以允许重新配置硬件。在缺少硬件显示旋转支持的情况下，可以使用 :cpp:expr:`lv_draw_sw_rotate` 来旋转 ``flush_cb`` 中的缓冲区。
 
+:cpp:expr:`lv_display_rotate_area(display, &area)` 旋转渲染区域根据显示器当前的旋转设置。
+
+请注意 :cpp:enumerator:`LV_DISPLAY_RENDER_MODE_DIRECT` 中的小变化区域直接在帧缓冲区中渲染，因此无法后来轮换了。 因此，在直接模式下，只能旋转整个帧缓冲区。对于 :cpp:enumerator:`LV_DISPLAY_RENDER_MODE_FULL` 也是如此。
+
+在 :cpp:enumerator:`LV_DISPLAY_RENDER_MODE_PARTIAL` 的情况下，小的渲染区域在刷新到帧缓冲区之前可以自行旋转。
 
 Color format（颜色格式）
 -----------------------
