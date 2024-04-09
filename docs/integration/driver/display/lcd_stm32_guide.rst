@@ -455,7 +455,7 @@ Step-by-step instructions（分步说明）
 				/* DCX high (data) */
 				HAL_GPIO_WritePin(LCD_DCX_GPIO_Port, LCD_DCX_Pin, GPIO_PIN_SET);
 				/* for color data use DMA transfer */
-				/* Set the SPI in 16-bit mode to match endianess */
+				/* Set the SPI in 16-bit mode to match endianness */
 				hspi1.Init.DataSize = SPI_DATASIZE_16BIT;
 				HAL_SPI_Init(&hspi1);
 				lcd_bus_busy = 1;

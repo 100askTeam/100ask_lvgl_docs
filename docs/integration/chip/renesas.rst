@@ -7,9 +7,8 @@ Renesas（瑞萨）
    <details>
      <summary>显示原文</summary>
 
-[Renesas](https://renesas.com/) is an official partner of LVGL.
-Therefore, LVGL contains built-in support for [Dave2D](https://lpccs-docs.renesas.com/DA1470x/UM-B-157_DA1470x-GPU-API-Manual/files/doc/overview-txt.html) (the GPU of Renesas)
-and LVGL also hosts ready-to-use Renesas projects.
+`Renesas <https://renesas.com/>`__ is an official partner of LVGL.
+Therefore, LVGL contains built-in support for `Dave2D <https://lpccs-docs.renesas.com/DA1470x/UM-B-157_DA1470x-GPU-API-Manual/files/doc/overview-txt.html>`__ (the GPU of Renesas)
 
 .. raw:: html
 
@@ -17,7 +16,7 @@ and LVGL also hosts ready-to-use Renesas projects.
    <br>
 
 
-[Renesas]( https://renesas.com/ ) 是 LVGL 的官方合作伙伴。因此，LVGL 包含对 [Dave2D]( https://lpccs-docs.renesas.com/DA1470x/UM-B-157_DA1470x-GPU-API-Manual/files/doc/overview-txt.html )的内置支持( Renesas 的 GPU）和 LVGL 还托管即用型 Renesas 项目。
+`Renesas <https://renesas.com/>`__ 是 LVGL 的官方合作伙伴。因此，LVGL 包含对 `Dave2D <https://lpccs-docs.renesas.com/DA1470x/UM-B-157_DA1470x-GPU-API-Manual/files/doc/overview-txt.html>`__ 的内置支持( Renesas 的 GPU）和 LVGL 还托管即用型 Renesas 项目。
 
 
 Dave2D（Dave2D）
@@ -63,7 +62,7 @@ Certified boards（认证板）
    <details>
      <summary>显示原文</summary>
 
-LVGL has [certified](https://lvgl.io/certificate) one Renesas board so far (more will come soon).
+LVGL has `certified <https://lvgl.io/certificate>`__ one Renesas board so far (more will come soon).
 
 .. raw:: html
 
@@ -71,7 +70,7 @@ LVGL has [certified](https://lvgl.io/certificate) one Renesas board so far (more
    <br>
 
 
-到目前为止，LVGL 已[认证]( https://lvgl.io/certificate ) 一块瑞萨电子主板（很快就会有更多主板）。
+到目前为止，LVGL 已 `认证 <https://lvgl.io/certificate>`__ 一块瑞萨电子主板（很快就会有更多主板）。
 
 
 .. raw:: html
@@ -86,7 +85,7 @@ Get started with the Renesas ecosystem（开始使用瑞萨电子生态系统）
    <details>
      <summary>显示原文</summary>
 
-The official IDE of Renesas is called [e² studio](https://www.renesas.com/us/en/software-tool/e-studio?gad_source=1&gclid=CjwKCAjw5ImwBhBtEiwAFHDZx2V3lumaenbyJnc5Ctrclr_lEQM3G22iZgB-4F92OVLCI7xmzp1YQRoCcRgQAvD_BwE). As it's Eclipse-based, it runs on Windows, Linux, and Mac as well.
+The official IDE of Renesas is called `e² studio <https://www.renesas.com/us/en/software-tool/e-studio?gad_source=1&gclid=CjwKCAjw5ImwBhBtEiwAFHDZx2V3lumaenbyJnc5Ctrclr_lEQM3G22iZgB-4F92OVLCI7xmzp1YQRoCcRgQAvD_BwE>`__. As it's Eclipse-based, it runs on Windows, Linux, and Mac as well.
 
 To get started, just download and install e² studio.
 
@@ -96,7 +95,7 @@ To get started, just download and install e² studio.
    <br>
 
 
-Renesas 的官方 IDE 名为 [e² studio](https://www.renesas.com/us/en/software-tool/e-studio?gad_source=1&gclid=CjwKCAjw5ImwBhBtEiwAFHDZx2V3lumaenbyJnc5Ctrclr_lEQM3G22iZgB-4F92OVLCI7xmzp1YQRoCcRgQAvD _BwE)。由于它基于 Eclipse，因此也可以在 Windows、Linux 和 Mac 上运行。
+Renesas 的官方 IDE 名为 `e² studio <https://www.renesas.com/us/en/software-tool/e-studio?gad_source=1&gclid=CjwKCAjw5ImwBhBtEiwAFHDZx2V3lumaenbyJnc5Ctrclr_lEQM3G22iZgB-4F92OVLCI7xmzp1YQRoCcRgQAvD_BwE>`__ 。由于它基于 Eclipse，因此也可以在 Windows、Linux 和 Mac 上运行。
 
 首先，只需下载并安装 e²studio。
 
@@ -119,7 +118,7 @@ LVGL provides a ready-to-use project for the [EK-RA8D1](https://www.renesas.com/
 
 To get a ready-to-use project, clone the [lv_renesas](https://github.com/lvgl/lv_renesas.git) repository:
 
-..code:: shell
+.. code:: shell
   git clone https://github.com/lvgl/lv_renesas.git --recurse-submodules
 
 After that, *Import* ``lv_ek_ra8d1`` into e² studio, build the project, and flash it.
@@ -184,12 +183,13 @@ Configuration（配置）
    <details>
      <summary>显示原文</summary>
 
-lv_conf.h contains the most important settings for LVGL. Namely:
+- ``lv_conf.h`` contains the most important settings for LVGL. Namely:
 
-LV_COLOR_DEPTH to set LVGL's default color depth
-LV_MEM_SIZE to set the maximum RAM available for LVGL
-LV_USE_DAVE2D to enable the GPU
-configuration.xml contains the settings for the board and the MCU. By opening this file, all the hardware and software components can be customized in a visual way.
+- ``LV_COLOR_DEPTH`` to set LVGL's default color depth
+- ``LV_MEM_SIZE to`` set the maximum RAM available for LVGL
+- ``LV_USE_DAVE2D`` to enable the GPU
+
+``configuration.xml`` contains the settings for the board and the MCU. By opening this file, all the hardware and software components can be customized in a visual way.
 
 
 .. raw:: html
@@ -198,9 +198,12 @@ configuration.xml contains the settings for the board and the MCU. By opening th
    <br>
 
 
-v_conf.h 包含 LVGL 最重要的设置。即：
+- ``lv_conf.h`` 包含 LVGL 最重要的设置。即：
 
-LV_COLOR_DEPTH 用于设置 LVGL 的默认颜色深度 LV_MEM_SIZE 用于设置 LVGL 可用的最大 RAM LV_USE_DAVE2D 用于启用 GPU 配置.xml 包含板和 MCU 的设置。通过打开该文件，可以以可视化方式自定义所有硬件和软件组件。
+- ``LV_COLOR_DEPTH`` 用于设置 LVGL 的默认颜色深度 
+- ``LV_MEM_SIZE to`` 用于设置 LVGL 可用的最大 RAM 
+- ``LV_USE_DAVE2D`` 用于启用 GPU 配置.
+- ``configuration.xml`` 包含板和 MCU 的设置。通过打开该文件，可以以可视化方式自定义所有硬件和软件组件。
 
 
 Support（支持）
