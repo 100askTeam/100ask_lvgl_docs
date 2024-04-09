@@ -14,7 +14,7 @@ extern "C" {
  * CURRENT VERSION OF LVGL
  ***************************/
 #define LVGL_VERSION_MAJOR 9
-#define LVGL_VERSION_MINOR 1
+#define LVGL_VERSION_MINOR 0
 #define LVGL_VERSION_PATCH 1
 #define LVGL_VERSION_INFO  "dev"
 
@@ -109,7 +109,6 @@ extern "C" {
 #include "src/layouts/lv_layout.h"
 
 #include "src/draw/lv_draw.h"
-#include "src/draw/lv_draw_buf.h"
 #include "src/draw/lv_draw_vector.h"
 
 #include "src/themes/lv_theme.h"
