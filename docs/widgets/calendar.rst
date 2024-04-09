@@ -330,6 +330,37 @@ contains 2 drop-drown lists: one for the year and another for the month.
 :cpp:expr:`lv_calendar_header_dropdown_create(calendar)` 创建一个标头，该标头包含 2 个下拉列表：一个用于年份，另一个用于月份。
 
 
+Chinese calendar（中国日历）
+----------------------------
+
+.. raw:: html
+
+   <details>
+     <summary>显示原文</summary>
+
+The Chinese calendar is a traditional cultural tool that integrates elements 
+such as the lunar calendar, solar terms, and traditional festivals. It is 
+widely used in Chinese social life, helping people understand the dates of 
+the lunar calendar, arrange festival activities, and inherit the excellent 
+traditional culture of the Chinese nation. Whether in families, businesses, 
+or education, the Chinese calendar plays an irreplaceable role, enabling 
+people to better understand and appreciate the charm of Chinese traditional 
+culture.
+
+If you want to use the Chinese calendar, please 
+use :cpp:expr:`lv_calendar_set_chinese_mode(calendar, true)` to enable it.
+
+.. raw:: html
+
+   </details> 
+   <br>
+
+
+中国历法是一种融合元素的传统文化工具 如农历、节气和传统节日。是的 广泛应用于中国社会生活，帮助人们了解日期 农历，安排节日活动，传承优秀 中华民族传统文化。无论是在家庭、企业、 或教育，中国历法起着不可替代的作用，使 人们更好地理解和欣赏中国传统的魅力 文化。
+
+如果您想使用中国日历，请使用 :cpp:expr:`lv_calendar_set_chinese_mode(calendar, true)` 启用它。
+
+
 .. _lv_calendar_example:
 
 Example
