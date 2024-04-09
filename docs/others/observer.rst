@@ -588,19 +588,16 @@ Set an object state if an integer subject's value is not equal to a reference va
     observer = lv_obj_bind_state_if_not_eq(obj, &subject, LV_STATE_*, ref_value);
 
 
-Button（按键）
--------------
-
 .. raw:: html
 
    <details>
      <summary>显示原文</summary>
 
-Set an integer subject to 1 when a button is checked and set it 0 when unchecked.
+Set an integer subject to 1 when an object is checked and set it 0 when unchecked.
 
 .. code:: c
 
-    observer = lv_button_bind_checked(obj, &subject);
+    observer = lv_obj_bind_checked(obj, &subject);
 
 .. raw:: html
 
@@ -608,12 +605,11 @@ Set an integer subject to 1 when a button is checked and set it 0 when unchecked
    <br>
 
 
-当按钮选中时，将整数主体设置为1，并在取消选中时将其设置为0。
+当对象选中时，将整数主体设置为1，并在取消选中时将其设置为0。
 
 .. code:: c
 
-    observer = lv_button_bind_checked(obj, &subject);
-
+    observer = lv_obj_bind_checked(obj, &subject);
 
 Label（标签）
 -------------
