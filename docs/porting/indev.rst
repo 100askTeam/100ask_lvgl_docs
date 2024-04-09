@@ -88,8 +88,6 @@ category.
      }
    }
 
-To set a mouse cursor use :cpp:expr:`lv_indev_set_cursor(indev, &img_cursor)`.
-
 .. raw:: html
 
    </details>
@@ -114,7 +112,82 @@ To set a mouse cursor use :cpp:expr:`lv_indev_set_cursor(indev, &img_cursor)`.
      }
    }
 
+Mouse cursor（鼠标光标）
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. raw:: html
+
+   <details>
+     <summary>显示原文</summary>
+
+To set a mouse cursor use :cpp:expr:`lv_indev_set_cursor(indev, &img_cursor)`.
+
+.. raw:: html
+
+   </details>
+   <br>
+
+
 要设置鼠标光标，请使用 :cpp:expr:`lv_indev_set_cursor(indev, &img_cursor)`。
+
+Crown behavior（皇冠行为）
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. raw:: html
+
+   <details>
+     <summary>显示原文</summary>
+
+The "Crown" is a rotary device typically found on smart watches.
+
+When the user clicks somewhere and after that turns the rotary
+the last clicked widget will be either scrolled or it's value will be incremented/decremented
+(e.g. in case of a slider).
+
+As this behavior is tightly related to the last clicked widget, the crown support is
+an extension of the pointer input device.  Just set ``data->diff`` to the number of
+turned steps and LVGL will automatically send :cpp:enum:`LV_EVENT_ROTARY` or scroll the widget based on the
+``editable`` flag in the widget's class. Non-editable widgets are scrolled and for editable widgets the event is sent.
+
+To get the steps in an event callback use :cpp:func:`int32_t diff = lv_event_get_rotary_diff(e)`
+
+The rotary sensitivity can be adjusted on 2 levels:
+
+1. In the input device by the `indev->rotary_sensitvity` element (1/256 unit)
+2. By the `rotary_sensitivity` style property in the widget (1/256 unit)
+
+The final diff is calculated like this:
+
+``diff_final = diff_in * (indev_sensitivity / 256) +  (widget_sensitivity / 256); ``
+For example, if both the indev and widget sensitivity is set to 128 (0.5), the input diff. will be
+multiplied by 0.25 (divided by 4). The value of the widget will be incremented by this value or
+the widget will be scrolled this amount of pixels.
+
+.. raw:: html
+
+   </details>
+   <br>
+
+
+“表冠”是智能手表上常见的旋转装置。
+
+当用户单击某处并转动旋转器后，最后单击的小部件将滚动或者其值将递增/递减（例如，在滑块的情况下）。
+
+由于此行为与最后单击的小部件紧密相关，因此表冠支撑是指针输入设备的扩展。只需设置 ``data->diff`` 转动的步数，LVGL 将 :cpp:enum:`LV_EVENT_ROTARY` 根据 ``editable`` 小部件类中的标志自动发送或滚动小部件。不可编辑的小部件会滚动，而对于可编辑的小部件，则会发送事件。
+
+要获取事件回调中的步骤，请使用 :cpp:func:`int32_t diff = lv_event_get_rotary_diff(e)`
+
+旋转灵敏度可以在 2 个级别上进行调整：
+
+1. 在输入设备中由 `indev->rotary_sensitvity` 元素（1/256 单位）组成
+
+2. 通过小部件中的 `rotary_sensitivity` 样式属性（1/256单位）
+
+最终的差异计算如下：
+
+``diff_final = diff_in * (indev_sensitivity / 256) +  (widget_sensitivity / 256); ``
+
+例如，如果 indev 和 widget 灵敏度均设置为 128 (0.5)，则输入 diff。将乘以 0.25（除以 4）。小部件的值将按此值递增，或者小部件将滚动此像素量。
 
 
 Keypad or keyboard（小键盘或键盘）
