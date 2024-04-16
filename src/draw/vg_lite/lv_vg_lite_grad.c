@@ -12,12 +12,11 @@
 #if LV_USE_DRAW_VG_LITE
 
 #include "lv_draw_vg_lite_type.h"
+#include "lv_vg_lite_pending.h"
 
 /*********************
  *      DEFINES
  *********************/
-
-#define LV_VG_LITE_GRAD_CACHE_SIZE 16
 
 /**********************
  *      TYPEDEFS
@@ -38,6 +37,7 @@ static vg_lite_linear_gradient_t * lv_vg_lite_linear_grad_get(struct _lv_draw_vg
 static bool grad_create_cb(grad_item_t * item, void * user_data);
 static void grad_free_cb(grad_item_t * item, void * user_data);
 static lv_cache_compare_res_t grad_compare_cb(const grad_item_t * lhs, const grad_item_t * rhs);
+static void grad_cache_release_cb(void * entry, void * user_data);
 
 /**********************
  *  STATIC VARIABLES
@@ -64,31 +64,55 @@ void lv_vg_lite_grad_init(struct _lv_draw_vg_lite_unit_t * u)
     u->grad_cache = lv_cache_create(&lv_cache_class_lru_rb_count, sizeof(grad_item_t), LV_VG_LITE_GRAD_CACHE_SIZE, ops);
     LV_ASSERT_NULL(u->grad_cache);
 
-    lv_array_init(&u->grad_pending, 4, sizeof(lv_cache_entry_t *));
+    u->grad_pending = lv_vg_lite_pending_create(sizeof(lv_cache_entry_t *), 4);
+    lv_vg_lite_pending_set_free_cb(u->grad_pending, grad_cache_release_cb, u->grad_cache);
 }
 
 void lv_vg_lite_grad_deinit(struct _lv_draw_vg_lite_unit_t * u)
 {
     LV_ASSERT_NULL(u);
-    lv_vg_lite_linear_grad_release_all(u);
-    lv_array_deinit(&u->grad_pending);
+    lv_vg_lite_pending_destroy(u->grad_pending);
     lv_cache_destroy(u->grad_cache, NULL);
+}
+
+void lv_vg_lite_grad_area_to_matrix(vg_lite_matrix_t * grad_matrix, const lv_area_t * area, lv_grad_dir_t dir)
+{
+    LV_ASSERT_NULL(grad_matrix);
+    LV_ASSERT_NULL(area);
+
+    vg_lite_identity(grad_matrix);
+    vg_lite_translate(area->x1, area->y1, grad_matrix);
+
+    switch(dir) {
+        case LV_GRAD_DIR_VER:
+            vg_lite_scale(1, lv_area_get_height(area) / 256.0f, grad_matrix);
+            vg_lite_rotate(90, grad_matrix);
+            break;
+
+        case LV_GRAD_DIR_HOR:
+            vg_lite_scale(lv_area_get_width(area) / 256.0f, 1, grad_matrix);
+            break;
+
+        default:
+            break;
+    }
 }
 
 void lv_vg_lite_draw_linear_grad(
     struct _lv_draw_vg_lite_unit_t * u,
     vg_lite_buffer_t * buffer,
     vg_lite_path_t * path,
-    const lv_area_t * area,
     const lv_grad_dsc_t * grad,
+    const vg_lite_matrix_t * grad_matrix,
     const vg_lite_matrix_t * matrix,
     vg_lite_fill_t fill,
     vg_lite_blend_t blend)
 {
+    LV_ASSERT_NULL(u);
     LV_ASSERT_NULL(buffer);
     LV_ASSERT_NULL(path);
-    LV_ASSERT_NULL(area);
     LV_ASSERT_NULL(grad);
+    LV_ASSERT_NULL(grad_matrix);
     LV_ASSERT_NULL(matrix);
 
     LV_PROFILER_BEGIN;
@@ -101,26 +125,15 @@ void lv_vg_lite_draw_linear_grad(
         return;
     }
 
-    vg_lite_matrix_t * grad_matrix = vg_lite_get_grad_matrix(gradient);
-    vg_lite_identity(grad_matrix);
-    vg_lite_translate(area->x1, area->y1, grad_matrix);
-
-    if(grad->dir == LV_GRAD_DIR_VER) {
-        vg_lite_scale(1, lv_area_get_height(area) / 256.0f, grad_matrix);
-        vg_lite_rotate(90, grad_matrix);
-    }
-    else if(grad->dir == LV_GRAD_DIR_HOR) {
-        vg_lite_scale(lv_area_get_width(area) / 256.0f, 1, grad_matrix);
-    }
-    else {
-        LV_LOG_ERROR("Unknown gradient direction: %d", (int)grad->dir);
-        LV_PROFILER_END;
-        return;
-    }
+    vg_lite_matrix_t * grad_mat_p = vg_lite_get_grad_matrix(gradient);
+    LV_ASSERT_NULL(grad_mat_p);
+    *grad_mat_p = *grad_matrix;
 
     LV_VG_LITE_ASSERT_DEST_BUFFER(buffer);
     LV_VG_LITE_ASSERT_SRC_BUFFER(&gradient->image);
     LV_VG_LITE_ASSERT_PATH(path);
+    LV_VG_LITE_ASSERT_MATRIX(grad_mat_p);
+    LV_VG_LITE_ASSERT_MATRIX(matrix);
 
     LV_PROFILER_BEGIN_TAG("vg_lite_draw_grad");
     LV_VG_LITE_CHECK_ERROR(vg_lite_draw_grad(
@@ -133,24 +146,6 @@ void lv_vg_lite_draw_linear_grad(
     LV_PROFILER_END_TAG("vg_lite_draw_grad");
 
     LV_PROFILER_END;
-}
-
-void lv_vg_lite_linear_grad_release_all(struct _lv_draw_vg_lite_unit_t * u)
-{
-    LV_ASSERT_NULL(u);
-    lv_array_t * arr = &u->grad_pending;
-    uint32_t size = lv_array_size(arr);
-    if(size == 0) {
-        return;
-    }
-
-    /* release all pending cache entries */
-    lv_cache_entry_t ** entry_p = lv_array_front(arr);
-    for(uint32_t i = 0; i < size; i++) {
-        lv_cache_release(u->grad_cache, *entry_p, NULL);
-        entry_p++;
-    }
-    lv_array_clear(arr);
 }
 
 /**********************
@@ -169,6 +164,13 @@ static vg_lite_linear_gradient_t * lv_vg_lite_linear_grad_get(struct _lv_draw_vg
 
     lv_cache_entry_t * cache_node_entry = lv_cache_acquire(u->grad_cache, &search_key, NULL);
     if(cache_node_entry == NULL) {
+        /* check if the cache is full */
+        size_t free_size = lv_cache_get_free_size(u->grad_cache, NULL);
+        if(free_size == 0) {
+            LV_LOG_INFO("grad cache is full, release all pending cache entries");
+            lv_vg_lite_finish(u);
+        }
+
         cache_node_entry = lv_cache_acquire_or_create(u->grad_cache, &search_key, NULL);
         if(cache_node_entry == NULL) {
             LV_LOG_ERROR("grad cache creating failed");
@@ -177,7 +179,7 @@ static vg_lite_linear_gradient_t * lv_vg_lite_linear_grad_get(struct _lv_draw_vg
     }
 
     /* Add the new entry to the pending list */
-    lv_array_push_back(&u->grad_pending, &cache_node_entry);
+    lv_vg_lite_pending_add(u->grad_pending, &cache_node_entry);
 
     grad_item_t * item = lv_cache_entry_get_data(cache_node_entry);
     return &item->vg_grad;
@@ -241,6 +243,13 @@ static lv_cache_compare_res_t grad_compare_cb(const grad_item_t * lhs, const gra
     }
 
     return 0;
+}
+
+static void grad_cache_release_cb(void * entry, void * user_data)
+{
+    lv_cache_entry_t ** entry_p = entry;
+    lv_cache_t * cache = user_data;
+    lv_cache_release(cache, *entry_p, NULL);
 }
 
 #endif /*LV_USE_DRAW_VG_LITE*/

@@ -214,6 +214,7 @@ static lv_obj_t * box_shadow_obj_create(lv_obj_t * parent, int32_t col, int32_t 
     lv_obj_t * obj = lv_obj_create(parent);
     lv_obj_remove_style_all(obj);
     lv_obj_set_style_bg_opa(obj, LV_OPA_20, 0);
+    lv_obj_set_style_bg_color(obj, lv_color_black(), 0);
     lv_obj_set_style_shadow_color(obj, lv_color_hex3(0xf00), 0);
     lv_obj_set_style_opa(obj, opa_saved, 0);
     lv_obj_set_size(obj, DEF_WIDTH - 20, DEF_HEIGHT - 5);
@@ -452,6 +453,7 @@ static lv_obj_t * arc_obj_create(lv_obj_t * parent, int32_t col, int32_t row, in
     lv_obj_t * obj = lv_arc_create(parent);
     lv_obj_remove_style_all(obj);
     lv_obj_set_style_arc_width(obj, w, 0);
+    lv_obj_set_style_arc_color(obj, lv_color_white(), 0);
     lv_obj_set_style_opa(obj, opa_saved, 0);
     lv_arc_set_bg_angles(obj, start, end);
     lv_obj_set_size(obj, DEF_HEIGHT, DEF_HEIGHT);
@@ -767,7 +769,7 @@ static void blend_mode_cb(lv_obj_t * parent)
     const char * cf_txt[] = {"RGB565", "RGB888.", "XRGB8888", "ARGB8888"};
     lv_color_format_t cf_values[] = {LV_COLOR_FORMAT_RGB565, LV_COLOR_FORMAT_RGB888, LV_COLOR_FORMAT_XRGB8888, LV_COLOR_FORMAT_ARGB8888};
     uint8_t * cf_bufs[] = {buf_rgb565, buf_rgb888, buf_xrgb8888, buf_argb8888};
-    static lv_image_dsc_t image_dscs[4];
+    static lv_draw_buf_t image_dscs[4];
 
     const char * mode_txt[] = {"Add.", "Sub.", "Mul."};
     lv_blend_mode_t mode_values[] = {LV_BLEND_MODE_ADDITIVE, LV_BLEND_MODE_SUBTRACTIVE, LV_BLEND_MODE_MULTIPLY};
@@ -787,7 +789,7 @@ static void blend_mode_cb(lv_obj_t * parent)
 
         lv_canvas_set_buffer(canvas, cf_bufs[cf], 36, 30, cf_values[cf]);
         create_blend_mode_image_buffer(canvas);
-        lv_img_dsc_t * img_src = lv_canvas_get_image(canvas);
+        lv_draw_buf_t * img_src = lv_canvas_get_draw_buf(canvas);
         image_dscs[cf] = *img_src;
 
         for(m = 0; m < 3; m++) {

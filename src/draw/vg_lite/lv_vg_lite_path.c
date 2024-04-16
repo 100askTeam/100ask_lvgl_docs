@@ -103,6 +103,9 @@ void lv_vg_lite_path_destroy(lv_vg_lite_path_t * path)
     if(path->base.path != NULL) {
         lv_free(path->base.path);
         path->base.path = NULL;
+
+        /* clear remaining path data */
+        LV_VG_LITE_CHECK_ERROR(vg_lite_clear_path(&path->base));
     }
     lv_free(path);
     LV_PROFILER_END;
@@ -133,6 +136,7 @@ void lv_vg_lite_path_reset(lv_vg_lite_path_t * path, vg_lite_format_t data_forma
     path->base.path_length = 0;
     path->base.format = data_format;
     path->base.quality = VG_LITE_MEDIUM;
+    path->base.path_type = VG_LITE_DRAW_ZERO;
     path->format_len = lv_vg_lite_path_format_len(data_format);
 }
 
@@ -433,7 +437,7 @@ void lv_vg_lite_path_append_arc(lv_vg_lite_path_t * path,
     sweep = MATH_RADIANS(sweep);
 
     int n_curves = (int)ceil(MATH_FABSF(sweep / MATH_HALF_PI));
-    int sweep_sign = (sweep < 0 ? -1 : 1);
+    float sweep_sign = sweep < 0 ? -1.f : 1.f;
     float fract = fmodf(sweep, MATH_HALF_PI);
     fract = (math_zero(fract)) ? MATH_HALF_PI * sweep_sign : fract;
 
@@ -444,9 +448,6 @@ void lv_vg_lite_path_append_arc(lv_vg_lite_path_t * path,
     if(pie) {
         lv_vg_lite_path_move_to(path, cx, cy);
         lv_vg_lite_path_line_to(path, start_x + cx, start_y + cy);
-    }
-    else {
-        lv_vg_lite_path_move_to(path, start_x + cx, start_y + cy);
     }
 
     for(int i = 0; i < n_curves; ++i) {

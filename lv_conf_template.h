@@ -1,6 +1,6 @@
 /**
  * @file lv_conf.h
- * Configuration file for v9.1.1-dev
+ * Configuration file for v9.1.0
  */
 
 /*
@@ -44,12 +44,6 @@
 #define LV_USE_STDLIB_STRING    LV_STDLIB_BUILTIN
 #define LV_USE_STDLIB_SPRINTF   LV_STDLIB_BUILTIN
 
-#define LV_STDINT_INCLUDE       <stdint.h>
-#define LV_STDDEF_INCLUDE       <stddef.h>
-#define LV_STDBOOL_INCLUDE      <stdbool.h>
-#define LV_INTTYPES_INCLUDE     <inttypes.h>
-#define LV_LIMITS_INCLUDE       <limits.h>
-#define LV_STDARG_INCLUDE       <stdarg.h>
 
 #if LV_USE_STDLIB_MALLOC == LV_STDLIB_BUILTIN
     /*Size of the memory available for `lv_malloc()` in bytes (>= 2kB)*/
@@ -112,11 +106,6 @@
 
 /*The target buffer size for simple layer chunks.*/
 #define LV_DRAW_LAYER_SIMPLE_BUF_SIZE    (24 * 1024)   /*[bytes]*/
-
-/* The stack size of the drawing thread.
- * NOTE: If FreeType or ThorVG is enabled, it is recommended to set it to 32KB or more.
- */
-#define LV_DRAW_THREAD_STACK_SIZE    (8 * 1024)   /*[bytes]*/
 
 #define LV_USE_DRAW_SW 1
 #if LV_USE_DRAW_SW == 1
@@ -203,15 +192,10 @@
  * but does not guarantee the same rendering quality as the software. */
 #define LV_VG_LITE_USE_BOX_SHADOW 0
 
-/* VG-Lite linear gradient image maximum cache number.
+/* VG-Lite gradient image maximum cache number.
  * NOTE: The memory usage of a single gradient image is 4K bytes.
  */
-#define LV_VG_LITE_LINEAR_GRAD_CACHE_CNT 32
-
-/* VG-Lite radial gradient image maximum cache size.
- * NOTE: The memory usage of a single gradient image is radial grad radius * 4 bytes.
- */
-#define LV_VG_LITE_RADIAL_GRAD_CACHE_CNT 32
+#define LV_VG_LITE_GRAD_CACHE_SIZE 32
 
 #endif
 
@@ -428,7 +412,6 @@
 /*Demonstrate special features*/
 #define LV_FONT_MONTSERRAT_28_COMPRESSED 0  /*bpp = 3*/
 #define LV_FONT_DEJAVU_16_PERSIAN_HEBREW 0  /*Hebrew, Arabic, Persian letters and all their forms*/
-#define LV_FONT_SIMSUN_14_CJK            0  /*1000 most common CJK radicals*/
 #define LV_FONT_SIMSUN_16_CJK            0  /*1000 most common CJK radicals*/
 
 /*Pixel perfect monospace fonts*/
@@ -527,7 +510,6 @@
     #define LV_CALENDAR_DEFAULT_MONTH_NAMES {"January", "February", "March",  "April", "May",  "June", "July", "August", "September", "October", "November", "December"}
     #define LV_USE_CALENDAR_HEADER_ARROW 1
     #define LV_USE_CALENDAR_HEADER_DROPDOWN 1
-    #define LV_USE_CALENDAR_CHINESE 0
 #endif  /*LV_USE_CALENDAR*/
 
 #define LV_USE_CANVAS     1
@@ -673,12 +655,6 @@
 #define LV_USE_FS_LITTLEFS 0
 #if LV_USE_FS_LITTLEFS
     #define LV_FS_LITTLEFS_LETTER '\0'     /*Set an upper cased letter on which the drive will accessible (e.g. 'A')*/
-#endif
-
-/*API for Arduino LittleFs. */
-#define LV_USE_FS_ARDUINO_ESP_LITTLEFS 0
-#if LV_USE_FS_ARDUINO_ESP_LITTLEFS
-    #define LV_FS_ARDUINO_ESP_LITTLEFS_LETTER '\0'     /*Set an upper cased letter on which the drive will accessible (e.g. 'A')*/
 #endif
 
 /*LODEPNG decoder library*/

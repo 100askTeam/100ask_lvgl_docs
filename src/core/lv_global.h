@@ -91,7 +91,6 @@ typedef struct _lv_global_t {
 
     uint32_t memory_zero;
     uint32_t math_rand_seed;
-    lv_area_transform_cache_t area_trans_cache;
 
     lv_event_t * event_header;
     uint32_t event_last_register_id;
@@ -158,6 +157,10 @@ typedef struct _lv_global_t {
 
 #if LV_USE_FS_WIN32 != '\0'
     lv_fs_drv_t win32_fs_drv;
+#endif
+
+#if LV_USE_FS_LITTLEFS
+    lv_fs_drv_t littlefs_fs_drv;
 #endif
 
 #if LV_USE_FREETYPE

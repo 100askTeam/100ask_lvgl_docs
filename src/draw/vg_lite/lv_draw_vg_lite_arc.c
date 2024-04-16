@@ -14,6 +14,7 @@
 #include "lv_draw_vg_lite_type.h"
 #include "lv_vg_lite_math.h"
 #include "lv_vg_lite_path.h"
+#include "lv_vg_lite_pending.h"
 #include "lv_vg_lite_utils.h"
 #include <math.h>
 
@@ -114,6 +115,8 @@ void lv_draw_vg_lite_arc(lv_draw_unit_t * draw_unit, const lv_draw_arc_dsc_t * d
         float end_x = radius_in * MATH_COSF(end_angle_rad) + cx;
         float end_y = radius_in * MATH_SINF(end_angle_rad) + cy;
 
+        lv_vg_lite_path_move_to(path, start_x, start_y);
+
         /* radius_out arc */
         lv_vg_lite_path_append_arc(path,
                                    cx, cy,
@@ -134,7 +137,6 @@ void lv_draw_vg_lite_arc(lv_draw_unit_t * draw_unit, const lv_draw_arc_dsc_t * d
                                    false);
 
         /* close arc */
-        lv_vg_lite_path_line_to(path, start_x, start_y);
         lv_vg_lite_path_close(path);
 
         /* draw round */
@@ -161,6 +163,7 @@ void lv_draw_vg_lite_arc(lv_draw_unit_t * draw_unit, const lv_draw_arc_dsc_t * d
 
     LV_VG_LITE_ASSERT_DEST_BUFFER(&u->target_buffer);
     LV_VG_LITE_ASSERT_PATH(vg_lite_path);
+    LV_VG_LITE_ASSERT_MATRIX(&matrix);
 
     LV_PROFILER_BEGIN_TAG("vg_lite_draw");
     LV_VG_LITE_CHECK_ERROR(vg_lite_draw(
@@ -183,6 +186,8 @@ void lv_draw_vg_lite_arc(lv_draw_unit_t * draw_unit, const lv_draw_arc_dsc_t * d
             /* move image to center */
             vg_lite_translate(cx - radius_out, cy - radius_out, &matrix);
 
+            LV_VG_LITE_ASSERT_MATRIX(&path_matrix);
+
             LV_PROFILER_BEGIN_TAG("vg_lite_draw_pattern");
             LV_VG_LITE_CHECK_ERROR(vg_lite_draw_pattern(
                                        &u->target_buffer,
@@ -197,7 +202,7 @@ void lv_draw_vg_lite_arc(lv_draw_unit_t * draw_unit, const lv_draw_arc_dsc_t * d
                                        color,
                                        VG_LITE_FILTER_BI_LINEAR));
             LV_PROFILER_END_TAG("vg_lite_draw_pattern");
-            lv_vg_lite_push_image_decoder_dsc(u, &decoder_dsc);
+            lv_vg_lite_pending_add(u->image_dsc_pending, &decoder_dsc);
         }
     }
 
