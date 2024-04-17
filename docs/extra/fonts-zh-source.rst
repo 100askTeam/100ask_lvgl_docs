@@ -31,8 +31,8 @@
 |                                       | /00_100ask_tools/fonts-zh-sou |
 |                                       | rce/SiYuanHeiTi-CN-VF.zip>`__ |
 +---------------------------------------+-------------------------------+
-| |SiYuanHeiTi-ExtraLight|              | `                             |
-|                                       | SiYuanHeiTi-ExtraLight  <http:|
+| |SiYuanHeiTi-ExtraLight|              |                               |
+|                                       | `SiYuanHeiTi-ExtraLight <http:|
 |                                       | //photos.100ask.net/lvgl/00_1 |
 |                                       | 00ask_tools/fonts-zh-source/S |
 |                                       | iYuanHeiTi-ExtraLight.zip>`__ |
@@ -125,8 +125,8 @@
 |                                       | 00_100ask_tools/fonts-zh-sour |
 |                                       | ce/SiYuanRouHei-Heavy.zip>`__ |
 +---------------------------------------+-------------------------------+
-| |SiYuanRouHei-IOS8|                   | `SiYuanRouHei-IOS8 <          |
-|                                       | http://photos.100ask.net/lvgl |
+| |SiYuanRouHei-IOS8|                   | `SiYuanRouHei-IOS8            |
+|                                       | <http://photos.100ask.net/lvgl|
 |                                       | /00_100ask_tools/fonts-zh-sou |
 |                                       | rce/SiYuanRouHei-IOS8.zip>`__ |
 +---------------------------------------+-------------------------------+
