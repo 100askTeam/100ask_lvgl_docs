@@ -575,7 +575,7 @@ open/close the PNG files. It should look like this:
      /*Check whether the type `src` is known by the decoder*/
      if(is_png(dsc->src) == false) return LV_RESULT_INVALID;
 
-     /*Decode and store the image. If `dsc->decoded` is `NULL`, the `read_line` function will be called to get the image data line-by-line*/
+     /*Decode and store the image. If `dsc->decoded` is `NULL`, the `decoder_get_area` function will be called to get the image data line-by-line*/
      dsc->decoded = my_png_decoder(dsc->src);
 
      /*Change the color format if decoded image format is different than original format. For PNG it's usually decoded to ARGB8888 format*/
@@ -591,13 +591,52 @@ open/close the PNG files. It should look like this:
     * Decode an area of image
     * @param decoder      pointer to the decoder where this function belongs
     * @param dsc          image decoder descriptor
-    * @param full_area    full image area information
-    * @param decoded_area area information to decode (x1, y1, x2, y2)
-    * @return             LV_RESULT_OK: no error; LV_RESULT_INVALID: can't decode image area
+    * @param full_area    input parameter. the full area to decode after enough subsequent calls
+    * @param decoded_area input+output parameter. set the values to `LV_COORD_MIN` for the first call and to reset decoding.
+    *                     the decoded area is stored here after each call.
+    * @return             LV_RESULT_OK: ok; LV_RESULT_INVALID: failed or there is nothing left to decode
     */
    static lv_result_t decoder_get_area(lv_image_decoder_t * decoder, lv_image_decoder_dsc_t * dsc,
                                     const lv_area_t * full_area, lv_area_t * decoded_area)
    {
+    /**
+     * If `dsc->decoded` is always set in `decoder_open` then `decoder_get_area` does not need to be implemented.
+     * If `dsc->decoded` is only sometimes set or never set in `decoder_open` then `decoder_get_area` is used to
+     * incrementally decode the image by calling it repeatedly until it returns `LV_RESULT_INVALID`.
+     * In the example below the image is decoded line-by-line but the decoded area can have any shape and size
+     * depending on the requirements and capabilities of the image decoder.
+     */
+     my_decoder_data_t * my_decoder_data = dsc->user_data;
+     /* if `decoded_area` has a field set to `LV_COORD_MIN` then reset decoding */
+     if(decoded_area->y1 == LV_COORD_MIN) {
+       decoded_area->x1 = full_area->x1;
+       decoded_area->x2 = full_area->x2;
+       decoded_area->y1 = full_area->y1;
+       decoded_area->y2 = decoded_area->y1; /* decode line-by-line, starting with the first line */
+       /* create a draw buf the size of one line */
+       bool reshape_success = NULL != lv_draw_buf_reshape(my_decoder_data->partial,
+                                                          dsc->decoded.header.cf,
+                                                          lv_area_get_width(full_area),
+                                                          1,
+                                                          LV_STRIDE_AUTO);
+       if(!reshape_success) {
+         lv_draw_buf_destroy(my_decoder_data->partial);
+         my_decoder_data->partial = lv_draw_buf_create(lv_area_get_width(full_area),
+                                                       1,
+                                                       dsc->decoded.header.cf,
+                                                       LV_STRIDE_AUTO);
+         my_png_decode_line_reset(full_area);
+       }
+     }
+     /* otherwise decoding is already in progress. decode the next line */
+     else {
+       /* all lines have already been decoded. indicate completion by returning `LV_RESULT_INVALID` */
+       if (decoded_area->y1 >= full_area->y2) return LV_RESULT_INVALID;
+       decoded_area->y1++;
+       decoded_area->y2++;
+     }
+     my_png_decode_line(my_decoder_data->partial);
+     return LV_RESULT_OK;
    }
 
    /**
@@ -609,8 +648,11 @@ open/close the PNG files. It should look like this:
    static void decoder_close(lv_image_decoder_t * decoder, lv_image_decoder_dsc_t * dsc)
    {
      /*Free all allocated data*/
-
-     /*Call the built-in close function if the built-in open/read_line was used*/
+     my_png_cleanup();
+     my_decoder_data_t * my_decoder_data = dsc->user_data;
+     lv_draw_buf_destroy(my_decoder_data->partial);
+     
+     /*Call the built-in close function if the built-in open/get_area was used*/
      lv_bin_decoder_close(decoder, dsc);
 
    }
@@ -697,13 +739,52 @@ So in summary:
   * 解码图像的一个区域
   * @param decoder      指向解码器的指针
   * @param dsc          图像解码器描述符
-  * @param full_area    图像的完整区域信息
-  * @param decoded_area 要解码的区域信息（x1，y1，x2，y2）
-  * @return             LV_RESULT_OK: 没有错误; LV_RESULT_INVALID: 无法解码区域
+  * @param full_area    在足够的后续调用后要解码的完整区域
+  * @param decoded_area 输入+输出参数。将第一次调用的值设置为“LV_COORD_MIN”并重置解码。
+  *                     每次调用后解码区域都存储在这里。
+  * @return             LV_RESULT_OK: 没有错误; LV_RESULT_INVALID: 失败或没有任何内容可供解码
   */
   static lv_result_t decoder_get_area(lv_image_decoder_t * decoder, lv_image_decoder_dsc_t * dsc,
                                   const lv_area_t * full_area, lv_area_t * decoded_area)
   {
+    /**
+     * If `dsc->decoded` is always set in `decoder_open` then `decoder_get_area` does not need to be implemented.
+     * If `dsc->decoded` is only sometimes set or never set in `decoder_open` then `decoder_get_area` is used to
+     * incrementally decode the image by calling it repeatedly until it returns `LV_RESULT_INVALID`.
+     * In the example below the image is decoded line-by-line but the decoded area can have any shape and size
+     * depending on the requirements and capabilities of the image decoder.
+     */
+     my_decoder_data_t * my_decoder_data = dsc->user_data;
+     /* if `decoded_area` has a field set to `LV_COORD_MIN` then reset decoding */
+     if(decoded_area->y1 == LV_COORD_MIN) {
+       decoded_area->x1 = full_area->x1;
+       decoded_area->x2 = full_area->x2;
+       decoded_area->y1 = full_area->y1;
+       decoded_area->y2 = decoded_area->y1; /* decode line-by-line, starting with the first line */
+       /* create a draw buf the size of one line */
+       bool reshape_success = NULL != lv_draw_buf_reshape(my_decoder_data->partial,
+                                                          dsc->decoded.header.cf,
+                                                          lv_area_get_width(full_area),
+                                                          1,
+                                                          LV_STRIDE_AUTO);
+       if(!reshape_success) {
+         lv_draw_buf_destroy(my_decoder_data->partial);
+         my_decoder_data->partial = lv_draw_buf_create(lv_area_get_width(full_area),
+                                                       1,
+                                                       dsc->decoded.header.cf,
+                                                       LV_STRIDE_AUTO);
+         my_png_decode_line_reset(full_area);
+       }
+     }
+     /* otherwise decoding is already in progress. decode the next line */
+     else {
+       /* all lines have already been decoded. indicate completion by returning `LV_RESULT_INVALID` */
+       if (decoded_area->y1 >= full_area->y2) return LV_RESULT_INVALID;
+       decoded_area->y1++;
+       decoded_area->y2++;
+     }
+     my_png_decode_line(my_decoder_data->partial);
+     return LV_RESULT_OK;
   }
 
   /**
@@ -715,8 +796,11 @@ So in summary:
   static void decoder_close(lv_image_decoder_t * decoder, lv_image_decoder_dsc_t * dsc)
   {
     /* 释放所有分配的数据 */
+     my_png_cleanup();
+     my_decoder_data_t * my_decoder_data = dsc->user_data;
+     lv_draw_buf_destroy(my_decoder_data->partial);
 
-    /* 如果使用了内置的打开/读取函数，则调用内置的关闭函数 */
+    /* 如果使用了内置的打开/获取区域，则调用内置的关闭函数 */
     lv_bin_decoder_close(decoder, dsc);
 
   }
