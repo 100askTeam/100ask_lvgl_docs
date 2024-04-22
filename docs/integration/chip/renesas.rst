@@ -8,7 +8,7 @@ Renesas（瑞萨）
      <summary>显示原文</summary>
 
 `Renesas <https://renesas.com/>`__ is an official partner of LVGL.
-Therefore, LVGL contains built-in support for `Dave2D <https://lpccs-docs.renesas.com/DA1470x/UM-B-157_DA1470x-GPU-API-Manual/files/doc/overview-txt.html>`__ (the GPU of Renesas)
+Therefore, LVGL contains built-in support for `Dave2D <https://www.renesas.com/document/mas/tes-dave2d-driver-documentation>`__ (the GPU of Renesas)
 
 .. raw:: html
 
@@ -16,7 +16,7 @@ Therefore, LVGL contains built-in support for `Dave2D <https://lpccs-docs.renesa
    <br>
 
 
-`Renesas <https://renesas.com/>`__ 是 LVGL 的官方合作伙伴。因此，LVGL 包含对 `Dave2D <https://lpccs-docs.renesas.com/DA1470x/UM-B-157_DA1470x-GPU-API-Manual/files/doc/overview-txt.html>`__ 的内置支持( Renesas 的 GPU）和 LVGL 还托管即用型 Renesas 项目。
+`Renesas <https://renesas.com/>`__ 是 LVGL 的官方合作伙伴。因此，LVGL 包含对 `Dave2D <https://www.renesas.com/document/mas/tes-dave2d-driver-documentation>`__ 的内置支持( Renesas 的 GPU)和 LVGL 还托管即用型 Renesas 项目。
 
 
 Dave2D（Dave2D）
@@ -116,7 +116,7 @@ LVGL provides a ready-to-use project for the [EK-RA8D1](https://www.renesas.com/
 - 4.5 Inch backlit TFT display, 16.7M display colors
 - 480x854 pixels resolution
 
-To get a ready-to-use project, clone the [lv_renesas](https://github.com/lvgl/lv_renesas.git) repository:
+To get a ready-to-use project, clone the `lv_renesas <https://github.com/lvgl/lv_renesas.git>`__ repository:
 
 .. code:: shell
   git clone https://github.com/lvgl/lv_renesas.git --recurse-submodules
@@ -139,7 +139,7 @@ LVGL 为 [EK-RA8D1] 提供了一个即用型项目( https://www.renesas.com/us/e
 - 4.5 英寸背光 TFT 显示屏，1670 万种显示颜色
 - 480x854 像素分辨率
 
-要获得现成的项目，请克隆 [lv_renesas]( https://github.com/lvgl/lv_renesas.git ) 存储库：
+要获得现成的项目，请克隆 `lv_renesas <https://github.com/lvgl/lv_renesas.git>`__ 存储库：
 
 ..code:: shell
   git clone https://github.com/lvgl/lv_renesas.git --recurse-submodules
