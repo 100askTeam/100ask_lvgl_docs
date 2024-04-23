@@ -17,14 +17,14 @@ coordinates was inspired by CSS. LVGL has by no means a complete
 implementation of CSS but a comparable subset is implemented (sometimes
 with minor adjustments).
 
-In short this means: - Explicitly set coordinates are stored in styles
-(size, position, layouts, etc.)
+In short this means: 
 
+- Explicitly set coordinates are stored in styles(size, position, layouts, etc.)
 - support min-width, max-width, min-height, max-height
 - have pixel, percentage, and "content" units
 - x=0; y=0 coordinate means the top-left corner of the parent plus the left/top padding plus border width
-- width/height means the full size, the "content area" is smaller with padding and border width - a subset
-  of flexbox and grid layouts are supported
+- width/height means the full size, the "content area" is smaller with padding and border width 
+- a subset of flexbox and grid layouts are supported
 
 .. raw:: html
 
@@ -32,16 +32,16 @@ In short this means: - Explicitly set coordinates are stored in styles
    <br>
 
 
-LVGL的许多其他部分一样，坐标设置的概念受到CSS的启发。LVGL并不完全实现了CSS，但实现了一个类似的子集（有时进行了微小调整）。
+LVGL的坐标设置的概念受到CSS的启发，LVGL并不完全实现了CSS，但实现了一个类似的子集（有的地方进行了微小调整）。
 
 简而言之，这意味着：
 
-- 明确定义的坐标被存储在样式中（大小、位置、布局等）
-
+- 显式设置的坐标存储在样式中（大小、位置、布局等）
 - 支持最小宽度、最大宽度、最小高度、最大高度
-- 有像素、百分比和“内容”单位
-- x=0；y=0 坐标意味着父元素的左上角加上左/上内边距和边框宽度
-- 宽/高表示完整的尺寸，"内容区域"在内边距和边框宽度的情况下较小 - 支持flexbox和grid布局的一个子集
+- 有像素、百分比和“内容（content）”单位
+- x=0；y=0坐标表示父对象的 左上角 + 左或上内边距 + 边框的宽度
+- 宽/高（width/height）表示完整的尺寸，“内容区域”较小，带有填充和边框宽度
+- 支持flexbox和grid布局的部分功能（子集）
 
 
 .. _coord_unites:
@@ -69,14 +69,12 @@ Units（单位）
    <br>
 
 
-- 像素：表示在屏幕上的位置。整数始终代表像素单位。
-   例如 :cpp:expr:`lv_obj_set_x(btn, 10)` （设置按钮的横坐标为10个像素）
-
-- 百分比：对象大小相对于其父级（属性有关）的百分比。 :cpp:expr:`lv_pct(value)` 将一个值转换为百分比。例如 :cpp:expr:`lv_obj_set_width(btn, lv_pct(50))` （将按钮的宽度设置为父级宽度的50%）
-
-- :c:macro:`LV_SIZE_CONTENT`：特殊值，将对象的宽度/高度设置为包含所有子元素。类似于CSS中的 ``auto``。
-
-例如 :cpp:expr:`lv_obj_set_width(btn, LV_SIZE_CONTENT)`（将按钮的宽度设置为自适应内容宽度）
+- 像素（pixel）：简单地说就是一个以像素为单位的位置。整数总是指像素。
+   例如 :cpp:expr:`lv_obj_set_x(btn, 10)` （设置按钮的横（x）坐标为10个像素）
+- 百分比（percentage）：对象或其父对象大小的百分比。 :cpp:expr:`lv_pct(value)` 将一个值转换为百分比。
+   例如 :cpp:expr:`lv_obj_set_width(btn, lv_pct(50))` （将按钮的宽度设置为父级宽度的50%）
+- :c:macro:`LV_SIZE_CONTENT`：设置对象宽度/高度的特殊值，将会根据子对象所需的大小自动调整自身大小。类似于CSS中的 ``auto``。
+   例如 :cpp:expr:`lv_obj_set_width(btn, LV_SIZE_CONTENT)`（将按钮的宽度设置为自适应内容宽度）
 
 
 .. _coord_boxing_model:
@@ -104,7 +102,7 @@ model. An object's "box" is built from the following parts:
    <br>
 
 
-LVGL遵循CSS的 `border-box <https://developer.mozilla.org/en-US/docs/Web/CSS/box-sizing>`__ 模型。一个对象的“框”由以下部分组成：
+LVGL遵循CSS的 `border-box <https://developer.mozilla.org/en-US/docs/Web/CSS/box-sizing>`__ 模型。一个对象的“盒子”由以下部分构成：
 
 - 边界框：元素的宽度/高度。
 - 边框宽度：边框的宽度。
@@ -132,9 +130,9 @@ The outline is drawn outside the bounding box.
    <br>
 
 
-边界线被画在边界框内部。在边界线内部，LVGL在放置对象的子元素时保留了“填充边距”。
+边界绘制在边界框内。在边界内部，LVGL在放置对象的子对象时保持“填充边距”。
 
-轮廓线被画在边界框外部。
+轮廓绘制在边界框之外。
 
 
 .. _coord_notes:
@@ -147,8 +145,7 @@ Important notes（重要笔记）
    <details>
      <summary>显示原文</summary>
 
-This section describes special cases in which LVGL's behavior might be
-unexpected.
+This section describes special cases in which LVGL's behavior might be unexpected.
 
 .. raw:: html
 
@@ -156,7 +153,7 @@ unexpected.
    <br>
 
 
-这一节描述了LVGL行为可能出乎意料的特殊情况。
+本节描述LVGL的行为可能会出现出乎意料的特殊情况。
 
 
 .. _coord_postponed_coordinate_calculation:
@@ -188,7 +185,7 @@ the screen of ``obj``.
    <br>
 
 
-LVGL不会立即重新计算所有坐标变化，这样做是为了提高性能。相反，对象会被标记为"dirty"，在重新绘制屏幕之前，LVGL会检查是否有任何"dirty"对象。如果有，则会刷新它们的位置、大小和布局。
+LVGL不会立即重新计算所有坐标变化，这样做是为了提高性能。相反，对象会被标记为"脏（dirty）"，在重新绘制屏幕之前，LVGL会检查是否有任何"dirty"对象。如果有，则会刷新它们的位置、大小和布局。
 
 换句话说，如果您需要获取对象的坐标，并且坐标刚刚发生了变化，LVGL需要强制重新计算坐标。要做到这一点，请调用 :cpp:func:`lv_obj_update_layout`。
 
@@ -246,12 +243,11 @@ For example:
    <br>
 
 
-根据 :ref:`coord_using_styles` 部分的描述，
-坐标也可以通过样式属性进行设置。更准确地说，
-实际上每个与样式坐标相关的属性都被以样式属性的方式存储在内部。
-如果你使用 :cpp:expr:`lv_obj_set_x(obj, 20)`，LVGL会将 ``x=20`` 保存在对象的本地样式中。
+根据 :ref:`coord_using_styles` 章节的内容，
+坐标也可以通过样式属性进行设置。更准确地说，实际上每个与样式坐标相关的属性都会以样式属性的方式存储在内部（RAM）。
+如果你使用 :cpp:expr:`lv_obj_set_x(obj, 20)`，LVGL会将 ``x=20`` 保存在对象的本地样式中（RAM）。
 
-这是一个内部机制，在你使用LVGL时并不太重要。
+这是一个内部机制，在你使用LVGL时并不太需要重点关注。
 然而，有一个情况下你需要注意实现方式。
 如果通过以下方式移除对象的样式：
 
@@ -265,7 +261,7 @@ For example:
 
    lv_obj_remove_style(obj, NULL, LV_PART_MAIN);
 
-之前设置的坐标也将被移除。
+那么会导致之前设置的坐标也将被移除。
 
 例如：
 
@@ -319,7 +315,7 @@ Percentage values are calculated from the parent's content area size.
    <br>
 
 
-将对象的x和y坐标设置为十分简单：
+如果想最简单地设置对象的x和y坐标，可以这样操作：
 
 .. code:: c
 
@@ -327,9 +323,9 @@ Percentage values are calculated from the parent's content area size.
    lv_obj_set_y(obj, 20);
    lv_obj_set_pos(obj, 10, 20);    //或者使用一个函数
 
-默认情况下，x和y坐标是从父元素的内容区域的左上角测量的。例如，如果父元素的每一边都有五个像素的填充，那么上面的代码会把 ``obj`` 放置在(15, 25)，因为内容区域在填充之后开始。
+默认情况下，x和y坐标是从父元素的内容区域的左上角开始计算的。例如，如果父元素的每一边都有五个像素的填充（padding），那么上面的代码会把 ``obj`` 放置在(15, 25)，因为内容区域在填充之后开始计算。
 
-百分比值是通过父元素的内容区域大小来计算的。
+百分比值是通过父元素的内容（content）区域的大小来计算的。
 
 .. code:: c
 
@@ -424,7 +420,7 @@ coordinates change.
    <br>
 
 
-在某些情况下，改变定位的原点从默认的左上角会更加方便。如果改变了原点，比如改成底部-右侧，那么(0,0)位置的意思是：与底部-右侧对齐。要改变原点，使用如下代码：
+在某些情况下，可以方便地从对象默认的左上角更改其定位原点。如果改变了原点，比如改成底部-右侧，那么(0,0)位置的意思是：与底部-右侧对齐。要改变原点，使用如下代码：
 
 .. code:: c
 
@@ -436,7 +432,7 @@ coordinates change.
 
    lv_obj_align(obj, align, x, y);
 
-以下对齐选项可用：
+有以下对齐选项可用：
 
 - :cpp:enumerator:`LV_ALIGN_TOP_LEFT`
 - :cpp:enumerator:`LV_ALIGN_TOP_MID`
@@ -457,7 +453,7 @@ coordinates change.
    //有相同的效果
    lv_obj_align(obj, LV_ALIGN_CENTER, 0, 0);
 
-如果父对象的大小改变，则子对象的设置对齐和位置会自动更新。
+如果父对象的大小改变，则子对象的设置对齐和位置会根据父对象的变化自动调整更新。
 
 上述介绍的功能使对象对齐到其父对象。然而，也可以将对象对齐到任意参考对象。
 
@@ -551,7 +547,7 @@ the following functions:
    <br>
 
 
-一个对象的宽度和高度也可以很容易地设置：
+一个对象的宽度和高度也可以很容易地进行设置：
 
 .. code:: c
 
@@ -565,18 +561,18 @@ the following functions:
 
    lv_obj_set_height(obj, lv_pct(100));
 
-大小设置支持特殊值：:c:macro:`LV_SIZE_CONTENT`。这意味着对象在相应方向上的大小将被设置为其子对象的大小。请注意，只有右侧和底部的子对象会被考虑，而顶部和左侧的子对象会被裁剪。这种限制使行为更可预测。
+大小设置支持特殊值：:c:macro:`LV_SIZE_CONTENT`。这意味着对象在相应方向上的大小将被设置为其子对象恰好所需的大小。请注意，只有右侧和底部的子对象才会被考虑，而顶部和左侧的子对象仍会被裁剪。这种限制使行为更可预测
 
 具有 :cpp:enumerator:`LV_OBJ_FLAG_HIDDEN` 或 :cpp:enumerator:`LV_OBJ_FLAG_FLOATING` 的对象将被 :c:macro:`LV_SIZE_CONTENT` 计算忽略。
 
-上述函数设置对象的包围框大小，但内容区域的大小也可以设置。这意味着通过添加填充，对象的包围框将被扩大。
+上述函数设置对象边界框的大小，但内容区域的大小也可以设置。这也就是说，对象的边界框会根据填充的大小进行调整。
 
 .. code:: c
 
    lv_obj_set_content_width(obj, 50); //实际宽度：左填充 + 50 + 右填充
    lv_obj_set_content_height(obj, 30); //实际高度：顶部填充 + 30 + 底部填充
 
-可以使用以下函数获取包围框和内容区域的大小：
+可以使用以下函数获取边界框和内容区域的大小：
 
 .. code:: c
 
@@ -636,15 +632,15 @@ complex features can be used via styles.
    <br>
 
 
-在底层，位置、大小和对齐属性是样式属性。上述描述的“简单函数”隐藏了与样式相关的代码以简化操作，并在对象的本地样式中设置位置、大小和对齐属性。
+在底层实现中，位置、大小和对齐属性是样式属性。上述描述的“简单函数”隐藏了与样式相关的代码来简化操作，实质上已经在对象的本地样式中设置位置、大小和对齐等属性。
 
 然而，使用样式来设置坐标具有一些重要的优点：
 
-- 它使得同时设置多个对象的宽度/高度等变得容易。比如，使所有滑块的尺寸为100x10像素。
-- 它也使得在一个地方修改数值成为可能。
+- 使得同时设置多个对象的宽度/高度等变得简单。比如，使所有滑块的尺寸为 100x10 像素。
+- 还可以在一个位置修改值。
 - 这些数值可以部分地被其他样式覆盖。例如， ``style_btn`` 默认将对象的宽度设置为 ``100x50``，但添加 ``style_full_width`` 仅覆盖对象的宽度。
 - 对象的位置或大小可以根据状态而有所不同。例如，在 :cpp:enumerator:`LV_STATE_DEFAULT` 状态下宽度为100像素，在 :cpp:enumerator:`LV_STATE_PRESSED` 状态下为120像素。
-- 样式过渡可以用于使坐标变化平滑。
+- 可以使用样式转换使坐标变化更加平滑。
 
 以下是使用样式设置对象大小的一些示例代码：
 
@@ -657,11 +653,11 @@ complex features can be used via styles.
    lv_obj_t * btn = lv_button_create(lv_screen_active());
    lv_obj_add_style(btn, &style, LV_PART_MAIN);
 
-正如您在下面看到的，还有一些其他很棒的尺寸和位置设置功能。然而，为了保持LVGL API的精简，只有最常见的坐标设置功能有一个“简单”版本，更复杂的功能可以通过样式来实现。
+正如您在下面看到的，还有一些其他很棒的尺寸和位置设置功能。然而，为了保持 LVGL API 的精简，只有最常见的坐标设置功能有一个“简单”版本，更复杂的功能可以通过样式来实现。
 
 .. _coord_translation:
 
-Translation（风格样式转换）
+Translation（位置转换）
 **************************
 
 .. raw:: html
@@ -739,7 +735,7 @@ change.
 
 现在假设有3个相邻的按钮。它们的位置如上所述。现在你想要在按下按钮时将按钮上移一点。
 
-实现这一目标的一种方法是为按下状态设置一个新的Y坐标：
+实现这一目标的一种方法是为其按下状态设置一个新的Y坐标：
 
 .. code:: c
 
@@ -785,14 +781,14 @@ change.
 
 在翻译中也可以使用百分比值。百分比是相对于对象的大小（而不是相对于父对象的大小）。例如 :cpp:expr:`lv_pct(50)` 将使物体移动一半的宽度/高度。
 
-在布局计算之后应用翻译。因此，即使对象的位置总是被布局计算，也可以进行翻译。
+在布局计算之后应用平移。因此，即使对象的位置总是被布局计算，也可以进行平移。
 
-翻译实际上移动了对象。这意味着它会使滚动条和 :c:macro:`LV_SIZE_CONTENT` 大小的对象对位置变化做出反应。
+平移实际上移动了对象。这意味着它会使滚动条和 :c:macro:`LV_SIZE_CONTENT` 大小的对象对位置变化做出反应。
 
 
 .. _coord_transformation:
 
-Transformation（转换）
+Transformation（大小转换）
 **********************
 
 .. raw:: html
@@ -829,7 +825,7 @@ This code enlarges a button when it's pressed:
 
 对象的大小可以相对于当前大小进行改变。变换后的宽度和高度会分别加在对象的两侧。这意味着，一个变换后的宽度为10px会使对象的宽度增加20个像素。
 
-与位置翻译不同，大小转换并不会使对象“实际”变大。换句话说，滚动条、布局和 :c:macro:`LV_SIZE_CONTENT` 不会对变换后的大小做出反应。因此，大小转换 “只是” 一种视觉效果。
+与位置转换不同，大小转换并不会使对象“实际”变大。换句话说，滚动条、布局和 :c:macro:`LV_SIZE_CONTENT` 不会对变换后的大小做出反应。因此，大小转换 “只是” 一种视觉效果。
 
 下面的代码会在按钮被按下时放大：
 
@@ -946,7 +942,7 @@ the given layout.
 
 每个布局都有一个相同的函数：
 :cpp:func:`lv_obj_set_layout` ``(obj, <布局名称>)`` 用于在对象上设置布局。
-关于父级和子级的其他设置，请参阅给定布局的文档。
+关于父级和子级的其他设置，请参阅指定布局的文档。
 
 
 Built-in layout（内置布局）
@@ -1006,7 +1002,7 @@ These flags can be added/removed with :cpp:expr:`lv_obj_add_flag(obj, FLAG)` and
 有一些标志可以用于对象，以影响它们与布局的行为：
 
 - :cpp:enumerator:`LV_OBJ_FLAG_HIDDEN` 隐藏的对象在布局计算中被忽略。
-- :cpp:enumerator:`LV_OBJ_FLAG_IGNORE_LAYOUT` 该对象被布局简单地忽略。它的坐标可以像往常一样设置。
+- :cpp:enumerator:`LV_OBJ_FLAG_IGNORE_LAYOUT` 该对象被布局简单地忽略。它的坐标可以像常规那样设置。
 - :cpp:enumerator:`LV_OBJ_FLAG_FLOATING` 与 :cpp:enumerator:`LV_OBJ_FLAG_IGNORE_LAYOUT` 相同，但具有 :cpp:enumerator:`LV_OBJ_FLAG_FLOATING` 标志的对象将在 :c:macro:`LV_SIZE_CONTENT` 计算中被忽略。
 
 这些标志可以使用 :cpp:expr:`lv_obj_add_flag(obj, FLAG)` 和 :cpp:expr:`lv_obj_remove_flag(obj, FLAG)` 添加/移除。
