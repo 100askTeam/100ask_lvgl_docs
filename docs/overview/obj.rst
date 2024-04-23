@@ -27,11 +27,11 @@ object.
    <br>
 
 
-在LVGL中，用户界面的 **基本构建块** 是对象，也称为 *Widgets*。例如，一个 :ref:`按钮 <lv_button>`、:ref:`标签 <lv_label>`、:ref:`图像 <lv_image>`、:ref:`列表 <lv_list>`、:ref:`图表 <lv_chart>` 或者 :ref:`文本区域 <lv_textarea>`。
+在LVGL中，用户界面的 **基本组成部分** 是对象（控件），也称为 *Widgets*。例如，一个 :ref:`按钮 <lv_button>`、:ref:`标签 <lv_label>`、:ref:`图像 <lv_image>`、:ref:`列表 <lv_list>`、:ref:`图表 <lv_chart>` 或者 :ref:`文本区域 <lv_textarea>`。
 
 您可以在这里查看所有的 :ref:`对象类型 <widgets>`。
 
-所有的对象都使用 :cpp:type:`lv_obj_t` 指针作为句柄进行引用。稍后可以使用该指针来设置或获取对象的属性。
+所有的对象都使用 :cpp:type:`lv_obj_t` 指针作为句柄进行引用。之后可以使用该指针来设置或获取对象的属性。
 
 
 .. _objects_attributes:
@@ -73,7 +73,7 @@ To see all the available functions visit the :ref:`Base object's documentation <
    <br>
 
 
-所有对象类型都共享一些基本属性：
+所有的对象类型都有一些通用的基本属性：
 
 - 位置
 - 大小
@@ -82,7 +82,7 @@ To see all the available functions visit the :ref:`Base object's documentation <
 - 事件处理程序
 - 等等
 
-您可以使用 ``lv_obj_set_...`` 和 ``lv_obj_get_...`` 函数设置/获取这些属性。例如：
+您可以使用 ``lv_obj_set_...`` 和 ``lv_obj_get_...`` 函数设置或者获取这些属性。例如：
 
 .. code:: c
 
@@ -90,10 +90,10 @@ To see all the available functions visit the :ref:`Base object's documentation <
    lv_obj_set_size(btn1, 100, 50);   /*设置按钮的大小*/
    lv_obj_set_pos(btn1, 20,30);      /*设置按钮的位置*/
 
-要查看所有可用的函数，请访问：:ref:`基本对象的文档 <lv_obj>`。
+您可以在这里查看所有的函数接口：:ref:`基本对象的文档 <lv_obj>`。
 
 
-Specific attributes（特定属性）
+Specific attributes（特殊属性）
 -------------------------------
 
 .. raw:: html
@@ -138,7 +138,7 @@ header files (e.g. *widgets/lv_slider.h*)
    lv_slider_set_range(slider1, 0, 100);                   /*设置最小值和最大值*/
    lv_slider_set_value(slider1, 40, LV_ANIM_ON);       /*设置当前值（位置）*/
 
-小部件的API在它们的 :ref:`文档 <widgets>` 中有描述，但您也可以查看相应的头文件（例如， *widgets/lv_slider.h*）
+所有控件的API在它们各自的 :ref:`文档 <widgets>` 中有描述，但您也可以查看相应的头文件（例如， *widgets/lv_slider.h*）
 
 
 .. _objects_working_mechanisms:
@@ -166,8 +166,8 @@ type of the parent but there are objects which are typically a parent
    <br>
 
 
-一个父对象可以被视为其子对象的容器。每个对象都恰好有一个父对象（屏幕除外），但一个父对象可以有任意数量的子对象。
-父对象的类型没有限制，但是有一些通常是父对象（例如按钮）或子对象（例如标签）的对象。
+一个父对象可以被视为其子对象的容器。每个对象都都必须会有且仅有一个父对象（屏幕除外），但一个父对象可以有任意数量的子对象。
+父对象的类型没有限制，但是有些对象一般是父对象（例如按钮）或者是子对象（例如标签）。
 
 
 Moving together（一起移动）
@@ -208,7 +208,9 @@ the example.)
    <br>
 
 
-如果父对象的位置改变，子对象也会随之移动。因此，所有位置都是相对于父对象的。
+如果父对象的位置改变，子对象也会随之移动。因此，所有子对象的位置都是相对于父对象而言的。
+
+.. image:: /misc/par_child1.png
 
 .. code:: c
    lv_obj_t * parent = lv_obj_create(lv_screen_active());   /* 在当前屏幕上创建一个父对象 */
@@ -220,11 +222,13 @@ the example.)
 
 修改父对象的位置：
 
+.. image:: /misc/par_child2.png
+
 .. code:: c
    lv_obj_set_pos(parent, 50, 50); /* 移动父对象。子对象会随之移动。 */
 
 
-（为简单起见，示例中未显示对象颜色的调整。）
+（为简单起见，示例中未显示对象颜色调整的代码。）
 
 
 Visibility only on the parent（仅在父对象上可见）
@@ -262,8 +266,8 @@ children to be drawn out of the parent.
 
    lv_obj_set_x(obj1, -30);    /*将子对象移出父对象一点点*/
 
-可以通过以下方式覆盖此行为
-:cpp:expr:`lv_obj_add_flag(obj, LV_OBJ_FLAG_OVERFLOW_VISIBLE)`，允许子对象在父对象外绘制。
+可以通过这个方法覆盖此行为
+:cpp:expr:`lv_obj_add_flag(obj, LV_OBJ_FLAG_OVERFLOW_VISIBLE)`，这会允许子对象在父对象之外进行绘制。
 
 
 Create and delete objects（创建和删除对象）
@@ -322,21 +326,21 @@ some time. The delay is expressed in milliseconds.
    <br>
 
 
-在LVGL中，对象可以在运行时动态创建和删除。这意味着只有当前创建的（存在的）对象消耗内存。
+在LVGL中，可以在运行时动态创建或删除对象。这也就是说，知道当对象被创建之后才会消耗内存资源。
 
-这允许在点击按钮打开屏幕时创建屏幕，并在加载新屏幕时删除屏幕。
+因此，您可以在点击按钮准备打开新界面(屏幕)时再创建新界面(屏幕)，并在加载新界面(屏幕)时删除旧界面(屏幕)。
 
-UI可以根据设备的当前环境进行创建。例如，可以根据当前连接的传感器创建仪表、图表、条形图和滑块。
+UI可以根据设备的当前环境进行创建。例如，可以根据当前连接的传感器创建仪表、图表、条形图和滑块所需的UI再进行创建（比如之前需要图标，突然传感器去掉了，那么可以选择不创建该ui控件）。
 
-每个小部件都有自己的 **create** 函数，原型如下：
+每个控件都有自己的 **create** 函数，函数原型如下：
 
 .. code:: c
 
    lv_obj_t * lv_<widget>_create(lv_obj_t * parent, <如果有其他参数>);
 
-通常，创建函数只有一个 *parent* 参数，指示在哪个对象上创建新的小部件。
+通常，创建函数只有一个 *parent* 参数，指示在哪个对象上创建该控件。
 
-返回值是指向创建的对象的指针，类型为 :cpp:type:`lv_obj_t` ``*``。
+返回值是指向创建出来的控件的指针，类型为 :cpp:type:`lv_obj_t` ``*``。
 
 有一个通用的 **delete** 函数适用于所有对象类型。它删除对象及其所有子对象。
 
@@ -346,11 +350,11 @@ UI可以根据设备的当前环境进行创建。例如，可以根据当前连
 
 :cpp:func:`lv_obj_del` 会立即删除对象。如果出于任何原因无法立即删除对象，可以使用
 :cpp:expr:`lv_obj_delete_async(obj)` ，它会在下一次调用 :cpp:func:`lv_timer_handler` 时执行删除操作。
-这在子对象的 :cpp:enumerator:`LV_EVENT_DELETE` 处理程序中删除父对象时很有用。
+这在子对象的 :cpp:enumerator:`LV_EVENT_DELETE` 处理程序中删除父对象时很有用（现在不能马上删除父对象，下一次运行lv_timer_handler时再删除）。
 
 可以使用 :cpp:expr:`lv_obj_clean(obj)` 删除对象的所有子对象（但不包括对象本身）。
 
-可以使用 :cpp:expr:`lv_obj_delete_delayed(obj, 1000)` 在一定时间后删除对象。延迟以毫秒为单位表示。
+可以使用 :cpp:expr:`lv_obj_delete_delayed(obj, 1000)` 在经过一定时间后再删除对象，以毫秒为单位。
 
 
 .. _objects_screens:
@@ -388,7 +392,7 @@ Screens can be created with any object type. For example, a
 
    lv_obj_t * scr1 = lv_obj_create(NULL);
 
-屏幕可以使用任何对象类型创建。例如，可以使用 :ref:`Base object <lv_obj>` 或者图像来创建壁纸。
+屏幕可以使用任何对象类型创建。例如，可以使用 :ref:`Base object <lv_obj>` 或者图像控件来创建壁纸。
 
 
 Get the active screen（获取活动屏幕）
@@ -472,14 +476,16 @@ about layers.
 使用 :cpp:expr:`lv_screen_load(scr1)` 来加载新的屏幕。
 自动生成两个图层：
 
-- 顶层
-- 系统层
+- 顶层（top layer）
+- 系统层（system layer）
 
 它们与屏幕独立，将显示在每个屏幕上。 *顶层* 位于屏幕上每个对象之上， *系统层* 位于 *顶层* 之上。您可以自由地向 *顶层* 添加任何弹出窗口。但是， *系统层* 受到系统级别的限制（例如，鼠标光标将与 :cpp:func:`lv_indev_set_cursor` 一起放置在那里）。
 
+层级： * 活动屏幕（screen_active） < 顶层（top layer） < 系统层（system layer） *
+
 :cpp:func:`lv_layer_top` 和 :cpp:func:`lv_layer_sys` 函数返回指向顶层和系统层的指针。
 
-阅读 :ref:`Layer overview <layers>` 部分，以了解更多关于图层的信息。
+阅读 :ref:`Layer overview <layers>` 章节内容，以了解更多关于图层的信息。
 
 
 Load screen with animation（用动画加载屏幕）
@@ -513,7 +519,7 @@ during the screen animation.
    <br>
 
 
-可以使用 :cpp:expr:`lv_screen_load_anim(scr, transition_type, time, delay, auto_del)` 来加载一个带动画的新屏幕。存在以下过渡类型：
+可以使用 :cpp:expr:`lv_screen_load_anim(scr, transition_type, time, delay, auto_del)` 来加载一个带动画效果的新屏幕。可以设置以下动画过渡类型：
 
 - :cpp:enumerator:`LV_SCR_LOAD_ANIM_NONE`: 在 ``delay`` 毫秒后立即切换
 - :cpp:enumerator:`LV_SCR_LOAD_ANIM_OVER_LEFT`, :cpp:enumerator:`LV_SCR_LOAD_ANIM_OVER_RIGHT`, :cpp:enumerator:`LV_SCR_LOAD_ANIM_OVER_TOP` 和 :cpp:enumerator:`LV_SCR_LOAD_ANIM_OVER_BOTTOM`：将新屏幕沿着给定方向移动到当前屏幕上方
@@ -554,7 +560,7 @@ Visit :ref:`display_multi_display_support` to learn more.
 
 :cpp:func:`lv_screen_active` ，:cpp:func:`lv_screen_load` 和 :cpp:func:`lv_screen_load_anim` 操作默认显示器。
 
-请访问 :ref:`display_multi_display_support` 以了解更多信息。
+请阅读 :ref:`display_multi_display_support` 章节内容，以了解更多关于多个显示器的信息。
 
 
 .. _objects_parts:
@@ -593,20 +599,20 @@ widgets. They are described in more detail in the
    <br>
 
 
-部件嵌入式由多个部分组成。例如，一个 :ref:`Base object <lv_obj>` 使用主要部分和滚动条部分，而一个 :ref:`Slider <lv_slider>` 使用主要部分、指示器部分和旋钮部分。部件类似于CSS中的 *伪元素*。
+部件嵌入式由多个控件组成。例如，一个 :ref:`Base object <lv_obj>` 使用主要部分和滚动条部分，而一个 :ref:`Slider <lv_slider>` 使用主要部分、指示器部分和旋钮部分。部件类似于CSS中的 *伪元素*。
 
 LVGL中存在以下预定义的部分：
 
 - :cpp:enumerator:`LV_PART_MAIN`：类似矩形的背景
-- :cpp:enumerator:`LV_PART_SCROLLBAR`：滚动条(s)
+- :cpp:enumerator:`LV_PART_SCROLLBAR`：滚动条(一个或多个)
 - :cpp:enumerator:`LV_PART_INDICATOR`：指示器，例如滑块、条形图、开关或复选框的勾选框
-- :cpp:enumerator:`LV_PART_KNOB`：类似于把手，用于调整值
+- :cpp:enumerator:`LV_PART_KNOB`：类似于把手（旋钮），用于调整值
 - :cpp:enumerator:`LV_PART_SELECTED`：指示当前选定的选项或部分
-- :cpp:enumerator:`LV_PART_ITEMS`：如果部件有多个类似的元素（例如表格单元格）则使用
+- :cpp:enumerator:`LV_PART_ITEMS`：如果部件有多个类似的元素（例如表格单元格）则可用
 - :cpp:enumerator:`LV_PART_CURSOR`：标记特定位置，例如文本区域或图表的光标
 - :cpp:enumerator:`LV_PART_CUSTOM_FIRST`：可以从这里添加自定义部分。
 
-部件的主要目的是允许对部件的"组件"进行样式设置。在 :ref:`Style overview <styles>` 部分中对它们进行了更详细的描述。
+部件的主要目的是允许对控件的 "组件（组成部分）" 进行样式设置。在 :ref:`Style overview <styles>` 章节中有对它们进行了更详细的说明。
 
 
 .. _objects_states:
@@ -652,7 +658,7 @@ To learn more about the states read the related section of the
    <br>
 
 
-物体可以处于以下状态的组合：
+控件可以处于以下状态的组合：
 
 - :cpp:enumerator:`LV_STATE_DEFAULT`：正常释放状态
 - :cpp:enumerator:`LV_STATE_CHECKED`：切换或选中状态
@@ -668,11 +674,11 @@ To learn more about the states read the related section of the
 - :cpp:enumerator:`LV_STATE_USER_3`：自定义状态
 - :cpp:enumerator:`LV_STATE_USER_4`：自定义状态
 
-通常情况下，库会根据用户与对象的交互（按下、释放、聚焦等）自动更改状态。然而，状态也可以手动更改。
+通常情况下，LVGL库会根据用户与对象的交互（按下、释放、聚焦等）自动更改状态。然而，状态也可以用户手动进行更改。
 要设置或清除给定的状态（但保持其他状态不变），可以使用 ``lv_obj_add/remove_state(obj, LV_STATE_...)``。
 在这两种情况下，也可以使用按位或运算符来组合状态值。例如： ``lv_obj_add_state(obj, part, LV_STATE_PRESSED | LV_PRESSED_CHECKED)``。
 
-要了解更多关于状态的内容，请阅读 :ref:`Style overview <styles>` 中的相关部分。
+要了解更多关于状态的内容，请阅读 :ref:`Style overview <styles>` 章节中的相关内容。
 
 
 .. _objects_snapshot:
