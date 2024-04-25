@@ -213,6 +213,7 @@ the example.)
 .. image:: /misc/par_child1.png
 
 .. code:: c
+
    lv_obj_t * parent = lv_obj_create(lv_screen_active());   /* 在当前屏幕上创建一个父对象 */
    lv_obj_set_size(parent, 100, 80);                    /* 设置父对象的大小 */
 
@@ -225,6 +226,7 @@ the example.)
 .. image:: /misc/par_child2.png
 
 .. code:: c
+
    lv_obj_set_pos(parent, 50, 50); /* 移动父对象。子对象会随之移动。 */
 
 
