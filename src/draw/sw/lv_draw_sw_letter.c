@@ -27,9 +27,8 @@
  *  STATIC PROTOTYPES
  **********************/
 
-LV_ATTRIBUTE_FAST_MEM static void draw_letter_normal(lv_draw_ctx_t * draw_ctx, const lv_draw_label_dsc_t * dsc,
-                                                     const lv_point_t * pos, lv_font_glyph_dsc_t * g, const uint8_t * map_p);
-
+static void /* LV_ATTRIBUTE_FAST_MEM */ draw_letter_normal(lv_draw_ctx_t * draw_ctx, const lv_draw_label_dsc_t * dsc,
+                                                           const lv_point_t * pos, lv_font_glyph_dsc_t * g, const uint8_t * map_p);
 
 #if LV_DRAW_COMPLEX && LV_USE_FONT_SUBPX
 static void draw_letter_subpx(lv_draw_ctx_t * draw_ctx, const lv_draw_label_dsc_t * dsc, const lv_point_t * pos,
@@ -103,7 +102,7 @@ void lv_draw_sw_letter(lv_draw_ctx_t * draw_ctx, const lv_draw_label_dsc_t * dsc
         if(letter >= 0x20 &&
            letter != 0xf8ff && /*LV_SYMBOL_DUMMY*/
            letter != 0x200c) { /*ZERO WIDTH NON-JOINER*/
-            LV_LOG_WARN("lv_draw_letter: glyph dsc. not found for U+%" PRIX32, letter);
+            LV_LOG_WARN("lv_draw_letter: glyph dsc. not found for U+%" LV_PRIX32, letter);
 
 #if LV_USE_FONT_PLACEHOLDER
             /* draw placeholder */
@@ -162,7 +161,7 @@ void lv_draw_sw_letter(lv_draw_ctx_t * draw_ctx, const lv_draw_label_dsc_t * dsc
  *   STATIC FUNCTIONS
  **********************/
 
-LV_ATTRIBUTE_FAST_MEM static void draw_letter_normal(lv_draw_ctx_t * draw_ctx, const lv_draw_label_dsc_t * dsc,
+static void LV_ATTRIBUTE_FAST_MEM draw_letter_normal(lv_draw_ctx_t * draw_ctx, const lv_draw_label_dsc_t * dsc,
                                                      const lv_point_t * pos, lv_font_glyph_dsc_t * g, const uint8_t * map_p)
 {
 
@@ -489,8 +488,8 @@ static void draw_letter_subpx(lv_draw_ctx_t * draw_ctx, const lv_draw_label_dsc_
 #endif
 
 #if LV_FONT_SUBPX_BGR
-                res_color.ch.blue = (uint32_t)((uint32_t)txt_rgb[0] * font_rgb[0] + (bg_rgb[0] * (255 - font_rgb[0]))) >> 8;
-                res_color.ch.red = (uint32_t)((uint32_t)txt_rgb[2] * font_rgb[2] + (bg_rgb[2] * (255 - font_rgb[2]))) >> 8;
+                res_color.ch.red = (uint32_t)((uint16_t)txt_rgb[0] * font_rgb[2] + (bg_rgb[0] * (255 - font_rgb[2]))) >> 8;
+                res_color.ch.blue = (uint32_t)((uint16_t)txt_rgb[2] * font_rgb[0] + (bg_rgb[2] * (255 - font_rgb[0]))) >> 8;
 #else
                 res_color.ch.red = (uint32_t)((uint16_t)txt_rgb[0] * font_rgb[0] + (bg_rgb[0] * (255 - font_rgb[0]))) >> 8;
                 res_color.ch.blue = (uint32_t)((uint16_t)txt_rgb[2] * font_rgb[2] + (bg_rgb[2] * (255 - font_rgb[2]))) >> 8;
@@ -570,4 +569,3 @@ static void draw_letter_subpx(lv_draw_ctx_t * draw_ctx, const lv_draw_label_dsc_
     lv_mem_buf_release(color_buf);
 }
 #endif /*LV_DRAW_COMPLEX && LV_USE_FONT_SUBPX*/
-

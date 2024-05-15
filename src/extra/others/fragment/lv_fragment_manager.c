@@ -36,7 +36,6 @@ struct _lv_fragment_manager_t {
     lv_ll_t stack;
 };
 
-
 /**********************
  *  STATIC PROTOTYPES
  **********************/
@@ -187,14 +186,15 @@ void lv_fragment_manager_replace(lv_fragment_manager_t * manager, lv_fragment_t 
 bool lv_fragment_manager_send_event(lv_fragment_manager_t * manager, int code, void * userdata)
 {
     LV_ASSERT_NULL(manager);
-    lv_fragment_stack_item_t * top = _lv_ll_get_tail(&manager->stack);
-    if(!top) return false;
-    lv_fragment_managed_states_t * states = top->states;
-    lv_fragment_t * instance = states->instance;
-    if(!instance) return false;
-    if(lv_fragment_manager_send_event(instance->child_manager, code, userdata)) return true;
-    if(!states->cls->event_cb) return false;
-    return states->cls->event_cb(instance, code, userdata);
+    lv_fragment_managed_states_t * p = NULL;
+    _LV_LL_READ_BACK(&manager->attached, p) {
+        if(!p->obj_created || p->destroying_obj) continue;
+        lv_fragment_t * instance = p->instance;
+        if(!instance) continue;
+        if(lv_fragment_manager_send_event(instance->child_manager, code, userdata)) return true;
+        if(p->cls->event_cb && p->cls->event_cb(instance, code, userdata)) return true;
+    }
+    return false;
 }
 
 size_t lv_fragment_manager_get_stack_size(lv_fragment_manager_t * manager)
@@ -256,7 +256,6 @@ static void item_del_fragment(lv_fragment_managed_states_t * item)
     lv_fragment_del(instance);
     item->instance = NULL;
 }
-
 
 static lv_fragment_managed_states_t * fragment_attach(lv_fragment_manager_t * manager, lv_fragment_t * fragment,
                                                       lv_obj_t * const * container)

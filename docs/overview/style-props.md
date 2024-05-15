@@ -355,7 +355,7 @@ Set the opacity of the border. Value 0, `LV_OPA_0` or `LV_OPA_TRANSP` means full
 </ul>
 
 ### border_width
-Set hte width of the border. Only pixel values can be used.
+Set the width of the border. Only pixel values can be used.
 <ul>
 <li style='display:inline; margin-right: 20px; margin-left: 0px'><strong>Default</strong> 0</li>
 <li style='display:inline; margin-right: 20px; margin-left: 0px'><strong>Inherited</strong> No</li>
@@ -708,6 +708,15 @@ Scale down all opacity values of the object by this factor. Value 0, `LV_OPA_0` 
 <li style='display:inline; margin-right: 20px; margin-left: 0px'><strong>Ext. draw</strong> No</li>
 </ul>
 
+### opa_layered
+First draw the object on the layer, then scale down layer opacity factor. Value 0, `LV_OPA_0` or `LV_OPA_TRANSP` means fully transparent, 255, `LV_OPA_100` or `LV_OPA_COVER` means fully covering, other values or LV_OPA_10, LV_OPA_20, etc means semi transparency.
+<ul>
+<li style='display:inline; margin-right: 20px; margin-left: 0px'><strong>Default</strong> `LV_OPA_COVER`</li>
+<li style='display:inline; margin-right: 20px; margin-left: 0px'><strong>Inherited</strong> Yes</li>
+<li style='display:inline; margin-right: 20px; margin-left: 0px'><strong>Layout</strong> No</li>
+<li style='display:inline; margin-right: 20px; margin-left: 0px'><strong>Ext. draw</strong> No</li>
+</ul>
+
 ### color_filter_dsc
 Mix a color to all colors of the object.
 <ul>
@@ -772,7 +781,7 @@ Describes how to blend the colors to the background. The possible values are `LV
 </ul>
 
 ### layout
-Set the layout if the object. The children will be repositioned and resized according to the policies set for the layout. For the possible values see the documentation of the layouts.
+Set the layout of the object. The children will be repositioned and resized according to the policies set for the layout. For the possible values see the documentation of the layouts.
 <ul>
 <li style='display:inline; margin-right: 20px; margin-left: 0px'><strong>Default</strong> 0</li>
 <li style='display:inline; margin-right: 20px; margin-left: 0px'><strong>Inherited</strong> No</li>

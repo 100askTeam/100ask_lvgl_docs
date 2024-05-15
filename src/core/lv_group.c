@@ -92,6 +92,7 @@ void lv_group_del(lv_group_t * group)
         indev = lv_indev_get_next(indev);
     }
 
+    if(default_group == group) default_group = NULL;
     _lv_ll_clear(&(group->obj_ll));
     _lv_ll_remove(&LV_GC_ROOT(_lv_group_ll), group);
     lv_mem_free(group);
@@ -112,6 +113,9 @@ void lv_group_add_obj(lv_group_t * group, lv_obj_t * obj)
     if(group == NULL) return;
 
     LV_LOG_TRACE("begin");
+
+    /*Be sure the object is removed from its current group*/
+    lv_group_remove_obj(obj);
 
     /*Do not add the object twice*/
     lv_obj_t ** obj_i;
@@ -163,8 +167,9 @@ void lv_group_swap_obj(lv_obj_t * obj1, lv_obj_t * obj2)
         else if((*obj_i) == obj2)(*obj_i) = obj1;
     }
 
-    if(*g1->obj_focus == obj1) lv_group_focus_obj(obj2);
-    else if(*g1->obj_focus == obj2) lv_group_focus_obj(obj1);
+    lv_obj_t * focused = lv_group_get_focused(g1);
+    if(focused == obj1) lv_group_focus_obj(obj2);
+    else if(focused == obj2) lv_group_focus_obj(obj1);
 
 }
 

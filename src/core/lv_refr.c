@@ -53,6 +53,7 @@ typedef struct {
  **********************/
 static void lv_refr_join_area(void);
 static void refr_invalid_areas(void);
+static void refr_sync_areas(void);
 static void refr_area(const lv_area_t * area_p);
 static void refr_area_part(lv_draw_ctx_t * draw_ctx);
 static lv_obj_t * lv_refr_get_top_obj(const lv_area_t * area_p, lv_obj_t * obj);
@@ -195,7 +196,6 @@ void lv_obj_redraw(lv_draw_ctx_t * draw_ctx, lv_obj_t * obj)
     draw_ctx->clip_area = clip_area_ori;
 }
 
-
 /**
  * Invalidate an area on display to redraw it
  * @param area_p pointer to area which should be invalidated (NULL: delete the invalidated areas)
@@ -320,17 +320,23 @@ void _lv_disp_refr_timer(lv_timer_t * tmr)
     }
 
     lv_refr_join_area();
-
+    refr_sync_areas();
     refr_invalid_areas();
-
 
     /*If refresh happened ...*/
     if(disp_refr->inv_p != 0) {
-        if(disp_refr->driver->full_refresh) {
-            lv_area_t disp_area;
-            lv_area_set(&disp_area, 0, 0, lv_disp_get_hor_res(disp_refr) - 1, lv_disp_get_ver_res(disp_refr) - 1);
-            disp_refr->driver->draw_ctx->buf_area = &disp_area;
-            draw_buf_flush(disp_refr);
+
+        /*Copy invalid areas for sync next refresh in double buffered direct mode*/
+        if(disp_refr->driver->direct_mode && disp_refr->driver->draw_buf->buf2) {
+
+            uint16_t i;
+            for(i = 0; i < disp_refr->inv_p; i++) {
+                if(disp_refr->inv_area_joined[i])
+                    continue;
+
+                lv_area_t * sync_area = _lv_ll_ins_tail(&disp_refr->sync_areas);
+                *sync_area = disp_refr->inv_areas[i];
+            }
         }
 
         /*Clean up*/
@@ -460,7 +466,6 @@ uint32_t lv_refr_get_fps_avg(void)
 }
 #endif
 
-
 /**********************
  *   STATIC FUNCTIONS
  **********************/
@@ -500,6 +505,78 @@ static void lv_refr_join_area(void)
             }
         }
     }
+}
+
+/**
+ * Refresh the sync areas
+ */
+static void refr_sync_areas(void)
+{
+    /*Do not sync if not direct mode*/
+    if(!disp_refr->driver->direct_mode) return;
+
+    /*Do not sync if not double buffered*/
+    if(disp_refr->driver->draw_buf->buf2 == NULL) return;
+
+    /*Do not sync if no sync areas*/
+    if(_lv_ll_is_empty(&disp_refr->sync_areas)) return;
+
+    /*The buffers are already swapped.
+     *So the active buffer is the off screen buffer where LVGL will render*/
+    void * buf_off_screen = disp_refr->driver->draw_buf->buf_act;
+    void * buf_on_screen = disp_refr->driver->draw_buf->buf_act == disp_refr->driver->draw_buf->buf1
+                           ? disp_refr->driver->draw_buf->buf2
+                           : disp_refr->driver->draw_buf->buf1;
+
+    /*Get stride for buffer copy*/
+    lv_coord_t stride = lv_disp_get_hor_res(disp_refr);
+
+    /*Iterate through invalidated areas to see if sync area should be copied*/
+    lv_area_t res[4] = {0};
+    int8_t res_c, j;
+    uint32_t i;
+    lv_area_t * sync_area, * new_area, * next_area;
+    for(i = 0; i < disp_refr->inv_p; i++) {
+        /*Skip joined areas*/
+        if(disp_refr->inv_area_joined[i]) continue;
+
+        /*Iterate over sync areas*/
+        sync_area = _lv_ll_get_head(&disp_refr->sync_areas);
+        while(sync_area != NULL) {
+            /*Get next sync area*/
+            next_area = _lv_ll_get_next(&disp_refr->sync_areas, sync_area);
+
+            /*Remove intersect of redraw area from sync area and get remaining areas*/
+            res_c = _lv_area_diff(res, sync_area, &disp_refr->inv_areas[i]);
+
+            /*New sub areas created after removing intersect*/
+            if(res_c != -1) {
+                /*Replace old sync area with new areas*/
+                for(j = 0; j < res_c; j++) {
+                    new_area = _lv_ll_ins_prev(&disp_refr->sync_areas, sync_area);
+                    *new_area = res[j];
+                }
+                _lv_ll_remove(&disp_refr->sync_areas, sync_area);
+                lv_mem_free(sync_area);
+            }
+
+            /*Move on to next sync area*/
+            sync_area = next_area;
+        }
+    }
+
+    /*Copy sync areas (if any remaining)*/
+    for(sync_area = _lv_ll_get_head(&disp_refr->sync_areas); sync_area != NULL;
+        sync_area = _lv_ll_get_next(&disp_refr->sync_areas, sync_area)) {
+        disp_refr->driver->draw_ctx->buffer_copy(
+            disp_refr->driver->draw_ctx,
+            buf_off_screen, stride, sync_area,
+            buf_on_screen, stride, sync_area
+        );
+    }
+
+    /*Clear sync areas*/
+    _lv_ll_clear(&disp_refr->sync_areas);
 }
 
 /**
@@ -620,9 +697,15 @@ static void refr_area_part(lv_draw_ctx_t * draw_ctx)
 {
     lv_disp_draw_buf_t * draw_buf = lv_disp_get_draw_buf(disp_refr);
 
+    if(draw_ctx->init_buf)
+        draw_ctx->init_buf(draw_ctx);
+
     /* Below the `area_p` area will be redrawn into the draw buffer.
-     * In single buffered mode wait here until the buffer is freed.*/
-    if(draw_buf->buf1 && !draw_buf->buf2) {
+     * In single buffered mode wait here until the buffer is freed.
+     * In full double buffered mode wait here while the buffers are swapped and a buffer becomes available*/
+    bool full_sized = draw_buf->size == (uint32_t)disp_refr->driver->hor_res * disp_refr->driver->ver_res;
+    if((draw_buf->buf1 && !draw_buf->buf2) ||
+       (draw_buf->buf1 && draw_buf->buf2 && full_sized)) {
         while(draw_buf->flushing) {
             if(disp_refr->driver->wait_cb) disp_refr->driver->wait_cb(disp_refr->driver);
         }
@@ -710,11 +793,7 @@ static void refr_area_part(lv_draw_ctx_t * draw_ctx)
     refr_obj_and_children(draw_ctx, lv_disp_get_layer_top(disp_refr));
     refr_obj_and_children(draw_ctx, lv_disp_get_layer_sys(disp_refr));
 
-    /*In true double buffered mode flush only once when all areas were rendered.
-     *In normal mode flush after every area*/
-    if(disp_refr->driver->full_refresh == false) {
-        draw_buf_flush(disp_refr);
-    }
+    draw_buf_flush(disp_refr);
 }
 
 /**
@@ -738,9 +817,9 @@ static lv_obj_t * lv_refr_get_top_obj(const lv_area_t * area_p, lv_obj_t * obj)
     lv_event_send(obj, LV_EVENT_COVER_CHECK, &info);
     if(info.res == LV_COVER_RES_MASKED) return NULL;
 
-    uint32_t i;
-    uint32_t child_cnt = lv_obj_get_child_cnt(obj);
-    for(i = 0; i < child_cnt; i++) {
+    int32_t i;
+    int32_t child_cnt = lv_obj_get_child_cnt(obj);
+    for(i = child_cnt - 1; i >= 0; i--) {
         lv_obj_t * child = obj->spec_attr->children[i];
         found_p = lv_refr_get_top_obj(area_p, child);
 
@@ -808,7 +887,6 @@ static void refr_obj_and_children(lv_draw_ctx_t * draw_ctx, lv_obj_t * top_obj)
         parent = lv_obj_get_parent(parent);
     }
 }
-
 
 static lv_res_t layer_get_area(lv_draw_ctx_t * draw_ctx, lv_obj_t * obj, lv_layer_type_t layer_type,
                                lv_area_t * layer_area_out)
@@ -883,7 +961,6 @@ static void layer_alpha_test(lv_obj_t * obj, lv_draw_ctx_t * draw_ctx, lv_draw_l
     lv_draw_layer_adjust(draw_ctx, layer_ctx, has_alpha ? LV_DRAW_LAYER_FLAG_HAS_ALPHA : LV_DRAW_LAYER_FLAG_NONE);
 }
 
-
 void refr_obj(lv_draw_ctx_t * draw_ctx, lv_obj_t * obj)
 {
     /*Do not refresh hidden objects*/
@@ -893,7 +970,7 @@ void refr_obj(lv_draw_ctx_t * draw_ctx, lv_obj_t * obj)
         lv_obj_redraw(draw_ctx, obj);
     }
     else {
-        lv_opa_t opa = lv_obj_get_style_opa(obj, 0);
+        lv_opa_t opa = lv_obj_get_style_opa_layered(obj, 0);
         if(opa < LV_OPA_MIN) return;
 
         lv_area_t layer_area_full;
@@ -921,6 +998,13 @@ void refr_obj(lv_draw_ctx_t * draw_ctx, lv_obj_t * obj)
             .x = lv_obj_get_style_transform_pivot_x(obj, 0),
             .y = lv_obj_get_style_transform_pivot_y(obj, 0)
         };
+
+        if(LV_COORD_IS_PCT(pivot.x)) {
+            pivot.x = (LV_COORD_GET_PCT(pivot.x) * lv_area_get_width(&obj->coords)) / 100;
+        }
+        if(LV_COORD_IS_PCT(pivot.y)) {
+            pivot.y = (LV_COORD_GET_PCT(pivot.y) * lv_area_get_height(&obj->coords)) / 100;
+        }
 
         lv_draw_img_dsc_t draw_dsc;
         lv_draw_img_dsc_init(&draw_dsc);
@@ -961,7 +1045,6 @@ void refr_obj(lv_draw_ctx_t * draw_ctx, lv_obj_t * obj)
         lv_draw_layer_destroy(draw_ctx, layer_ctx);
     }
 }
-
 
 static uint32_t get_max_row(lv_disp_t * disp, lv_coord_t area_w, lv_coord_t area_h)
 {
@@ -1025,7 +1108,7 @@ static void draw_buf_rotate_180(lv_disp_drv_t * drv, lv_area_t * area, lv_color_
     area->x1 = drv->hor_res - tmp_coord - 1;
 }
 
-static LV_ATTRIBUTE_FAST_MEM void draw_buf_rotate_90(bool invert_i, lv_coord_t area_w, lv_coord_t area_h,
+static void LV_ATTRIBUTE_FAST_MEM draw_buf_rotate_90(bool invert_i, lv_coord_t area_w, lv_coord_t area_h,
                                                      lv_color_t * orig_color_p, lv_color_t * rot_buf)
 {
 
@@ -1189,24 +1272,13 @@ static void draw_buf_flush(lv_disp_t * disp)
     lv_draw_ctx_t * draw_ctx = disp->driver->draw_ctx;
     if(draw_ctx->wait_for_finish) draw_ctx->wait_for_finish(draw_ctx);
 
-    /* In double buffered mode wait until the other buffer is freed
+    /* In partial double buffered mode wait until the other buffer is freed
      * and driver is ready to receive the new buffer */
-    if(draw_buf->buf1 && draw_buf->buf2) {
+    bool full_sized = draw_buf->size == (uint32_t)disp_refr->driver->hor_res * disp_refr->driver->ver_res;
+    if(draw_buf->buf1 && draw_buf->buf2 && !full_sized) {
         while(draw_buf->flushing) {
             if(disp_refr->driver->wait_cb) disp_refr->driver->wait_cb(disp_refr->driver);
         }
-
-        /*If the screen is transparent initialize it when the flushing is ready*/
-#if LV_COLOR_SCREEN_TRANSP
-        if(disp_refr->driver->screen_transp) {
-            if(disp_refr->driver->clear_cb) {
-                disp_refr->driver->clear_cb(disp_refr->driver, disp_refr->driver->draw_buf->buf_act, disp_refr->driver->draw_buf->size);
-            }
-            else {
-                lv_memset_00(disp_refr->driver->draw_buf->buf_act, disp_refr->driver->draw_buf->size * LV_IMG_PX_SIZE_ALPHA_BYTE);
-            }
-        }
-#endif
     }
 
     draw_buf->flushing = 1;
@@ -1225,6 +1297,7 @@ static void draw_buf_flush(lv_disp_t * disp)
             call_flush_cb(disp->driver, draw_ctx->buf_area, draw_ctx->buf);
         }
     }
+
     /*If there are 2 buffers swap them. With direct mode swap only on the last area*/
     if(draw_buf->buf1 && draw_buf->buf2 && (!disp->driver->direct_mode || flushing_last)) {
         if(draw_buf->buf_act == draw_buf->buf1)
@@ -1270,4 +1343,3 @@ static void mem_monitor_init(mem_monitor_t * _mem_monitor)
     _mem_monitor->mem_label = NULL;
 }
 #endif
-

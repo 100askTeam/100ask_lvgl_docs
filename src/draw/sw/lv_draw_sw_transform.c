@@ -122,8 +122,8 @@ void lv_draw_sw_transform(lv_draw_ctx_t * draw_ctx, const lv_area_t * dest_area,
             xs_step_256 = (256 * xs_diff) / (dest_w - 1);
             ys_step_256 = (256 * ys_diff) / (dest_w - 1);
         }
-        int32_t xs_ups = xs1_ups;
-        int32_t ys_ups = ys1_ups;
+        int32_t xs_ups = xs1_ups + 0x80;
+        int32_t ys_ups = ys1_ups + 0x80;
 
         if(draw_dsc->antialias == 0) {
             switch(cf) {
@@ -180,7 +180,7 @@ static void rgb_no_aa(const uint8_t * src, lv_coord_t src_w, lv_coord_t src_h, l
         }
         else {
 
-#if LV_COLOR_DEPTH == 8
+#if LV_COLOR_DEPTH == 1 || LV_COLOR_DEPTH == 8
             const uint8_t * src_tmp = src;
             src_tmp += ys_int * src_stride + xs_int;
             cbuf[x].full = src_tmp[0];
@@ -221,7 +221,7 @@ static void argb_no_aa(const uint8_t * src, lv_coord_t src_w, lv_coord_t src_h, 
             const uint8_t * src_tmp = src;
             src_tmp += (ys_int * src_stride * LV_IMG_PX_SIZE_ALPHA_BYTE) + xs_int * LV_IMG_PX_SIZE_ALPHA_BYTE;
 
-#if LV_COLOR_DEPTH == 8
+#if LV_COLOR_DEPTH == 1 || LV_COLOR_DEPTH == 8
             cbuf[x].full = src_tmp[0];
 #elif LV_COLOR_DEPTH == 16
             cbuf[x].full = src_tmp[0] + (src_tmp[1] << 8);
@@ -264,7 +264,6 @@ static void rgb565a8_no_aa(const uint8_t * src, lv_coord_t src_w, lv_coord_t src
 }
 #endif
 
-
 static void argb_and_rgb_aa(const uint8_t * src, lv_coord_t src_w, lv_coord_t src_h, lv_coord_t src_stride,
                             int32_t xs_ups, int32_t ys_ups, int32_t xs_step, int32_t ys_step,
                             int32_t x_end, lv_color_t * cbuf, uint8_t * abuf, lv_img_cf_t cf)
@@ -273,7 +272,7 @@ static void argb_and_rgb_aa(const uint8_t * src, lv_coord_t src_w, lv_coord_t sr
     int32_t ys_ups_start = ys_ups;
     bool has_alpha;
     int32_t px_size;
-    lv_color_t ck = {0};
+    lv_color_t ck = _LV_COLOR_ZERO_INITIALIZER;
     switch(cf) {
         case LV_IMG_CF_TRUE_COLOR:
             has_alpha = false;
@@ -341,7 +340,6 @@ static void argb_and_rgb_aa(const uint8_t * src, lv_coord_t src_w, lv_coord_t sr
         const uint8_t * src_tmp = src;
         src_tmp += (ys_int * src_stride * px_size) + xs_int * px_size;
 
-
         if(xs_int + x_next >= 0 &&
            xs_int + x_next <= src_w - 1 &&
            ys_int + y_next >= 0 &&
@@ -396,7 +394,7 @@ static void argb_and_rgb_aa(const uint8_t * src, lv_coord_t src_w, lv_coord_t sr
 
                 if(abuf[x] == 0x00) continue;
 
-#if LV_COLOR_DEPTH == 8
+#if LV_COLOR_DEPTH == 1 || LV_COLOR_DEPTH == 8
                 c_base.full = px_base[0];
                 c_ver.full = px_ver[0];
                 c_hor.full = px_hor[0];
@@ -429,7 +427,7 @@ static void argb_and_rgb_aa(const uint8_t * src, lv_coord_t src_w, lv_coord_t sr
         }
         /*Partially out of the image*/
         else {
-#if LV_COLOR_DEPTH == 8
+#if LV_COLOR_DEPTH == 1 || LV_COLOR_DEPTH == 8
             cbuf[x].full = src_tmp[0];
 #elif LV_COLOR_DEPTH == 16
             cbuf[x].full = src_tmp[0] + (src_tmp[1] << 8);
@@ -493,4 +491,3 @@ static void transform_point_upscaled(point_transform_dsc_t * t, int32_t xin, int
 }
 
 #endif
-

@@ -49,16 +49,26 @@ extern "C" {
 #define LV_IMG_ZOOM_NONE            256        /*Value for not zooming the image*/
 LV_EXPORT_CONST_INT(LV_IMG_ZOOM_NONE);
 
+// *INDENT-OFF*
 #if LV_USE_ASSERT_STYLE
-#define LV_STYLE_CONST_INIT(var_name, prop_array) const lv_style_t var_name = { .sentinel = LV_STYLE_SENTINEL_VALUE, .v_p = { .const_props = prop_array }, .has_group = 0xFF, .prop1 = LV_STYLE_PROP_ANY }
+#define LV_STYLE_CONST_INIT(var_name, prop_array)                       \
+    const lv_style_t var_name = {                                       \
+        .sentinel = LV_STYLE_SENTINEL_VALUE,                            \
+        .v_p = { .const_props = prop_array },                           \
+        .has_group = 0xFF,                                              \
+        .prop1 = LV_STYLE_PROP_ANY,                                     \
+        .prop_cnt = (sizeof(prop_array) / sizeof((prop_array)[0])),     \
+    }
 #else
-#define LV_STYLE_CONST_INIT(var_name, prop_array) const lv_style_t var_name = { .v_p = { .const_props = prop_array }, .has_group = 0xFF, .prop1 = LV_STYLE_PROP_ANY }
+#define LV_STYLE_CONST_INIT(var_name, prop_array)                       \
+    const lv_style_t var_name = {                                       \
+        .v_p = { .const_props = prop_array },                           \
+        .has_group = 0xFF,                                              \
+        .prop1 = LV_STYLE_PROP_ANY,                                     \
+        .prop_cnt = (sizeof(prop_array) / sizeof((prop_array)[0])),     \
+    }
 #endif
-
-/** On simple system, don't waste resources on gradients */
-#if !defined(LV_DRAW_COMPLEX) || !defined(LV_GRADIENT_MAX_STOPS)
-#define LV_GRADIENT_MAX_STOPS 2
-#endif
+// *INDENT-ON*
 
 #define LV_STYLE_PROP_META_INHERIT 0x8000
 #define LV_STYLE_PROP_META_INITIAL 0x4000
@@ -250,23 +260,24 @@ typedef enum {
 
     /*Group 6*/
     LV_STYLE_OPA                    = 96,
-    LV_STYLE_COLOR_FILTER_DSC       = 97,
-    LV_STYLE_COLOR_FILTER_OPA       = 98,
-    LV_STYLE_ANIM                   = 99,
-    LV_STYLE_ANIM_TIME              = 100,
-    LV_STYLE_ANIM_SPEED             = 101,
-    LV_STYLE_TRANSITION             = 102,
-    LV_STYLE_BLEND_MODE             = 103,
-    LV_STYLE_TRANSFORM_WIDTH        = 104,
-    LV_STYLE_TRANSFORM_HEIGHT       = 105,
-    LV_STYLE_TRANSLATE_X            = 106,
-    LV_STYLE_TRANSLATE_Y            = 107,
-    LV_STYLE_TRANSFORM_ZOOM         = 108,
-    LV_STYLE_TRANSFORM_ANGLE        = 109,
-    LV_STYLE_TRANSFORM_PIVOT_X      = 110,
-    LV_STYLE_TRANSFORM_PIVOT_Y      = 111,
+    LV_STYLE_OPA_LAYERED            = 97,
+    LV_STYLE_COLOR_FILTER_DSC       = 98,
+    LV_STYLE_COLOR_FILTER_OPA       = 99,
+    LV_STYLE_ANIM                   = 100,
+    LV_STYLE_ANIM_TIME              = 101,
+    LV_STYLE_ANIM_SPEED             = 102,
+    LV_STYLE_TRANSITION             = 103,
+    LV_STYLE_BLEND_MODE             = 104,
+    LV_STYLE_TRANSFORM_WIDTH        = 105,
+    LV_STYLE_TRANSFORM_HEIGHT       = 106,
+    LV_STYLE_TRANSLATE_X            = 107,
+    LV_STYLE_TRANSLATE_Y            = 108,
+    LV_STYLE_TRANSFORM_ZOOM         = 109,
+    LV_STYLE_TRANSFORM_ANGLE        = 110,
+    LV_STYLE_TRANSFORM_PIVOT_X      = 111,
+    LV_STYLE_TRANSFORM_PIVOT_Y      = 112,
 
-    _LV_STYLE_LAST_BUILT_IN_PROP     = 111,
+    _LV_STYLE_LAST_BUILT_IN_PROP     = 112,
     _LV_STYLE_NUM_BUILT_IN_PROPS     = _LV_STYLE_LAST_BUILT_IN_PROP + 1,
 
     LV_STYLE_PROP_ANY                = 0xFFFF,
@@ -327,7 +338,6 @@ typedef struct {
 /**********************
  * GLOBAL PROTOTYPES
  **********************/
-
 
 /**
  * Initialize a style
@@ -440,7 +450,9 @@ static inline lv_style_res_t lv_style_get_prop_inlined(const lv_style_t * style,
 {
     if(style->prop1 == LV_STYLE_PROP_ANY) {
         const lv_style_const_prop_t * const_prop;
-        for(const_prop = style->v_p.const_props; const_prop->prop != LV_STYLE_PROP_INV; const_prop++) {
+        uint32_t i;
+        for(i = 0; i < style->prop_cnt; i++) {
+            const_prop = style->v_p.const_props + i;
             lv_style_prop_t prop_id = LV_STYLE_PROP_ID_MASK(const_prop->prop);
             if(prop_id == prop) {
                 if(const_prop->prop & LV_STYLE_PROP_META_INHERIT)
