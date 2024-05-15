@@ -16,7 +16,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
         dt.insertBefore(button, dt.firstChild);
     });
 
-    fetch('https://lvgl.io/home-banner.txt') // Replace with your URL
+    //fetch('https://lvgl.io/home-banner.txt') // Replace with your URL
+    fetch('https://photos.100ask.net/100ask/100ask_lvgl_doc/100ask_docs_versionlist/home-banner.txt')
   .then(response => {
     // Check if the request was successful
     if (!response.ok) {
