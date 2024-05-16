@@ -134,6 +134,10 @@ html_sidebars = {
     ]
 }
 
+html_js_files = [
+    'js/custom.js'
+]
+
 html_favicon = 'favicon.png'
 html_logo = 'logo_100ask.png'
 

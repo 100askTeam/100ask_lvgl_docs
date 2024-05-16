@@ -75,28 +75,18 @@ jobs:
       # ===============================
       - name: Commit documentation changes
         run: |
-          git clone https://${{secrets.CODING_USERNAME}}:${{secrets.CODING_PASSWD}}@e.coding.net/weidongshan/sphinx_docs/100ask_lvgl_docs.git --branch master --single-branch master
-          cp -r out_html/* master/8.1
+          git clone https://${{secrets.CODING_USERNAME}}:${{secrets.CODING_PASSWD}}@e.coding.net/weidongshan/sphinx_docs/100ask_lvgl_docs.git --depth=1 --branch master --single-branch master
+          mkdir -p master/${{ steps.version.outputs.VERSION_NAME }}
+          rm -rf master/${{ steps.version.outputs.VERSION_NAME }}/*
+          cp -r out_html/* master/${{ steps.version.outputs.VERSION_NAME }}
           ls
           cd master
-          touch 8.1/.nojekyll && touch master/.nojekyll
+          touch master/.nojekyll
           git config --local user.email "baiwenwang@100ask.com"
           git config --local user.name "www.100ask.org"
           git add .
           git commit -m "Update documentation" -a || true
           git push origin master
-          # The above command will fail if no changes were present, so we ignore
-          # that.B_TOKEN }}
-      - name: executing remote ssh command using password
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.HOST }}
-          username: root
-          key: ${{ secrets.SSH_ID_RSA }}
-          port: 22
-          script: |
-            ls -al
-            cd /home/100ask_lvgl_docs  && git pull
     # ===============================
       #- name: Deploy
       #  uses: JamesIves/github-pages-deploy-action@3.7.1
