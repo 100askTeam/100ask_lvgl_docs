@@ -10,7 +10,8 @@ git checkout 45e0bc5c8d3e55cfbcaf8214361d2335b8b9a7b4
 git submodule update --init -- lvgl
 cd lvgl
 #git checkout $CURRENT_REF
-git checkout 0ad639eee6b92799dd223dd0fac6c932a84b4c0f # https://github.com/lvgl/lvgl/commits/release/v8.1/
+# git checkout 0ad639eee6b92799dd223dd0fac6c932a84b4c0f # https://github.com/lvgl/lvgl/commits/release/v8.1/
+git checkout fc98bf7f3cceb5b08a176520c0699b391628fe47 # https://github.com/lvgl/lvgl/commits/release/v8.2/
 cd ..
 git submodule update --init -- lv_drivers
 mkdir cmbuild
