@@ -6,7 +6,7 @@ rm -rf emscripten_builder
 git clone https://github.com/lvgl/lv_sim_emscripten.git emscripten_builder
 scripts/genexamplelist.sh > emscripten_builder/examplelist.c
 cd emscripten_builder
-git checkout fe8cc24b991d32b3e397d2147e576d49ffca06a9 # https://github.com/lvgl/lv_web_emscripten/commits/release/v8.3/
+git checkout 45e0bc5c8d3e55cfbcaf8214361d2335b8b9a7b4
 git submodule update --init -- lvgl
 cd lvgl
 #git checkout $CURRENT_REF
