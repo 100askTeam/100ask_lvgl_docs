@@ -99,6 +99,10 @@ For example:
   static uint32_t user_data = 10;
   lv_timer_t * timer = lv_timer_create(my_timer, 500,  &user_data);
 
+.. raw:: html
+
+   </details>
+   <br>
 
 Ready and Reset（准备与重置）
 *****************************
