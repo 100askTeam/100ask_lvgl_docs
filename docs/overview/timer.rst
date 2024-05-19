@@ -75,34 +75,33 @@ For example:
 
 
 要创建一个新定时器，使用 :cpp:expr:`lv_timer_create(timer_cb, period_ms, user_data)`。这将创建一个 :cpp:type:`lv_timer_t` ``*`` 变量，可以稍后用来修改定时器的参数。 :cpp:func:`lv_timer_create_basic` 也可以使用。这允许您在不指定任何参数的情况下创建一个新定时器。
- 
+
 定时器回调函数应该有一个 ``void (*lv_timer_cb_t)(lv_timer_t *)`` 原型。
 
 例如：
 
+
 .. code:: c
-  void my_timer(lv_timer_t * timer)
-  {
-    /* 使用用户数据 */
-    uint32_t * user_data = timer->user_data;
-    printf("my_timer called with user data: %d\n", *user_data);
 
-    /* 使用LVGL进行某些操作 */
-    if(something_happened) {
-      something_happened = false;
-      lv_button_create(lv_screen_active(), NULL);
-    }
-  }
+   void my_timer(lv_timer_t * timer)
+   {
+     /*Use the user_data*/
+     uint32_t * user_data = timer->user_data;
+     printf("my_timer called with user data: %d\n", *user_data);
 
-  ...
+     /*Do something with LVGL*/
+     if(something_happened) {
+       something_happened = false;
+       lv_button_create(lv_screen_active(), NULL);
+     }
+   }
 
-  static uint32_t user_data = 10;
-  lv_timer_t * timer = lv_timer_create(my_timer, 500,  &user_data);
+   ...
 
-.. raw:: html
+   static uint32_t user_data = 10;
+   lv_timer_t * timer = lv_timer_create(my_timer, 500,  &user_data);
 
-   </details>
-   <br>
+
 
 Ready and Reset（准备与重置）
 *****************************
@@ -142,6 +141,7 @@ You can modify some timer parameters later:
 - :cpp:expr:`lv_timer_set_cb(timer, new_cb)`
 - :cpp:expr:`lv_timer_set_period(timer, new_period)`
 
+
 .. raw:: html
 
    </details>
@@ -166,6 +166,7 @@ You can make a timer repeat only a given number of times with
 :cpp:expr:`lv_timer_set_repeat_count(timer, count)`. The timer will
 automatically be deleted after it's called the defined number of times.
 Set the count to ``-1`` to repeat indefinitely.
+
 
 .. raw:: html
 
@@ -308,9 +309,11 @@ For example:
 
    /*The screen is still valid so you can do other things with it*/
 
+
 If you just want to delete an object and don't need to clean anything up
 in ``my_screen_cleanup`` you could just use :cpp:func:`lv_obj_delete_async` which
 will delete the object on the next call to :cpp:func:`lv_timer_handler`.
+
 
 .. raw:: html
 
@@ -345,9 +348,9 @@ will delete the object on the next call to :cpp:func:`lv_timer_handler`.
 
    /*屏幕仍然有效，因此您可以对其进行其他操作*/
 
+
 如果您只想删除一个对象，而不需要在 ``my_screen_cleanup`` 中进行任何清理操作，
 可以直接使用 :cpp:func:`lv_obj_delete_async` ，它将在下一次调用 :cpp:func:`lv_timer_handler` 时删除该对象。
-
 
 .. _timer_api:
 
