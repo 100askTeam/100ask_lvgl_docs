@@ -1,7 +1,7 @@
 .. _lv_spinbox:
 
 ==============================
-Spinbox （旋转框）(lv_spinbox)
+Spinbox （微调框）(lv_spinbox)
 ==============================
 
 Overview（概述）
@@ -22,7 +22,7 @@ modified :ref:`Text area <lv_textarea>`.
    <br>
 
 
-旋转框包含一个数字作为文本，可以增加或 减少 *Keys* 或 API 函数。在引擎盖下，Spinbox 是一个 修改了 :ref:`文本区域 <lv_textarea>`。
+Spinbox 微调框包含一个数字作为文本，可以增加或 减少 *Keys* 或 API 函数。在引擎盖下，Spinbox 是一个 修改了 :ref:`文本区域 <lv_textarea>`。
 
 
 .. _lv_spinbox_parts_and_styles:
@@ -43,7 +43,7 @@ The parts of the Spinbox are identical to the :ref:`Text area <lv_textarea>`.
    <br>
 
 
-旋转框的各个部分与 :ref:`文本区域 <lv_textarea>` 相同。
+微调框的各个部分与 :ref:`文本区域 <lv_textarea>` 相同。
 
 
 Value, range and step（值、范围和步长）

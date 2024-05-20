@@ -20,7 +20,7 @@ The Spinner object is a spinning arc over a ring.
    <br>
 
 
-Spinner 对象是环上的旋转弧。
+Spinner（旋转器） 对象是环上的旋转弧。
 
 
 .. _lv_spinner_parts_and_styles:

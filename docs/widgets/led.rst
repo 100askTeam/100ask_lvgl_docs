@@ -1,7 +1,7 @@
 .. _lv_led:
 
 ============
-LED (lv_led)
+LED（指示灯） (lv_led)
 ============
 
 Overview（概述）
@@ -21,7 +21,7 @@ adjusted. With lower brightness the colors of the LED become darker.
    <br>
 
 
-LED是矩形（或圆形）对象。它的亮度可以调节。亮度降低时，LED的颜色会变暗。
+LED（指示灯）是矩形（或圆形）对象。它的亮度可以调节。亮度降低时，LED的颜色会变暗。
 
 
 .. _lv_led_parts_and_styles:

@@ -1,7 +1,7 @@
 .. _lv_tabview:
 
 ====================
-Tabview (lv_tabview)
+Tabview（选项卡） (lv_tabview)
 ====================
 
 Overview（概述）
@@ -32,7 +32,7 @@ sliding horizontally on the content.
    <br>
 
 
-选项卡视图对象可用于组织选项卡中的内容。选项卡 视图是从其他小部件构建的：
+Tabview（选项卡）视图对象可用于组织选项卡中的内容。选项卡 视图是从其他控件构建的：
 
 - 主容器：:ref:`lv_obj`
 - 选项卡按钮：带有 :ref:`lv_obj` 的 :ref:`lv_obj` 

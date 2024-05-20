@@ -1,7 +1,7 @@
 .. _lv_obj:
 
 ====================
-Base object (lv_obj)
+Base object（基础对象） (lv_obj)
 ====================
 
 Overview

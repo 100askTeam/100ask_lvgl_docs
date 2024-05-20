@@ -21,7 +21,7 @@ buttons and a content area.
    <br>
 
 
-窗口是类似容器的对象，由带有标题和按钮的标题以及内容区域构建。
+Window （窗口）是类似容器的对象，由带有标题和按钮的标题以及内容区域构建。
 
 
 .. _lv_win_parts_and_styles:

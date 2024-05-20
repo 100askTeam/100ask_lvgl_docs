@@ -1,7 +1,7 @@
 .. _lv_list:
 
 ==============
-List (lv_list)
+List（列表） (lv_list)
 ==============
 
 Overview
@@ -21,7 +21,7 @@ and Texts can be added
    <br>
 
 
-列表基本上是一个垂直布局的矩形，按钮指向该矩形和可以添加文本。
+List（列表） 基本上是一个垂直布局的矩形，按钮指向该矩形和可以添加文本。
 
 
 .. _lv_list_parts_and_styles:

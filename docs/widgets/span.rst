@@ -1,7 +1,7 @@
 .. _lv_span:
 
 ======================
-Span（跨度） (lv_span)
+Span（富文本） (lv_span)
 ======================
 
 Overview（概述）
@@ -21,7 +21,7 @@ different fonts, colors, and sizes into the spangroup object.
    </details> 
    <br>
 
-spangroup 是用于显示富文本的对象。不同 从Label对象中，可以呈现样式为 ``spangroup``， 将不同的字体、颜色和大小添加到 SpanGroup 对象中。
+spangroup（富文本） 是用于显示富文本的对象。不同 从Label对象中，可以呈现样式为 ``spangroup``， 将不同的字体、颜色和大小添加到 SpanGroup 对象中。
 
 
 .. _lv_span_parts_and_styles:
