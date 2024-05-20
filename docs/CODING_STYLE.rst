@@ -1,3 +1,5 @@
+.. _coding-style:
+
 Coding style（编码风格）
 =======================
 
