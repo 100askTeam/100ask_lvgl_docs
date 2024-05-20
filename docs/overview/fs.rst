@@ -350,6 +350,177 @@ To use files in image widgets the following callbacks are required:
 - 定位
 - 告诉
 
+.. _overview_file_system_cache:
+
+Optional file buffering/caching（可选的文件缓冲/缓存）
+****************************************************
+
+.. raw:: html
+
+   <details>
+     <summary>显示原文</summary>
+
+Files will buffer their reads if the corresponding ``LV_FS_*_CACHE_SIZE``
+config option is set to a value greater than zero. Each open file will
+buffer up to that many bytes to reduce the number of FS driver calls.
+
+Generally speaking, file buffering can be optimized for different kinds
+of access patterns. The one implemented here is optimal for reading large
+files in chunks, which is what the image decoder does.
+It has the potential to call the driver's ``read`` fewer
+times than ``lv_fs_read`` is called. In the best case where the cache size is
+\>= the size of the file, ``read`` will only be called once. This strategy is good
+for linear reading of large files but less helpful for short random reads across a file bigger than the buffer
+since data will be buffered that will be discarded after the next seek and read.
+The cache should be sufficiently large or disabled in that case. Another case where the cache should be disabled
+is if the file contents are expected to change by an external factor like with special OS files.
+
+The implementation is documented below. Note that the FS functions make calls
+to other driver FS functions when the cache is enabled. i.e., ``lv_fs_read`` may call the driver's ``seek``
+so the driver needs to implement more callbacks when the cache is enabled.
+
+``lv_fs_read`` :sub:`(behavior when the cache is enabled)`
+-------------------------------------------------
+
+.. mermaid::
+   :zoom:
+
+   %%{init: {'theme':'neutral'}}%%
+   flowchart LR
+       A["call lv_fs_read and
+          the cache is enabled"] --> B{{"is there cached data
+                                         at the file position?"}}
+       B -->|yes| C{{"does the cache have
+                      all required bytes available?"}}
+       C -->|yes| D["copy all required bytes from
+                     the cache to the destination
+                     buffer"]
+       C -->|no| F["copy the available
+                    required bytes
+                    until the end of the cache
+                    into the destination buffer"]
+             --> G["seek the real file to the end
+                    of what the cache had available"]
+             --> H{{"is the number of remaining bytes
+                     larger than the size of the whole cache?"}}
+       H -->|yes| I["read the remaining bytes
+                     from the real file to the
+                     destination buffer"]
+       H -->|no| J["eagerly read the real file
+                    to fill the whole cache
+                    or as many bytes as the
+                    read call can"]
+             --> O["copy the required bytes
+                    to the destination buffer"]
+       B -->|no| K["seek the real file to
+                    the file position"]
+             --> L{{"is the number of required
+                     bytes greater than the
+                     size of the entire cache?"}}
+       L -->|yes| M["read the real file to
+                     the destination buffer"]
+       L -->|no| N["eagerly read the real file
+                    to fill the whole cache
+                    or as many bytes as the
+                    read call can"]
+             --> P["copy the required bytes
+                    to the destination buffer"]
+
+``lv_fs_write`` :sub:`(behavior when the cache is enabled)`
+--------------------------------------------------
+
+The part of the cache that coincides with the written content
+will be updated to reflect the written content.
+
+``lv_fs_seek`` :sub:`(behavior when the cache is enabled)`
+-------------------------------------------------
+
+The driver's ``seek`` will not actually be called unless the ``whence``
+is ``LV_FS_SEEK_END``, in which case ``seek`` and ``tell`` will be called
+to determine where the end of the file is.
+
+``lv_fs_tell`` :sub:`(behavior when the cache is enabled)`
+-------------------------------------------------
+
+The driver's ``tell`` will not actually be called.
+
+
+.. raw:: html
+
+   </details>
+   <br>
+
+
+如果相应的 ``LV_FS_*_CACHE_SIZE`` 配置选项设置为大于零的值，文件将缓冲其读取。每个打开的文件将缓冲最多这么多字节，以减少 FS 驱动程序调用的数量。
+
+一般来说，文件缓冲可以针对不同类型的访问模式进行优化。这里实现的方法最适合以块的形式读取大文件，这就是图像解码器的作用。它有可能减少驱动程序的 ``read`` 比调用 ``lv_fs_read`` 的次数。在缓存大小 >= 文件大小的最佳情况下， ``read`` 只会被调用一次。此策略对于大文件的线性读取很有用，但对于跨大于缓冲区的文件的短随机读取帮助不大，因为数据将被缓冲，这些数据将在下一次查找和读取后被丢弃。在这种情况下，缓存应该足够大或禁用。应禁用缓存的另一种情况是，如果文件内容预计会因外部因素（例如特殊操作系统文件）而发生更改。
+
+下面记录了实施情况。请注意，当启用缓存时，FS 函数会调用其他驱动程序 FS 函数。即， ``lv_fs_read`` 可能会调用驱动程序 ``seek``，因此驱动程序需要在启用缓存时实现更多回调。
+
+``lv_fs_read`` :sub:`(启用缓存时的行为)`
+-------------------------------------------------
+
+.. mermaid::
+   :zoom:
+
+   %%{init: {'theme':'neutral'}}%%
+   flowchart LR
+       A["call lv_fs_read and
+          the cache is enabled"] --> B{{"is there cached data
+                                         at the file position?"}}
+       B -->|yes| C{{"does the cache have
+                      all required bytes available?"}}
+       C -->|yes| D["copy all required bytes from
+                     the cache to the destination
+                     buffer"]
+       C -->|no| F["copy the available
+                    required bytes
+                    until the end of the cache
+                    into the destination buffer"]
+             --> G["seek the real file to the end
+                    of what the cache had available"]
+             --> H{{"is the number of remaining bytes
+                     larger than the size of the whole cache?"}}
+       H -->|yes| I["read the remaining bytes
+                     from the real file to the
+                     destination buffer"]
+       H -->|no| J["eagerly read the real file
+                    to fill the whole cache
+                    or as many bytes as the
+                    read call can"]
+             --> O["copy the required bytes
+                    to the destination buffer"]
+       B -->|no| K["seek the real file to
+                    the file position"]
+             --> L{{"is the number of required
+                     bytes greater than the
+                     size of the entire cache?"}}
+       L -->|yes| M["read the real file to
+                     the destination buffer"]
+       L -->|no| N["eagerly read the real file
+                    to fill the whole cache
+                    or as many bytes as the
+                    read call can"]
+             --> P["copy the required bytes
+                    to the destination buffer"]
+
+``lv_fs_write`` :sub:`(启用缓存时的行为)`
+--------------------------------------------------
+
+缓存中与写入内容一致的部分将被更新以反映写入内容。
+
+``lv_fs_seek`` :sub:`(启用缓存时的行为)`
+-------------------------------------------------
+
+驱动程序 ``seek`` 实际上不会被调用，除非 ``whence``， ``LV_FS_SEEK_END`` 在这种情况下 ``seek`` ， ``tell`` 将调用 来确定文件结尾在哪里。
+
+The driver's ``seek`` will not actually be called unless the ``whence``
+is ``LV_FS_SEEK_END``, in which case ``seek`` and ``tell`` will be called
+to determine where the end of the file is.
+``lv_fs_tell`` :sub:`(启用缓存时的行为)`
+-------------------------------------------------
+
+ ``tell`` 实际上不会调用驱动程序。
 
 .. _overview_file_system_api:
 
