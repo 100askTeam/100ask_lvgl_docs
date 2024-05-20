@@ -83,7 +83,12 @@ To add the gridnav feature to an object use
   object can be scrolled in that direction then it will be scrolled instead of
   going to the next/previous object. If there is no more room for scrolling the
   next/previous object will be focused normally
-
+- :cpp:enumerator:`LV_GRIDNAV_CTRL_HORIZONTAL_MOVE_ONLY`: Only use the left/right keys
+  for grid navigation. Up/down key events will be sent to the focused object.
+- :cpp:enumerator:`LV_GRIDNAV_CTRL_VERTICAL_MOVE_ONLY`: Only use the up/down keys
+  for grid navigation. Left/right key events will be sent to the focused object.
+:cpp:enumerator:`LV_GRIDNAV_CTRL_HORIZONTAL_MOVE_ONLY` and :cpp:enumerator:`LV_GRIDNAV_CTRL_VERTICAL_MOVE_ONLY`
+should not be used together.
 :cpp:expr:`lv_gridnav_remove(cont)` Removes gridnav from an object.
 
 .. raw:: html
@@ -99,7 +104,9 @@ To add the gridnav feature to an object use
 - :cpp:enumerator:`LV_GRIDNAV_CTRL_NONE`：默认设置
 - :cpp:enumerator:`LV_GRIDNAV_CTRL_ROLLOVER`：如果在某个方向上没有下一个/上一个对象，焦点将转移到下一行/上一行的对象（在左/右键上）或第一行/最后一行的对象（在上/下键上）
 - :cpp:enumerator:`LV_GRIDNAV_CTRL_SCROLL_FIRST`：如果按下箭头并且焦点对象可以在该方向上滚动，则它将滚动而不是转到下一个/上一个对象。如果没有更多的滚动空间，则正常情况下将对下一个/上一个对象进行聚焦
-
+- :cpp:enumerator:`LV_GRIDNAV_CTRL_HORIZONTAL_MOVE_ONLY`：仅使用左/右键,用于网格导航。 向上/向下键事件将被发送到焦点对象。
+- :cpp:enumerator:`LV_GRIDNAV_CTRL_VERTICAL_MOVE_ONLY`：仅使用向上/向下键,用于网格导航。 左/右键事件将被发送到焦点对象。
+:cpp:enumerator:`LV_GRIDNAV_CTRL_HORIZONTAL_MOVE_ONLY` 和 :cpp:enumerator:`LV_GRIDNAV_CTRL_VERTICAL_MOVE_ONLY`不应该一起使用。
 :cpp:expr:`lv_gridnav_remove(cont)` 从对象中移除gridnav。
 
 
