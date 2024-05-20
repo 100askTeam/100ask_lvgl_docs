@@ -46,7 +46,7 @@ widgets = {
     "btnmatrix": "Button matrix（矩阵按钮）",
     "calendar": "Calendar（日历）",
     "canvas": "Canvas（画布）",
-    "chart": "Chart（图标）",
+    "chart": "Chart（图表）",
     "checkbox": "Checkbox（复选框）",
     "colorwheel": "Colorwheel（色轮）",
     "dropdown": "Dropdown（下拉列表）",
