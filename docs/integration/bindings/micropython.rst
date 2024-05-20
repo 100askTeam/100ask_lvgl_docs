@@ -400,7 +400,7 @@ LVGL C API Coding Conventions（LVGL C API编码规范）
    <details>
      <summary>显示原文</summary>
 
-For a summary of coding conventions to follow see the `CODING STYLE <CODING_STYLE>`__.
+For a summary of coding conventions to follow see the :ref:`coding-style`.
 
 .. raw:: html
 
@@ -408,7 +408,7 @@ For a summary of coding conventions to follow see the `CODING STYLE <CODING_STYL
    <br>
 
 
-有关要遵循的编码约定的摘要，请参阅 `CODING STYLE <CODING_STYLE>`__。
+有关要遵循的编码约定的摘要，请参阅 :ref:`coding-style`。
 
 
 .. _memory_management:
