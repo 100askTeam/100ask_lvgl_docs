@@ -21,11 +21,11 @@ The Arc consists of a background and a foreground arc. The foreground
    <br>
 
 
-弧线由背景弧线和前景弧线组成。前景 （指示灯）可以触摸调节。
+圆弧由背景弧和前景弧组成。前景弧（指示器）可以进行触摸与调节操作。
 
 .. _lv_arc_parts_and_styles:
 
-Parts and Styles（零件和样式）
+Parts and Styles（部分和样式）
 *****************************
 
 .. raw:: html
@@ -50,9 +50,9 @@ Parts and Styles（零件和样式）
    <br>
 
 
--  :cpp:enumerator:`LV_PART_MAIN` 使用典型背景绘制背景 样式属性和使用圆弧样式属性的弧。圆弧的大小和位置将遵循填充样式属性。
--  :cpp:enumerator:`LV_PART_INDICATOR` 使用圆弧样式绘制另一个圆弧性能。它的填充值是相对于背景弧。
--  :cpp:enumerator:`LV_PART_KNOB` 在指标的末尾绘制一个手柄，使用所有背景属性和填充值。如果使用零填充，旋钮大小与指示器的宽度相同。较大的填充使其更大，较小的填充使其更小。
+-  :cpp:enumerator:`LV_PART_MAIN` 使用典型背景样式特性绘制背景，使用圆弧样式特性绘制圆弧。圆弧的大小和位置遵循填充（padding）样式属性。
+-  :cpp:enumerator:`LV_PART_INDICATOR` 使用圆弧（arc）样式属性绘制出来的另一条圆弧。它的填充值是相对于背景弧来解释的。
+-  :cpp:enumerator:`LV_PART_KNOB` 在指标的末尾绘制一个旋钮，使用所有背景属性和填充值。如果使用零填充，旋钮大小与指示器的宽度相同。较大的填充使其更大，较小的填充使其更小。
 
 
 .. _lv_arc_usage:
@@ -91,7 +91,7 @@ the [0;360] range.
 
 可以使用 :cpp:expr:`lv_arc_set_value(arc, new_value)` 设置新值。设置的值被解释为一个范围（最小值和最大值），可以使用 :cpp:expr:`lv_arc_set_range(arc, min, max)` 修改。默认范围为 0...100。
 
-指示器弧线绘制在主部件的弧线上。如果将值设置为最大值时，指示器弧将覆盖整个 "背景 "弧。要设置背景弧的起始角度和终止角度，请使用 :cpp:expr:`lv_arc_set_bg_angles(arc, start_angle, end_angle)` 函数或 ``lv_arc_set_bg_start/end_angle(arc, angle)`` 函数。
+指示弧绘制在主要部分的弧上。如果将该值设置为最大值，则指示弧将覆盖整个“背景”弧。要设置背景弧的起始角度和终止角度，请使用 :cpp:expr:`lv_arc_set_bg_angles(arc, start_angle, end_angle)` 函数或 ``lv_arc_set_bg_start/end_angle(arc, angle)`` 函数。
 
 零度位于对象的右侧（3 点钟方向），度数按顺时针方向递增。角度应在[0;360] 范围内。
 
@@ -113,7 +113,7 @@ An offset to the 0 degree position can be added with
    <br>
 
 
-可以用 :cpp:expr:`lv_arc_set_rotation(arc, deg)` 添加到 0 度位置的偏移量。
+可以用 :cpp:expr:`lv_arc_set_rotation(arc, deg)` 从零度位置开始设置角度。
 
 
 Mode（模式）
@@ -171,9 +171,9 @@ degree/second unit and can be set with
    <br>
 
 
-如果按下弧形键，当前值将以有限的速度设置 *变化率*。变化率以度/秒为单位，可以用 :cpp:expr:`lv_arc_set_change_rage(arc, rate)` 设置。
+如果按下弧形键，当前值将以一定的速度反映在前景弧的变化上，这个变化的过程称为 *变化率*。变化率以度/秒为单位，可以用 :cpp:expr:`lv_arc_set_change_rage(arc, rate)` 设置。（简单的理解就是arc的前景弧到达某个值所需要的时间，时间单位是 度/秒）
 
-Knob offset（旋钮控件）
+Knob offset（旋钮偏移）
 ----------------------
 
 .. raw:: html
@@ -192,10 +192,10 @@ relative to the end of the arc The knob offset can be set by
    <br>
 
 
-更改旋钮控件允许移动旋钮的位置相对于弧线末端旋钮偏移可以通过 :cpp:expr:`lv_arc_set_knob_offset(arc, offset_angle)` 设置，只有在 :cpp:enumerator:`LV_PART_KNOB` 时才可见。
+旋钮的位置可以通过设置偏移值调整，如果不调整默认位于前景弧最末端处，调整偏移后可以在其之前以及之后。旋钮偏移可以通过 :cpp:expr:`lv_arc_set_knob_offset(arc, offset_angle)` 设置，只在 :cpp:enumerator:`LV_PART_KNOB` 部分生效。
 
 
-Setting the indicator manually（手动设置指示灯）
+Setting the indicator manually（手动设置指示器部分）
 -----------------------------------------------
 
 .. raw:: html
@@ -221,7 +221,7 @@ the object non-clickable:
    <br>
 
 
-也可以使用 :cpp:expr:`lv_arc_set_angles(arc, start_angle, end_angle)` 函数或 ``lv_arc_set_start/end_angle(arc, start_angle)`` 直接设置指示器的角度(零度位于对象的中间右侧（3 点钟方向），并且度数沿顺时针方向增加。)。 在这种情况下，设置的 “值” 和 “模式” 将被忽略。
+也可以使用 :cpp:expr:`lv_arc_set_angles(arc, start_angle, end_angle)` 函数或 ``lv_arc_set_start/end_angle(arc, start_angle)`` 直接设置指示器部分的角度(零度位于对象的中间右侧（3 点钟方向），并且度数沿顺时针方向增加。)。 在这种情况下，设置的 “值” 和 “模式” 将被忽略。
 
 换言之，角度和值设置是独立的。你应该只使用其中之一。将两者混合可能会导致意外行为。
 
@@ -282,7 +282,7 @@ event of the arc.
 
 另一个对象可以根据当前位置定位弧，以便遵循弧的当前值（角度）。为此，执行此操作请使用 :cpp:expr:`lv_arc_align_obj_to_angle(arc, obj_to_align, radius_offset)`。
 
-类似地，:cpp:expr:`lv_arc_rotate_obj_to_angle(arc, obj_to_rotate, radius_offset)` 可以是用于将对象旋转到弧的当前值。
+类似地，:cpp:expr:`lv_arc_rotate_obj_to_angle(arc, obj_to_rotate, radius_offset)` 可以是用于将对象根据旋钮的角度旋转之后再对齐到arc的旋钮的位置上。
 
 在 ``VALUE_CHANGED`` 发生弧形时调用这些函数是一个典型的用例。
 
@@ -336,14 +336,14 @@ Learn more about :ref:`events`.
 
 -  :cpp:enumerator:`LV_EVENT_DRAW_PART_BEGIN` 和 :cpp:enumerator:`LV_EVENT_DRAW_PART_END` 被发送具有以下类型：
 
-   -  :cpp:enumerator:`LV_ARC_DRAW_PART_BACKGROUND` 背景弧线。
+   -  :cpp:enumerator:`LV_ARC_DRAW_PART_BACKGROUND` 背景弧。
    
       -  ``part``: :cpp:enumerator:`LV_PART_MAIN`
       -  ``p1``: 弧形中心
       -  ``radius``: 弧的半径
       -  ``arc_dsc``
 
-   -  :cpp:enumerator:`LV_ARC_DRAW_PART_FOREGROUND` 前景弧线。
+   -  :cpp:enumerator:`LV_ARC_DRAW_PART_FOREGROUND` 前景弧。
 
       -  ``part``: :cpp:enumerator:`LV_PART_INDICATOR`
       -  ``p1``: 弧形中心
