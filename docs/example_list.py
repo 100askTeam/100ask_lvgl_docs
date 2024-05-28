@@ -65,7 +65,7 @@ widgets = {
     "slider": "Slider（滑动条）",
     "span": "Span（富文本）",
     "spinbox": "Spinbox（微调框）",
-    "spinner": "Spinner（旋转器）",
+    "spinner": "Spinner（环形加载器）",
     "switch": "Switch（开关）",
     "table": "Table（表格）",
     "tabview": "Tabview（选项卡）",
