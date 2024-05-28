@@ -1,7 +1,7 @@
 .. _lv_spinner:
 
 ==============================
-Spinner（旋转器） (lv_spinner)
+Spinner（环形加载器） (lv_spinner)
 ==============================
 
 Overview（概述）
@@ -20,7 +20,7 @@ The Spinner object is a spinning arc over a ring.
    <br>
 
 
-Spinner（旋转器）对象是在环上旋转的圆弧。
+Spinner（环形加载器）对象是在环上旋转的圆弧。
 
 
 .. _lv_spinner_parts_and_styles:
@@ -49,7 +49,7 @@ The parts are identical to the parts of :ref:`lv_arc`.
 Usage（用法）
 *************
 
-Create a spinner（创建旋转器）
+Create a spinner（创建环形加载器）
 ------------------------------
 
 .. raw:: html
@@ -69,9 +69,9 @@ of one revulation and the length of he arc can be customized.
    <br>
 
 
-若要创建旋转器，请使用 :cpp:expr:`lv_spinner_create(parent)`。
+若要创建环形加载器，请使用 :cpp:expr:`lv_spinner_create(parent)`。
 
-使用 :cpp:expr:`lv_spinner_set_anim_params(spinner, spin_duration, angle)` 设置旋转器的动画时间和弧长角度。
+使用 :cpp:expr:`lv_spinner_set_anim_params(spinner, spin_duration, angle)` 设置环形加载器的动画时间和弧长角度。
 
 
 .. _lv_spinner_events:
@@ -96,7 +96,7 @@ Learn more about :ref:`events`.
    <br>
 
 
-LVGL库本身不会向旋转器发送任何特殊事件。
+LVGL库本身不会向环形加载器发送任何特殊事件。
 
 另请参阅 `圆弧 </widgets/arc>`__ 的事件。
 
