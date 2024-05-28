@@ -20,12 +20,12 @@ The Spinner object is a spinning arc over a ring.
    <br>
 
 
-Spinner（旋转器） 对象是环上的旋转弧。
+Spinner（旋转器）对象是在环上旋转的圆弧。
 
 
 .. _lv_spinner_parts_and_styles:
 
-Parts and Styles（零件和样式）
+Parts and Styles（部分和样式）
 *****************************
 
 .. raw:: html
@@ -41,7 +41,7 @@ The parts are identical to the parts of :ref:`lv_arc`.
    <br>
 
 
-这些部件与 :ref:`lv_arc` 的部件相同。
+这些部分与 :ref:`lv_arc` 的部分相同。
 
 
 .. _lv_spinner_usage:
@@ -71,7 +71,7 @@ of one revulation and the length of he arc can be customized.
 
 若要创建旋转器，请使用 :cpp:expr:`lv_spinner_create(parent)`。
 
-使用 :cpp:expr:`lv_spinner_set_anim_params(spinner, spin_duration, angle)` 持续时间一个转速和弧的长度可以定制。。
+使用 :cpp:expr:`lv_spinner_set_anim_params(spinner, spin_duration, angle)` 设置旋转器的动画时间和弧长角度。
 
 
 .. _lv_spinner_events:
@@ -96,9 +96,9 @@ Learn more about :ref:`events`.
    <br>
 
 
-不会向旋转器发送任何特殊事件。
+LVGL库本身不会向旋转器发送任何特殊事件。
 
-另请参阅 `弧线 </widgets/arc>`__ 的事件。
+另请参阅 `圆弧 </widgets/arc>`__ 的事件。
 
 详细了解更多 :ref:`events`。
 
@@ -123,7 +123,7 @@ Learn more about :ref:`indev_keys`.
    <br>
 
 
-对象类型不处理任何 *按键* 。
+本控件不处理任何 *按键* 。
 
 了解有关 :ref:`indev_keys` 的更多信息。
 
