@@ -166,7 +166,7 @@ The number of elements should be equal to the number of buttons
 
 默认情况下，所有标志都被禁用。
 
-要设置或清除按钮的控制属性，请使用 :cpp:expr:`lv_buttonmatrix_set_button_ctrl(buttonm, button_id, LV_BUTTONMATRIX_CTRL_...)` 和 :cpp:expr:`lv_buttonmatrix_clear_button_ctrl(buttonm, button_id, LV_BUTTONMATRIX_CTRL_...)` 分别。 更多  ``LV_BUTTONMATRIX_CTRL_...`` 值可以被 OR-ed
+要设置或清除按钮的控制属性，请使用 :cpp:expr:`lv_buttonmatrix_set_button_ctrl(buttonm, button_id, LV_BUTTONMATRIX_CTRL_...)` 和 :cpp:expr:`lv_buttonmatrix_clear_button_ctrl(buttonm, button_id, LV_BUTTONMATRIX_CTRL_...)` 。 更多  ``LV_BUTTONMATRIX_CTRL_...`` 值可以被 OR-ed
 
 要为矩阵按钮的所有按钮设置/清除相同的控制属性，请使用 :cpp:expr:`lv_buttonmatrix_set_button_ctrl_all(buttonm, LV_BUTTONMATRIX_CTRL_...)` 和 :cpp:expr:`lv_buttonmatrix_clear_button_ctrl_all(buttonm, LV_BUTTONMATRIX_CTRL_...)`。
 
@@ -229,8 +229,7 @@ Learn more about :ref:`events`.
 
 另请参阅 :ref:`基本对象 <lv_obj>` 的事件。
 
-:cpp:expr:`lv_buttonmatrix_get_selected_button(buttonm)` 返回最近被释放或聚焦按钮的索引。如果没有这样的按钮，则 :cpp:enumerator:`LV_BUTTONMATRIX_BUTTON_NONE` 返回最近被释放或聚焦按钮的索引。
-按钮。
+:cpp:expr:`lv_buttonmatrix_get_selected_button(buttonm)` 返回最近被释放或聚焦按钮的索引。如果没有这样的按钮，则返回 :cpp:enumerator:`LV_BUTTONMATRIX_BUTTON_NONE` 。
 
 :cpp:expr:`lv_buttonmatrix_get_button_text(buttonm, button_id)` 返回指向文本 ``button_id``\ 的按钮。
 
