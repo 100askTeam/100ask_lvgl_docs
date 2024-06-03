@@ -100,9 +100,10 @@ If you would rather try LVGL on your own project follow these steps:
    <details>
      <summary>显示原文</summary>
 
--  Create a draw buffer: LVGL will render the graphics here first, and
-   send the rendered image to the display. The buffer size can be set
-   freely but 1/10 screen size is a good starting point.
+-   Create a draw buffer: LVGL supports multiple buffering methods. Here you
+   can see how to set up partial buffering
+   (that is render the screen and the changed areas in a smaller buffer).
+   The buffer size can be set freely but 1/10 screen size is a good starting point.
 
 .. raw:: html
 
@@ -110,7 +111,7 @@ If you would rather try LVGL on your own project follow these steps:
    <br>
 
 
-- 创建一个绘制缓冲区：LVGL 将首先在此处渲染图形，并将渲染的图像发送到显示器。 缓冲区大小可以自由设置，但 1/10 屏幕大小是一个很好的起点。
+- LVGL支持多种缓冲方法。在这里，你可以看到如何设置部分缓冲（即在较小的缓冲区中渲染屏幕和变更区域）。 缓冲区大小可以自由设置，但 1/10 屏幕大小是一个很好的起点。
 
 
 .. code:: c
@@ -173,11 +174,9 @@ If you would rather try LVGL on your own project follow these steps:
 
 .. code:: c
 
-   static lv_indev_t indev_drv;           /*Descriptor of a input device driver*/
-   lv_indev_drv_init(&indev_drv);             /*Basic initialization*/
-   indev_drv.type = LV_INDEV_TYPE_POINTER;    /*Touch pad is a pointer-like device*/
-   indev_drv.read_cb = my_touchpad_read;      /*Set your driver function*/
-   lv_indev_drv_register(&indev_drv);         /*Finally register the driver*/
+   lv_indev_t * indev = lv_indev_create();           /*Create an input device*/
+   lv_indev_set_type(indev, LV_INDEV_TYPE_POINTER);  /*Touch pad is a pointer-like device*/
+   lv_ondev_set_read_cb(indev, my_touchpad_read);    /*Set your driver function*/
 
    void my_touchpad_read(lv_indev_drv_t * indev_drv, lv_indev_data_t * data)
    {
