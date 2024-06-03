@@ -26,6 +26,7 @@ Widgets（控件）
     led
     line
     list
+    lottie
     menu
     msgbox
     roller
