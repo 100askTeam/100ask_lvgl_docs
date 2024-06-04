@@ -21,12 +21,12 @@ and Texts can be added
    <br>
 
 
-List（列表） 基本上是一个垂直布局的矩形，按钮指向该矩形和可以添加文本。
+List（列表） 基本上是一个垂直布局的矩形，按钮指向该矩形并且可以添加文本。
 
 
 .. _lv_list_parts_and_styles:
 
-Parts and Styles（零件和样式）
+Parts and Styles（部分和样式）
 *****************************
 
 **Background** （背景）
@@ -79,12 +79,12 @@ The text starts to scroll horizontally if it's too long.
    <br>
 
 
-:cpp:expr:`lv_list_add_button(list, icon, text)` 添加一个带有图标的全角按钮
+:cpp:expr:`lv_list_add_button(list, icon, text)` 添加一个带有图标和文本的全宽按钮
 
 - 可以是图像或符号
 - 和文本。
 
-如果文本太长，文本将开始水平滚动。
+如果文本太长，文本将会水平滚动。
 
 
 Texts（文本）
