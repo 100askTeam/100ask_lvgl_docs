@@ -138,6 +138,7 @@ Get started with the Renesas ecosystem（开始使用瑞萨电子生态系统）
    <details>
      <summary>显示原文</summary>
 
+
 .. |img_debug_btn| image:: /misc/renesas/debug_btn.png
    :alt: Debug button
 
@@ -249,9 +250,9 @@ Get started with the Renesas ecosystem（开始使用瑞萨电子生态系统）
 
 
 .. |img_debug_btn| image:: /misc/renesas/debug_btn.png
-   :alt: 调试按钮
+   :alt: Debug button
 
-.. dropdown:: RA系列
+.. dropdown:: RA Family
 
    - 瑞萨官方的集成开发环境（IDE）被称为e² studio。由于它基于Eclipse，因此可以在Windows、Linux和Mac上运行。RA系列需要带有FSP 5.3的最新版本。可以在 `这里 <https://www.renesas.com/us/en/software-tool/flexible-software-package-fsp>`__ 下载.
 
@@ -313,7 +314,7 @@ Get started with the Renesas ecosystem（开始使用瑞萨电子生态系统）
       |
 
       .. image:: /misc/renesas/toolchains.png
-         :alt: 工具链
+         :alt: Toolchains
 
    - 克隆现成的 `lv_port_renesas_rx72n-envision-kit <https://github.com/lvgl/lv_port_renesas_rx72n-envision-kit.git>`__ 代码库：
 
