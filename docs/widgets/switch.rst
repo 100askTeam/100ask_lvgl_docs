@@ -26,7 +26,7 @@ on and off.
 
 .. _lv_switch_parts_and_styles:
 
-Parts and Styles（零件和样式）
+Parts and Styles（部分和样式）
 *****************************
 
 .. raw:: html
@@ -52,7 +52,7 @@ Parts and Styles（零件和样式）
    <br>
 
 
-开关包括以下3个零件：
+开关包括以下3个部分：
  
 -  :cpp:enumerator:`LV_PART_MAIN` 背景。 修改其 ``padding`` 会让下面的(指示器和旋钮)在相应方向上的大小发生变化。
 
@@ -92,7 +92,7 @@ Call :cpp:expr:`lv_obj_add_state(obj, LV_STATE_CHECKED)` to turn it on, or
 
 要获取开关的当前状态（ ``true`` 处于打开状态），请使用 :cpp:expr:`lv_obj_has_state（obj，lv_state_CHECKED）`
 
-调用 :cpp:expr:`lv_obj_add_state（obj，lv_state_CHECKED）` 将其打开，或 :cpp:expr:`lv_obj_remove_state（obj，lv_state_CHECKED）` 以将其关闭。
+调用 :cpp:expr:`lv_obj_add_state（obj，lv_state_CHECKED）` 手动将其打开，或 :cpp:expr:`lv_obj_remove_state（obj，lv_state_CHECKED）` 手动将其关闭。
 
 
 .. _lv_switch_events:

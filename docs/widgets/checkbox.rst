@@ -21,12 +21,12 @@ Checkbox is clicked the tick box is toggled.
    <br>
 
 
-复选框 (Checkbox) 对象是从“勾选框”和标签创建的。当 Chackbox 被点击时，勾选框被切换。
+复选框 (Checkbox) 控件是由“勾选框”（tick box）和标签（label）组成的。当 Chackbox 被点击时，勾选框会进行切换。
 
 
 .. _lv_checkbox_parts_and_styles:
 
-Parts and Styles（零件和样式）
+Parts and Styles（部分和样式）
 *****************************
 
 .. raw:: html
@@ -114,15 +114,15 @@ To get whether the checkbox is checked or not use:
    <br>
 
 
-您可以使用通用状态添加/清除功能手动选中、取消选中和禁用复选框：
+您可以使用通用状态 添加或清除 功能来手动勾选、取消勾选和禁用复选框：
 
 .. code:: c
 
-   lv_obj_add_state(cb, LV_STATE_CHECKED);   /*Make the checkbox checked*/
-   lv_obj_remove_state(cb, LV_STATE_CHECKED); /*Make the checkbox unchecked*/
-   lv_obj_add_state(cb, LV_STATE_CHECKED | LV_STATE_DISABLED); /*Make the checkbox checked and disabled*/
+   lv_obj_add_state(cb, LV_STATE_CHECKED);   /* 让复选框处于勾选 */
+   lv_obj_remove_state(cb, LV_STATE_CHECKED); /* 让复选框不处于勾选 */
+   lv_obj_add_state(cb, LV_STATE_CHECKED | LV_STATE_DISABLED); /* 选中并禁用该复选框 */
 
-要了解该复选框是否处于选中状态，请使用：:cpp:expr:`lv_obj_has_state(cb, LV_STATE_CHECKED)`。
+要了解该复选框是否处于选中状态（若处于选中状态则返回true），请使用：:cpp:expr:`lv_obj_has_state(cb, LV_STATE_CHECKED)`。
 
 
 .. _lv_checkbox_events:
@@ -187,7 +187,7 @@ Learn more about :ref:`indev_keys`.
 - ``LV_KEY_LEFT/DOWN``如果启用切换，则转到非切换状态
 - :cpp:enumerator:`LV_KEY_ENTER` 单击复选框并切换它
 
-请注意，像往常一样，:cpp:enumerator:`LV_KEY_ENTER` 的状态被转换为 ``LV_EVENT_PRESSED/PRESSING/RELEASED`` 等。
+请注意，跟往常一样，:cpp:enumerator:`LV_KEY_ENTER` 的状态被转换为 ``LV_EVENT_PRESSED/PRESSING/RELEASED`` 等。
 
 了解有关 :ref:`indev_keys`的更多信息。
 
