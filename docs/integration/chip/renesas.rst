@@ -151,7 +151,9 @@ Get started with the Renesas ecosystem（开始使用瑞萨电子生态系统）
    - Clone the ready-to-use repository for your selected board:
 
       .. code-block:: shell
+
          git clone https://github.com/lvgl/lv_port_renesas_ek-ra8d1.git --recurse-submodules
+
       Downloading the `.zip` from GitHub doesn't work as it doesn't download the submodules.
 
    - Open e² studio, go to ``File`` -> ``Import project`` and select ``General`` / ``Exsisting projects into workspace``
@@ -238,6 +240,7 @@ Get started with the Renesas ecosystem（开始使用瑞萨电子生态系统）
 
    .. note::
       Make sure that both channels of ``SW1`` DIP switch (next to ``ECN1``) are OFF.
+
 
 .. raw:: html
 
