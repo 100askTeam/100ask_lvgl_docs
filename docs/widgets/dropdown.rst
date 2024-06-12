@@ -29,16 +29,16 @@ with encoder navigation too.
    <br>
 
 
-下拉列表允许用户从列表中选择一个值。
+下拉列表允许用户从选项列表中选择一个值。
 
-下拉列表的选项表默认是关闭的，他可以选项可以是单个值或预定义文本。 当单击下拉列表后，其将创建一个列表，用户可以从中选择一个选项。 当用户选择了一个值后，该列表将再次被删除。
+下拉列表的选项表默认是关闭的，其中的选项可以是单个值或预定义文本。 当单击下拉列表后，其将创建一个列表，用户可以从中选择一个选项。 当用户选择了一个值后，该列表将被删除，下次点击会再重新生成。
 
-下拉列表将已经添加到默认组了。此外，下拉列表是一个可编辑的对象，允许通过编码器导航选项。
+下拉列表已经添加到默认组。此外，下拉列表是一个可编辑的对象，允许通过编码器导航选项。
 
 
 .. _lv_dropdown_parts_and_styles:
 
-Parts and Styles（零件和样式）
+Parts and Styles（部分和样式）
 ****************************
 
 .. raw:: html
@@ -55,11 +55,11 @@ The Dropdown widget is built from the elements: "button" and "list"
    <br>
 
 
-下拉组件由以下元素构建：“按钮”和“列表”（均与按钮和列表控件无关）
+下拉组件由以下元素组成：“按钮”和“列表”（都与按钮和列表控件无关，也就是并不是按钮和列表控件）
 
 
-Button
-------
+Button（列表）
+-------------
 
 .. raw:: html
 
@@ -122,7 +122,7 @@ Alternatively the theme can be extended with the new styles.
 -  :cpp:enumerator:`LV_PART_SCROLLBAR` 列表滚动条的背景、边框、阴影属性和宽度（对于它自己的宽度）以及右侧间距的右侧填充。
 -  :cpp:enumerator:`LV_PART_SELECTED` 指的是当前按下、选中或按下+选中的选项。 也是使用典型的背景属性。
 
-列表在打开/关闭时隐藏/显示。若要向其添加样式，请使用 :cpp:expr:`lv_dropdown_get_list(dropdown)` 获取列表对象。例如：
+列表在打开或关闭时会隐藏或显示。若要向其添加样式，请使用 :cpp:expr:`lv_dropdown_get_list(dropdown)` 获取列表对象。例如：
 
 .. code:: c
 
@@ -178,7 +178,7 @@ an option.
 
 :cpp:expr:`lv_dropdown_add_option(dropdown, "New option", pos)` 函数向 ``pos`` 索引插入一个新选项。
 
-为了节省内存，选项也可以使用 :cpp:expr:`lv_dropdown_set_static_options(dropdown, options)` 从静态（常量）字符串中设置。 在这种情况下，当下拉列表存在时，选项字符串应该处于活动状态，并且不能使用 :cpp:func:`lv_dropdown_add_option` 插入新的选项。
+为了节省内存，选项也可以使用函数 :cpp:expr:`lv_dropdown_set_static_options(dropdown, options)` 从静态（常量）字符串中设置。 在这种情况下，当下拉列表存在时，选项字符串应该处于活动状态，并且不能使用 :cpp:func:`lv_dropdown_add_option` 插入新的选项。
 
 可以使用 :cpp:expr:`lv_dropdown_set_selected(dropdown, id)` 手动选择一个选项，其中 ``id`` 是一个选项的索引，选项从 0 开始索引。
 
@@ -203,9 +203,9 @@ The get the *index* of the selected option, use
    <br>
 
 
-要获取所选中的选项的索引(index) ，可以使用 :cpp:expr:`lv_dropdown_get_selected(dropdown)`。
+要获取所选中的选项的索引（index），使用函数 :cpp:expr:`lv_dropdown_get_selected(dropdown)`。
 
-:cpp:expr:`lv_dropdown_get_selected_str(dropdown, buf, buf_size)`  将所选选项的 *name* 复制到 ``buf``。
+要获取所选中的选项的文本（str），使用函数 :cpp:expr:`lv_dropdown_get_selected_str(dropdown, buf, buf_size)`  将所选选项的 *name* 复制到 ``buf``。
 
 
 Direction（方向）
@@ -228,9 +228,9 @@ the edge.
    <br>
 
 
-列表可以在任何一侧创建。 默认的 :cpp:enumerator:`LV_DIR_BOTTOM` 可以通过 :cpp:expr:`lv_dropdown_set_dir(dropdown, LV_DIR_LEFT)`  函数进行修改。
+列表可以在任何一侧创建（展开）。 默认是 :cpp:enumerator:`LV_DIR_BOTTOM` （底部展开），可以通过函数 :cpp:expr:`lv_dropdown_set_dir(dropdown, LV_DIR_LEFT)` 修改展开方向。
 
-如果列表展开会超出屏幕，他会自动进行调整。
+如果列表在指定的展开方向超出的屏幕（父对象）的范围，其会自动进行调整展开方向。
 
 
 Symbol（符号）
@@ -253,7 +253,7 @@ will be shown on the left, otherwise on the right.
    <br>
 
 
-可以使用 :cpp:expr:`lv_dropdown_set_symbol(dropdown, LV_SYMBOL_...)` 将符号（通常是箭头）添加到下拉列表中
+可以使用函数 :cpp:expr:`lv_dropdown_set_symbol(dropdown, LV_SYMBOL_...)` 将符号（通常是箭头）添加到下拉列表中
 
 如果下拉列表的方向是 :cpp:enumerator:`LV_DIR_LEFT` ，符号将显示在左侧，否则显示在右侧，上下侧类似。
 
@@ -277,10 +277,10 @@ the selected option is displayed on the button.
    <br>
 
 
-主要部分(LV_PART_MAIN)可以显示所选选项或静态文本。 如果使用 :cpp:expr:`lv_dropdown_set_text(dropdown, "Some text")` ; 设置内容，那么无论选择哪个选项，它都会只会显示你所设置的内容。 如果文本为 ``NULL``，则所当前选选项将显示在按钮上。
+主要部分(LV_PART_MAIN)可以显示所选选项或静态文本。 如果使用函数 :cpp:expr:`lv_dropdown_set_text(dropdown, "Some text")` 设置内容，那么无论选择哪个选项，它都会只会显示你所设置的内容。 如果文本为 ``NULL``，则所当前选选项将显示在按钮上。
 
 
-Manually open/close（手动打开/关闭）
+Manually open/close（手动打开或关闭）
 ----------------------------------
 
 .. raw:: html
