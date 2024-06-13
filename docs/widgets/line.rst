@@ -21,12 +21,12 @@ points.
    <br>
 
 
-线条(Line)组件能在给出的一组点之间绘制出相连的直线。
+线条(Line)控件能在给出的一组点之间绘制出相连的直线。
 
 
 .. _lv_line_parts_and_styles:
 
-Parts and Styles（零件和样式）
+Parts and Styles（部分和样式）
 *****************************
 
 .. raw:: html
@@ -76,7 +76,7 @@ values do not automatically expand the bounding box.
 
 点必须存储在 :cpp:struct:`lv_point_precise_t` 类型的数组中，并通过 :cpp:expr:`lv_line_set_points(lines, point_array, point_cnt)` 函数将数组传递给line对象。
 
-它们的坐标可以指定为原始像素坐标 （例如 ``{5, 10}``），或使用 :cpp:expr:`lv_pct(x)` 作为线条边界框的百分比。在后一种情况下，线的宽度/高度可能需要显式使用 ``lv_obj_set_width/height``， 作为百分比值不会自动展开边界框。
+它们的坐标可以指定为原始像素坐标 （例如 ``{5, 10}``），或使用 :cpp:expr:`lv_pct(x)` 设置线条边界的区域百分比（相对于父对象）。在后一种情况下，线的宽度/高度（可现实的最大区域）需要显式使用函数 ``lv_obj_set_width/height``设置， 作为百分比值不会自适应调整边界。
 
 Auto-size（自动调整大小）
 ------------------------

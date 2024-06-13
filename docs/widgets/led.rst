@@ -26,7 +26,7 @@ LED（指示灯）是矩形（或圆形）对象。它的亮度可以调节。�
 
 .. _lv_led_parts_and_styles:
 
-Parts and Styles（零件和样式）
+Parts and Styles（部分和样式）
 *****************************
 
 .. raw:: html
@@ -67,7 +67,7 @@ background color, border color, and shadow color.
    <br>
 
 
-您可以使用 :cpp:expr:`lv_led_set_color(led, lv_color_hex(0xff0080))` 设置 LED 的颜色。这将用作背景颜色、边框颜色和阴影颜色。
+可以使用函数 :cpp:expr:`lv_led_set_color(led, lv_color_hex(0xff0080))` 设置 LED 的颜色。这将用作背景颜色、边框颜色和阴影颜色。
 
 
 Brightness（亮度）
@@ -87,7 +87,7 @@ The brightness should be between 0 (darkest) and 255 (lightest).
    <br>
 
 
-可以使用 :cpp:expr:`lv_led_set_bright(led, bright)` 设置它们的亮度。亮度应介于0（最暗）和255（最亮）之间。
+可以使用函数 :cpp:expr:`lv_led_set_bright(led, bright)` 设置它们的亮度。亮度范围：0（最暗）- 255（最亮）。
 
 
 Toggle（切换）
@@ -107,7 +107,7 @@ the ON and OFF state.
    </details> 
    <br>
 
-使用 :cpp:expr:`lv_led_on(led)` 和 :cpp:expr:`lv_led_off(led)` 将亮度设置为预定义的ON或OFF值。 :cpp:expr:`lv_led_toggle(led)` 在ON和OFF状态之间切换。
+使用函数 :cpp:expr:`lv_led_on(led)` 和 :cpp:expr:`lv_led_off(led)` 将亮度设置为预定义的ON或OFF值。函数:cpp:expr:`lv_led_toggle(led)` 就像开关，会让led在ON和OFF状态之间切换。
 
 
 .. _lv_led_events:
