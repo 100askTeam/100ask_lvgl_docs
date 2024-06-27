@@ -79,6 +79,43 @@ The minor and major range (values of each tick) are configured with :cpp:expr:`l
 次要范围和主要范围（每个刻度的值）配置为 :cpp:expr:`lv_scale_set_range(scale, minor_range, major_range)`。
 
 
+Tick drawing order（刻度绘制顺序）
+---------------------------------
+
+.. raw:: html
+
+   <details>
+     <summary>显示原文</summary>
+
+You can set the drawing of the ticks on top of the main line with :cpp:expr:`lv_scale_set_draw_ticks_on_top(scale, true)`. The default
+drawing order is below the main line.
+
+This is a scale with the ticks being drawn below of the main line (default):
+
+.. image:: /misc/scale_ticks_below.png
+
+This is an scale with the ticks being drawn at the top of the main line:
+
+.. image:: /misc/scale_ticks_on_top.png
+
+.. raw:: html
+
+   </details> 
+   <br>
+
+
+您可以通过调用 :cpp:expr:`lv_scale_set_draw_ticks_on_top(scale, true)`将刻度的绘制设置在主线之上。默认的绘制顺序是在主线之下。
+
+这是一个刻度绘制在主线之下的标尺（默认情况）：
+
+.. image:: /misc/scale_ticks_below.png
+
+这是一个刻度绘制在主线之上的标尺：
+
+.. image:: /misc/scale_ticks_on_top.png
+
+
+
 Configure ticks（配置刻度线）
 ----------------------------
 
