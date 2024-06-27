@@ -113,20 +113,6 @@ Buffer swapping can be activated by passing a second buffer of same size instead
 
     Partial mode can be activated via the macro in ``src/board_init.c`` file of the demo projects.
 
-
-Screen rotation
-"""""""""""""""
-
-Software based screen rotation is supported in partial mode. It uses the common API, no extra configuration is required:
-
-.. code:: c
-    lv_display_set_rotation(lv_display_get_default(), LV_DISP_ROTATION_90);
-    /* OR */
-    lv_display_set_rotation(lv_display_get_default(), LV_DISP_ROTATION_180);
-    /* OR */
-    lv_display_set_rotation(lv_display_get_default(), LV_DISP_ROTATION_270);
-Make sure the heap is large enough, as a buffer with the same size as the partial buffer will be allocated.
-
 .. raw:: html
 
    </details>
@@ -159,6 +145,28 @@ Make sure the heap is large enough, as a buffer with the same size as the partia
 Screen rotation（屏幕旋转）
 """""""""""""""""""""""""""""
 
+.. raw:: html
+
+   <details>
+     <summary>显示原文</summary>
+
+Software based screen rotation is supported in partial mode. It uses the common API, no extra configuration is required:
+
+.. code:: c
+    lv_display_set_rotation(lv_display_get_default(), LV_DISP_ROTATION_90);
+    /* OR */
+    lv_display_set_rotation(lv_display_get_default(), LV_DISP_ROTATION_180);
+    /* OR */
+    lv_display_set_rotation(lv_display_get_default(), LV_DISP_ROTATION_270);
+    
+Make sure the heap is large enough, as a buffer with the same size as the partial buffer will be allocated.
+
+.. raw:: html
+
+   </details>
+   <br>
+
+
 支持在部分模式下进行基于软件的屏幕旋转。它使用通用API，无需额外配置：
 
 .. code:: c
@@ -167,4 +175,5 @@ Screen rotation（屏幕旋转）
     lv_display_set_rotation(lv_display_get_default(), LV_DISP_ROTATION_180);
     /* OR */
     lv_display_set_rotation(lv_display_get_default(), LV_DISP_ROTATION_270);
+    
 确保堆大小足够大，因为将分配一个与部分缓冲区大小相同的缓冲区。
