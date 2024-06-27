@@ -109,6 +109,23 @@ Buffer swapping can be activated by passing a second buffer of same size instead
     lv_display_t * disp = lv_renesas_glcdc_partial_create(partial_draw_buf, NULL, sizeof(partial_draw_buf));
     lv_display_set_default(disp);
 
+.. note::
+
+    Partial mode can be activated via the macro in ``src/board_init.c`` file of the demo projects.
+
+
+Screen rotation
+"""""""""""""""
+
+Software based screen rotation is supported in partial mode. It uses the common API, no extra configuration is required:
+
+.. code:: c
+    lv_display_set_rotation(lv_display_get_default(), LV_DISP_ROTATION_90);
+    /* OR */
+    lv_display_set_rotation(lv_display_get_default(), LV_DISP_ROTATION_180);
+    /* OR */
+    lv_display_set_rotation(lv_display_get_default(), LV_DISP_ROTATION_270);
+Make sure the heap is large enough, as a buffer with the same size as the partial buffer will be allocated.
 
 .. raw:: html
 
@@ -127,3 +144,27 @@ Buffer swapping can be activated by passing a second buffer of same size instead
 
 要在 :cpp:enumerator:`LV_DISPLAY_RENDER_MODE_PARTIAL` 模式下使用驱动，必须分配一个额外的缓冲区，最好在最快的可用内存区域中。
 通过传递第二个相同大小的缓冲区而不是 :cpp:expr:`NULL` 参数，可以激活缓冲区交换。
+
+.. code:: c
+
+    static lv_color_t partial_draw_buf[DISPLAY_HSIZE_INPUT0 * DISPLAY_VSIZE_INPUT0 / 10] BSP_PLACE_IN_SECTION(".sdram") BSP_ALIGN_VARIABLE(1024);
+
+    lv_display_t * disp = lv_renesas_glcdc_partial_create(partial_draw_buf, NULL, sizeof(partial_draw_buf));
+    lv_display_set_default(disp);
+
+.. note::
+
+    可以通过示例项目的 ``src/board_init.c`` 文件中的宏来激活部分模式。
+
+Screen rotation（屏幕旋转）
+"""""""""""""""""""""""""""""
+
+支持在部分模式下进行基于软件的屏幕旋转。它使用通用API，无需额外配置：
+
+.. code:: c
+    lv_display_set_rotation(lv_display_get_default(), LV_DISP_ROTATION_90);
+    /* OR */
+    lv_display_set_rotation(lv_display_get_default(), LV_DISP_ROTATION_180);
+    /* OR */
+    lv_display_set_rotation(lv_display_get_default(), LV_DISP_ROTATION_270);
+确保堆大小足够大，因为将分配一个与部分缓冲区大小相同的缓冲区。
