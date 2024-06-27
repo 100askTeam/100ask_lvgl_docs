@@ -10,3 +10,4 @@ Bindings（绑定）
    cpp
    pikascript
    javascript
+   api_json
