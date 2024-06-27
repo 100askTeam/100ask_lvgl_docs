@@ -70,8 +70,8 @@ Add a tile（添加平铺显示）
    <details>
      <summary>显示原文</summary>
 
-:cpp:expr:`lv_tileview_add_tile(tileview, row_id, col_id, dir)` creates a new
-tile on the ``row_id``\ th row and ``col_id``\ th column. ``dir`` can be
+:cpp:expr:`lv_tileview_add_tile(tileview, col_id, row_id, dir)` creates a new
+tile on the ``col_id``\ th column  and ``row_id``\ th row. ``dir`` can be
 ``LV_DIR_LEFT/RIGHT/TOP/BOTTOM/HOR/VER/ALL`` or OR-ed values to enable
 moving to the adjacent tiles into the given direction by swiping.
 
@@ -83,7 +83,7 @@ can be created.
    </details> 
    <br>
 
-:cpp:expr:`lv_tileview_add_tile(tileview, row_id, col_id, dir)` 创建一个新的第 ``row_id``\ th 行和 ``col_id``\ th 列上的瓦片 ``目录`` 可以是 ``LV_DIR_LEFT/RIGHT/TOP/BOTTOM/HOR/VER/ALL`` 或 OR-ed 值以启用通过滑动向给定方向移动到相邻的图块。
+:cpp:expr:`lv_tileview_add_tile(tileview, row_id, col_id, dir)` 函数在平铺视图 tileview 中的第 col_id 列和第 row_id 行创建了一个新的瓦片。dir 参数可以是 ``LV_DIR_LEFT/RIGHT/TOP/BOTTOM/HOR/VER/ALL`` 中的一个或多个值，通过按位或（OR-ed）操作来组合，以允许通过滑动手势在给定方向上移动到相邻的瓦片。
 
 返回的值是可以在其 ``lv_obj_t *`` 上创建选项卡内容的值。
 
