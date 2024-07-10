@@ -28,7 +28,7 @@ to write texts into a :ref:`Text area <lv_textarea>`.
 
 .. _lv_keyboard_parts_and_styles:
 
-Parts and Styles（零件与样式）
+Parts and Styles（部分与样式）
 *****************************
 
 .. raw:: html
@@ -87,7 +87,7 @@ default mode is :cpp:enumerator:`LV_KEYBOARD_MODE_TEXT_UPPER`.
    <br>
 
 
-键盘可以切换下面这几种输入模式：
+键盘可以切换为下面这几种输入模式：
 
 - :cpp:enumerator:`LV_KEYBOARD_MODE_TEXT_LOWER` 26键英文小写键盘模式
 - :cpp:enumerator:`LV_KEYBOARD_MODE_TEXT_UPPER` 26键英文大写键盘模式
@@ -119,7 +119,7 @@ use :cpp:expr:`lv_keyboard_set_textarea(kb, ta)`.
    <br>
 
 
-你可以将 :ref:`Text area <lv_textarea>` 分配给键盘绑定，之后点击键盘上的按钮就能更改文本框中的内容。可以通过 :cpp:expr:`lv_keyboard_set_textarea(kb, ta)` 函数将文本框分配给键盘绑定。
+你可以将 :ref:`Text area <lv_textarea>` 分配给键盘绑定，之后点击键盘上的按钮就能更改文本框中的内容。可以通过 :cpp:expr:`lv_keyboard_set_textarea(kb, ta)` 函数将文本框绑定到键盘上。
 
 
 Key Popovers（按键弹出提示）
@@ -198,8 +198,8 @@ with the original map:
 
 请记住，使用以下关键字可以得到与内置map(布局)相同的效果：
 
-- :c:macro:`LV_SYMBOL_OK` 将 :cpp:enumerator:`LV_EVENT_READY` 发生到指定的文本区域。
-- :c:macro:`LV_SYMBOL_CLOSE` 或 :c:macro:`LV_SYMBOL_KEYBOARD` 将 :cpp:enumerator:`LV_EVENT_CANCEL` 发生到指定的文本区域。
+- :c:macro:`LV_SYMBOL_OK` 将 :cpp:enumerator:`LV_EVENT_READY` 事件触发到指定的文本区域。
+- :c:macro:`LV_SYMBOL_CLOSE` 或 :c:macro:`LV_SYMBOL_KEYBOARD` 将 :cpp:enumerator:`LV_EVENT_CANCEL` 事件触发到指定的文本区域。
 - :c:macro:`LV_SYMBOL_BACKSPACE` 删除光标左侧的字符。
 - :c:macro:`LV_SYMBOL_LEFT` 向左移动光标。
 - :c:macro:`LV_SYMBOL_RIGHT` 向右移动光标。
@@ -246,7 +246,7 @@ Learn more about :ref:`events`.
 -  :cpp:enumerator:`LV_EVENT_READY`: 单击 *确定* 按钮。
 -  :cpp:enumerator:`LV_EVENT_CANCEL`: 单击 *关闭* 按钮。
 
-键盘有一个名为 **默认事件处理程序回调** 调用 :cpp:func:`lv_keyboard_def_event_cb`，用于处理按钮按下，映射更改、指定的文本区域等。您可以删除并替换它如果您愿意，可以使用自定义事件处理程序。
+键盘有一个名为 **默认事件处理程序回调** 调用 :cpp:func:`lv_keyboard_def_event_cb`，用于处理按钮按下，映射更改、指定的文本区域等。如果您愿意，您可以删除并替换它，也可以使用自定义事件处理。
 
 :注意: 在 8.0 及更高版本中，向键盘添加事件处理程序不会删除默认事件处理程序。 此行为与 v7 不同，在 v7 中，添加事件处理程序将始终替换前一个事件处理程序。
 

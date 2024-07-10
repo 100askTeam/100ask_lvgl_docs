@@ -22,7 +22,7 @@ modified :ref:`Text area <lv_textarea>`.
    <br>
 
 
-Spinbox（微调框）包含了一串数字文本，可以通过 *Keys* 或 API 函数来“增加” 或 “减少” 数字大小 。本质上微调框只是覆盖在 :ref:`文本框 <lv_textarea>` 控件上面。
+Spinbox（微调框）包含了一串数字文本，可以通过 *Keys* 或 API 函数来 “增加” 或 “减少” 数字大小 。本质上微调框只是覆盖在 :ref:`文本框 <lv_textarea>` 控件上面。
 
 
 .. _lv_spinbox_parts_and_styles:

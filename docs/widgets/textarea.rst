@@ -32,7 +32,7 @@ One line mode and password modes are supported.
 
 .. _lv_textarea_parts_and_styles:
 
-Parts and Styles（零件和样式）
+Parts and Styles（部分和样式）
 *****************************
 
 .. raw:: html
@@ -105,12 +105,12 @@ To add wide characters like ``'á'``, ``'ß'`` or CJK characters use
    <br>
 
 
-您可以使用以下命令在光标的当前位置插入文本或字符：
+您可以使用以下接口在光标的当前位置插入文本或字符：
 
 -  :cpp:expr:`lv_textarea_add_char(textarea, 'c')`
 -  :cpp:expr:`lv_textarea_add_text(textarea, "insert this text")`
 
-要添加宽字符，如 ``'á'``, ``'ß'`` 或 CJK 字符，请使用 :cpp:expr:`lv_textarea_add_text(ta, "á")`。
+要添加宽字符，如 ``'á'``, ``'ß'`` 或 CJK 字符，请使用接口 :cpp:expr:`lv_textarea_add_text(ta, "á")`。
 
 :cpp:expr:`lv_textarea_set_text(ta, "New text")` 会改变(清空再覆盖)文本框中的所有内容。
 
@@ -134,7 +134,7 @@ A placeholder text can be specified
    <br>
 
 
-您可以通过 :cpp:expr:`lv_textarea_set_placeholder_text(ta, "Placeholder text")` 指定占位符文本，当文本框的内容为空时，所设置的占位符文本将会展示出来。
+您可以通过接口 :cpp:expr:`lv_textarea_set_placeholder_text(ta, "Placeholder text")` 指定占位符文本，当文本框的内容为空时，所设置的占位符文本将会展示出来。
 
 
 Delete character（删除字符）
@@ -344,7 +344,7 @@ scrolling and drawing will as fast as with "normal" short texts.
    <br>
 
 
-如果文本框中有很长的文本（例如 > 20k 个字符），可能会导致滚动和绘制速度很慢。 但是，如果在 ``lv_conf.h`` 中启用 :c:macro:`LV_LABEL_LONG_TXT_HINT` 那么这个问题可以得到很好的改善。 这将会保存有关标签(label)的一些附加信息以加快其绘制速度。 使用 :c:macro:`LV_LABEL_LONG_TXT_HINT` 后，滚动和绘制速度将与 “普通” 的短文本一样快。
+如果文本框中有很长的文本（例如 > 20k 个字符），可能会导致滚动和绘制速度很慢。 但是，如果在 ``lv_conf.h`` 中启用 :c:macro:`LV_LABEL_LONG_TXT_HINT` 那么这个问题可以得到很好的改善。 这将会保存有关标签(label)的一些附加信息以加快其绘制速度。 使用 :c:macro:`LV_LABEL_LONG_TXT_HINT` 后，其滚动和绘制速度将与 “普通” 的短文本一样快。
 
 
 Select text（选择文本）
@@ -399,9 +399,9 @@ Learn more about :ref:`events`.
    <br>
 
 
--  :cpp:enumerator:`LV_EVENT_INSERT` 在插入字符或文本之前发送该事件。 事件参数是即将插入的文本。可以通过接口 :cpp:expr:`lv_textarea_set_insert_replace(textarea, "New text")` 将要计划插入的文本替换为其他文本。 注意替换的新文本不能时局部变量，也就是不能在回调函数直接创建局部变量保存新文本。 ``""`` 表示不插入任何内容。
+-  :cpp:enumerator:`LV_EVENT_INSERT` 在插入字符或文本之前发送该事件。 事件参数是即将插入的文本。可以通过接口 :cpp:expr:`lv_textarea_set_insert_replace(textarea, "New text")` 将要计划插入的文本替换为其他文本。 注意替换的新文本不能是局部变量，也就是不能在回调函数中直接创建局部变量保存新文本。 ``""`` 表示不插入任何内容。
 -  :cpp:enumerator:`LV_EVENT_VALUE_CHANGED` 当文本框的内容被改变时发送该事件。
--  :cpp:enumerator:`LV_EVENT_READY` 在按下 :cpp:enumerator:`LV_KEY_ENTER` 时发送到单行文本框。
+-  :cpp:enumerator:`LV_EVENT_READY` 在按下 :cpp:enumerator:`LV_KEY_ENTER` 按键时发送到单行文本框。
 
 参见 :ref:`Base object <lv_obj>` 的事件。
 
