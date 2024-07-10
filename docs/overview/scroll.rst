@@ -328,7 +328,7 @@ Elastic scroll（弹性卷轴效果）
    <details>
      <summary>显示原文</summary>
 
-Normally an object can't be scrolled past the extremeties of its
+Normally an object can't be scrolled past the extremities of its
 content. That is the top side of the content can't be below the top side
 of the object.
 

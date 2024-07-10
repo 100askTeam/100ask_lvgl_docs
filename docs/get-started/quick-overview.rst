@@ -729,7 +729,7 @@ Examples
 
 .. _quick-overview_micropython:
 
-Micropython
+MicroPython
 -----------
 
 .. raw:: html

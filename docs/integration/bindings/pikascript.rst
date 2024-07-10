@@ -59,10 +59,10 @@ Why PikaScript + LVGL ?（为什么选择 PikaScript + LVGL？）
      <summary>显示原文</summary>
 
 PikaScript now supports the main features of LVGL8, and these APIs are
-fully compatible with Micropython!
+fully compatible with MicroPython!
 
 This means that you can continue to use already written code from
-Micropython, and then use less code space and RAM.
+MicroPython, and then use less code space and RAM.
 
 Enjoy detailed code hints down to the parameter type for a better
 programming experience
@@ -75,9 +75,9 @@ Use a more convenient IDE, such as vs-based simulation projects
    <br>
 
 
-PikaScript现在支持LVGL8的主要功能，并且这些API与Micropython完全兼容！
+PikaScript现在支持LVGL8的主要功能，并且这些API与MicroPython完全兼容！
 
-这意味着您可以继续使用已经编写好的Micropython代码，同时使用更少的代码空间和RAM。
+这意味着您可以继续使用已经编写好的MicroPython代码，同时使用更少的代码空间和RAM。
 
 享受详细的代码提示，甚至可以提供参数类型，以获得更好的编程体验。
 

@@ -24,7 +24,7 @@ https://cmake.org/cmake/help/latest/manual/cmake-presets.7.html
 这个项目使用CMakePresets来确保轻松构建。在这里了解更多关于CMake Presets的信息：https://cmake.org/cmake/help/latest/manual/cmake-presets.7.html
 
 
-Prerequsites（先决条件）
+Prerequisites（先决条件）
 -----------------------
 
 .. raw:: html
@@ -122,7 +122,7 @@ When hitting the generate button, CMake will create solution files (for VS) or N
 The following targets are available.
 
 - lvgl (the actual library, required)
-- lvgl_thorvg (an vector grafics extension, optional)
+- lvgl_thorvg (an vector graphics extension, optional)
 - lvgl_examples (example usages, optional)
 - lvgl_demos (some demos, optional)
 
@@ -166,7 +166,7 @@ Build with Command line（使用命令行进行构建）
      <summary>显示原文</summary>
 
 You can also build your project using the command line.
-Run the follwoing commands
+Run the following commands
 
 - cmake --preset windows-base
 - cmake --build --preset windows-base_dbg

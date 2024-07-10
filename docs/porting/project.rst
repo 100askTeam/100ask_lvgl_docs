@@ -115,7 +115,7 @@ Other platforms and tools（其它平台和工具）
    <details>
      <summary>显示原文</summary>
 
-The `Get started </integartion/index>`__ section contains many platform
+The `Get started </integration/index>`__ section contains many platform
 specific descriptions e.g. for ESP32, Arduino, NXP, RT-Thread, NuttX,
 etc.
 
@@ -125,7 +125,7 @@ etc.
    <br>
 
 
-`入门 </integartion/index>`__ 部分包含许多平台具体描述，例如 ESP32、Arduino、NXP、RT-Thread、NuttX、 等。
+`入门 </integration/index>`__ 部分包含许多平台具体描述，例如 ESP32、Arduino、NXP、RT-Thread、NuttX、 等。
 
 
 Demos and Examples（演示和示例）

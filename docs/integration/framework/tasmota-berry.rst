@@ -115,7 +115,7 @@ also introduced the Berry scripting language, a small-footprint language
 similar to Python and fully integrated in Tasmota.
 
 A comprehensive mapping of LVGL in Berry language is now available,
-similar to the mapping of Micropython. It allows to use +98% of all LVGL
+similar to the mapping of MicroPython. It allows to use +98% of all LVGL
 features. It is also possible to write custom widgets in Berry.
 
 Versions supported: LVGL v8.0.2, LodePNG v20201017, Freetype 2.10.4
@@ -129,7 +129,7 @@ Versions supported: LVGL v8.0.2, LodePNG v20201017, Freetype 2.10.4
 2021 年，Tasmota 为基于 ESP32 的设备增加了对 LVGL 的全面支持。
 它还引入了与 Python 类似的轻量级脚本语言 Berry，该语言已完全集成到 Tasmota 中。
 
-现在可以使用类似于 Micropython 的映射在 Berry 语言中全面映射 LVGL，允许使用 LVGL 的 +98% 的功能。
+现在可以使用类似于 MicroPython 的映射在 Berry 语言中全面映射 LVGL，允许使用 LVGL 的 +98% 的功能。
 还可以在 Berry 中编写自定义控件。
 
 支持版本：LVGL v8.0.2，LodePNG v20201017，Freetype 2.10.4

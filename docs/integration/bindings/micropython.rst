@@ -1,7 +1,7 @@
 .. _micropython:
 
 ===========
-Micropython
+MicroPython
 ===========
 
 .. raw:: html
@@ -9,11 +9,11 @@ Micropython
    <details>
      <summary>显示原文</summary>
 
-What is Micropython?
+What is MicroPython?
 --------------------
 
-`Micropython <http://micropython.org/>`__ is Python for
-microcontrollers. Using Micropython, you can write Python3 code and run
+`MicroPython <http://micropython.org/>`__ is Python for
+microcontrollers. Using MicroPython, you can write Python3 code and run
 it even on a bare metal architecture with limited resources.
 
 .. raw:: html
@@ -29,7 +29,7 @@ it even on a bare metal architecture with limited resources.
 使用MicroPython，您可以编写Python3代码并在资源有限的裸机架构上运行它。
 
 
-Highlights of Micropython（MicroPython的亮点）
+Highlights of MicroPython（MicroPython的亮点）
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. raw:: html
@@ -74,7 +74,7 @@ Highlights of Micropython（MicroPython的亮点）
 - **嵌入式定向**: 自带专为嵌入式系统设计的模块，比如用于访问底层硬件的 `machine module <https://docs.micropython.org/en/latest/library/machine.html#classes>`__ （I/O引脚、ADC、UART、SPI、I2C、RTC、定时器等）。
 
 
-Why Micropython + LVGL?（为什么选择Micropython + LVGL？）
+Why MicroPython + LVGL?（为什么选择MicroPython + LVGL？）
 ---------------------------------------------------------
 
 .. raw:: html
@@ -82,7 +82,7 @@ Why Micropython + LVGL?（为什么选择Micropython + LVGL？）
    <details>
      <summary>显示原文</summary>
 
-Micropython `does not have a good native high-level GUI library <https://forum.micropython.org/viewtopic.php?f=18&t=5543>`__.
+MicroPython `does not have a good native high-level GUI library <https://forum.micropython.org/viewtopic.php?f=18&t=5543>`__.
 LVGL is an `Object-Oriented Component Based <https://blog.lvgl.io/2018-12-13/extend-lvgl-objects>`__
 high-level GUI library, which seems to be a natural candidate to map into a higher level language, such as Python.
 LVGL is implemented in C and its APIs are in C.
@@ -93,11 +93,11 @@ LVGL is implemented in C and its APIs are in C.
    <br>
 
 
-Micropython `没有一个好的本地高级GUI库 <https://forum.micropython.org/viewtopic.php?f=18&t=5543>`__。 LVGL是一个 `面向对象的组件化 <https://blog.lvgl.io/2018-12-13/extend-lvgl-objects>`__ 高级GUI库，似乎是将其映射到高级语言（如Python）的一个自然选择。
+MicroPython `没有一个好的本地高级GUI库 <https://forum.micropython.org/viewtopic.php?f=18&t=5543>`__。 LVGL是一个 `面向对象的组件化 <https://blog.lvgl.io/2018-12-13/extend-lvgl-objects>`__ 高级GUI库，似乎是将其映射到高级语言（如Python）的一个自然选择。
 LVGL是用C实现的，其API也是用C编写的。
 
 
-Here are some advantages of using LVGL in Micropython:（以下是在Micropython中使用LVGL的一些优点：）
+Here are some advantages of using LVGL in MicroPython:（以下是在MicroPython中使用LVGL的一些优点：）
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. raw:: html
@@ -107,7 +107,7 @@ Here are some advantages of using LVGL in Micropython:（以下是在Micropython
 
 - Develop GUI in Python, a very popular high level language. Use paradigms such as Object-Oriented Programming.
 - Usually, GUI development requires multiple iterations to get things right. With C, each iteration consists of
-  **``Change code`` > ``Build`` > ``Flash`` > ``Run``**. In Micropython it's just
+  **``Change code`` > ``Build`` > ``Flash`` > ``Run``**. In MicroPython it's just
   **``Change code`` > ``Run``** ! You can even run commands interactively using the
   `REPL <https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop>`__ (the interactive prompt)
 
@@ -122,7 +122,7 @@ Here are some advantages of using LVGL in Micropython:（以下是在Micropython
 在MicroPython中，只需要 **``更改代码`` > ``运行``**！甚至可以使用REPL（交互式提示符）来交互地运行命令。
 
 
-Micropython + LVGL could be used for:（Micropython + LVGL可以用于：）
+MicroPython + LVGL could be used for:（MicroPython + LVGL可以用于：）
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. raw:: html
@@ -209,9 +209,9 @@ Online Simulator（在线模拟器）
    <details>
      <summary>显示原文</summary>
 
-If you want to experiment with LVGL + Micropython without downloading
+If you want to experiment with LVGL + MicroPython without downloading
 anything - you can use our online simulator! It's a fully functional
-LVGL + Micropython that runs entirely in the browser and allows you to
+LVGL + MicroPython that runs entirely in the browser and allows you to
 edit a python script and run it.
 
 `Click here to experiment on the online simulator <https://sim.lvgl.io/>`__
@@ -224,11 +224,11 @@ Many `LVGL examples <https://docs.lvgl.io/master/examples.html>`__ are available
    <br>
 
 
-如果你想在不下载任何东西的情况下尝试LVGL + Micropython，你可以使用我们的在线模拟器！它是一个完全功能的LVGL + Micropython，在浏览器中运行，可以让你编辑Python脚本并运行。
+如果你想在不下载任何东西的情况下尝试LVGL + MicroPython，你可以使用我们的在线模拟器！它是一个完全功能的LVGL + Micropython，在浏览器中运行，可以让你编辑Python脚本并运行。
 
 `点击这里在在线模拟器上进行实验 <https://sim.lvgl.io/>`__
 
-许多 `LVGL示例 <https://docs.lvgl.io/master/examples.html>`__ 也适用于Micropython。只需点击链接！
+许多 `LVGL示例 <https://docs.lvgl.io/master/examples.html>`__ 也适用于MicroPython。只需点击链接！
 
 
 PC Simulator（PC 模拟器）
@@ -239,7 +239,7 @@ PC Simulator（PC 模拟器）
    <details>
      <summary>显示原文</summary>
 
-Micropython is ported to many platforms. One notable port is "unix", which allows you to build and run Micropython
+MicroPython is ported to many platforms. One notable port is "unix", which allows you to build and run Micropython
 (+LVGL) on a Linux machine. (On a Windows machine you might need Virtual Box or WSL or MinGW or Cygwin etc.)
 
 `Click here to know more information about building and running the unix port <https://github.com/lvgl/lv_micropython>`__
@@ -263,13 +263,13 @@ Embedded Platforms（嵌入式平台）
    <details>
      <summary>显示原文</summary>
 
-In the end, the goal is to run it all on an embedded platform. Both Micropython and LVGL can be used on many embedded
-architectures. `lv_micropython <https://github.com/lvgl/lv_micropython>`__ is a fork of Micropython+LVGL and currently
-supports Linux, ESP32, STM32 and RP2. It can be ported to any other platform supported by Micropython.
+In the end, the goal is to run it all on an embedded platform. Both MicroPython and LVGL can be used on many embedded
+architectures. `lv_micropython <https://github.com/lvgl/lv_micropython>`__ is a fork of MicroPython+LVGL and currently
+supports Linux, ESP32, STM32 and RP2. It can be ported to any other platform supported by MicroPython.
 
 - You would also need display and input drivers. You can either use one of the existing drivers provided with lv_micropython,
   or you can create your own input/display drivers for your specific hardware.
-- Drivers can be implemented either in C as a Micropython module, or in pure Python!
+- Drivers can be implemented either in C as a MicroPython module, or in pure Python!
 
 lv_micropython already contains these drivers:
 
@@ -305,10 +305,10 @@ lv_micropython already contains these drivers:
    <br>
 
 
-最终目标是在嵌入式平台上运行所有内容。 Micropython和LVGL都可以用于许多嵌入式架构。 `lv_micropython <https://github.com/lvgl/lv_micropython>`__ 是Micropython+LVGL的一个分支，目前支持Linux、ESP32、STM32和RP2。它可以移植到Micropython支持的任何其他平台。
+最终目标是在嵌入式平台上运行所有内容。 MicroPython和LVGL都可以用于许多嵌入式架构。 `lv_micropython <https://github.com/lvgl/lv_micropython>`__ 是Micropython+LVGL的一个分支，目前支持Linux、ESP32、STM32和RP2。它可以移植到Micropython支持的任何其他平台。
 
 - 您还需要显示和输入驱动程序。您可以使用lv_micropython提供的现有驱动程序之一，也可以为您的特定硬件创建自己的输入/显示驱动程序。
-- 驱动程序可以在C中作为Micropython模块实现，也可以使用纯Python实现！
+- 驱动程序可以在C中作为MicroPython模块实现，也可以使用纯Python实现！
 
 lv_micropython已经包含了这些驱动程序：
 
@@ -350,7 +350,7 @@ Where can I find more information?
 - ``lv_micropython`` `README <https://github.com/lvgl/lv_micropython>`__
 - ``lv_binding_micropython`` `README <https://github.com/lvgl/lv_binding_micropython>`__
 - The `LVGL micropython forum <https://forum.lvgl.io/c/micropython>`__ (Feel free to ask anything!)
-- At Micropython: `docs <http://docs.micropython.org/en/latest/>`__ and `forum <https://forum.micropython.org/>`__
+- At MicroPython: `docs <http://docs.micropython.org/en/latest/>`__ and `forum <https://forum.micropython.org/>`__
 - `Blog Post <https://blog.lvgl.io/2019-02-20/micropython-bindings>`__, a little outdated.
 
 .. raw:: html
@@ -362,11 +362,11 @@ Where can I find more information?
 - ``lv_micropython`` `README <https://github.com/lvgl/lv_micropython>`__
 - ``lv_binding_micropython`` `README <https://github.com/lvgl/lv_binding_micropython>`__
 - 在 `LVGL micropython 论坛 <https://forum.lvgl.io/c/micropython>`__ 上（随意提问！）
-- 在 Micropython 上：`文档 <http://docs.micropython.org/en/latest/>`__ 和 `论坛 <https://forum.micropython.org/>`__
+- 在 MicroPython 上：`文档 <http://docs.micropython.org/en/latest/>`__ 和 `论坛 <https://forum.micropython.org/>`__
 - `博客文章 <https://blog.lvgl.io/2019-02-20/micropython-bindings>`__，有点过时。
 
 
-The Micropython Binding is auto generated!（Micropython绑定是自动生成的！）
+The MicroPython Binding is auto generated!（MicroPython绑定是自动生成的！）
 ------------------------------------------
 
 .. raw:: html
@@ -377,7 +377,7 @@ The Micropython Binding is auto generated!（Micropython绑定是自动生成的
 - LVGL is a git submodule inside `lv_micropython <https://github.com/lvgl/lv_micropython>`__
   (LVGL is a git submodule of `lv_binding_micropython <https://github.com/lvgl/lv_binding_micropython>`__
   which is itself a submodule of `lv_micropython <https://github.com/lvgl/lv_micropython>`__).
-- When building lv_micropython, the public LVGL C API is scanned and Micropython API is auto-generated. That means that
+- When building lv_micropython, the public LVGL C API is scanned and MicroPython API is auto-generated. That means that
   lv_micropython provides LVGL API for **any** LVGL version, and generally does not require code changes as LVGL evolves.
 
 .. raw:: html
@@ -389,7 +389,7 @@ The Micropython Binding is auto generated!（Micropython绑定是自动生成的
 LVGL是 `lv_micropython <https://github.com/lvgl/lv_micropython>`__内的一个git子模块
 （LVGL是 `lv_binding_micropython <https://github.com/lvgl/lv_binding_micropython>`__的一个git子模块，
 它本身是 `lv_micropython <https://github.com/lvgl/lv_micropython>`__的一个子模块）。
-在构建lv_micropython时，会扫描公共LVGL C API并自动生成Micropython API。这意味着lv_micropython为 **任何**LVGL版本提供LVGL API，并且通常不需要随着LVGL的演变而进行代码更改。
+在构建lv_micropython时，会扫描公共LVGL C API并自动生成MicroPython API。这意味着lv_micropython为 **任何**LVGL版本提供LVGL API，并且通常不需要随着LVGL的演变而进行代码更改。
 
 
 LVGL C API Coding Conventions（LVGL C API编码规范）
@@ -421,7 +421,7 @@ Memory Management（内存管理）
    <details>
      <summary>显示原文</summary>
 
-| When LVGL runs in Micropython, all dynamic memory allocations (:cpp:func:`lv_malloc`) are handled by Micropython's memory
+| When LVGL runs in MicroPython, all dynamic memory allocations (:cpp:func:`lv_malloc`) are handled by MicroPython's memory
   manager which is `garbage-collected <https://en.wikipedia.org/wiki/Garbage_collection_(computer_science)>`__ (GC).
 | To prevent GC from collecting memory prematurely, all dynamic allocated RAM must be reachable by GC.
 | GC is aware of most allocations, except from pointers on the `Data Segment <https://en.wikipedia.org/wiki/Data_segment>`__:
@@ -438,7 +438,7 @@ Such pointers need to be defined in a special way to make them reachable by GC
    <br>
 
 
-当LVGL在Micropython中运行时，所有动态内存分配（:cpp:func:`lv_malloc`）由Micropython的内存管理器处理，该管理器进行垃圾回收（GC）。
+当LVGL在MicroPython中运行时，所有动态内存分配（:cpp:func:`lv_malloc`）由MicroPython的内存管理器处理，该管理器进行垃圾回收（GC）。
 
 为了防止GC过早回收内存，所有动态分配的RAM必须可被GC访问。
 
@@ -529,18 +529,18 @@ Callbacks（回调）
    <details>
      <summary>显示原文</summary>
 
-In C a callback is just a function pointer. But in Micropython we need to register a *Micropython callable object* for each
-callback. Therefore in the Micropython binding we need to register both a function pointer and a Micropython object for every callback.
+In C a callback is just a function pointer. But in MicroPython we need to register a *MicroPython callable object* for each
+callback. Therefore in the MicroPython binding we need to register both a function pointer and a MicroPython object for every callback.
 
 Therefore we defined a **callback convention** for the LVGL C API that expects lvgl headers to be defined in a certain
-way. Callbacks that are declared according to the convention would allow the binding to register a Micropython object
+way. Callbacks that are declared according to the convention would allow the binding to register a MicroPython object
 next to the function pointer when registering a callback, and access that object when the callback is called.
 
-- The basic idea is that we have ``void * user_data`` field that is used automatically by the Micropython Binding
-  to save the *Micropython callable object* for a callback. This field must be provided when registering the function
+- The basic idea is that we have ``void * user_data`` field that is used automatically by the MicroPython Binding
+  to save the *MicroPython callable object* for a callback. This field must be provided when registering the function
   pointer, and provided to the callback function itself.
-- Although called "user_data", the user is not expected to read/write that field. Instead, the Micropython glue code uses
-  ``user_data`` to automatically keep track of the Micropython callable object. The glue code updates it when the callback
+- Although called "user_data", the user is not expected to read/write that field. Instead, the MicroPython glue code uses
+  ``user_data`` to automatically keep track of the MicroPython callable object. The glue code updates it when the callback
   is registered, and uses it when the callback is called in order to invoke a call to the original callable object.
 
 There are a few options for defining a callback in LVGL C API:

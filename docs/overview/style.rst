@@ -416,7 +416,7 @@ Styles can be built as ``const`` too to save RAM:
    LV_STYLE_CONST_INIT(style1, style1_props);
 
 Later ``const`` style can be used like any other style but (obviously)
-new properties can not be added.
+new properties cannot be added.
 
 .. raw:: html
 
@@ -442,7 +442,7 @@ new properties can not be added.
 
    static lv_style_t style_btn_red;
    lv_style_init(&style_btn_red);
-   lv_style_set_bg_color(&style_btn_red, lv_plaette_main(LV_PALETTE_RED));
+   lv_style_set_bg_color(&style_btn_red, lv_palette_main (LV_PALETTE_RED));
    lv_style_set_bg_opa(&style_btn_red, LV_OPA_COVER);
 
 要删除一个属性，可以使用：
@@ -924,7 +924,7 @@ configured by the following properties in ``lv_conf.h``:
 - :cpp:enumerator:`LV_LAYER_SIMPLE_BUF_SIZE`: [bytes] the optimal target buffer size. LVGL will try to allocate this size of memory.
 - :cpp:enumerator:`LV_LAYER_SIMPLE_FALLBACK_BUF_SIZE`: [bytes] used if :cpp:enumerator:`LV_LAYER_SIMPLE_BUF_SIZE` couldn't be allocated.
 
-If transformation properties were also used the layer can not be
+If transformation properties were also used the layer cannot be
 rendered in chunks, but one larger memory needs to be allocated. The
 required memory depends on the angle, zoom and pivot parameters, and the
 size of the area to redraw, but it's never larger than the size of the
