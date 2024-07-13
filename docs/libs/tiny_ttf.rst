@@ -34,11 +34,12 @@ entire time the font is being used.
 After a font is created, you can change the font size in pixels by using
 :cpp:expr:`lv_tiny_ttf_set_size(font, font_size)`.
 
-By default, a font will use up to 4KB of cache to speed up rendering
-glyphs. This maximum can be changed by using
-:cpp:expr:`lv_tiny_ttf_create_data_ex(data, data_size, font_size, cache_size)`
-or :cpp:expr:`lv_tiny_ttf_create_file_ex(path, font_size, cache_size)` (when
-available). The cache size is indicated in bytes.
+By default, a font will cache data for upto 256 glyphs elements to speed up rendering.
+This maximum can be changed by using
+:cpp:expr:`lv_tiny_ttf_create_data_ex(data, data_size, font_size, kerning, cache_size, )`
+or :cpp:expr:`lv_tiny_ttf_create_file_ex(path, font_size, kerning, cache_size)` (when
+available). The cache size is indicated in number of entries. Kerning is whether to allow
+if supported, or disable.
 
 .. raw:: html
 
@@ -58,7 +59,8 @@ available). The cache size is indicated in bytes.
 
 创建字体后，可以使用 :cpp:expr:`lv_tiny_ttf_set_size(font, font_size)` 更改字体大小（以像素为单位）。
 
-默认情况下，字体将使用最多 4KB 的缓存来加快渲染速度符号。可以使用 :cpp:expr:`lv_tiny_ttf_create_data_ex(data, data_size, font_size, cache_size)` 或 :cpp:expr:`lv_tiny_ttf_create_file_ex(path, font_size, cache_size)` 更改此最大值（当可用时）。缓存大小以字节表示。
+默认情况下，字体会缓存最多256个字形元素的数据以加快渲染速度。这个最大值可以通过使用 :cpp:expr:`lv_tiny_ttf_create_data_ex(data, data_size, font_size, kerning, cache_size, )` 或 :cpp:expr:`lv_tiny_ttf_create_file_ex(path, font_size, kerning, cache_size)`（如果可用）来更改。缓存大小以条目数量表示。Kerning 表示是否启用（如果支持的话）或禁用。
+
 
 
 .. _tiny_ttf_example:
