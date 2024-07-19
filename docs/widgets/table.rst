@@ -31,14 +31,14 @@ navigation too.
 
 Table（表格）是由包含文本的行、列和单元格构建的。
 
-表格对象非常轻量级，因为仅存储文本。没有为细胞创建真实的对象，但它们只是即时绘制的。
+表格对象非常轻量级，因为仅存储文本。没有为各个单元格创建真实的对象，因为它们只是即时绘制出来的。
 
-表将添加到默认组中（如果已设置）。除了表是一个可编辑对象，用于选择带编码器的单元格导航也是如此。
+表格对象默认已经在默认组中（如果已设置）。可以在导航模式下选中整张表，之后进入编辑模式可以在各个单元格之间进行移动选择。
 
 
 .. _lv_table_parts_and_styles:
 
-Parts and Styles（零件和样式）
+Parts and Styles（部分和样式）
 *****************************
 
 .. raw:: html
@@ -92,12 +92,9 @@ New rows and columns are automatically added is required
 
 单元格只能存储文本，因此在将数字显示在表格中之前，需要将其转换为文本。
 
-:cpp:expr:`lv_table_set_cell_value(table, row, col, "Content")`。 文本由表保存，因此它甚至可以是局部变量。
+:cpp:expr:`lv_table_set_cell_value(table, row, col, "Content")`。 传入的文本由表独立保存，因此它甚至可以是局部变量。这个接口会自动添加新的行和列。
 
 可以在文本中使用换行符，例如 ``"Value\n60.3"``。
-
-需要自动添加新的行和列
-
 
 Rows and Columns（行和列）
 -------------------------
@@ -116,9 +113,7 @@ To explicitly set number of rows and columns use
    </details> 
    <br>
 
-
 要明确设置行数和列数，请使用 :cpp:expr:`lv_table_set_row_count(table, row_cnt)` 和 :cpp:expr:`lv_table_set_column_count(table, col_cnt)`
-
 
 Width and Height（宽度和高度）
 -----------------------------
@@ -143,7 +138,7 @@ padding etc) and the number of rows.
 
 列的宽度可以通过 :cpp:expr:`lv_table_set_column_width(table, col_id, width)` 设置。 Table 对象的总宽度将设置为列宽的总和。
 
-高度是根据单元格样式（字体、填充等）和行数自动计算的。
+表格对象会根据单元的格样式（字体、填充等）和行数自动计算高度。
 
 
 Merge cells（合并单元格）
@@ -217,7 +212,7 @@ Learn more about :ref:`events`.
    <br>
 
 
--  :cpp:enumerator:`LV_EVENT_VALUE_CHANGED` 用选择新单元格时发送的按键。
+-  :cpp:enumerator:`LV_EVENT_VALUE_CHANGED` 用选择（通过触摸或按键点击）单元格时发送的事件。
 
 参见 :ref:`Base object <lv_obj>` 的事件。
 
@@ -254,7 +249,7 @@ Learn more about :ref:`indev_keys`.
 
 以下 *按键* 由表处理：
 
-- ``LV_KEY_RIGHT/LEFT/UP/DOWN/`` 选择一个单元格。
+- ``LV_KEY_RIGHT/LEFT/UP/DOWN/`` 选中一个单元格。
 
 请注意，与往常一样，:cpp:enumerator:`LV_KEY_ENTER` 的状态被转换为 ``LV_EVENT_PRESSED/PRESSING/RELEASED`` 等。
 
