@@ -25,14 +25,20 @@ ticks - cursors - scrolling and zooming
    <br>
 
 
-图表是可视化数据点的基本对象。目前支持折线图（用折线连接点和/或在其上绘制点）和条形图。
+图表是可以将数据点可视化的基本对象。目前支持折线图（用折线连接点和/或在其上绘制点）和柱状图。
 
-图表可以有： - 分割线 - 2 y 轴 - 轴刻度和文本刻度 - 光标 - 滚动和缩放
+图表可以有：
+
+- 分割线 
+- 2 y轴
+- 轴刻度和文本刻度
+- 光标
+- 滚动和缩放
 
 
 .. _lv_chart_parts_and_styles:
 
-Parts and Styles（零件和样式）
+Parts and Styles（部分和样式）
 *****************************
 
 .. raw:: html
@@ -68,15 +74,16 @@ Parts and Styles（零件和样式）
    <br>
 
 
--  :cpp:enumerator:`LV_PART_MAIN` 图表的背景。使用所有典型的 背景和 *线条* （用于分割线）相关样式性能。 *填充* 使系列区域更小。对于列图表设置 ``pad_column`` 相邻索引。
+-  :cpp:enumerator:`LV_PART_MAIN` 图表的背景。使用所有典型的 背景和 *Line* （用于分割线）相关样式。 *Padding* 使series区域更小。可通过 ``pad_column`` 设置相邻索引之间的间隔。
 -  :cpp:enumerator:`LV_PART_SCROLLBAR` 缩放图表时使用的滚动条。看有关详细信息，请参阅 :ref:`基本对象 <lv_obj>`\ 的文档。
--  :cpp:enumerator:`LV_PART_ITEMS` 指 线或条形系列。
+-  :cpp:enumerator:`LV_PART_ITEMS` 指线或柱状条：
 
-   -  折线图：折线属性由折线使用。 ``width``, ``height``, ``bg_color`` 和 ``radius`` 用于设置点的外观。
-   -  条形图：典型的背景属性用于设置进度条。 ``pad_column`` 设置相同的索引。
+   -  折线图： *line* 属性由折线使用。 ``width``, ``height``, ``bg_color`` 和 ``radius`` 用于设置点的外观。
+   -  柱状图：典型的背景属性用于设置进度条。 ``pad_column`` 设置相邻索引的间隔。
 
 -  :cpp:enumerator:`LV_PART_INDICATOR` 指折线图和散点图上的点 （小圆圈或正方形）。
--  :cpp:enumerator:`LV_PART_CURSOR` *线条* 属性用于设置游标的样式。 ``width``, ``height``, ``bg_color`` and ``radius`` 用于设置点的外观。
+-  :cpp:enumerator:`LV_PART_CURSOR` *Line* 属性用于设置游标的样式。 ``width``, ``height``, ``bg_color`` and ``radius`` 用于设置点的外观。
+
 
 .. _lv_chart_usage:
 
@@ -109,16 +116,16 @@ You can specify the display type with
 
 存在以下数据显示类型：
 
-- :cpp:enumerator:`LV_CHART_TYPE_NONE`: 不显示任何数据。可用于隐藏系列。
-- :cpp:enumerator:`LV_CHART_TYPE_LINE`: 在数据点和/或数据点上的点（矩形或圆圈）之间绘制线条。
-- :cpp:enumerator:`LV_CHART_TYPE_BAR`: 绘制条。
-- :cpp:enumerator:`LV_CHART_TYPE_SCATTER`:X/Y 图表绘制点和点之间的线。.
+- :cpp:enumerator:`LV_CHART_TYPE_NONE`: 不显示任何数据。可用于隐藏 series。
+- :cpp:enumerator:`LV_CHART_TYPE_LINE`: 根据数据点的数量和xy轴的大小，平均间隔绘制数据点（矩形或者圆形）并且在点与点之间绘制线条连接。
+- :cpp:enumerator:`LV_CHART_TYPE_BAR`: 根据数据点的数量和xy轴的大小，平均间隔绘制柱状条。
+- :cpp:enumerator:`LV_CHART_TYPE_SCATTER`:根据给定的x、y坐标绘制出其在xy轴上的点和线。
 
-您可以使用 :cpp:expr:`lv_chart_set_type(chart, LV_CHART_TYPE_...)` 指定显示类型。
+你可以使用 :cpp:expr:`lv_chart_set_type(chart, LV_CHART_TYPE_...)` 指定显示类型。
 
 
-Data series（数据系列）
-----------------------
+Data series（Series数据）
+------------------------
 
 .. raw:: html
 
@@ -160,7 +167,7 @@ For :cpp:enumerator:`LV_CHART_TYPE_SCATTER` type
    <br>
 
 
-您可以按 :cpp:expr:`lv_chart_add_series(chart, color, axis)` 向图表添加任意数量的序列。这将分配一个 :cpp:struct:`lv_chart_series_t` 结构，其中包含所选的数据点的数组。 ``axis`` 可以具有以下值：
+你可以通过函数 :cpp:expr:`lv_chart_add_series(chart, color, axis)` 向图表添加任意数量的series。这将分配一个 :cpp:struct:`lv_chart_series_t` 结构，其中包含数据点的数组。 ``axis`` 可以具有以下值：
 
 - :cpp:enumerator:`LV_CHART_AXIS_PRIMARY_Y`: 左轴
 - :cpp:enumerator:`LV_CHART_AXIS_SECONDARY_Y`: 右轴
@@ -169,7 +176,7 @@ For :cpp:enumerator:`LV_CHART_TYPE_SCATTER` type
 
 ``axis`` 指示应使用哪个轴的范围来缩放值。
 
-:cpp:expr:`lv_chart_set_ext_y_array(chart, ser, value_array)` 制作图表对给定序列使用外部数组。 ``value_array`` 应该看起来像 ``int32_t * value_array[num_points]``。数组大小需要足够大以容纳该系列的所有点。这 array 的指针将保存在图表中，因此它需要是全局的， 静态或动态分配。注意：您应该 :cpp:expr:`lv_chart_refresh(chart)` 在外部数据源已更新被以更新图表。
+:cpp:expr:`lv_chart_set_ext_y_array(chart, ser, value_array)` 制作图表对给定series使用外部数组。 ``value_array`` 应该看起来像 ``int32_t * value_array[num_points]``。数组大小需要足够大以容纳该series的所有点。这 array 的指针将保存在图表中，因此它需要是全局的， 静态或动态分配。注意：你应该 :cpp:expr:`lv_chart_refresh(chart)` 在外部数据源已更新被以更新图表。
 
 一个级数的值数组可以用 :cpp:expr:`lv_chart_get_y_array(chart, ser)` 获得，可以一起使用 ``ext_array`` 或 *普通数组*\ s。
 
@@ -205,7 +212,7 @@ as well.
    <br>
 
 
-有几个选项可以设置序列数据：
+有几个选项可以设置series数据：
 
 1. 在数组中手动设置值，例如 ``ser1->points[3] = 7`` ，并使用 :cpp:enumerator:`lv_chart_refresh(chart)` 刷新图表。
 2. 使用 :cpp:expr:`lv_chart_set_value_by_id(chart, ser, id, value)` 其中id是要更新的点的索引。id
@@ -268,11 +275,11 @@ array is large enough.
    <br>
 
 
-序列中的点数可以通过 :cpp:expr:`lv_chart_set_point_count(chart, point_num)` 进行修改。默认值为 10。 注意：这也会影响外部处理的点数缓冲区被分配给一个系列，所以你需要确保外部数组足够大。
+series中的点数可以通过 :cpp:expr:`lv_chart_set_point_count(chart, point_num)` 进行修改。默认值为 10。注意：这也会影响外部处理的点数缓冲区被分配给一个series，所以你需要确保外部数组足够大。
 
 
-Handling large number of points
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Handling large number of points（处理很密集的点）
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. raw:: html
 
@@ -291,7 +298,7 @@ draws a vertical lines between them to ensure no peaks are missed.
    <br>
 
 
-在折线图上，如果点数大于像素数在水平方向上，图表将只绘制垂直线以使大量数据的绘制效果。如果有，比方说，10指向像素，LVGL搜索最小值和最大值在它们之间画一条垂直线，以确保没有遗漏峰值。以确保不会遗漏任何峰值。
+在折线图上，如果点数大于水平方向上的像素范围，图表将只绘制垂直线来让大量数据的绘制有效。比如，每像素10个点，LVGL搜索最小值和最大值，并在它们之间画一条垂直线，以确保没有遗漏峰值。。
 
 
 Vertical range（垂直范围）
@@ -316,7 +323,7 @@ is: 0..100.
    <br>
 
 
-您可以使用 :cpp:expr:`lv_chart_set_range(chart, axis, min, max)` 指定 y 方向的最小值和最大值。 ``axis`` 可以是（左轴）或（右轴）。:cpp:enumerator:`LV_CHART_AXIS_PRIMARY` (左轴) 或 :cpp:enumerator:`LV_CHART_AXIS_SECONDARY`
+你可以使用 :cpp:expr:`lv_chart_set_range(chart, axis, min, max)` 指定 y 方向的最小值和最大值。 ``axis`` 可以是（左轴）或（右轴）。:cpp:enumerator:`LV_CHART_AXIS_PRIMARY` (左轴) 或 :cpp:enumerator:`LV_CHART_AXIS_SECONDARY`
 (右轴).
 
 点的值将按比例缩放。默认范围是：0..100。
@@ -342,10 +349,10 @@ would be drawn on top of the border and therefore it won't be drawn.
    <br>
 
 
-水平和垂直分割线的数量可以通过 :cpp:expr:`lv_chart_set_div_line_count(chart, hdiv_num, vdiv_num)` 进行修改。默认设置为 3 条水平分割线和 5 条垂直分割线。如果有一个一侧可见边框，该侧没有填充，即分界线将绘制在边框的顶部，因此不会绘制。
+水平和垂直分割线的数量可以通过 :cpp:expr:`lv_chart_set_div_line_count(chart, hdiv_num, vdiv_num)` 进行修改。默认设置为 3 条水平分割线和 5 条垂直分割线。如果一侧有可见的边框，并且该侧没有填充，则分割线将绘制在边框的顶部，因此不会绘制。
 
 
-Override default start point for series（覆盖序列的默认起点）
+Override default start point for series（覆盖series的默认起点）
 -----------------------------------------------------------
 
 .. raw:: html
@@ -367,9 +374,9 @@ Note that :cpp:enumerator:`LV_CHART_UPDATE_MODE_SHIFT` also changes the
    <br>
 
 
-如果希望绘图从序列的默认点以外的点 ``point[0]`` 开始，则可以使用函数 :cpp:expr:`lv_chart_set_x_start_point(chart, ser, id)`  其中 ``id`` 要从中开始绘图的新索引位置。
+如果希望绘图从series的默认点以外的点 ``point[0]`` 开始，则可以使用函数 :cpp:expr:`lv_chart_set_x_start_point(chart, ser, id)`  其中 ``id`` 是要从中开始绘图的新索引位置。
 
-请注意， ``start_point`` 这也会更改。
+请注意， :cpp:enumerator:`LV_CHART_UPDATE_MODE_SHIFT` 也会更改 ``start_point``。
 
 
 Tick marks and labels（刻度线和标签）
@@ -389,7 +396,7 @@ See the example below to learn more.
    <br>
 
 
-借助 `Scale </widgets/scale>`__，可以非常灵活地添加垂直和水平刻度。 请参阅下面的示例以了解更多信息。
+借助 `Scale </widgets/scale>`__控件，可以非常灵活地添加垂直和水平刻度。 请参阅后面的示例以了解更多信息。
 
 
 Zoom（缩放）
@@ -409,7 +416,7 @@ to larger value. This way the chart will be scrollable on its parent.
    <br>
 
 
-要缩放图表，您只需将其包装到父容器中并设置图表的宽度或高度即可 到更大的价值。这样，图表就可以在其父级上滚动。
+要缩放图表，你只需将其包装到父容器中，并将图表的宽度或高度设置为更大的值。这样，图表将在其父级上得到放大的效果并可滚动查看。
 
 
 Cursor（光标）
@@ -443,13 +450,13 @@ scrolling) the cursor will move with the point.
    <br>
 
 
-可以使用 ``lv_chart_cursor_t * c1 = lv_chart_add_cursor(chart, color, dir);`` 添加光标。 ``dir`` ``LV_DIR_NONE/RIGHT/UP/LEFT/DOWN/HOR/VER/ALL`` 的可能值或或它们的OR-ed 值用于指示应在哪个方向上绘制光标。
+可以使用 ``lv_chart_cursor_t * c1 = lv_chart_add_cursor(chart, color, dir);`` 添加光标。 ``dir`` 的值可以是 ``LV_DIR_NONE/RIGHT/UP/LEFT/DOWN/HOR/VER/ALL`` 或它们的OR-ed 值，用于指示应在哪个方向上绘制光标。
 
-:cpp:expr:`lv_chart_set_cursor_pos(chart, cursor, &point)` 设置光标。 ``pos`` 是指向 :cpp:struct:`lv_point_t` 变量的指针。例如 ``lv_point_t point = {10, 20}`` 。如果图表滚动光标将保留在同一个地方。
+:cpp:expr:`lv_chart_set_cursor_pos(chart, cursor, &point)` 设置光标的位置。``pos`` 是指向 :cpp:struct:`lv_point_t` 变量的指针。例如 ``lv_point_t point = {10, 20}``。如果滚动图表，光标将保持在同一位置。
 
 :cpp:expr:`lv_chart_get_point_pos_by_id(chart, series, id, &point_out)` 获取给定点的坐标。将光标放在给定的位置很有用。
 
-:cpp:expr:`lv_chart_set_cursor_point(chart, cursor, series, point_id)` 摇杆光标位于某个点。如果点的位置发生变化（新值或滚动）光标将随点移动。
+:cpp:expr:`lv_chart_set_cursor_point(chart, cursor, series, point_id)` 将光标粘在一个点上。如果点的位置发生变化（新值或滚动），光标将随点移动。
 
 
 .. _lv_chart_events:
