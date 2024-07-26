@@ -178,9 +178,9 @@ For :cpp:enumerator:`LV_CHART_TYPE_SCATTER` type
 
 :cpp:expr:`lv_chart_set_ext_y_array(chart, ser, value_array)` 制作图表对给定series使用外部数组。 ``value_array`` 应该看起来像 ``int32_t * value_array[num_points]``。数组大小需要足够大以容纳该series的所有点。这 array 的指针将保存在图表中，因此它需要是全局的， 静态或动态分配。注意：你应该 :cpp:expr:`lv_chart_refresh(chart)` 在外部数据源已更新被以更新图表。
 
-一个级数的值数组可以用 :cpp:expr:`lv_chart_get_y_array(chart, ser)` 获得，可以一起使用 ``ext_array`` 或 *普通数组*\ s。
+一个 serie 的值数组可以通过接口 :cpp:expr:`lv_chart_get_x/y_array(chart, ser)` 获得。
 
-对于 :cpp:enumerator:`LV_CHART_TYPE_SCATTER` 类型 :cpp:expr:`lv_chart_set_ext_x_array(chart, ser, value_array)` 和 :cpp:expr:`lv_chart_get_x_array(chart, ser)` 也可以使用。
+对于 :cpp:enumerator:`LV_CHART_TYPE_SCATTER` 类型可以通过 :cpp:expr:`lv_chart_set_ext_x/y_array(chart, ser, value_array)` 设置，以及 :cpp:expr:`lv_chart_get_x/y_array(chart, ser)` 获取。
 
 
 Modify the data（修改数据）
@@ -396,7 +396,7 @@ See the example below to learn more.
    <br>
 
 
-借助 `Scale </widgets/scale>`__控件，可以非常灵活地添加垂直和水平刻度。 请参阅后面的示例以了解更多信息。
+借助 `Scale </widgets/scale>`__ 控件，可以非常灵活地添加垂直和水平刻度。请参阅后面的示例以了解用法参考。
 
 
 Zoom（缩放）
