@@ -20,12 +20,12 @@ Scale allows you to have a linear scale with ranges and sections with custom sty
    <br>
 
 
-标尺允许您拥有具有自定义样式的范围和部分的线性标尺。
+标尺控件允许使用自定义样式的范围和剖面进行线性缩放。
 
 
 .. _lv_scale_parts_and_styles:
 
-Parts and Styles（零件和样式）
+Parts and Styles（部分和样式）
 *****************************
 
 .. raw:: html
@@ -48,9 +48,9 @@ The scale widget is divided in the following three parts:
 
 标尺控件分为以下三个部分：
 
-- :cpp:enumerator:`LV_PART_MAIN` 主线。请参阅示例图像中的蓝线。
-- :cpp:enumerator:`LV_PART_ITEMS` 轻微的蜱虫。请参阅示例图像中的红色小刻度。
-- :cpp:enumerator:`LV_PART_INDICATOR` 主要刻度及其标签（如果启用）。 在示例图像中查看粉红色标签和绿色主要刻度。
+- :cpp:enumerator:`LV_PART_MAIN` 主线。请参阅后面示例演示中的蓝线。
+- :cpp:enumerator:`LV_PART_ITEMS` 每个主刻度之间的次刻度。请参阅后面示例演示中的红色次刻度。
+- :cpp:enumerator:`LV_PART_INDICATOR` 主要刻度及其标签（如果启用）。 请参阅后面示例演示查看粉红色标签和绿色主刻度。
 
 
 .. image:: /misc/scale.png
@@ -76,7 +76,7 @@ The minor and major range (values of each tick) are configured with :cpp:expr:`l
    <br>
 
 
-次要范围和主要范围（每个刻度的值）配置为 :cpp:expr:`lv_scale_set_range(scale, minor_range, major_range)`。
+通过接口 :cpp:expr:`lv_scale_set_range(scale, minor_range, major_range)` 设置刻度上的最小值和最大值 。
 
 
 Tick drawing order（刻度绘制顺序）
@@ -104,19 +104,19 @@ This is an scale with the ticks being drawn at the top of the main line:
    <br>
 
 
-您可以通过调用 :cpp:expr:`lv_scale_set_draw_ticks_on_top(scale, true)`将刻度的绘制设置在主线之上。默认的绘制顺序是在主线之下。
+可以通过调用 :cpp:expr:`lv_scale_set_draw_ticks_on_top(scale, true)` 将刻度的绘制设置在主线之上。默认的绘制顺序是在主线之下。
 
-这是一个刻度绘制在主线之下的标尺（默认情况）：
+这是一个将刻度绘制在主线之下的标尺（默认情况）：
 
 .. image:: /misc/scale_ticks_below.png
 
-这是一个刻度绘制在主线之上的标尺：
+这是一个将刻度绘制在主线之上的标尺：
 
 .. image:: /misc/scale_ticks_on_top.png
 
 
 
-Configure ticks（配置刻度线）
+Configure ticks（配置刻度）
 ----------------------------
 
 .. raw:: html
@@ -144,16 +144,15 @@ and :cpp:expr:`lv_obj_set_style_length(scale, 5, LV_PART_ITEMS);` for minor tick
    <br>
 
 
-使用 :cpp:expr:`lv_scale_set_total_tick_count(scale, total_tick_count)` 设置总刻度数。然后使用 :cpp:expr:`lv_scale_set_major_tick_every(scale, nth_tick)`，将主要刻度线配置为每 N 个刻度线。
+通过接口 :cpp:expr:`lv_scale_set_total_tick_count(scale, total_tick_count)` 设置总刻度数。然后使用接口 :cpp:expr:`lv_scale_set_major_tick_every(scale, nth_tick)`设置主要刻度的分布：每 N 个刻度一个主刻度。
 
-主要刻度上的标签可以配置lv_scale_set_label_show（刻度、show_label）、 如果应绘制标签，则将 show_label 设置为 true，如果应绘制标签，则将 设置为 true，将标签设置为隐藏标签。 如果需要在主要刻度中不需要数值，则可以设置文本 以 lv_scale_set_text_src（scale， custom_labels） 作为最后一个元素， 即静态字符 * custom_labels[3] = {“One”， “Two”， NULL};。
+主要刻度上的标签可以通过函数 :cpp:expr:`lv_scale_set_label_show(scale, show_label)` 进行配置、 如果需要展示标签，则将 show_label 设置为 true，如果不想展示标签，则将 设置为 false 。 如果想修改主刻度标签的值，可以通过接口 :cpp:expr:`lv_scale_set_text_src(scale, custom_labels)` 设置， 参数 ``custom_labels`` 必须是静态数组，并且使用 ``NULL`` 作为最后一个元素，例如： :cpp:expr:`static char * custom_labels[3] = {"One", "Two", NULL};` 。
 
-可以使用 :cpp:expr:`lv_scale_set_label_show(scale, show_label)` 配置主要刻度线的标签、 如果要绘制标签，则设置 `show_label` 为 true，如果要隐藏标签，则设置 :cpp:expr:`false`。如果需要在主要刻度线中使用文本而不是数值，可以使用 :cpp:expr:`false` 设置。使用 :cpp:expr:`lv_scale_set_text_src(scale, custom_labels)`，将 ``NULL`` 作为最后一个元素、 即 :cpp:expr:`static char * custom_labels[3] = {"One", "Two", NULL};`。
+主刻度的长度可通过修改 :cpp:enumerator:`LV_PART_INDICATOR` 的 length 样式属性配置；次刻度的长度通过修改 :cpp:enumerator:`LV_PART_ITEMS`  的 length 样式属性配置。例如使用本地样式，修改主刻度线的长度： :cpp:expr:`lv_obj_set_style_length(scale, 5, LV_PART_INDICATOR);` ；修改次刻度线的长度： :cpp:expr:`lv_obj_set_style_length(scale, 5, LV_PART_ITEMS);` 。
 
-刻度线的长度可通过 :cpp:enumerator:`LV_PART_INDICATOR` 上的 length 样式属性配置。和 :cpp:enumerator:`LV_PART_ITEMS` 上的长度样式属性配置主要刻度线和次要刻度线，例如使用本地样式： :cpp:expr:`lv_obj_set_style_length(scale, 5, LV_PART_INDICATOR);` 用于大刻度线 和 :cpp:expr:`lv_obj_set_style_length(scale, 5, LV_PART_ITEMS);` 用于小刻度线。
 
-Sections（部分）
----------------
+Sections（剖面）
+-----------------
 
 .. raw:: html
 
@@ -182,13 +181,13 @@ For lines (main line, major and minor ticks) the following properties can be con
    <br>
 
 
-部分是小调和大调范围之间的空间。它们可以使用 :cpp:expr:`lv_scale_add_section(scale)` 创建，它会处理一个 :cpp:type:`lv_scale_section_t` 指针。
+剖面就是在标尺最大值和最小值之间选取一部分（一个或多个），单个可用于表示这些剖面是特别的或者是突出需要留意的，多个剖面且按照一定间距隔开时可表示这些是分层次的，类似剖面那样（比如土壤剖面尺）。它们可以使用接口 :cpp:expr:`lv_scale_add_section(scale)` 创建，它会返回 :cpp:type:`lv_scale_section_t` 指针，后续可通过 ``lv_scale_section_...`` 接口进行操作。
 
-该部分的范围配置为 :cpp:expr:`lv_scale_section_set_range(section, minor_range, major_range)` 。 标尺截面的三个部分中每个部分的样式都可以用 :cpp:expr:`lv_scale_section_set_style(section, PART, style_pointer)`设置，其中 `PART` 可以是 ， 也可以是 :cpp:enumerator:`LV_PART_MAIN`, :cpp:enumerator:`LV_PART_ITEMS` 或 :cpp:enumerator:`LV_PART_INDICATOR`, :cpp:expr:`style_pointer`  ， :cpp:type:`lv_style_t` 应该指向全局变量或静态变量。
+可通过接口 :cpp:expr:`lv_scale_section_set_range(section, minor_range, major_range)` 设置剖面的范围 。 与标尺一样，剖面也有一样的三个部分可以对其配置样式，但是需要使用特定的接口设置样式，例如： :cpp:expr:`lv_scale_section_set_style(section, PART, style_pointer)`设置，其中 `PART` 可以是 :cpp:enumerator:`LV_PART_MAIN`, :cpp:enumerator:`LV_PART_ITEMS` 以及 :cpp:enumerator:`LV_PART_INDICATOR` ； :cpp:expr:`style_pointer` 是样式变量，必须是全局变量或静态变量。
 
 对于标签，可以配置以下属性：:cpp:func:`lv_style_set_text_font`, :cpp:func:`lv_style_set_text_color`, :cpp:func:`lv_style_set_text_letter_space`, :cpp:func:`lv_style_set_text_opa`。
 
-对于线（主线、主要和次要报价），可以配置以下属性：:cpp:func:`lv_style_set_line_color`, :cpp:func:`lv_style_set_line_width`。
+对于线（主线、主和次刻度），可以配置以下属性：:cpp:func:`lv_style_set_line_color`, :cpp:func:`lv_style_set_line_width`。
 
 .. _lv_scale_events:
 
