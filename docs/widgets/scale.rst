@@ -183,11 +183,11 @@ For lines (main line, major and minor ticks) the following properties can be con
 
 剖面就是在标尺最大值和最小值之间选取一部分（一个或多个），单个可用于表示这些剖面是特别的或者是突出需要留意的，多个剖面且按照一定间距隔开时可表示这些是分层次的，类似剖面那样（比如土壤剖面尺）。它们可以使用接口 :cpp:expr:`lv_scale_add_section(scale)` 创建，它会返回 :cpp:type:`lv_scale_section_t` 指针，后续可通过 ``lv_scale_section_...`` 接口进行操作。
 
-可通过接口 :cpp:expr:`lv_scale_section_set_range(section, minor_range, major_range)` 设置剖面的范围 。 与标尺一样，剖面也有一样的三个部分可以对其配置样式，但是需要使用特定的接口设置样式，例如： :cpp:expr:`lv_scale_section_set_style(section, PART, style_pointer)`设置，其中 `PART` 可以是 :cpp:enumerator:`LV_PART_MAIN`, :cpp:enumerator:`LV_PART_ITEMS` 以及 :cpp:enumerator:`LV_PART_INDICATOR` ； :cpp:expr:`style_pointer` 是样式变量，必须是全局变量或静态变量。
+可通过接口 :cpp:expr:`lv_scale_section_set_range(section, minor_range, major_range)` 设置剖面的范围 。 与标尺一样，剖面也有一样的三个部分可以对其配置样式，但是需要使用特定的接口设置样式，例如： :cpp:expr:`lv_scale_section_set_style(section, PART, style_pointer)` 设置，其中 `PART` 可以是 :cpp:enumerator:`LV_PART_MAIN` , :cpp:enumerator:`LV_PART_ITEMS` 以及 :cpp:enumerator:`LV_PART_INDICATOR` ； :cpp:expr:`style_pointer` 是样式变量，必须是全局变量或静态变量。
 
-对于标签，可以配置以下属性：:cpp:func:`lv_style_set_text_font`, :cpp:func:`lv_style_set_text_color`, :cpp:func:`lv_style_set_text_letter_space`, :cpp:func:`lv_style_set_text_opa`。
+对于标签，可以配置以下属性： :cpp:func:`lv_style_set_text_font` , :cpp:func:`lv_style_set_text_color` , :cpp:func:`lv_style_set_text_letter_space` , :cpp:func:`lv_style_set_text_opa` 。
 
-对于线（主线、主和次刻度），可以配置以下属性：:cpp:func:`lv_style_set_line_color`, :cpp:func:`lv_style_set_line_width`。
+对于线（主线、主和次刻度），可以配置以下属性：:cpp:func:`lv_style_set_line_color` , :cpp:func:`lv_style_set_line_width` 。
 
 .. _lv_scale_events:
 
