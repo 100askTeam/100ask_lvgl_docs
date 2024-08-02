@@ -144,11 +144,11 @@ and :cpp:expr:`lv_obj_set_style_length(scale, 5, LV_PART_ITEMS);` for minor tick
    <br>
 
 
-通过接口 :cpp:expr:`lv_scale_set_total_tick_count(scale, total_tick_count)` 设置总刻度数。然后使用接口 :cpp:expr:`lv_scale_set_major_tick_every(scale, nth_tick)`设置主要刻度的分布：每 N 个刻度一个主刻度。
+通过接口 :cpp:expr:`lv_scale_set_total_tick_count(scale, total_tick_count)` 设置总刻度数。然后使用接口 :cpp:expr:`lv_scale_set_major_tick_every(scale, nth_tick)` 设置主要刻度的分布：每 N 个刻度一个主刻度。
 
 主要刻度上的标签可以通过函数 :cpp:expr:`lv_scale_set_label_show(scale, show_label)` 进行配置、 如果需要展示标签，则将 show_label 设置为 true，如果不想展示标签，则将 设置为 false 。 如果想修改主刻度标签的值，可以通过接口 :cpp:expr:`lv_scale_set_text_src(scale, custom_labels)` 设置， 参数 ``custom_labels`` 必须是静态数组，并且使用 ``NULL`` 作为最后一个元素，例如： :cpp:expr:`static char * custom_labels[3] = {"One", "Two", NULL};` 。
 
-主刻度的长度可通过修改 :cpp:enumerator:`LV_PART_INDICATOR` 的 length 样式属性配置；次刻度的长度通过修改 :cpp:enumerator:`LV_PART_ITEMS`  的 length 样式属性配置。例如使用本地样式，修改主刻度线的长度： :cpp:expr:`lv_obj_set_style_length(scale, 5, LV_PART_INDICATOR);` ；修改次刻度线的长度： :cpp:expr:`lv_obj_set_style_length(scale, 5, LV_PART_ITEMS);` 。
+主刻度的长度可通过修改 :cpp:enumerator:`LV_PART_INDICATOR` 的 length 样式属性配置；次刻度的长度通过修改 :cpp:enumerator:`LV_PART_ITEMS` 的 length 样式属性配置。例如使用本地样式，修改主刻度线的长度： :cpp:expr:`lv_obj_set_style_length(scale, 5, LV_PART_INDICATOR);` ；修改次刻度线的长度： :cpp:expr:`lv_obj_set_style_length(scale, 5, LV_PART_ITEMS);` 。
 
 
 Sections（剖面）
