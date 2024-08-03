@@ -1,9 +1,11 @@
 #if LV_BUILD_TEST
 #include "../lvgl.h"
+#include "../../lvgl_private.h"
 
 #include "unity/unity.h"
 
 #if LV_USE_QRCODE
+#include <string.h>
 
 static lv_obj_t * active_screen = NULL;
 

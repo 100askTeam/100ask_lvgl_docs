@@ -17,8 +17,6 @@ extern "C" {
 #include "lv_types.h"
 #include "../draw/lv_draw_buf.h"
 
-#include <stdint.h>
-
 /*********************
  *      DEFINES
  *********************/
@@ -48,14 +46,14 @@ extern "C" {
  *
  * @return a pointer to a matching item, or NULL if none exists.
  */
-void * _lv_utils_bsearch(const void * key, const void * base, uint32_t n, uint32_t size,
-                         int32_t (*cmp)(const void * pRef, const void * pElement));
+void * lv_utils_bsearch(const void * key, const void * base, size_t n, size_t size,
+                        int (*cmp)(const void * pRef, const void * pElement));
 
 /**
  * Save a draw buf to a file
  * @param draw_buf  pointer to a draw buffer
  * @param path      path to the file to save
- * @return          LV_RES_OK: success; LV_RES_INV: error
+ * @return          LV_RESULT_OK: success; LV_RESULT_INVALID: error
  */
 lv_result_t lv_draw_buf_save_to_file(const lv_draw_buf_t * draw_buf, const char * path);
 

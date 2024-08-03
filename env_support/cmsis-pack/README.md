@@ -103,6 +103,7 @@ remove the misleading guide above this code segment.
    
    - LV_USE_ILI9341
    
+   - LV_USE_RENESAS_GLCDC   
      
    
 5. Update `LV_LOG_PRINTF` to `1` and `LV_LOG_LEVEL` to `LV_LOG_LEVEL_USER`
@@ -126,6 +127,8 @@ Make sure `LV_MEM_SIZE` is no less than `(128*1024U)`.
     - \#define LV_USE_FS_WIN32 0
     - \#define LV_USE_FS_FATFS 0
     - #define LV_USE_FS_LITTLEFS 0
+    - #define LV_USE_FS_ARDUINO_ESP_LITTLEFS 0
+    - #define LV_USE_FS_ARDUINO_SD 0
     - #define LV_USE_FS_MEMFS 0
     - \#define LV_USE_LODEPNG 0
     - #define LV_USE_LIBPNG 0

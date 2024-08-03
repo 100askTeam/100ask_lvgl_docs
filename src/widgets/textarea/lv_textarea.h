@@ -33,36 +33,6 @@ LV_EXPORT_CONST_INT(LV_TEXTAREA_CURSOR_LAST);
  *      TYPEDEFS
  **********************/
 
-/*Data of text area*/
-typedef struct {
-    lv_obj_t obj;
-    lv_obj_t * label;            /*Label of the text area*/
-    char * placeholder_txt;      /*Place holder label. only visible if text is an empty string*/
-    char * pwd_tmp;              /*Used to store the original text in password mode*/
-    char * pwd_bullet;           /*Replacement characters displayed in password mode*/
-    const char * accepted_chars; /*Only these characters will be accepted. NULL: accept all*/
-    uint32_t max_length;         /*The max. number of characters. 0: no limit*/
-    uint32_t pwd_show_time;      /*Time to show characters in password mode before change them to '*'*/
-    struct {
-        int32_t valid_x;        /*Used when stepping up/down to a shorter line.
-                                    *(Used by the library)*/
-        uint32_t pos;              /*The current cursor position
-                                    *(0: before 1st letter; 1: before 2nd letter ...)*/
-        lv_area_t area;            /*Cursor area relative to the Text Area*/
-        uint32_t txt_byte_pos;     /*Byte index of the letter after (on) the cursor*/
-        uint8_t show : 1;          /*Cursor is visible now or not (Handled by the library)*/
-        uint8_t click_pos : 1;     /*1: Enable positioning the cursor by clicking the text area*/
-    } cursor;
-#if LV_LABEL_TEXT_SELECTION
-    uint32_t sel_start;  /*Temporary values for text selection*/
-    uint32_t sel_end;
-    uint8_t text_sel_in_prog : 1; /*User is in process of selecting*/
-    uint8_t text_sel_en : 1;      /*Text can be selected on this text area*/
-#endif
-    uint8_t pwd_mode : 1; /*Replace characters with '*'*/
-    uint8_t one_line : 1; /*One line mode (ignore line breaks)*/
-} lv_textarea_t;
-
 LV_ATTRIBUTE_EXTERN_DATA extern const lv_obj_class_t lv_textarea_class;
 
 enum {
@@ -86,7 +56,7 @@ lv_obj_t * lv_textarea_create(lv_obj_t * parent);
 
 /**
  * Insert a character to the current cursor position.
- * To add a wide char, e.g. 'Á' use `_lv_text_encoded_conv_wc('Á')`
+ * To add a wide char, e.g. 'Á' use `lv_text_encoded_conv_wc('Á')`
  * @param obj       pointer to a text area object
  * @param c         a character (e.g. 'a')
  */
@@ -181,7 +151,7 @@ void lv_textarea_set_accepted_chars(lv_obj_t * obj, const char * list);
 void lv_textarea_set_max_length(lv_obj_t * obj, uint32_t num);
 
 /**
- * In `LV_EVENT_INSERT` the text which planned to be inserted can be replaced by an other text.
+ * In `LV_EVENT_INSERT` the text which planned to be inserted can be replaced by another text.
  * It can be used to add automatic formatting to the text area.
  * @param obj       pointer to a text area object
  * @param txt       pointer to a new string to insert. If `""` no text will be added.

@@ -33,7 +33,7 @@ void lv_example_observer_5(void)
     lv_subject_add_observer(&fw_update_status_subject, fw_upload_manager_observer_cb, NULL);
 
     /*Create start FW update button*/
-    lv_obj_t * btn = lv_btn_create(lv_screen_active());
+    lv_obj_t * btn = lv_button_create(lv_screen_active());
     lv_obj_add_event_cb(btn, fw_update_btn_clicked_event_cb, LV_EVENT_CLICKED, NULL);
     lv_obj_center(btn);
     lv_obj_t * label = lv_label_create(btn);
@@ -146,7 +146,7 @@ static void download_timer_cb(lv_timer_t * t)
 }
 
 /**
- * Emulate connection and FW dowlading by timers
+ * Emulate connection and FW downloading by timers
  */
 static void fw_upload_manager_observer_cb(lv_observer_t * observer, lv_subject_t * subject)
 {

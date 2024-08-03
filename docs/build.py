@@ -70,6 +70,7 @@ def cmd(s):
     print("")
     print(s)
     print("-------------------------------------")
+    
     r = os.system(s)
     if r != 0:
         print("Exit build due to previous error")

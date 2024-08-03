@@ -6,13 +6,13 @@
 /*********************
  *      INCLUDES
  *********************/
-#include "../lv_draw.h"
+#include "../lv_draw_private.h"
 #if LV_USE_DRAW_SDL
 #include LV_SDL_INCLUDE_PATH
 #include <SDL2/SDL_image.h>
 
 #include "lv_draw_sdl.h"
-#include "../../core/lv_refr.h"
+#include "../../core/lv_refr_private.h"
 #include "../../display/lv_display_private.h"
 #include "../../stdlib/lv_string.h"
 #include "../../drivers/sdl/lv_sdl_window.h"
@@ -112,6 +112,7 @@ void lv_draw_sdl_init(void)
         .create_cb = (lv_cache_create_cb_t)sdl_texture_cache_create_cb,
         .free_cb = (lv_cache_free_cb_t)sdl_texture_cache_free_cb,
     });
+    lv_cache_set_name(draw_sdl_unit->texture_cache, "SDL_TEXTURE");
 }
 
 /**********************
@@ -129,7 +130,7 @@ static int32_t dispatch(lv_draw_unit_t * draw_unit, lv_layer_t * layer)
     t = lv_draw_get_next_available_task(layer, NULL, DRAW_UNIT_ID_SDL);
     if(t == NULL) return -1;
 
-    lv_display_t * disp = _lv_refr_get_disp_refreshing();
+    lv_display_t * disp = lv_refr_get_disp_refreshing();
     SDL_Texture * texture = layer_get_texture(layer);
     if(layer != disp->layer_head && texture == NULL) {
         void * buf = lv_draw_layer_alloc_buf(layer);
@@ -183,7 +184,7 @@ static bool draw_to_texture(lv_draw_sdl_unit_t * u, cache_data_t * data)
     dest_layer._clip_area = task->area;
     lv_memzero(sdl_render_buf, lv_area_get_size(&dest_layer.buf_area) * 4 + 100);
 
-    lv_display_t * disp = _lv_refr_get_disp_refreshing();
+    lv_display_t * disp = lv_refr_get_disp_refreshing();
 
     SDL_Texture * texture = NULL;
     switch(task->type) {
@@ -224,10 +225,41 @@ static bool draw_to_texture(lv_draw_sdl_unit_t * u, cache_data_t * data)
             break;
         case LV_DRAW_TASK_TYPE_IMAGE: {
                 lv_draw_image_dsc_t * image_dsc = task->draw_dsc;
-                const char * path = image_dsc->src;
-                SDL_Surface * surface = IMG_Load(&path[2]);
-                if(surface == NULL) {
-                    fprintf(stderr, "could not load image: %s\n", IMG_GetError());
+                lv_image_src_t type = lv_image_src_get_type(image_dsc->src);
+                SDL_Surface * surface = NULL;
+                if(type == LV_IMAGE_SRC_FILE) {
+                    const char * path = image_dsc->src;
+                    surface = IMG_Load(&path[2]);
+                    if(surface == NULL) {
+                        LV_LOG_ERROR("could not load image from file: %s", IMG_GetError());
+                        return false;
+                    }
+                }
+                else if(type == LV_IMAGE_SRC_VARIABLE) {
+                    lv_image_dsc_t * lvd = (lv_image_dsc_t *)image_dsc->src;
+                    surface = SDL_CreateRGBSurfaceFrom((void *)lvd->data,
+                                                       lvd->header.w, lvd->header.h,
+                                                       LV_COLOR_FORMAT_GET_BPP(lvd->header.cf),
+                                                       lvd->header.stride,
+#if SDL_BYTEORDER == SDL_LIL_ENDIAN
+                                                       0x00FF0000,
+                                                       0x0000FF00,
+                                                       0x000000FF,
+                                                       0xFF000000
+#else
+                                                       0x0000FF00,
+                                                       0x00FF0000,
+                                                       0xFF000000,
+                                                       0x000000FF
+#endif
+                                                      );
+                    if(surface == NULL) {
+                        LV_LOG_ERROR("could not load image from variable");
+                        return false;
+                    }
+                }
+                else {
+                    LV_LOG_WARN("image source type unknown");
                     return false;
                 }
 
@@ -275,7 +307,7 @@ static bool draw_to_texture(lv_draw_sdl_unit_t * u, cache_data_t * data)
 
 static void blend_texture_layer(lv_draw_sdl_unit_t * u)
 {
-    lv_display_t * disp = _lv_refr_get_disp_refreshing();
+    lv_display_t * disp = lv_refr_get_disp_refreshing();
     SDL_Renderer * renderer = lv_sdl_window_get_renderer(disp);
 
     SDL_Rect clip_rect;
@@ -330,7 +362,7 @@ static void draw_from_cached_texture(lv_draw_sdl_unit_t * u)
 
     cache_data_t * data_cached = lv_cache_entry_get_data(entry_cached);
     SDL_Texture * texture = data_cached->texture;
-    lv_display_t * disp = _lv_refr_get_disp_refreshing();
+    lv_display_t * disp = lv_refr_get_disp_refreshing();
     SDL_Renderer * renderer = lv_sdl_window_get_renderer(disp);
 
     lv_layer_t * dest_layer = u->base_unit.target_layer;

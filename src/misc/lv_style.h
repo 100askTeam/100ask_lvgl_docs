@@ -1,4 +1,4 @@
-/**
+﻿/**
  * @file lv_style.h
  *
  */
@@ -13,8 +13,6 @@ extern "C" {
 /*********************
  *      INCLUDES
  *********************/
-#include <stdbool.h>
-#include <stdint.h>
 #include "../font/lv_font.h"
 #include "lv_color.h"
 #include "lv_area.h"
@@ -70,7 +68,7 @@ LV_EXPORT_CONST_INT(LV_SCALE_NONE);
 #endif
 // *INDENT-ON*
 
-#define LV_STYLE_CONST_PROPS_END { .prop_ptr = NULL, .value = { .num = 0 } }
+#define LV_STYLE_CONST_PROPS_END { .prop = LV_STYLE_PROP_INV, .value = { .num = 0 } }
 
 /**********************
  *      TYPEDEFS
@@ -79,40 +77,28 @@ LV_EXPORT_CONST_INT(LV_SCALE_NONE);
 /**
  * Possible options how to blend opaque drawings
  */
-enum _lv_blend_mode_t {
+typedef enum {
     LV_BLEND_MODE_NORMAL,     /**< Simply mix according to the opacity value*/
     LV_BLEND_MODE_ADDITIVE,   /**< Add the respective color channels*/
     LV_BLEND_MODE_SUBTRACTIVE,/**< Subtract the foreground from the background*/
     LV_BLEND_MODE_MULTIPLY,   /**< Multiply the foreground and background*/
-};
-
-#ifdef DOXYGEN
-typedef _lv_blend_mode_t lv_blend_mode_t;
-#else
-typedef uint8_t lv_blend_mode_t;
-#endif /*DOXYGEN*/
+} lv_blend_mode_t;
 
 /**
  * Some options to apply decorations on texts.
  * 'OR'ed values can be used.
  */
-enum _lv_text_decor_t {
+typedef enum {
     LV_TEXT_DECOR_NONE          = 0x00,
     LV_TEXT_DECOR_UNDERLINE     = 0x01,
     LV_TEXT_DECOR_STRIKETHROUGH = 0x02,
-};
-
-#ifdef DOXYGEN
-typedef _lv_text_decor_t lv_text_decor_t;
-#else
-typedef uint8_t lv_text_decor_t;
-#endif /*DOXYGEN*/
+} lv_text_decor_t;
 
 /**
  * Selects on which sides border should be drawn
  * 'OR'ed values can be used.
  */
-enum _lv_border_side_t {
+typedef enum {
     LV_BORDER_SIDE_NONE     = 0x00,
     LV_BORDER_SIDE_BOTTOM   = 0x01,
     LV_BORDER_SIDE_TOP      = 0x02,
@@ -120,28 +106,28 @@ enum _lv_border_side_t {
     LV_BORDER_SIDE_RIGHT    = 0x08,
     LV_BORDER_SIDE_FULL     = 0x0F,
     LV_BORDER_SIDE_INTERNAL = 0x10, /**< FOR matrix-like objects (e.g. Button matrix)*/
-};
-
-#ifdef DOXYGEN
-typedef _lv_border_side_t lv_border_side_t;
-#else
-typedef uint8_t lv_border_side_t;
-#endif /*DOXYGEN*/
+} lv_border_side_t;
 
 /**
  * The direction of the gradient.
  */
-enum _lv_grad_dir_t {
-    LV_GRAD_DIR_NONE, /**< No gradient (the `grad_color` property is ignored)*/
-    LV_GRAD_DIR_VER,  /**< Vertical (top to bottom) gradient*/
-    LV_GRAD_DIR_HOR,  /**< Horizontal (left to right) gradient*/
-};
+typedef enum {
+    LV_GRAD_DIR_NONE,       /**< No gradient (the `grad_color` property is ignored)*/
+    LV_GRAD_DIR_VER,        /**< Simple vertical (top to bottom) gradient*/
+    LV_GRAD_DIR_HOR,        /**< Simple horizontal (left to right) gradient*/
+    LV_GRAD_DIR_LINEAR,     /**< Linear gradient defined by start and end points. Can be at any angle.*/
+    LV_GRAD_DIR_RADIAL,     /**< Radial gradient defined by start and end circles*/
+    LV_GRAD_DIR_CONICAL,    /**< Conical gradient defined by center point, start and end angles*/
+} lv_grad_dir_t;
 
-#ifdef DOXYGEN
-typedef _lv_grad_dir_t lv_grad_dir_t;
-#else
-typedef uint8_t lv_grad_dir_t;
-#endif /*DOXYGEN*/
+/**
+ * Gradient behavior outside the defined range.
+*/
+typedef enum {
+    LV_GRAD_EXTEND_PAD,     /**< Repeat the same color*/
+    LV_GRAD_EXTEND_REPEAT,  /**< Repeat the pattern*/
+    LV_GRAD_EXTEND_REFLECT, /**< Repeat the pattern mirrored*/
+} lv_grad_extend_t;
 
 /** A gradient stop definition.
  *  This matches a color and a position in a virtual 0-255 scale.
@@ -154,10 +140,37 @@ typedef struct {
 
 /** A descriptor of a gradient. */
 typedef struct {
-    lv_gradient_stop_t   stops[LV_GRADIENT_MAX_STOPS]; /**< A gradient stop array */
-    uint8_t              stops_count;                  /**< The number of used stops in the array */
-    lv_grad_dir_t        dir : 3;                      /**< The gradient direction.
-                                                        * Any of LV_GRAD_DIR_HOR, LV_GRAD_DIR_VER, LV_GRAD_DIR_NONE */
+    lv_gradient_stop_t   stops[LV_GRADIENT_MAX_STOPS];  /**< A gradient stop array */
+    uint8_t              stops_count;                   /**< The number of used stops in the array */
+    lv_grad_dir_t        dir : 3;                       /**< The gradient direction.
+                                                         * Any of LV_GRAD_DIR_NONE, LV_GRAD_DIR_VER, LV_GRAD_DIR_HOR,
+                                                           LV_GRAD_TYPE_LINEAR, LV_GRAD_TYPE_RADIAL, LV_GRAD_TYPE_CONICAL */
+    lv_grad_extend_t     extend : 2;                    /**< Behaviour outside the defined range.
+                                                         * LV_GRAD_EXTEND_NONE, LV_GRAD_EXTEND_PAD, LV_GRAD_EXTEND_REPEAT, LV_GRAD_EXTEND_REFLECT */
+#if LV_USE_DRAW_SW_COMPLEX_GRADIENTS
+    union {
+        /*Linear gradient parameters*/
+        struct {
+            lv_point_t  start;                          /**< Linear gradient vector start point */
+            lv_point_t  end;                            /**< Linear gradient vector end point */
+        } linear;
+        /*Radial gradient parameters*/
+        struct {
+            lv_point_t  focal;                          /**< Center of the focal (starting) circle in local coordinates */
+            /* (can be the same as the ending circle to create concentric circles) */
+            lv_point_t  focal_extent;                   /**< Point on the circle (can be the same as the center) */
+            lv_point_t  end;                            /**< Center of the ending circle in local coordinates */
+            lv_point_t  end_extent;                     /**< Point on the circle determining the radius of the gradient */
+        } radial;
+        /*Conical gradient parameters*/
+        struct {
+            lv_point_t  center;                         /**< Conical gradient center point */
+            int16_t     start_angle;                    /**< Start angle 0..3600 */
+            int16_t     end_angle;                      /**< End angle 0..3600 */
+        } conical;
+    } params;
+    void * state;
+#endif
 } lv_grad_dsc_t;
 
 /**
@@ -174,7 +187,7 @@ typedef union {
  *
  * Props are split into groups of 16. When adding a new prop to a group, ensure it does not overflow into the next one.
  */
-enum _lv_style_prop_t {
+enum {
     LV_STYLE_PROP_INV               = 0,
 
     /*Group 0*/
@@ -301,15 +314,12 @@ enum _lv_style_prop_t {
     LV_STYLE_BITMAP_MASK_SRC        = 115,
     LV_STYLE_ROTARY_SENSITIVITY     = 116,
 
-#if LV_USE_FLEX
     LV_STYLE_FLEX_FLOW              = 125,
     LV_STYLE_FLEX_MAIN_PLACE        = 126,
     LV_STYLE_FLEX_CROSS_PLACE       = 127,
     LV_STYLE_FLEX_TRACK_PLACE       = 128,
     LV_STYLE_FLEX_GROW              = 129,
-#endif
 
-#if LV_USE_GRID
     LV_STYLE_GRID_COLUMN_ALIGN      = 130,
     LV_STYLE_GRID_ROW_ALIGN         = 131,
     LV_STYLE_GRID_ROW_DSC_ARRAY     = 132,
@@ -320,32 +330,19 @@ enum _lv_style_prop_t {
     LV_STYLE_GRID_CELL_ROW_POS      = 137,
     LV_STYLE_GRID_CELL_ROW_SPAN     = 138,
     LV_STYLE_GRID_CELL_Y_ALIGN      = 139,
-#endif
 
-    _LV_STYLE_LAST_BUILT_IN_PROP     = 140,
+    LV_STYLE_LAST_BUILT_IN_PROP     = 140,
 
-    _LV_STYLE_NUM_BUILT_IN_PROPS     = _LV_STYLE_LAST_BUILT_IN_PROP + 1,
+    LV_STYLE_NUM_BUILT_IN_PROPS     = LV_STYLE_LAST_BUILT_IN_PROP + 1,
 
     LV_STYLE_PROP_ANY                = 0xFF,
-    _LV_STYLE_PROP_CONST             = 0xFF /* magic value for const styles */
+    LV_STYLE_PROP_CONST             = 0xFF /* magic value for const styles */
 };
 
-#ifdef DOXYGEN
-typedef _lv_style_prop_t lv_style_prop_t;
-#else
-typedef uint8_t lv_style_prop_t;
-#endif /*DOXYGEN*/
-
-enum _lv_style_res_t {
+typedef enum {
     LV_STYLE_RES_NOT_FOUND,
     LV_STYLE_RES_FOUND,
-};
-
-#ifdef DOXYGEN
-typedef _lv_style_res_t lv_style_res_t;
-#else
-typedef uint8_t lv_style_res_t;
-#endif /*DOXYGEN*/
+} lv_style_res_t;
 
 /**
  * Descriptor for style transitions
@@ -362,7 +359,7 @@ typedef struct {
  * Descriptor of a constant style property.
  */
 typedef struct {
-    const lv_style_prop_t * prop_ptr;
+    lv_style_prop_t prop;
     lv_style_value_t value;
 } lv_style_const_prop_t;
 
@@ -499,8 +496,8 @@ static inline lv_style_res_t lv_style_get_prop_inlined(const lv_style_t * style,
     if(lv_style_is_const(style)) {
         lv_style_const_prop_t * props = (lv_style_const_prop_t *)style->values_and_props;
         uint32_t i;
-        for(i = 0; props[i].prop_ptr; i++) {
-            if(*props[i].prop_ptr == prop) {
+        for(i = 0; props[i].prop != LV_STYLE_PROP_INV; i++) {
+            if(props[i].prop == prop) {
                 *value = props[i].value;
                 return LV_STYLE_RES_FOUND;
             }
@@ -533,7 +530,7 @@ bool lv_style_is_empty(const lv_style_t * style);
  * @param prop a style property
  * @return the group [0..30] 30 means all the custom properties with index > 120
  */
-static inline uint32_t _lv_style_get_prop_group(lv_style_prop_t prop)
+static inline uint32_t lv_style_get_prop_group(lv_style_prop_t prop)
 {
     uint32_t group = prop >> 2;
     if(group > 30) group = 31;    /*The MSB marks all the custom properties*/
@@ -547,7 +544,7 @@ static inline uint32_t _lv_style_get_prop_group(lv_style_prop_t prop)
  * @param prop a style property
  * @return the flags of the property
  */
-uint8_t _lv_style_prop_lookup_flags(lv_style_prop_t prop);
+uint8_t lv_style_prop_lookup_flags(lv_style_prop_t prop);
 
 #include "lv_style_gen.h"
 
@@ -601,7 +598,7 @@ static inline void lv_style_set_transform_scale(lv_style_t * style, int32_t valu
  */
 static inline bool lv_style_prop_has_flag(lv_style_prop_t prop, uint8_t flag)
 {
-    return _lv_style_prop_lookup_flags(prop) & flag;
+    return lv_style_prop_lookup_flags(prop) & flag;
 }
 
 /*************************

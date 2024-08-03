@@ -1,5 +1,6 @@
 #if LV_BUILD_TEST
 #include "../lvgl.h"
+#include "../../lvgl_private.h"
 
 #include "unity/unity.h"
 #include "lv_test_indev.h"
@@ -178,7 +179,7 @@ static void create_ui(void)
     lv_canvas_fill_bg(canvas, c2, LV_OPA_COVER);
     draw_to_canvas(canvas);
 
-    LV_IMG_DECLARE(test_img_lvgl_logo_jpg);
+    LV_IMAGE_DECLARE(test_img_lvgl_logo_jpg);
     lv_obj_t * img;
     img = lv_image_create(scr);
     lv_image_set_src(img, &test_img_lvgl_logo_jpg);

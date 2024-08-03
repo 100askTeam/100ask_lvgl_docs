@@ -1,11 +1,17 @@
 #if LV_BUILD_TEST
 
 #include "../lvgl.h"
+#include "../../lvgl_private.h"
 
 #include "unity/unity.h"
 #include "lv_test_helpers.h"
 
 static lv_anim_timeline_t * anim_timeline;
+
+static uint32_t anim1_start_called;
+static uint32_t anim2_start_called;
+static uint32_t anim1_completed_called;
+static uint32_t anim2_completed_called;
 
 void setUp(void)
 {
@@ -18,12 +24,11 @@ void tearDown(void)
     /* Function run after every test */
     if(anim_timeline) lv_anim_timeline_delete(anim_timeline);
     lv_obj_clean(lv_screen_active());
-
 }
 
 void test_anim_timeline_progress_1(void)
 {
-    lv_obj_t * obj = lv_obj_create(lv_scr_act());
+    lv_obj_t * obj = lv_obj_create(lv_screen_active());
     lv_obj_set_size(obj, 100, 100);
     lv_obj_set_pos(obj, 30, 40);
 
@@ -83,7 +88,7 @@ void test_anim_timeline_progress_1(void)
 
 void test_anim_timeline_progress_2(void)
 {
-    lv_obj_t * obj = lv_obj_create(lv_scr_act());
+    lv_obj_t * obj = lv_obj_create(lv_screen_active());
     lv_obj_set_size(obj, 100, 100);
     lv_anim_t a1;
     lv_anim_init(&a1);
@@ -147,7 +152,7 @@ void test_anim_timeline_progress_2(void)
 
 void test_anim_timeline_start(void)
 {
-    lv_obj_t * obj = lv_obj_create(lv_scr_act());
+    lv_obj_t * obj = lv_obj_create(lv_screen_active());
     lv_obj_set_size(obj, 100, 100);
 
     lv_obj_set_pos(obj, 70, 70);
@@ -238,7 +243,7 @@ void test_anim_timeline_start(void)
 
 void test_anim_timeline_reverse(void)
 {
-    lv_obj_t * obj = lv_obj_create(lv_scr_act());
+    lv_obj_t * obj = lv_obj_create(lv_screen_active());
     lv_obj_set_size(obj, 100, 100);
 
     lv_obj_set_pos(obj, 70, 70);
@@ -320,6 +325,139 @@ void test_anim_timeline_reverse(void)
 
     lv_test_wait(1000);
     TEST_ASSERT_EQUAL(20, lv_obj_get_x(obj));
+}
+
+void anim1_exec_cb(void * var, int32_t v)
+{
+    LV_UNUSED(var);
+    printf("[anim1] %d\n", v);
+}
+void anim1_start(lv_anim_t * a)
+{
+    LV_UNUSED(a);
+    printf("[anim1] start\n");
+    anim1_start_called++;
+}
+void anim1_completed(lv_anim_t * a)
+{
+    LV_UNUSED(a);
+    printf("[anim1] completed\n");
+    anim1_completed_called++;
+}
+
+void anim2_exec_cb(void * var, int32_t v)
+{
+    LV_UNUSED(var);
+    printf("                    [anim2] %d\n", v);
+}
+void anim2_start(lv_anim_t * a)
+{
+    LV_UNUSED(a);
+    printf("                    [anim2] start\n");
+    anim2_start_called++;
+}
+void anim2_completed(lv_anim_t * a)
+{
+    LV_UNUSED(a);
+    printf("                    [anim2] completed\n");
+    anim2_completed_called++;
+}
+
+void test_anim_timeline_with_anim_start_cb_and_completed_cb(void)
+{
+    lv_anim_t anim1;
+    lv_anim_t anim2;
+
+    lv_anim_init(&anim1);
+    lv_anim_set_values(&anim1, 0, 1024);
+    lv_anim_set_duration(&anim1, 300);
+    lv_anim_set_exec_cb(&anim1, anim1_exec_cb);
+    lv_anim_set_start_cb(&anim1, anim1_start);
+    lv_anim_set_completed_cb(&anim1, anim1_completed);
+    anim1_start_called = 0;
+    anim1_completed_called = 0;
+
+    lv_memcpy(&anim2, &anim1, sizeof(anim1));
+    lv_anim_set_duration(&anim2, 300);
+    lv_anim_set_path_cb(&anim2, lv_anim_path_overshoot);
+    lv_anim_set_exec_cb(&anim2, anim2_exec_cb);
+    lv_anim_set_start_cb(&anim2, anim2_start);
+    lv_anim_set_completed_cb(&anim2, anim2_completed);
+    anim2_start_called = 0;
+    anim2_completed_called = 0;
+
+    anim_timeline = lv_anim_timeline_create();
+    lv_anim_timeline_add(anim_timeline,   0, &anim1);
+    lv_anim_timeline_add(anim_timeline, 200, &anim2);
+    lv_anim_timeline_set_progress(anim_timeline, 0);
+    lv_anim_timeline_start(anim_timeline);
+
+    lv_refr_now(NULL);
+
+    /*                              |----- Reverse ------|
+     *   |-----anim1-----|                 |--anim1 rvs--|
+     *           |----anim2----|    |--anim2 rvs--|
+     *
+     *   0       200   300    500   600    800  900     1100
+     */
+
+    lv_test_wait(20); /*Wait 20 ms*/
+    TEST_ASSERT_EQUAL(1, anim1_start_called);
+    TEST_ASSERT_EQUAL(0, anim1_completed_called);
+    TEST_ASSERT_EQUAL(0, anim2_start_called);
+    TEST_ASSERT_EQUAL(0, anim2_completed_called);
+
+    lv_test_wait(200); /*Now we are at 220ms */
+    TEST_ASSERT_EQUAL(1, anim1_start_called);
+    TEST_ASSERT_EQUAL(0, anim1_completed_called);
+    TEST_ASSERT_EQUAL(1, anim2_start_called);
+    TEST_ASSERT_EQUAL(0, anim2_completed_called);
+
+    lv_test_wait(100); /*Now we are at 320ms */
+    TEST_ASSERT_EQUAL(1, anim1_start_called);
+    TEST_ASSERT_EQUAL(1, anim1_completed_called);
+    TEST_ASSERT_EQUAL(1, anim2_start_called);
+    TEST_ASSERT_EQUAL(0, anim2_completed_called);
+
+    lv_test_wait(200); /*Now we are at 520ms */
+    TEST_ASSERT_EQUAL(1, anim1_start_called);
+    TEST_ASSERT_EQUAL(1, anim1_completed_called);
+    TEST_ASSERT_EQUAL(1, anim2_start_called);
+    TEST_ASSERT_EQUAL(1, anim2_completed_called);
+
+    lv_test_wait(80); /*Now we are at 600ms */
+    anim1_start_called = 0;
+    anim1_completed_called = 0;
+    anim2_start_called = 0;
+    anim2_completed_called = 0;
+
+    lv_anim_timeline_set_reverse(anim_timeline, true);
+    lv_anim_timeline_set_progress(anim_timeline, LV_ANIM_TIMELINE_PROGRESS_MAX);
+    lv_anim_timeline_start(anim_timeline);
+
+    lv_test_wait(20); /*Now we are at 620ms */
+    TEST_ASSERT_EQUAL(0, anim1_start_called);
+    TEST_ASSERT_EQUAL(0, anim1_completed_called);
+    TEST_ASSERT_EQUAL(1, anim2_start_called);
+    TEST_ASSERT_EQUAL(0, anim2_completed_called);
+
+    lv_test_wait(200); /*Now we are at 820ms */
+    TEST_ASSERT_EQUAL(1, anim1_start_called);
+    TEST_ASSERT_EQUAL(0, anim1_completed_called);
+    TEST_ASSERT_EQUAL(1, anim2_start_called);
+    TEST_ASSERT_EQUAL(0, anim2_completed_called);
+
+    lv_test_wait(100); /*Now we are at 920ms */
+    TEST_ASSERT_EQUAL(1, anim1_start_called);
+    TEST_ASSERT_EQUAL(0, anim1_completed_called);
+    TEST_ASSERT_EQUAL(1, anim2_start_called);
+    TEST_ASSERT_EQUAL(1, anim2_completed_called);
+
+    lv_test_wait(200); /*Now we are at 1120ms */
+    TEST_ASSERT_EQUAL(1, anim1_start_called);
+    TEST_ASSERT_EQUAL(1, anim1_completed_called);
+    TEST_ASSERT_EQUAL(1, anim2_start_called);
+    TEST_ASSERT_EQUAL(1, anim2_completed_called);
 }
 
 #endif

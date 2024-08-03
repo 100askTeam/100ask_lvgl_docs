@@ -1,5 +1,6 @@
 #if LV_BUILD_TEST
 #include "../lvgl.h"
+#include "../../lvgl_private.h"
 
 #include "unity/unity.h"
 #include "lv_test_helpers.h"
@@ -22,7 +23,7 @@ static void create_images(void)
     lv_obj_t * label;
 
     /* PNG array */
-    LV_IMG_DECLARE(test_img_lvgl_logo_png);
+    LV_IMAGE_DECLARE(test_img_lvgl_logo_png);
     img = lv_image_create(lv_screen_active());
     lv_image_set_src(img, &test_img_lvgl_logo_png);
     lv_obj_align(img, LV_ALIGN_CENTER, -100, -20);

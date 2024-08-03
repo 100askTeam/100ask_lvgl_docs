@@ -15,12 +15,12 @@ extern "C" {
  *********************/
 #include "lv_cache_entry.h"
 #include "lv_cache_private.h"
-#include <stdbool.h>
-#include <stdlib.h>
+#include "../lv_types.h"
 
-#include "_lv_cache_lru_rb.h"
+#include "lv_cache_lru_rb.h"
 
 #include "lv_image_cache.h"
+#include "lv_image_header_cache.h"
 /*********************
  *      DEFINES
  *********************/
@@ -137,6 +137,7 @@ bool lv_cache_evict_one(lv_cache_t * cache, void * user_data);
 /**
  * Set the maximum size of the cache.
  * If the current cache size is greater than the new maximum size, the cache's policy will be used to evict entries until the new maximum size is reached.
+ * If set to 0, the cache will be disabled.
  * @note But this behavior will happen only new entries are added to the cache.
  * @param cache         The cache object pointer to set the maximum size.
  * @param max_size      The new maximum size of the cache.
@@ -169,6 +170,14 @@ size_t lv_cache_get_size(lv_cache_t * cache, void * user_data);
 size_t lv_cache_get_free_size(lv_cache_t * cache, void * user_data);
 
 /**
+ * Return true if the cache is enabled.
+ * Disabled cache means that when the max_size of the cache is 0. In this case, all cache operations will be no-op.
+ * @param cache         The cache object pointer to check if it's disabled.
+ * @return              Returns true if the cache is enabled, false otherwise.
+ */
+bool lv_cache_is_enabled(lv_cache_t * cache);
+
+/**
  * Set the compare callback of the cache.
  * @param cache         The cache object pointer to set the compare callback.
  * @param compare_cb    The compare callback to set.
@@ -191,6 +200,21 @@ void   lv_cache_set_create_cb(lv_cache_t * cache, lv_cache_create_cb_t alloc_cb,
  * @param user_data     A user data pointer.
  */
 void   lv_cache_set_free_cb(lv_cache_t * cache, lv_cache_free_cb_t free_cb, void * user_data);
+
+/**
+ * Give a name for a cache object. Only the pointer of the string is saved.
+ * @param cache         The cache object pointer to set the name.
+ * @param name          The name of the cache.
+ */
+void lv_cache_set_name(lv_cache_t * cache, const char * name);
+
+/**
+ * Get the name of a cache object.
+ * @param cache         The cache object pointer to get the name.
+ * @return              Returns the name of the cache.
+ */
+const char * lv_cache_get_name(lv_cache_t * cache);
+
 /*************************
  *    GLOBAL VARIABLES
  *************************/

@@ -23,7 +23,7 @@ extern "C" {
  *      TYPEDEFS
  **********************/
 
-struct _lv_indev_t {
+struct lv_indev_t {
     /**< Input device type*/
     lv_indev_type_t type;
 
@@ -70,7 +70,7 @@ struct _lv_indev_t {
     uint16_t long_press_repeat_time;
 
     /**< Rotary diff count will be multiplied by this value and divided by 256*/
-    int32_t rotary_sensitvity;
+    int32_t rotary_sensitivity;
 
     struct {
         /*Pointer and button data*/
@@ -85,13 +85,14 @@ struct _lv_indev_t {
         lv_obj_t * last_obj;     /*The last object which was pressed*/
         lv_obj_t * scroll_obj;   /*The object being scrolled*/
         lv_obj_t * last_pressed; /*The lastly pressed object*/
+        lv_obj_t * last_hovered; /*The lastly hovered object*/
         lv_area_t scroll_area;
         lv_point_t gesture_sum; /*Count the gesture pixels to check LV_INDEV_DEF_GESTURE_LIMIT*/
         int32_t diff;
 
         /*Flags*/
-        lv_dir_t scroll_dir : 4;
-        lv_dir_t gesture_dir : 4;
+        uint8_t scroll_dir : 4;
+        uint8_t gesture_dir : 4;
         uint8_t gesture_sent : 1;
     } pointer;
     struct {

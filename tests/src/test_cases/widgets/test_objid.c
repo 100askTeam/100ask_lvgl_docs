@@ -1,7 +1,9 @@
 #if LV_BUILD_TEST
 #include "../lvgl.h"
+#include "../../lvgl_private.h"
 
 #include "unity/unity.h"
+#include <string.h>
 
 void test_obj_id_should_match_class_name(void)
 {
@@ -24,6 +26,19 @@ void test_obj_id_should_grow_by_one(void)
     lv_obj_t * obj2 = lv_label_create(NULL);
     id2 = (lv_uintptr_t)obj2->id;
     TEST_ASSERT_EQUAL(id1 + 1, id2);
+}
+
+void test_obj_id_get_child(void)
+{
+    lv_obj_t * parent = lv_obj_create(lv_screen_active());
+    lv_obj_t * child = lv_label_create(parent);
+    lv_obj_t * grandchild = lv_label_create(child);
+
+    lv_obj_set_id(child, (void *)(lv_uintptr_t)1);
+    lv_obj_set_id(grandchild, (void *)(lv_uintptr_t)2);
+
+    TEST_ASSERT_EQUAL_PTR(child, lv_obj_get_child_by_id(NULL, (void *)(lv_uintptr_t)1));
+    TEST_ASSERT_EQUAL_PTR(grandchild, lv_obj_get_child_by_id(NULL, (void *)(lv_uintptr_t)2));
 }
 
 #endif

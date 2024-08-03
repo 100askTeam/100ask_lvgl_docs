@@ -1,5 +1,6 @@
 #if LV_BUILD_TEST
 #include "../lvgl.h"
+#include "../../lvgl_private.h"
 
 #include "unity/unity.h"
 #include "lv_test_indev.h"
@@ -85,9 +86,9 @@ void test_animimg_set_repeat_count_infinite(void)
 {
     lv_animimg_set_repeat_count(animimg, LV_ANIM_REPEAT_INFINITE);
 
-    uint16_t actual_count = lv_animimg_get_repeat_count(animimg);
+    uint32_t actual_count = lv_animimg_get_repeat_count(animimg);
 
-    TEST_ASSERT_EQUAL_UINT16(actual_count, LV_ANIM_REPEAT_INFINITE);
+    TEST_ASSERT_EQUAL_UINT32(actual_count, LV_ANIM_REPEAT_INFINITE);
 }
 
 void test_animimg_start(void)

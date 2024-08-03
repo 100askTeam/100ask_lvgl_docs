@@ -71,8 +71,8 @@ void lv_port_display_init(void)
     lv_display_set_rotation(lcd_disp, LV_DISPLAY_ROTATION_270);     /* set landscape orientation */
 
     /* Example: two dynamically allocated buffers for partial rendering */
-    lv_color_t * buf1 = NULL;
-    lv_color_t * buf2 = NULL;
+    uint8_t * buf1 = NULL;
+    uint8_t * buf2 = NULL;
 
     uint32_t buf_size = MY_DISP_HOR_RES * MY_DISP_VER_RES / 10 * lv_color_format_get_size(lv_display_get_color_format(
                                                                                               lcd_disp));
@@ -167,7 +167,7 @@ static void lcd_send_color(lv_display_t * disp, const uint8_t * cmd, size_t cmd_
         /* DCX high (data) */
         HAL_GPIO_WritePin(LCD_DCX_GPIO_Port, LCD_DCX_Pin, GPIO_PIN_SET);
         /* for color data use DMA transfer */
-        /* Set the SPI in 16-bit mode to match endianess */
+        /* Set the SPI in 16-bit mode to match endianness */
         hspi1.Init.DataSize = SPI_DATASIZE_16BIT;
         HAL_SPI_Init(&hspi1);
         lcd_bus_busy = 1;

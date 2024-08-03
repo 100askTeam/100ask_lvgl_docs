@@ -1,5 +1,6 @@
 #if LV_BUILD_TEST
 #include "../lvgl.h"
+#include "../../lvgl_private.h"
 
 #include "unity/unity.h"
 
@@ -139,7 +140,7 @@ void test_spangroup_set_overflow(void)
 void test_spangroup_set_overflow_invalid_parameters_overflow_not_changed(void)
 {
     lv_spangroup_set_overflow(spangroup, LV_SPAN_OVERFLOW_ELLIPSIS);
-    lv_spangroup_set_overflow(spangroup, _LV_SPAN_OVERFLOW_LAST);
+    lv_spangroup_set_overflow(spangroup, LV_SPAN_OVERFLOW_LAST);
 
     TEST_ASSERT_EQUAL(LV_SPAN_OVERFLOW_ELLIPSIS, lv_spangroup_get_overflow(spangroup));
 }
@@ -168,7 +169,7 @@ void test_spangroup_set_mode(void)
 void test_spangroup_set_mode_invalid_parameter_mode_not_changed(void)
 {
     lv_spangroup_set_mode(spangroup, LV_SPAN_MODE_EXPAND);
-    lv_spangroup_set_mode(spangroup, _LV_SPAN_MODE_LAST);
+    lv_spangroup_set_mode(spangroup, LV_SPAN_MODE_LAST);
     TEST_ASSERT_EQUAL(LV_SPAN_MODE_EXPAND, lv_spangroup_get_mode(spangroup));
 }
 
@@ -277,6 +278,101 @@ void test_spangroup_get_expand_width(void)
 
     TEST_ASSERT_EQUAL_INT(constrained_size,
                           lv_spangroup_get_expand_width(spangroup, experimental_size));
+}
+
+void test_spangroup_newlines(void)
+{
+    active_screen = lv_screen_active();
+    spangroup = lv_spangroup_create(active_screen);
+    lv_obj_set_size(spangroup, LV_PCT(100), LV_PCT(100));
+
+    lv_span_set_text(lv_spangroup_new_span(spangroup), "Lorem\n");
+    lv_span_set_text(lv_spangroup_new_span(spangroup), "ipsum");
+
+    lv_span_set_text(lv_spangroup_new_span(spangroup), "\n\n");
+
+    lv_span_set_text(lv_spangroup_new_span(spangroup), "dolor");
+    lv_span_set_text(lv_spangroup_new_span(spangroup), "");
+    lv_span_set_text(lv_spangroup_new_span(spangroup), "\nsit");
+
+    /* carriage return is treated as equivalent to line feed */
+    lv_span_set_text(lv_spangroup_new_span(spangroup), "\r");
+
+    lv_span_set_text(lv_spangroup_new_span(spangroup), "amet,\n consectetur");
+    lv_span_set_text(lv_spangroup_new_span(spangroup), " adipiscing");
+
+    lv_span_set_text(lv_spangroup_new_span(spangroup), "\n");
+    lv_span_set_text(lv_spangroup_new_span(spangroup), "");
+
+    lv_span_set_text(lv_spangroup_new_span(spangroup), "\relit, sed\n");
+    lv_span_set_text(lv_spangroup_new_span(spangroup), "do eiusmod");
+
+    TEST_ASSERT_EQUAL_SCREENSHOT("widgets/span_06.png");
+}
+
+#if LV_USE_FREETYPE && __WORDSIZE == 64
+
+void test_spangroup_chinese_break_line(void)
+{
+    lv_font_t * font = lv_freetype_font_create("src/test_files/fonts/noto/NotoSansSC-Regular.ttf",
+                                               LV_FREETYPE_FONT_RENDER_MODE_BITMAP, 24, LV_FREETYPE_FONT_STYLE_NORMAL);
+
+    if(!font) {
+        LV_LOG_ERROR("freetype font create failed.");
+        TEST_FAIL();
+    }
+
+    active_screen = lv_screen_active();
+    spangroup = lv_spangroup_create(active_screen);
+    lv_obj_set_size(spangroup, LV_PCT(100), LV_PCT(100));
+    lv_spangroup_set_mode(spangroup, LV_SPAN_MODE_BREAK);
+
+    lv_obj_set_style_text_font(spangroup, font, 0);
+    lv_obj_set_style_border_width(spangroup, 2, 0);
+    lv_obj_set_width(spangroup, 250);
+
+    lv_span_t * span1 = lv_spangroup_new_span(spangroup);
+    lv_span_set_text(span1, "八百标兵奔北坡");
+    lv_span_t * span2 = lv_spangroup_new_span(spangroup);
+    lv_span_set_text(span2, "炮兵并排北边跑");
+    lv_style_set_text_color(&span2->style, lv_palette_main(LV_PALETTE_RED));
+    lv_span_t * span3 = lv_spangroup_new_span(spangroup);
+    lv_span_set_text(span3, "中英文测试。The quick brown fox jumps over a lazy dog. ");
+    lv_style_set_text_color(&span3->style, lv_palette_main(LV_PALETTE_BLUE));
+    lv_span_t * span4 = lv_spangroup_new_span(spangroup);
+    lv_span_set_text(span4, "abcdefghijklmn中英文测试");
+    lv_style_set_text_color(&span4->style, lv_palette_main(LV_PALETTE_GREEN));
+
+    TEST_ASSERT_EQUAL_SCREENSHOT("widgets/span_07.png");
+
+    lv_obj_set_style_text_font(spangroup, LV_FONT_DEFAULT, 0);
+    lv_freetype_font_delete(font);
+}
+
+#else
+
+void test_spangroup_chinese_break_line(void)
+{
+}
+
+#endif
+
+void test_spangroup_style_text_letter_space(void)
+{
+    active_screen = lv_screen_active();
+    spangroup = lv_spangroup_create(active_screen);
+
+    lv_obj_set_style_outline_width(spangroup, 1, 0);
+    lv_obj_set_style_text_letter_space(spangroup, 20, 0);
+
+    lv_span_set_text(lv_spangroup_new_span(spangroup), "A");
+    lv_span_set_text(lv_spangroup_new_span(spangroup), "B");
+    lv_span_set_text(lv_spangroup_new_span(spangroup), "C");
+    lv_span_set_text(lv_spangroup_new_span(spangroup), "D");
+    lv_span_set_text(lv_spangroup_new_span(spangroup), "E");
+    lv_span_set_text(lv_spangroup_new_span(spangroup), "F");
+
+    TEST_ASSERT_EQUAL_SCREENSHOT("widgets/span_08.png");
 }
 
 #endif
