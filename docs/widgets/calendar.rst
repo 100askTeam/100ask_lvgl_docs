@@ -30,16 +30,21 @@ attached to the calendar.
    <br>
 
 
-Calendar 对象是一个经典日历，它可以：- 显示 7x7 矩阵中的任何月份 - 显示日期名称 - 突出显示当前日期（今天）- 突出显示任何用户定义的日期
+Calendar 对象是一个经典日历，它可以：
 
-日历将添加到默认组（如果已设置）。日历是一个可编辑的对象，允许选择和单击日期编码器导航也是如此。
+- 通过一个7x7矩阵显示任何月份
+- 显示日期名称
+- 突出显示当前日期（今天）
+- 突出显示任何用户定义的日期
 
-为了使日历灵活，默认情况下它不显示当前的年或月。相反，有可选的“标头”可以是附加到日历。
+日历默认会添加到默认组（如果已设置）。日历控件可以通过编码器的导航模式选中，之后可以通过编辑模式选择指定的日期。
+
+为了使日历灵活，默认情况下它不显示当前的年份或月份。但是可以通过可选的 “标头（headers）” 附加到日历的顶部，这样就可以显示当前的年份及月份，并且可以切换到其他年份或月份。
 
 
 .. _lv_calendar_parts_and_styles:
 
-Parts and Styles（零件和样式）
+Parts and Styles（部分和样式）
 *****************************
 
 .. raw:: html
@@ -64,21 +69,16 @@ object under the hood to arrange the days into a matrix.
    <br>
 
 
-calendar 对象使用后台下的按钮矩阵对象将日期排列到矩阵中。
+calendar 对象的底层是通过按钮矩阵对象将日期排列到（7x7）矩阵中。
 
 - :cpp:enumerator:`LV_PART_MAIN` 日历的背景。使用所有与背景相关的样式属性。
 
-- :cpp:enumerator:`LV_PART_ITEMS` 指日期和日期名称。设置按钮矩阵控制标志以区分 按钮，并添加自定义抽屉事件，按如下方式修改按钮的属性：
+- :cpp:enumerator:`LV_PART_ITEMS` 指日期和日期名称。设置按钮矩阵控制标志来区分不同的按钮（日期），并添加自定义绘制（drawer）事件，可参考如下方式修改按钮的属性：
 
   - 日期名称没有边框，没有背景，用灰色绘制
-  - 上个月和下个月的天数有 :cpp:enumerator:`LV_BUTTONMATRIX_CTRL_DISABLED` 标志
-  - 今天与主题的原色有较厚的边框 - 突出显示的日子与主题的原色有一些不透明。
-
-日期名称没有边框，没有背景，用灰色绘制
-
-上个月和下个月的天数有标志
-
-今天主题的原色有较厚的边框 - 突出显示的日子与主题的原色有一些不透明。
+  - 矩阵中上个月和下个月的天数有 :cpp:enumerator:`LV_BUTTONMATRIX_CTRL_DISABLED` 标志
+  - 今天（你指定的日期）有较厚的边框（使用主题的主色） 
+  - 突出显示的日期有一些不透明度（使用主题的主色）。
 
 
 .. _lv_calendar_usage:
@@ -100,7 +100,7 @@ with ``year``, ``month`` and ``day`` fields.
    <br>
 
 
-某些函数使用 :cpp:struct:`lv_calendar_date_t` 结构类型，这是一种结构带有 ``年``, ``月`` 和 ``日`` 字段。
+某些函数使用 :cpp:struct:`lv_calendar_date_t` 结构体类型，这个结构体有 ``year``, ``month`` 和 ``day`` 成员。
 
 
 Current date（当前日期）
@@ -121,7 +121,7 @@ To set the current date (today), use the
    <br>
 
 
-要设置当前日期（今天），请使用 :cpp:expr:`lv_calendar_set_today_date(calendar, year, month, day)` 功能。 ``月`` 需要在 1..12 范围并且 ``日`` 在 1..31 范围内。
+要设置当前日期（今天），请使用 :cpp:expr:`lv_calendar_set_today_date(calendar, year, month, day)` 函数。 ``month（月）`` 的范围：1..12 ； ``day（日）`` 的范围：1..31。
 
 
 Shown date（显示日期）
@@ -141,10 +141,10 @@ To set the shown date, use
    <br>
 
 
-要设置显示的日期，请使用 :cpp:expr:`lv_calendar_set_shown_date(calendar, year, month)`
+设置想展示的日期（年月），请使用 :cpp:expr:`lv_calendar_set_shown_date(calendar, year, month)` 函数。
 
 
-Highlighted days（重要日子）
+Highlighted days（突出显示的日期）
 ---------------------------
 
 .. raw:: html
@@ -164,7 +164,7 @@ or global variable.
    <br>
 
 
-突出显示的日期列表应存储在 :cpp:struct:`lv_calendar_date_t` 数组，通过 :cpp:expr:`lv_calendar_set_highlighted_dates(calendar, highlighted_dates, date_num)` 加载。 只有数组的指针将被保存，因此数组应该是静态的或全局变量。
+可以指定多个想要突出显示的日期，突出显示的日期列表应存储在 :cpp:struct:`lv_calendar_date_t` 类型的数组中，其通过 :cpp:expr:`lv_calendar_set_highlighted_dates(calendar, highlighted_dates, date_num)` 函数加载，该函数只会保存数组的指针，所以该数组应该是静态的或全局变量。
 
 
 Name of the days（日期名称）
@@ -187,7 +187,7 @@ global or constant variables.
    <br>
 
 
-可以使用 :cpp:expr:`lv_calendar_set_day_names(calendar, day_names)` 调整日期的名称，其中 ``day_names`` 看起来像 ``const char * day_names[7] = {"Su", "Mo", ...};`` 只有保存日期名称的指针，因此元素应该是静态的， 全局变量或常量变量。
+可以使用函数 :cpp:expr:`lv_calendar_set_day_names(calendar, day_names)` 调整日期的名称（默认是星期一至星期天的英文缩写），其中参数 ``day_names`` 可以是类似这样的数组 ``const char * day_names[7] = {"Su", "Mo", ...};`` 只有保存日期名称的指针，因此元素应该是静态的，全局变量或常量变量。
 
 
 Custom year list（自定义年份列表）
@@ -209,10 +209,10 @@ or can be generated dynamically into a buffer as well.
    <br>
 
 
-使用 :cpp:expr:`lv_calendar_header_dropdown_set_year_list(calendar, years_list)` 设置自定义年份列表，其中 ``years_list`` 是指向自定义年份列表的指针。它可以是一个常量字符串像 ``static const char * years = "2023\n2022\n2021\n2020\n2019";``，或者也可以动态生成到缓冲区中。
+使用 :cpp:expr:`lv_calendar_header_dropdown_set_year_list(calendar, years_list)` 函数设置自定义年份列表，其中参数 ``years_list`` 是指向自定义年份列表的指针。它可以是一个常量字符串比如 ``static const char * years = "2023\n2022\n2021\n2020\n2019";``，或者也可以动态生成到缓冲区中。
 
 
-Chinese calendar（中国日历）
+Chinese calendar（中国历法）
 ----------------------------
 
 .. raw:: html
@@ -238,64 +238,10 @@ use :cpp:expr:`lv_calendar_set_chinese_mode(calendar, true)` to enable it.
    <br>
 
 
-中国历法是一种融合元素的传统文化工具 如农历、节气和传统节日。是的 广泛应用于中国社会生活，帮助人们了解日期 农历，安排节日活动，传承优秀 中华民族传统文化。无论是在家庭、企业、 或教育，中国历法起着不可替代的作用，使 人们更好地理解和欣赏中国传统的魅力 文化。
+中国历法是一种融合了农历、节气和传统节日等元素的传统文化工具。它广泛应用于中国社会生活中，帮助人们了解农历日期，安排节日活动，继承中华民族优秀的传统文化。无论是在家庭、商业还是教育领域，中国历法都发挥着不可替代的作用，使人们能够更好地理解和欣赏中国传统文化的魅力。
 
-如果您想使用中国日历，请使用 :cpp:expr:`lv_calendar_set_chinese_mode(calendar, true)` 启用它。
+如果您想使用中国历法，请使用函数 :cpp:expr:`lv_calendar_set_chinese_mode(calendar, true)` 启用它。
 
-
-.. _lv_calendar_events:
-
-Events（事件）
-**************
-
-.. raw:: html
-
-   <details>
-     <summary>显示原文</summary>
-
--  :cpp:enumerator:`LV_EVENT_VALUE_CHANGED` Sent if a date is clicked.
-   :cpp:expr:`lv_calendar_get_pressed_date(calendar, &date)` set ``date`` to the
-    date currently being pressed. Returns :cpp:enumerator:`LV_RESULT_OK` if there is a
-   valid pressed date, else :cpp:enumerator:`LV_RESULT_INVALID`.
-
-Learn more about :ref:`events`.
-
-.. raw:: html
-
-   </details> 
-   <br>
-
-
--  :cpp:enumerator:`LV_EVENT_VALUE_CHANGED` 如果单击日期，则发送。:cpp:expr:`lv_calendar_get_pressed_date(calendar, &date)` 将 ``date`` 设置为当前按下的日期。如果存在，则返回 :cpp:enumerator:`LV_RES_OK` 有效的按下日期，否则 :cpp:enumerator:`LV_RES_INVALID`。
-
-详细了解更多 :ref:`events`。
-
-
-.. _lv_calendar_keys:
-
-Keys（按键）
-***********
-
-.. raw:: html
-
-   <details>
-     <summary>显示原文</summary>
-
--  ``LV_KEY_RIGHT/UP/LEFT/RIGHT`` To navigate among the buttons to dates
--  :cpp:enumerator:`LV_KEY_ENTER` To press/release the selected date
-
-Learn more about :ref:`indev_keys`.
-
-.. raw:: html
-
-   </details> 
-   <br>
-
-
--  ``LV_KEY_RIGHT/UP/LEFT/RIGHT`` 在按钮之间导航到日期
--  :cpp:enumerator:`LV_KEY_ENTER` 按下/松开所选日期
-
-详细了解更多 :ref:`indev_keys`。
 
 
 .. _lv_calendar_header:
@@ -359,6 +305,61 @@ contains 2 drop-drown lists: one for the year and another for the month.
 
 
 :cpp:expr:`lv_calendar_header_dropdown_create(calendar)` 创建一个标头，该标头包含 2 个下拉列表：一个用于年份，另一个用于月份。
+
+
+.. _lv_calendar_events:
+
+Events（事件）
+**************
+
+.. raw:: html
+
+   <details>
+     <summary>显示原文</summary>
+
+-  :cpp:enumerator:`LV_EVENT_VALUE_CHANGED` Sent if a date is clicked.
+   :cpp:expr:`lv_calendar_get_pressed_date(calendar, &date)` set ``date`` to the
+    date currently being pressed. Returns :cpp:enumerator:`LV_RESULT_OK` if there is a
+   valid pressed date, else :cpp:enumerator:`LV_RESULT_INVALID`.
+
+Learn more about :ref:`events`.
+
+.. raw:: html
+
+   </details> 
+   <br>
+
+
+-  :cpp:enumerator:`LV_EVENT_VALUE_CHANGED` 如果单击日期，则发送该事件，通过调用函数 :cpp:expr:`lv_calendar_get_pressed_date(calendar, &date)` 将 ``date`` 设置为当前按下的日期。如果存在，则返回 :cpp:enumerator:`LV_RES_OK` 有效的按下日期，否则 :cpp:enumerator:`LV_RES_INVALID`。
+
+详细了解更多 :ref:`events`。
+
+
+.. _lv_calendar_keys:
+
+Keys（按键）
+***********
+
+.. raw:: html
+
+   <details>
+     <summary>显示原文</summary>
+
+-  ``LV_KEY_RIGHT/UP/LEFT/RIGHT`` To navigate among the buttons to dates
+-  :cpp:enumerator:`LV_KEY_ENTER` To press/release the selected date
+
+Learn more about :ref:`indev_keys`.
+
+.. raw:: html
+
+   </details> 
+   <br>
+
+
+-  ``LV_KEY_RIGHT/UP/LEFT/RIGHT`` 在按钮之间导航到日期
+-  :cpp:enumerator:`LV_KEY_ENTER` 按下/松开所选日期
+
+详细了解更多 :ref:`indev_keys`。
 
 
 .. _lv_calendar_example:
