@@ -67,11 +67,11 @@ If you would rather try LVGL on your own project follow these steps:
    ``lvgl`` folder, change the first ``#if 0`` to ``1`` to enable the
    file's content and set the :c:macro:`LV_COLOR_DEPTH` defines.
 -  Include ``lvgl/lvgl.h`` in files where you need to use LVGL related functions.
+-  Call :cpp:func:`lv_init`
 -  Call :cpp:expr:`lv_tick_inc(x)` every ``x`` milliseconds in a Timer or Task
    (``x`` should be between 1 and 10). It is required for the internal
    timing of LVGL. Alternatively, register a ``tick_get_cb`` with
    :cpp:func:`lv_tick_set_cb` so that LVGL can retrieve the current time directly.
--  Call :cpp:func:`lv_init`
 -  Create a display.
 
 .. raw:: html
@@ -86,8 +86,8 @@ If you would rather try LVGL on your own project follow these steps:
 - 将 ``lvgl`` 文件夹复制到您的项目中。
 - 将 ``lvgl/lv_conf_template.h`` 作为 ``lv_conf.h`` 复制到 ``lvgl`` 文件夹旁边，将其第一个的 ``#if 0`` 更改为 ``1`` 以使能文件的内容并修改设置 :c:macro:`LV_COLOR_DEPTH` 宏。
 - 在需要使用 LVGL 相关函数的文件中包含 ``lvgl/lvgl.h``。
-- 在计时器或任务中每 ``x`` 毫秒调用一次 :cpp:expr:`lv_tick_inc(x)` (``x``  应该在 1 到 10 之间)。 LVGL 的内部时序需要它。或者，使用 :cpp:func:`lv_tick_set_cb` 注册 ``tick_get_cb`` ，以便LVGL可以直接检索当前时间。
 - 调用 :cpp:func:`lv_init` (初始化lvgl库)
+- 在计时器或任务中每 ``x`` 毫秒调用一次 :cpp:expr:`lv_tick_inc(x)` (``x``  应该在 1 到 10 之间)。 LVGL 的内部时序需要它。或者，使用 :cpp:func:`lv_tick_set_cb` 注册 ``tick_get_cb`` ，以便LVGL可以直接检索当前时间。
 - 创建一个显示。
 
 
@@ -116,8 +116,10 @@ If you would rather try LVGL on your own project follow these steps:
 
 .. code:: c
 
-   static lv_color_t buf1[MY_DISP_HOR_RES * MY_DISP_VER_RES / 10];                        /*Declare a buffer for 1/10 screen size*/
-   lv_display_set_buffers(display, buf1, NULL, sizeof(buf1));  /*Initialize the display buffer.*/
+   /*Declare a buffer for 1/10 screen size*/
+   #define BYTE_PER_PIXEL (LV_COLOR_FORMAT_GET_SIZE(LV_COLOR_FORMAT_RGB565)) /*will be 2 for RGB565 */
+   static uint8_t buf1[MY_DISP_HOR_RES * MY_DISP_VER_RES / 10 * BYTE_PER_PIXEL];
+   lv_display_set_buffers(display, buf1, NULL, sizeof(buf1), LV_DISPLAY_RENDER_MODE_PARTIAL);  /*Initialize the display buffer.*/
 
 .. raw:: html
 
