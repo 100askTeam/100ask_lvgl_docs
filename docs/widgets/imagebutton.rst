@@ -5,7 +5,7 @@ Image button （图像按钮）(lv_imagebutton)
 ========================================
 
 Overview（概述）
-****************
+******************
 
 .. raw:: html
 
@@ -25,15 +25,15 @@ repeated to match the width of the object.
    <br>
 
 
-图像按钮与简单的“Button”对象非常相似。唯一的 不同之处在于，它以每种状态显示用户定义的图像 绘制矩形。
+图像按钮与简单的 “Button” 对象非常相似。唯一的区别是，它在每个状态下显示用户定义的图像，而不是绘制矩形。
 
-您可以设置左、右和中心图像，中心图像将是 重复以匹配对象的宽度。
+可以设置左、右和中心图像，中心图像将重复以匹配对象的宽度。
 
 
 .. _lv_imagebutton_parts_and_styles:
 
-Parts and Styles（零件和样式）
-*****************************
+Parts and Styles（部分和样式）
+*******************************
 
 .. raw:: html
 
@@ -50,15 +50,15 @@ Parts and Styles（零件和样式）
    <br>
 
 
--  :cpp:enumerator:`LV_PART_MAIN`  指图像。如果背景样式属性，将在图像后面绘制一个矩形按钮。
+-  :cpp:enumerator:`LV_PART_MAIN`  指图像。如果使用背景样式属性，将在图像按钮后面绘制一个矩形。
 
 .. _lv_imagebutton_usage:
 
 Usage（用法）
-*************
+***************
 
 Image sources（图片来源）
-------------------------
+--------------------------
 
 .. raw:: html
 
@@ -95,13 +95,13 @@ they will be used in pressed state instead of the released images.
    <br>
 
 
-若要将图像设置为状态，请使用 :cpp:expr:`lv_imagebutton_set_src(imagebutton, LV_IMAGEBUTTON_STATE_..., src_left, src_center, src_right)`。
+要将图像设置为某个状态，请使用 :cpp:expr:`lv_imagebutton_set_src(imagebutton, LV_IMAGEBUTTON_STATE_..., src_left, src_center, src_right)` 。
 
-图像源的工作方式与 `图片对象 </widgets/image>`__ 中所述的工作方式相同，只是“图像”按钮不支持“符号”。任何来源都可以为 ``NULL``。
+图像源的工作原理与 `图片对象 </widgets/image>`__ 中所述的相同，但是 "图像" 按钮不支持 "Symbols（符号）" 。任何源都可以为 ``NULL`` 。
 
-如果仅 ``src_center`` 指定，则小部件的宽度将自动设置为图像的宽度。但是，如果设置了所有三个源，则需要由用户设置宽度（例如使用 :cpp:expr:`lv_obj_set_width` ），并且中心图像将平铺以填充给定大小。
+如果只指定了 ``src_center`` ，则控件的宽度将自动设置为图像的宽度。但是，如果设置了所有三个源，则宽度需要由用户设置（例如使用 :cpp:expr:`lv_obj_set_width` ），并且中心图像将被平铺以填充给定的大小。
 
-可能的状态包括：
+状态可以是：
 
 - :cpp:enumerator:`LV_IMAGEBUTTON_STATE_RELEASED`
 - :cpp:enumerator:`LV_IMAGEBUTTON_STATE_PRESSED`
@@ -110,8 +110,7 @@ they will be used in pressed state instead of the released images.
 - :cpp:enumerator:`LV_IMAGEBUTTON_STATE_CHECKED_PRESSED`
 - :cpp:enumerator:`LV_IMAGEBUTTON_STATE_CHECKED_DISABLED`
 
-如果仅在 :cpp:enumerator:`LV_IMAGEBUTTON_STATE_RELEASED` 中设置源，则这些源也将在其他状态使用。如果设置例如 :cpp:enumerator:`LV_IMAGEBUTTON_STATE_PRESSED` 它们将在按下状态下使用，而不是在发布的图像中使用。
-
+如果只给状态 :cpp:enumerator:`LV_IMAGEBUTTON_STATE_RELEASED` 设置源，这些源也将在其他状态使用。如果设置了例如 :cpp:enumerator:`LV_IMAGEBUTTON_STATE_PRESSED` ，它们将在按下状态下使用图像源，而不是在 :cpp:enumerator:`LV_IMAGEBUTTON_STATE_RELEASED` 中使用。
 
 States（状态）
 -------------
@@ -156,9 +155,9 @@ Learn more about :ref:`events`.
    <br>
 
 
--  :cpp:enumerator:`LV_EVENT_VALUE_CHANGED` 切换按钮时发送。
+-  :cpp:enumerator:`LV_EVENT_VALUE_CHANGED` 切换按钮时发送该事件。
 
-详细了解更多 :ref:`events`。
+详细了解更多阅读 :ref:`events`。
 
 
 .. _lv_imagebutton_keys:
@@ -194,7 +193,7 @@ Learn more about :ref:`indev_keys`.
 .. _lv_imagebutton_example:
 
 Example
-*******
+********
 
 .. include:: ../examples/widgets/imagebutton/index.rst
 
