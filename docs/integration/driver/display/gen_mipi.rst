@@ -244,8 +244,8 @@ Example（例子）
 		lv_display_set_rotation(my_disp, LV_DISPLAY_ROTATION_90);
 
 		/* Configure draw buffers, etc. */
-		lv_color_t * buf1 = NULL;
-		lv_color_t * buf2 = NULL;
+		uint8_t * buf1 = NULL;
+		uint8_t * buf2 = NULL;
 
 		uint32_t buf_size = LCD_H_RES * LCD_BUF_LINES * lv_color_format_get_size(lv_display_get_color_format(my_disp));
 
@@ -327,8 +327,8 @@ Example（例子）
 		lv_display_set_rotation(my_disp, LV_DISPLAY_ROTATION_90);
 
 		/* Configure draw buffers, etc. */
-		lv_color_t * buf1 = NULL;
-		lv_color_t * buf2 = NULL;
+		uint8_t * buf1 = NULL;
+		uint8_t * buf2 = NULL;
 
 		uint32_t buf_size = LCD_H_RES * LCD_BUF_LINES * lv_color_format_get_size(lv_display_get_color_format(my_disp));
 
