@@ -1,11 +1,11 @@
 .. _lv_tabview:
 
-====================
+===============================
 Tabview（选项卡） (lv_tabview)
-====================
+===============================
 
 Overview（概述）
-****************
+******************
 
 .. raw:: html
 
@@ -32,22 +32,21 @@ sliding horizontally on the content.
    <br>
 
 
-Tabview（选项卡）视图对象可用于组织选项卡中的内容。选项卡 视图是从其他控件构建的：
+Tabview（选项卡）对象可用于组织选项卡中的内容。选项卡对象是由其他控件组件而成的：
 
-- 主容器：:ref:`lv_obj`
-- 选项卡按钮：带有 :ref:`lv_obj` 的 :ref:`lv_obj` 
-- 选项卡的容器 :ref:`lv_obj`
-- 选项卡内容： :ref:`lv_obj`
+- 主容器： :ref:`lv_obj`
+- 选项卡栏及其按钮： :ref:`lv_obj` 、 :ref:`lv_btn` 、 :ref:`lv_label` 
+- 选项卡标签： :ref:`lv_obj`
 
-选项卡按钮可以位于顶部、底部、左侧和右侧 选项卡视图的一侧。
+选项卡栏可以位于选项卡控件的顶部、底部、左侧和右侧。
 
-可以通过单击选项卡按钮或通过以下方式选择新选项卡 在内容上水平滑动。
+可以通过单击选项卡栏中的按钮或在选项卡标签上水平滑动来切换选项卡标签。
 
 
 .. _lv_tabview_parts_and_styles:
 
-Parts and Styles（零件和样式）
-*****************************
+Parts and Styles（部分和样式）
+*******************************
 
 .. raw:: html
 
@@ -63,16 +62,16 @@ There are no special parts on the Tab view but the ``lv_obj`` and
    <br>
 
 
-选项卡视图上没有特殊部件，但 ``lv_obj`` 和 ``lv_button``  小部件用于创建选项卡视图。
+选项卡上没有特殊部分，但 ``lv_obj`` 和 ``lv_button`` 控件用于创建选项卡。
 
 
 .. _lv_tabview_usage:
 
 Usage（用法）
-*************
+***************
 
-Create a Tab view（创建选项卡视图）
-----------------------------------
+Create a Tab view（创建选项卡）
+------------------------------------
 
 .. raw:: html
 
@@ -87,11 +86,11 @@ Create a Tab view（创建选项卡视图）
    <br>
 
 
-:cpp:expr:`lv_tabview_create(parent)` 创建一个新的空 Tab 视图。
+:cpp:expr:`lv_tabview_create(parent)` 创建一个新的空选项卡。
 
 
-Add tabs（添加选项卡）
----------------------
+Add tabs（添加选项卡标签）
+---------------------------
 
 .. raw:: html
 
@@ -108,11 +107,11 @@ the tab's content can be created.
    <br>
 
 
-可以使用 :cpp:expr:`lv_tabview_add_tab(tabview, "Tab name")` 添加新选项卡。 这将返回指向 :ref:`lv_obj` 对象的指针，其可以创建选项卡的内容。
+可以使用函数 :cpp:expr:`lv_tabview_add_tab(tabview, "Tab name")` 添加一个新的选项卡标签。 这将返回一个指向 :ref:`lv_obj` 对象的指针，在该对象中可以创建选项卡标签的内容。
 
 
-Rename tabs（重命名选项卡）
---------------------------
+Rename tabs（重命名选项卡标签）
+-------------------------------
 
 .. raw:: html
 
@@ -128,11 +127,11 @@ A tab can be renamed with
    <br>
 
 
-可以使用 :cpp:expr:`lv_tabview_rename_tab(tabview, tab_id, "New Name")` 重命名选项卡。
+可以使用函数 :cpp:expr:`lv_tabview_rename_tab(tabview, tab_id, "New Name")` 重命名选项卡标签。
 
 
-Change tab（“更改”选项卡）
--------------------------
+Change tab（切换选项卡标签）
+-----------------------------
 
 .. raw:: html
 
@@ -152,17 +151,15 @@ To select a new tab you can:
    <br>
 
 
-要选择新选项卡，您可以：
+可以通过下面的方式切换到其他选项卡标签：
 
-- 单击其选项卡按钮
-
-- 水平滑动
-
+- 单击其选项卡栏中的按钮
+- 在选项卡标签中水平滑动
 - 使用 :cpp:expr:`lv_tabview_set_active(tabview, id, LV_ANIM_ON)` 函数
 
 
 Set tab bar position（设置选项卡栏位置）
--------------------------------------
+-----------------------------------------
 
 .. raw:: html
 
@@ -178,11 +175,11 @@ the tab bar can be moved to any sides.
    <br>
 
 
-使用 :cpp:expr:`lv_tabview_set_tab_bar_position(tabview, LV_DIR_LEFT/RIGHT/TOP/BOTTOM)` 选项卡栏可以移动到任何一侧。
+使用函数 :cpp:expr:`lv_tabview_set_tab_bar_position(tabview, LV_DIR_LEFT/RIGHT/TOP/BOTTOM)` 选项卡栏可以移动到任何一侧。
 
 
 Set tab bar size（设置选项卡栏大小）
------------------------------------
+--------------------------------------
 
 .. raw:: html
 
@@ -199,11 +196,11 @@ arrangement it means the width.
    <br>
 
 
-选项卡栏的大小可以通过 :cpp:expr:`lv_tabview_set_tab_bar_size(tabview, size)` 来调整，如果是垂直排列，则是指标签栏的高度，并且在水平排列它意味着宽度。
+选项卡栏的大小可以通过函数 :cpp:expr:`lv_tabview_set_tab_bar_size(tabview, size)` 来调整。对于参数 ``size`` ，如果选项卡栏是垂直摆放，则表示高度；如果选项卡栏是水平排列，则表示宽度。
 
 
-Get the parts（获取零件）
-------------------------
+Get the parts（获取部分）
+---------------------------
 
 .. raw:: html
 
@@ -219,14 +216,14 @@ Get the parts（获取零件）
    <br>
 
 
-- :cpp:expr:`lv_tabview_get_content(tabview)` 返回选项卡内容的容器
-- :cpp:expr:`lv_tabview_get_tab_bar(tabview)` 返回选项卡按钮的容器
+- :cpp:expr:`lv_tabview_get_content(tabview)` 返回选项卡的主容器
+- :cpp:expr:`lv_tabview_get_tab_bar(tabview)` 返回选项卡栏的容器
 
 
 .. _lv_tabview_events:
 
 Events（事件）
-**************
+*****************
 
 .. raw:: html
 
@@ -245,15 +242,15 @@ Learn more about :ref:`events`.
    <br>
 
 
--  :cpp:enumerator:`LV_EVENT_VALUE_CHANGED` 通过滑动选择新选项卡时发送或单击选项卡按钮。 :cpp:expr:`lv_tabview_get_tab_active(tabview)` 返回当前选项卡从零开始的索引。
+-  :cpp:enumerator:`LV_EVENT_VALUE_CHANGED` 通过滑动选项卡标签或单击选项栏按钮切换到新选项卡时发送。 :cpp:expr:`lv_tabview_get_tab_active(tabview)` 返回当前所在选项卡标签的索引（从零开始）。
 
-详细了解更多 :ref:`events`。
+详细阅读了解更多 :ref:`events` 。
 
 
 .. _lv_tabview_keys:
 
 Keys（按键）
-************
+**************
 
 .. raw:: html
 
@@ -271,19 +268,19 @@ Learn more about :ref:`indev_keys`.
    <br>
 
 
-按键仅对 Tab 键有效。 如果需要，请手动添加到组。
+按键仅对选项卡栏中的按钮有效。如果需要，请手动添加到组。
 
-了解有关 :ref:`indev_keys` 的更多信息。
+阅读了解有关 :ref:`indev_keys` 的更多信息。
 
 
 .. _lv_tabview_example:
 
 Example
-*******
+********
 
 .. include:: ../examples/widgets/tabview/index.rst
 
 .. _lv_tabview_api:
 
 API
-***
+****
