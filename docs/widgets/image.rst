@@ -5,7 +5,7 @@ Image （图象）(lv_image)
 ========================
 
 Overview（概述）
-***************
+******************
 
 .. raw:: html
 
@@ -24,15 +24,15 @@ can be supported as well.
    <br>
 
 
-图像是显示来自闪存（作为数组）或来自文件的图像的基本对象。 图像也可以显示符号 (``LV_SYMBOL_...``) 。
+图像是显示来自闪存（数组）或来自文件的图像的基本对象。 图像也可以显示符号 (``LV_SYMBOL_...``) 。
 
-使用图像解码器接口 也可以支持自定义图像格式。
+使用 :ref:`图像解码器接口( Image decoder interface) <overview_image_decoder>` 也可以支持自定义图像格式。
 
 
 .. _lv_image_parts_and_styles:
 
-Parts and Styles（零件和样式）
-*****************************
+Parts and Styles（部分和样式）
+********************************
 
 .. raw:: html
 
@@ -49,16 +49,16 @@ Parts and Styles（零件和样式）
    <br>
 
 
-- :cpp:enumerator:`LV_PART_MAIN` 使用典型背景样式属性的背景矩形和使用图像样式属性的图像本身。
+- :cpp:enumerator:`LV_PART_MAIN` 使用典型背景样式属性的背景矩形和使用图像样式（img）属性的图像本身。
 
 
 .. _lv_image_usage:
 
 Usage（用法）
-*************
+****************
 
 Image source（图片来源）
------------------------
+--------------------------
 
 .. raw:: html
 
@@ -83,13 +83,12 @@ the online converter tool but now you should select the binary output
 format. You also need to use LVGL's file system module and register a
 driver with some functions for the basic file operation. Go to the
 :ref:`File system <overview_file_system>` to learn more. To set an image sourced
-from a file, use :cpp:expr:`lv_image_set_src(img, "S:folder1/my_img.bin")`.
+from a file, use :cpp:expr:`lv_image_set_src(img, "S:folder1/my_img.bin")` .
 
 You can also set a symbol similarly to :ref:`Labels <lv_label>`. In
 this case, the image will be rendered as text according to the *font*
 specified in the style. It enables to use of light-weight monochrome
-"letters" instead of real images. You can set symbol like
-:cpp:expr:`lv_image_set_src(img1, LV_SYMBOL_OK)`.
+"letters" instead of real images. You can set symbol like :cpp:expr:`lv_image_set_src(img1, LV_SYMBOL_OK)` .
 
 .. raw:: html
 
@@ -101,20 +100,19 @@ specified in the style. It enables to use of light-weight monochrome
 
 - 代码中的变量（带有像素的 C 数组）。
 - 外部存储的文件（例如在 SD 卡上）。
-- 带有 :ref:`Symbols <fonts_symbols>` 的文本。
+- 带有 :ref:`Symbols(符号) <fonts_symbols>` 的文本。
 
-要设置图像的来源，请使用 :cpp:expr:`lv_image_set_src(img, src)`。
+要设置图像的来源，请使用 :cpp:expr:`lv_image_set_src(img, src)` 接口。
 
-要从 PNG、JPG 或 BMP 图像生成像素数组，请使用  `在线图像转换工具 <https://lvgl.io/tools/imageconverter>`__ 并使用其指针设置转换后的图像：  :cpp:expr:`lv_image_set_src(img1, &converted_img_var)` 要使该变量在 C 文件中可见，您需要使用 :cpp:macro:`LV_IMAGE_DECLARE(converted_img_var)` 声明它。
+要从 PNG、JPG 或 BMP 图像生成像素数组，请使用 `LVGL官网的在线图像转换工具 <https://lvgl.io/tools/imageconverter>`__ 并将转换后的图像指针（比如 ``converted_img_var`` ）通过接口函数 :cpp:expr:`lv_image_set_src(img1, &converted_img_var)` 使用。要使该变量在 C 文件中可见，需要使用 :cpp:macro:`LV_IMAGE_DECLARE(converted_img_var)` 声明它。
 
-要使用外部文件，您还需要使用在线转换器工具转换图像文件，但现在您应该选择二进制输出格式。 您还需要使用 LVGL 的文件系统模块，并为基本文件操作注册一个具有一些功能的驱动程序。 转到 :ref:`文件系统 <overview_file_system>` 了解更多信息。 要设置来自文件的图像，请使用 :cpp:expr:`lv_image_set_src(img, "S:folder1/my_img.bin")`。
+要使用外部文件，还需要使用 `LVGL官网的在线图像转换工具 <https://lvgl.io/tools/imageconverter>`__  转换图像文件，这时候需要选择转为二进制输出格式；转出来之后还需要使用 :ref:` LVGL 的文件系统接口 <overview_file_system>` 对接你适配好的文件系统驱动。 要设置来自文件系统的二进制图像文件，请使用这样使用该接口 :cpp:expr:`lv_image_set_src(img, "S:folder1/my_img.bin")` 。
 
-您还可以设置类似于 :ref:`标签 <lv_label>`. 的符号。 在这种情况下，图像将根据样式中指定的 *font* 呈现为文本。 它允许使用轻量级单色“字母”而不是真实图像。 你可以设置像 :cpp:expr:`lv_image_set_src(img1, LV_SYMBOL_OK)` 这样的符号。
-
+图像控件还可以显示类似于 :ref:`标签 <lv_label>` 控件那样显示 :ref:`Symbols(符号) <fonts_symbols>` 或者字符；在这种情况下，图像将根据样式中指定的 *font* 呈现文本。 它允许使用轻量级单色 “字母” 而不是真实图像，例如 :cpp:expr:`lv_image_set_src(img1, LV_SYMBOL_OK "Some text")` 。
 
 
 Label as an image（标签作为图象）
---------------------------------
+----------------------------------
 
 .. raw:: html
 
@@ -133,11 +131,11 @@ using :c:macro:`LV_SYMBOL_DUMMY` as the prefix of the text. For example,
    <br>
 
 
-图像和标签有时用于传达相同的内容。 例如，描述按钮的作用。 因此，图像和标签在某种程度上是可以互换的，即图像可以通过使用 :c:macro:`LV_SYMBOL_DUMMY` 作为文本的前缀来显示文本。 例如，:cpp:expr:`lv_image_set_src(img, LV_SYMBOL_DUMMY, "Some text")`。
+图像和标签有时可以用于传达相同的内容，例如，描述按钮的作用。因此，图像和标签在某种程度上是可以互换的，也就是说图像可以通过使用 :c:macro:`LV_SYMBOL_DUMMY` 作为文本的前缀来显示文本。 例如， :cpp:expr:`lv_image_set_src(img, LV_SYMBOL_DUMMY "Some text")` 。
 
 
 Transparency（透明度）
----------------------
+------------------------
 
 .. raw:: html
 
@@ -161,8 +159,8 @@ handling methods:
 - **Alpha 字节** 向每个包含像素不透明度的像素添加一个 Alpha 字节
 
 
-Palette and Alpha index（调色板和Alpha索引）
--------------------------------------------
+Palette and Alpha index（调色板和 Alpha 索引）
+-----------------------------------------------
 
 .. raw:: html
 
@@ -186,15 +184,15 @@ about the color formats, read the :ref:`Images <overview_image>` section.
 
 除了 *True color* (RGB) 颜色格式外，还支持以下格式：
 
-- **索引** ： 图像有调色板。
+- **Indexed（索引）** ： 图像有调色板。
 
-- **Alpha 索引** ：仅存储 Alpha 值。
+- **Alpha indexed（透明度索引）** ：仅存储 Alpha（透明度） 值。
 
 可以在图像转换器中选择这些选项。 要了解有关颜色格式的更多信息，请阅读 :ref:`图像 <overview_image>`  部分。
 
 
 Recolor（重新着色）
-------------------
+--------------------
 
 .. raw:: html
 
@@ -217,13 +215,13 @@ The color to mix is set by ``img_recolor``.
    <br>
 
 
-颜色可以与具有给定强度的图像的每个像素混合。 这对于显示图像的不同状态（选中、非活动、按下等）非常有用，而无需存储同一图像的更多版本。 可以通过在 :cpp:enumerator:`LV_OPA_TRANSP` （无重新着色，值：0）和 :cpp:enumerator:`LV_OPA_COVER` （完全重新着色，值：255）之间设置 ``img_recolor_opa`` 在样式中启用此功能。 默认值为 :cpp:enumerator:`LV_OPA_TRANSP` 因此禁用此功能。
+颜色可以与具有给定强度的图像的每个像素混合。 这对于显示图像的不同状态（选中、非活动、按下等）非常有用，而无需存储同一图像的更多版本。 可以通过在 :cpp:enumerator:`LV_OPA_TRANSP` （无重新着色，值：0）和 :cpp:enumerator:`LV_OPA_COVER` （完全重新着色，值：255）之间设置 ``image_recolor_opa`` 在样式中启用此功能。 默认值为 :cpp:enumerator:`LV_OPA_TRANSP` 因此禁用此功能。
 
-要混合的颜色由 ``img_recolor`` 设置。
+要混合的颜色通过 ``image_recolor`` 样式设置。
 
 
 Offset（偏移量）
----------------
+-----------------
 
 .. raw:: html
 
@@ -242,11 +240,11 @@ or a "running image" effect can be created by :ref:`Animating <animations>` the 
    <br>
 
 
-使用 :cpp:expr:`lv_image_set_offset_x(img, x_ofs)` 和 :cpp:expr:`lv_image_set_offset_y(img, y_ofs)`，您可以向显示的图像。如果对象尺寸小于图像源大小的情况下非常有用。使用偏移参数，可以创建一个 `纹理图集 <https://en.wikipedia.org/wiki/Texture_atlas>`__ 或 "运行图像 "效果，可以通过 :ref:`Animating <animations>` 的 x 或 y 偏移量来创建。
+可以通过接口 :cpp:expr:`lv_image_set_offset_x(img, x_ofs)` 和 :cpp:expr:`lv_image_set_offset_y(img, y_ofs)` 为显示的图像添加一些偏移，这在对象尺寸小于图像源大小的情况下非常有用。使用偏移参数，可以创建一个 `纹理图集 <https://en.wikipedia.org/wiki/Texture_atlas>`__ 或 "运行图像 "效果，可以通过动画 :ref:`Animating <animations>` 设置 x 或 y 偏移量。
 
 
 Transformations（转换）
-----------------------
+-------------------------
 
 .. raw:: html
 
@@ -298,31 +296,30 @@ differences are that pure image widget transformation
    <br>
 
 
-使用 lv_image_set_scale（img， factor） 将缩放图像。 将 ``factor`` 设置为 ``256`` 或 :c:macro:`LV_SCALE_NONE` 来禁用缩放。一个较大的值会放大图像（例如 ``512`` 双倍尺寸），较小的值会缩小它（例如 ``128`` 半尺寸）。分数缩放也可以同样有效。例如 ``281`` 用于 10% 的放大。
+可以通过接口 :cpp:expr:`lv_image_set_scale(img, factor)` 缩放图像，参数 ``factor`` 控制缩放，将其设置为 ``256`` 或 :c:macro:`LV_SCALE_NONE` 就是不进行缩放；一个较大的值会放大图像（例如 ``512`` 放大两倍），较小的值会缩小它（例如 ``128`` 缩小一半）；分数缩放也可以同样有效。例如 ``281`` 用于 10% 的放大。
 
-:cpp:expr:`lv_image_set_scale_x(img, factor)` 和 :cpp:expr:`lv_image_set_scale_y(img, factor)` 也可用于水平和垂直独立缩放（非均匀缩放）。
+可以通过函数 :cpp:expr:`lv_image_set_scale_x(img, factor)` 和 :cpp:expr:`lv_image_set_scale_y(img, factor)` 进行水平和垂直独立缩放（非均匀缩放）。
 
-要旋转图像，请使用 :cpp:expr:`lv_image_set_rotation(img, angle)`。角度有 0.1 度精度，所以对于45.8°将设置458。
+要旋转图像，请使用 :cpp:expr:`lv_image_set_rotation(img, angle)` ； 参数 ``factor`` 控制角度，其角度精度为 0.1 度，比如，要设置为 45.8° 将其设置为458。
 
-默认情况下，旋转的枢轴点是图像的中心。 它可以用 :cpp:expr:`lv_image_set_pivot(img, pivot_x, pivot_y)` 更改。 ``0;0`` 是左上角。
+默认情况下，旋转的轴心点是图像的中心，可以通过函数 :cpp:expr:`lv_image_set_pivot(img, pivot_x, pivot_y)` 更改轴心点； 参数 ``pivot_x`` , ``pivot_y`` 就是要指定的轴心点坐标，比如 ``[0, 0]`` 意思是将轴心点改到图像的左上角。
 
-转换的质量可以用 :cpp:expr:`lv_image_set_antialias(img, true)`.进行调整。启用抗锯齿转换质量更高，但速度较慢。
+转换的质量可以通过函数 :cpp:expr:`lv_image_set_antialias(img, true)` 进行调整；启用抗锯齿会让转换质量更高，但速度较慢。
 
-转换要求整个映像可用。因此 索引图像 (``LV_COLOR_FORMAT_I1/2/4/8_...``)，仅 Alpha 图像无法转换。 换言之，转换仅适用于存储为 C 数组的普通 (A)RGB 或 A8 图像有效，或者如果自定义 :ref:`overview_image_decoder` 返回整个图像。
+转换需要整个图像可用。因此索引图像 (``LV_COLOR_FORMAT_I1/2/4/8_...``)，仅 Alpha 图像无法转换。 换言之，转换仅适用于存储为 C 数组的普通 (A)RGB 或 A8 图像有效，或者如果自定义 :ref:`overview_image_decoder` 返回整个图像。
 
-请注意，图像对象的实际坐标在转换过程中不会发生变化。转换过程中不会改变。也就是说，:cpp:expr:`lv_obj_get_width/height/x/y()` 将返回非缩放时的原始坐标。
+注意，图像对象的真实坐标在变换过程中不会改变。也就是说，:cpp:expr:`lv_obj_get_width/height/x/y()` 将返回原始的、未缩放的坐标。
 
 重要图像的转换与 来自样式的转换属性。（看这里）。主要 不同的是，纯粹的图像小部件转换
 
-**重要** 图像的变换与来自样式的变换属性无关。来自样式的转换属性。(参见  :ref:`这里 <styles_opacity_blend_modes_transformations>`)。主要区别在于，纯粹的图像小部件转换。
+**重要** 图像的转换与来自样式的转换属性无关。(请阅读 :ref:`这里 <styles_opacity_blend_modes_transformations>` )。主要区别在于纯图像控件的转换。
 
-- 不转换图像小组件的子项
+- 不会转换图像控件的子项
+- 图像直接转换，无需创建中间层（缓冲区）来快照控件
 
-- 图像直接转换，无需创建中间层（缓冲区）来为小部件快照
 
-
-Inner align（内对齐）
---------------------
+Inner align（内部对齐）
+-------------------------
 
 .. raw:: html
 
@@ -367,13 +364,13 @@ The alignment can be set by :cpp:func:`lv_image_set_inner_align`
    <br>
 
 
-默认情况下，图像小组件的宽度和高度为 :cpp:enumerator:`LV_SIZE_CONTENT`。 这意味着小部件将根据图像源自动调整大小。
+默认情况下，图像控件的宽度和高度为 :cpp:enumerator:`LV_SIZE_CONTENT` ，也就是说其会根据图像源自动调整大小。
 
-如果小部件的宽度或高度设置为较大的值，则 ``inner_align`` 属性会告知如何在小部件内对齐图像源。。
+如果宽度或高度设置为较大的值，则 ``inner_align`` 属性会告知如何在图像控件内对齐图像源。
 
-对齐方式设置以下任一：
+对齐方式可以设置为：
 
-- :cpp:enumerator:`LV_IMAGE_ALIGN_DEFAULT`: 左上角的意思
+- :cpp:enumerator:`LV_IMAGE_ALIGN_DEFAULT`：意思是左上角
 - :cpp:enumerator:`LV_IMAGE_ALIGN_TOP_LEFT`
 - :cpp:enumerator:`LV_IMAGE_ALIGN_TOP_MID`
 - :cpp:enumerator:`LV_IMAGE_ALIGN_TOP_RIGHT`
@@ -386,12 +383,12 @@ The alignment can be set by :cpp:func:`lv_image_set_inner_align`
 - :cpp:enumerator:`LV_IMAGE_ALIGN_STRETCH`
 - :cpp:enumerator:`LV_IMAGE_ALIGN_TILE`
 
-该 ``offset`` 值在图像源对齐后应用。例如，设置 ``y=-10`` 和 :cpp:enumerator:`LV_IMAGE_ALIGN_CENTER` 将使图像源从小部件的中心向上移动一点。
+``offset（偏移）``值在图像源对齐后应用。例如，设置 ``y=-10`` 和 :cpp:enumerator:`LV_IMAGE_ALIGN_CENTER` 将使图像源从控件的中心向上移动一些。
 
 或者自动缩放或平铺图像
 
-- :cpp:enumerator:`LV_IMAGE_ALIGN_STRETCH` 设置 X 和 Y 比例以填充小部件的区域
-- :cpp:enumerator:`LV_IMAGE_ALIGN_TILE` 将图像平铺到小部件区域。应用偏移以移动平铺。
+- :cpp:enumerator:`LV_IMAGE_ALIGN_STRETCH` 设置 X 和 Y 的比例以填充控件的区域。
+- :cpp:enumerator:`LV_IMAGE_ALIGN_TILE` 将图像平铺到控件区域。应用 offset（偏移） 来移动平铺。
 
 对齐方式可以通过以下方式设置 :cpp:func:`lv_image_set_inner_align`
 
@@ -399,7 +396,7 @@ The alignment can be set by :cpp:func:`lv_image_set_inner_align`
 .. _lv_image_events:
 
 Events（事件）
-*************
+****************
 
 .. raw:: html
 
@@ -420,7 +417,7 @@ Learn more about :ref:`events`.
 
 图像对象不发送特殊事件。
 
-参见 :ref:`基本对象 <lv_obj>` 的事件。
+请阅读 :ref:`基本对象 <lv_obj>` 的事件。
 
 详细了解更多 :ref:`events`。
 
@@ -428,7 +425,7 @@ Learn more about :ref:`events`.
 .. _lv_image_keys:
 
 Keys（按键）
-***********
+**************
 
 .. raw:: html
 
@@ -445,14 +442,14 @@ Learn more about :ref:`indev_keys`.
    <br>
 
 
-对象类型不处理 *Keys* 。
+图像对象不处理 *Keys* 。
 
-了解有关 :ref:`indev_keys` 的更多信息。
+阅读了解有关 :ref:`indev_keys` 的更多信息。
 
 .. _lv_image_example:
 
 Example
-*******
+**********
 
 .. include:: ../examples/widgets/image/index.rst
 
