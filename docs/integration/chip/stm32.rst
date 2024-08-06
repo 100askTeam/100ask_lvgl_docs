@@ -73,8 +73,11 @@ the *main.c* file. \* Create some frame buffer(s) as global variables:
 
    //Frame buffers
    /*Static or global buffer(s). The second buffer is optional*/
-   static lv_color_t buf_1[BUFF_SIZE]; //TODO: Chose a buffer size. DISPLAY_WIDTH * 10 is one suggestion.
-   static lv_color_t buf_2[BUFF_SIZE];
+   //TODO: Adjust color format and choose buffer size. DISPLAY_WIDTH * 10 is one suggestion.
+   #define BYTE_PER_PIXEL (LV_COLOR_FORMAT_GET_SIZE(LV_COLOR_FORMAT_RGB565)) /*will be 2 for RGB565 */
+   #define BUFF_SIZE (DISPLAY_WIDTH * 10 * BYTE_PER_PIXEL)
+   static uint8_t buf_1[BUFF_SIZE];
+   static uint8_t buf_2[BUFF_SIZE];
 
 - In your ``main()`` function, after initialising your CPU,
   peripherals, and LCD panel, call :cpp:func:`lv_init` to initialise LVGL.
@@ -185,8 +188,11 @@ the *main.c* file. \* Create some frame buffer(s) as global variables:
 
    //Frame buffers
    /*静态或全局缓冲区。第二个缓冲区是可选的*/
-   static lv_color_t buf_1[BUFF_SIZE]; //TODO: 选择一个缓冲区大小。 DISPLAY_WIDTH * 10是一个建议。
-   static lv_color_t buf_2[BUFF_SIZE];
+   //TODO：调整颜色格式并选择缓冲区大小。一个建议是 DISPLAY_WIDTH * 10。
+   #define BYTE_PER_PIXEL (LV_COLOR_FORMAT_GET_SIZE(LV_COLOR_FORMAT_RGB565)) /* 对于 RGB565 来说将是 2 */
+   #define BUFF_SIZE (DISPLAY_WIDTH * 10 * BYTE_PER_PIXEL)
+   static uint8_t buf_1[BUFF_SIZE];
+   static uint8_t buf_2[BUFF_SIZE];
 
 - 在您的 ``main()`` 函数中，初始化CPU，外设和LCD面板后，调用 :cpp:func:`lv_init` 初始化LVGL。然后，您可以使用 :cpp:func:`lv_display_create` 创建显示驱动程序，并使用 :cpp:func:`lv_display_set_buffers` 注册帧缓冲区。
 
@@ -265,8 +271,11 @@ variables:
 
    //Frame buffers
    /*Static or global buffer(s). The second buffer is optional*/
-   static lv_color_t buf_1[BUFF_SIZE]; //TODO: Declare your own BUFF_SIZE appropriate to your system.
-   static lv_color_t buf_2[BUFF_SIZE];
+   #define BYTE_PER_PIXEL (LV_COLOR_FORMAT_GET_SIZE(LV_COLOR_FORMAT_RGB565)) /*will be 2 for RGB565 */
+   //TODO: Declare your own BUFF_SIZE appropriate to your system.
+   #define BUFF_SIZE (DISPLAY_WIDTH * 10 * BYTE_PER_PIXEL)
+   static uint8_t buf_1[BUFF_SIZE];
+   static uint8_t buf_2[BUFF_SIZE];
 
 - In your ``main`` function, after your peripherals (SPI, GPIOs, LCD
   etc) have been initialised, initialise LVGL using :cpp:func:`lv_init`,
@@ -279,6 +288,7 @@ variables:
    lv_init();
    lv_display_t *display = lv_display_create(WIDTH, HEIGHT); /*Create the display*/
    lv_display_set_flush_cb(display, my_flush_cb);        /*Set a flush callback to draw to the display*/
+   lv_display_set_buffers(disp, buf_1, buf_2, sizeof(buf_1), LV_DISPLAY_RENDER_MODE_PARTIAL); /*Set an initialized buffer*/
 
    // Register the touch controller with LVGL - Not included here for brevity.
 
@@ -388,8 +398,11 @@ variables:
 
    //帧缓冲区
    /*静态或全局缓冲区（可选的第二个缓冲区）*/
-   static lv_color_t buf_1[BUFF_SIZE]; //TODO：根据您的系统声明适当的BUFF_SIZE。
-   static lv_color_t buf_2[BUFF_SIZE];
+   #define BYTE_PER_PIXEL (LV_COLOR_FORMAT_GET_SIZE(LV_COLOR_FORMAT_RGB565)) /* 对于 RGB565 格式，每个像素将占用 2 字节 */
+   // 待办事项：根据您的系统需求，自行声明合适的缓冲区大小。
+   #define BUFF_SIZE (DISPLAY_WIDTH * 10 * BYTE_PER_PIXEL)
+   static uint8_t buf_1[BUFF_SIZE];
+   static uint8_t buf_2[BUFF_SIZE];
 
 - 在您的 ``main`` 函数中，在初始化外设（SPI，GPIO，LCD）之后，使用 :cpp:func:`lv_init` 初始化LVGL，使用 :cpp:func:`lv_display_create` 创建新的显示驱动程序，使用 :cpp:func:`lv_display_set_buffers` 注册帧缓冲区。
 
@@ -399,6 +412,7 @@ variables:
    lv_init();
    lv_display_t *display = lv_display_create(WIDTH, HEIGHT); /*创建显示*/
    lv_display_set_flush_cb(display, my_flush_cb);        /*设置刷新回调以绘制到显示器*/
+   lv_display_set_buffers(disp, buf_1, buf_2, sizeof(buf_1), LV_DISPLAY_RENDER_MODE_PARTIAL); /*设置一个已初始化的缓冲区*/
 
    // 使用LVGL注册触摸控制器-由于篇幅的原因，此处未包含。
 
