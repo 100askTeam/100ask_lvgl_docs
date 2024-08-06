@@ -1,11 +1,11 @@
 .. _lv_menu:
 
-======================
+=======================
 Menu （菜单）(lv_menu)
-======================
+=======================
 
 Overview（概述）
-****************
+******************
 
 .. raw:: html
 
@@ -21,13 +21,13 @@ handles the traversal between pages automatically.
    <br>
 
 
-菜单小部件可用于轻松创建多级菜单。它自动处理页面之间的遍历。
+菜单控件可以轻松创建多级菜单。它自动处理页面之间的遍历切换。
 
 
 .. _lv_menu_parts_and_styles:
 
-Parts and Styles（零件和样式）
-*****************************
+Parts and Styles（部分和样式）
+*******************************
 
 .. raw:: html
 
@@ -36,16 +36,16 @@ Parts and Styles（零件和样式）
 
 The menu widget is built from the following objects: 
 
-- Main container: :cpp:type:`lv_menu_main_cont`
-- Main header: :cpp:type:`lv_menu_main_header_cont`
-- Back button: :ref:`lv_button`
-- Back button icon: :ref:`lv_image`
-- Main page: :cpp:type:`lv_menu_page`
-- Sidebar container: :cpp:type:`lv_menu_sidebar_cont`
-- Sidebar header: :cpp:type:`lv_menu_sidebar_header_cont`
-- Back button: :ref:`lv_button`
-- Back button icon: :ref:`lv_image`
-- Sidebar page: :cpp:type:`lv_menu_page`
+- Main container: :cpp:type:`lv_menu_main_cont` 
+- Main header: :cpp:type:`lv_menu_main_header_cont` 
+- Back button: :ref:`lv_button` 
+- Back button icon: :ref:`lv_image` 
+- Main page: :cpp:type:`lv_menu_page` 
+- Sidebar container: :cpp:type:`lv_menu_sidebar_cont` 
+- Sidebar header: :cpp:type:`lv_menu_sidebar_header_cont` 
+- Back button: :ref:`lv_button` 
+- Back button icon: :ref:`lv_image` 
+- Sidebar page: :cpp:type:`lv_menu_page` 
 
 .. raw:: html
 
@@ -53,27 +53,23 @@ The menu widget is built from the following objects:
    <br>
 
 
-菜单小部件由以下对象构建：
+菜单控件由以下对象组合而成：
 
-- 主容器：:cpp:type:`lv_menu_main_cont`
-- 主标题：:cpp:type:`lv_menu_main_header_cont`
-- 返回按钮：:ref:`lv_button`
-- 返回按钮图标：:ref:`lv_image`
-- 主页：:cpp:type:`lv_menu_page`
-- 侧边栏容器：:cpp:type:`lv_menu_sidebar_cont`
-- 侧边栏标题：:cpp:type:`lv_menu_sidebar_header_cont`
-- 返回按钮：:ref:`lv_button`
-- 返回按钮图标：:ref:`lv_image`
-- 侧边栏页面：:cpp:type:`lv_menu_page`
-
+- 主容器： :cpp:type:`lv_menu_main_cont` 
+- 主标题： :cpp:type:`lv_menu_main_header_cont` 
+- 返回按钮： :ref:`lv_button` 
+- 返回按钮图标： :ref:`lv_image` 
+- 页面： :cpp:type:`lv_menu_page` 
+- 侧边栏容器： :cpp:type:`lv_menu_sidebar_cont` 
+- 侧边栏标题： :cpp:type:`lv_menu_sidebar_header_cont` 
 
 .. _lv_menu_usage:
 
 Usage（用法）
-*************
+**************
 
 Create a menu（创建菜单）
-------------------------
+--------------------------
 
 .. raw:: html
 
@@ -91,8 +87,8 @@ Create a menu（创建菜单）
 :cpp:expr:`lv_menu_create(parent)` 创建一个新的空菜单。
 
 
-Header mode（标头模式）
-----------------------
+Header mode（标题模式）
+------------------------
 
 .. raw:: html
 
@@ -113,17 +109,17 @@ You can set header modes with :cpp:expr:`lv_menu_set_mode_header(menu, LV_MENU_H
    <br>
 
 
-存在以下标头模式：
+页面的标题可以设置为下面的模式：
 
-- :cpp:enumerator:`LV_MENU_HEADER_TOP_FIXED` 标头位于顶部。
-- :cpp:enumerator:`LV_MENU_HEADER_TOP_UNFIXED` 页眉位于顶部，可以滚动到视图之外。
+- :cpp:enumerator:`LV_MENU_HEADER_TOP_FIXED` 标题位于顶部。
+- :cpp:enumerator:`LV_MENU_HEADER_TOP_UNFIXED` 标题位于顶部，可以滚动到视图之外。
 - :cpp:enumerator:`LV_MENU_HEADER_BOTTOM_FIXED` 标题位于底部。
 
-您可以使用 :cpp:expr:`lv_menu_set_mode_header(menu, LV_MENU_HEADER...)`。
+可以使用函数 :cpp:expr:`lv_menu_set_mode_header(menu, LV_MENU_HEADER...)` 设置模式。
 
 
-Root back button mode（Root后退按钮模式）
-----------------------------------------
+Root back button mode（根页面后退按钮模式）
+-------------------------------------------
 
 .. raw:: html
 
@@ -144,16 +140,16 @@ You can set root back button modes with
    <br>
 
 
-存在以下根后退按钮模式：
+根页面后退按钮可以设置为下面的模式：
 
 - :cpp:enumerator:`LV_MENU_ROOT_BACK_BTN_DISABLED`
 - :cpp:enumerator:`LV_MENU_ROOT_BACK_BTN_ENABLED`
 
-您可以使用 :cpp:expr:`lv_menu_set_mode_root_back_button(menu, LV_MENU_ROOT_BACK_BTN...)`。
+可以使用函数 :cpp:expr:`lv_menu_set_mode_root_back_button(menu, LV_MENU_ROOT_BACK_BTN...)` 设置模式。
 
 
-Create a menu page（创建菜单页）
--------------------------------
+Create a menu page（创建菜单页面）
+----------------------------------
 
 .. raw:: html
 
@@ -169,11 +165,11 @@ can add any widgets to the page.
    <br>
 
 
-:cpp:expr:`lv_menu_page_create(menu, title)` 创建一个新的空菜单页。你可以向页面添加任何控件。
+可以使用函数 :cpp:expr:`lv_menu_page_create(menu, title)` 创建一个新的空菜单页，之后你可以向该页面添加任何控件。
 
 
 Set a menu page in the main area（在主区域设置菜单页面）
-------------------------------------------------------
+---------------------------------------------------------
 
 .. raw:: html
 
@@ -190,11 +186,11 @@ history.
    <br>
 
 
-创建菜单页面后，您可以使用 :cpp:expr:`lv_menu_set_page(menu, page)` 将其设置为主区域。 ``NULL`` 以清除主菜单和清除菜单历史。
+创建菜单页面后，可以使用函数 :cpp:expr:`lv_menu_set_page(menu, page)` 将其设置为主区域， 参数 ``page`` 为 ``NULL`` 则会清除主菜单和清除菜单历史页面。
 
 
-Set a menu page in the sidebar（在边栏中设置菜单页面）
-----------------------------------------------------
+Set a menu page in the sidebar（在侧边栏中设置菜单页面）
+-------------------------------------------------------
 
 .. raw:: html
 
@@ -210,11 +206,11 @@ Once a menu page has been created, you can set it to the sidebar with
    <br>
 
 
-创建菜单页面后，您可以使用 :cpp:expr:`lv_menu_set_sidebar_page(menu, page)` 将其设置为侧边栏。 ``NULL`` 以清除侧边栏。
+创建菜单页面后，可以使用函数 :cpp:expr:`lv_menu_set_sidebar_page(menu, page)` 将其设置为侧边栏，参数 ``page`` 为``NULL`` 则会清除侧边栏页面。
 
 
 Linking between menu pages（菜单页之间的链接）
----------------------------------------------
+------------------------------------------------
 
 .. raw:: html
 
@@ -231,11 +227,11 @@ click the button obj, you want it to open up a new page, use
    <br>
 
 
-例如，您在主页中创建了一个按钮 obj。当你单击按钮 obj，您希望它打开一个新页面，使用 :cpp:expr:`lv_menu_set_load_page_event(menu, obj, new page)`。
+例如，在主页中创建了一个按钮控件，当你单击按钮控件，希望它打开一个新页面，这时可以使用函数 :cpp:expr:`lv_menu_set_load_page_event(menu, obj, new page)` 打开新页面。
 
 
-Create a menu container, section, separator（创建菜单容器、节、分隔符）
----------------------------------------------------------------------
+Create a menu container, section, separator（创建菜单容器、部分、分隔符）
+-----------------------------------------------------------------------
 
 .. raw:: html
 
@@ -255,7 +251,7 @@ menu:
    <br>
 
 
-可以创建以下对象，以便更轻松地设置 菜单：
+可以创建以下对象，以便更轻松地设置菜单样式：
 
 - :cpp:expr:`lv_menu_cont_create(parent page)` 创建一个新的空容器。
 - :cpp:expr:`lv_menu_section_create(parent page)` 创建一个新的空白部分。
@@ -265,7 +261,7 @@ menu:
 .. _lv_menu_events:
 
 Events（事件）
-**************
+***************
 
 .. raw:: html
 
@@ -296,24 +292,24 @@ Learn more about :ref:`events`.
    <br>
 
 
--  :cpp:enumerator:`LV_EVENT_VALUE_CHANGED` 显示页面时发送。
+-  :cpp:enumerator:`LV_EVENT_VALUE_CHANGED` 切换到新页面显示时发送。
 
-   -  :cpp:expr:`lv_menu_get_cur_main_page(menu)` 返回指向菜单页的指针 当前显示在 main 中。
-   -  :cpp:expr:`lv_menu_get_cur_sidebar_page(menu)` 返回指向菜单的指针 当前显示在边栏中的页面。
+   -  :cpp:expr:`lv_menu_get_cur_main_page(menu)` 返回指向当前在 main 中显示的菜单页的指针。
+   -  :cpp:expr:`lv_menu_get_cur_sidebar_page(menu)` 返回指向当前显示在侧边栏中的菜单页面的指针。
 
--  :cpp:enumerator:`LV_EVENT_CLICKED` 当标题中的后退按钮来自任一时发送单击主栏或侧边栏。:cpp:enumerator:`LV_OBJ_FLAG_EVENT_BUBBLE` 已启用按钮，以便您可以将事件添加到菜单本身。
+-  :cpp:enumerator:`LV_EVENT_CLICKED` 当单击主标题或侧边栏中的后退按钮时触发该事件。按钮已经启用 :cpp:enumerator:`LV_OBJ_FLAG_EVENT_BUBBLE` ，所以可以将事件添加到菜单本身。
 
-   -  :cpp:expr:`lv_menu_back_button_is_root(menu, button)` 检查按钮是否为root “后退” 按钮。
+   -  :cpp:expr:`lv_menu_back_button_is_root(menu, button)` 检查该按钮是否为根页面的后退 按钮。
 
-另请参阅 :ref:`基本对象 <lv_obj>` 的事件。
+另请阅读 :ref:`基本对象 <lv_obj>` 的事件了解更多事件。
 
-详细了解更多 :ref:`events`。
+阅读详细了解更多 :ref:`events` 关于的事件文档。
 
 
 .. _lv_menu_keys:
 
 Keys（按键）
-************
+**************
 
 .. raw:: html
 
@@ -330,9 +326,9 @@ Learn more about :ref:`indev_keys`.
    <br>
 
 
-菜单小部件不处理任何 *按键* 。
+菜单控件不处理任何 *按键* 。
 
-了解有关 :ref:`indev_keys` 的更多信息。
+阅读了解有关 :ref:`indev_keys` 的更多信息。
 
 
 .. _lv_menu_example:
