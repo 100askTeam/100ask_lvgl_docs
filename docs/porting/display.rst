@@ -348,10 +348,11 @@ Color format（颜色格式）
 The default color format of the display is set according to :c:macro:`LV_COLOR_DEPTH`
 (see ``lv_conf.h``)
 
-- :c:macro:`LV_COLOR_DEPTH` ``32``: XRGB8888（4 字节/像素）
-- :c:macro:`LV_COLOR_DEPTH` ``24``: RGB888（3 字节/像素）
-- :c:macro:`LV_COLOR_DEPTH` ``16``: RGB565（2字节/像素）
-- :c:macro:`LV_COLOR_DEPTH` ``8``:L8（1 字节/像素）尚不支持
+- :c:macro:`LV_COLOR_DEPTH` ``32``: XRGB8888 (4 bytes/pixel)
+- :c:macro:`LV_COLOR_DEPTH` ``24``: RGB888 (3 bytes/pixel)
+- :c:macro:`LV_COLOR_DEPTH` ``16``: RGB565 (2 bytes/pixel)
+- :c:macro:`LV_COLOR_DEPTH` ``8``: L8 (1 bytes/pixel)
+- :c:macro:`LV_COLOR_DEPTH` ``1``: I1 (1 bit/pixel) Only support for horizontal mapped buffers.
 
 The ``color_format`` can be changed with
 :cpp:expr:`lv_display_set_color_depth(display, LV_COLOR_FORMAT_...)`.
@@ -370,15 +371,15 @@ selected color format.
 
 显示器的默认颜色格式是根据 :c:macro:`LV_COLOR_DEPTH` (请参阅 ``lv_conf.h``)
 
-- :c:macro:`LV_COLOR_DEPTH` ``32``: XRGB8888 (4 bytes/pixel)
-- :c:macro:`LV_COLOR_DEPTH` ``24``: RGB888 (3 bytes/pixel)
-- :c:macro:`LV_COLOR_DEPTH` ``16``: RGB565 (2 bytes/pixel)
-- :c:macro:`LV_COLOR_DEPTH` ``8``: L8 (1 bytes/pixel) Not supported yet
+- :c:macro:`LV_COLOR_DEPTH` ``32``: XRGB8888（4 字节/像素）
+- :c:macro:`LV_COLOR_DEPTH` ``24``: RGB888（3 字节/像素）
+- :c:macro:`LV_COLOR_DEPTH` ``16``: RGB565（2字节/像素）
+- :c:macro:`LV_COLOR_DEPTH` ``8``:L8（1 字节/像素）
+- :c:macro:`LV_COLOR_DEPTH` ``1``:I1（每个像素1比特）仅支持水平映射缓冲区。
 
-可以用 :cpp:expr:`lv_display_set_color_depth(display, LV_COLOR_FORMAT_...)`。 此外，默认值 :c:macro:`LV_COLOR_FORMAT_ARGB8888` 可以是用作井。
+颜色格式可以通过调用 :cpp:expr:`lv_display_set_color_depth(display, LV_COLOR_FORMAT_...)` 来更改。除了默认值 :c:macro:`LV_COLOR_FORMAT_ARGB8888` 也可以使用。
 
-绘制缓冲区应足够大，以便于任何选定的颜色格式。
-
+非常重要的是，绘图缓冲区（或缓冲区）的大小对于任何选定的颜色格式来说都应该是足够大的。
 
 Swap endianness（交换字节序）
 ----------------------------
