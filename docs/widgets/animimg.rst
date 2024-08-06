@@ -5,7 +5,7 @@ Animation Image （动画图像） (lv_animimg)
 =========================================
 
 Overview（概述）
-****************
+******************
 
 .. raw:: html
 
@@ -24,15 +24,15 @@ You can specify a duration and repeat count.
    <br>
 
 
-动画图像类似于正常的“图像”对象。唯一的不同之处在于，您设置的不是一个源图像，而是一个数组多源图像。
+动画图像对象类似于正常的 “图像” 对象。唯一区别是，设置的不是一个图像源，而是多个图像源。
 
-您可以指定持续时间和重复计数。
+可以指定持续时间和重复计数。
 
 
 .. _lv_animimg_parts_and_styles:
 
-Parts and Styles（零件和样式）
-*****************************
+Parts and Styles（部分和样式）
+*******************************
 
 .. raw:: html
 
@@ -49,15 +49,15 @@ Parts and Styles（零件和样式）
    <br>
 
 
-:cpp:enumerator:`LV_PART_MAIN` 使用典型背景样式属性和图像本身使用图像样式属性。
+:cpp:enumerator:`LV_PART_MAIN` 使用典型背景样式属性的背景样式属性和使用图像样式属性的图像本身。 使用典型背景样式属性和图像本身使用图像样式属性。
 
 .. _lv_animimg_usage:
 
 Usage（用法）
-*****
+**************
 
 Image sources（图片来源）
-------------------------
+-------------------------
 
 .. raw:: html
 
@@ -73,12 +73,12 @@ To set the image in a state, use the
    <br>
 
 
-若要将图像设置为状态，请使用 :cpp:expr:`lv_animimg_set_src(imagebutton, dsc[], num)`。
+使用接口 :cpp:expr:`lv_animimg_set_src(imagebutton, dsc[], num)` 为动画图像设置图像源，参数 ``dsc`` 是包含一个或多个图像源的数组，参数num是图像源的个数。
 
 .. _lv_animimg_events:
 
 Events（事件）
-******
+***************
 
 .. raw:: html
 
@@ -99,15 +99,15 @@ Learn more about :ref:`events`.
 
 图像对象不会发送任何特殊事件。
 
-另请参阅 Base 对象的事件。
+另请参阅基础对象的事件。
 
-详细了解 :ref:`events`。
+详细了解阅读 :ref:`events`。
 
 
 .. _lv_animimg_keys:
 
 Keys（按键）
-***********
+*************
 
 .. raw:: html
 
@@ -125,12 +125,12 @@ Learn more about :ref:`indev_keys`.
 
 对象类型不处理任何键。
 
-了解有关 :ref:`indev_keys` 的更多信息。
+阅读了解有关 :ref:`indev_keys` 的更多信息。
   
 .. _lv_animimg_example:
 
 Example
-*******
+*********
 
 .. include:: ../examples/widgets/animimg/index.rst
 
