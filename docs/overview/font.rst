@@ -752,10 +752,156 @@ Example
    /*Free the font if not required anymore*/
    lv_binfont_destroy(my_font);
 
+
+Use a BDF font（使用BDF字体）
+****************************
+
+.. raw:: html
+
+   <details>
+     <summary>显示原文</summary>
+
+Small displays with low resolution don't look pretty with automatically rendered fonts. A bitmap font provides
+the solution, but it's necessary to convert the bitmap font (BDF) to a TTF.
+
 .. raw:: html
 
    </details>
    <br>
+
+
+小尺寸且分辨率低的显示屏使用自动渲染的字体看起来并不美观。位图字体提供了解决方案，但需要将位图字体（BDF）转换为TTF格式。
+
+
+Convert BDF to TTF（将BDF转换为TTF）
+-----------------------------------
+
+.. raw:: html
+
+   <details>
+     <summary>显示原文</summary>
+
+BDF are bitmap fonts where fonts are not described in outlines but in pixels. BDF files can be used but
+they must be converted into the TTF format via mkttf. This tool uses potrace to generate outlines from
+the bitmap information. The bitmap itself will be embedded into the TTF as well. `lv_font_conv <https://github.com/lvgl/lv_font_conv/>`__ uses
+the embedded bitmap but it also needs the outlines. One could think you can use a fake MS Bitmap
+only sfnt (ttf) (TTF without outlines) created by fontforge but this will not work.
+
+Install imagemagick, python3, python3-fontforge and potrace
+
+On Ubuntu Systems, just type
+
+.. code:: bash
+    sudo apt install imagemagick python3-fontforge potrace
+Clone mkttf
+
+.. code:: bash
+    git clone https://github.com/Tblue/mkttf
+Read the mkttf docs.
+
+Former versions of imagemagick needs the imagemagick call in front of convert, identify and so on.
+But newer versions don't. So you might probably change 2 lines in potrace-wrapper.sh.
+Open potrace-wrapper.sh and remove imagemagick from line 55 and line 64.
+
+line 55
+
+.. code:: bash
+    wh=($(identify -format '%[width]pt %[height]pt' "${input?}"))
+line 64
+
+.. code:: bash
+    convert "${input?}" -sample '1000%' - \
+It might be necessary to change the mkttf.py script.
+
+line 1
+
+.. code:: bash
+    #!/usr/bin/env python3
+
+
+.. raw:: html
+
+   </details>
+   <br>
+
+
+BDF是位图字体，其中的字体不是用轮廓描述的，而是用像素描述的。BDF文件可以使用，但它们必须通过mkttf转换为TTF格式。这个工具使用potrace从位图信息生成轮廓。位图本身也会嵌入到TTF中。 
+`lv_font_conv <https://github.com/lvgl/lv_font_conv/>`__ 使用嵌入的位图，但它也需要轮廓。有人可能会认为你可以使用由fontforge创建的假MS Bitmap only sfnt（ttf）（没有轮廓的TTF），但这不会起作用。
+
+安装imagemagick、python3、python3-fontforge和potrace
+
+在Ubuntu系统上，只需输入
+
+.. code:: bash
+    sudo apt install imagemagick python3-fontforge potrace
+克隆mkttf
+
+.. code:: bash
+    git clone https://github.com/Tblue/mkttf
+阅读mkttf文档。
+
+旧版本的imagemagick需要在convert、identify等前面加上imagemagick调用。但新版本不需要。你可能需要更改potrace-wrapper.sh中的2行。
+打开potrace-wrapper.sh，从第55行和第64行删除imagemagick。
+
+第55行
+
+.. code:: bash
+    wh=($(identify -format '%[width]pt %[height]pt' "${input?}"))
+第64行
+
+.. code:: bash
+    convert "${input?}" -sample '1000%' - \
+可能需要更改mkttf.py脚本。
+
+第1行
+
+.. code:: bash
+    #!/usr/bin/env python3
+
+
+Example for a 12px font（12像素字体示例）
+----------------------------------------
+
+.. raw:: html
+
+   <details>
+     <summary>显示原文</summary>
+
+.. code:: bash
+    cd mkttf
+    ./mkttf.py ./TerminusMedium-12-12.bdf
+    Importing bitmaps from 0 additional fonts...
+    Importing font `./TerminusMedium-12-12.bdf' into glyph background...
+    Processing glyphs...
+    Saving TTF file...
+    Saving SFD file...
+    Done!
+The TTF TerminusMedium-001.000.ttf has been created from ./TerminusMedium-12-12.bdf.
+Create font for lvgl
+.. code:: bash
+    lv_font_conv --bpp 1 --size 12 --no-compress --font TerminusMedium-001.000.ttf --range 0x20-0x7e,0xa1-0xff --format lvgl -o terminus_1bpp_12px.c
+:note: use 1bpp because we don't use anti-aliasing. It doesn't look sharp on displays with a low resolution.
+
+.. raw:: html
+
+   </details>
+   <br>
+
+
+.. code:: bash
+    cd mkttf
+    ./mkttf.py ./TerminusMedium-12-12.bdf
+    Importing bitmaps from 0 additional fonts...
+    Importing font `./TerminusMedium-12-12.bdf' into glyph background...
+    Processing glyphs...
+    Saving TTF file...
+    Saving SFD file...
+    Done!
+The TTF TerminusMedium-001.000.ttf has been created from ./TerminusMedium-12-12.bdf.
+为lvgl创建字体
+.. code:: bash
+    lv_font_conv --bpp 1 --size 12 --no-compress --font TerminusMedium-001.000.ttf --range 0x20-0x7e,0xa1-0xff --format lvgl -o terminus_1bpp_12px.c
+:n注意: 使用1bpp因为我们不使用抗锯齿。在分辨率低的显示屏上它看起来不够锐利。
 
 
 Add a new font engine（添加新的字体引擎）
