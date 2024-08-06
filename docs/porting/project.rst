@@ -189,7 +189,8 @@ will attempt to include ``lv_conf.h`` simply with
 
 You can even use a different name for ``lv_conf.h``. The custom path can
 be set via the :c:macro:`LV_CONF_PATH` define. For example
-``-DLV_CONF_PATH="/home/joe/my_project/my_custom_conf.h"``
+``-DLV_CONF_PATH="/home/joe/my_project/my_custom_conf.h"``. If this define
+is set :c:macro:`LV_CONF_SKIP` is assumed to be ``0``.
 
 If :c:macro:`LV_CONF_SKIP` is defined, LVGL will not try to include
 ``lv_conf.h``. Instead you can pass the config defines using build
@@ -231,7 +232,7 @@ For example:
 
 或者， ``lv_conf.h``  可以复制到另一个地方，但随后你应该将 :c:macro:`LV_CONF_INCLUDE_SIMPLE` 定义添加到编译器中选项（例如 ``-DLV_CONF_INCLUDE_SIMPLE``  对于GCC编译器），并手动包含路径（例如 ``-I../include/gui`` ）。在本例中为 LVGL 将尝试简单地将 ``lv_conf.h`` 包含在 ``#include "lv_conf.h"``。
 
-您甚至可以为 ``lv_conf.h`` 使用不同的名称。自定义路径可以通过 :c:macro:`LV_CONF_PATH` 定义进行设置。例如 ``-DLV_CONF_PATH="/home/joe/my_project/my_custom_conf.h"``。
+您甚至可以为 ``lv_conf.h`` 使用不同的名称。自定义路径可以通过 :c:macro:`LV_CONF_PATH` 定义进行设置。例如 ``-DLV_CONF_PATH="/home/joe/my_project/my_custom_conf.h"``。如果设置了这个 :c:macro:`LV_CONF_SKIP` 将被假定为 ``0``。
 
 如果 :c:macro:`LV_CONF_SKIP` 已定义，则 LVGL 不会尝试包含 ``lv_conf.h``。相反，您可以使用 build 传递配置定义选项。例如 ``"-DLV_COLOR_DEPTH=32 -DLV_USE_BUTTON=1"``。未设置 options 将获得一个默认值，该值与 ``lv_conf_template.h`` 的内容相同。
 
