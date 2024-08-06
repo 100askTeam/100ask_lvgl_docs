@@ -27,3 +27,4 @@ Overview（概述）
     profiler
     renderers/index
     new_widget
+    vg_lite_tvg
