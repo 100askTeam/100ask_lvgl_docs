@@ -322,6 +322,28 @@ using :cpp:expr:`lv_obj_clean(obj)`.
 You can use :cpp:expr:`lv_obj_delete_delayed(obj, 1000)` to delete an object after
 some time. The delay is expressed in milliseconds.
 
+Sometimes you're not sure whether an object was deleted and you need some way to
+check if it's still "alive". Anytime before the object is deleted, you can use
+cpp:expr:`lv_obj_null_on_delete(&obj)` to cause your object pointer to be set to ``NULL``
+when the object is deleted.
+
+Make sure the pointer variable itself stays valid until the object is deleted. Here
+is an example:
+
+.. code:: c
+   void some_timer_callback(lv_timer_t * t)
+   {
+      static lv_obj_t * my_label;
+      if(my_label == NULL) {
+         my_label = lv_label_create(lv_screen_active());
+         lv_obj_delete_delayed(my_label, 1000);
+         lv_obj_null_on_delete(&my_label);
+      }
+      else {
+         lv_obj_set_x(my_label, lv_obj_get_x(my_label) + 1);
+      }
+   }
+
 .. raw:: html
 
    </details>
@@ -357,6 +379,25 @@ UI可以根据设备的当前环境进行创建。例如，可以根据当前连
 可以使用 :cpp:expr:`lv_obj_clean(obj)` 删除对象的所有子对象（但不包括对象本身）。
 
 可以使用 :cpp:expr:`lv_obj_delete_delayed(obj, 1000)` 在经过一定时间后再删除对象，以毫秒为单位。
+
+有时候，您可能不确定一个对象是否已被删除，并且需要某种方法来检查它是否仍然“存活”。在对象被删除之前，您可以随时使用:expr:`lv_obj_null_on_delete(&obj)` 来设置，以便在对象被删除时，您的对象指针会被设置为 ``NULL``。
+
+确保指针变量本身在对象被删除之前保持有效。以下是一个示例：
+
+.. code:: c
+   void some_timer_callback(lv_timer_t * t)
+   {
+      static lv_obj_t * my_label;
+      if(my_label == NULL) {
+         my_label = lv_label_create(lv_screen_active());
+         lv_obj_delete_delayed(my_label, 1000);
+         lv_obj_null_on_delete(&my_label);
+      }
+      else {
+         lv_obj_set_x(my_label, lv_obj_get_x(my_label) + 1);
+      }
+   }
+
 
 
 .. _objects_screens:
