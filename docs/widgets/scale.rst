@@ -133,6 +133,10 @@ If instead of a numerical value in the major ticks a text is required they can b
 with :cpp:expr:`lv_scale_set_text_src(scale, custom_labels)` using ``NULL`` as the last element, 
 i.e. :cpp:expr:`static char * custom_labels[3] = {"One", "Two", NULL};`.
 
+<strong> NOTE: </strong> The major tick value is calculated with the :cpp:expr:`lv_map` API (when not setting the custom labels),
+this calculation takes into consideration the total tick number and the scale range, so the label drawn can present rounding errors
+when the calculated value is a float number.
+
 The length of the ticks can be configured with the length style property on the :cpp:enumerator:`LV_PART_INDICATOR` 
 for major ticks and :cpp:enumerator:`LV_PART_ITEMS` for minor ticks, for example with local style: 
 :cpp:expr:`lv_obj_set_style_length(scale, 5, LV_PART_INDICATOR);` for major ticks 
@@ -147,6 +151,8 @@ and :cpp:expr:`lv_obj_set_style_length(scale, 5, LV_PART_ITEMS);` for minor tick
 通过接口 :cpp:expr:`lv_scale_set_total_tick_count(scale, total_tick_count)` 设置总刻度数。然后使用接口 :cpp:expr:`lv_scale_set_major_tick_every(scale, nth_tick)` 设置主要刻度的分布：每 N 个刻度一个主刻度。
 
 主要刻度上的标签可以通过函数 :cpp:expr:`lv_scale_set_label_show(scale, show_label)` 进行配置、 如果需要展示标签，则将 show_label 设置为 true，如果不想展示标签，则将 设置为 false 。 如果想修改主刻度标签的值，可以通过接口 :cpp:expr:`lv_scale_set_text_src(scale, custom_labels)` 设置， 参数 ``custom_labels`` 必须是静态数组，并且使用 ``NULL`` 作为最后一个元素，例如： :cpp:expr:`static char * custom_labels[3] = {"One", "Two", NULL};` 。
+
+<strong>注意：</strong>主要刻度值是通过使用 :cpp:expr:`lv_map` (当未设置自定义标签时) 计算得出的，此计算会考虑总刻度数量和刻度范围，因此当计算值为浮点数时，绘制的标签可能会出现四舍五入的错误。
 
 主刻度的长度可通过修改 :cpp:enumerator:`LV_PART_INDICATOR` 的 length 样式属性配置；次刻度的长度通过修改 :cpp:enumerator:`LV_PART_ITEMS` 的 length 样式属性配置。例如使用本地样式，修改主刻度线的长度： :cpp:expr:`lv_obj_set_style_length(scale, 5, LV_PART_INDICATOR);` ；修改次刻度线的长度： :cpp:expr:`lv_obj_set_style_length(scale, 5, LV_PART_ITEMS);` 。
 
