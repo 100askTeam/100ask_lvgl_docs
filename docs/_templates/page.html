@@ -21,9 +21,11 @@
 <script type="text/javascript">
 function add_version_selector()
 {
-    //return fetch("https://raw.githubusercontent.com/lvgl/docs_compiled/gh-pages/versionlist.txt")
-    //return fetch("https://gitee.com/weidongshan/100ask_docs_versionlist/raw/main/lvgl_versionlist.txt")
-    //return fetch("https://raw.githubusercontent.com/100askTeam/100ask_docs_versionlist/main/lvgl_versionlist.txt")
+<!--
+    return fetch("https://raw.githubusercontent.com/lvgl/docs_compiled/gh-pages/versionlist.txt")
+    return fetch("https://gitee.com/weidongshan/100ask_docs_versionlist/raw/main/lvgl_versionlist.txt")
+    return fetch("https://raw.githubusercontent.com/100askTeam/100ask_docs_versionlist/main/lvgl_versionlist.txt")
+-->
     return fetch("https://photos.100ask.net/100ask/100ask_lvgl_doc/100ask_docs_versionlist/lvgl_versionlist.txt")
         .then(res => res.text())
         .then(text => {
