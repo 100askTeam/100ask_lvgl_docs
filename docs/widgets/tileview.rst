@@ -1,11 +1,11 @@
 .. _lv_tileview:
 
-===================================
+====================================
 Tile view（平铺视图） (lv_tileview)
-===================================
+====================================
 
 Overview（概述）
-****************
+******************
 
 .. raw:: html
 
@@ -26,15 +26,15 @@ may have seen on smartwatches.
    <br>
 
 
-平铺视图(lv_tileview)平铺视图(Tileview)是一个容器对象，其中的元素（称为图块）可以以网格形式排列。通过滑动，用户可以在图块之间导航。可以单独在图块上禁用任何方向的滑动，以不允许从一个图块移动到另一个图块。
+平铺视图(Tileview)是一个容器对象，其中的元素（ *tiles（瓦片）* ）可以以网格形式排列。用户可以通过滑动在瓦片之间导航。可以单独在瓦片上禁用任意方向的滑动，以防止从一个瓦片移动到另一个瓦片。
 
-如果Tileview是屏幕尺寸的，它将提供可能已经在智能手表上看到的用户界面。
+如果平铺视图设置为屏幕大小，则用户界面类似于在智能手表上看到的界面。
 
 
 .. _lv_tileview_parts_and_styles:
 
-Parts and Styles（零件和样式）
-*****************************
+Parts and Styles（部分和样式）
+*******************************
 
 .. raw:: html
 
@@ -52,17 +52,17 @@ The parts and styles work the same as for :ref:`lv_obj`.
    <br>
 
 
-平铺视图是由 :ref:`lv_obj` 容器和 :ref:`lv_obj` 平铺构建的。
+平铺视图是由 :ref:`lv_obj` 容器和 :ref:`lv_obj` 平铺构建而成的。
 
-部件和样式的工作方式与 :ref:`lv_obj` 相同。
+部分和样式的工作方式与 :ref:`lv_obj` 相同。
 
 
 .. _lv_tileview_usage:
 
 Usage（用法）
-*************
+***************
 
-Add a tile（添加平铺显示）
+Add a tile（添加瓦片）
 -------------------------
 
 .. raw:: html
@@ -83,13 +83,13 @@ can be created.
    </details> 
    <br>
 
-:cpp:expr:`lv_tileview_add_tile(tileview, row_id, col_id, dir)` 函数在平铺视图 tileview 中的第 col_id 列和第 row_id 行创建了一个新的瓦片。dir 参数可以是 ``LV_DIR_LEFT/RIGHT/TOP/BOTTOM/HOR/VER/ALL`` 中的一个或多个值，通过按位或（OR-ed）操作来组合，以允许通过滑动手势在给定方向上移动到相邻的瓦片。
+:cpp:expr:`lv_tileview_add_tile(tileview, row_id, col_id, dir)` 函数在平铺视图 tileview 中的第 ``col_id`` 列和第 ``row_id`` 行创建了一个新的瓦片。dir 参数可以是 ``LV_DIR_LEFT/RIGHT/TOP/BOTTOM/HOR/VER/ALL`` 中的一个或多个值，通过按位或（OR-ed）操作来组合，以允许通过滑动手势在给定方向上移动到相邻的瓦片。
 
-返回的值是可以在其 ``lv_obj_t *`` 上创建选项卡内容的值。
+返回的值是 ``lv_obj_t *`` 可以在其（瓦片）上填充内容。
 
 
-Change tile（更改平铺显示）
---------------------------
+Change tile（切换瓦片显示）
+---------------------------
 
 .. raw:: html
 
@@ -106,13 +106,13 @@ The Tile view can scroll to a tile with
    <br>
 
 
-Tile 视图可以使用 :cpp:expr:`lv_tileview_set_tile(tileview, tile_obj, LV_ANIM_ON/OFF)` 或 :cpp:expr:`lv_tileview_set_tile_by_index(tileview, col_id, row_id, LV_ANIM_ON/OFF)` 滚动到图块
+平铺视图可以使用接口 :cpp:expr:`lv_tileview_set_tile(tileview, tile_obj, LV_ANIM_ON/OFF)` 或 :cpp:expr:`lv_tileview_set_tile_by_index(tileview, col_id, row_id, LV_ANIM_ON/OFF)` 切换到指定的瓦片。
 
 
 .. _lv_tileview_events:
 
 Events（事件）
-*************
+***************
 
 .. raw:: html
 
@@ -129,13 +129,13 @@ Events（事件）
    <br>
 
 
--  :cpp:enumerator:`LV_EVENT_VALUE_CHANGED` 当通过滚动加载新图块时发送。 :cpp:expr:`lv_tileview_get_tile_active(tabview)` 可用于获取当前图块。
+-  :cpp:enumerator:`LV_EVENT_VALUE_CHANGED` 当通过滚动加载新瓦片时发送此事件，接口 :cpp:expr:`lv_tileview_get_tile_active(tabview)` 可用于获取当前所在的瓦片。
 
 
 .. _lv_tileview_keys:
 
 Keys（按键）
-************
+**************
 
 .. raw:: html
 
