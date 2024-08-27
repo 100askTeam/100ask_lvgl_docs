@@ -1,11 +1,11 @@
 .. _lv_win:
 
-=======================
+========================
 Window （窗口）(lv_win)
-=======================
+========================
 
 Overview
-********
+**********
 
 .. raw:: html
 
@@ -21,13 +21,13 @@ buttons and a content area.
    <br>
 
 
-Window （窗口）是类似容器的对象，由带有标题和按钮的标题以及内容区域构建。
+Window（窗口）是一个类似容器的对象，由带有标题、按钮和内容区域的标题构建而成。
 
 
 .. _lv_win_parts_and_styles:
 
-Parts and Styles（零件和样式）
-******************************
+Parts and Styles（部分和样式）
+********************************
 
 .. raw:: html
 
@@ -49,7 +49,7 @@ documentation for details:
    <br>
 
 
-该窗口是由其他控件构建的，因此您可以查看它们的文档以获取详细信息：
+该窗口是由其他控件构建的，因此可以查看它们的文档以获取详细信息：
 
 - 背景：:ref:`lv_obj`
 - 背景标题：:ref:`lv_obj`
@@ -61,10 +61,10 @@ documentation for details:
 .. _lv_win_usage:
 
 Usage（用法）
-*************
+***************
 
 Create a Window（创建一个窗口）
-------------------------------
+-------------------------------
 
 .. raw:: html
 
@@ -80,11 +80,11 @@ header.
    <br>
 
 
-:cpp:expr:`lv_win_create(parent, header_height)` 创建一个带有空标题的窗口。
+:cpp:expr:`lv_win_create(parent, header_height)` 创建一个标题为空的窗口。
 
 
 Title and buttons（标题和按钮）
-------------------------------
+--------------------------------
 
 .. raw:: html
 
@@ -115,13 +115,12 @@ title.
 
 可以使用 :cpp:expr:`lv_win_add_button(win, icon, button_width)` 将控制按钮添加到窗口的标题 。 ``icon`` 可以是任何图像源， ``button_width`` 是按钮的宽度。
 
-标题和按钮将按照函数调用的顺序添加。因此，添加一个按钮、一个文本和另外两个按钮将导致左侧有一个按钮、一个标题和右侧有两个按钮。标题的宽度设置为占据标题上的所有剩余空间。换句话说：它将标题后添加的所有按钮推到右侧。
-
+标题和按钮将按照调用函数的顺序添加。因此，添加一个按钮、一个文本和另外两个按钮将在左侧产生一个按钮，在右侧产生一个标题和两个按钮。标题的宽度设置为占据标题上的所有剩余空间。换句话说： 它将标题后添加的所有按钮推到右侧。
 
 .. _lv_win_get_parts:
 
-Get the parts（获取零件）
-************************
+Get the parts（获取部分）
+**************************
 
 .. raw:: html
 
@@ -139,13 +138,13 @@ to which the content of the window can be added.
 
 
 :cpp:expr:`lv_win_get_header(win)` 返回一个指向标题的指针，
-:cpp:expr:`lv_win_get_content(win)` 返回一个指向可以添加窗口内容的内容容器的指针。
+:cpp:expr:`lv_win_get_content(win)` 返回一个指向可以在窗口添加内容的容器指针。
 
 
 .. _lv_win_events:
 
 Events（事件）
-**************
+****************
 
 .. raw:: html
 
@@ -171,7 +170,7 @@ Learn more about :ref:`events`.
 .. _lv_win_keys:
 
 Keys
-****
+******
 
 .. raw:: html
 
@@ -196,11 +195,11 @@ Learn more about :ref:`indev_keys`.
 .. _lv_win_example:
 
 Example
-*******
+*********
 
 .. include:: ../examples/widgets/win/index.rst
 
 .. _lv_win_api:
 
 API
-***
+*****
