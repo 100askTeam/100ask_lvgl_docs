@@ -1,11 +1,11 @@
 .. _flex:
 
-==============
+================
 Flex（弹性布局）
-==============
+================
 
 Overview（概述）
-***************
+*****************
 
 .. raw:: html
 
@@ -31,17 +31,17 @@ with :c:macro:`LV_USE_FLEX` in ``lv_conf.h``.
    <br>
 
 
-Flexbox（或简称 Flex）是 `CSS Flexbox <https://css-tricks.com/snippets/css/a-guide-to-flexbox/>`__ 的一个子集。
+Flexbox（弹性布局）（或简称 Flex）是 `CSS Flexbox <https://css-tricks.com/snippets/css/a-guide-to-flexbox/>`__ 的一个子集。
 
-它可以将项目排列成行或列（轨道），处理环绕，调整项目和轨道之间的间距，处理 grow 以使项目填充剩余空间的最小/最大宽度和高度。
+它可以将项目排列成行或列（轨道(tracks)），处理包裹，调整项目和轨道之间的间距，处理 grow 以使项目填充相对于最小/最大宽度和高度的剩余空间。
 
-要使对象 flex 容器调用 :cpp:expr:`lv_obj_set_layout(obj, LV_LAYOUT_FLEX)`。
+要使对象变为 flex 容器请调用 :cpp:expr:`lv_obj_set_layout(obj, LV_LAYOUT_FLEX)` 。
 
-请注意，LVGL 的 flex 布局功能需要通过 ``lv_conf.h`` 中的 :c:macro:`LV_USE_FLEX` 全局启用。
+请注意，LVGL 的 flex 布局功能需要打开 ``lv_conf.h`` 中的宏 :c:macro:`LV_USE_FLEX` 启用。
 
 
 Terms（约定）
-************
+**************
 
 .. raw:: html
 
@@ -63,17 +63,18 @@ Terms（约定）
    </details>
    <br>
 
+术语约定：
 
-- (tracks)轨道：行或列
-- (main direction)主要方向：行或列，物品放置的方向
-- (cross direction)横向：垂直于主方向
-- (wrap)环绕：如果曲目中没有更多空间，则开始新曲目
-- (grow)增长：如果设置在一个项目上，它将增长以填充轨道上的剩余空间。 可用空间将根据其增长值分配给各个项目（值越大意味着空间越大）
-- (gap)间隙：行和列或轨道上的项目之间的空间
+- **tracks（轨道）**：行或列
+- **main direction（主要方向）**：行或列，物品放置的方向
+- **cross direction（横向）**：垂直于主方向
+- **wrap（包裹）**：如果曲目中没有更多空间，则开始新曲目
+- **grow（增长）**：如果设置在一个项目上，它将增长以填充轨道上的剩余空间。 可用空间将根据其增长值分配给各个项目（值越大意味着空间越大）
+- **gap（间隙）**：行和列或轨道上的项目之间的空间
 
 
 Simple interface（简单接口）
-***************************
+******************************
 
 .. raw:: html
 
@@ -88,13 +89,13 @@ With the following functions you can set a Flex layout on any parent.
    <br>
 
 
-使用以下功能，您可以在任何父级上设置 Flex 布局。
+使用以下功能，可以在任何父级上设置 Flex 布局。
 
 
 .. _flex_flow:
 
-Flex flow
----------
+Flex flow（布局流向）
+---------------------
 
 .. raw:: html
 
@@ -120,24 +121,24 @@ The possible values for ``flex_flow`` are:
    <br>
 
 
-:cpp:expr:`lv_obj_set_flex_flow(obj, flex_flow)`
+设置接口 :cpp:expr:`lv_obj_set_flex_flow(obj, flex_flow)`，其中 ``flex_flow`` 的值可以是：
 
- ``flex_flow`` 的可能值是：
+- :cpp:enumerator:`LV_FLEX_FLOW_ROW`: 将孩子排成一排，不包裹起来
+- :cpp:enumerator:`LV_FLEX_FLOW_COLUMN`: 将孩子放在一列，不包裹起来
+- :cpp:enumerator:`LV_FLEX_FLOW_ROW_WRAP`:将孩子按行排列并包裹起来
+- :cpp:enumerator:`LV_FLEX_FLOW_COLUMN_WRAP`:将孩子按列排列并包裹起来
+- :cpp:enumerator:`LV_FLEX_FLOW_ROW_REVERSE`: 将孩子排成一排，不包裹起来，但顺序相反
+- :cpp:enumerator:`LV_FLEX_FLOW_COLUMN_REVERSE`: 将孩子放在一列，不包裹起来，但顺序相反
+- :cpp:enumerator:`LV_FLEX_FLOW_ROW_WRAP_REVERSE`: 将孩子按行排列并包裹起来，但顺序相反
+- :cpp:enumerator:`LV_FLEX_FLOW_COLUMN_WRAP_REVERSE`: 将孩子按列排列并包裹起来，但顺序相反
 
-- :cpp:enumerator:`LV_FLEX_FLOW_ROW`: 将子元素排成一排而不包裹
-- :cpp:enumerator:`LV_FLEX_FLOW_COLUMN`: 将子项放在一列中而不换行
-- :cpp:enumerator:`LV_FLEX_FLOW_ROW_WRAP`:将孩子排成一排并包裹起来
-- :cpp:enumerator:`LV_FLEX_FLOW_COLUMN_WRAP`:将子元素放置在带有环绕的列中
-- :cpp:enumerator:`LV_FLEX_FLOW_ROW_REVERSE`: 将子元素排成一行而不换行，但顺序相反
-- :cpp:enumerator:`LV_FLEX_FLOW_COLUMN_REVERSE`: 将子项放在一列中，不换行，但顺序相反
-- :cpp:enumerator:`LV_FLEX_FLOW_ROW_WRAP_REVERSE`: 将子元素排成一行而不换行，但顺序相反
-- :cpp:enumerator:`LV_FLEX_FLOW_COLUMN_WRAP_REVERSE`: 将子项放在一列中，不换行，但顺序相反
+（注：flex-flow是flex-direction 与 flex-wrap的结合）
 
 
 .. _flex_align:
 
-Flex align
-----------
+Flex align（对齐方式）
+-----------------------
 
 .. raw:: html
 
@@ -180,26 +181,26 @@ The possible values are:
    <br>
 
 
-要管理孩子的位置，请使用 :cpp:expr:`lv_obj_set_flex_align(obj,  main_place, cross_place, track_cross_place)`
+要管理孩子的对齐，请使用 :cpp:expr:`lv_obj_set_flex_align(obj,  main_place, cross_place, track_cross_place)`
 
-- ``main_place`` 确定如何在主轴上的轨道中分布项目。 例如。 将 :cpp:enumerator:`LV_FLEX_FLOW_ROW_WRAP` 上的项目向右刷新。 （它在 CSS 中称为 ``justify-content`` ）
-- ``cross_place`` 确定如何在横轴上的轨道中分布项目。 例如。 如果项目具有不同的高度，则将它们放置在轨道的底部。 （在 CSS 中称为 ``align-items`` ）
+- ``main_place`` 确定如何在主轴上分配其轨道中的项目。 例如。 将 :cpp:enumerator:`LV_FLEX_FLOW_ROW_WRAP` 上的项目向右刷新。 （它在 CSS 中称为 ``justify-content`` ）
+- ``cross_place`` 确定如何在横轴上分配其轨道中的项目。 例如。 如果项目具有不同的高度，则将它们放置在轨道的底部。 （在 CSS 中称为 ``align-items`` ）
 - ``track_cross_place`` 确定如何分配轨道（在 CSS 中称为  ``align-content`` ）
 
 可能的值为：
 
-- :cpp:enumerator:`LV_FLEX_ALIGN_START`: 表示在水平方向和垂直方向的顶部左侧。 （默认）
-- :cpp:enumerator:`LV_FLEX_ALIGN_END`: 表示水平和底部垂直
+- :cpp:enumerator:`LV_FLEX_ALIGN_START`: 表示水平放置，垂直放置（默认）
+- :cpp:enumerator:`LV_FLEX_ALIGN_END`: 表示水平方向上，底部垂直
 - :cpp:enumerator:`LV_FLEX_ALIGN_CENTER`: 只是居中
-- :cpp:enumerator:`LV_FLEX_ALIGN_SPACE_EVENLY`: 项目是分布的，因此任意两个项目之间的间距（以及到边缘的空间）是相等的。 不适用于 ``track_cross_place``。
-- :cpp:enumerator:`LV_FLEX_ALIGN_SPACE_AROUND`: 项目均匀分布在轨道中，它们周围的空间相等。 请注意，视觉上的空间并不相等，因为所有项目的两侧都有相等的空间。 第一个项目将与容器边缘有一个单位的空间，但下一个项目之间有两个单位的空间，因为下一个项目有自己的适用间距。 不适用于 ``track_cross_place``。
-- :cpp:enumerator:`LV_FLEX_ALIGN_SPACE_BETWEEN`:  项目均匀分布在轨道中：第一个项目在开始线上，最后一个项目在结束线上。 不适用于 ``track_cross_place``。
+- :cpp:enumerator:`LV_FLEX_ALIGN_SPACE_EVENLY`: 项目的分布使得任意两个项目之间的间距（以及到边缘的间距）相等。不适用于 ``track_cross_place``。
+- :cpp:enumerator:`LV_FLEX_ALIGN_SPACE_AROUND`: 项目在轨道上均匀分布，周围有相等的空间。请注意，从视觉上看，空间并不相等，因为所有项目的两侧都有相等的空间。第一个项目在容器边缘有一个单位的空间，但下一个项目之间有两个单位的间隔，因为下一个项有自己的适用间距。不适用于 ``track_cross_place``。
+- :cpp:enumerator:`LV_FLEX_ALIGN_SPACE_BETWEEN`:  项目在轨道中均匀分布：第一个项目在开始行，最后一个项目在结束行。不适用于 ``track_cross_place``。
 
 
 .. _flex_grow:
 
-Flex grow
----------
+Flex grow（弹性增长）
+----------------------
 
 .. raw:: html
 
@@ -227,7 +228,7 @@ Flex grow can be set on a child with
    <br>
 
 
-Flex Growth 可用于让一个或多个孩子填充轨道上的可用空间。 如果有更多的孩子成长，可用空间将与成长值成比例地分配。 例如，让我们有 400 像素的剩余空间和 4 个增长的对象：
+Flex grow（弹性增长）可用于让一个或多个孩子填满轨道上的可用空间。当很多孩子都有生长参数时，可用空间将按比例分配给生长值。例如，还有400像素的剩余空间和4个带有grow的对象：
 
 - ``A`` 增长 = 1
 - ``B`` 增长 = 1
@@ -235,13 +236,13 @@ Flex Growth 可用于让一个或多个孩子填充轨道上的可用空间。 �
 
 ``A`` 和 ``B`` 的大小为 100 px，而 ``C`` 的大小为 200 px。
 
-可以使用:cpp:expr:`lv_obj_set_flex_grow(child, value)`在子节点上设置 Flex 增长。 ``value`` 需要 > 1 或 0 禁用在孩子身上生长。
+可以使用:cpp:expr:`lv_obj_set_flex_grow(child, value)`在子节点上设置 Flex 增长值。 ``value`` 需要 > 1 或 0 才能禁用在孩子身上生长。
 
 
 .. _flex_style:
 
 Style interface（样式接口）
-**************************
+*****************************
 
 .. raw:: html
 
@@ -265,7 +266,7 @@ The following flex related style properties exist:
    <br>
 
 
-所有与 Flex 相关的值都是底层的样式属性，您可以像使用任何其他样式属性一样使用它们。 存在以下与 flex 相关的样式属性：
+所有与 Flex 相关的值都是底层的样式属性，可以像使用任何其他样式属性一样使用它们。 存在以下与 flex 相关的样式属性：
 
 - :cpp:enumerator:`FLEX_FLOW`
 - :cpp:enumerator:`FLEX_MAIN_PLACE`
@@ -277,7 +278,7 @@ The following flex related style properties exist:
 .. _flex_padding:
 
 Internal padding（内部填充）
--------------------------
+-----------------------------
 
 .. raw:: html
 
@@ -299,22 +300,21 @@ objects: :cpp:expr:`lv_style_set_pad_column(&row_container_style,0)`
    </details>
    <br>
 
-
-要修改对象之间插入的最小空间 flexbox ， 可以在 Flex 容器样式上设置以下属性：
+要修改对象之间的间距，可以在 flex 容器上设置以下样式属性：
 
 -  ``pad_row`` 设置行之间的内边距。
 -  ``pad_column`` 设置列之间的内边距。
 
-例如，如果您不希望在您的 对象：:cpp:expr:`lv_style_set_pad_column(&row_container_style,0)`
+例如，如果你不希望对象之间有任何填充，可以这样设置： :cpp:expr:`lv_style_set_pad_column(&row_container_style,0)`
 
 
 .. _flex_other:
 
 Other features（其它功能）
-*************************
+****************************
 
 RTL
----
+-----
 
 .. raw:: html
 
@@ -336,13 +336,13 @@ placed from right to left.
    <br>
 
 
-如果容器的基本方向设置为 :cpp:enumerator:`LV_BASE_DIR_RTL` :cpp:enumerator:`LV_FLEX_ALIGN_START` 和 :cpp:enumerator:`LV_FLEX_ALIGN_END` 的含义在 ``ROW`` 布局上交换。 IE。 ``START`` 表示正确。
+如果容器的基本方向设置为 :cpp:enumerator:`LV_BASE_DIR_RTL` ，那么 :cpp:enumerator:`LV_FLEX_ALIGN_START` 和 :cpp:enumerator:`LV_FLEX_ALIGN_END` 的意思是在 ``ROW`` 布局上交换，``START`` 的意思是右。 
 
- ``ROW`` 布局上的项目和 ``COLUMN`` 布局的轨道将从右到左放置。
+``ROW`` 布局上的项目和 ``COLUMN`` 布局的轨道将从右向左放置。
 
 
 New track（新轨道）
-------------------
+---------------------
 
 .. raw:: html
 
@@ -358,17 +358,17 @@ You can force Flex to put an item into a new line with
    <br>
 
 
-您可以使用 :cpp:expr:`lv_obj_add_flag(child, LV_OBJ_FLAG_FLEX_IN_NEW_TRACK)` 强制 Flex 将项目放入新行。
+可以使用接口 :cpp:expr:`lv_obj_add_flag(child, LV_OBJ_FLAG_FLEX_IN_NEW_TRACK)` 强制 Flex 将项目放入新行。
 
 
 .. _flex_example:
 
 Example
-*******
+**********
 
 .. include:: ../examples/layouts/flex/index.rst
 
 .. _flex_api:
 
 API
-***
+******
