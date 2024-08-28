@@ -189,8 +189,8 @@ The possible values are:
 
 可能的值为：
 
-- :cpp:enumerator:`LV_FLEX_ALIGN_START`: 表示水平放置，垂直放置（默认）
-- :cpp:enumerator:`LV_FLEX_ALIGN_END`: 表示水平方向上，底部垂直
+- :cpp:enumerator:`LV_FLEX_ALIGN_START`: 表示左侧水平，顶部垂直（默认）
+- :cpp:enumerator:`LV_FLEX_ALIGN_END`: 表示右侧水平，底部垂直
 - :cpp:enumerator:`LV_FLEX_ALIGN_CENTER`: 只是居中
 - :cpp:enumerator:`LV_FLEX_ALIGN_SPACE_EVENLY`: 项目的分布使得任意两个项目之间的间距（以及到边缘的间距）相等。不适用于 ``track_cross_place``。
 - :cpp:enumerator:`LV_FLEX_ALIGN_SPACE_AROUND`: 项目在轨道上均匀分布，周围有相等的空间。请注意，从视觉上看，空间并不相等，因为所有项目的两侧都有相等的空间。第一个项目在容器边缘有一个单位的空间，但下一个项目之间有两个单位的间隔，因为下一个项有自己的适用间距。不适用于 ``track_cross_place``。
