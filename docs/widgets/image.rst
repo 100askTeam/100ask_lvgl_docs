@@ -385,10 +385,10 @@ The alignment can be set by :cpp:func:`lv_image_set_inner_align`
 
 或者自动缩放或平铺图像
 
-- :cpp:enumerator:`LV_IMAGE_ALIGN_STRETCH` 设置 X 和 Y 的比例以填充控件的区域。
-- :cpp:enumerator:`LV_IMAGE_ALIGN_TILE` 将图像平铺到控件区域。应用 offset（偏移） 来移动平铺。
+- :cpp:enumerator:`LV_IMAGE_ALIGN_STRETCH` 自动根据 X 和 Y 的比例来平铺填充控件的区域，即使控件区域不对称。
+- :cpp:enumerator:`LV_IMAGE_ALIGN_TILE` 将图像像印章那样平铺满控件区域，底层应用 offset（偏移） 来移动平铺。
 
-对齐方式可以通过以下方式设置 :cpp:func:`lv_image_set_inner_align`
+对齐方式可以通过调用此函数设置 :cpp:func:`lv_image_set_inner_align`
 
 
 .. _lv_image_events:
