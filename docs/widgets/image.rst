@@ -310,9 +310,7 @@ differences are that pure image widget transformation
 
 注意，图像对象的真实坐标在变换过程中不会改变。也就是说，:cpp:expr:`lv_obj_get_width/height/x/y()` 将返回原始的、未缩放的坐标。
 
-重要图像的转换与 来自样式的转换属性。（看这里）。主要 不同的是，纯粹的图像小部件转换
-
-**重要** 图像的转换与来自样式的转换属性无关。(请阅读 :ref:`这里 <styles_opacity_blend_modes_transformations>` )。主要区别在于纯图像控件的转换。
+**重要** 图像的转换与来自样式的转换属性无关，(请阅读 :ref:`这里 <styles_opacity_blend_modes_transformations>` )。主要区别在于纯图像控件的转换。
 
 - 不会转换图像控件的子项
 - 图像直接转换，无需创建中间层（缓冲区）来快照控件
@@ -383,7 +381,7 @@ The alignment can be set by :cpp:func:`lv_image_set_inner_align`
 - :cpp:enumerator:`LV_IMAGE_ALIGN_STRETCH`
 - :cpp:enumerator:`LV_IMAGE_ALIGN_TILE`
 
-``offset（偏移）``值在图像源对齐后应用。例如，设置 ``y=-10`` 和 :cpp:enumerator:`LV_IMAGE_ALIGN_CENTER` 将使图像源从控件的中心向上移动一些。
+``offset（偏移）`` 值在图像源对齐后应用。例如，设置 ``y=-10`` 和 :cpp:enumerator:`LV_IMAGE_ALIGN_CENTER` 将使图像源从控件的中心向上移动一些。
 
 或者自动缩放或平铺图像
 
@@ -419,7 +417,7 @@ Learn more about :ref:`events`.
 
 请阅读 :ref:`基本对象 <lv_obj>` 的事件。
 
-详细了解更多 :ref:`events`。
+详细了解更多 :ref:`events` 。
 
 
 .. _lv_image_keys:
@@ -456,4 +454,4 @@ Example
 .. _lv_image_api:
 
 API
-***
+****
