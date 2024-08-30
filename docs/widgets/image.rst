@@ -106,7 +106,7 @@ specified in the style. It enables to use of light-weight monochrome
 
 要从 PNG、JPG 或 BMP 图像生成像素数组，请使用 `LVGL官网的在线图像转换工具 <https://lvgl.io/tools/imageconverter>`__ 并将转换后的图像指针（比如 ``converted_img_var`` ）通过接口函数 :cpp:expr:`lv_image_set_src(img1, &converted_img_var)` 使用。要使该变量在 C 文件中可见，需要使用 :cpp:macro:`LV_IMAGE_DECLARE(converted_img_var)` 声明它。
 
-要使用外部文件，还需要使用 `LVGL官网的在线图像转换工具 <https://lvgl.io/tools/imageconverter>`__  转换图像文件，这时候需要选择转为二进制输出格式；转出来之后还需要使用 :ref:` LVGL 的文件系统接口 <overview_file_system>` 对接你适配好的文件系统驱动。 要设置来自文件系统的二进制图像文件，请使用这样使用该接口 :cpp:expr:`lv_image_set_src(img, "S:folder1/my_img.bin")` 。
+要使用外部文件，还需要使用 `LVGL官网的在线图像转换工具 <https://lvgl.io/tools/imageconverter>`__  转换图像文件，这时候需要选择转为二进制输出格式；转出来之后还需要使用 :ref:`LVGL 的文件系统接口 <overview_file_system>` 对接你适配好的文件系统驱动。 要设置来自文件系统的二进制图像文件，请使用这样使用该接口 :cpp:expr:`lv_image_set_src(img, "S:folder1/my_img.bin")` 。
 
 图像控件还可以显示类似于 :ref:`标签 <lv_label>` 控件那样显示 :ref:`Symbols(符号) <fonts_symbols>` 或者字符；在这种情况下，图像将根据样式中指定的 *font* 呈现文本。 它允许使用轻量级单色 “字母” 而不是真实图像，例如 :cpp:expr:`lv_image_set_src(img1, LV_SYMBOL_OK "Some text")` 。
 
