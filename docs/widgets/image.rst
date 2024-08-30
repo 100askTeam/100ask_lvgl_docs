@@ -104,7 +104,7 @@ specified in the style. It enables to use of light-weight monochrome
 
 要设置图像的来源，请使用 :cpp:expr:`lv_image_set_src(img, src)` 接口。
 
-要从 PNG、JPG 或 BMP 图像生成像素数组，请使用 `LVGL官网的在线图像转换工具 <https://lvgl.io/tools/imageconverter>`__ 并将转换后的图像指针（比如 ``converted_img_var`` ）通过接口函数 :cpp:expr:`lv_image_set_src(img1, &converted_img_var)` 使用。要使该变量在 C 文件中可见，需要使用 :cpp:macro:`LV_IMAGE_DECLARE(converted_img_var)` 声明它。
+要从 PNG、JPG 或 BMP 图像生成像素数组，请使用 `LVGL官网的在线图像转换工具 <https://lvgl.io/tools/imageconverter>`__ 并将转换后的图像指针（比如 ``converted_img_var`` ）通过接口函数 :cpp:expr:`lv_image_set_src(img1, &converted_img_var)` 使用。要使该变量在 C 文件中可见，需要使用 :cpp:expr:`LV_IMAGE_DECLARE(converted_img_var)` 声明它。
 
 要使用外部文件，还需要使用 `LVGL官网的在线图像转换工具 <https://lvgl.io/tools/imageconverter>`__  转换图像文件，这时候需要选择转为二进制输出格式；转出来之后还需要使用 :ref:`LVGL 的文件系统接口 <overview_file_system>` 对接你适配好的文件系统驱动。 要设置来自文件系统的二进制图像文件，请使用这样使用该接口 :cpp:expr:`lv_image_set_src(img, "S:folder1/my_img.bin")` 。
 
@@ -308,7 +308,7 @@ differences are that pure image widget transformation
 
 转换需要整个图像可用。因此索引图像 (``LV_COLOR_FORMAT_I1/2/4/8_...``)，仅 Alpha 图像无法转换。 换言之，转换仅适用于存储为 C 数组的普通 (A)RGB 或 A8 图像有效，或者如果自定义 :ref:`overview_image_decoder` 返回整个图像。
 
-注意，图像对象的真实坐标在变换过程中不会改变。也就是说，:cpp:expr:`lv_obj_get_width/height/x/y()` 将返回原始的、未缩放的坐标。
+注意，图像对象的真实坐标在转换过程中不会改变。也就是说，:cpp:expr:`lv_obj_get_width/height/x/y()` 将返回原始的、未缩放的坐标。
 
 **重要** 图像的转换与来自样式的转换属性无关，(请阅读 :ref:`这里 <styles_opacity_blend_modes_transformations>` )。主要区别在于纯图像控件的转换。
 
