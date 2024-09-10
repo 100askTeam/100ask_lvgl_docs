@@ -190,7 +190,7 @@ cursor will jump to the position where the Text area was clicked.
    <br>
 
 
-光标的位置可以使用函数 :cpp:expr:`lv_textarea_set_cursor_pos(textarea, 10)` 直接修改。 第二个参数为你要指定的光标的位置，要注意的是： ``0`` 表示将光标移动到 “第一个字符之前”，:cpp:enumerator:`LV_TA_CURSOR_LAST` 表示将光标移动到 “最后一个字符之后”
+光标的位置可以使用函数 :cpp:expr:`lv_textarea_set_cursor_pos(textarea, 10)` 直接修改。 第二个参数为你要指定的光标的位置，要注意的是： ``0`` 表示将光标移动到 “第一个字符之前”，:cpp:enumerator:`LV_TEXTAREA_CURSOR_LAST` 表示将光标移动到 “最后一个字符之后”
 
 您可以使用下面这些接口函数修改光标位置：
 
