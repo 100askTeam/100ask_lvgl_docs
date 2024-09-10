@@ -26,7 +26,7 @@ may have seen on smartwatches.
    <br>
 
 
-平铺视图(Tileview)是一个容器对象，其中的元素（ *tiles（瓦片）* ）可以以网格形式排列。用户可以通过滑动在瓦片之间导航。可以单独在瓦片上禁用任意方向的滑动，以防止从一个瓦片移动到另一个瓦片。
+平铺视图(Tileview)是一个容器对象，其中的元素（ *tiles（瓷砖）* ）可以以网格形式排列。用户可以通过滑动在瓷砖之间导航。可以单独在瓷砖上禁用任意方向的滑动，以防止从一个瓷砖移动到另一个瓷砖。
 
 如果平铺视图设置为屏幕大小，则用户界面类似于在智能手表上看到的界面。
 
@@ -62,7 +62,7 @@ The parts and styles work the same as for :ref:`lv_obj`.
 Usage（用法）
 ***************
 
-Add a tile（添加瓦片）
+Add a tile（添加瓷砖）
 -------------------------
 
 .. raw:: html
@@ -83,12 +83,12 @@ can be created.
    </details> 
    <br>
 
-:cpp:expr:`lv_tileview_add_tile(tileview, row_id, col_id, dir)` 函数在平铺视图 tileview 中的第 ``col_id`` 列和第 ``row_id`` 行创建了一个新的瓦片。dir 参数可以是 ``LV_DIR_LEFT/RIGHT/TOP/BOTTOM/HOR/VER/ALL`` 中的一个或多个值，通过按位或（OR-ed）操作来组合，以允许通过滑动手势在给定方向上移动到相邻的瓦片。
+:cpp:expr:`lv_tileview_add_tile(tileview, row_id, col_id, dir)` 函数在平铺视图 tileview 中的第 ``col_id`` 列和第 ``row_id`` 行创建了一个新的瓷砖。dir 参数可以是 ``LV_DIR_LEFT/RIGHT/TOP/BOTTOM/HOR/VER/ALL`` 中的一个或多个值，通过按位或（OR-ed）操作来组合，以允许通过滑动手势在给定方向上移动到相邻的瓷砖。
 
-返回的值是 ``lv_obj_t *`` 可以在其（瓦片）上填充内容。
+返回的值是 ``lv_obj_t *`` 可以在其（瓷砖）上填充内容。
 
 
-Change tile（切换瓦片显示）
+Change tile（切换瓷砖显示）
 ---------------------------
 
 .. raw:: html
@@ -106,7 +106,7 @@ The Tile view can scroll to a tile with
    <br>
 
 
-平铺视图可以使用接口 :cpp:expr:`lv_tileview_set_tile(tileview, tile_obj, LV_ANIM_ON/OFF)` 或 :cpp:expr:`lv_tileview_set_tile_by_index(tileview, col_id, row_id, LV_ANIM_ON/OFF)` 切换到指定的瓦片。
+平铺视图可以使用接口 :cpp:expr:`lv_tileview_set_tile(tileview, tile_obj, LV_ANIM_ON/OFF)` 或 :cpp:expr:`lv_tileview_set_tile_by_index(tileview, col_id, row_id, LV_ANIM_ON/OFF)` 切换到指定的瓷砖。
 
 
 .. _lv_tileview_events:
@@ -129,7 +129,7 @@ Events（事件）
    <br>
 
 
--  :cpp:enumerator:`LV_EVENT_VALUE_CHANGED` 当通过滚动加载新瓦片时发送此事件，接口 :cpp:expr:`lv_tileview_get_tile_active(tabview)` 可用于获取当前所在的瓦片。
+-  :cpp:enumerator:`LV_EVENT_VALUE_CHANGED` 当通过滚动加载新瓷砖时发送此事件，接口 :cpp:expr:`lv_tileview_get_tile_active(tabview)` 可用于获取当前所在的瓷砖。
 
 
 .. _lv_tileview_keys:
