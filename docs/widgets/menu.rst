@@ -56,12 +56,12 @@ The menu widget is built from the following objects:
 菜单控件由以下对象组合而成：
 
 - 主容器： :cpp:type:`lv_menu_main_cont` 
-- 主标题： :cpp:type:`lv_menu_main_header_cont` 
+- 主标头： :cpp:type:`lv_menu_main_header_cont` 
 - 返回按钮： :ref:`lv_button` 
 - 返回按钮图标： :ref:`lv_image` 
 - 页面： :cpp:type:`lv_menu_page` 
 - 侧边栏容器： :cpp:type:`lv_menu_sidebar_cont` 
-- 侧边栏标题： :cpp:type:`lv_menu_sidebar_header_cont` 
+- 侧边栏标头： :cpp:type:`lv_menu_sidebar_header_cont` 
 
 .. _lv_menu_usage:
 
@@ -87,7 +87,7 @@ Create a menu（创建菜单）
 :cpp:expr:`lv_menu_create(parent)` 创建一个新的空菜单。
 
 
-Header mode（标题模式）
+Header mode（标头模式）
 ------------------------
 
 .. raw:: html
@@ -109,11 +109,11 @@ You can set header modes with :cpp:expr:`lv_menu_set_mode_header(menu, LV_MENU_H
    <br>
 
 
-页面的标题可以设置为下面的模式：
+页面的标头可以设置为下面的模式：
 
-- :cpp:enumerator:`LV_MENU_HEADER_TOP_FIXED` 标题位于顶部。
-- :cpp:enumerator:`LV_MENU_HEADER_TOP_UNFIXED` 标题位于顶部，可以滚动到视图之外。
-- :cpp:enumerator:`LV_MENU_HEADER_BOTTOM_FIXED` 标题位于底部。
+- :cpp:enumerator:`LV_MENU_HEADER_TOP_FIXED` 标头位于顶部。
+- :cpp:enumerator:`LV_MENU_HEADER_TOP_UNFIXED` 标头位于顶部，可以滚动到视图之外。
+- :cpp:enumerator:`LV_MENU_HEADER_BOTTOM_FIXED` 标头位于底部。
 
 可以使用函数 :cpp:expr:`lv_menu_set_mode_header(menu, LV_MENU_HEADER...)` 设置模式。
 
@@ -297,7 +297,7 @@ Learn more about :ref:`events`.
    -  :cpp:expr:`lv_menu_get_cur_main_page(menu)` 返回指向当前在 main 中显示的菜单页的指针。
    -  :cpp:expr:`lv_menu_get_cur_sidebar_page(menu)` 返回指向当前显示在侧边栏中的菜单页面的指针。
 
--  :cpp:enumerator:`LV_EVENT_CLICKED` 当单击主标题或侧边栏中的后退按钮时触发该事件。按钮已经启用 :cpp:enumerator:`LV_OBJ_FLAG_EVENT_BUBBLE` ，所以可以将事件添加到菜单本身。
+-  :cpp:enumerator:`LV_EVENT_CLICKED` 当单击主标头或侧边栏中的后退按钮时触发该事件。按钮已经启用 :cpp:enumerator:`LV_OBJ_FLAG_EVENT_BUBBLE` ，所以可以将事件添加到菜单本身。
 
    -  :cpp:expr:`lv_menu_back_button_is_root(menu, button)` 检查该按钮是否为根页面的后退 按钮。
 
