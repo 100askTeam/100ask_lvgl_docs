@@ -236,7 +236,7 @@ Flex grow（弹性增长）可用于让一个或多个孩子填满轨道上的�
 
 ``A`` 和 ``B`` 的大小为 100 px，而 ``C`` 的大小为 200 px。
 
-可以使用:cpp:expr:`lv_obj_set_flex_grow(child, value)`在子节点上设置 Flex 增长值。 ``value`` 需要 > 1 或 0 才能禁用在孩子身上生长。
+可以使用 :cpp:expr:`lv_obj_set_flex_grow(child, value)` 在子节点上设置 Flex 增长值。 ``value`` 需要 > 1 或 0 才能禁用在孩子身上生长。
 
 
 .. _flex_style:
