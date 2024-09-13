@@ -257,8 +257,6 @@ typedef struct lv_observer_t lv_observer_t;
 
 typedef struct lv_monkey_config_t lv_monkey_config_t;
 
-typedef struct lv_pinyin_dict_t lv_pinyin_dict_t;
-
 typedef struct lv_ime_pinyin_t lv_ime_pinyin_t;
 
 typedef struct lv_file_explorer_t lv_file_explorer_t;
@@ -323,7 +321,12 @@ typedef struct lv_rlottie_t lv_rlottie_t;
 
 typedef struct lv_ffmpeg_player_t lv_ffmpeg_player_t;
 
+typedef struct lv_glfw_window_t lv_glfw_window_t;
+typedef struct lv_glfw_texture_t lv_glfw_texture_t;
+
 typedef uint32_t lv_prop_id_t;
+
+typedef struct lv_draw_buf_t lv_draw_buf_t;
 
 #if LV_USE_OBJ_PROPERTY
 typedef struct lv_property_name_t lv_property_name_t;

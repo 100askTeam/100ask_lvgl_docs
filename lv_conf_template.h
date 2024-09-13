@@ -1,6 +1,6 @@
 ﻿/**
  * @file lv_conf.h
- * Configuration file for v9.1.1-dev
+ * Configuration file for v9.2.0
  */
 
 /*
@@ -26,7 +26,7 @@
    COLOR SETTINGS
  *====================*/
 
-/*Color depth: 8 (A8), 16 (RGB565), 24 (RGB888), 32 (XRGB8888)*/
+/*Color depth: 1 (I1), 8 (L8), 16 (RGB565), 24 (RGB888), 32 (XRGB8888)*/
 #define LV_COLOR_DEPTH 16
 
 /*=========================
@@ -191,8 +191,13 @@
     #define LV_USE_VGLITE_BLIT_SPLIT 0
 
     #if LV_USE_OS
-        /* Enable VGLite draw async. Queue multiple tasks and flash them once to the GPU. */
-        #define LV_USE_VGLITE_DRAW_ASYNC 1
+        /* Use additional draw thread for VG-Lite processing.*/
+        #define LV_USE_VGLITE_DRAW_THREAD 1
+
+        #if LV_USE_VGLITE_DRAW_THREAD
+            /* Enable VGLite draw async. Queue multiple tasks and flash them once to the GPU. */
+            #define LV_USE_VGLITE_DRAW_ASYNC 1
+        #endif
     #endif
 
     /* Enable VGLite asserts. */
@@ -203,6 +208,11 @@
 #define LV_USE_DRAW_PXP 0
 
 #if LV_USE_DRAW_PXP
+    #if LV_USE_OS
+        /* Use additional draw thread for PXP processing.*/
+        #define LV_USE_PXP_DRAW_THREAD 1
+    #endif
+
     /* Enable PXP asserts. */
     #define LV_USE_PXP_ASSERT 0
 #endif
@@ -217,28 +227,28 @@
 #define LV_USE_DRAW_VG_LITE 0
 
 #if LV_USE_DRAW_VG_LITE
-/* Enable VG-Lite custom external 'gpu_init()' function */
-#define LV_VG_LITE_USE_GPU_INIT 0
+    /* Enable VG-Lite custom external 'gpu_init()' function */
+    #define LV_VG_LITE_USE_GPU_INIT 0
 
-/* Enable VG-Lite assert. */
-#define LV_VG_LITE_USE_ASSERT 0
+    /* Enable VG-Lite assert. */
+    #define LV_VG_LITE_USE_ASSERT 0
 
-/* VG-Lite flush commit trigger threshold. GPU will try to batch these many draw tasks. */
-#define LV_VG_LITE_FLUSH_MAX_COUNT 8
+    /* VG-Lite flush commit trigger threshold. GPU will try to batch these many draw tasks. */
+    #define LV_VG_LITE_FLUSH_MAX_COUNT 8
 
-/* Enable border to simulate shadow
- * NOTE: which usually improves performance,
- * but does not guarantee the same rendering quality as the software. */
-#define LV_VG_LITE_USE_BOX_SHADOW 0
+    /* Enable border to simulate shadow
+     * NOTE: which usually improves performance,
+     * but does not guarantee the same rendering quality as the software. */
+    #define LV_VG_LITE_USE_BOX_SHADOW 0
 
-/* VG-Lite gradient maximum cache number.
- * NOTE: The memory usage of a single gradient image is 4K bytes.
- */
-#define LV_VG_LITE_GRAD_CACHE_CNT 32
+    /* VG-Lite gradient maximum cache number.
+     * NOTE: The memory usage of a single gradient image is 4K bytes.
+     */
+    #define LV_VG_LITE_GRAD_CACHE_CNT 32
 
-/* VG-Lite stroke maximum cache number.
- */
-#define LV_VG_LITE_STROKE_CACHE_CNT 32
+    /* VG-Lite stroke maximum cache number.
+     */
+    #define LV_VG_LITE_STROKE_CACHE_CNT 32
 
 #endif
 
@@ -447,6 +457,9 @@
 /*Enable matrix support
  *Requires `LV_USE_FLOAT = 1`*/
 #define LV_USE_MATRIX           0
+
+/*Include `lvgl_private.h` in `lvgl.h` to access internal data and functions by default*/
+#define LV_USE_PRIVATE_API		0
 
 /*==================
  *   FONT USAGE
@@ -685,6 +698,9 @@
 
 /*File system interfaces for common APIs */
 
+/*Setting a default driver letter allows skipping the driver prefix in filepaths*/
+#define LV_FS_DEFAULT_DRIVE_LETTER '\0'
+
 /*API for fopen, fread, etc*/
 #define LV_USE_FS_STDIO 0
 #if LV_USE_FS_STDIO
@@ -738,8 +754,6 @@
 #define LV_USE_FS_ARDUINO_SD 0
 #if LV_USE_FS_ARDUINO_SD
     #define LV_FS_ARDUINO_SD_LETTER '\0'     /*Set an upper cased letter on which the drive will accessible (e.g. 'A')*/
-    #define LV_FS_ARDUINO_SD_CS_PIN 0     /*Set the pin connected to the chip select line of the SD card */
-    #define LV_FS_ARDUINO_SD_FREQUENCY 40000000     /*Set the frequency used by the chip of the SD CARD */
 #endif
 
 /*LODEPNG decoder library*/
@@ -762,8 +776,8 @@
 /*GIF decoder library*/
 #define LV_USE_GIF 0
 #if LV_USE_GIF
-/*GIF decoder accelerate*/
-#define LV_GIF_CACHE_DECODE_DATA 0
+    /*GIF decoder accelerate*/
+    #define LV_GIF_CACHE_DECODE_DATA 0
 #endif
 
 
@@ -938,6 +952,7 @@
     #define LV_SDL_INCLUDE_PATH     <SDL2/SDL.h>
     #define LV_SDL_RENDER_MODE      LV_DISPLAY_RENDER_MODE_DIRECT   /*LV_DISPLAY_RENDER_MODE_DIRECT is recommended for best performance*/
     #define LV_SDL_BUF_COUNT        1    /*1 or 2*/
+    #define LV_SDL_ACCELERATED      1    /*1: Use hardware acceleration*/
     #define LV_SDL_FULLSCREEN       0    /*1: Make the window full screen by default*/
     #define LV_SDL_DIRECT_EXIT      1    /*1: Exit the application when all SDL windows are closed*/
     #define LV_SDL_MOUSEWHEEL_MODE  LV_SDL_MOUSEWHEEL_MODE_ENCODER  /*LV_SDL_MOUSEWHEEL_MODE_ENCODER/CROWN*/
@@ -952,6 +967,13 @@
     #define LV_X11_RENDER_MODE_PARTIAL 1  /*Partial render mode (preferred)*/
     #define LV_X11_RENDER_MODE_DIRECT  0  /*direct render mode*/
     #define LV_X11_RENDER_MODE_FULL    0  /*Full render mode*/
+#endif
+
+/*Use Wayland to open a window and handle input on Linux or BSD desktops */
+#define LV_USE_WAYLAND          0
+#if LV_USE_WAYLAND
+    #define LV_WAYLAND_WINDOW_DECORATIONS   0    /*Draw client side window decorations only necessary on Mutter/GNOME*/
+    #define LV_WAYLAND_WL_SHELL             0    /*Use the legacy wl_shell protocol instead of the default XDG shell*/
 #endif
 
 /*Driver for /dev/fb*/

@@ -83,7 +83,7 @@
    COLOR SETTINGS
  *====================*/
 
-/*Color depth: 8 (A8), 16 (RGB565), 24 (RGB888), 32 (XRGB8888)*/
+/*Color depth: 1 (I1), 8 (L8), 16 (RGB565), 24 (RGB888), 32 (XRGB8888)*/
 #ifndef LV_COLOR_DEPTH
     #ifdef CONFIG_LV_COLOR_DEPTH
         #define LV_COLOR_DEPTH CONFIG_LV_COLOR_DEPTH
@@ -570,16 +570,31 @@
     #endif
 
     #if LV_USE_OS
-        /* Enable VGLite draw async. Queue multiple tasks and flash them once to the GPU. */
-        #ifndef LV_USE_VGLITE_DRAW_ASYNC
+        /* Use additional draw thread for VG-Lite processing.*/
+        #ifndef LV_USE_VGLITE_DRAW_THREAD
             #ifdef LV_KCONFIG_PRESENT
-                #ifdef CONFIG_LV_USE_VGLITE_DRAW_ASYNC
-                    #define LV_USE_VGLITE_DRAW_ASYNC CONFIG_LV_USE_VGLITE_DRAW_ASYNC
+                #ifdef CONFIG_LV_USE_VGLITE_DRAW_THREAD
+                    #define LV_USE_VGLITE_DRAW_THREAD CONFIG_LV_USE_VGLITE_DRAW_THREAD
                 #else
-                    #define LV_USE_VGLITE_DRAW_ASYNC 0
+                    #define LV_USE_VGLITE_DRAW_THREAD 0
                 #endif
             #else
-                #define LV_USE_VGLITE_DRAW_ASYNC 1
+                #define LV_USE_VGLITE_DRAW_THREAD 1
+            #endif
+        #endif
+
+        #if LV_USE_VGLITE_DRAW_THREAD
+            /* Enable VGLite draw async. Queue multiple tasks and flash them once to the GPU. */
+            #ifndef LV_USE_VGLITE_DRAW_ASYNC
+                #ifdef LV_KCONFIG_PRESENT
+                    #ifdef CONFIG_LV_USE_VGLITE_DRAW_ASYNC
+                        #define LV_USE_VGLITE_DRAW_ASYNC CONFIG_LV_USE_VGLITE_DRAW_ASYNC
+                    #else
+                        #define LV_USE_VGLITE_DRAW_ASYNC 0
+                    #endif
+                #else
+                    #define LV_USE_VGLITE_DRAW_ASYNC 1
+                #endif
             #endif
         #endif
     #endif
@@ -604,6 +619,21 @@
 #endif
 
 #if LV_USE_DRAW_PXP
+    #if LV_USE_OS
+        /* Use additional draw thread for PXP processing.*/
+        #ifndef LV_USE_PXP_DRAW_THREAD
+            #ifdef LV_KCONFIG_PRESENT
+                #ifdef CONFIG_LV_USE_PXP_DRAW_THREAD
+                    #define LV_USE_PXP_DRAW_THREAD CONFIG_LV_USE_PXP_DRAW_THREAD
+                #else
+                    #define LV_USE_PXP_DRAW_THREAD 0
+                #endif
+            #else
+                #define LV_USE_PXP_DRAW_THREAD 1
+            #endif
+        #endif
+    #endif
+
     /* Enable PXP asserts. */
     #ifndef LV_USE_PXP_ASSERT
         #ifdef CONFIG_LV_USE_PXP_ASSERT
@@ -642,64 +672,64 @@
 #endif
 
 #if LV_USE_DRAW_VG_LITE
-/* Enable VG-Lite custom external 'gpu_init()' function */
-#ifndef LV_VG_LITE_USE_GPU_INIT
-    #ifdef CONFIG_LV_VG_LITE_USE_GPU_INIT
-        #define LV_VG_LITE_USE_GPU_INIT CONFIG_LV_VG_LITE_USE_GPU_INIT
-    #else
-        #define LV_VG_LITE_USE_GPU_INIT 0
+    /* Enable VG-Lite custom external 'gpu_init()' function */
+    #ifndef LV_VG_LITE_USE_GPU_INIT
+        #ifdef CONFIG_LV_VG_LITE_USE_GPU_INIT
+            #define LV_VG_LITE_USE_GPU_INIT CONFIG_LV_VG_LITE_USE_GPU_INIT
+        #else
+            #define LV_VG_LITE_USE_GPU_INIT 0
+        #endif
     #endif
-#endif
 
-/* Enable VG-Lite assert. */
-#ifndef LV_VG_LITE_USE_ASSERT
-    #ifdef CONFIG_LV_VG_LITE_USE_ASSERT
-        #define LV_VG_LITE_USE_ASSERT CONFIG_LV_VG_LITE_USE_ASSERT
-    #else
-        #define LV_VG_LITE_USE_ASSERT 0
+    /* Enable VG-Lite assert. */
+    #ifndef LV_VG_LITE_USE_ASSERT
+        #ifdef CONFIG_LV_VG_LITE_USE_ASSERT
+            #define LV_VG_LITE_USE_ASSERT CONFIG_LV_VG_LITE_USE_ASSERT
+        #else
+            #define LV_VG_LITE_USE_ASSERT 0
+        #endif
     #endif
-#endif
 
-/* VG-Lite flush commit trigger threshold. GPU will try to batch these many draw tasks. */
-#ifndef LV_VG_LITE_FLUSH_MAX_COUNT
-    #ifdef CONFIG_LV_VG_LITE_FLUSH_MAX_COUNT
-        #define LV_VG_LITE_FLUSH_MAX_COUNT CONFIG_LV_VG_LITE_FLUSH_MAX_COUNT
-    #else
-        #define LV_VG_LITE_FLUSH_MAX_COUNT 8
+    /* VG-Lite flush commit trigger threshold. GPU will try to batch these many draw tasks. */
+    #ifndef LV_VG_LITE_FLUSH_MAX_COUNT
+        #ifdef CONFIG_LV_VG_LITE_FLUSH_MAX_COUNT
+            #define LV_VG_LITE_FLUSH_MAX_COUNT CONFIG_LV_VG_LITE_FLUSH_MAX_COUNT
+        #else
+            #define LV_VG_LITE_FLUSH_MAX_COUNT 8
+        #endif
     #endif
-#endif
 
-/* Enable border to simulate shadow
- * NOTE: which usually improves performance,
- * but does not guarantee the same rendering quality as the software. */
-#ifndef LV_VG_LITE_USE_BOX_SHADOW
-    #ifdef CONFIG_LV_VG_LITE_USE_BOX_SHADOW
-        #define LV_VG_LITE_USE_BOX_SHADOW CONFIG_LV_VG_LITE_USE_BOX_SHADOW
-    #else
-        #define LV_VG_LITE_USE_BOX_SHADOW 0
+    /* Enable border to simulate shadow
+     * NOTE: which usually improves performance,
+     * but does not guarantee the same rendering quality as the software. */
+    #ifndef LV_VG_LITE_USE_BOX_SHADOW
+        #ifdef CONFIG_LV_VG_LITE_USE_BOX_SHADOW
+            #define LV_VG_LITE_USE_BOX_SHADOW CONFIG_LV_VG_LITE_USE_BOX_SHADOW
+        #else
+            #define LV_VG_LITE_USE_BOX_SHADOW 0
+        #endif
     #endif
-#endif
 
-/* VG-Lite gradient maximum cache number.
- * NOTE: The memory usage of a single gradient image is 4K bytes.
- */
-#ifndef LV_VG_LITE_GRAD_CACHE_CNT
-    #ifdef CONFIG_LV_VG_LITE_GRAD_CACHE_CNT
-        #define LV_VG_LITE_GRAD_CACHE_CNT CONFIG_LV_VG_LITE_GRAD_CACHE_CNT
-    #else
-        #define LV_VG_LITE_GRAD_CACHE_CNT 32
+    /* VG-Lite gradient maximum cache number.
+     * NOTE: The memory usage of a single gradient image is 4K bytes.
+     */
+    #ifndef LV_VG_LITE_GRAD_CACHE_CNT
+        #ifdef CONFIG_LV_VG_LITE_GRAD_CACHE_CNT
+            #define LV_VG_LITE_GRAD_CACHE_CNT CONFIG_LV_VG_LITE_GRAD_CACHE_CNT
+        #else
+            #define LV_VG_LITE_GRAD_CACHE_CNT 32
+        #endif
     #endif
-#endif
 
-/* VG-Lite stroke maximum cache number.
- */
-#ifndef LV_VG_LITE_STROKE_CACHE_CNT
-    #ifdef CONFIG_LV_VG_LITE_STROKE_CACHE_CNT
-        #define LV_VG_LITE_STROKE_CACHE_CNT CONFIG_LV_VG_LITE_STROKE_CACHE_CNT
-    #else
-        #define LV_VG_LITE_STROKE_CACHE_CNT 32
+    /* VG-Lite stroke maximum cache number.
+     */
+    #ifndef LV_VG_LITE_STROKE_CACHE_CNT
+        #ifdef CONFIG_LV_VG_LITE_STROKE_CACHE_CNT
+            #define LV_VG_LITE_STROKE_CACHE_CNT CONFIG_LV_VG_LITE_STROKE_CACHE_CNT
+        #else
+            #define LV_VG_LITE_STROKE_CACHE_CNT 32
+        #endif
     #endif
-#endif
 
 #endif
 
@@ -1310,6 +1340,15 @@
         #define LV_USE_MATRIX CONFIG_LV_USE_MATRIX
     #else
         #define LV_USE_MATRIX           0
+    #endif
+#endif
+
+/*Include `lvgl_private.h` in `lvgl.h` to access internal data and functions by default*/
+#ifndef LV_USE_PRIVATE_API
+    #ifdef CONFIG_LV_USE_PRIVATE_API
+        #define LV_USE_PRIVATE_API CONFIG_LV_USE_PRIVATE_API
+    #else
+        #define LV_USE_PRIVATE_API		0
     #endif
 #endif
 
@@ -2284,6 +2323,15 @@
 
 /*File system interfaces for common APIs */
 
+/*Setting a default driver letter allows skipping the driver prefix in filepaths*/
+#ifndef LV_FS_DEFAULT_DRIVE_LETTER
+    #ifdef CONFIG_LV_FS_DEFAULT_DRIVE_LETTER
+        #define LV_FS_DEFAULT_DRIVE_LETTER CONFIG_LV_FS_DEFAULT_DRIVE_LETTER
+    #else
+        #define LV_FS_DEFAULT_DRIVE_LETTER '\0'
+    #endif
+#endif
+
 /*API for fopen, fread, etc*/
 #ifndef LV_USE_FS_STDIO
     #ifdef CONFIG_LV_USE_FS_STDIO
@@ -2475,20 +2523,6 @@
             #define LV_FS_ARDUINO_SD_LETTER '\0'     /*Set an upper cased letter on which the drive will accessible (e.g. 'A')*/
         #endif
     #endif
-    #ifndef LV_FS_ARDUINO_SD_CS_PIN
-        #ifdef CONFIG_LV_FS_ARDUINO_SD_CS_PIN
-            #define LV_FS_ARDUINO_SD_CS_PIN CONFIG_LV_FS_ARDUINO_SD_CS_PIN
-        #else
-            #define LV_FS_ARDUINO_SD_CS_PIN 0     /*Set the pin connected to the chip select line of the SD card */
-        #endif
-    #endif
-    #ifndef LV_FS_ARDUINO_SD_FREQUENCY
-        #ifdef CONFIG_LV_FS_ARDUINO_SD_FREQUENCY
-            #define LV_FS_ARDUINO_SD_FREQUENCY CONFIG_LV_FS_ARDUINO_SD_FREQUENCY
-        #else
-            #define LV_FS_ARDUINO_SD_FREQUENCY 40000000     /*Set the frequency used by the chip of the SD CARD */
-        #endif
-    #endif
 #endif
 
 /*LODEPNG decoder library*/
@@ -2547,14 +2581,14 @@
     #endif
 #endif
 #if LV_USE_GIF
-/*GIF decoder accelerate*/
-#ifndef LV_GIF_CACHE_DECODE_DATA
-    #ifdef CONFIG_LV_GIF_CACHE_DECODE_DATA
-        #define LV_GIF_CACHE_DECODE_DATA CONFIG_LV_GIF_CACHE_DECODE_DATA
-    #else
-        #define LV_GIF_CACHE_DECODE_DATA 0
+    /*GIF decoder accelerate*/
+    #ifndef LV_GIF_CACHE_DECODE_DATA
+        #ifdef CONFIG_LV_GIF_CACHE_DECODE_DATA
+            #define LV_GIF_CACHE_DECODE_DATA CONFIG_LV_GIF_CACHE_DECODE_DATA
+        #else
+            #define LV_GIF_CACHE_DECODE_DATA 0
+        #endif
     #endif
-#endif
 #endif
 
 
@@ -3059,6 +3093,17 @@
             #define LV_SDL_BUF_COUNT        1    /*1 or 2*/
         #endif
     #endif
+    #ifndef LV_SDL_ACCELERATED
+        #ifdef LV_KCONFIG_PRESENT
+            #ifdef CONFIG_LV_SDL_ACCELERATED
+                #define LV_SDL_ACCELERATED CONFIG_LV_SDL_ACCELERATED
+            #else
+                #define LV_SDL_ACCELERATED 0
+            #endif
+        #else
+            #define LV_SDL_ACCELERATED      1    /*1: Use hardware acceleration*/
+        #endif
+    #endif
     #ifndef LV_SDL_FULLSCREEN
         #ifdef CONFIG_LV_SDL_FULLSCREEN
             #define LV_SDL_FULLSCREEN CONFIG_LV_SDL_FULLSCREEN
@@ -3141,6 +3186,31 @@
             #define LV_X11_RENDER_MODE_FULL CONFIG_LV_X11_RENDER_MODE_FULL
         #else
             #define LV_X11_RENDER_MODE_FULL    0  /*Full render mode*/
+        #endif
+    #endif
+#endif
+
+/*Use Wayland to open a window and handle input on Linux or BSD desktops */
+#ifndef LV_USE_WAYLAND
+    #ifdef CONFIG_LV_USE_WAYLAND
+        #define LV_USE_WAYLAND CONFIG_LV_USE_WAYLAND
+    #else
+        #define LV_USE_WAYLAND          0
+    #endif
+#endif
+#if LV_USE_WAYLAND
+    #ifndef LV_WAYLAND_WINDOW_DECORATIONS
+        #ifdef CONFIG_LV_WAYLAND_WINDOW_DECORATIONS
+            #define LV_WAYLAND_WINDOW_DECORATIONS CONFIG_LV_WAYLAND_WINDOW_DECORATIONS
+        #else
+            #define LV_WAYLAND_WINDOW_DECORATIONS   0    /*Draw client side window decorations only necessary on Mutter/GNOME*/
+        #endif
+    #endif
+    #ifndef LV_WAYLAND_WL_SHELL
+        #ifdef CONFIG_LV_WAYLAND_WL_SHELL
+            #define LV_WAYLAND_WL_SHELL CONFIG_LV_WAYLAND_WL_SHELL
+        #else
+            #define LV_WAYLAND_WL_SHELL             0    /*Use the legacy wl_shell protocol instead of the default XDG shell*/
         #endif
     #endif
 #endif

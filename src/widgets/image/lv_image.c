@@ -6,12 +6,12 @@
 /*********************
  *      INCLUDES
  *********************/
+#include "lv_image_private.h"
 #include "../../misc/lv_area_private.h"
 #include "../../draw/lv_draw_image_private.h"
 #include "../../draw/lv_draw_private.h"
 #include "../../core/lv_obj_event_private.h"
 #include "../../core/lv_obj_class_private.h"
-#include "lv_image_private.h"
 #if LV_USE_IMAGE != 0
 
 #include "../../stdlib/lv_string.h"
@@ -92,7 +92,7 @@ static const lv_property_ops_t properties[] = {
         .getter = lv_image_get_antialias,
     },
     {
-        .id = LV_PROPERTY_IMAGE_ALIGN,
+        .id = LV_PROPERTY_IMAGE_INNER_ALIGN,
         .setter = lv_image_set_inner_align,
         .getter = lv_image_get_inner_align,
     },
