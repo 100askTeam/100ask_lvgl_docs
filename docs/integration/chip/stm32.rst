@@ -500,3 +500,43 @@ variables:
      lv_display_flush_ready(display);
    }
 
+
+DMA2D Support（DMA2D 支持）
+---------------------------
+
+.. raw:: html
+
+   <details>
+     <summary>显示原文</summary>
+
+LVGL supports DMA2D - a feature of some STM32 MCUs which can improve performance
+when blending fills and images. Some STM32 product lines such as STM32F4 STM32F7, STM32L4,
+STM32U5, and STM32H7 include models with DMA2D support.
+
+LVGL's integration with DMA2D can be enabled by setting ``LV_USE_DRAW_DMA2D``
+to ``1`` in ``lv_conf.h``
+
+With ``LV_USE_DRAW_DMA2D_INTERRUPT`` set to ``0`` and ``LV_USE_OS`` set to ``LV_OS_NONE``,
+DMA2D will draw some fills and images concurrently with the software render where
+possible. If ``LV_USE_DRAW_DMA2D_INTERRUPT`` is set to ``1`` and ``LV_USE_OS`` set to
+``LV_OS_FREERTOS`` (or another OS) the main difference will be that the core will idle
+instead of "busywait" while waiting for a DMA2D transfer to complete.
+
+If ``LV_USE_DRAW_DMA2D_INTERRUPT`` is enabled then you are required to call
+:cpp:expr:`lv_draw_dma2d_transfer_complete_interrupt_handler` whenever the DMA2D
+"transfer complete" global interrupt is received.
+
+.. raw:: html
+
+   </details>
+   <br>
+
+
+LVGL 支持 DMA2D，这是一些 STM32 微控制器的特性，可以在混合填充和图像时提高性能。一些 STM32 产品线，如 STM32F4、STM32F7、STM32L4、STM32U5 和 STM32H7，包括支持 DMA2D 的型号。
+
+通过在 ``lv_conf.h``中将 ``LV_USE_DRAW_DMA2D`` 设置为 ``1`` ，可以启用 LVGL 与 DMA2D 的集成。
+
+将 ``LV_USE_DRAW_DMA2D_INTERRUPT`` 设置为 ``0`` 并将 ``LV_USE_OS`` 设置为 ``LV_OS_NONE``时，DMA2D 将在可能的情况下与软件渲染并行绘制一些填充和图像。如果将 ``LV_USE_DRAW_DMA2D_INTERRUPT`` 设置为 ``1`` 并将 ``LV_USE_OS`` 设置为 ``LV_OS_FREERTOS`` （或其他操作系统），主要区别在于，在等待 DMA2D 传输完成时，核心将处于空闲状态而不是“忙等”。
+
+如果启用了 ``LV_USE_DRAW_DMA2D_INTERRUPT`` ，则需要在收到 DMA2D “传输完成”全局中断时调用 :cpp:expr:`lv_draw_dma2d_transfer_complete_interrupt_handler` 。
+
