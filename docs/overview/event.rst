@@ -218,7 +218,7 @@ Input device events（输入设备事件）
 -  :cpp:enumerator:`LV_EVENT_CLICKED`: Called on release if not scrolled (regardless to long press)
 -  :cpp:enumerator:`LV_EVENT_RELEASED`: Called in every cases when the object has been released
 -  :cpp:enumerator:`LV_EVENT_SCROLL_BEGIN`: Scrolling begins. The event parameter is a pointer to the animation of the scroll. Can be modified
--  :cpp:enumerator:`LV_EVENT_SCROLL_THROW_BEGIN`: 
+-  :cpp:enumerator:`LV_EVENT_SCROLL_THROW_BEGIN`:
 -  :cpp:enumerator:`LV_EVENT_SCROLL_END`: Scrolling ends
 -  :cpp:enumerator:`LV_EVENT_SCROLL`: Scrolling
 -  :cpp:enumerator:`LV_EVENT_GESTURE`: A gesture is detected. Get the gesture with :cpp:expr:`lv_indev_get_gesture_dir(lv_indev_active());`
@@ -228,6 +228,8 @@ Input device events（输入设备事件）
 -  :cpp:enumerator:`LV_EVENT_LEAVE`: The object is defocused but still selected
 -  :cpp:enumerator:`LV_EVENT_HIT_TEST`: Perform advanced hit-testing
 -  :cpp:enumerator:`LV_EVENT_INDEV_RESET`: Indev has been reset
+-  :cpp:enumerator:`LV_EVENT_HOVER_OVER`: Indev hover over object
+-  :cpp:enumerator:`LV_EVENT_HOVER_LEAVE`: Indev hover leave object
 
 .. raw:: html
 
@@ -254,6 +256,9 @@ Input device events（输入设备事件）
 -  :cpp:enumerator:`LV_EVENT_LEAVE`: 对象失去焦点但仍然被选中
 -  :cpp:enumerator:`LV_EVENT_HIT_TEST`: 执行高级点击测试
 -  :cpp:enumerator:`LV_EVENT_INDEV_RESET`: 输入设备已重置
+-  :cpp:enumerator:`LV_EVENT_HOVER_OVER`: 开发中，鼠标悬停在对象上方。
+-  :cpp:enumerator:`LV_EVENT_HOVER_LEAVE`: 开发中，鼠标离开对象。
+
 
 
 Drawing events（绘图事件）

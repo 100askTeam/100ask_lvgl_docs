@@ -80,7 +80,7 @@ The objects can be in the combination of the following states:
 - :cpp:enumerator:`LV_STATE_FOCUSED`: (0x0002) Focused via keypad or encoder or clicked via touchpad/mouse
 - :cpp:enumerator:`LV_STATE_FOCUS_KEY`: (0x0004) Focused via keypad or encoder but not via touchpad/mouse
 - :cpp:enumerator:`LV_STATE_EDITED`: (0x0008) Edit by an encoder
-- :cpp:enumerator:`LV_STATE_HOVERED`: (0x0010) Hovered by mouse (not supported now)
+- :cpp:enumerator:`LV_STATE_HOVERED`: (0x0010) Hovered by mouse
 - :cpp:enumerator:`LV_STATE_PRESSED`: (0x0020) Being pressed
 - :cpp:enumerator:`LV_STATE_SCROLLED`: (0x0040) Being scrolled
 - :cpp:enumerator:`LV_STATE_DISABLED`: (0x0080) Disabled state
@@ -161,7 +161,7 @@ Some practical notes:
 - :cpp:enumerator:`LV_STATE_FOCUSED`：(0x0002) 通过键盘或编码器聚焦，或通过触摸板/鼠标点击
 - :cpp:enumerator:`LV_STATE_FOCUS_KEY`：(0x0004) 仅通过键盘或编码器聚焦，而非通过触摸板/鼠标
 - :cpp:enumerator:`LV_STATE_EDITED`：(0x0008) 由编码器编辑
-- :cpp:enumerator:`LV_STATE_HOVERED`：(0x0010) 鼠标悬停（目前不支持）
+- :cpp:enumerator:`LV_STATE_HOVERED`：(0x0010) 鼠标悬停
 - :cpp:enumerator:`LV_STATE_PRESSED`：(0x0020) 被按下的状态
 - :cpp:enumerator:`LV_STATE_SCROLLED`：(0x0040) 正在滚动的状态
 - :cpp:enumerator:`LV_STATE_DISABLED`：(0x0080) 禁用的状态
