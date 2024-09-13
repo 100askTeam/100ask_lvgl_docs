@@ -62,9 +62,50 @@ In ``lv_conf.h`` enable ``LV_USE_FS_...`` and assign an upper cased
 letter to ``LV_FS_..._LETTER`` (e.g. ``'S'``). After that you can access
 files using that driver letter. E.g. ``"S:path/to/file.txt"``.
 
-The work directory can be set with ``LV_FS_..._PATH``. E.g.
+Working with common prefixes（处理通用前缀）
+""""""""""""""""""""""""""""""""""""""""""""
+
+A **default driver letter** can be set by ``LV_FS_DEFAULT_DRIVE_LETTER``,
+which allows skipping the drive prefix in file paths.
+
+For example if ``LV_FS_DEFAULT_DRIVE_LETTER`` is set the ``'S'`` *"path/to/file.txt"* will mean *"S:path/to/file.txt"*. 
+
+This feature is useful if you have only a single driver and don't want to bother with LVGL's driver layer in the file paths.
+It also helps to use a unified path with LVGL's file system and normal file systems. 
+The original mechanism is not affected, so a path starting with drive letter will still work.
+
+The **working directory** can be set with ``LV_FS_..._PATH``. E.g.
 ``"/home/joe/projects/"`` The actual file/directory paths will be
-appended to it.
+appended to it, allowing to skip the common part.
+
+.. raw:: html
+
+   </details>
+   <br>
+
+
+如果你使用的是上面说到的几种文件系统(并且本身可以正常工作)，那么可以根据自己的文件系统在 ``lv_conf.h`` 中打开 ``LV_USE_FS_...`` 然后在 ``LV_FS_..._LETTER`` 分配一个盘符(驱动程序号) (一般是大写字母，比如： ``'S'``)
+
+之后，您就可以通过lvgl提供的文件系统接口访问指定的盘符中的文件。例如： ``"S:path/to/file.txt"``。
+
+可以通过 ``LV_FS_DEFAULT_DRIVE_LETTER``设置一个默认驱动器字母，这允许在文件路径中省略驱动器前缀。
+
+例如，如果 ``LV_FS_DEFAULT_DRIVE_LETTER`` 设置为 ``'S'`` ，"path/to/file.txt" 将表示 "S:path/to/file.txt"。
+
+如果你只有一个驱动器并且不想在文件路径中使用 LVGL 的驱动器层，这个特性非常有用。
+它还有助于使用 LVGL 文件系统和普通文件系统的统一路径。
+原始机制不受影响，因此以驱动器字母开头的路径仍然有效。
+
+工作目录 可以通过 ``LV_FS_..._PATH`` 设置。例如"/home/joe/projects/" 实际的文件/目录路径将附加到它后面，允许省略公共部分。
+
+
+Caching（缓存）
+"""""""""""""""
+
+.. raw:: html
+
+   <details>
+     <summary>显示原文</summary>
 
 :ref:`Cached reading <overview_file_system_cache>` is also supported if ``LV_FS_..._CACHE_SIZE`` is set to
 not ``0`` value. :cpp:func:`lv_fs_read` caches this size of data to lower the
@@ -87,23 +128,16 @@ the file name:
   lv_fs_make_path_from_buffer(&mempath, LV_FS_MEMFS_LETTER, (void*)buffer, size);
   lv_fs_res_t res = lv_fs_open(&file, (const char *)&mempath, LV_FS_MODE_RD);
 
+
 .. raw:: html
 
    </details>
    <br>
 
 
-如果你使用的是上面说到的几种文件系统(并且本身可以正常工作)，那么可以根据自己的文件系统在 ``lv_conf.h`` 中打开 ``LV_USE_FS_...`` 然后在 ``LV_FS_..._LETTER`` 分配一个盘符(驱动程序号) (一般是大写字母，比如： ``'S'``)
+如果将 ``LV_FS_..._CACHE_SIZE`` 设置为非 ``0`` 值，还支持 :ref:`Cached reading <overview_file_system_cache>` 。  :cpp:func:`lv_fs_read` 会缓存这个大小的数据，以减少实际从存储中读取的次数。
 
-之后，您就可以通过lvgl提供的文件系统接口访问指定的盘符中的文件。例如： ``"S:path/to/file.txt"``。
-
-你可以通过设置 ``LV_FS_..._PATH`` 来指定一个工作目录，比如： ``"/home/joe/projects/"`` 。 实际的文件/目录路径将附加到它上面， 比如：访问  ``"/home/joe/projects/file.txt"`` 时，直接写  ``"file.txt"`` 即可。
-
-lvgl的文件系统抽象接口支持设置文件访问缓冲区，可以通过设置 ``LV_FS_..._CACHE_SIZE`` 的值来指定缓冲区的大小(默认是0)，这样的好处是可以减少对从存储设备的实际操作次数，提高效率。
-
-要使用内存映射文件仿真，对象必须创建并初始化。此对象可以作为文件名： ``lv_fs_path_ex_t`` 
-
-若要使用内存映射文件仿真，必须为 ``lv_fs_path_ex_t`` 对象创建并初始化。此对象可以传递给 :cpp:func:`lv_fs_open` 作为文件名：
+要使用内存映射文件模拟，必须创建并初始化一个 ``lv_fs_path_ex_t`` 对象。这个对象可以作为文件名传递给 :cpp:func:`lv_fs_open` :
 
 .. code:: c
 

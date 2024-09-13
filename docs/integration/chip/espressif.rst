@@ -199,3 +199,216 @@ To add a display or touch driver to your project, use a command like:
 
    idf.py add-dependency "espressif/esp_lcd_gc9a01^2.0.0"
 
+
+Using the File System under ESP-IDF（使用 ESP-IDF 下的文件系统）
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. raw:: html
+
+   <details>
+     <summary>显示原文</summary>
+
+ESP-IDF uses the standard C functions (``fopen``, ``fread``) in all storage related APIs.
+This allows seamless interoperability with LVGL when enabling the :c:macro:`LV_USE_FS_STDIO` configuration.
+The process is described in details below, using ``SPIFFS`` as demonstration.
+
+- **Decide what storage system you want to use**
+
+   ESP-IDF has many, ready-to-use examples like
+   `SPIFFS <https://github.com/espressif/esp-idf/tree/master/examples/storage/spiffsgen>`__
+   , 
+   `SD Card <https://github.com/espressif/esp-idf/tree/master/examples/storage/sd_card/sdspi>`__ 
+   and 
+   `LittleFS <https://github.com/espressif/esp-idf/tree/master/examples/storage/littlefs>`__
+   .
+
+- **Re-configure your own project**
+
+   The example project should be examined for details, but in general the changes involve:
+
+   - Enabling LVGL's STDIO file system in the configuration
+
+      You can use ``menuconfig``:
+
+         - ``Component config → LVGL configuration → 3rd Party Libraries``: enable ``File system on top of stdio API``
+         - Then select ``Set an upper cased letter on which the drive will accessible`` and set it to ``65`` (ASCII **A**)
+         - You can also set ``Default driver letter`` to 65 to skip the prefix in file paths.
+
+   - Modifying the partition table
+
+      The exact configuration depends on your flash size and existing partitions,
+      but the new final result should look something like this:
+
+      .. code:: csv
+         nvs,      data, nvs,     0x9000,  0x6000,
+         phy_init, data, phy,     0xf000,  0x1000,
+         factory,  app,  factory, 0x10000, 1400k,
+         storage,  data, spiffs,         ,  400k,
+      .. note::
+
+         If you are not using a custom ``parition.csv`` yet, it can be added
+         via ``menuconfig`` (``Partition Table → Partition Table → Custom partition table CSV``).
+
+   - Apply changes to the build system
+
+      Some ESP file systems provide automatic generation from a host folder using CMake. The proper line(s) must be copied to ``main/CMakeLists.txt``
+
+      .. note::
+
+         ``LittleFS`` has extra dependencies that should be added to ``main/idf_component.yml``
+
+- **Prepare the image files**
+
+   LVGL's ``LVGLImage.py`` Python tool can be used to convert images to binary pixel map files.
+   It supports various formats and compression.
+
+   Meanwhile 3rd party libraries
+   (like :ref:`LodePNG<lodepng>` and :ref:`Tiny JPEG<tjpgd>`)
+   allow using image files without conversion.
+
+   After preparing the files, they should be moved to the target device:
+
+   - If properly activated a **SPIFFS** file system based on the ``spiffs_image`` folder should be automatically generated and later flashed to the target
+   - Similar mechanism for **LittleFS** uses the ``flash_data`` folder, but it's only available for Linux hosts
+   - For the **SD Card**, a traditional file browser can be used
+
+- **Invoke proper API calls in the application code**
+
+   The core functionality requires only a few lines. The following example draws the image as well.
+
+   .. code:: c
+      #include "esp_spiffs.h"
+      void lv_example_image_from_esp_fs(void) {
+         esp_vfs_spiffs_conf_t conf = {
+            .base_path = "/spiffs",
+            .partition_label = NULL,
+            .max_files = 5,
+            .format_if_mount_failed = false
+         };
+         esp_err_t ret = esp_vfs_spiffs_register(&conf);
+         if (ret != ESP_OK) {
+            ESP_LOGE(TAG, "Failed to register SPIFF filesystem");
+            return;
+         }
+         lv_obj_t * obj = lv_image_create(lv_screen_active());
+         lv_image_set_src(obj, "A:/spiffs/logo.bin");
+         lv_obj_center(obj);
+      }
+- **Build and flash**
+
+   After calling ``idf.py build flash`` the picture should be displayed on the screen.
+
+
+.. note::
+
+   Changes made by ``menuconfig`` are not being tracked in the repository if the ``sdkconfig`` file is added to ``.gitignore``, which is the default for many ESP-IDF projects.
+   To make your configuration permanent, add the following lines to ``sdkconfig.defaults``:
+
+   .. code:: c
+      CONFIG_PARTITION_TABLE_CUSTOM=y
+      CONFIG_LV_USE_FS_STDIO=y
+      CONFIG_LV_FS_STDIO_LETTER=65
+      CONFIG_LV_LV_FS_DEFAULT_DRIVE_LETTER=65
+
+.. raw:: html
+
+   </details>
+   <br>
+
+在 ESP-IDF 中使用标准 C 函数（如 ``fopen`` 和 ``fread``）进行所有与存储相关的 API 调用，可以让你在启用 LVGL 的 :c:macro:`LV_USE_FS_STDIO` 配置时实现无缝互操作性。以下是使用 ``SPIFFS`` 作为示例的详细过程：
+
+- **决定您想要使用的存储系统**
+
+   ESP-IDF 提供了许多现成的示例，例如 
+   `SPIFFS <https://github.com/espressif/esp-idf/tree/master/examples/storage/spiffsgen>`__
+   ， 
+   `SD Card <https://github.com/espressif/esp-idf/tree/master/examples/storage/sd_card/sdspi>`__ 
+  以及 
+   `LittleFS <https://github.com/espressif/esp-idf/tree/master/examples/storage/littlefs>`__
+   。
+
+- **重新配置你的项目**
+
+   应该检查示例项目以了解详细信息，但通常涉及的更改包括：
+
+   - 在配置中启用 LVGL 的 STDIO 文件系统
+
+     你可以使用 ``menuconfig``:
+
+         - 在 ``Component config → LVGL configuration → 3rd Party Libraries``：中启用 ``File system on top of stdio API``
+         - 然后选择 ``Set an upper cased letter on which the drive will accessible`` 并将其设置为 ``65`` (ASCII 字母 **A**)
+         - 你也可以将 ``Default driver letter`` 设置为 65，以在文件路径中跳过前缀。
+
+   - 修改分区表
+
+     确切的配置取决于您的闪存大小和现有分区， 但新的最终结果应该看起来像这样：
+
+      .. code:: csv
+         nvs,      data, nvs,     0x9000,  0x6000,
+         phy_init, data, phy,     0xf000,  0x1000,
+         factory,  app,  factory, 0x10000, 1400k,
+         storage,  data, spiffs,         ,  400k,
+      .. note::
+
+         如果您还没有使用自定义的 ``parition.csv``， 可以通过
+         ``menuconfig`` 添加 (``Partition Table → Partition Table → Custom partition table CSV``).
+
+   - 应用构建系统更改
+
+      一些 ESP 文件系统提供了使用 CMake 从主机文件夹自动生成的功能。必须将正确的行复制到  ``main/CMakeLists.txt``
+
+      .. note::
+
+         ``LittleFS`` has extra dependencies that should be added to ``main/idf_component.yml``
+
+- **准备图像文件**
+
+   可以使用 LVGL 的 ``LVGLImage.py`` Python 工具将图像转换为二进制像素映射文件。
+   它支持各种格式和压缩。
+
+   同时，第三方库
+   (如 :ref:`LodePNG<lodepng>` 和 :ref:`Tiny JPEG<tjpgd>`)
+   允许在不转换的情况下使用图像文件。
+
+   准备好文件后，应将它们移动到目标设备：
+
+   - 如果正确激活，基于 ``spiffs_image`` 文件夹的 **SPIFFS** 文件系统应自动生成，然后烧录到目标设备
+   - **LittleFS** 的类似机制使用 ``flash_data`` 文件夹，但仅适用于 Linux 主机
+   - 对于 **SD Card** 卡，可以使用传统的文件浏览器
+
+- **在应用程序代码中调用适当的 API**
+
+   核心功能只需要几行代码。以下示例同时绘制图像。
+
+   .. code:: c
+      #include "esp_spiffs.h"
+      void lv_example_image_from_esp_fs(void) {
+         esp_vfs_spiffs_conf_t conf = {
+            .base_path = "/spiffs",
+            .partition_label = NULL,
+            .max_files = 5,
+            .format_if_mount_failed = false
+         };
+         esp_err_t ret = esp_vfs_spiffs_register(&conf);
+         if (ret != ESP_OK) {
+            ESP_LOGE(TAG, "Failed to register SPIFF filesystem");
+            return;
+         }
+         lv_obj_t * obj = lv_image_create(lv_screen_active());
+         lv_image_set_src(obj, "A:/spiffs/logo.bin");
+         lv_obj_center(obj);
+      }
+- **构建和烧录**
+
+   调用 ``idf.py build flash`` 后，图片应该会显示在屏幕上。
+
+.. note::
+
+   如果 ``sdkconfig`` 文件被添加到 ``.gitignore`` 中，那么通过 ``menuconfig`` 所做的更改将不会在仓库中被跟踪，这是许多 ESP-IDF 项目的默认设置。
+   要使您的配置永久化，请在 ``sdkconfig.defaults``中添加以下行：
+
+   .. code:: c
+      CONFIG_PARTITION_TABLE_CUSTOM=y
+      CONFIG_LV_USE_FS_STDIO=y
+      CONFIG_LV_FS_STDIO_LETTER=65
+      CONFIG_LV_LV_FS_DEFAULT_DRIVE_LETTER=65

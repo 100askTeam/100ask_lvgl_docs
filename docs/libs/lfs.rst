@@ -32,7 +32,7 @@ Usage（用法）
    <details>
      <summary>显示原文</summary>
 
-Enable :c:macro:`LV_USE_FS_LITTLEFS` and define a :c:macro`LV_FS_LITTLEFS_LETTER` in ``lv_conf.h``.
+Enable :c:macro:`LV_USE_FS_LITTLEFS` and define a :c:macro:`LV_FS_LITTLEFS_LETTER` in ``lv_conf.h``.
 
 When enabled :c:macro:`lv_littlefs_set_handler` can be used to set up a mount point.
 

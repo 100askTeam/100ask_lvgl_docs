@@ -14,6 +14,11 @@ any type of file system. A file system is identified by an assigned
 drive letter. For example, if an SD card is associated with the letter
 ``'S'``, a file can be reached using ``"S:path/to/file.txt"``.
 
+.. note::
+
+	If you want to skip the drive prefix from the path, you can use the :c:macro:`LV_FS_DEFAULT_DRIVE_LETTER` config parameter.
+
+
 .. raw:: html
 
    </details>
@@ -22,6 +27,11 @@ drive letter. For example, if an SD card is associated with the letter
 
 LVGL有一个“文件系统”抽象模块，可以让你连接任何类型的文件系统。文件系统通过分配的驱动器号来识别。
 例如，如果SD卡与字母 ``'S'`` 关联，可以使用 ``"S:path/to/file.txt"`` 来访问文件。
+
+.. note::
+
+	如果你想在路径中省略驱动器前缀，可以使用 :c:macro:`LV_FS_DEFAULT_DRIVE_LETTER` 配置参数。
+
 
 
 Ready to use drivers（准备使用驱动程序）
