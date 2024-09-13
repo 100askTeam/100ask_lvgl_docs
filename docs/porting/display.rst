@@ -276,7 +276,6 @@ or anything else to optimize while the waiting for flush.
 If ``flush_wait_cb`` is not set, LVGL assume that `lv_display_flush_ready`
 is used.
 
-
 .. raw:: html
 
    </details>
@@ -352,8 +351,8 @@ The default color format of the display is set according to :c:macro:`LV_COLOR_D
 - :c:macro:`LV_COLOR_DEPTH` ``24``: RGB888 (3 bytes/pixel)
 - :c:macro:`LV_COLOR_DEPTH` ``16``: RGB565 (2 bytes/pixel)
 - :c:macro:`LV_COLOR_DEPTH` ``8``: L8 (1 bytes/pixel)
-- :c:macro:`LV_COLOR_DEPTH` ``1``: I1 (1 bit/pixel) Only support for horizontal mapped buffers.
 
+- :c:macro:`LV_COLOR_DEPTH` ``1``: I1 (1 bit/pixel) Only support for horizontal mapped buffers. See :refr:`monochrome` for more details:
 The ``color_format`` can be changed with
 :cpp:expr:`lv_display_set_color_depth(display, LV_COLOR_FORMAT_...)`.
 Besides the default value :c:macro:`LV_COLOR_FORMAT_ARGB8888` can be
@@ -375,7 +374,7 @@ selected color format.
 - :c:macro:`LV_COLOR_DEPTH` ``24``: RGB888（3 字节/像素）
 - :c:macro:`LV_COLOR_DEPTH` ``16``: RGB565（2字节/像素）
 - :c:macro:`LV_COLOR_DEPTH` ``8``:L8（1 字节/像素）
-- :c:macro:`LV_COLOR_DEPTH` ``1``:I1（每个像素1比特）仅支持水平映射缓冲区。
+- :c:macro:`LV_COLOR_DEPTH` ``1``:I1（每个像素1比特）仅支持水平映射缓冲区。有关更多详细信息，请参阅 :refr:`monochrome` :
 
 颜色格式可以通过调用 :cpp:expr:`lv_display_set_color_depth(display, LV_COLOR_FORMAT_...)` 来更改。除了默认值 :c:macro:`LV_COLOR_FORMAT_ARGB8888` 也可以使用。
 
@@ -428,6 +427,77 @@ to
 到
 
 ``GGG BBBBB | RRRRR GGG``.
+
+.. _monochrome:
+
+Monochrome Displays（单色显示器）
+--------------------------------
+.. raw:: html
+
+   <details>
+     <summary>显示原文</summary>
+
+LVGL supports rendering directly in a 1-bit format for monochrome displays.
+To enable it, set ``LV_COLOR_DEPTH 1`` or use :cpp:expr:`lv_display_set_color_format(display, LV_COLOR_FORMAT_I1)`.
+
+The :cpp:expr:`LV_COLOR_FORMAT_I1` format assumes that bytes are mapped to rows (i.e., the bits of a byte are written next to each other).
+The order of bits is MSB first, which means:
+
+.. code::
+             MSB           LSB
+   bits       7 6 5 4 3 2 1 0
+   pixels     0 1 2 3 4 5 6 7
+             Left         Right
+Ensure that the LCD controller is configured accordingly.
+
+Internally, LVGL rounds the redrawn areas to byte boundaries. Therefore, updated areas will:
+
+- Start on an ``Nx8`` coordinate.
+- End on an ``Nx8 - 1`` coordinate.
+
+When setting up the buffers for rendering (:cpp:func:`lv_display_set_buffers`), make the buffer 8 bytes larger.
+This is necessary because LVGL reserves 2 x 4 bytes in the buffer, as these are assumed to be used as a palette.
+
+To skip the palette, include the following line in your ``flush_cb`` function: ``px_map += 8``.
+
+As usual, monochrome displays support partial, full, and direct rendering modes as well.
+In full and direct modes, the buffer size should be large enough for the whole screen, meaning ``(horizontal_resolution x vertical_resolution / 8) + 8`` bytes.
+As LVGL can not handle fractional width make sure to round the horizontal resolution to 8-
+(For example 90 to 96)
+
+.. raw:: html
+
+   </details>
+   <br>
+
+
+LVGL 支持直接以 1 位格式渲染，适用于单色显示器。
+要启用它，设置 ``LV_COLOR_DEPTH 1`` 或使用 :cpp:expr:`lv_display_set_color_format(display, LV_COLOR_FORMAT_I1)`。
+
+ :cpp:expr:`LV_COLOR_FORMAT_I1` 格式假设字节映射到行（即，一个字节的位彼此相邻）。
+位的顺序是首先为 MSB（最高位有效），这意味着：
+
+.. code::
+             MSB           LSB
+   bits       7 6 5 4 3 2 1 0
+   pixels     0 1 2 3 4 5 6 7
+             Left         Right
+请确保 LCD 控制器相应地配置。
+
+在内部，LVGL 将重绘区域四舍五入到字节边界。因此，更新区域将：
+
+- 从 ``Nx8`` 坐标开始。
+- 在 ``Nx8 - 1`` 坐标结束。
+
+在设置渲染缓冲区 (:cpp:func:`lv_display_set_buffers`) 时，使缓冲区增大 8 字节。
+这是必要的，因为 LVGL 保留缓冲区中的 2 x 4 字节，这些字节假定用作调色板。
+
+要跳过调色板，在您的 ``flush_cb`` 函数中包含以下行： ``px_map += 8``。
+
+像往常一样，单色显示器也支持部分、全屏和直接渲染模式。
+在全屏和直接模式下，缓冲区大小应足够容纳整个屏幕，即 ``（水平分辨率 x 垂直分辨率 / 8）+ 8`` 字节。
+由于 LVGL 不能处理分数宽度，请确保将水平分辨率四舍五入到 8 的倍数
+（例如，90 四舍五入到 96）
 
 
 User data（用户数据）
