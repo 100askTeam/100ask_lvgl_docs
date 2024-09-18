@@ -4,8 +4,8 @@
 Window （窗口）(lv_win)
 ========================
 
-Overview
-**********
+Overview（概述）
+******************
 
 .. raw:: html
 
@@ -21,7 +21,7 @@ buttons and a content area.
    <br>
 
 
-Window（窗口）是一个类似容器的对象，由带有标题、按钮和内容区域的标题构建而成。
+Window（窗口）是一个类似容器的对象，由带有标头、按钮和内容区域构建而成。
 
 
 .. _lv_win_parts_and_styles:
@@ -49,12 +49,12 @@ documentation for details:
    <br>
 
 
-该窗口是由其他控件构建的，因此可以查看它们的文档以获取详细信息：
+窗口控件是由其他控件构建的，因此可以查看它们的文档以获取详细信息：
 
 - 背景：:ref:`lv_obj`
-- 背景标题：:ref:`lv_obj`
-- 标题上的标题：:ref:`lv_label`
-- 标题上的按钮： :ref:`lv_button`
+- 背景标头：:ref:`lv_obj`
+- 标头上的标题：:ref:`lv_label`
+- 标头上的按钮： :ref:`lv_button`
 - 背景内容区：:ref:`lv_obj`
 
 
@@ -71,7 +71,7 @@ Create a Window（创建一个窗口）
    <details>
      <summary>显示原文</summary>
 
-:cpp:expr:`lv_win_create(parent, header_height)` creates a Window with an empty
+:cpp:expr:`lv_win_create(parent)` creates a Window with an empty
 header.
 
 .. raw:: html
@@ -80,10 +80,10 @@ header.
    <br>
 
 
-:cpp:expr:`lv_win_create(parent, header_height)` 创建一个标题为空的窗口。
+:cpp:expr:`lv_win_create(parent)` 创建一个标头为空的窗口。
 
 
-Title and buttons（标题和按钮）
+Title and buttons（标头和按钮）
 --------------------------------
 
 .. raw:: html
@@ -111,11 +111,11 @@ title.
    <br>
 
 
-可以使用 :cpp:expr:`lv_win_add_title(win, "The title")` 将任意数量的文本（但通常只有一个）添加到标题中。
+可以使用 :cpp:expr:`lv_win_add_title(win, "The title")` 将任意数量的文本（但通常只有一个）添加到标头中。
 
-可以使用 :cpp:expr:`lv_win_add_button(win, icon, button_width)` 将控制按钮添加到窗口的标题 。 ``icon`` 可以是任何图像源， ``button_width`` 是按钮的宽度。
+可以使用 :cpp:expr:`lv_win_add_button(win, icon, button_width)` 将控制按钮添加到窗口的标头 。 ``icon`` 可以是任何图像源， ``button_width`` 是按钮的宽度。
 
-标题和按钮将按照调用函数的顺序添加。因此，添加一个按钮、一个文本和另外两个按钮将在左侧产生一个按钮，在右侧产生一个标题和两个按钮。标题的宽度设置为占据标题上的所有剩余空间。换句话说： 它将标题后添加的所有按钮推到右侧。
+标头和按钮将按照调用函数的顺序添加。因此，添加一个按钮、一个文本和另外两个按钮将在左侧产生一个按钮，在右侧产生一个标头和两个按钮。标头的宽度设置为占据标头上的所有剩余空间。换句话说： 它将标头后添加的所有按钮推到右侧。
 
 .. _lv_win_get_parts:
 
@@ -137,7 +137,7 @@ to which the content of the window can be added.
    <br>
 
 
-:cpp:expr:`lv_win_get_header(win)` 返回一个指向标题的指针，
+:cpp:expr:`lv_win_get_header(win)` 返回一个指向标头的指针，
 :cpp:expr:`lv_win_get_content(win)` 返回一个指向可以在窗口添加内容的容器指针。
 
 
@@ -169,8 +169,8 @@ Learn more about :ref:`events`.
 
 .. _lv_win_keys:
 
-Keys
-******
+Keys（按键）
+************
 
 .. raw:: html
 
