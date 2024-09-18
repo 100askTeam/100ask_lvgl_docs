@@ -1,8 +1,8 @@
 .. _lv_lottie:
 
-==================
-Lottie (lv_lottie)
-==================
+=======================
+Lottie动画 (lv_lottie)
+=======================
 
 Overview（概览）
 ****************
@@ -28,18 +28,18 @@ the user needs to provide a buffer where the current frame is stored.
    <br>
 
 
-Lottie 组件能够解析、光栅化以及播放 `Lottie 动画 <https://lottiefiles.com>`__。
+Lottie 控件能够解析、光栅化以及播放 `Lottie 动画 <https://lottiefiles.com>`__。
 
 Lottie 动画是基于矢量的动画。可以将其视为 SVG 和 GIF 的现代组合。
 
-动画可以从多种来源下载，比如 `https://lottiefiles.com/ <https://lottiefiles.com/>`__ ，或者你可以使用例如 Adobe After Effects 来创建自己的动画。
+动画可以从多种来源下载，比如 `https://lottiefiles.com <https://lottiefiles.com>`__ ，或者你可以使用例如 Adobe After Effects 来创建自己的动画。
 
-Lottie 组件基于 :ref:`lv_canvas` 因为为了渲染动画，用户需要提供一个缓冲区来存储当前帧。
+Lottie 控件基于 :ref:`lv_canvas` 所以为了能渲染动画，用户需要提供一个缓冲区来存储当前帧。
 
 
 .. _lv_lottie_parts_and_styles:
 
-Parts and Styles（组件和样式）
+Parts and Styles（部分和样式）
 ******************************
 
 .. raw:: html
@@ -55,13 +55,13 @@ Parts and Styles（组件和样式）
    <br>
 
 
--  :cpp:enumerator:`LV_PART_MAIN` 动画的背景。通常背景样式属性适用，但通常保持透明。
+-  :cpp:enumerator:`LV_PART_MAIN` 动画的背景。通常背景样式属性适用，但默认保持透明。
 
 
 .. _lv_lottie_usage:
 
 Usage（用法）
-************
+*************
 
 Dependencies（依赖）
 --------------------
@@ -85,15 +85,15 @@ can compile the cpp files.
    <br>
 
 
-Lottie 组件使用了 `ThorVG <https://github.com/thorvg/thorvg>`__ 库，该库已经 `集成到 LVGL  <https://github.com/lvgl/lvgl/tree/master/src/libs/thorvg>`__ 中。
+Lottie 控件使用到了 `ThorVG <https://github.com/thorvg/thorvg>`__ 库，该库已经 `集成内置到 LVGL库  <https://github.com/lvgl/lvgl/tree/master/src/libs/thorvg>`__ 中。
 
-为了使用 Lottie 动画，需要启用 ``LV_USE_THORVG_INTERNAL`` （使用内置的 ThorVG）或者``LV_USE_THORVG_EXTERNAL`` （外部链接它）。对于一般的矢量图形，也需要启用 ``LV_USE_VECTOR_GRAPHIC`` 。
+为了使用 Lottie 动画，需要在 `lv_conf.h` 中启用 ``LV_USE_THORVG_INTERNAL`` （使用内置的 ThorVG 库）或者 ``LV_USE_THORVG_EXTERNAL`` （使用外部库或自定义的库）。对于矢量图形，通常还需要启用 ``LV_USE_VECTOR_GRAPHIC`` 。
 
-由于 ThorVG 用 C++ 编写，当使用 ``LV_USE_THORVG_INTERNAL`` 时，请确保你能编译 cpp 文件。
+由于 ThorVG 用 C++ 编写，当使用 ``LV_USE_THORVG_INTERNAL`` 时，请确保你的编译环境能编译 cpp 文件。
 
 
 Set a buffer（设置缓冲区）
--------------------------
+--------------------------
 
 .. raw:: html
 
@@ -118,17 +118,18 @@ When a draw buffer is used, it must be already initialized by the user with :cpp
    <br>
 
 
-为了渲染动画，需要给 Lottie 组件分配一个缓冲区。
+为了渲染动画，需要给 Lottie 控件分配一个缓冲区。
 动画以 ARGB8888 格式渲染，因此缓冲区的大小应该是 ``目标宽度 x 目标高度 x 4 字节``。
 
 为了保持缓冲区大小和动画大小的一致性，
-组件的大小（即动画的大小）在内部设置为缓冲区的尺寸。
+控件的大小（即动画的大小）在内部根据缓冲区大小自动调整。
 
 可以使用以下任一方法设置缓冲区：
- :cpp:expr:`void lv_lottie_set_buffer(lottie, w, h, buf);`
-或者 :cpp:expr:`lv_lottie_set_draw_buf(lottie, draw_buf)`。
 
-当使用绘制缓冲区时，它必须已经被用户使用 :cpp:expr:`LV_COLOR_FORMAT_ARGB8888` 颜色格式初始化。
+- :cpp:expr:`lv_lottie_set_buffer(lottie, w, h, buf)` 
+- :cpp:expr:`lv_lottie_set_draw_buf(lottie, draw_buf)` 
+
+当使用绘制缓冲区时，它必须已经被用户使用 :cpp:enumerator:`LV_COLOR_FORMAT_ARGB8888` 颜色格式初始化。
 
 
 Set a source（设置源）
@@ -163,10 +164,11 @@ Note that the Lottie loader doesn't support LVGL's File System interface but a "
    <br>
 
 
-``lv_example_lottie_approve.c`` 包含一个示例动画。为了存储 JSON 字符串，存储了一个十六进制数组，原因如下：
+``lv_example_lottie_approve.c`` 包含一个示例动画。为了存储 JSON 字符串，使用数组存储其十六进制格式的字符串数据，原因如下：
 
 - 避免在 JSON 文件中转义 ``"`` 字符
 - 一些编译器不支持非常长的字符串
+
 可以使用 ``lvgl/scripts/filetohex.py`` 将 Lottie 文件转换为十六进制数组。
 例如：
 
@@ -174,11 +176,11 @@ Note that the Lottie loader doesn't support LVGL's File System interface but a "
 
    ./filetohex.py path/to/lottie.json > out.txt
 
-要从头数据创建动画，使用
-:cpp:enumerator:`lv_lottie_set_src_data(lottie, data, sizeof(data))`
+要从数据源创建 lottie 动画，使用 :cpp:expr:`lv_lottie_set_src_data(lottie, data, sizeof(data))` 
 
-Lottie 动画可以通过使用 :cpp:enumerator:`lv_lottie_set_src_file(lottie, "path/to/file.json")` 从 JSON 文件打开。
-注意，Lottie 加载器不支持 LVGL 的文件系统界面，但应该使用没有驱动器字母的“普通路径”。
+Lottie 动画可以通过使用 :cpp:expr:`lv_lottie_set_src_file(lottie, "path/to/file.json")` 从 JSON 文件打开。
+
+注意，Lottie 加载器不支持 LVGL 的文件系统接口，但应该使用没有驱动器字母（盘符）的 “常规路径” 。
 
 
 Get the animation（获取动画）
@@ -199,7 +201,7 @@ can be freely adjusted.
    <br>
 
 
-``lv_anim_t * a = lv_lottie_get_anim(lottie)`` 返回控制 Lottie 动画的 LVGL 动画。默认情况下，它无限期地以 60FPS 运行，但是 LVGL 动画可以自由调整。
+``lv_anim_t * a = lv_lottie_get_anim(lottie)`` 返回控制 Lottie 动画的 LVGL 动画。默认情况下，它以60FPS的速度无限运行，但是 LVGL 的动画可以对其进行调整。
 
 
 .. _lv_lottie_events:
@@ -222,7 +224,7 @@ Learn more about :ref:`events`.
    <br>
 
 
-Lottie 组件没有发送特殊事件。
+Lottie 控件没有发送特殊事件。
 
 了解更多关于 :ref:`events`。
 
@@ -245,7 +247,7 @@ Learn more about :ref:`indev_keys`.
    <br>
 
 
-Lottie 组件不处理任何键。
+Lottie 控件不处理任何键。
 了解更多关于 :ref:`indev_keys`。
 
 .. _lv_lottie_example:
