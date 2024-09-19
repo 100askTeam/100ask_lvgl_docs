@@ -121,7 +121,7 @@ values:
    <br>
 
 
-首先，您需要描述行和列的大小。可以通过声明2个数组和其中的轨迹大小来完成。最后一个元素必须是 :c:macro:`LV_GRID_TEMPLATE_LAST` 。
+首先，需要描述行和列的大小。这可以通过声明2个数组和其中的轨道大小来完成。最后一个元素必须是 :c:macro:`LV_GRID_TEMPLATE_LAST` 。
 
 例如：
 
@@ -130,7 +130,7 @@ values:
    static int32_t column_dsc[] = {100, 400, LV_GRID_TEMPLATE_LAST};   /*2 columns with 100 and 400 ps width*/
    static int32_t row_dsc[] = {100, 100, 100, LV_GRID_TEMPLATE_LAST}; /*3 100 px tall rows*/
 
-要在父级上设置描述符，请使用:cpp:expr:`lv_obj_set_grid_dsc_array(obj, col_dsc, row_dsc)`。
+要在父级上设置描述符，请使用 :cpp:expr:`lv_obj_set_grid_dsc_array(obj, col_dsc, row_dsc)` 。
 
 除了简单地设置像素大小之外，还可以使用两个特殊值：
 
@@ -177,13 +177,11 @@ involve from the start cell. Must be ``>= 1``.
 
 ``column_align`` 和 ``row_align`` 确定如何对齐其单元格中的子项，可能的值有：
 
-:cpp:enumerator:`LV_GRID_ALIGN_START`: 表示左侧水平，顶部垂直（默认）
+- :cpp:enumerator:`LV_GRID_ALIGN_START`: 表示左侧水平，顶部垂直（默认）
+- :cpp:enumerator:`LV_GRID_ALIGN_END`: 表示右侧水平，底部垂直
+- :cpp:enumerator:`LV_GRID_ALIGN_CENTER`: 居中
 
-:cpp:enumerator:`LV_GRID_ALIGN_END`: 表示右侧水平，底部垂直
-
-:cpp:enumerator:`LV_GRID_ALIGN_CENTER`: 只是居中
-
- ``column_pos`` 和 ``row_pos`` 表示放置在网格中的项目的索引（从0开始）。
+``column_pos`` 和 ``row_pos`` 表示放置在网格中的项目的索引（从0开始）。
 
 ``column_span`` 和 ``row_span`` 表示项目从开始单元格开始应包含多少个轨道，必须 ``>= 1``。
 
@@ -204,16 +202,16 @@ If there are some empty space the track can be aligned several ways:
 - :cpp:enumerator:`LV_GRID_ALIGN_END`: means right on a horizontally and bottom vertically
 - :cpp:enumerator:`LV_GRID_ALIGN_CENTER`: simply center
 - :cpp:enumerator:`LV_GRID_ALIGN_SPACE_EVENLY`: items are distributed so that the spacing
-  between any two items (and the space to the edges) is equal. Not applies to ``track_cross_place``.
+  between any two items (and the space to the edges) is equal.
 - :cpp:enumerator:`LV_GRID_ALIGN_SPACE_AROUND`: items are
   evenly distributed in the track with equal space around them. Note that
   visually the spaces aren't equal, since all the items have equal space
   on both sides. The first item will have one unit of space against the
   container edge, but two units of space between the next item because
-  that next item has its own spacing that applies. Not applies to ``track_cross_place``.
+  that next item has its own spacing that applies.
 - :cpp:enumerator:`LV_GRID_ALIGN_SPACE_BETWEEN`: items are
   evenly distributed in the track: first item is on the start line, last
-  item on the end line. Not applies to ``track_cross_place``.
+  item on the end line.
 
 To set the track's alignment use
 :cpp:expr:`lv_obj_set_grid_align(obj, column_align, row_align)`.
@@ -226,17 +224,12 @@ To set the track's alignment use
 
 如果空间足够大，则可以通过多种方式对齐轨道：
 
-:cpp:enumerator:`LV_GRID_ALIGN_START`: 表示左侧水平，顶部垂直（默认）
-
-:cpp:enumerator:`LV_GRID_ALIGN_END`: 表示右侧水平，底部垂直
-
-:cpp:enumerator:`LV_GRID_ALIGN_CENTER`: 只是居中
-
-:cpp:enumerator:`LV_GRID_ALIGN_SPACE_EVENLY`: 项目的分布使得任意两个项目之间的间距（以及到边缘的间距）相等。不适用于 ``track_cross_place``。
-
-:cpp:enumerator:`LV_GRID_ALIGN_SPACE_AROUND`: 项目在轨道上均匀分布，周围有相等的空间。请注意，从视觉上看，空间并不相等，因为所有项目的两侧都有相等的空间。第一个项目在容器边缘有一个单位的空间，但下一个项目之间有两个单位的间隔，因为下一个项有自己的适用间距。不适用于 ``track_cross_place``。
-
-:cpp:enumerator:`LV_GRID_ALIGN_SPACE_BETWEEN`: 项目在轨道中均匀分布：第一个项目在开始行，最后一个项目在结束行。不适用于 ``track_cross_place``。
+- :cpp:enumerator:`LV_GRID_ALIGN_START`: 表示左侧水平，顶部垂直（默认）
+- :cpp:enumerator:`LV_GRID_ALIGN_END`: 表示右侧水平，底部垂直
+- :cpp:enumerator:`LV_GRID_ALIGN_CENTER`: 只是居中
+- :cpp:enumerator:`LV_GRID_ALIGN_SPACE_EVENLY`: 项目的分布使得任意两个项目之间的间距（以及到边缘的间距）相等。不适用于 ``track_cross_place``。
+- :cpp:enumerator:`LV_GRID_ALIGN_SPACE_AROUND`: 项目在轨道上均匀分布，周围有相等的空间。请注意，从视觉上看，空间并不相等，因为所有项目的两侧都有相等的空间。第一个项目在容器边缘有一个单位的空间，但下一个项目之间有两个单位的间隔，因为下一个项有自己的适用间距。不适用于 ``track_cross_place``。
+- :cpp:enumerator:`LV_GRID_ALIGN_SPACE_BETWEEN`: 项目在轨道中均匀分布：第一个项目在开始行，最后一个项目在结束行。不适用于 ``track_cross_place``。
 
 要设置轨道的对齐方式，请使用接口 :cpp:expr:`lv_obj_set_grid_align(obj, column_align, row_align)` 设置。
 
@@ -269,15 +262,14 @@ The sub grid feature works the same as in CSS. For further reference see `this d
    <br>
 
 
-如果设置父级的列、行网格描述符，网格项将看到5列4行，其中包含父级对应的轨道大小。
+如果设置父级的列、行网格描述符，则网格项将看到比如5列4行，其中包含父级对应的轨道大小。
 
-这样，即使在网格上使用了包裹项，从网格的角度来看，可以使其“透明”。
+这样，即使在网格上使用了包裹项，也可以从网格的角度使其“透明”。
 
 
 局限性：
 
 - 子网格仅在一个级别深度中解析。也就是说，一个网格可以有一个子网格，但一个子网格中不能有其它子网格。
- 
 - ``LV_GRID_CONTENT`` 轨道不在子网格中处理，只在其自己的网格中处理。
 
 子网格功能的工作原理与CSS中的相同。如需进一步参考请参阅 `这里的说明 <https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout/Subgrid>`__.
