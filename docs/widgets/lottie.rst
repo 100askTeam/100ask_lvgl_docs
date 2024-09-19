@@ -174,7 +174,7 @@ Note that the Lottie loader doesn't support LVGL's File System interface but a "
 
 .. code:: shell
 
-   ./filetohex.py path/to/lottie.json > out.txt
+   python ./filetohex.py path/to/lottie.json > out.txt
 
 要从数据源创建 lottie 动画，使用 :cpp:expr:`lv_lottie_set_src_data(lottie, data, sizeof(data))` 
 
