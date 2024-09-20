@@ -33,7 +33,7 @@ with :c:macro:`LV_USE_FLEX` in ``lv_conf.h``.
 
 Flexbox（弹性布局）（或简称 Flex）是 `CSS Flexbox <https://css-tricks.com/snippets/css/a-guide-to-flexbox/>`__ 的一个子集。
 
-它可以将项目排列成行或列（轨道(tracks)），处理包裹，调整项目和轨道之间的间距，处理 grow 以使项目填充相对于最小/最大宽度和高度的剩余空间。
+它可以将元素排列成行或列（轨道(tracks)），处理包裹，调整元素和轨道之间的间距，处理 grow 以使元素填充相对于最小/最大宽度和高度的剩余空间。
 
 要使对象变为 flex 容器请调用 :cpp:expr:`lv_obj_set_layout(obj, LV_LAYOUT_FLEX)` 。
 
@@ -66,11 +66,11 @@ Terms（约定）
 术语约定：
 
 - **tracks（轨道）**：行或列
-- **main direction（主要方向或主轴）**：行或列，项目放置的方向
-- **cross direction（交叉方式或交叉轴）**：垂直于主方向
-- **wrap（包裹）**：如果轨道中没有更多空间，则开始新的轨道放置项目
-- **grow（增长）**：如果设置在一个项目上，它将增长以填充轨道上的剩余空间。 可用空间将根据其增长值分配给各个项目（值越大意味着空间越大）
-- **gap（间隙）**：行和列或轨道上的项目之间的空间
+- **main direction（主要方向或主轴）**：行或列，元素放置的方向
+- **cross direction（交叉方向或交叉轴）**：垂直于主方向
+- **wrap（包裹）**：如果轨道中没有更多空间，则开始新的轨道放置元素
+- **grow（增长）**：如果设置在一个元素上，它将增长以填充轨道上的剩余空间。 可用空间将根据其增长值分配给各个元素（值越大意味着空间越大）
+- **gap（间隙）**：行和列或轨道上的元素之间的空间
 
 
 Simple interface（简单接口）
@@ -183,18 +183,18 @@ The possible values are:
 
 要管理孩子的对齐，请使用 :cpp:expr:`lv_obj_set_flex_align(obj,  main_place, cross_place, track_cross_place)`
 
-- ``main_place`` 定义子元素在主轴方向上的对齐方式。 例如。 将 :cpp:enumerator:`LV_FLEX_FLOW_ROW_WRAP` 上的项目向右刷新。 （它在 CSS 中称为 ``justify-content`` ）
-- ``cross_place`` 定义子元素在交叉轴的对齐方式。 例如。 如果项目具有不同的高度，则将它们放置在轨道的底部。 （在 CSS 中称为 ``align-items`` ）
-- ``track_cross_place`` 定义多行项目在交叉轴的对齐方式（在 CSS 中称为  ``align-content`` ）
+- ``main_place`` 定义子元素在主轴方向上的对齐方式。 例如。 将 :cpp:enumerator:`LV_FLEX_FLOW_ROW_WRAP` 上的元素向右刷新。 （它在 CSS 中称为 ``justify-content`` ）
+- ``cross_place`` 定义子元素在交叉轴的对齐方式。 例如。 如果元素具有不同的高度，则将它们放置在轨道的底部。 （在 CSS 中称为 ``align-items`` ）
+- ``track_cross_place`` 定义多行元素在交叉轴的对齐方式（在 CSS 中称为  ``align-content`` ）
 
 可能的值为：
 
 - :cpp:enumerator:`LV_FLEX_ALIGN_START`: 表示左侧水平，顶部垂直（默认）
 - :cpp:enumerator:`LV_FLEX_ALIGN_END`: 表示右侧水平，底部垂直
 - :cpp:enumerator:`LV_FLEX_ALIGN_CENTER`: 居中摆放
-- :cpp:enumerator:`LV_FLEX_ALIGN_SPACE_EVENLY`: 项目的分布使得任意两个项目之间的间距（以及到边缘的间距）相等，包括首尾项目离容器边缘的距离。不适用于 ``cross_place``。
-- :cpp:enumerator:`LV_FLEX_ALIGN_SPACE_AROUND`: 项目在轨道上均匀分布，项目两侧之间的间隔相等。请注意，从视觉上看，空间并不相等，因为所有项目的两侧都有相等的空间。第一个项目在容器边缘有一个单位的空间，但下一个项目之间有两个单位的间隔，因为下一个项有自己的适用间距。不适用于 ``cross_place``。
-- :cpp:enumerator:`LV_FLEX_ALIGN_SPACE_BETWEEN`:  项目在轨道上彼此之间的间隔相等，首尾项目贴合容器边缘。不适用于 ``cross_place``。
+- :cpp:enumerator:`LV_FLEX_ALIGN_SPACE_EVENLY`: 元素的分布使得任意两个元素之间的间距（以及到边缘的间距）相等，包括首尾元素离容器边缘的距离。不适用于 ``cross_place``。
+- :cpp:enumerator:`LV_FLEX_ALIGN_SPACE_AROUND`: 元素在轨道上均匀分布，元素两侧之间的间隔相等。请注意，从视觉上看，空间并不相等，因为所有元素的两侧都有相等的空间。第一个元素在容器边缘有一个单位的空间，但下一个元素之间有两个单位的间隔，因为下一个项有自己的适用间距。不适用于 ``cross_place``。
+- :cpp:enumerator:`LV_FLEX_ALIGN_SPACE_BETWEEN`:  元素在轨道上彼此之间的间隔相等，首尾元素贴合容器边缘。不适用于 ``cross_place``。
 
 
 .. _flex_grow:
@@ -338,7 +338,7 @@ placed from right to left.
 
 如果容器的基本方向设置为 :cpp:enumerator:`LV_BASE_DIR_RTL` ，那么 :cpp:enumerator:`LV_FLEX_ALIGN_START` 和 :cpp:enumerator:`LV_FLEX_ALIGN_END` 的意思是在 ``ROW`` 布局上交换，``START`` 的意思是右。 
 
-``ROW`` 布局上的项目和 ``COLUMN`` 布局的轨道将从右向左放置。
+``ROW`` 布局上的元素和 ``COLUMN`` 布局的轨道将从右向左放置。
 
 
 New track（新轨道）
@@ -358,7 +358,7 @@ You can force Flex to put an item into a new line with
    <br>
 
 
-可以使用接口 :cpp:expr:`lv_obj_add_flag(child, LV_OBJ_FLAG_FLEX_IN_NEW_TRACK)` 强制 Flex 将项目放入新行。
+可以使用接口 :cpp:expr:`lv_obj_add_flag(child, LV_OBJ_FLAG_FLEX_IN_NEW_TRACK)` 强制 Flex 将元素放入新行。
 
 
 .. _flex_example:
