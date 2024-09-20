@@ -66,8 +66,8 @@ Terms（约定）
 术语约定：
 
 - **tracks（轨道）**：行或列
-- **main direction（主要方向）**：行或列，项目放置的方向
-- **cross direction（横向）**：垂直于主方向
+- **main direction（主要方向或主轴）**：行或列，项目放置的方向
+- **cross direction（交叉方式或交叉轴）**：垂直于主方向
 - **wrap（包裹）**：如果轨道中没有更多空间，则开始新的轨道放置项目
 - **grow（增长）**：如果设置在一个项目上，它将增长以填充轨道上的剩余空间。 可用空间将根据其增长值分配给各个项目（值越大意味着空间越大）
 - **gap（间隙）**：行和列或轨道上的项目之间的空间
@@ -183,18 +183,18 @@ The possible values are:
 
 要管理孩子的对齐，请使用 :cpp:expr:`lv_obj_set_flex_align(obj,  main_place, cross_place, track_cross_place)`
 
-- ``main_place`` 决定纵向轨道在横向上的分布。 例如。 将 :cpp:enumerator:`LV_FLEX_FLOW_ROW_WRAP` 上的项目向右刷新。 （它在 CSS 中称为 ``justify-content`` ）
-- ``cross_place`` 决定横向轨道的项目的分布。 例如。 如果项目具有不同的高度，则将它们放置在轨道的底部。 （在 CSS 中称为 ``align-items`` ）
-- ``track_cross_place`` 决定横向轨道在纵向上的分布（在 CSS 中称为  ``align-content`` ）
+- ``main_place`` 定义子元素在主轴方向上的对齐方式。 例如。 将 :cpp:enumerator:`LV_FLEX_FLOW_ROW_WRAP` 上的项目向右刷新。 （它在 CSS 中称为 ``justify-content`` ）
+- ``cross_place`` 定义子元素在交叉轴的对齐方式。 例如。 如果项目具有不同的高度，则将它们放置在轨道的底部。 （在 CSS 中称为 ``align-items`` ）
+- ``track_cross_place`` 定义多行项目在交叉轴的对齐方式（在 CSS 中称为  ``align-content`` ）
 
 可能的值为：
 
 - :cpp:enumerator:`LV_FLEX_ALIGN_START`: 表示左侧水平，顶部垂直（默认）
 - :cpp:enumerator:`LV_FLEX_ALIGN_END`: 表示右侧水平，底部垂直
-- :cpp:enumerator:`LV_FLEX_ALIGN_CENTER`: 只是居中
-- :cpp:enumerator:`LV_FLEX_ALIGN_SPACE_EVENLY`: 项目的分布使得任意两个项目之间的间距（以及到边缘的间距）相等。不适用于 ``cross_place``。
-- :cpp:enumerator:`LV_FLEX_ALIGN_SPACE_AROUND`: 项目在轨道上均匀分布，周围有相等的空间。请注意，从视觉上看，空间并不相等，因为所有项目的两侧都有相等的空间。第一个项目在容器边缘有一个单位的空间，但下一个项目之间有两个单位的间隔，因为下一个项有自己的适用间距。不适用于 ``cross_place``。
-- :cpp:enumerator:`LV_FLEX_ALIGN_SPACE_BETWEEN`:  项目在轨道中均匀分布：第一个项目在开始行，最后一个项目在结束行。不适用于 ``cross_place``。
+- :cpp:enumerator:`LV_FLEX_ALIGN_CENTER`: 居中摆放
+- :cpp:enumerator:`LV_FLEX_ALIGN_SPACE_EVENLY`: 项目的分布使得任意两个项目之间的间距（以及到边缘的间距）相等，包括首尾项目离容器边缘的距离。不适用于 ``cross_place``。
+- :cpp:enumerator:`LV_FLEX_ALIGN_SPACE_AROUND`: 项目在轨道上均匀分布，项目两侧之间的间隔相等。请注意，从视觉上看，空间并不相等，因为所有项目的两侧都有相等的空间。第一个项目在容器边缘有一个单位的空间，但下一个项目之间有两个单位的间隔，因为下一个项有自己的适用间距。不适用于 ``cross_place``。
+- :cpp:enumerator:`LV_FLEX_ALIGN_SPACE_BETWEEN`:  项目在轨道上彼此之间的间隔相等，首尾项目贴合容器边缘。不适用于 ``cross_place``。
 
 
 .. _flex_grow:
