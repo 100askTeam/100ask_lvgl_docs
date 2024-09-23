@@ -228,7 +228,6 @@ To set the track's alignment use
 - :cpp:enumerator:`LV_GRID_ALIGN_START`: 表示左侧水平，顶部垂直（默认）
 - :cpp:enumerator:`LV_GRID_ALIGN_END`: 表示右侧水平，底部垂直
 - :cpp:enumerator:`LV_GRID_ALIGN_CENTER`: 居中摆放
-- :cpp:enumerator:`LV_GRID_ALIGN_STRETCH`: 平铺填充
 - :cpp:enumerator:`LV_GRID_ALIGN_SPACE_EVENLY`: 元素的分布使得任意两个元素之间的间距（以及到边缘的间距）相等，包括首尾元素离容器边缘的距离。。
 - :cpp:enumerator:`LV_GRID_ALIGN_SPACE_AROUND`: 元素在轨道上均匀分布，周围有相等的空间。请注意，从视觉上看，空间并不相等，因为所有元素的两侧都有相等的空间。第一个元素在容器边缘有一个单位的空间，但下一个元素之间有两个单位的间隔，因为下一个项有自己的适用间距。
 - :cpp:enumerator:`LV_GRID_ALIGN_SPACE_BETWEEN`: 元素在轨道上彼此之间的间隔相等，首尾元素贴合容器边缘：第一个元素在开始行，最后一个元素在结束行。
