@@ -1,8 +1,8 @@
 .. _gif:
 
-=======================
+========================
 GIF decoder（GIF解码器）
-=======================
+========================
 
 .. raw:: html
 
@@ -30,7 +30,7 @@ GIF解码器让我们可以在 LVGL 中使用 GIF 图像。
 
 详细介绍： https://github.com/lecram/gifdec 。
 
-如果在 ``lv_conf.h`` 中启用了 :c:macro:`LV_USE_GIF` 后，可以使用 :cpp:expr:`lv_gif_create(parent)` 创建 gif 组件，这与 lv_img_create 非常相似。
+如果在 ``lv_conf.h`` 中启用了 :c:macro:`LV_USE_GIF` ，那么可以使用 :cpp:expr:`lv_gif_create(parent)` 创建 gif 控件，这与 lv_img_create 非常相似。
  
 :cpp:expr:`lv_gif_set_src(obj, src)` 的工作方式与 :cpp:func:`lv_image_set_src` 非常相似。作为源，它还接受图像作为变量 (:c:struct:`lv_image_dsc_t`) 或文件。
 

@@ -1,8 +1,8 @@
 .. _bmp:
 
-=======================
+========================
 BMP decoder（BMP解码器）
-=======================
+========================
 
 .. raw:: html
 
@@ -79,7 +79,7 @@ Limitations（限制）
 
 - 仅支持 BMP 文件，不支持像 C 数组(:c:struct:`lv_image_dsc_t`) 这样的 BMP 图像数据。这是因为 BMP 文件和 LVGL 的图像格式存储图像数据的方式没有实际区别。
 - BMP 文件只能从文件中加载。如果您想将它们存储在 闪存(FLASH) 中，最好使用 `LVGL's image converter <https://lvgl.io/tools/imageconverter>`__ 的图像转换器将它们转换为 C 数组。
-- BMP 文件的颜色格式需要与 lv_conf.h 中的 LV_COLOR_DEPTH 匹配。使用 GIMP 以所需格式保存图像。 RGB888 和 ARGB888 都适用于 :c:macro:`LV_COLOR_DEPTH` ``32``
+- BMP 文件的颜色格式需要与 lv_conf.h 中的 :c:macro:`LV_COLOR_DEPTH` 匹配。使用 GIMP 以所需格式保存图像。 RGB888 和 ARGB888 都适用于 :c:macro:`LV_COLOR_DEPTH` ``32``
 - 不支持调色板。
 - 因为不是整个图像被读入后不能进行缩放或旋转。
 
