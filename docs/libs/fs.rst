@@ -1,8 +1,8 @@
 .. _libs_filesystem:
 
-====================================
+=====================================
 File System Interfaces（文件系统接口）
-====================================
+=====================================
 
 .. raw:: html
 
@@ -32,9 +32,9 @@ provides only the bridge between FATFS, STDIO, POSIX, WIN32 and LVGL.
    <br>
 
 
-LVGL 有一个文件系统模块，可为各种类型的文件系统驱动程序提供一个通用的抽象层接口。
+LVGL 有一个文件系统模块，为各种文件系统驱动程序提供抽象层。
 
-LVG 内置支持以下文件系统：
+LVGL 内置支持以下文件系统：
 
 - `FATFS <http://elm-chan.org/fsw/ff/00index_e.html>`__
 - STDIO (Linux 和 Windows 都可以使用的 C 标准函数接口，比如： ``fopen``, ``fread``)
@@ -45,7 +45,7 @@ LVG 内置支持以下文件系统：
 - Arduino ESP LITTLEFS（专为 Arduino ESP 设计的小型故障安全文件系统）
 - Arduino SD (允许读取和写入 SD 卡)
 
-您仍然需要提供驱动程序和库，此扩展 仅提供 FATFS、STDIO、POSIX、WIN32 和 LVGL 之间的桥梁。
+在实际使用时需要提供相应文件系统的驱动程序和库，此扩展仅提供上述这些文件系统和 LVGL 之间的API统一抽象对接。
 
 
 .. _libs_filesystem_usage:
@@ -62,7 +62,7 @@ In ``lv_conf.h`` enable ``LV_USE_FS_...`` and assign an upper cased
 letter to ``LV_FS_..._LETTER`` (e.g. ``'S'``). After that you can access
 files using that driver letter. E.g. ``"S:path/to/file.txt"``.
 
-Working with common prefixes（处理通用前缀）
+Working with common prefixes
 """"""""""""""""""""""""""""""""""""""""""""
 
 A **default driver letter** can be set by ``LV_FS_DEFAULT_DRIVE_LETTER``,
@@ -84,19 +84,24 @@ appended to it, allowing to skip the common part.
    <br>
 
 
-如果你使用的是上面说到的几种文件系统(并且本身可以正常工作)，那么可以根据自己的文件系统在 ``lv_conf.h`` 中打开 ``LV_USE_FS_...`` 然后在 ``LV_FS_..._LETTER`` 分配一个盘符(驱动程序号) (一般是大写字母，比如： ``'S'``)
+如果你使用的是上面说到的几种文件系统(并且本身可以正常工作)，那么可以根据自己的文件系统在 ``lv_conf.h`` 中打开 ``LV_USE_FS_...`` 然后在 ``LV_FS_..._LETTER`` 分配一个盘符(驱动程序号) (一般是大写字母，比如： ``'S'`` )
 
-之后，您就可以通过lvgl提供的文件系统接口访问指定的盘符中的文件。例如： ``"S:path/to/file.txt"``。
+之后，您就可以通过lvgl提供的文件系统接口访问指定的盘符中的文件。例如： ``"S:path/to/file.txt"`` 。
 
-可以通过 ``LV_FS_DEFAULT_DRIVE_LETTER``设置一个默认驱动器字母，这允许在文件路径中省略驱动器前缀。
 
-例如，如果 ``LV_FS_DEFAULT_DRIVE_LETTER`` 设置为 ``'S'`` ，"path/to/file.txt" 将表示 "S:path/to/file.txt"。
+Working with common prefixes（处理通用前缀）
+""""""""""""""""""""""""""""""""""""""""""""
 
-如果你只有一个驱动器并且不想在文件路径中使用 LVGL 的驱动器层，这个特性非常有用。
+
+可以通过 ``LV_FS_DEFAULT_DRIVE_LETTER`` 设置一个默认盘符字母，这允许在文件路径中省略盘符前缀。
+
+例如，如果 ``LV_FS_DEFAULT_DRIVE_LETTER`` 设置为 ``'S'`` ， *"path/to/file.txt"* 将表示 *"S:path/to/file.txt"* 。
+
+如果你只有一个盘符并且不想在文件路径中使用 LVGL 的盘符，这个特性非常有用。
 它还有助于使用 LVGL 文件系统和普通文件系统的统一路径。
-原始机制不受影响，因此以驱动器字母开头的路径仍然有效。
+原始机制不受影响，因此以盘符字母开头的路径仍然有效。
 
-工作目录 可以通过 ``LV_FS_..._PATH`` 设置。例如"/home/joe/projects/" 实际的文件/目录路径将附加到它后面，允许省略公共部分。
+工作目录可以通过 ``LV_FS_..._PATH`` 设置。例如 ``"/home/joe/projects/"`` 实际的文件/目录路径将附加到它后面，允许省略公共部分。
 
 
 Caching（缓存）
@@ -135,7 +140,7 @@ the file name:
    <br>
 
 
-如果将 ``LV_FS_..._CACHE_SIZE`` 设置为非 ``0`` 值，还支持 :ref:`Cached reading <overview_file_system_cache>` 。  :cpp:func:`lv_fs_read` 会缓存这个大小的数据，以减少实际从存储中读取的次数。
+如果将 ``LV_FS_..._CACHE_SIZE`` 设置为非 ``0`` 值，那么会支持 :ref:`Cached reading <overview_file_system_cache>` 。  :cpp:func:`lv_fs_read` 会缓存 ``LV_FS_..._CACHE_SIZE`` 设置的数据大小，以减少实际从存储中读取的次数。
 
 要使用内存映射文件模拟，必须创建并初始化一个 ``lv_fs_path_ex_t`` 对象。这个对象可以作为文件名传递给 :cpp:func:`lv_fs_open` :
 
