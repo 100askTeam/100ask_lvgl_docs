@@ -1,8 +1,8 @@
 .. _arduino_sd:
 
-==========
-Arduino SD（Arduino SD卡）
-==========================
+===========
+Arduino SD
+===========
 
 .. raw:: html
 

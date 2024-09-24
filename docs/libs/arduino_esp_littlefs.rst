@@ -1,7 +1,7 @@
 .. _arduino_esp_littlefs:
 
 =========================================
-Arduino ESP littlefs（Arduino ESP 小文件）
+Arduino ESP littlefs
 =========================================
 
 .. raw:: html
