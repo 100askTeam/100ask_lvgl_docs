@@ -1,8 +1,8 @@
 .. _qrcode:
 
-================
+=================
 QR code（二维码）
-================
+=================
 
 .. raw:: html
 
@@ -19,13 +19,13 @@ QR code generation with LVGL. Uses
    <br>
 
 
-使用 LVGL 生成二维码。使用 `nayuki <https://github.com/nayuki>`__ 的 `QR-Code-generator <https://github.com/nayuki/QR-Code-generator>`__ 码生成器。
+LVGL 生成二维码的功能，使用到了 `nayuki <https://github.com/nayuki>`__ 的 `QR-Code-generator <https://github.com/nayuki/QR-Code-generator>`__ 。
 
 
 .. _qrcode_usage:
 
 Usage（用法）
-------------
+-------------
 
 .. raw:: html
 
@@ -50,14 +50,14 @@ call :cpp:func:`lv_qrcode_update` again to regenerate the QR code.
 
 在 ``lv_conf.h`` 中启用 :c:macro:`LV_USE_QRCODE` 。
 
-使用 :cpp:func:`lv_qrcode_create` 创建qrcode对象，并使用 :cpp:func:`lv_qrcode_update` 以生成二维码。
+函数 :cpp:func:`lv_qrcode_create` 创建二维码对象，函数 :cpp:func:`lv_qrcode_update` 以生成二维码。
 
-如果需要重新修改尺寸和颜色，请使用 :cpp:func:`lv_qrcode_set_size` 和 :cpp:func:`lv_qrcode_set_dark_color` 或 
-:cpp:func:`lv_qrcode_set_light_color`，以及再次调用 :cpp:func:`lv_qrcode_update` 以重新生成QR代码。
+如果需要重新修改尺寸和颜色，请使用函数 :cpp:func:`lv_qrcode_set_size` 和 :cpp:func:`lv_qrcode_set_dark_color` 或 
+:cpp:func:`lv_qrcode_set_light_color`，以及需要再次调用函数 :cpp:func:`lv_qrcode_update` 以重新生成（刷新）新的二维码。
 
 
 Notes（笔记）
-------------
+-------------
 
 .. raw:: html
 
@@ -73,7 +73,7 @@ Notes（笔记）
    <br>
 
 
-- 数据较少的二维码较小，但它们按整数缩放 数字以最适合给定的尺寸。
+- 数据信息较少的二维码会较小，但它们会按整数缩放以最适合给定的大小。
 
 
 .. _qrcode_example:

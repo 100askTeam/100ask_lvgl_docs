@@ -1,8 +1,8 @@
 .. _barcode:
 
-================
+=================
 Barcode（条形码）
-================
+=================
 
 .. raw:: html
 
@@ -19,13 +19,13 @@ Barcode generation with LVGL. Uses
    <br>
 
 
-使用 LVGL 生成条形码。使用 `fhunleth <https://github.com/fhunleth>`__ 的 `code128 <https://github.com/fhunleth/code128>`__ 。
+LVGL 生成条形码的功能，使用到了 `fhunleth <https://github.com/fhunleth>`__ 的 `code128 <https://github.com/fhunleth/code128>`__ 。
 
 
 .. _barcode_usage:
 
 Usage（用法）
-------------
+-------------
 
 .. raw:: html
 
@@ -49,15 +49,15 @@ the barcode.
    <br>
 
 
-在 :c:macro:`LV_USE_BARCODE` 中启用 ``lv_conf.h``。
+在 ``lv_conf.h`` 中启用 :c:macro:`LV_USE_BARCODE` 。
 
-:cpp:func:`lv_barcode_create` 用于创建条形码对象，:cpp:func:`lv_barcode_update` 用于生成条形码。
+函数 :cpp:func:`lv_barcode_create` 用于创建条形码对象，函数 :cpp:func:`lv_barcode_update` 用于生成（刷新）条形码。
 
-调用 :cpp:func:`lv_barcode_set_scale` 调整缩放，调用 :cpp:func:`lv_barcode_set_dark_color` 和 :cpp:func:`lv_barcode_set_light_color` 将设置显示方向，并再次调用 :cpp:func:`lv_barcode_update` 以重新生成条形码。
+函数 :cpp:func:`lv_barcode_set_scale` 调整缩放，函数 :cpp:func:`lv_barcode_set_dark_color` 和 :cpp:func:`lv_barcode_set_light_color` 调整颜色，需要再次调用 :cpp:func:`lv_barcode_update` 以重新生成（刷新）条形码。
 
 
 Notes（笔记）
-------------
+-------------
 
 .. raw:: html
 
@@ -77,7 +77,7 @@ Notes（笔记）
    <br>
 
 
-- 最好不要手动设置条形码的宽度，因为当 物体的宽度小于条形码的宽度， 由于截断，显示将不完整。
+- 最好不要手动设置条形码的宽度，因为当 物体的宽度小于条形码的宽度， 由于截断，将得到不完整的条形码。
 - 比例调整只能是整数倍，例如，:cpp:expr:`lv_barcode_set_scale（条形码，2）` 表示 2 倍缩放。
 - 方向调整可以是 :cpp:enumerator:`LV_DIR_HOR` 或 :cpp:enumerator:`LV_DIR_VER`
 
