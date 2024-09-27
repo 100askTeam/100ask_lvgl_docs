@@ -1,0 +1,164 @@
+=======================================================
+ST7789 LCD Controller driver（ST7789液晶控制器驱动程序）
+=======================================================
+
+Overview（概览）
+----------------
+
+.. raw:: html
+
+   <details>
+     <summary>显示原文</summary>
+
+The `ST7789 <https://www.buydisplay.com/download/ic/ST7789.pdf>`__ is a single-chip controller/driver for 262K-color, graphic type TFT-LCD. It consists of 720
+source line and 320 gate line driving circuits. This chip is capable of connecting directly to an external
+microprocessor, and accepts, 8-bits/9-bits/16-bits/18-bits parallel interface. Display data can be stored in the
+on-chip display data RAM of 240x320x18 bits. It can perform display data RAM read/write operation with no
+external operation clock to minimize power consumption. In addition, because of the integrated power supply
+circuit necessary to drive liquid crystal; it is possible to make a display system with the fewest components.
+
+The ST7789 LCD controller `driver <https://github.com/lvgl/lvgl/src/drivers/display/st7789>`__ is a platform-agnostic driver, based on the `generic MIPI driver <https://github.com/lvgl/lvgl/doc/integration/drivers/display/gen_mipi.rst>`__.
+It implements display initialization, supports display rotation and implements the display flush callback. The user needs to implement only two platform-specific functions to send
+a command or pixel data to the controller via SPI or parallel bus. Typically these are implemented by calling the appropriate SDK library functions on the given platform.
+
+.. raw:: html
+
+   </details>
+   <br>
+
+
+`ST7789 <https://www.buydisplay.com/download/ic/ST7789.pdf>`__ 是一款用于262K色彩图形型TFT-LCD的单芯片控制器/驱动器。它由720个源线和320个门线驱动电路组成。该芯片能够直接连接到外部微处理器，并接受8位/9位/16位/18位并行接口。显示数据可以存储在240x320x18位的芯片内显示数据RAM中。它可以在没有外部操作时钟的情况下执行显示数据RAM的读/写操作，以最小化功耗。此外，由于集成了驱动液晶所需的电源电路，可以使用最少的组件构建显示系统。
+
+ST7789 LCD控制器 `driver <https://github.com/lvgl/lvgl/src/drivers/display/st7789>`__ is a platform-agnostic driver, based on the `generic MIPI driver <https://github.com/lvgl/lvgl/doc/integration/drivers/display/gen_mipi.rst>`__ 是一个平台无关的驱动器，基于通用的MIPI驱动器。它实现了显示初始化，支持显示旋转，并实现了显示刷新回调。用户只需要实现两个与平台相关的函数来通过SPI或并行总线向控制器发送命令或像素数据。通常情况下，这些函数通过在给定平台上调用相应的SDK库函数来实现。
+
+
+Prerequisites（先决条件）
+-------------------------
+
+.. raw:: html
+
+   <details>
+     <summary>显示原文</summary>
+
+There are no prerequisites.
+
+.. raw:: html
+
+   </details>
+   <br>
+
+
+没有先决条件。
+
+
+Configuring the driver（配置驱动程序）
+-------------------------------------
+
+.. raw:: html
+
+   <details>
+     <summary>显示原文</summary>
+
+Enable the ST7789 driver support in lv_conf.h, by cmake compiler define or by KConfig
+
+.. code:: c
+
+	#define LV_USE_ST7789  1
+
+.. raw:: html
+
+   </details>
+   <br>
+
+
+在lv_conf.h中启用ST7789驱动程序支持，可以通过CMake编译器定义或通过KConfig进行配置。
+
+.. code:: c
+
+	#define LV_USE_ST7789  1
+
+
+Usage（用法）
+-------------
+
+.. raw:: html
+
+   <details>
+     <summary>显示原文</summary>
+
+You need to implement two platform-dependent functions:
+
+.. code:: c
+
+	/* Send short command to the LCD. This function shall wait until the transaction finishes. */
+	int32_t my_lcd_send_cmd(lv_display_t *disp, const uint8_t *cmd, size_t cmd_size, const uint8_t *param, size_t param_size)
+	{
+		...
+	}
+
+	/* Send large array of pixel data to the LCD. If necessary, this function has to do the byte-swapping. This function can do the transfer in the background. */
+	int32_t my_lcd_send_color(lv_display_t *disp, const uint8_t *cmd, size_t cmd_size, uint8_t *param, size_t param_size)
+	{
+		...
+	}
+
+To create an ST7789-based display use the function
+
+.. code:: c
+
+	/**
+	 * Create an LCD display with ST7789 driver
+	 * @param hor_res       horizontal resolution
+	 * @param ver_res       vertical resolution
+	 * @param flags         default configuration settings (mirror, RGB ordering, etc.)
+	 * @param send_cmd      platform-dependent function to send a command to the LCD controller (usually uses polling transfer)
+	 * @param send_color    platform-dependent function to send pixel data to the LCD controller (usually uses DMA transfer: must implement a 'ready' callback)
+	 * @return              pointer to the created display
+	 */
+	lv_display_t * lv_st7789_create(uint32_t hor_res, uint32_t ver_res, lv_lcd_flag_t flags,
+									lv_st7789_send_cmd_cb_t send_cmd_cb, lv_st7789_send_color_cb_t send_color_cb);
+
+
+For additional details and a working example see the `generic MIPI driver documentation <https://github.com/lvgl/lvgl/doc/integration/drivers/display/gen_mipi.rst>`__.
+
+.. raw:: html
+
+   </details>
+   <br>
+
+   
+你需要实现两个平台相关的函数：
+
+.. code:: c
+
+	/* 向LCD发送短命令。此函数将等待事务完成。 */
+	int32_t my_lcd_send_cmd(lv_display_t *disp, const uint8_t *cmd, size_t cmd_size, const uint8_t *param, size_t param_size)
+	{
+		...
+	}
+
+	/* 向LCD发送大量像素数据。如果需要，此函数必须进行字节交换。此函数可以在后台进行传输。 */
+	int32_t my_lcd_send_color(lv_display_t *disp, const uint8_t *cmd, size_t cmd_size, uint8_t *param, size_t param_size)
+	{
+		...
+	}
+
+要创建基于ST7789驱动的显示器，请使用以下函数
+
+.. code:: c
+
+	/**
+	 * 使用ST7789驱动程序创建LCD显示器
+	 * @param hor_res       水平分辨率
+	 * @param ver_res       垂直分辨率
+	 * @param flags         默认配置设置（镜像，RGB排序等）
+	 * @param send_cmd      用于向LCD控制器发送命令的平台相关函数（通常使用轮询传输）
+	 * @param send_color    用于向LCD控制器发送像素数据的平台相关函数（通常使用DMA传输：必须实现“ready”回调）
+	 * @return              指向创建的显示器的指针
+	 */
+	lv_display_t * lv_st7789_create(uint32_t hor_res, uint32_t ver_res, lv_lcd_flag_t flags,
+									lv_st7789_send_cmd_cb_t send_cmd_cb, lv_st7789_send_color_cb_t send_color_cb);
+
+
+有关更多详细信息和工作示例，请参阅 `通用MIPI驱动文档 <https://github.com/lvgl/lvgl/doc/integration/drivers/display/gen_mipi.rst>`__。
+

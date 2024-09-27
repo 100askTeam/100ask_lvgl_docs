@@ -1,0 +1,165 @@
+=======================================================
+ST7796 LCD Controller driver（ST7796液晶控制器驱动程序）
+=======================================================
+
+Overview（概览）
+----------------
+
+.. raw:: html
+
+   <details>
+     <summary>显示原文</summary>
+
+The `ST7796S <https://www.buydisplay.com/download/ic/ST7796S.pdf>`__ is a single-chip controller/driver for 262K-color, graphic type TFT-LCD. It consists of 960
+source lines and 480 gate lines driving circuits. The ST7796S is capable of connecting directly to an external
+microprocessor, and accepts 8-bit/9-bit/16-bit/18-bit parallel interface, SPI, and the ST7796S also provides
+MIPI interface. Display data can be stored in the on-chip display data RAM of 320x480x18 bits. It can perform
+display data RAM read-/write-operation with no external clock to minimize power consumption. In addition,
+because of the integrated power supply circuit necessary to drive liquid crystal; it is possible to make a display
+system with fewest components.
+
+The ST7796 LCD controller `driver <https://github.com/lvgl/lvgl/src/drivers/display/st7796>`__ is a platform-agnostic driver, based on the `generic MIPI driver <https://github.com/lvgl/lvgl/doc/integration/drivers/display/gen_mipi.rst>`__.
+It implements display initialization, supports display rotation and implements the display flush callback. The user needs to implement only two platform-specific functions to send
+a command or pixel data to the controller via SPI or parallel bus. Typically these are implemented by calling the appropriate SDK library functions on the given platform.
+
+.. raw:: html
+
+   </details>
+   <br>
+
+
+`ST7796S <https://www.buydisplay.com/download/ic/ST7796S.pdf>`__ 是一款用于262K色彩图形式TFT-LCD的单芯片控制器/驱动器。它具有960行源和480行网驱动电路。ST7796S能够直接连接到外部微处理器，并接受8位/9位/16位/18位并行接口、SPI以及MIPI接口。显示数据可以存储在320x480x18位的片内显示数据RAM中。它可以在没有外部时钟的情况下执行显示数据RAM读/写操作，以最小化功耗。此外，由于集成了驱动液晶所需的电源电路，可以使用最少的组件构建显示系统。
+
+ST7796 LCD驱动器 `driver <https://github.com/lvgl/lvgl/src/drivers/display/st7796>`__ is a platform-agnostic driver, based on the `generic MIPI driver <https://github.com/lvgl/lvgl/doc/integration/drivers/display/gen_mipi.rst>`__ 是一个与平台无关的驱动器，基于通用MIPI驱动器。它实现了显示初始化，支持显示旋转，并实现了显示刷新回调函数。用户只需实现两个特定于平台的函数，通过SPI或并行总线向控制器发送命令或像素数据。通常情况下，通过在给定平台上调用适当的SDK库函数来实现这些函数。
+
+
+Prerequisites（先决条件）
+-------------------------
+
+.. raw:: html
+
+   <details>
+     <summary>显示原文</summary>
+
+There are no prerequisites.
+
+.. raw:: html
+
+   </details>
+   <br>
+
+
+没有先决条件。
+
+
+Configuring the driver（配置驱动程序）
+-------------------------------------
+
+.. raw:: html
+
+   <details>
+     <summary>显示原文</summary>
+
+Enable the ST7796 driver support in lv_conf.h, by cmake compiler define or by KConfig
+
+.. code:: c
+
+	#define LV_USE_ST7796  1
+
+.. raw:: html
+
+   </details>
+   <br>
+
+
+在lv_conf.h中启用ST7796驱动程序支持，可以通过CMake编译器定义或通过KConfig来实现。
+
+.. code:: c
+
+	#define LV_USE_ST7796  1
+
+
+Usage（用法）
+-------------
+
+.. raw:: html
+
+   <details>
+     <summary>显示原文</summary>
+
+You need to implement two platform-dependent functions:
+
+.. code:: c
+
+	/* Send short command to the LCD. This function shall wait until the transaction finishes. */
+	int32_t my_lcd_send_cmd(lv_display_t *disp, const uint8_t *cmd, size_t cmd_size, const uint8_t *param, size_t param_size)
+	{
+		...
+	}
+
+	/* Send large array of pixel data to the LCD. If necessary, this function has to do the byte-swapping. This function can do the transfer in the background. */
+	int32_t my_lcd_send_color(lv_display_t *disp, const uint8_t *cmd, size_t cmd_size, uint8_t *param, size_t param_size)
+	{
+		...
+	}
+
+To create an ST7796-based display use the function
+
+.. code:: c
+
+	/**
+	 * Create an LCD display with ST7796 driver
+	 * @param hor_res       horizontal resolution
+	 * @param ver_res       vertical resolution
+	 * @param flags         default configuration settings (mirror, RGB ordering, etc.)
+	 * @param send_cmd      platform-dependent function to send a command to the LCD controller (usually uses polling transfer)
+	 * @param send_color    platform-dependent function to send pixel data to the LCD controller (usually uses DMA transfer: must implement a 'ready' callback)
+	 * @return              pointer to the created display
+	 */
+	lv_display_t * lv_st7796_create(uint32_t hor_res, uint32_t ver_res, lv_lcd_flag_t flags,
+									lv_st7796_send_cmd_cb_t send_cmd_cb, lv_st7796_send_color_cb_t send_color_cb);
+
+
+For additional details and a working example see the `generic MIPI driver documentation <https://github.com/lvgl/lvgl/doc/integration/drivers/display/gen_mipi.rst>`__.
+
+.. raw:: html
+
+   </details>
+   <br>
+
+
+你需要实现两个与平台相关的函数：
+
+.. code:: c
+
+	/* Send short command to the LCD. This function shall wait until the transaction finishes. */
+	int32_t my_lcd_send_cmd(lv_display_t *disp, const uint8_t *cmd, size_t cmd_size, const uint8_t *param, size_t param_size)
+	{
+		...
+	}
+
+	/* Send large array of pixel data to the LCD. If necessary, this function has to do the byte-swapping. This function can do the transfer in the background. */
+	int32_t my_lcd_send_color(lv_display_t *disp, const uint8_t *cmd, size_t cmd_size, uint8_t *param, size_t param_size)
+	{
+		...
+	}
+
+使用以下函数创建基于ST7796驱动器的显示屏：
+
+.. code:: c
+
+	/**
+	 * Create an LCD display with ST7796 driver
+	 * @param hor_res       horizontal resolution
+	 * @param ver_res       vertical resolution
+	 * @param flags         default configuration settings (mirror, RGB ordering, etc.)
+	 * @param send_cmd      platform-dependent function to send a command to the LCD controller (usually uses polling transfer)
+	 * @param send_color    platform-dependent function to send pixel data to the LCD controller (usually uses DMA transfer: must implement a 'ready' callback)
+	 * @return              pointer to the created display
+	 */
+	lv_display_t * lv_st7796_create(uint32_t hor_res, uint32_t ver_res, lv_lcd_flag_t flags,
+									lv_st7796_send_cmd_cb_t send_cmd_cb, lv_st7796_send_color_cb_t send_color_cb);
+
+
+有关更多详细信息和可行示例，请参阅 `通用MIPI驱动程序文档 <https://github.com/lvgl/lvgl/doc/integration/drivers/display/gen_mipi.rst>`__.
+

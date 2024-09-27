@@ -1,0 +1,167 @@
+==========================================================
+ST7735 LCD Controller driver（ST7735液晶显示控制器驱动程序）
+==========================================================
+
+Overview（概览）
+----------------
+
+.. raw:: html
+
+   <details>
+     <summary>显示原文</summary>
+
+The `ST7735S <https://www.buydisplay.com/download/ic/ST7735S.pdf>`__ is a single-chip controller/driver for 262K-color, graphic type TFT-LCD. It consists of 396
+source line and 162 gate line driving circuits. This chip is capable of connecting directly to an external
+microprocessor, and accepts Serial Peripheral Interface (SPI), 8-bit/9-bit/16-bit/18-bit parallel interface.
+Display data can be stored in the on-chip display data RAM of 132 x 162 x 18 bits. It can perform display data
+RAM read/write operation with no external operation clock to minimize power consumption. In addition,
+because of the integrated power supply circuits necessary to drive liquid crystal, it is possible to make a
+display system with fewer components.
+
+The ST7735 LCD controller `driver <https://github.com/lvgl/lvgl/src/drivers/display/st7735>`__ is a platform-agnostic driver, based on the `generic MIPI driver <https://github.com/lvgl/lvgl/doc/integration/drivers/display/gen_mipi.rst>`__.
+It implements display initialization, supports display rotation and implements the display flush callback. The user needs to implement only two platform-specific functions to send
+a command or pixel data to the controller via SPI or parallel bus. Typically these are implemented by calling the appropriate SDK library functions on the given platform.
+
+.. raw:: html
+
+   </details>
+   <br>
+
+
+`ST7735S <https://www.buydisplay.com/download/ic/ST7735S.pdf>`__ 是一款用于262K色彩、图形类型TFT-LCD的单芯片控制器/驱动器。它包含396个源码线和162个网线驱动电路。该芯片可以直接连接到外部微处理器，并接受串行外围接口（SPI）、8位/9位/16位/18位并行接口。显示数据可以存储在132 x 162 x 18位的芯片内显示数据RAM中。
+它可以在没有外部操作时钟的情况下执行显示数据RAM读写操作，以最小化功耗。此外，由于集成了驱动液晶所需的电源电路，可以使用更少的元件构建显示系统。
+
+ST7735 LCD控制器 `driver <https://github.com/lvgl/lvgl/src/drivers/display/st7735>`__ is a platform-agnostic driver, based on the `generic MIPI driver <https://github.com/lvgl/lvgl/doc/integration/drivers/display/gen_mipi.rst>`__ 是一个与平台无关的驱动程序，基于通用的MIPI驱动程序。它实现了显示初始化，支持显示旋转，并实现了显示刷新回调函数。用户只需要实现两个特定于平台的函数，通过SPI或并行总线向控制器发送命令或像素数据。通常，这些函数通过调用给定平台上适当的SDK库函数来实现。
+
+
+Prerequisites（先决条件）
+-------------------------
+
+.. raw:: html
+
+   <details>
+     <summary>显示原文</summary>
+
+There are no prerequisites.
+
+.. raw:: html
+
+   </details>
+   <br>
+
+
+没有先决条件。
+
+
+Configuring the driver（配置驱动程序）
+-------------------------------------
+
+.. raw:: html
+
+   <details>
+     <summary>显示原文</summary>
+
+Enable the ST7735 driver support in lv_conf.h, by cmake compiler define or by KConfig
+
+.. code:: c
+
+	#define LV_USE_ST7735  1
+
+.. raw:: html
+
+   </details>
+   <br>
+
+
+在lv_conf.h文件中启用ST7735驱动器支持，可以通过CMake编译器定义或通过KConfig来实现。
+
+.. code:: c
+
+	#define LV_USE_ST7735  1
+
+
+
+Usage（用法）
+-------------
+
+.. raw:: html
+
+   <details>
+     <summary>显示原文</summary>
+
+You need to implement two platform-dependent functions:
+
+.. code:: c
+
+	/* Send short command to the LCD. This function shall wait until the transaction finishes. */
+	int32_t my_lcd_send_cmd(lv_display_t *disp, const uint8_t *cmd, size_t cmd_size, const uint8_t *param, size_t param_size)
+	{
+		...
+	}
+
+	/* Send large array of pixel data to the LCD. If necessary, this function has to do the byte-swapping. This function can do the transfer in the background. */
+	int32_t my_lcd_send_color(lv_display_t *disp, const uint8_t *cmd, size_t cmd_size, uint8_t *param, size_t param_size)
+	{
+		...
+	}
+
+To create an ST7735-based display use the function
+
+.. code:: c
+
+	/**
+	 * Create an LCD display with ST7735 driver
+	 * @param hor_res       horizontal resolution
+	 * @param ver_res       vertical resolution
+	 * @param flags         default configuration settings (mirror, RGB ordering, etc.)
+	 * @param send_cmd      platform-dependent function to send a command to the LCD controller (usually uses polling transfer)
+	 * @param send_color    platform-dependent function to send pixel data to the LCD controller (usually uses DMA transfer: must implement a 'ready' callback)
+	 * @return              pointer to the created display
+	 */
+	lv_display_t * lv_st7735_create(uint32_t hor_res, uint32_t ver_res, lv_lcd_flag_t flags,
+									lv_st7735_send_cmd_cb_t send_cmd_cb, lv_st7735_send_color_cb_t send_color_cb);
+
+
+For additional details and a working example see the `generic MIPI driver documentation <https://github.com/lvgl/lvgl/doc/integration/drivers/display/gen_mipi.rst>`__.
+
+.. raw:: html
+
+   </details>
+   <br>
+
+
+您需要实现两个平台相关的函数：
+
+.. code:: c
+
+	/* 将短命令发送给LCD，此函数将等待事务完成。 */
+	int32_t my_lcd_send_cmd(lv_display_t *disp, const uint8_t *cmd, size_t cmd_size, const uint8_t *param, size_t param_size)
+	{
+		...
+	}
+
+	/* 将大批量像素数据发送给LCD。必要时，此函数必须进行字节交换。此函数可以在后台进行传输。 */
+	int32_t my_lcd_send_color(lv_display_t *disp, const uint8_t *cmd, size_t cmd_size, uint8_t *param, size_t param_size)
+	{
+		...
+	}
+
+要创建基于ST7735驱动器的显示，请使用以下函数：
+
+.. code:: c
+
+	/**
+	 * 创建一个带有ST7735驱动器的LCD显示器
+	 * @param hor_res       水平分辨率
+	 * @param ver_res       垂直分辨率
+	 * @param flags         默认配置设置（镜像，RGB顺序等）
+	 * @param send_cmd      平台相关函数，用于向LCD控制器发送命令（通常使用轮询传输）
+	 * @param send_color    平台相关函数，用于向LCD控制器发送像素数据（通常使用DMA传输：必须实现'准备好'回调函数）
+	 * @return              指向创建的显示器的指针
+	 */
+	lv_display_t * lv_st7735_create(uint32_t hor_res, uint32_t ver_res, lv_lcd_flag_t flags,
+									lv_st7735_send_cmd_cb_t send_cmd_cb, lv_st7735_send_color_cb_t send_color_cb);
+
+
+有关详细信息和工作示例，请查看`通用MIPI驱动程序文档 `<https://github.com/lvgl/lvgl/doc/integration/drivers/display/gen_mipi.rst>`__。
+
