@@ -1,8 +1,8 @@
 .. _monkey:
 
-=======
-Monkey
-=======
+=====================
+Monkey测试（压力测试）
+=====================
 
 .. raw:: html
 
@@ -17,7 +17,7 @@ A simple monkey test. Use random input to stress test the application.
    <br>
 
 
-一个简单的 monkey 测试。使用随机输入来对应用程序进行压力测试。
+这里提供一个简单的 monkey 测试接口，其使用随机输入来对应用程序进行压力测试。
 
 
 .. _monkey_usage:
@@ -58,18 +58,18 @@ Note that ``input_range`` has different meanings in different ``type``:
    <br>
 
 
-请在 ``lv_conf.h`` 中启用 :c:macro:`LV_USE_MONKEY`。
+请在 ``lv_conf.h`` 中启用 :c:macro:`LV_USE_MONKEY` 。
 
-首先配置monkey，使用 :c:struct:`lv_monkey_config_t` 定义配置结构，设置 ``type``（查看 `input devices</overview/indev>`__ 以获取支持的类型），然后设置 ``period_range`` 和 ``input_range`` 的范围，monkey会在此范围内随机时间输出随机操作。调用 :cpp:func:`lv_monkey_create` 创建monkey。最后调用 :cpp:expr:`lv_monkey_set_enable(monkey, true)` 启用monkey。
+首先配置monkey，使用 :c:struct:`lv_monkey_config_t` 定义配置结构，设置 ``type`` （查看 `input devices</overview/indev>`__ 以获取支持的类型），然后设置 ``period_range`` 和 ``input_range`` 的范围，monkey会在此范围内随机时间输出随机操作。调用 :cpp:func:`lv_monkey_create` 创建monkey。最后调用 :cpp:expr:`lv_monkey_set_enable(monkey, true)` 启用monkey。
 
-如果要暂停monkey，请调用 :cpp:expr:`lv_monkey_set_enable(monkey, false)`。要删除monkey，请调用 :cpp:expr:`lv_monkey_delete(monkey)`。
+如果要暂停monkey，请调用 :cpp:expr:`lv_monkey_set_enable(monkey, false)` 。要删除monkey，请调用 :cpp:expr:`lv_monkey_delete(monkey)` 。
 
 请注意， ``input_range`` 在不同的 ``type`` 中有不同的含义：
 
 - :cpp:enumerator:`LV_INDEV_TYPE_POINTER`：无效果，在屏幕分辨率的像素内随机点击。
 - :cpp:enumerator:`LV_INDEV_TYPE_ENCODER`： ``enc_diff`` 的最小值和最大值。
-- :cpp:enumerator:`LV_INDEV_TYPE_BUTTON` ： ``btn_id`` 的最小值和最大值。使用 :cpp:func:`lv_monkey_get_indev` 获取输入设备，并使用:cpp:func:`lv_indev_set_button_points`将按键ID映射到坐标上。
-- :cpp:enumerator:`LV_INDEV_TYPE_KEYPAD` ：无效果，发送随机的 :ref:`indev_keys`。
+- :cpp:enumerator:`LV_INDEV_TYPE_BUTTON` ： ``btn_id`` 的最小值和最大值。使用 :cpp:func:`lv_monkey_get_indev` 获取输入设备，并使用 :cpp:func:`lv_indev_set_button_points` 将按键ID映射到坐标上。
+- :cpp:enumerator:`LV_INDEV_TYPE_KEYPAD` ：无效果，发送随机的 :ref:`indev_keys` 。
 
 
 .. _monkey_example:
