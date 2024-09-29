@@ -414,8 +414,7 @@ a press/release action at the first index of the ``points_array`` will be perfor
 
 要将按钮分配给坐标，请使用 ``lv_indev_set_button_points(my_indev, points_array)``。 ``points_array`` 应该看起来像 ``const lv_point_t points_array[] = { {12,30},{60,90}, ...}``
 
-:重要: The points_array can't go out of scope. Either declare it as a global variable
-            or as a static variable inside a function。
+:重要: points_array 不能超出作用域。可以将其声明为全局变量，或者在函数内部声明为静态变量。
 
 .. code:: c
 
@@ -473,11 +472,11 @@ The default value of the following parameters can be changed in :cpp:type:`lv_in
 
 以下参数的默认值可以在 :cpp:type:`lv_indev_t` 中更改：
 
-- ``scroll_limit`` 在实际滚动对象之前要滑动的像素数。
-- ``scroll_throw`` 滚动投掷（动量）减慢 [%]。更大的价值意味着更快的减速。
-- ``long_press_time`` 按下发送 :cpp:enumerator:`LV_EVENT_LONG_PRESSED` 的时间（以毫秒为单位）
-- ``long_press_repeat_time`` 发送 :cpp:enumerator:`LV_EVENT_LONG_PRESSED_REPEAT` 的间隔（以毫秒为单位）
-- ``read_timer`` 指向读取输入设备的 ``lv_timer`` 的指针。它的参数可以通过 ``lv_timer_...()`` 函数改变。  ``lv_conf.h`` 中的 :c:macro:`LV_DEF_REFR_PERIOD` 设置默认读取周期。
+- ``scroll_limit`` 在实际滚动对象之前要滑动的像素数量。
+- ``scroll_throw`` 滚动抛（动量）的减速百分比 [%]。值越大表示减数越快。
+- ``long_press_time`` 发送 :cpp:enumerator:`LV_EVENT_LONG_PRESSED` 事件的按下时间（以毫秒为单位）
+- ``long_press_repeat_time`` 发送 :cpp:enumerator:`LV_EVENT_LONG_PRESSED_REPEAT` 的时间间隔（以毫秒为单位）
+- ``read_timer`` 指向读取输入设备的 ``lv_timer`` 的指针。它的参数可以通过 ``lv_timer_...()`` 函数改变。  ``lv_conf.h`` 中的 :c:macro:`LV_DEF_REFR_PERIOD` 设置了默认读取周期。
 
 
 Feedback（回调处理）
