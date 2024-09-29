@@ -27,8 +27,8 @@ functions:
 
 但是，在以下情况下调用 LVGL 相关函数是有效的：
 
-- 在 *事件* 中。在 :ref:`events` 中了解更多信息。
-- 在 *lv_timer* 中。在 :ref:`timer` 中了解更多信息。
+- 在 *事件* 中。更多信息请参考 :ref:`events` 。
+- 在 *lv_timer* 中。更多信息请参考 :ref:`timer` 。
 
 
 Tasks and threads（任务和线程）
@@ -65,16 +65,16 @@ Here is some pseudocode to illustrate the concept:
    <br>
 
 
-如果你需要使用真正的任务或线程，你需要一个互斥锁，它应该在调用 :cpp:func:`lv_timer_handler` 之前被调用并在它之后释放。 此外，您必须在每个 LVGL  (``lv_...``) 相关函数调用和代码周围的其他任务和线程中使用相同的互斥锁。 这样你就可以在真正的多任务环境中使用 LVGL。只需使用互斥锁来避免并发调用 LVGL 函数。
+如果你需要使用真正的任务或线程，你需要一个互斥锁，该互斥锁应该在调用 :cpp:func:`lv_timer_handler` 之前被调用，并在调用它之后释放。 此外，你必须在其他任务和线程中围绕每个与 LVGL  (``lv_...``) 相关的函数调用和代码使用相同的互斥锁。 这样，你就可以在真正的多任务环境中使用 LVGL。需使用一个互斥锁来避免 LVGL 函数的并发调用。
 
 LVGL 有一个内置的互斥锁，可以与以下函数一起使用：
 
 - :cpp:func:`lv_lock()` and :cpp:func:`lv_lock_isr()`
 - :cpp:func:`lv_unlock()`
 
-这些函数在 :cpp:func:`lv_timer_handler` 中被内部调用，用户只需要在自己的线程中调用它们。
+这些函数在 :cpp:func:`lv_timer_handler` 内部被调用，用户只需要在他们自己的线程中调用它们。
 
-要启用 ``lv_lock/lv_unlock`` ，需要将 ``LV_USE_OS`` 设置为除 ``LV_OS_NONE`` 之外的其他值。
+要启用 ``lv_lock/lv_unlock`` ， ``LV_USE_OS`` 需要设置为除 ``LV_OS_NONE`` 之外的其他值。
 
 下面是一些伪代码来说明这个概念：
 
@@ -129,7 +129,7 @@ interrupt, and periodically check it in an LVGL timer (which is run by
    <br>
 
 
-尽量避免从中断处理程序调用 LVGL 函数（除了 :cpp:func:`lv_tick_inc`  和 :cpp:func:`lv_display_flush_ready`）。但是如果你需要这样做，你必须在 :cpp:func:`lv_timer_handler` 运行时禁用使用 LVGL 函数的中断。 
+尽量避免从中断处理程序调用 LVGL 函数（除了 :cpp:func:`lv_tick_inc`  和 :cpp:func:`lv_display_flush_ready`）。但是如果你需要这样做，你必须在 :cpp:func:`lv_timer_handler` 运行时，禁用使用 LVGL 函数的中断。 
 
-这是一种更好的方法，只需在中断，并在LVGL计时器中定期检查它（由 :cpp:func:`lv_timer_handler` 运行）。
+一个更好的方法是在中断中简单地设置一个标志或某个值，并在 LVGL 定时器中定期检查它（LVGL 定时器由 :cpp:func:`lv_timer_handler` 运行）。
 

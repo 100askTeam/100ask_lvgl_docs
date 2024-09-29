@@ -18,7 +18,7 @@ happening in the library.
    <br>
 
 
-LVGL 有内置的 *Log* 模块来通知用户库中发生的事情。
+LVGL 有内置的 *Log* 模块来向用户告知库中发生的事情。
 
 
 Log level（日志等级）
@@ -58,7 +58,7 @@ logged.
 - :c:macro:`LV_LOG_LEVEL_USER`: 仅用户消息
 - :c:macro:`LV_LOG_LEVEL_NONE`: 不记录任何内容
 
-级别高于设置的日志级别的事件也将被记录。例如。如果你 :c:macro:`LV_LOG_LEVEL_WARN`，错误也会被记录。
+级别高于设置的日志级别的事件也将被记录。例如。如果你 :c:macro:`LV_LOG_LEVEL_WARN`，错误也将会被记录。
 
 
 Printing logs（打印日志）
@@ -148,11 +148,11 @@ functions. Here:
 
 
 -  ``LV_LOG_TRACE/INFO/WARN/ERROR/USER(text)`` append following information to your ``text``
--  Log Level
--  \__FILE\_\_
--  \__LINE\_\_
--  \__func\_\_
--  ``LV_LOG(text)`` is similar to ``LV_LOG_USER`` but has no extra information attached.
+-  Log Level（日志级别）
+-  \__FILE\_\_（文件名）
+-  \__LINE\_\_（行号）
+-  \__func\_\_（函数名）
+-  ``LV_LOG(text)`` 与 ``LV_LOG_USER`` 类似，但没有附加额外信息.
 
 
 API
