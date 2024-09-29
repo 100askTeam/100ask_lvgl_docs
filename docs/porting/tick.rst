@@ -50,13 +50,13 @@ LVGL 需要一个系统滴答时钟来了解动画和其他任务所用的时间
    - Arduino: ``lv_tick_set_cb(millis);``
    - FreeRTOS: ``lv_tick_set_cb(xTaskGetTickCount);``
    - STM32: ``lv_tick_set_cb(HAL_GetTick);``
-   - ESP32: ``lv_tick_set_cb(my_tick_get_cb);``, 哪里 ``my_tick_get_cb`` 是包装器 ``esp_timer_get_time() / 1000;``
+   - ESP32: ``lv_tick_set_cb(my_tick_get_cb);``, 其中 ``my_tick_get_cb`` 是 ``esp_timer_get_time() / 1000 的包装函数;``
 
 2. 定期调用 ``lv_tick_inc(x)`` 其中 ``x`` 是自上次调用以来经过的毫秒数。 ``lv_tick_inc`` 应从高优先级中断调用。
 
 刻度（毫秒）应独立于 MCU 的任何其他活动。
 
-例如，这可行，但 LVGL 的计时将不正确，因为 ``lv_timer_handler`` 未考虑 的执行时间：
+例如，这种方法可行，但 LVGL 的计时将不正确，因为 ``lv_timer_handler`` 未考虑 的执行时间：
 
 API
 ---
