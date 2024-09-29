@@ -18,7 +18,7 @@ happening in the library.
    <br>
 
 
-LVGL 有内置的 *Log* 模块来通知用户库中发生的事情。
+LVGL 有内置的 *Log* 模块来向用户告知库中发生的事情。
 
 
 Log level（日志等级）
@@ -148,11 +148,11 @@ functions. Here:
 
 
 -  ``LV_LOG_TRACE/INFO/WARN/ERROR/USER(text)`` append following information to your ``text``
--  Log Level
--  \__FILE\_\_
--  \__LINE\_\_
--  \__func\_\_
--  ``LV_LOG(text)`` is similar to ``LV_LOG_USER`` but has no extra information attached.
+-  Log Level（日志级别）
+-  \__FILE\_\_（文件名）
+-  \__LINE\_\_（行号）
+-  \__func\_\_（函数名）
+-  ``LV_LOG(text)`` 与 ``LV_LOG_USER`` 类似，但没有附加额外信息.
 
 
 API
