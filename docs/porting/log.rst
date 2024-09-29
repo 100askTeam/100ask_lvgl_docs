@@ -58,7 +58,7 @@ logged.
 - :c:macro:`LV_LOG_LEVEL_USER`: 仅用户消息
 - :c:macro:`LV_LOG_LEVEL_NONE`: 不记录任何内容
 
-级别高于设置的日志级别的事件也将被记录。例如。如果你 :c:macro:`LV_LOG_LEVEL_WARN`，错误也会被记录。
+级别高于设置的日志级别的事件也将被记录。例如。如果你 :c:macro:`LV_LOG_LEVEL_WARN`，错误也将会被记录。
 
 
 Printing logs（打印日志）
