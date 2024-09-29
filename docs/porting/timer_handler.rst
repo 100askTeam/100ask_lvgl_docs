@@ -24,7 +24,7 @@ Example:
    <br>
 
 
-要处理 LVGL 的任务，您需要以下列方式之一定期调用 :cpp:func:`lv_timer_handler`：
+要处理 LVGL 的任务，您需要以下列方式之一中定期调用 :cpp:func:`lv_timer_handler`：
 
 -  *main()* 函数的 *while(1)* 
 - 定时器定期中断（比 :cpp:func:`lv_tick_inc` 优先级低）
@@ -56,7 +56,7 @@ the porting:
    <br>
 
 
-如果要在超级循环中使用 :cpp:func:`lv_timer_handler` ，则需要帮助程序 :cpp:func:`lv_timer_handler_run_in_period` 提供功能以简化移植：
+如果要在超级循环中使用 :cpp:func:`lv_timer_handler` ，则提供了一个辅助函数 :cpp:func:`lv_timer_handler_run_in_period` 来简化移植过程：
 
 
 .. code:: c
