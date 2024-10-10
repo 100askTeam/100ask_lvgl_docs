@@ -21,7 +21,7 @@ LVGL rendering acceleration can be supported without the need for LVGL adaptatio
 
 这是一个通用的VG-Lite渲染后端实现，旨在尽可能利用 `VeriSilicon <https://verisilicon.com/>`_ 的通用API来操作GPU硬件。
 
-即使不同的芯片制造商，只要他们使用相同版本的VG-Lite API作为渲染后端，LVGL渲染加速就可以得到支持，无需对LVGL进行适配工作。
+即使不同的芯片制造商，只要他们使用与渲染后端相同版本的VG-Lite API，LVGL渲染加速就可以得到支持，无需对LVGL进行适配工作。
 
 
 Configuration（配置）
@@ -81,22 +81,22 @@ NOTE: VG-Lite rendering backend does not support multi-threaded calls, please ma
 
 
 1. 在 ``lv_conf.h`` 中将 :c:macro:`LV_USE_DRAW_VG_LITE` 设置为1以启用VG-Lite渲染后端。
-确保您的硬件已经适配到VG-Lite API，并且 ``vg_lite.h`` 的绝对路径已经暴露，可以直接被lvgl引用。
+确保您的硬件已经适配VG-Lite API，并且已经暴露可以直接被lvgl引用的 ``vg_lite.h`` 的绝对路径。
 
 2. 确认GPU初始化方法，有两种方式：
 - SDK在系统启动期间自行调用GPU初始化函数，LVGL启动时GPU已经可用；将 :c:macro:`LV_VG_LITE_USE_GPU_INIT` 设置为0。
 - LVGL主动调用GPU初始化函数，SDK需要实现公共函数 `gpu_init()`。 LVGL将在启动期间调用它来完成GPU硬件初始化；将 :c:macro:`LV_VG_LITE_USE_GPU_INIT` 设置为1。
 
 3. 设置 :c:macro:`LV_VG_LITE_USE_ASSERT` 配置以启用GPU调用参数检查。
-由于GPU调用中使用的参数复杂，错误的参数可能导致GPU硬件异常操作，例如忘记添加路径的结束符号或不符合缓冲区步长的对齐要求。
-为了快速解决这类问题，在每个VG-Lite调用前增加了严格的参数检查，包括缓冲区步长验证和矩阵可逆性检查。
-当检测到错误的参数时，将触发断言以打印出错误参数，允许用户及时进行更正，减少在硬件模拟上浪费的时间。
+由于GPU调用中使用的参数复杂，错误的参数可能导致GPU硬件异常操作，例如忘记在路径中添加结束符号或不满足缓冲区步长的对齐要求。
+为了快速解决这类问题，在每次VG-Lite调用前增加了严格的参数检查，包括缓冲区步长验证和矩阵可逆性检查。
+当检测到错误的参数时，将触发断言并打印出错误参数，允许用户及时进行更正，减少在硬件模拟上浪费的时间。
 请注意，启用此检查将降低运行时性能。建议在Debug模式下启用它，在Release版本中禁用它。
 
-4. 设置 :c:macro:`LV_VG_LITE_FLUSH_MAX_COUNT` 配置以指定刷新方法。
+4. 将 :c:macro:`LV_VG_LITE_FLUSH_MAX_COUNT` 配置以指定刷新方法。
 VG-Lite使用两组命令缓冲区来渲染指令，充分利用这一机制可以大大提高绘图效率。
 目前支持两种缓冲方法：
-- 将 :c:macro:`LV_VG_LITE_FLUSH_MAX_COUNT` 设置为零（推荐）。渲染后端每次向命令缓冲区写入渲染指令时，都会获取GPU的工作状态。 当GPU空闲时，它将立即调用 ``vg_lite_flush`` 通知GPU开始渲染并交换命令缓冲区。当GPU忙碌时，它将继续用渲染指令填充命令缓冲区缓存。 底层驱动程序将自动决定命令缓冲区是否已满。当即将填满时，它将强制等待未完成的绘图任务结束并交换命令缓冲区。 这种方法可以有效地提高GPU利用率，特别是在渲染文本的场景中，因为GPU的绘图时间和CPU的数据准备时间非常接近，允许CPU和GPU并行运行。
+- 将 :c:macro:`LV_VG_LITE_FLUSH_MAX_COUNT` 设置为零（推荐）。渲染后端每次向命令缓冲区写入渲染指令时，都会获取GPU的工作状态。 当GPU空闲时，它将立即调用 ``vg_lite_flush`` 通知GPU开始渲染并交换命令缓冲区。当GPU忙碌时，它将继续用渲染指令填充命令缓冲区缓存。 底层驱动程序将自动判断命令缓冲区是否已被填充。当即将被填满时，它将强制等待未完成的绘图任务结束并交换命令缓冲区。 这种方法可以有效地提高GPU利用率，特别是在渲染文本的场景中，因为GPU的绘图时间和CPU的数据准备时间非常接近，允许CPU和GPU并行运行。
 - 将 :c:macro:`LV_VG_LITE_FLUSH_MAX_COUNT` 设置为大于零的值，例如8。在向命令缓冲区写入8个渲染指令后，渲染后端将调用 ``vg_lite_flush`` 通知GPU开始渲染并交换命令缓冲区。
 
 5. 设置 :c:macro:`LV_VG_LITE_USE_BOX_SHADOW` 配置以使用GPU渲染阴影。
