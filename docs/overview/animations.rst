@@ -21,7 +21,7 @@ The *animator* functions have the following prototype:
    <br>
 
 
-您可以使用动画自动更改变量的值，该值在开始值和结束值之间变化。动画将通过定期调用具有相应值参数的“animator”函数来完成。
+您可以使用动画在一个起始值和一个结束值之间自动改变一个变量的值。动画将通过定期调用具有相应值参数的“animator”函数来完成。
 
 *animator* 函数具有以下原型：
 
@@ -69,7 +69,7 @@ and configured with ``lv_anim_set_...()`` functions.
    <br>
 
 
-要创建动画，必须初始化一个 :cpp:type:`lv_anim_t` 变量，并使用 ``lv_anim_set_()`` 函数进行配置。
+要创建动画，必须初始化一个 :cpp:type:`lv_anim_t` 类型的变量，并使用 ``lv_anim_set_()`` 函数进行配置。
 
 
 .. code:: c
@@ -150,9 +150,9 @@ will remove any existing animations for such a pair.
    <br>
 
 
-你可以同时对同一个变量应用多种不同的动画。例如，使用 :cpp:func:`lv_obj_set_x` 和 :cpp:func:`lv_obj_set_y` 
-来同时设置 x 和 y 坐标的动画。然而，同一个变量和函数对只能存在一个动画，:cpp:func:`lv_anim_start`
- 会移除任何给定变量和函数对的现有动画。
+你可以同时对同一个变量上应用多种不同的动画。例如，使用 :cpp:func:`lv_obj_set_x` 和 :cpp:func:`lv_obj_set_y` 
+对 x 和 y 坐标进行动画处理。然而，同给定变量和函数对只能存在一个动画，并且:cpp:func:`lv_anim_start`
+ 会移除任何现有的这样的一对变量和函数的动画。
 
 
 .. _animations_path:
@@ -188,7 +188,7 @@ the following built-in path functions:
 
 你可以控制动画的路径。最简单的情况是线性的，意味着在 *start* 和 *end* 
 之间的当前值会以固定步长改变。 *path* 是一个函数，根据动画的当前状态
-计算下一个要设置的值。当前内置的路径函数有以下几种：
+计算下一个要设置的值。目前，内置的路径函数有以下几种：
 
 -  :cpp:func:`lv_anim_path_linear`: 线性动画
 -  :cpp:func:`lv_anim_path_step`: 在最后一步时进行变化
@@ -225,10 +225,10 @@ pixels so *20* means *20 px/sec* speed.
    <br>
 
 
- 默认情况下，您直接设置了动画时间。但在某些情况下，设置动画速度更实用。
+ 默认情况下，您直接设置了动画时间。但在某些情况下，设置动画的速度更实用。
 
-:cpp:expr:`lv_anim_speed_to_time(speed, start, end)` 函数计算以给定
-速度从起始值达到终止值所需的时间（以毫秒为单位）。速度的单位是 *单位/秒* 。
+:cpp:expr:`lv_anim_speed_to_time(speed, start, end)` 函数会根据给定
+速度，从起始值达到终止值所需的时间（以毫秒为单位）进行计算。速度的单位是 *单位/秒* 。
 例如，:cpp:expr:`lv_anim_speed_to_time(20, 0, 100)` 将得到5000毫秒。
 例如，在 :cpp:func:`lv_obj_set_x` 的情况下， *单位* 是像素，所以 *20* 表示 *20 像素/秒* 的速度。  
 
@@ -252,7 +252,7 @@ provide the animated variable and its animator function.
    <br>
 
 
-如果您提供动画变量及其动画器函数，您可以使用 :cpp:expr:`lv_anim_delete(var, func)` 删除动画。
+如果您提供了被动画的变量及其动画器函数，您可以使用 :cpp:expr:`lv_anim_delete(var, func)` 删除动画。
 
 
 .. _animations_timeline:
@@ -293,9 +293,9 @@ timeline.
 
 其次，通过调用 :cpp:func:`lv_anim_timeline_create` 创建一个动画时间线对象。
 
-第三，通过调用 :cpp:expr:`lv_anim_timeline_add(at, start_time, &a)`.将动画元素添加到动画时间线中。 ``start_time`` 是动画在时间线上的开始时间。请注意， ``start_time`` 将覆盖 ``delay`` 的值。
+第三，通过调用 :cpp:expr:`lv_anim_timeline_add(at, start_time, &a)`.将动画元素添加到动画时间轴中。 ``start_time`` 是动画在时间轴上的开始时间。请注意， ``start_time`` 将覆盖 ``delay`` 的值。
 
-最后，调用 :cpp:expr:`lv_anim_timeline_start(at)` 来启动动画时间线。
+最后，调用 :cpp:expr:`lv_anim_timeline_start(at)` 来启动动画时间轴。
 
 .. raw:: html
 
@@ -341,7 +341,7 @@ anim timeline before deleting the object. Otherwise, the program may crash or be
 调用 :cpp:expr:`lv_anim_timeline_get_reverse(at)` 函数来获取是否倒播动画时间轴。
 
 调用 :cpp:expr:`lv_anim_timeline_delete(at)` 函数来删除动画时间轴。
-注意: 如果在动画过程中需要删除对象，请确保在删除对象之前删除动画时间轴。否则，程序可能崩溃或表现异常。
+注意: 如果在动画过程中需要删除对象，请确保在删除对象之前删除动画时间轴。否则，程序可能崩溃或出现异常行为。
 
 .. image:: /misc/anim-timeline.png
 
