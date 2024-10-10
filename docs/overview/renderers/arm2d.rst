@@ -29,7 +29,7 @@ https://github.com/ARM-software/Arm-2D.
    <br>
 
 
-Arm-2D 本身并非GPU，而是一个 **面向微控制器的2DGPU的硬件抽象层** ，支持从Cortex-M0到最新Cortex-M85等所有Cortex-M处理器。
+Arm-2D 本身并非GPU，而是一个 **面向微控制器的2DGPU的硬件抽象层** ，支持从Cortex-M0到最新的Cortex-M85等所有的Cortex-M处理器。
 
 Arm-2D提供两种加速方式加速LVGL9： **同步模式（Synchronouse Mode）** 和 **异步模式（Asynchronous Mode）** 。
 
