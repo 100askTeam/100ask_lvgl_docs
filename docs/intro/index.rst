@@ -51,21 +51,21 @@ Key features（主要特性）
    <br>
 
 
-- 丰富且强大的模块化图形组件：按钮 (buttons)、图表 (charts)、列表 (lists)、滑动条 (sliders)、图片 (images) 等
-- 高级的图形引擎：动画、抗锯齿、透明度、平滑滚动、图层混合等效果
-- 支持多种输入设备：触摸屏、 键盘、编码器、按键等
-- 支持多显示设备
-- 不依赖特定的硬件平台，可以在任何显示屏上运行
-- 配置可裁剪（最低资源占用：64 kB Flash，16 kB RAM）
-- 基于UTF-8的多语种支持，例如中文、日文、韩文、阿拉伯文等
-- 可以通过类CSS的方式来设计、布局图形界面（例如：Flexbox、Grid）
-- 支持操作系统、外置内存、以及硬件加速（LVGL已内建支持STM32 DMA2D、NXP PXP和VGLite）
-- 即便仅有单缓冲区(frame buffer)的情况下，也可保证渲染如丝般顺滑
-- 全部由C编写完成，并支持C++调用
-- 支持Micropython编程，参见：LVGL API in Micropython
-- 支持模拟器仿真，可以无硬件依托进行开发
-- 丰富详实的例程
-- 详尽的文档以及API参考手册，可线上查阅或可下载为PDF格式
+- 丰富且强大的模块化图形组件，例如按钮 (buttons)、图表 (charts)、列表 (lists)、滑动条 (sliders)、图片 (images) 等
+- 高级的图形引擎：具有动画、抗锯齿、透明度、平滑滚动、图层混合等效果
+- 支持多种输入设备：例如触摸屏、 键盘、编码器、按键等
+- 支持多语言，采用 UTF-8 编码
+- 多显示器支持，即可以同时使用多个 TFT、单色显示器
+- 具有类似 CSS 样式的完全可定制图形元素
+- 与硬件无关：可与任何微控制器或显示器配合使用
+- 可扩展：能够在内存很小的情况下运行（64KB 闪存，16KB 内存）
+- 支持操作系统、外部存储器和 GPU，但不是必需的
+- 即使具有高级图形效果，也可进行单帧缓冲操作
+- 用 C 语言编写以实现最大兼容性（与 C++ 兼容）
+- 模拟器可在没有嵌入式硬件的情况下在 PC 上开始嵌入式图形用户界面设计
+- 支持与 MicroPython 绑定
+- 教程、示例、主题可用于快速图形用户界面设计
+- 文档可在线获取以及以 PDF 形式提供
 - 在 MIT 许可下免费和开源
 
 
@@ -111,20 +111,20 @@ Basically, every modern controller which is able to drive a display is suitable 
 基本上，每个能够驱动显示器的现代控制器都适合运行 LVGL。 最低要求是：
 
 * 16、32 或 64 位微控制器或处理器
-* 建议使用 >16 MHz 时钟速度
-* 闪存/ROM： > 64 kB 用于非常重要的组件 (> 建议使用 180 kB)
+* 建议时钟速度大于 16MHz
+* Flash/ROM： 对于非常基本的组件，需要大于 64KB (建议大于 180KB)
 * RAM:
-    * 静态 RAM 使用量：~2 kB，取决于使用的功能和对象类型
-    * 堆: > 2kB (> 建议使用 8 kB)
-    * 动态数据（堆）: > 2 KB (> 如果使用多个对象，建议使用 16 kB). 在 lv_conf.h 文件中配置 LV_MEM_SIZE 生效。
-    * 显示缓冲区：> “水平分辨率”像素（推荐 >10 × 10×“ 水平分辨率”）
-    * MCU或外部显示控制器中的一个帧缓冲区
-* C99 或更新的编译器
+    * 静态 RAM 的使用量：根据使用的功能和对象类型，约为 2KB
+    * 栈空间: 大于 2KB (建议大于 8KB)
+    * 动态数据（堆）: 如果使用多个对象，大于 2KB (建议大于 48KB)。通过在 “lv_conf.h” 文件中的 :c:macro:LV_MEM_SIZE进行设置。
+    * 显示缓冲区：大于 “水平分辨率” 像素（建议大于 10 倍 “水平分辨率”）
+    * 在MCU或外部显示控制器中有一个帧缓冲区
+* C99 或更新版本的编译器
 * 具备基本的 C（或 C++）知识：
     * `pointers <https://www.tutorialspoint.com/cprogramming/c_pointers.htm>`_。
     * `structs <https://www.tutorialspoint.com/cprogramming/c_structures.htm>`_。
     * `callbacks <https://www.geeksforgeeks.org/callbacks-in-c/>`_。
-:注意: *资源占用情况与具体硬件平台、编译器等因素有关，上表中仅给出参考值.*
+:注意: *内存使用量可能因架构、编译器和构建选项而有所不同.*
 
 
 License（许可证）
@@ -151,13 +151,13 @@ You can choose from many different ways of contributing See :ref:`contributing` 
    <br>
 
 
-LVGL 项目（包括所有存储库）在 `MIT license <https://github.com/lvgl/lvgl/blob/master/LICENCE.txt>`_ 许可下获得许可。 这意味着您甚至可以在商业项目中使用它。
+LVGL 项目（包括所有存储库）在 `MIT license <https://github.com/lvgl/lvgl/blob/master/LICENCE.txt>`_ 授权下获得许可。 这意味着您甚至可以在商业项目中使用它。
 
-这不是强制性的，但如果您在论坛的 `My projects <https://forum.lvgl.io/c/my-projects/10>`_ 类别或来自 `lvgl.io <https://lvgl.io/#contact>`_ 的私人消息中写下有关您的项目的几句话，我们将不胜感激。
+这不是强制性的，但如果您在论坛的 `My projects <https://forum.lvgl.io/c/my-projects/10>`_ 分类中写一些关于你的项目的文字，或者给 `lvgl.io <https://lvgl.io/#contact>`_ 发一封私信，我们将非常感激。
 
-尽管您可以免费获得 LVGL，但它背后的工作量很大。它由一群志愿者创建，他们在空闲时间为您提供。
+尽管您可以免费获得 LVGL，但它背后的工作量很大。它由一群志愿者创建，他们在空闲时间为您提供了这个库。
 
-为了使 LVGL 项目可持续，请考虑为该项目做 :ref:`contributing` 。您可以从多种投稿方式中进行选择，例如简单地写一条关于您正在使用 LVGL 的推文、修复错误、翻译文档，甚至成为维护者。
+为了使 LVGL 项目可持续发展，请考虑为该项目做贡献。你可以从许多不同的贡献方式中进行选择，见 :ref:`contributing` 部分，例如简单地写一条关于您正在使用 LVGL 的推文、修复错误、翻译文档，甚至成为维护者。
 
 
 Repository layout（仓库布局）
@@ -201,17 +201,17 @@ You will find these repositories there:
 
 您可以从下面的列表获取到lvgl所有相关的代码仓库：
 
-- `lvgl <https://github.com/lvgl/lvgl>`_：本身有很多 `例子 <https://github.com/lvgl/lvgl/blob/master/examples/>`_ 和  `演示示例 <https://github.com/lvgl/lvgl/blob/master/demos/>`_。
+- `lvgl <https://github.com/lvgl/lvgl>`_：库本身以及许多 `例子 <https://github.com/lvgl/lvgl/blob/master/examples/>`_ 和  `演示示例 <https://github.com/lvgl/lvgl/blob/master/demos/>`_。
 
 - `lv_drivers <https://github.com/lvgl/lv_drivers>`_: 显示和输入设备驱动程序。
 
-- `博客 <https://github.com/lvgl/blog>`_: `博客站点的来源 <https://blog.lvgl.io>`_。
+- `博客 <https://github.com/lvgl/blog>`_: `博客网站 <https://blog.lvgl.io>`_的源代码。
 
-- `sim <https://github.com/lvgl/sim>`_:  `在线模拟器网站的来源 <https://sim.lvgl.io>`_。
+- `sim <https://github.com/lvgl/sim>`_:  `在线模拟器网站 <https://sim.lvgl.io>`_的源代码。
 
-- `lv_port_* <https://github.com/lvgl?q=lv_port&type=&language=>`_: LVGL到端口或开发板。
+- `lv_port_* <https://github.com/lvgl?q=lv_port&type=&language=>`_: LVGL 针对开发板或环境的移植。
 
-- `lv_binding_* <https://github.com/lvgl?q=lv_binding&type=&language=l>`_: 绑定到其他语言。
+- `lv_binding_* <https://github.com/lvgl?q=lv_binding&type=&language=l>`_: 与其他语言的绑定。
 
 
 Release policy（发布策略）
@@ -236,13 +236,13 @@ Tags like `vX.Y.Z` are created for every release.
    <br>
 
 
-LVGL库遵循 `语义版本管理 <https://semver.org/>`_:
+LVGL库遵循 `语义化版本管理 <https://semver.org/>`_的规则:
 
-* 不兼容 API 更改的主要版本。 比如： v5.0.0, v6.0.0
-* 新的但向后兼容的功能的次要版本。 比如： v6.1.0, v6.2.0
-* 用于向后兼容错误修复的补丁版本。 比如： v6.1.1, v6.1.2
+* 主版本号：不兼容的 API 变更。例如 v5.0.0、v6.0.0
+* 次版本号：新的但向后兼容的功能。例如 v6.1.0、v6.2.0
+* 修订版本号：向后兼容的错误修复。例如 v6.1.1、v6.1.2
 
-* 为每个版本创建诸如 `vX.Y.Z` 之类的标签。
+* 为每个版本创建像 `vX.Y.Z` 之类的标签。
 
 
 Release cycle（发布周期）
@@ -263,9 +263,9 @@ Release cycle（发布周期）
    <br>
 
 
-* 错误修复：每周按需发布
-* 次要版本：每 3-4 个月
-* 主要版本：大约每年
+* 错误修复：根据需求发布，甚至可能每周发布一次
+* 次要版本：每 3-4 个月一次
+* 主要版本：大约每年一次
 
 
 Branches（分支）
@@ -291,10 +291,10 @@ The core repositories have at least the following branches:
 
 核心存储库至少有以下分支：
 
-* `master`: 最新版本，此处直接合并补丁。
+* `master`: 最新版本，补丁直接合并到这里。
 * `release/vX.Y`: 次要版本的稳定版本
-* `fix/some-description`: 错误修复的临时分支
-* `feat/some-description`: 功能的临时分支
+* `fix/some-description`: 用于错误修复的临时分支
+* `feat/some-description`: 用于新功能的临时分支
 
 
 Changelog（变更日志）
@@ -313,7 +313,7 @@ The changes are recorded in :ref:`changelog`.
    <br>
 
 
-更改记录在 :ref:`changelog` 中。
+这些变更记录在 :ref:`changelog` 中。
 
 
 Version support（版本支持）
@@ -354,7 +354,7 @@ Starting from v8, every minor release is supported for 1 year.
    <br>
 
 
-在v8之前，每个主要版本的次要版本都支持1年。从v8开始，每个次要版本都支持1年。
+在v8之前，每个主要版本的最后一个次要版本会被支持1年。从v8开始，每个次要版本都支持1年。
 
 
 +---------+---------------------+--------------------+--------+
@@ -405,10 +405,9 @@ Before posting a question, please ready this FAQ section as you might find answe
 
 可以在论坛提问： `https://forum.lvgl.io/ <https://forum.lvgl.io/>`_。
 
-我们使用 `GitHub issues <https://github.com/lvgl/lvgl/issues>`_ 问题 进行开发相关讨论。 仅当您的问题或问题与库的开发密切相关时才应使用它们。
+我们使用 `GitHub issues <https://github.com/lvgl/lvgl/issues>`_ 进行与开发相关的讨论。 只有当您的问题或事项与库的开发密切相关时，才应使用它们。
 
-在发布问题之前，请准备好这个常见问题部分，因为您可能也会在这里找到问题的答案。
-
+在发布问题之前，请先阅读此常见问题解答部分，因为你可能在这里也能找到问题的答案。
 
 Is my MCU/hardware supported?（LVGL是否支持我的 MCU/硬件？）
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -439,11 +438,11 @@ LVGL 支持每个能够通过并行端口、SPI、RGB 接口或其他任何方�
 
 * “通用” MCU，如 STM32F、STM32H、NXP Kinetis、LPC、IMX、dsPIC33、PIC32、SWM341 等。
 *  蓝牙、GSM、Wi-Fi 模块，如Nordic NRF、Espressif ESP32和Raspberry Pi Pico W
-* 带有帧缓冲设备的 Linux，例如 /dev/fb0。 这包括单板计算机，如 Raspberry Pi
-* 任何其他具有足够强大 MCU 和外围设备来驱动显示器的设备
+* 带有帧缓冲设备（例如 /dev/fb0）的Linux。 这包括单板计算机，如 Raspberry Pi
+* 任何具有足够强大的 MCU 和用于驱动显示器的外设的其他设备
 
 
-Is my display supported?（支持我的显示器吗？）
+Is my display supported?（我的显示器是否受支持？）
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. raw:: html
@@ -471,21 +470,21 @@ See the :ref:`display_interface` section to learn more.
    <br>
 
 
-LVGL 只需要一个简单的驱动程序函数即可将像素阵列复制到显示器的给定区域。 如果您可以在显示器上执行此操作，那么您可以将其与 LVGL 一起使用。
+LVGL 只需要一个简单的驱动程序函数，即可将像素阵列复制到显示器的给定区域。 如果您可以在显示器上执行此操作，那么您就可以在 LVGL 中使用它。
 
-支持的显示类型的一些示例：
+些受支持的显示器类型示例：
 
-* 具有 16 位或 24 位色深的 TFT
+* 具有 16 位或 24 位色深的 TFT 显示器
 * 带有 HDMI 端口的显示器
 * 小型单色显示器
 * 灰度显示
-* 甚至 LED 矩阵
+* 甚至是 LED 矩阵
 * 或任何其他可以控制像素颜色/状态的显示器
 
 请参阅 :ref:`display_interface` 部分以了解更多信息。
 
 
-LVGL doesn't start, randomly crashes or nothing is drawn on the display. What can be the problem?（LVGL未启动、随机崩溃或显示器上未绘制任何内容。问题出在哪里？）
+LVGL doesn't start, randomly crashes or nothing is drawn on the display. What can be the problem?（LVGL未启动、随机崩溃或显示器上未绘制任何内容。可能是什么问题呢？）
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. raw:: html
@@ -507,16 +506,16 @@ LVGL doesn't start, randomly crashes or nothing is drawn on the display. What ca
    <br>
 
 
-* 请尝试增加 :c:macro:`LV_MEM_SIZE`。
-* 确保您的显示器在没有LVGL的情况下工作。例如：启动时把它漆成红色。
-* 启用 :ref:`logging`
-* 启用 ``lv_conf.h`` (`LV_USE_ASSERT_...`)中的断言
+* 请尝试增加 :c:macro:`LV_MEM_SIZE`（LVGL 内存大小宏定义）。
+* 确保您的显示器在没有LVGL的情况下工作。例如：启动时把它涂成红色。
+* 启用 :ref:`logging`功能
+* 在 ``lv_conf.h`` 文件中启用断言(`LV_USE_ASSERT_...`)
 * 如果您使用RTOS
     * 增加调用 :cpp:func:`lv_timer_handler` 的任务的堆栈大小
-    * 请确保您使用了如下所述的互斥： :ref:`os_interrupt`
+    * 确保按照这里的描述使用了互斥锁： :ref:`os_interrupt`
 
 
-My display driver is not called. What have I missed?（我的显示驱动程序没有被调用。我错过了什么？）
+My display driver is not called. What have I missed?（我的显示驱动程序没有被调用。我遗漏了什么？）
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. raw:: html
@@ -536,7 +535,7 @@ Learn more in the :ref:`tick` and :ref:`timer` sections.
 
 确保你在中断中调用了 :cpp:expr:`lv_tick_inc(x)` ，在你的主 ``while(1)`` 中调用了 :cpp:func:`lv_timer_handler` 。
 
-在 :ref:`tick` 和 :ref:`timer` sections部分了解更多信息。
+在 :ref:`tick` 和 :ref:`timer` 部分可以了解更多信息。
 
 
 Why is the display driver called only once? Only the upper part of the display is refreshed.（为什么显示驱动程序只调用一次？仅刷新显示的上部。）
@@ -555,10 +554,10 @@ Be sure you are calling :cpp:expr:`lv_display_flush_ready(drv)` at the end of yo
    <br>
 
 
-确保在"*显示刷新回调*"结束时调用 :cpp:expr:`lv_display_flush_ready(drv)` 。
+确保在你的"*显示刷新回调函数*"结束时调用 :cpp:expr:`lv_display_flush_ready(drv)` 。
 
 
-Why do I see only garbage on the screen?（为什么我在屏幕上只看到垃圾？）
+Why do I see only garbage on the screen?（为什么我在屏幕上只看到乱码？）
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. raw:: html
@@ -574,7 +573,7 @@ Probably there a bug in your display driver. Try the following code without usin
    <br>
 
 
-您的显示驱动程序中可能存在错误。在不使用 LVGL 的情况下尝试以下代码。你应该看到一个带有红蓝渐变的正方形。
+很可能是你的显示驱动程序中有错误。在不使用 LVGL 的情况下尝试以下代码。你应该看到一个带有红蓝渐变色的正方形。
 
 
 .. code-block:: c
@@ -641,12 +640,12 @@ How to speed up my UI?（如何加速我的用户界面？）
    <br>
 
 
-- 如果您的 MCU 支持的话，请打开编译器优化并启用缓存
+- 开启编译器优化，如果你的微控制器单元（MCU）有缓存则启用缓存
 - 增加显示缓冲区的大小
-- 使用 2 个显示缓冲区并在后台使用 DMA（或类似外围设备）刷新缓冲区
+- 使用 2 个显示缓冲区，并在后台使用直接存储器访问（DMA）或类似的外设刷新缓冲区
 - 如果您使用 SPI 或并行端口来驱动显示器，请提高它们的时钟速度
 - 如果您的显示器具有 SPI 端口，请考虑更改为并行模型，因为它具有更高的吞吐量
-- 将显示缓冲区保留在内部 RAM（而不是外部 SRAM）中，因为 LVGL 经常使用它，并且访问时间应该很短
+- 将显示缓冲区保持在内部 RAM（而不是外部 SRAM）中，因为 LVGL 经常使用它，并且它应该具有快速的访问时间
 
 
 How to reduce flash/ROM usage?（如何减少闪存/ROM的使用？）
@@ -667,9 +666,9 @@ If you are using GCC/CLANG you can add `-fdata-sections -ffunction-sections` com
    <br>
 
 
-您可以禁用 *lv_conf.h* 中所有未使用的功能（如动画、文件系统、GPU等）和对象类型。
+您可以在 *lv_conf.h* 中禁用所有未使用的功能（如动画、文件系统、GPU等）和对象类型。
 
-如果使用GCC/CLANG，可以添加 `-fdata-sections -ffunction-sections` 编译器标志和 `--gc-sections` 链接器标志，以从最终二进制文件中删除未使用的函数和变量。如果可能，请添加 `-flto` 编译器标志，以便与GCC的 `-Os` 或CLANG的 `-Oz` 一起启用链接时间优化。
+如果您正在使用GCC/CLANG，您可以添加 `-fdata-sections -ffunction-sections` 编译器标志和 `--gc-sections` 链接器标志，以从最终二进制文件中删除未使用的函数和变量。如果可能，请添加 `-flto` 编译器标志，以便与GCC的 `-Os` 或CLANG的 `-Oz` 一起启用链接时间优化。
 
 
 How to reduce the RAM usage?（如何减少内存使用）
@@ -690,9 +689,9 @@ How to reduce the RAM usage?（如何减少内存使用）
    <br>
 
 
-* 降低 *显示缓冲区* 的大小
-* 减少 *lv_conf.h* 中的 :c:macro:`LV_MEM_SIZE` 。 当您创建按钮、标签等对象时会使用此内存。
-* 要使用较低的 :c:macro:`LV_MEM_SIZE` 您可以仅在需要时创建对象并在不再需要时将其删除
+* 减小 *显示缓冲区* 的大小
+* 减少 *lv_conf.h* 中的 :c:macro:`LV_MEM_SIZE` 。 当您创建如按钮、标签等对象时，会使用此内存。
+* 为了在较小的 :c:macro:`LV_MEM_SIZE` 下工作，您可以仅在需要时创建对象并在不再需要时将其删除
 
 
 How to work with an operating system?（如何使用操作系统？）
@@ -712,5 +711,5 @@ See the :ref:`os_interrupt` section to learn more.
    <br>
 
 
-要使用任务可以相互中断（抢占式）的操作系统，您应该使用互斥锁保护与 LVGL 相关的函数调用。 请参阅 :ref:`os_interrupt` 部分以了解更多信息。
+在操作系统中，任务可能会相互中断（抢占式），因此你应该使用互斥锁来保护与 LVGL 相关的函数调用。 请参阅 :ref:`os_interrupt` 部分以了解更多信息。
 

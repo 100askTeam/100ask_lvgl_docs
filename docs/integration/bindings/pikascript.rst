@@ -47,7 +47,7 @@ your arguments .
 
 它更简单，无需任何移植和配置，即可直接运行，不依赖于操作系统或文件系统，对 Windows 平台上的流行 IDE（集成开发环境）如 Keil、IAR、RT-Thread-Studio 有良好的支持，当然，它也支持 Linux-gcc 开发平台。
 
-它更智能，具有独特的 C 模块机制，它允许你仅通过用 Python 编写 C 模块的 API 就能自动生成绑定，无需处理手动编写任何宏或全局表的麻烦。另一方面，所有的 C 模块都拥有复杂智能的提示，甚至能提示你的参数类型。
+它更智能，具有独特的 C 模块机制，只需要 Python 编写 C 模块的 API 就能自动生成绑定，无需处理手动编写任何宏或全局表的麻烦。另一方面，所有的 C 模块都拥有复杂的智能提示，甚至能提示你的参数类型。
 
 
 Why PikaScript + LVGL ?（为什么选择 PikaScript + LVGL？）
@@ -79,9 +79,9 @@ PikaScript现在支持LVGL8的主要功能，并且这些API与MicroPython完全
 
 这意味着您可以继续使用已经编写好的MicroPython代码，同时使用更少的代码空间和RAM。
 
-享受详细的代码提示，甚至可以提供参数类型，以获得更好的编程体验。
+享受详细到参数类型的代码提示，以获得更好的编程体验。
 
-使用更方便的IDE，比如基于vs的仿真项目。
+使用更方便的IDE，比如基于vs的模拟项目。
 
 
 So how does it look like?（那看起来怎么样呢？）
@@ -273,7 +273,7 @@ PikaScript具有独特的C模块智能绑定工具。
        def set_bg_angles(self, start: int, end: int): ...
        def set_angles(self, start: int, end: int): ...
 
-然后，PikaScript的预编译器可以通过以module_class_method格式命名函数来自动绑定以下C函数，而无需任何额外工作，所有绑定和注册都会自动完成。
+然后，PikaScript的预编译器可以自动绑定以下C函数，只需要以module_class_method格式命名函数即可，而无需任何额外工作，所有绑定和注册都会自动完成。
 
 .. code:: c
 

@@ -15,5 +15,5 @@ In progress: https://github.com/lvgl/lv_binding_cpp
    <br>
 
 
-未完：https://github.com/lvgl/lv_binding_cpp
+在进行中：https://github.com/lvgl/lv_binding_cpp
 
