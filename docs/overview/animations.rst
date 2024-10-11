@@ -257,7 +257,7 @@ provide the animated variable and its animator function.
 
 .. _animations_timeline:
 
-Timeline（时间线）
+Timeline（时间轴）
 *****************
 
 .. raw:: html
@@ -291,7 +291,7 @@ timeline.
 
 首先，创建一个动画元素，但不要调用 :cpp:func:`lv_anim_start`。
 
-其次，通过调用 :cpp:func:`lv_anim_timeline_create` 创建一个动画时间线对象。
+其次，通过调用 :cpp:func:`lv_anim_timeline_create` 创建一个动画时间轴对象。
 
 第三，通过调用 :cpp:expr:`lv_anim_timeline_add(at, start_time, &a)`.将动画元素添加到动画时间轴中。 ``start_time`` 是动画在时间轴上的开始时间。请注意， ``start_time`` 将覆盖 ``delay`` 的值。
 
