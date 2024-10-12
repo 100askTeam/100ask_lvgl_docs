@@ -238,26 +238,26 @@ Input device events（输入设备事件）
 
 
 -  :cpp:enumerator:`LV_EVENT_PRESSED`: 对象已被按下
--  :cpp:enumerator:`LV_EVENT_PRESSING`: 对象正在被按下（在持续按压时被调用）
+-  :cpp:enumerator:`LV_EVENT_PRESSING`: 对象正在被按下（在按下期间持续调用）
 -  :cpp:enumerator:`LV_EVENT_PRESS_LOST`: 对象仍在被按下，但滑动光标/手指离开对象
 -  :cpp:enumerator:`LV_EVENT_SHORT_CLICKED`: 对象被按下一小段时间，然后释放。如果被滚动，则不会被调用。
 -  :cpp:enumerator:`LV_EVENT_LONG_PRESSED`: 对象至少被按下`long_press_time`。如果被滚动，则不会被调用。
--  :cpp:enumerator:`LV_EVENT_LONG_PRESSED_REPEAT`: 在每`long_press_repeat_time`毫秒后，调用一次。如果被滚动，则不会被调用。
--  :cpp:enumerator:`LV_EVENT_CLICKED`: 如果没有被滚动，在释放时被调用（不管长按）
--  :cpp:enumerator:`LV_EVENT_RELEASED`: 在所有对象释放时被调用
+-  :cpp:enumerator:`LV_EVENT_LONG_PRESSED_REPEAT`: 在每`long_press_repeat_time`（长按重复时间）毫秒后，调用一次。如果被滚动，则不会被调用。
+-  :cpp:enumerator:`LV_EVENT_CLICKED`: 如果没有被滚动，在释放时被调用（与长按无关）
+-  :cpp:enumerator:`LV_EVENT_RELEASED`: 在任何对象释放时被调用
 -  :cpp:enumerator:`LV_EVENT_SCROLL_BEGIN`: 滚动开始。事件参数是滚动动画的指针。可以被修改
 -  :cpp:enumerator:`LV_EVENT_SCROLL_THROW_BEGIN`: 
 -  :cpp:enumerator:`LV_EVENT_SCROLL_END`: 滚动结束
--  :cpp:enumerator:`LV_EVENT_SCROLL`: 滚动
+-  :cpp:enumerator:`LV_EVENT_SCROLL`: 滚动中
 -  :cpp:enumerator:`LV_EVENT_GESTURE`: 检测到手势。使用 :cpp:expr:`lv_indev_get_gesture_dir(lv_indev_active());` 获取手势
--  :cpp:enumerator:`LV_EVENT_KEY`: 将键发送给对象。使用 :cpp:expr:`lv_indev_get_key(lv_indev_active());` 获取键
--  :cpp:enumerator:`LV_EVENT_FOCUSED`: 对象被聚焦
+-  :cpp:enumerator:`LV_EVENT_KEY`: 将键发送给对象。使用 :cpp:expr:`lv_indev_get_key(lv_indev_active());` 获取键值
+-  :cpp:enumerator:`LV_EVENT_FOCUSED`: 对象获得焦点
 -  :cpp:enumerator:`LV_EVENT_DEFOCUSED`: 对象失去焦点
 -  :cpp:enumerator:`LV_EVENT_LEAVE`: 对象失去焦点但仍然被选中
 -  :cpp:enumerator:`LV_EVENT_HIT_TEST`: 执行高级点击测试
 -  :cpp:enumerator:`LV_EVENT_INDEV_RESET`: 输入设备已重置
--  :cpp:enumerator:`LV_EVENT_HOVER_OVER`: 开发中，鼠标悬停在对象上方。
--  :cpp:enumerator:`LV_EVENT_HOVER_LEAVE`: 开发中，鼠标离开对象。
+-  :cpp:enumerator:`LV_EVENT_HOVER_OVER`: 输入设备悬停在对象上方。
+-  :cpp:enumerator:`LV_EVENT_HOVER_LEAVE`: 输入设备离开对象上方的悬停状态。
 
 
 
@@ -285,14 +285,14 @@ Drawing events（绘图事件）
    <br>
 
 
-- :cpp:enumerator:`LV_EVENT_COVER_CHECK`: 检查对象是否完全覆盖了一个区域。事件参数是 :cpp:type:`lv_cover_check_info_t *`。
-- :cpp:enumerator:`LV_EVENT_REFR_EXT_DRAW_SIZE`: 获取对象周围所需的额外绘制区域（例如用于阴影）。事件参数是 :cpp:type:`int32_t *` 来存储大小。
+- :cpp:enumerator:`LV_EVENT_COVER_CHECK`: 检查对象是否完全覆盖了一个区域。事件参数是 :cpp:type:`lv_cover_check_info_t *`类型的指针。
+- :cpp:enumerator:`LV_EVENT_REFR_EXT_DRAW_SIZE`: 获取对象周围所需的额外绘制区域（例如用于阴影）。事件参数是 :cpp:type:`int32_t *` 类型的指针，用于存储大小值。
 - :cpp:enumerator:`LV_EVENT_DRAW_MAIN_BEGIN`: 开始主绘制阶段
 - :cpp:enumerator:`LV_EVENT_DRAW_MAIN`: 执行主绘制
-- :cpp:enumerator:`LV_EVENT_DRAW_MAIN_END`: 结束主绘制阶段
+- :cpp:enumerator:`LV_EVENT_DRAW_MAIN_END`: 完成主绘制阶段
 - :cpp:enumerator:`LV_EVENT_DRAW_POST_BEGIN`: 开始后绘制阶段（当所有子对象都绘制完成时）
 - :cpp:enumerator:`LV_EVENT_DRAW_POST`: 执行后绘制阶段（当所有子对象都绘制完成时）
-- :cpp:enumerator:`LV_EVENT_DRAW_POST_END`: 结束后绘制阶段（当所有子对象都绘制完成时）
+- :cpp:enumerator:`LV_EVENT_DRAW_POST_END`: 完成后绘制阶段（当所有子对象都绘制完成时）
 - :cpp:enumerator:`LV_EVENT_DRAW_TASK_ADDED`: 添加绘制任务
 
 
@@ -317,7 +317,7 @@ Special events（特殊事件）
 
 
 -  :cpp:enumerator:`LV_EVENT_VALUE_CHANGED`: 对象的值已更改（例如，滑块移动）
--  :cpp:enumerator:`LV_EVENT_INSERT`: 文本已插入到对象中。事件数据是被插入的 `char *`。
+-  :cpp:enumerator:`LV_EVENT_INSERT`: 文本已插入到对象中。事件数据是被插入的 `char *`类型的文本。
 -  :cpp:enumerator:`LV_EVENT_REFRESH`: 通知对象刷新其上的某些内容（用户用）
 -  :cpp:enumerator:`LV_EVENT_READY`: 进程已结束
 -  :cpp:enumerator:`LV_EVENT_CANCEL`: 进程已取消
@@ -509,7 +509,7 @@ contains all data about the event. The following values can be gotten from it:
 :cpp:type:`lv_event_t` 是传递给事件回调函数的唯一参数，它包含了该事件的所有数据。可以从中获取以下值：
 
 - :cpp:expr:`lv_event_get_code(e)`：获取事件代码
-- :cpp:expr:`lv_event_get_current_target(e)`：获取发送事件的对象。即，正在被调用事件处理器的对象。 
+- :cpp:expr:`lv_event_get_current_target(e)`：获取事件被发送到的对象。即，正在被调用其事件处理程序的对象。 
 - :cpp:expr:`lv_event_get_target(e)`： 获取最初触发事件的对象（如果启用了 :ref:`event bubbling <events_bubbling>` ，则与 :cpp:func:`lv_event_get_target` 不同）
 - :cpp:expr:`lv_event_get_user_data(e)`： 获取作为 :cpp:func:`lv_obj_add_event` 的最后一个参数传递的指针。
 - :cpp:expr:`lv_event_get_param(e)`： 获取作为 :cpp:func:`lv_event_send` 的最后一个参数传递的参数。
@@ -540,9 +540,9 @@ not the original object. To get the original target call
    <br>
 
 
-如果启用了 :cpp:expr:`lv_obj_add_flag(obj, LV_OBJ_FLAG_EVENT_BUBBLE)`，那么所有事件也会发送给对象的父级。如果父级也启用了 :cpp:enumerator:`LV_OBJ_FLAG_EVENT_BUBBLE`，那么该事件将继续被发送给其父级，依此类推。
+如果启用了 :cpp:expr:`lv_obj_add_flag(obj, LV_OBJ_FLAG_EVENT_BUBBLE)`，那么所有事件也会发送给对象的父对象。如果父对象也启用了 :cpp:enumerator:`LV_OBJ_FLAG_EVENT_BUBBLE`，那么该事件将继续被发送给其父对象，依此类推。
 
-事件的 *target* 参数始终是当前的目标对象，而不是原始对象。要获取原始目标，可以在事件处理函数中调用 :cpp:expr:`lv_event_get_target_obj(e)`。
+事件的 *target* 参数始终是当前的目标对象，而不是原始对象。要获取原始目标对象，可以在事件处理函数中调用 :cpp:expr:`lv_event_get_target_obj(e)`。
 
 
 .. _events_examples:
