@@ -148,7 +148,7 @@ For the lighter variants of a palette color use
    <br>
 
 
-LVGL中包含 `Material Design's palette <https://vuetifyjs.com/en/styles/colors/#material-colors>`__ 的颜色。在这个系统中，所有命名的颜色都有一个名义上的主要颜色，以及四种较暗和五种较浅的变体。
+LVGL中包含 `Material Design's palette <https://vuetifyjs.com/en/styles/colors/#material-colors>`__ 的颜色。在这个系统中，所有命名的颜色都有一个名义上的主要颜色，以及四种更深和五种较浅的变体。
 
 颜色的名称如下：
 

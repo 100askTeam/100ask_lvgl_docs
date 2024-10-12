@@ -20,7 +20,7 @@ after that.
    <br>
 
 
-在这里您可以了解有关 LVGL 的最重要的事情。 您应该先阅读本文以获得大致印象，然后再阅读详细的 :ref:`porting` 和 :ref:`overview` 部分。
+在这里您可以了解有关 LVGL 的最重要的事情。 您应该先阅读这部分内容以获得大致印象，然后再阅读详细的 :ref:`porting（移植）` 和 :ref:`overview（概述）` 部分。
 
 
 Get started in a simulator（从模拟器开始）
@@ -47,7 +47,7 @@ experience with LVGL immediately.
 
 强烈建议您先在lvgl模拟器上开始学习实验，而不是立即将 LVGL 移植到嵌入式硬件。
 
-LVGL 已适配到许多 IDE，以确保您能找到自己喜欢的一种模拟器开发环境。转到 :ref:`simulator` 部分以获取可以在您的 PC 上运行的即用型项目。通过这种方式，您可以暂时节省移植时间并立即获得一些使用 LVGL 的经验。(这是非常有用的！)
+LVGL 被移植到许多 IDE 中，以确保您能找到自己最喜欢的那个。转到 :ref:`simulator（模拟器）` 部分以获取可以在您的 PC 上运行的现成项目。通过这种方式，您现在可以节省移植时间，并立即获得一些使用 LVGL 的经验。(这是非常有用的！)
 
 
 Add LVGL into your project（将 LVGL 添加到您的项目中）
@@ -80,15 +80,15 @@ If you would rather try LVGL on your own project follow these steps:
    <br>
 
 
-如果您更愿意在自己的项目中尝试 LVGL，请按照以下步骤操作：
+如果您想在自己的项目中尝试 LVGL，请按照以下步骤操作：
 
-- 使用git命令 ``git clone https://github.com/lvgl/lvgl.git`` 从 GitHub `下载 <https://github.com/lvgl/lvgl/archive/master.zip>`__ 或克隆库。
+- 从 GitHub `下载 <https://github.com/lvgl/lvgl/archive/master.zip>`__ 或使用git命令 ``git clone https://github.com/lvgl/lvgl.git`` 从GitHub克隆库。
 - 将 ``lvgl`` 文件夹复制到您的项目中。
-- 将 ``lvgl/lv_conf_template.h`` 作为 ``lv_conf.h`` 复制到 ``lvgl`` 文件夹旁边，将其第一个的 ``#if 0`` 更改为 ``1`` 以使能文件的内容并修改设置 :c:macro:`LV_COLOR_DEPTH` 宏。
+- 将 ``lvgl/lv_conf_template.h`` 复制为 ``lv_conf.h`` 并放在 ``lvgl`` 文件夹旁边，将其第一个的 ``#if 0`` 更改为 ``1`` 以启用该文件的内容并修改设置 :c:macro:`LV_COLOR_DEPTH` 定义。
 - 在需要使用 LVGL 相关函数的文件中包含 ``lvgl/lvgl.h``。
 - 调用 :cpp:func:`lv_init` (初始化lvgl库)
-- 在计时器或任务中每 ``x`` 毫秒调用一次 :cpp:expr:`lv_tick_inc(x)` (``x``  应该在 1 到 10 之间)。 LVGL 的内部时序需要它。或者，使用 :cpp:func:`lv_tick_set_cb` 注册 ``tick_get_cb`` ，以便LVGL可以直接检索当前时间。
-- 创建一个显示。
+- 在定时器或任务中每 ``x`` 毫秒调用一次 :cpp:expr:`lv_tick_inc(x)` (``x``  应该在 1 到 10 之间)。 这是 LVGL 的内部计时所必需的。或者，使用 :cpp:func:`lv_tick_set_cb` 注册一个 ``tick_get_cb`` ，以便LVGL可以直接检索当前时间。
+- 创建一个显示器。
 
 
 .. code:: c
@@ -111,7 +111,7 @@ If you would rather try LVGL on your own project follow these steps:
    <br>
 
 
-- LVGL支持多种缓冲方法。在这里，你可以看到如何设置部分缓冲（即在较小的缓冲区中渲染屏幕和变更区域）。 缓冲区大小可以自由设置，但 1/10 屏幕大小是一个很好的起点。
+- 创建一个绘制缓冲区：LVGL支持多种缓冲方法。在这里，你可以看到如何设置局部缓冲（即在一个较小的缓冲区中渲染屏幕和已更改的区域）。 缓冲区的大小可以自由设置，但以屏幕大小的 1/10 作为起点是一个不错的选择。
 
 
 .. code:: c
@@ -135,7 +135,7 @@ If you would rather try LVGL on your own project follow these steps:
    <br>
 
 
-- 实现并注册一个函数，该函数可以将渲染图像复制到显示区域：
+- 实现并注册一个能够将渲染后的图像复制到你的显示器的某个区域的函数：
 
 
 .. code:: c
@@ -210,9 +210,9 @@ section.
    <br>
 
 
-在主函数 ``while(1)`` 循环或操作系统任务中每隔几毫秒定期调用 :cpp:func:`lv_timer_handler` 。 如果需要，它将重绘屏幕，处理输入设备，动画等。
+在主函数 ``while(1)`` 循环中或操作系统任务中每隔几毫秒定期调用 :cpp:func:`lv_timer_handler` 。 如果需要，它将重绘屏幕，处理输入设备、动画等。
 
-有关更详细的指南，请转到 :ref:`porting` 部分。
+有关更详细的指南，请转到 :ref:`porting（移植）` 部分。
 
 
 Learn the basics（学习基础知识）
@@ -220,7 +220,7 @@ Learn the basics（学习基础知识）
 
 .. _quick-overview_widgets:
 
-Widgets（部件）
+Widgets（控件）
 ~~~~~~~~~~~~~~~
 
 .. raw:: html
@@ -283,19 +283,19 @@ related header file
    <br>
 
 
-按钮、标签、滑块、图表等图形元素称为对象或小部件。转到 :ref:`widgets` 以查看可用小部件的完整列表。
+按钮、标签、滑块、图表等图形元素称为对象或小部件。转到 :ref:`widgets（控件）` 以查看可用小部件的完整列表。
 
-每个对象都有一个创建它的父对象。例如，如果在按钮上创建标签，则该按钮是标签的父级。
+每个对象都有一个创建它的父对象。例如，如果一个标签创建在一个按钮上，那么这个按钮就是标签的父对象。
 
 子对象与父对象一起移动，如果删除父对象，子对象也将被删除。
 
-子项只能在其父项上可见。换句话说，父级之外的子级部分被剪掉了。
+子对象只能在其父项上可见。换句话说，子对象在父对象外部的部分会被裁剪。
 
 Screen 是“根”父级。您可以拥有任意数量的屏幕。
 
-要获取当前屏幕调用 :cpp:func:`lv_screen_active`，并使用 :cpp:expr:`lv_screen_load(scr1)` 加载屏幕。
+要获取当前屏幕，可以调用 :cpp:func:`lv_screen_active`，并使用 :cpp:expr:`lv_screen_load(scr1)` 加载屏幕。
  
-您可以使用 ``lv_<type>_create(parent)`` 创建一个新对象。它将返回一个 :cpp:type:`lv_obj_t` ``*`` 变量，该变量可用作对象的引用以设置其参数。
+您可以使用 ``lv_<type>_create(parent)`` 创建一个新对象。它将返回一个 :cpp:type:`lv_obj_t` ``*`` 类型的变量，这个变量可以作为对该对象的引用以设置其参数。
 
 For example（例如）:
 
@@ -311,7 +311,7 @@ For example（例如）:
    lv_obj_set_y(btn1, 10);
    lv_obj_set_size(btn1, 200, 50);
 
-除了基本属性外，小部件还可以具有特定于类型的小部件由 ``lv_<widget_type>_set_<parameter_name>(obj, <value>)`` 函数设置的参数。例如：
+除了基本属性外，小部件还可以具有特定类型的参数，这些参数通过 ``lv_<widget_type>_set_<parameter_name>(obj, <value>)`` 函数进行设置。例如：
 
 .. code:: c
 
@@ -370,13 +370,13 @@ To learn all features of the events go to the :ref:`events` section.
    <br>
 
 
-事件用于通知用户某个对象发生了某些事情。 您可以将一个或多个回调分配给一个对象，如果该对象被单击、释放、拖动、删除等将被调用。
+事件用于通知用户某个对象发生了某些事情。 您可以为一个对象分配一个或多个回调函数，如果该对象被单击、释放、拖动、删除等情况发生时，这些回调函数将被调用。
 
-一个回调是这样分配的：
+回调函数的分配方式如下：
 
 .. code:: c
 
-   lv_obj_add_event_cb(btn, btn_event_cb, LV_EVENT_CLICKED, NULL); /*Assign a callback to the button*/
+   lv_obj_add_event_cb(btn, btn_event_cb, LV_EVENT_CLICKED, NULL); /*为按钮分配一个回调函数*/
 
    ...
 
@@ -385,15 +385,15 @@ To learn all features of the events go to the :ref:`events` section.
        printf("Clicked\n");
    }
 
-:cpp:enumerator:`LV_EVENT_CLICKED` 可以代替 :cpp:enumerator:`LV_EVENT_ALL` 调用任何事件的回调。
+:cpp:enumerator:`LV_EVENT_CLICKED` 可以代替 :cpp:enumerator:`LV_EVENT_ALL` ，以便在任何事情发生时调用回调函数。
 
-从 :cpp:expr:`lv_event_t * e` 中，可以使用以下命令检索当前事件代码：
+从 :cpp:expr:`lv_event_t * e` 中，可以使用以下方式获取当前事件代码：
 
 .. code:: c
 
    lv_event_code_t code = lv_event_get_code(e);
 
-可以使用以下命令检索触发事件的对象：
+触发事件的对象可以通过以下方式获取：
 
 .. code:: c
 
@@ -428,9 +428,9 @@ Read the widgets' documentation to learn which parts each uses.
    <br>
 
 
-部件可能由一个或多个 *部分* 构建。例如，一个按钮只有一个名为 :cpp:enumerator:`LV_PART_MAIN` 的部分。但是， :ref:`lv_slider(滑块)`  具有 :cpp:enumerator:`LV_PART_MAIN`、 :cpp:enumerator:`LV_PART_INDICATOR` 和 :cpp:enumerator:`LV_PART_KNOB`。
+部件可能由一个或多个 *部分* 组成。例如，一个按钮只有一个名为 :cpp:enumerator:`LV_PART_MAIN` 的部分。但是，一个 :ref:`lv_slider(滑块)`  具有 :cpp:enumerator:`LV_PART_MAIN`、 :cpp:enumerator:`LV_PART_INDICATOR` 和 :cpp:enumerator:`LV_PART_KNOB`。
 
-通过使用零件，你可以将不同的样式应用于小装置。（见下文）
+通过使用部分，你可以对小部件的子元素应用不同的样式。（见下文）
 
 阅读小部件的文档，了解每个小部件使用的部分。
 
@@ -482,11 +482,11 @@ LVGL 对象可以处于以下状态的组合：
 - :cpp:enumerator:`LV_STATE_FOCUS_KEY`: 通过键盘或编码器聚焦，但不通过触摸板/鼠标聚焦
 - :cpp:enumerator:`LV_STATE_EDITED`: 由编码器编辑
 - :cpp:enumerator:`LV_STATE_HOVERED`: 鼠标悬停
-- :cpp:enumerator:`LV_STATE_PRESSED`: 被按下
+- :cpp:enumerator:`LV_STATE_PRESSED`: 正在被按下
 - :cpp:enumerator:`LV_STATE_SCROLLED`: 正在滚动
-- :cpp:enumerator:`LV_STATE_DISABLED`: 禁用
+- :cpp:enumerator:`LV_STATE_DISABLED`: 被禁用
 
-例如，如果你按下一个对象，它会自动进入 :cpp:enumerator:`LV_STATE_FOCUSED` 和 :cpp:enumerator:`LV_STATE_PRESSED` 状态，当你释放它时， :cpp:enumerator:`LV_STATE_PRESSED` 状态将被移除，保持活动状态。
+例如，如果你按下一个对象，它会自动进入 :cpp:enumerator:`LV_STATE_FOCUSED` 和 :cpp:enumerator:`LV_STATE_PRESSED` 状态，当你释放它时， :cpp:enumerator:`LV_STATE_PRESSED` 状态将被移除，而焦点任然保持活动状态。
 
 要检查对象是否处于给定状态，请使用 ``lv_obj_has_state(obj, LV_STATE_...)``。如果对象当时处于该状态，它将返回 ``true`` 。
 
@@ -523,9 +523,9 @@ configure the style. For example:
    <br>
 
 
-样式实例包含背景颜色、边框等属性 宽度、字体等，用于描述对象的外观。
+一个样式实例包含背景颜色、边框宽度、字体等属性，用于描述对象的外观。
 
-样式用 :cpp:struct:`lv_style_t` 变量表示。只有他们的指针 保存在对象中，因此需要将它们定义为静态或全局。 在使用样式之前，需要使用  :cpp:expr:`lv_style_init(&style1)` 对其进行初始化。之后，可以将属性添加到 配置样式。例如：
+样式用 :cpp:struct:`lv_style_t` 类型的变量表示。由于只有他们的指针被保存在对象中，因此需要将它们定义为静态或全局变量。 在使用一个样式之前，需要使用  :cpp:expr:`lv_style_init(&style1)` 对其进行初始化。之后，可以添加属性来配置样式。例如：
 
 
 .. code:: c
@@ -552,9 +552,9 @@ slider is pressed:
    <br>
 
 
-请参阅此处的完整属性列表 :ref:`styles_properties`。
+在此处查看属性的完整列表 :ref:`styles_properties`。
 
-使用对象的零件和的ORed组合指定样式状态。例如，当滑块被按下：
+样式是通过对象的部分和状态的按位或组合来分配的。例如，要在滑块被按下时将此样式应用于滑块的指示器上：
 
 
 .. code:: c
@@ -574,7 +574,7 @@ If the *part* is :cpp:enumerator:`LV_PART_MAIN` it can be omitted:
    <br>
 
 
-如果是 *part* ，则 :cpp:enumerator:`LV_PART_MAIN` 可以省略：
+如果 *part* 是 :cpp:enumerator:`LV_PART_MAIN` ，则可以省略它：
 
 
 .. code:: c
@@ -637,7 +637,7 @@ background color to make the button red:
    <br>
 
 
-样式可以级联（类似于 CSS）。这意味着您可以为对象的一部分添加更多样式。 例如 ``style_btn`` 可以设置默认按钮外观， ``style_btn_red`` 可以覆盖背景颜色使按钮变为红色：
+样式可以级联（类似于 CSS）。这意味着您可以为对象的一部分添加更多样式。 例如 ``style_btn`` 可以设置默认的按钮外观， ``style_btn_red`` 可以覆盖背景颜色使按钮变为红色：
 
 
 .. code:: c
@@ -668,11 +668,11 @@ style which resides inside the object and is used only by the object:
    <br>
 
 
-如果没有为当前状态设置属性，则将使用带有 :cpp:enumerator:`LV_STATE_DEFAULT` 的样式。如果即使在默认状态下也未定义该属性，则使用默认值。
+如果没有为当前状态设置属性，则将使用带有 :cpp:enumerator:`LV_STATE_DEFAULT` 的样式。如果在默认状态下未定义该属性，则会使用默认值。
 
-一些属性（通常是与文本相关的）可以被继承。这意味着如果一个属性没有在一个对象中设置，它也会在它的父级中搜索。 例如，您可以在屏幕样式中设置一次字体，该屏幕上的所有文本都会默认继承它。
+一些属性（通常是与文本相关的属性）可以被继承。这意味着如果一个对象中未设置某个属性，它也会在它的父对象进行查找。 例如，您可以在屏幕的样式中设置一次字体，该屏幕上的所有文本都将默认继承它。
 
-本地样式属性也可以添加到对象中。它创建了一个位于对象内部并且仅由对象使用的样式：
+也可以向对象添加局部样式属性。这将创建一个驻留在对象内部且仅由该对象使用的样式：
 
 
 .. code:: c

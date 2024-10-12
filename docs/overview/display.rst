@@ -17,7 +17,7 @@ Displays（显示）
    <br>
 
 
-:重要提示: LVGL中的 *显示* 基本概念在 :ref:`porting` 部分有解释。因此在继续阅读之前，请先阅读该部分。
+:重要提示: LVGL中的 *显示* 基本概念在 :ref:`porting` 章节有解释。因此在继续阅读之前，请先阅读该部分。
 
 
 .. _display_multi_display_support:
@@ -52,15 +52,15 @@ Why would you want multi-display support? Here are some examples:
    <br>
 
 
-在LVGL中，你可以拥有多个显示器，每个显示器都有自己的驱动程序、小部件和颜色深度。
+在LVGL中，你可以拥有多个显示器，每个显示器都有自己的驱动程序、控件和颜色深度。
 
-创建更多的显示器很简单：只需使用 :cpp:func:`lv_display_create` 并设置缓冲区和 ``flush_cb``。当你创建UI时，使用 :cpp:expr:`lv_display_set_default(disp)` 告诉库在哪个显示器上创建对象。
+创建多个的显示器很简单：只需使用 :cpp:func:`lv_display_create` 并设置缓冲区和 ``flush_cb``。当你创建UI时，使用 :cpp:expr:`lv_display_set_default(disp)` 告诉库在哪个显示器上创建对象。
 
 为什么你需要多显示器支持呢？以下是一些例子：
 
-- 在TFT显示屏上有本地UI，并在VNC上按需创建“虚拟”屏幕。（你需要添加VNC驱动程序）。
+- 有一个“正常”彻底TFT显示屏，带有本地UI，并在VNC上按需创建“虚拟”屏幕。（你需要添加VNC驱动程序）。
 - 有一个大型TFT显示屏和一个小型单色显示屏。
-- 在大型仪器或技术中有一些较小和简单的显示器。
+- 在大型仪器或技术设备中有一些较小且简单的显示器。
 - 有两个大型TFT显示器：一个供客户使用，一个供店员使用。
 
 
@@ -92,14 +92,14 @@ user activity on the default display. (See below in :ref:`Inactivity <display_in
    <br>
 
 
-使用更多的显示器可能是有用的，但在大多数情况下并不需要。
-因此，如果您只注册一个显示器，则整个多显示器处理的概念将完全隐藏。
+使用多个的显示器可能会很有用的，但在大多数情况下并不是必需的。
+因此，如果您只注册一个显示器，则整个多显示器处理的概念将完全被隐藏。
 默认情况下，将使用最后创建的（也是唯一的）显示器。
 
 :cpp:func:`lv_screen_active`、:cpp:func:`lv_screen_load`、:cpp:func:`lv_layer_top`、
 :cpp:func:`lv_layer_sys`、:c:macro:`LV_HOR_RES` 和 :c:macro:`LV_VER_RES` 总是应用于最近创建的（默认）显示器。
-如果您将 ``disp`` 参数传递给显示相关的函数时为 ``NULL``，通常会使用默认显示器。
-例如，:cpp:expr:`lv_display_trigger_activity(NULL)` 将在默认显示器上触发一个用户活动。（在下面的 :ref:`Inactivity <display_inactivity>` 中查看）。
+如果您将 ``NULL`` 作为 ``disp`` 参数传递给显示相关的函数，通常会使用默认显示器。
+例如，:cpp:expr:`lv_display_trigger_activity(NULL)` 将在默认显示器上触发用户活动。（在下面的 :ref:`Inactivity <display_inactivity>` 中查看）。
 
 
 Mirror display（镜像显示）
@@ -149,7 +149,7 @@ each real display with the truncated area.
 
 1. 将显示器的分辨率设置为大显示器的分辨率。
 2. 在 ``flush_cb`` 函数中，截取和修改每个显示器的 ``area`` 参数。
-3. 将缓冲区的内容发送到每个真实显示器，使用截取的区域。
+3. 使用截取后的区域将缓冲区的内容发送到每个真实的显示器。
 
 .. _display_screens:
 
@@ -207,11 +207,11 @@ not delete the currently loaded screen.
 - **显示器** 是绘制像素的物理硬件。
 - **屏幕** 是与特定显示器关联的高级根对象。一个显示器可以有多个与之关联的屏幕，但反之不行。
 
-屏幕可以被视为最高级的容器，它们没有父级。屏幕的大小始终等于其显示器的大小，它们的原点是（0；0）。因此，屏幕的坐标无法更改，即不能在屏幕上使用 :cpp:func:`lv_obj_set_pos`、:cpp:func:`lv_obj_set_size` 或类似的函数。
+屏幕可以被视为是没有父对象的最高级别容器。屏幕的大小始终等于其显示器的大小，它们的原点是（0；0）。因此，屏幕的坐标无法更改，即不能在屏幕上使用 :cpp:func:`lv_obj_set_pos`、:cpp:func:`lv_obj_set_size` 或类似的函数。
 
-屏幕可以从任何对象类型创建，但最常见的两种类型是 :ref:`基本对象 <lv_obj>` 和 :ref:`Image <lv_image>` （用于创建壁纸）。
+屏幕可以由任何对象类型创建，但最常见的两种类型是 :ref:`基本对象 <lv_obj>` 和 :ref:`Image <lv_image>` （用于创建壁纸）。
 
-要创建一个屏幕，请使用 :cpp:expr:`lv_obj_t * scr = lv_<type>_create(NULL)`。 ``NULL`` 表示没有父级。
+要创建一个屏幕，请使用 :cpp:expr:`lv_obj_t * scr = lv_<type>_create(NULL)`。 ``NULL`` 表示没有父对象。
 
 要加载一个屏幕，请使用 :cpp:expr:`lv_screen_load(scr)`。要获取活动屏幕，请使用 :cpp:expr:`lv_screen_active()`。这些函数适用于默认显示器。如果您要指定要在哪个显示器上工作，请使用 :cpp:expr:`lv_display_get_screen_active(disp)` 和 :cpp:expr:`lv_display_load_screen(disp, scr)`。屏幕还可以加载动画。了解更多信息，请参阅 :ref:`这里 <objects_load_screens>`。
 
@@ -257,9 +257,9 @@ UIs:
    <br>
 
 
-通常，屏幕的不透明度是 :cpp:enumerator:`LV_OPA_COVER`，以为它的子元素提供一个坚实的背景。如果不是这种情况（不透明度<100%），显示的 ``bottom_layer`` 将会可见。如果底层的不透明度也不是 :cpp:enumerator:`LV_OPA_COVER`，LVGL 将无法绘制坚实的背景。
+通常，屏幕的不透明度是 :cpp:enumerator:`LV_OPA_COVER`，以便为它的子对象提供一个坚实的背景。如果不是这种情况（不透明度<100%），显示的 ``bottom_layer`` 将会可见。如果底层的不透明度也不是 :cpp:enumerator:`LV_OPA_COVER`，LVGL 将无法绘制坚实的背景。
 
-这种配置（透明屏幕和显示屏）可以用于创建例如 OSD 菜单，在其中视频在底层播放，菜单被叠加在上层。
+这种配置（透明屏幕和显示屏）可以用于创建例如在底层播放视频，而在上层覆盖菜单的 OSD 菜单。
 
 为了正确地渲染屏幕，显示的颜色格式需要设置为带有 alpha 通道的格式。
 
@@ -308,7 +308,7 @@ screen will be used (**and not all displays**).
 
 
 用户的不活动时间是在每个显示器上进行测量的。每次使用 :ref:`Input device <indev>` （如果 :ref:`与显示器相关联 <porting_indev_other_features>`）都会被视为一次活动。要获取自上次活动以来经过的时间，请使用 :cpp:expr:`lv_display_get_inactive_time(disp)`。
-如果传递了 ``NULL``，则将返回所有显示器中最低的不活动时间（ **不是默认显示**）。
+如果传递了 ``NULL``，则将返回所有显示器中最低的不活动时间（ **“NULL”不只是默认显示器**）。
 
 您可以使用 :cpp:expr:`lv_display_trigger_activity(disp)` 手动触发一次活动。如果 ``disp`` 是 ``NULL``，则将使用默认屏幕（ **而不是所有显示器**）。
 
@@ -346,11 +346,11 @@ default display.
    <br>
 
 
-每个显示屏都有背景颜色，背景图像和背景不透明度属性。当当前屏幕是透明的或未定位以覆盖整个显示屏时，它们就会变得可见。
+每个显示器都有背景颜色，背景图像和背景不透明度属性。当当前屏幕是透明的或未定位以覆盖整个显示屏时，它们就会变得可见。
 
-背景颜色是填充显示屏的简单颜色。可以使用 :cpp:expr:`lv_obj_set_style_bg_color(obj, color)` 来调整它。
+背景颜色是填充显示器的简单颜色。可以使用 :cpp:expr:`lv_obj_set_style_bg_color(obj, color)` 来调整它。
 
-显示背景图像是一个文件路径或指向 :cpp:struct:`lv_image_dsc_t` 变量（转换后的图像数据）的指针，以用作壁纸。可以使用 :cpp:expr:`lv_obj_set_style_bg_img_src(obj, &my_img)` 来设置它。
+显示器背景图像是一个文件路径或指向 :cpp:struct:`lv_image_dsc_t` 变量（转换后的图像数据）的指针，以用作壁纸。可以使用 :cpp:expr:`lv_obj_set_style_bg_img_src(obj, &my_img)` 来设置它。
 如果配置了背景图像，背景就不会用 ``bg_color`` 填充。
 
 背景颜色或图像的不透明度可以使用 :cpp:expr:`lv_obj_set_style_bg_opa(obj, opa)` 来调整。

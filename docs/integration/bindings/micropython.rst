@@ -25,7 +25,7 @@ it even on a bare metal architecture with limited resources.
 什么是MicroPython？
 --------------------
 
-`MicroPython <http://micropython.org/>`__ 是针对微控制器的Python语言。
+`MicroPython <http://micropython.org/>`__ 是适用于微控制器的Python语言。
 使用MicroPython，您可以编写Python3代码并在资源有限的裸机架构上运行它。
 
 
@@ -61,10 +61,10 @@ Highlights of MicroPython（MicroPython的亮点）
    <br>
 
 
-- **紧凑**: 适合在仅有256k的代码空间和16k的RAM内运行。不需要操作系统，尽管你也可以选择在操作系统下运行。
-- **兼容**: 努力使自己尽可能与正常的Python（称为CPython）兼容。
+- **紧凑**: 仅需要256k的代码空间和16k的RAM即可安装并运行。不需要操作系统，不过如果你愿意，也可以在有操作系统的情况下运行它。
+- **兼容**: 力求尽可能与普通Python（称为CPython）兼容。
 - **多功能**: 支持多种架构（x86、x86-64、ARM、ARM Thumb、Xtensa）。
-- **互动**: 无需编译-刷写-启动的循环。通过REPL（交互式提示符），你可以输入命令并立即执行，运行脚本等。
+- **互动**: 无需编译-烧录-启动的循环。通过REPL（交互式提示符），你可以输入命令并立即执行，运行脚本等。
 - **受欢迎**: 支持许多平台。用户群体越来越庞大。值得一提的分支包括：
 
   - `MicroPython <https://github.com/micropython/micropython>`__
@@ -93,7 +93,7 @@ LVGL is implemented in C and its APIs are in C.
    <br>
 
 
-MicroPython `没有一个好的本地高级GUI库 <https://forum.micropython.org/viewtopic.php?f=18&t=5543>`__。 LVGL是一个 `面向对象的组件化 <https://blog.lvgl.io/2018-12-13/extend-lvgl-objects>`__ 高级GUI库，似乎是将其映射到高级语言（如Python）的一个自然选择。
+MicroPython `没有一个良好的原生高级GUI库 <https://forum.micropython.org/viewtopic.php?f=18&t=5543>`__。 LVGL是一个 `基于面向对象组件的 <https://blog.lvgl.io/2018-12-13/extend-lvgl-objects>`__ 高级GUI库，似乎是将其映射到高级语言（如Python）的自然选择。
 LVGL是用C实现的，其API也是用C编写的。
 
 
@@ -117,8 +117,8 @@ Here are some advantages of using LVGL in MicroPython:（以下是在MicroPython
    <br>
 
 
-- 用Python开发图形用户界面(GUI)，这是一种非常流行的高级语言。使用面向对象编程等范式。
-- 通常，GUI开发需要多次迭代才能达到完美。使用C语言，每次迭代包括 **``更改代码`` > ``构建`` > ``刷新`` > ``运行``**。
+- 用Python开发图形用户界面(GUI)，这是一种非常流行的高级语言。可以使用面向对象编程等范式。
+- 通常，GUI开发需要多次迭代才能达到理想效果。使用C语言，每次迭代包括 **``更改代码`` > ``构建`` > ``烧录`` > ``运行``**。
 在MicroPython中，只需要 **``更改代码`` > ``运行``**！甚至可以使用REPL（交互式提示符）来交互地运行命令。
 
 
@@ -148,12 +148,12 @@ MicroPython + LVGL could be used for:（MicroPython + LVGL可以用于：）
    <br>
 
 
-- 快速原型GUI。
-- 缩短GUI更改和微调周期。
-- 通过定义可重用的组合对象，以更抽象的方式建模GUI，充分利用Python的语言特性，如继承，闭包，列表推导，生成器，异常处理，任意精度整数等。
-- 使LVGL能够覆盖更广泛的受众群体。不需要了解C语言即可在嵌入式系统上创建漂亮的GUI。这与 `CircuitPython vision <https://learn.adafruit.com/welcome-to-circuitpython/what-is-circuitpython>`__ 非常契合。
-  CircuitPython的设计考虑了教育因素，使新用户或无经验用户更容易入门嵌入式开发。
-- 创建与LVGL在较高层次上交互的工具（例如拖放式设计师）。
+- 快速进行GUI的原型设计。
+- 缩短GUI更改和微调的周期。
+- 通过定义可复用的组合对象，以更抽象的方式对GUI进行建模，充分利用Python的语言特性，如继承，闭包，列表推导，生成器，异常处理，任意精度整数等。
+- 让更多人能够使用LVGL。不需要了解C语言即可在嵌入式系统上创建漂亮的GUI。这与 `CircuitPython vision <https://learn.adafruit.com/welcome-to-circuitpython/what-is-circuitpython>`__ 非常契合。
+  CircuitPython的设计考虑了教育用途，旨在让新用户或无经验用户更容易入门嵌入式开发。
+- 创建在更高层次上与LVGL配合使用的工具（例如拖放式设计器）。
 
 --------------
 
@@ -178,7 +178,7 @@ Let's dive right into an example!
 
 这很像C API，但为LVGL组件进行了面向对象的设计。
 
-让我们立即进入一个例子！
+让我们直接进入一个例子！
 
 
 A simple example（一个简单的例子）
@@ -224,7 +224,7 @@ Many `LVGL examples <https://docs.lvgl.io/master/examples.html>`__ are available
    <br>
 
 
-如果你想在不下载任何东西的情况下尝试LVGL + MicroPython，你可以使用我们的在线模拟器！它是一个完全功能的LVGL + Micropython，在浏览器中运行，可以让你编辑Python脚本并运行。
+如果你想在不下载任何东西的情况下尝试LVGL + MicroPython，你可以使用我们的在线模拟器！它是一个功能齐全的LVGL + Micropython，完全在浏览器中运行，可以让你编辑Python脚本并运行。
 
 `点击这里在在线模拟器上进行实验 <https://sim.lvgl.io/>`__
 
@@ -250,7 +250,7 @@ MicroPython is ported to many platforms. One notable port is "unix", which allow
    <br>
 
 
-MicroPython 已经移植到许多平台。其中一个显着的移植是“unix”，它允许你在 Linux 机器上构建和运行 MicroPython（+LVGL）。 （在 Windows 机器上，你可能需要使用 Virtual Box、WSL、MinGW 或 Cygwin 等工具。）
+MicroPython 已经被移植到许多平台。一个值得注意的移植版本是“unix”，它允许你在 Linux 机器上构建和运行 MicroPython（+LVGL）。 （在 Windows 机器上，你可能需要使用 Virtual Box、WSL、MinGW 或 Cygwin 等工具。）
 
 点击此处了解有关构建和运行 unix 移植版本的更多信息：<https://github.com/lvgl/lv_micropython>
 
@@ -310,7 +310,7 @@ lv_micropython already contains these drivers:
 - 您还需要显示和输入驱动程序。您可以使用lv_micropython提供的现有驱动程序之一，也可以为您的特定硬件创建自己的输入/显示驱动程序。
 - 驱动程序可以在C中作为MicroPython模块实现，也可以使用纯Python实现！
 
-lv_micropython已经包含了这些驱动程序：
+lv_micropython已经包含了以下这些驱动程序：
 
 - 显示驱动程序：
 
@@ -442,13 +442,13 @@ Such pointers need to be defined in a special way to make them reachable by GC
 
 为了防止GC过早回收内存，所有动态分配的RAM必须可被GC访问。
 
-GC能意识到大部分分配，但不包括数据段上的指针：
+GC能意识到大部分分配，但不包括 `数据段 <https://en.wikipedia.org/wiki/Data_segment>`__上的指针：
 
-- 全局变量指针
-- 静态全局变量指针
-- 静态局部变量指针
+- 作为全局变量的指针
+- 作为静态全局变量的指针
+- 作为静态局部变量的指针
 
-这些指针需要以特殊方式定义，以便让它们可通过GC访问。
+这些指针需要以特殊方式定义，以便让它们能够被GC访问。
 
 
 Identify The Problem（确定问题）
@@ -468,7 +468,7 @@ Problem happens when an allocated memory's pointer (return value of :cpp:func:`l
    <br>
 
 
-问题发生在当一个分配的内存指针（即 :cpp:func:`lv_malloc` 的返回值）只被存储在 **全局**、 **静态全局** 或 **静态局部** 指针变量中，而不是作为先前分配的 ``struct`` 或其他变量的一部分。
+当一个分配的内存指针（即 :cpp:func:`lv_malloc` 的返回值）只被存储在 **全局**、 **静态全局** 或 **静态局部** 指针变量中，而不是作为先前分配的 ``struct`` 或其他变量的一部分时，就会出现问题。
 
 
 Solve The Problem（解决问题）
@@ -574,12 +574,12 @@ In practice it's also possible to mix these options, for example provide a struc
    <br>
 
 
-在C语言中，回调函数只是一个函数指针。但在Micropython中，我们需要为每个回调注册一个 *Micropython可调用对象* 。因此，在Micropython绑定中，我们需要为每个回调同时注册函数指针和Micropython对象。
+在C语言中，回调只是一个函数指针。但在Micropython中，我们需要为每个回调注册一个 *Micropython可调用对象* 。因此，在Micropython绑定中，我们需要为每个回调同时注册一个函数指针和一个Micropython对象。
 
 因此，我们为LVGL C API定义了一个 **回调规范**，该规范要求按照某种方式定义lvgl标头文件。根据该规范声明的回调函数将允许绑定在注册回调时在函数指针旁边注册一个Micropython对象，并在调用回调时访问该对象。
 
 - 基本思想是我们有一个名为 ``void * user_data`` 的字段，Micropython绑定会自动使用它来保存回调的 *Micropython可调用对象*。在注册函数指针时必须提供此字段，并将其提供给回调函数本身。
-- 尽管称为 ``user_data`` ，但并不希望用户读/写该字段。相反，Micropython的粘合代码使用 ``user_data`` 自动跟踪Micropython可调用对象。在注册回调时，粘合代码会更新它，并在调用回调时使用它，以调用原始可调用对象。
+- 尽管称为 ``user_data`` ，但用户不应该读/写该字段。相反，Micropython的粘合代码使用 ``user_data`` 自动跟踪Micropython可调用对象。在注册回调时，粘合代码会更新它，并在调用回调时使用它，以调用原始可调用对象。
 
 在LVGL C API中定义回调的几个选项：
 
@@ -592,11 +592,11 @@ In practice it's also possible to mix these options, for example provide a struc
 
 - 选项2：将 ``user_data`` 作为函数参数
 
-  - 在注册函数的 **最后** 一个参数中提供一个称为 ``void * user_data`` 的参数
+  - 提供一个名为 ``void * user_data`` 的参数作为注册函数的 **最后** 一个参数
 
     - 回调本身将接收 ``void *`` 作为 **最后** 一个参数
 
-- 选项3：回调和 ``user_data`` 都是结构字段
+- 选项3：回调和 ``user_data`` 都是结构体字段
 
   - API公开了一个具有函数指针成员和 ``user_data`` 成员的结构
 

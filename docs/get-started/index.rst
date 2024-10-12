@@ -31,29 +31,29 @@ are learning to use LVGL:
    <br>
 
 
-可以按照如下顺序来学习LVGL：
+有几种方法可以让你开始接触 LVGL。以下是在学习使用 LVGL 时推荐的文档阅读顺序和实践内容：
 
-1. 使用 `网页在线例程 <https://lvgl.io/demos>`__ 来体验LVGL（3分钟）
+1. 查看 `在线演示 <https://lvgl.io/demos>`__ 以观看 LVGL 的实际运行效果（3分钟）
 
-2. 阅读文档 :ref:`introduction` 章节来初步了解LVGL（5分钟）
+2. 阅读文档的 :ref:`introduction（介绍）` 章节来初步了解LVGL（5分钟）
 
-3. 再来阅读一下文档 :ref:`quick-overview` 章节来了解LVGL的基本知识（15分钟）
+3. 阅读文档 :ref:`quick-overview（快速概览）` 章节来了解LVGL的基本知识（15分钟）
 
-4. 学习如何使用 :ref:`simulator` 来在电脑上仿真LVGL（10分钟）
+4. 安装一个 :ref:`simulator（模拟器）` 来在电脑上仿真LVGL（10分钟）
 
-5. 试着动手实践一些 :ref:`examples`
+5. 尝试动手实践一些 :ref:`examples（示例）`
 
-6. 查看特定于平台的教程。（在下面的本节中）。（10分钟）
+6. 查看特定平台的教程（在下面这个部分）。（10分钟）
 
-7. 参考移植指南尝试将LVGL :ref:`porting` 到一块开发板上，LVGL也已经提供了一些移植好的 `工程 <https://github.com/lvgl?q=lv_port_&type=&language=>`__
+7. 将LVGL移植到开发板上，查看 :ref:`porting（移植）` 指南或者查看现成可用的 `工程 <https://github.com/lvgl?q=lv_port_&type=&language=>`__
 
-8. 仔细阅读文档 :ref:`overview` 章节来更加深入的了解和熟悉LVGL（2-3小时）
+8. 仔细阅读文档 :ref:`overview（概述）` 章节来更加深入的理解LVGL（2-3小时）
 
-9. 浏览文档 :ref:`widgets` 章节来了解如何使用它们
+9. 浏览文档 :ref:`widgets（控件）` 章节来了解它们的特性和用法
 
-10. 如果你有问题可以到LVGL `论坛 <http://forum.lvgl.io/>`__ 提问
+10. 如果你有问题，可以前往LVGL `论坛 <http://forum.lvgl.io/>`__ 提问
 
-11. 阅读文档 :ref:`contributing` 章节来看看你能帮LVGL社区做些什么，以促进LVGL软件质量的不断提高（15分钟）
+11. 阅读文档 :ref:`contributing（贡献）` 章节以了解你可以如何帮助改进LVGL，从而促进LVGL软件质量的不断提高（15分钟）
 
 
 .. toctree::

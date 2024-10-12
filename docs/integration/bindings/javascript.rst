@@ -25,7 +25,7 @@ providing a familiar React-like experience to users.
 
 使用 `lv_binding_js <https://github.com/lvgl/lv_binding_js>`__ 你可以用JavaScript编写lvgl。
 
-它利用了React的虚拟DOM概念来操纵lvgl的UI组件，为用户提供了一个熟悉的类React体验。
+它使用React的虚拟DOM概念来操作lvgl的UI控件，为用户提供了一个类似React的熟悉体验。
 
 **代码**
 
@@ -59,7 +59,7 @@ Table of Contents（目录）
 -  `功能 <#features>`__
 -  `演示 <#demo>`__
 -  `构建 <#building>`__
--  `组件 <#components>`__
+-  `控件 <#components>`__
 -  `字体 <#font>`__
 -  `动画 <#animation>`__
 -  `样式 <#style>`__
@@ -87,9 +87,9 @@ Features（功能）
    <br>
 
 
-- 支持所有LVGL内置组件
+- 支持所有LVGL内置控件
 - 完全支持LVGL的flex和grid样式
-- 支持大多数LVGL样式，只需像HTML5 CSS一样编写
+- 支持大多数LVGL样式，只需像HTML5的CSS一样编写
 - 支持动态加载图片
 - 完全支持LVGL动画功能
 
@@ -133,7 +133,7 @@ necessary libraries, compile flags, etc.
    <br>
 
 
-以下是有关如何在本地平台上构建 lvgljs 的开发者注释。这些不是完整的指南，但包括了必要的库、编译标志等方面的注释。
+以下是有关如何在本地平台上构建 lvgljs 的开发者说明。这些不是完整的指南，但包括了有关必要的库、编译标志等方面的说明。
 
 
 lvgljs
@@ -183,7 +183,7 @@ JS Bundle（JS捆绑）
    注意 <https://github.com/lvgl/lv_binding_js/blob/master/doc/build/js-bundle.md>`__
 
 
-Components（部件）
+Components（控件）
 ------------------
 
 .. raw:: html
@@ -319,7 +319,7 @@ runtime
    <br>
 
 
-lvgljs依赖于以下优秀的工作：
+lvgljs依赖于以下出色的工作成果：
 
 `lvgl <https://github.com/lvgl/lvgl>`__：为任何MCU、MPU和显示类型创建美观的用户界面
 

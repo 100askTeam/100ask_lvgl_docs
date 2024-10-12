@@ -29,9 +29,9 @@ https://github.com/ARM-software/Arm-2D.
    <br>
 
 
-Arm-2D 本身并非GPU，而是一个 **针对微控制器上常用2DGPU的硬件抽象层** ，支持从Cortex-M0到最新Cortex-M85的所有Cortex-M处理器。
+Arm-2D 本身并非GPU，而是一个 **面向微控制器的2DGPU的硬件抽象层** ，支持从Cortex-M0到最新的Cortex-M85等所有的Cortex-M处理器。
 
-Arm-2D提供两种加速方式： **同步模式（Synchronouse Mode）** 和 **异步模式（Asynchronous Mode）** 。
+Arm-2D提供两种加速方式加速LVGL9： **同步模式（Synchronouse Mode）** 和 **异步模式（Asynchronous Mode）** 。
 
 - 当芯片支持 **Helium** 或者 **ACI(Arm Custom Instruction)** 时，推荐使用 **同步模式** 来加速LVGL；
 - 当芯片中存在Arm-2D所支持的2D GPU时，（例如：基于Arm DMAC-350所派生出来的2D GPU），推荐使用 **异步模式** 来加速LVGL。
@@ -70,10 +70,10 @@ check the environment and set the :c:macro:`LV_USE_DRAW_ARM2D_SYNC` accordingly.
 
 总的来说：
 
-- 你可以在 ``lv_conf.h`` 中将宏 :c:macro:`LV_USE_DRAW_ARM2D_SYNC` 设置为 ``1``、将宏 :c:macro:`LV_DRAW_SW_ASM` 设置为 ``LV_DRAW_SW_ASM_HELIUM`` 来为LVGL开启Arm-2D同步加速模式。
+- 你可以在 ``lv_conf.h`` 中将宏 :c:macro:`LV_USE_DRAW_ARM2D_SYNC` 设置为 ``1``、将宏 :c:macro:`LV_DRAW_SW_ASM` 设置为 ``LV_DRAW_SW_ASM_HELIUM`` 来启用LVGL的Arm-2D同步加速模式。
 - 你可以在 ``lv_conf.h`` 中将宏 :c:macro:`LV_USE_DRAW_ARM2D_ASYNC` 设置为 ``1`` 为LVGL开启Arm-2D的异步加速模式。
 
-如果你是使用 `CMSIS-Pack <https://github.com/lvgl/lvgl/tree/master/env_support/cmsis-pack>`__ 来部署LVGL，则不需要手动的定义宏 :c:macro:`LV_USE_DRAW_ARM2D_SYNC`，因为 lv_conf_cmsis.h 会根据当前的编译环境自动的对其进行配置。
+如果你正在使用 `CMSIS-Pack <https://github.com/lvgl/lvgl/tree/master/env_support/cmsis-pack>`__ 来部署LVGL，则不需要手动的定义宏 :c:macro:`LV_USE_DRAW_ARM2D_SYNC`，因为 lv_conf_cmsis.h 会根据当前的编译环境自动的对其进行配置。
 
 
 Design Considerations（设计建议）
