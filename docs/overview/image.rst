@@ -18,8 +18,7 @@ some metadata.
    <br>
 
 
-一幅图像可以是一个文件或一个变量，它存储了位图本身和一些元数据。
-
+图像可以是一个文件，也可以是一个存储位图本身以及一些元数据的变量。
 
 Store images（存储图像）
 ************************
@@ -84,10 +83,10 @@ into the resulting executable like any other constant data.
 - **头部**：
 
   - *cf*：颜色格式。请参见 :ref:`below <overview_image_color_formats>`
-  - *w*：像素宽度（<= 2048）
-  - *h*：像素高度（<= 2048）
+  - *w*：以像素为单位的宽度（<= 2048）
+  - *h*：以像素为单位的高度（<= 2048）
   - *always zero*：总是为零的3比特
-  - *reserved*：保留未来使用
+  - *reserved*：为未来使用保留
 - **数据**：指向存储图像本身的数组的指针
 - **data_size**： ``数据`` 的长度，以字节为单位
 
@@ -124,14 +123,14 @@ easier to replace without needing to rebuild the main program.
 
 
 为了处理文件，你需要给LVGL添加一个存储 *驱动器*。简而言之，
-一个 *驱动器* 是一系列函数（ *打开*、 *读取*、 *关闭* 等）
-注册到LVGL中以执行文件操作。你可以添加一个标准文件系统的接口
+一个 *驱动器* 是在LVGL中注册的一组函数（ *打开*、 *读取*、 *关闭* 等）
+用于进行文件操作。你可以添加一个标准文件系统的接口
 （例如SD卡上的FAT32），或者你可以创建自己的简易文件系统
 来从SPI Flash存储器读取数据。无论哪种情况， *驱动器* 
 只是一个抽象，用来读取和/或写入数据到存储器。查看
 :ref:`File system <overview_file_system>` 部分以了解更多。
 
-存储为文件的图像不会链接到最终的可执行文件中，
+存储为文件的图像不会链接到生成的可执行文件中，
 必须在绘制之前读入RAM。因此，它们不像在编译时链接的图像那样
 资源友好。然而，它们更容易被替换，无需重新构建主程序。
 
@@ -297,8 +296,8 @@ https://lvgl.io/tools/imageconverter
    浏览器将自动下载生成的文件。
 
 在生成的C数组（变量）中，所有颜色深度
-（1、8、16或32位）的位图都包含在C文件中，但只有匹配 :c:macro:`LV_COLOR_DEPTH` 在 *lv_conf.h* 中的颜色深度
-将实际链接到最终的可执行文件中。
+（1、8、16或32位）的位图都包含在C文件中，但只有与在 *lv_conf.h* 中的 :c:macro:`LV_COLOR_DEPTH` 宏匹配的颜色深度
+才会实际链接到生成的可执行文件中。
 
 对于二进制文件，您需要指定您想要的颜色格式：
 
@@ -454,7 +453,7 @@ The following formats are understood by the built-in decoder:
    <br>
 
 
-如在 :ref:`overview_image_color_formats` 部分中所见，LVGL 支持多种内置图像格式。在许多情况下，这些就是你所需要的。然而，LVGL 并不直接支持通用图像格式，如 PNG 或 JPG。
+如在 :ref:`overview_image_color_formats` 部分中所见，LVGL 支持多种内置图像格式。在许多情况下，这些就是你所需要的全部。然而，LVGL 并不直接支持通用图像格式，如 PNG 或 JPG。
 
 要处理非内置图像格式，你需要使用外部库，并通过 *图像解码器*接口将它们连接到LVGL。
 
@@ -511,13 +510,13 @@ to *True color* according to the format described in the :ref:`overview_image_co
    <br>
 
 
-创建自定义图像最简单的方法是使用在线图像转换器，并选择 ``Raw`` 或 ``Raw with alpha`` 格式。这样做只会简单地将你上传的二进制文件的每个字节作为图像“位图”写入。
+创建自定义图像最简单的方法是使用在线图像转换器，并选择 ``Raw`` 或 ``Raw with alpha`` 格式。它将获取你上传的二进制文件的每个字节，并将其作为图像 “位图” 写入。
 然后你需要附加一个图像解码器，它会解析该位图并生成真正的、可渲染的位图。
 
 ``header.cf`` 将分别是 :cpp:enumerator:`LV_COLOR_FORMAT_RAW` ，:cpp:enumerator:`LV_COLOR_FORMAT_RAW_ALPHA`。
-根据你的需求，你应该选择正确的格式：一个完全不透明的图像，使用alpha通道。
+根据你的需求，你应该选择正确的格式：完全不透明的图像，或用alpha通道的图像。
 
-解码后，这些 *raw* 格式会被库视为 *True color* 。换句话说，图像解码器必须根据 :ref:`overview_image_color_formats` 章节中描述的格式，将 *Raw* 图像解码为 *True color*。
+解码后，这些 *raw* 格式会被库视为 *True color* 。换句话说，图像解码器必须根据 :ref:`overview_image_color_formats` 章节中描述的格式，将 *Raw* 图像解码为 *True color*图像。
 
 
 Register an image decoder（注册图像解码器）
@@ -678,7 +677,7 @@ So in summary:
    <br>
 
 
-这是一个使用LVGL和PNG图像的示例。
+一下是一个使用LVGL处理PNG图像的示例。
 
 首先，您需要创建一个新的图像解码器并设置一些打开/关闭PNG文件的函数。代码如下：
 
@@ -808,7 +807,7 @@ So in summary:
 总结一下：
 
 - 在 ``decoder_info`` 函数中，您应该收集有关图像的一些基本信息，并将其存储在 ``header`` 中。
-- 在 ``decoder_open`` 函数中，您应该尝试打开指向 ``dsc->src`` 的图像源。它的类型已经是 ``dsc->src_type == LV_IMG_SRC_FILE/VARIABLE``。
+- 在 ``decoder_open`` 函数中，您应该尝试打开指向 ``dsc->src`` 的图像源。它的类型已经在 ``dsc->src_type == LV_IMG_SRC_FILE/VARIABLE``中。
   如果该格式/类型不受解码器支持，返回 ``LV_RESULT_INVALID``。然而，如果可以打开图像，应将指向解码图像的指针设置在 ``dsc->decoded`` 中。
   如果已知格式，但不想解码整个图像（例如没有足够的内存），请设置 ``dsc->decoded = NULL``，并使用 ``decoder_get_area`` 来获取图像区域的像素。
 - 在 ``decoder_close`` 函数中，应该释放所有分配的资源。
@@ -851,7 +850,7 @@ images to tell color of the image.
    <br>
 
 
-LVGL会自动使用注册的图像解码器，如果您尝试绘制原始图像（即使用 ``lv_image`` 对象），但您也可以手动使用它们。创建一个 :cpp:type:`lv_image_decoder_dsc_t` 变量来描述解码会话，并调用 :cpp:func:`lv_image_decoder_open`。
+LVGL会自动使用注册的图像解码器，如果您尝试绘制原始图像（即使用 ``lv_image`` 对象），但您也可以手动使用它们。创建一个 :cpp:type:`lv_image_decoder_dsc_t` 类型的变量来描述解码会话，并调用 :cpp:func:`lv_image_decoder_open`函数。
 
 ``color`` 参数仅适用于 ``LV_COLOR_FORMAT_A1/2/4/8`` 图像，用于定义图像的颜色。
 
@@ -1158,10 +1157,10 @@ and lowest life value will be dropped.
 
 如果你想要或需要覆盖 LVGL 的测量结果，你可以在缓存条目中手动设置 *权重* 值， `cache_entry->weight = time_ms` 来给出更高或更低的值。（保持不变以让 LVGL 控制它。）
 
-每个缓存条目都有一个 *"生命周期"* 值。每次通过缓存打开图像时，所有条目的 *生命周期* 值会根据它们的 *权重* 值增加，使它们变得更老。
+每个缓存条目都有一个 *"生命周期"* 值。每次通过缓存打开图像时，所有条目的 *生命周期* 值会根据它们的 *权重* 值增加，使它们变得更旧。
 当缓存中的图像被使用时，其 *使用计数* （usage_count）的值会增加，以使其变得更活跃。
 
-如果缓存中没有更多空间，那么 *使用计数（usage_count）== 0* 且生命周期值最低的条目将被丢弃。
+如果缓存中没有更多空间，那么 *使用计数（usage_count）== 0* 且生命周期值最低的条目将被删除。
 
 
 Memory usage（内存使用情况）
