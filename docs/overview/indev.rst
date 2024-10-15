@@ -27,9 +27,9 @@ An input device usually means:
 输入设备通常指：
 
 - 像触摸板或鼠标这样的类似指针的输入设备
-- 像普通键盘或简单数字键盘这样的键盘
-- 左/右旋转和推按钮的编码器
-- 分配给屏幕特定点的外部硬件按钮
+- 像普通键盘或简单的数字小键盘这样的键盘
+- 左/右旋转和按下选项的编码器
+- 被分配到屏幕特定位置的外部硬件按钮
 
 :important: 在继续阅读前，请阅读「输入设备」的 `移植 </porting/indev>`__ 部分
 
@@ -142,7 +142,7 @@ prevent LVGL sending further input device related events.
    <br>
 
 
-指针输入设备可以检测基本手势。默认情况下，大多数小部件将手势发送给其父对象，因此最终手势可以以 :cpp:enumerator:`LV_EVENT_GESTURE` 事件的形式在屏幕对象上被检测到。例如：
+指针输入设备可以检测基本手势。默认情况下，大多数控件将手势发送给其父对象，因此最终手势可以以 :cpp:enumerator:`LV_EVENT_GESTURE` 事件的形式在屏幕对象上被检测到。例如：
 
 .. code:: c
 
@@ -304,7 +304,7 @@ and :cpp:enumerator:`LV_KEY_ENTER`.
 - :cpp:enumerator:`LV_KEY_LEFT`：减少值或向左移动
 - :cpp:enumerator:`LV_KEY_ESC`：关闭或退出（例如，关闭 :ref:`下拉列表 <lv_dropdown>`）
 - :cpp:enumerator:`LV_KEY_DEL`：删除（例如，在 :ref:`文本区 <lv_textarea>` 中删除右侧的字符）
-- :cpp:enumerator:`LV_KEY_BACKSPACE`：删除左侧的字符（例如，在 :ref:`文本区 <lv_textarea>` 中）
+- :cpp:enumerator:`LV_KEY_BACKSPACE`：删除左侧的一个字符（例如，在 :ref:`文本区 <lv_textarea>` 中）
 - :cpp:enumerator:`LV_KEY_HOME`：跳至开头/顶部（例如，在 :ref:`文本区 <lv_textarea>` 中）
 - :cpp:enumerator:`LV_KEY_END`：跳至末尾（例如，在 :ref:`文本区 <lv_textarea>` 中）
 
@@ -365,7 +365,7 @@ meaning (e.g. :ref:`Button <lv_button>`), a long press is required.
 
 在 *编辑* 模式下，通常使用 :cpp:enumerator:`LV_KEY_NEXT` 和 :cpp:enumerator:`LV_KEY_PREV` 来修改对象。
 根据对象的类型，短按或长按 :cpp:enumerator:`LV_KEY_ENTER` 可切换回 *导航* 模式。
-通常，无法按压的对象（比如 :ref:`滑块<lv_slider>`）在短按时会离开 *编辑* 模式。
+通常，无法被按压的对象（比如 :ref:`滑块<lv_slider>`）在短按时会离开 *编辑* 模式。
 但是需要在有短按功能的对象上进行长按，比如 :ref:`按钮<lv_button>`。
 
 
@@ -391,7 +391,7 @@ with :cpp:expr:`lv_indev_set_group(my_indev, g)`.
    <br>
 
 
-交互式小部件，比如按钮、复选框、滑块等，可以自动添加到默认组中。只需创建一个组 :cpp:expr:`lv_group_t * g = lv_group_create()` 并将默认组设为 :g:cpp:expr:`lv_group_set_default(g)`。
+交互式控件，比如按钮、复选框、滑块等，可以自动添加到默认组中。只需创建一个组 :cpp:expr:`lv_group_t * g = lv_group_create()` 并将默认组设为 :g:cpp:expr:`lv_group_set_default(g)`。
 
 不要忘记用 :cpp:expr:`lv_indev_set_group(my_indev, g)` 将一个或多个输入设备分配给默认组。
 
@@ -421,7 +421,7 @@ For a more detailed description read the
    <br>
 
 
-如果通过触控板点击或通过编码器或键盘输入来聚焦一个对象，它会进入 :cpp:enumerator:`LV_STATE_FOCUSED` 状态。因此，聚焦的样式将被应用于该对象。
+如果一个对象通过触摸板点击或者编码器或键盘被聚焦，它会进入 :cpp:enumerator:`LV_STATE_FOCUSED` 状态。因此，聚焦的样式将被应用于该对象。
 
 如果一个对象切换到编辑模式，它会进入:cpp:expr:`LV_STATE_FOCUSED | LV_STATE_EDITED` 状态，因此这些样式属性将会显示出来。
 
