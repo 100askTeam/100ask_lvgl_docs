@@ -151,13 +151,13 @@ To enable the profiler, set :c:macro:`LV_USE_PROFILER` in ``lv_conf.h`` and conf
    <br>
 
  
-要启用性能分析器，请在 ``lv_conf.h`` 中设置 :c:macro:`LV_USE_PROFILER`，并配置以下选项：
+要启用性能分析器，请在 ``lv_conf.h`` 中设置宏 :c:macro:`LV_USE_PROFILER`，并配置以下选项：
 
-1. 通过设置 :c:macro:`LV_USE_PROFILER_BUILTIN` 来启用内置的性能分析器功能。
+1. 通过设置宏 :c:macro:`LV_USE_PROFILER_BUILTIN` 来启用内置的性能分析器功能。
 
-2. 缓冲区配置：将 :c:macro:`LV_PROFILER_BUILTIN_BUF_SIZE` 的值设置为配置缓冲区大小。较大的缓冲区可以存储更多的跟踪事件信息，减少对渲染的干扰。但这也会导致更高的内存消耗。
+2. 缓冲区配置：设置宏 :c:macro:`LV_PROFILER_BUILTIN_BUF_SIZE` 的值来配置缓冲区大小。较大的缓冲区可以存储更多的跟踪事件信息，减少对渲染的干扰。但这也会导致更高的内存消耗。
 
-3. 时间戳配置：LVGL默认使用精度为1毫秒的 :cpp:func:`lv_tick_get` 函数获取事件发生时的时间戳。因此，它无法准确测量低于1毫秒的间隔。如果您的系统环境可以提供更高的精度（例如1微秒），则可以按以下方式配置性能分析器：
+3. 时间戳配置：LVGL默认使用精度为1毫秒的 :cpp:func:`lv_tick_get` 函数获取事件发生时的时间戳。因此，它无法准确测量低于1毫秒的时间间隔。如果您的系统环境可以提供更高的精度（例如1微秒），则可以按以下方式配置性能分析器：
 
 - **UNIX** 环境推荐配置：
 
@@ -452,9 +452,9 @@ Taking `NuttX <https://github.com/apache/nuttx>`_ RTOS as an example:
 如果您想使用操作系统提供的分析器方法，您可以在 ``lv_conf.h`` 中修改以下配置：
 
 - :c:macro:`LV_PROFILER_INCLUDE`：为分析器函数提供头文件。
-- :c:macro:`LV_PROFILER_BEGIN`：分析器开始点函数。
+- :c:macro:`LV_PROFILER_BEGIN`：分析器起始点函数。
 - :c:macro:`LV_PROFILER_END`：分析器结束点函数。
-- :c:macro:`LV_PROFILER_BEGIN_TAG`：带有自定义标签的分析器开始点函数。
+- :c:macro:`LV_PROFILER_BEGIN_TAG`：带有自定义标签的分析器起始点函数。
 - :c:macro:`LV_PROFILER_END_TAG`：带有自定义标签的分析器结束点函数。
 
 以 `NuttX <https://github.com/apache/nuttx>`_ RTOS 为例：
@@ -497,7 +497,7 @@ Please check the completeness of the logs. If the logs are incomplete, it may be
 
 1. 由于波特率过高引起的串口接收错误。您需要降低波特率。
 2. 在打印跟踪日志期间插入了其他线程日志导致的数据损坏。您需要禁用其他线程的日志输出，或者参考上面的配置使用单独的日志输出接口。
-3. 确保通过 :c:macro:`LV_PROFILER_BEGIN_TAG/END_TAG` 传递的字符串不是堆栈上的局部变量或者共享内存中的字符串，因为当前仅记录字符串地址，而不复制内容。
+3. 确保通过宏 :c:macro:`LV_PROFILER_BEGIN_TAG/END_TAG` 传递的字符串不是堆栈上的局部变量或者共享内存中的字符串，因为当前仅记录字符串地址，而不复制内容。
 
 
 Function execution time displayed as 0s in Perfetto（功能执行时间显示为0秒在Perfetto中）
@@ -540,7 +540,7 @@ When the buffer used to store trace events becomes full, the profiler will outpu
 
 当用于存储跟踪事件的缓冲区变满时，分析器会输出缓冲区中的所有数据，这可能会导致 UI 的阻塞和输出过程的卡顿。您可以通过采取以下措施来进行优化：
 
-1. 增加 :c:macro:`LV_PROFILER_BUILTIN_BUF_SIZE` 的值。较大的缓冲区可以减少日志输出的频率，但也会消耗更多的内存。
+1. 增加宏 :c:macro:`LV_PROFILER_BUILTIN_BUF_SIZE` 的值。较大的缓冲区可以减少日志输出的频率，但也会消耗更多的内存。
 2. 优化日志输出函数的执行时间，例如增加串口波特率或改善文件写入速度。
 
 
@@ -565,7 +565,7 @@ If the trace logs are not automatically printed when the buffer is not full, you
 
 如果缓冲区未满时未自动打印跟踪日志，您可以尝试以下方法来强制日志输出：
 
-1. 减小 :c:macro:`LV_PROFILER_BUILTIN_BUF_SIZE` 的值，以更快地填充缓冲区并触发自动打印。
+1. 减小宏 :c:macro:`LV_PROFILER_BUILTIN_BUF_SIZE` 的值，以更快地填充缓冲区并触发自动打印。
 2. 手动调用或使用定时器调用 :cpp:func:`lv_profiler_builtin_flush` 函数来强制日志输出。
 
 
