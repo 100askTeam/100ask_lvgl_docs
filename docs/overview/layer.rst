@@ -77,7 +77,7 @@ its children.
    <br>
 
 
-默认情况下，LVGL会在旧对象的顶部绘制新对象。
+默认情况下，LVGL会在旧对象之上绘制新对象。
 
 例如，假设我们将一个按钮添加到名为button1的父对象上，然后再添加另一个名为button2的按钮。那么button1（以及它的子对象）将位于背景中，并且可以被button2及其子对象覆盖。
 
@@ -197,9 +197,9 @@ LVGL使用两个特殊的图层，分别是 ``layer_top`` 和 ``layer_sys``。�
 
 要获取这些图层，请使用 :cpp:func:`lv_layer_top`和:cpp:func:`lv_layer_sys`。
 
-这些图层和其他任何小部件一样工作，即可以设置样式、滚动，并且可以在上面创建任何类型的小部件。
+这些图层和其他任何控件一样工作，这意味着可以为它们设置样式、进行滚动，并且可以在上面创建任何类型的控件。
 
-用户可以使用 ``layer_top`` 创建一些在各个地方都可见的内容。例如，菜单栏、弹出窗口等。如果启用了 ``click`` 属性，则 ``layer_top`` 将吸收所有用户点击事件，并作为模态框工作。
+用户可以使用 ``layer_top`` 创建一些在各个地方都可见的内容。例如，菜单栏、弹出窗口等。如果启用了 ``click`` 属性，则 ``layer_top`` 将吸收所有用户点击事件，并充当模态窗口。
 
 .. code:: c
 
@@ -230,7 +230,7 @@ The get the bottom layer use :cpp:func:`lv_layer_bottom`.
    <br>
 
 
-底层与顶层和系统层类似，也具有屏幕大小，但位于活动屏幕的下方。只有当活动屏幕的背景不透明度小于 255 时才可见。
+与顶层和系统层类似，底层也具有屏幕大小，但位于活动屏幕的下方。只有当活动屏幕的背景不透明度小于 255 时才可见。
 
 要获取底层，请使用 :cpp:func:`lv_layer_bottom`。
 
@@ -251,8 +251,8 @@ Some style properties make LVGL to allocate a buffer and render a widget and its
    <br>
 
 
-一些样式属性会让 LVGL 分配一个缓冲区，并首先在那里渲染一个部件及其子部件。
-稍后，该层将在应用一些转换或其他修改后，合并到屏幕或其父层。
+一些样式属性会让 LVGL 分配一个缓冲区，并首先在那里渲染一个控件及其子部件。
+之后，该层将在应用一些转换或其他修改后，被合并到屏幕或其父层。
 
 
 Simple layer（简单层）
@@ -286,7 +286,7 @@ If there is no memory for a new chunk, LVGL will try allocating layer when anoth
 - ``bitmap_mask_src``
 - ``blend_mode``
 
-在这种情况下，小部件将被切割成大小为 ``LV_DRAW_SW_LAYER_SIMPLE_BUF_SIZE`` 的块。
+在这种情况下，控件将被切割成大小为 ``LV_DRAW_SW_LAYER_SIMPLE_BUF_SIZE`` 的块。
 
 如果没有足够的内存来创建一个新的块，LVGL 将尝试在另一个块被渲染并释放时分配图层。
 
@@ -316,7 +316,7 @@ The following style properties trigger the creation of a "Transform layer":
    <br>
 
 
-当小部件进行变换时，需要渲染更大部分的小部件以提供足够的变换数据。LVGL尽可能渲染尽可能小的区域，但由于变换的性质，在这种情况下无法进行切片。
+当控件进行变换时，需要渲染更大部分的控件以提供足够的数据用于变换。LVGL会尝试尽可能小地渲染控件的区域，但由于变换的性质，在这种情况下无法进行切片。
 
 以下样式属性会触发创建“变换层”：
 
@@ -343,7 +343,8 @@ The ``clip_corner`` style property also makes LVGL to create a 2 layers with rad
    <br>
 
 
-``clip_corner`` 样式属性还使LVGL创建具有顶部和底部部件的半径高度的2层。
+``clip_corner`` 样式属性也会使 LVGL 为控件的顶部和底部创建具有半径高度的两层。
+。
 
 
 .. _layers_api:

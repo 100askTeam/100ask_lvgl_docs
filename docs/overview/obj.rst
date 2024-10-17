@@ -27,11 +27,11 @@ object.
    <br>
 
 
-在LVGL中，用户界面的 **基本组成部分** 是对象（控件），也称为 *Widgets*。例如，一个 :ref:`按钮 <lv_button>`、:ref:`标签 <lv_label>`、:ref:`图像 <lv_image>`、:ref:`列表 <lv_list>`、:ref:`图表 <lv_chart>` 或者 :ref:`文本区域 <lv_textarea>`。
+在LVGL中，用户界面的 **基本组成部分** 是对象，也称为 *控件*。例如，一个 :ref:`按钮 <lv_button>`、:ref:`标签 <lv_label>`、:ref:`图像 <lv_image>`、:ref:`列表 <lv_list>`、:ref:`图表 <lv_chart>` 或者 :ref:`文本区域 <lv_textarea>`。
 
 您可以在这里查看所有的 :ref:`对象类型 <widgets>`。
 
-所有的对象都使用 :cpp:type:`lv_obj_t` 指针作为句柄进行引用。之后可以使用该指针来设置或获取对象的属性。
+所有的对象都使用 :cpp:type:`lv_obj_t` 类型的指针作为句柄进行引用。之后可以使用该指针来设置或获取对象的属性。
 
 
 .. _objects_attributes:
@@ -77,7 +77,7 @@ To see all the available functions visit the :ref:`Base object's documentation <
 
 - 位置
 - 大小
-- 父级
+- 父对象
 - 样式
 - 事件处理程序
 - 等等
@@ -350,9 +350,9 @@ is an example:
    <br>
 
 
-在LVGL中，可以在运行时动态创建或删除对象。这也就是说，知道当对象被创建之后才会消耗内存资源。
+在LVGL中，可以在运行时动态创建或删除对象。这也就是说，知道当对象被创建之后（存在）才会消耗内存资源。
 
-因此，您可以在点击按钮准备打开新界面(屏幕)时再创建新界面(屏幕)，并在加载新界面(屏幕)时删除旧界面(屏幕)。
+这允许在点击按钮打开新界面(屏幕)时才创建一个新界面(屏幕)，并在加载新界面(屏幕)时删除旧界面(屏幕)。
 
 UI可以根据设备的当前环境进行创建。例如，可以根据当前连接的传感器创建仪表、图表、条形图和滑块所需的UI再进行创建（比如之前需要图标，突然传感器去掉了，那么可以选择不创建该ui控件）。
 
@@ -362,7 +362,7 @@ UI可以根据设备的当前环境进行创建。例如，可以根据当前连
 
    lv_obj_t * lv_<widget>_create(lv_obj_t * parent, <如果有其他参数>);
 
-通常，创建函数只有一个 *parent* 参数，指示在哪个对象上创建该控件。
+通常，创建函数只有一个 *parent* 参数，告诉它们在哪个对象上创建新的控件。
 
 返回值是指向创建出来的控件的指针，类型为 :cpp:type:`lv_obj_t` ``*``。
 
@@ -457,7 +457,7 @@ To get the currently active screen use the :cpp:func:`lv_screen_active` function
    <br>
 
 
-每个显示器上都会存在一个活动屏幕。默认情况下，库会为每个显示器创建和加载一个名为“Base object”的屏幕。
+每个显示器上都会始终存在一个活动屏幕。默认情况下，库会为每个显示器创建和加载一个“Base object”作为屏幕。
 
 要获得当前活动的屏幕，请使用 :cpp:func:`lv_screen_active` 函数。
 
@@ -522,7 +522,7 @@ about layers.
 - 顶层（top layer）
 - 系统层（system layer）
 
-它们与屏幕独立，将显示在每个屏幕上。 *顶层* 位于屏幕上每个对象之上， *系统层* 位于 *顶层* 之上。您可以自由地向 *顶层* 添加任何弹出窗口。但是， *系统层* 受到系统级别的限制（例如，鼠标光标将与 :cpp:func:`lv_indev_set_cursor` 一起放置在那里）。
+它们独立于屏幕，将显示在每个屏幕上。 *顶层* 位于屏幕上每个对象之上， *系统层* 位于 *顶层* 之上。您可以自由地向 *顶层* 添加任何弹出窗口。但是， *系统层* 受到系统级别的限制（例如，鼠标光标将与 :cpp:func:`lv_indev_set_cursor` 一起放置在那里）。
 
 层级： * 活动屏幕（screen_active） < 顶层（top layer） < 系统层（system layer） *
 

@@ -25,8 +25,8 @@ drive letter. For example, if an SD card is associated with the letter
    <br>
 
 
-LVGL有一个“文件系统”抽象模块，可以让你连接任何类型的文件系统。文件系统通过分配的驱动器号来识别。
-例如，如果SD卡与字母 ``'S'`` 关联，可以使用 ``"S:path/to/file.txt"`` 来访问文件。
+LVGL有一个“文件系统”抽象模块，可以让你连接任何类型的文件系统。文件系统通过分配的驱动器盘符来识别。
+例如，如果SD卡与盘符 ``'S'`` 关联，可以使用 ``"S:path/to/file.txt"`` 来访问文件。
 
 .. note::
 
@@ -105,7 +105,7 @@ supported.
 
 
 添加驱动程序时，需要像下面这样初始化一个 :cpp:type:`lv_fs_drv_t` 类型的变量。
-:cpp:type:`lv_fs_drv_t` 变量需要是静态的、全局的或者动态分配的，不能是局部变量。
+:cpp:type:`lv_fs_drv_t` 类型的变量需要是静态的、全局的或者动态分配的，不能是局部变量。
 
 .. code:: c
 
@@ -171,8 +171,8 @@ related callbacks. (see below)
 
    void * (*open_cb)(lv_fs_drv_t * drv, const char * path, lv_fs_mode_t mode);
 
-``path`` 是驱动器字母后的路径（例如"S:path/to/file.txt" -> "path/to/file.txt"）。
-``mode`` 可以是 :cpp:enumerator:`LV_FS_MODE_WR` 或 :cpp:enumerator:`LV_FS_MODE_RD`，用于进行写入或读取打开。
+``path`` 是盘符后的路径（例如"S:path/to/file.txt" -> "path/to/file.txt"）。
+``mode`` 可以是 :cpp:enumerator:`LV_FS_MODE_WR` 或 :cpp:enumerator:`LV_FS_MODE_RD`，用于进行写入或读取方式打开。
 
 返回值是指向描述打开文件的 *文件对象* 的指针，如果存在任何问题（例如文件未找到），则返回 ``NULL``。
 返回的文件对象将传递给其他与文件系统相关的回调函数（见下文）。
@@ -295,7 +295,7 @@ practice to insert a ``'/'`` in front of each directory name.
 
    lv_fs_close(&f);
 
-在 :cpp:func:`lv_fs_open` 中的模式可以是 :cpp:enumerator:`LV_FS_MODE_WR` ，用于仅打开写入，或 :cpp:enumerator:`LV_FS_MODE_RD` ``|`` :cpp:enumerator:`LV_FS_MODE_WR` 用于两者都可以
+在 :cpp:func:`lv_fs_open` 函数中的模式可以是 :cpp:enumerator:`LV_FS_MODE_WR` ，用于仅打开写入，或 :cpp:enumerator:`LV_FS_MODE_RD` ``|`` :cpp:enumerator:`LV_FS_MODE_WR` 用于读写打开
 
 该示例显示如何读取目录的内容。如何标记结果中的目录是由驱动程序决定的，但在每个目录名称前面加上 ``'/'`` 可能是一个很好的做法。
 
@@ -350,9 +350,9 @@ To use files in image widgets the following callbacks are required:
    <br>
 
 
-:ref:`Image <lv_image>` 对象也可以从文件中打开（除了编译程序中存储的变量）。
+引用:ref:`Image <lv_image>` 对象也可以从文件中打开（除了编译程序中存储的变量）。
 
-要在图像小部件中使用文件，需要以下回调函数：
+要在图像控件中使用文件，需要以下回调函数：
 
 - 打开
 - 关闭
@@ -461,11 +461,11 @@ The driver's ``tell`` will not actually be called.
    <br>
 
 
-如果相应的 ``LV_FS_*_CACHE_SIZE`` 配置选项设置为大于零的值，文件将缓冲其读取。每个打开的文件将缓冲最多这么多字节，以减少 FS 驱动程序调用的数量。
+如果相应的 ``LV_FS_*_CACHE_SIZE`` 配置选项设置为大于零的值，文件将缓冲其读取。每个打开的文件将缓冲最多这么多字节，以减少 FS 驱动程序调用的次数。
 
-一般来说，文件缓冲可以针对不同类型的访问模式进行优化。这里实现的方法最适合以块的形式读取大文件，这就是图像解码器的作用。它有可能减少驱动程序的 ``read`` 比调用 ``lv_fs_read`` 的次数。在缓存大小 >= 文件大小的最佳情况下， ``read`` 只会被调用一次。此策略对于大文件的线性读取很有用，但对于跨大于缓冲区的文件的短随机读取帮助不大，因为数据将被缓冲，这些数据将在下一次查找和读取后被丢弃。在这种情况下，缓存应该足够大或禁用。应禁用缓存的另一种情况是，如果文件内容预计会因外部因素（例如特殊操作系统文件）而发生更改。
+一般来说，文件缓冲可以针对不同类型的访问模式进行优化。这里实现的缓冲策略对于分块读取大文件是最优的，这就是图像解码器的作用。它有可能减少驱动程序的 ``read`` 比调用 ``lv_fs_read`` 的次数。在缓存大小 >= 文件大小的最佳情况下， ``read`` 只会被调用一次。此策略对于大文件的线性读取很有用，但对于跨大于缓冲区的文件的短随机读取帮助不大，因为数据将被缓冲，这些数据将在下一次查找和读取后被丢弃。在这种情况下，缓存应该足够大或禁用。应禁用缓存的另一种情况是，如果文件内容预计会因外部因素（例如特殊操作系统文件）而发生更改。
 
-下面记录了实施情况。请注意，当启用缓存时，FS 函数会调用其他驱动程序 FS 函数。即， ``lv_fs_read`` 可能会调用驱动程序 ``seek``，因此驱动程序需要在启用缓存时实现更多回调。
+下面记录了实施情况。请注意，当启用缓存时，FS 函数会调用其他驱动程序 FS 函数。即， ``lv_fs_read`` 可能会调用驱动程序 ``seek``，因此驱动程序需要在启用缓存时实现更多回调函数。
 
 ``lv_fs_read`` :sub:`(启用缓存时的行为)`
 -------------------------------------------------

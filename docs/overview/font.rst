@@ -37,7 +37,7 @@ compared to *format = LV_FONT_GLYPH_FORMAT_A1*.
    <br>
 
 
-在LVGL中，字体是由位图和其他必要的信息组成，用于绘制单个字母（字形）的图像。字体存储在 `lv_font_t` 变量中，并可以在样式的 `text_font` 字段中设置。例如：
+在LVGL中，字体是位图和其他渲染单个字母（字形）图像所需的信息的集合。字体存储在 `lv_font_t` 类型的变量中，并可以在样式的 `text_font` 字段中设置。例如：
 
 .. code:: c
 
@@ -45,9 +45,9 @@ compared to *format = LV_FONT_GLYPH_FORMAT_A1*.
  
 字体有一个 **格式** 属性，描述了字形绘制数据的存储方式。它有两个分类： `传统简单格式` 和 `高级格式`。在传统简单格式中，字体存储在一个简单的位图数组中。在高级格式中，字体以不同的方式存储，例如 `矢量图`、 `SVG` 等。
 
-在传统简单格式中，存储的像素值决定了像素的不透明度。这样，通过更高的位深度（每像素位数），字母的边缘可以更加平滑。可能的位深度值为1、2、4和8（更高的值意味着更好的质量）。
+在传统简单格式中，存储的像素值决定了像素的不透明度。这样，通过更高的 *bpp (每像素位数)*，字母的边缘可以更加平滑。可能的 *bpp* 值为1、2、4和8（更高的值意味着更好的质量）。
 
-格式属性还影响存储字体所需的内存量。例如， *format = LV_FONT_GLYPH_FORMAT_A4* 的字体大小大约是 *format = LV_FONT_GLYPH_FORMAT_A1* 的四倍。
+“格式”属性还影响存储字体所需的内存量。例如， *format = LV_FONT_GLYPH_FORMAT_A4* 的字体大小大约是 *format = LV_FONT_GLYPH_FORMAT_A1* 的四倍。
 
 
 Unicode support（支持Unicode编码）
@@ -78,7 +78,7 @@ If all works well, a ✓ character should be displayed.
    <br>
 
 
-LVGL支持 **UTF-8** 编码的Unicode字符。您的编辑器需要配置为以UTF-8格式保存代码/文本（通常这是默认设置），并确保在 *lv_conf.h* 中将 :c:macro:`LV_TXT_ENC` 设置为 :c:macro:`LV_TXT_ENC_UTF8` （这是默认值）。
+LVGL支持 **UTF-8** 编码的Unicode字符。您的编辑器需要配置为以UTF-8格式保存你的代码/文本（通常这是默认设置），并确保在 *lv_conf.h* 中将 :c:macro:`LV_TXT_ENC` 设置为 :c:macro:`LV_TXT_ENC_UTF8` （这是默认值）。
 
 要进行测试，请尝试以下代码：
 
@@ -147,7 +147,7 @@ bullet symbol (U+2022) and the built-in symbols (see below).
    <br>
 
 
-包含所有的ASCII字符，度符号（U+00B0），圆点符号（U+2022）和内置的符号（见下方）。
+包含所有的ASCII字符，度数符号（U+00B0），项目符号（U+2022）和内置的符号（见下方）。
 
 - :c:macro:`LV_FONT_MONTSERRAT_12`：12像素字体
 - :c:macro:`LV_FONT_MONTSERRAT_14`：14像素字体
@@ -224,22 +224,22 @@ Or more symbols together:
 
 
 -  :c:macro:`LV_FONT_MONTSERRAT_28_COMPRESSED`: 与普通 28 像素字体相同，但以 3 bpp 存储为 :ref:`fonts_compressed`
--  :c:macro:`LV_FONT_DEJAVU_16_PERSIAN_HEBREW`: 16 像素字体覆盖常用字符范围，并包括希伯来、阿拉伯和波斯文字符及其形式
--  :c:macro:`LV_FONT_SIMSUN_16_CJK`: 16 像素字体覆盖常用字符范围，并包含 1000 多个最常见的CJK部首
--  :c:macro:`LV_FONT_UNSCII_8`: 8 像素像素完美的字体，仅包含 ASCII 字符
+-  :c:macro:`LV_FONT_DEJAVU_16_PERSIAN_HEBREW`: 16 像素字体覆盖常用字符范围，并包括希伯来语、阿拉伯语和波斯语字符及其形式
+-  :c:macro:`LV_FONT_SIMSUN_16_CJK`: 16 像素字体，具有常规范围加上 1000 多个最常见的中日韩部首
+-  :c:macro:`LV_FONT_UNSCII_8`: 8 像素完美像素字体，仅包含 ASCII 字符
 -  :c:macro:`LV_FONT_UNSCII_16`: 16 像素像素完美的字体，仅包含 ASCII 字符
 
-内置字体是 **全局变量**，名称如 :cpp:var:`lv_font_montserrat_16` 代表高度为 16 像素的字体。要在样式中使用它们，只需添加一个指向字体变量的指针，如上所示。
+内置字体是 **全局变量**，，例如对于10像素高度的字体，名称为 :cpp:var:`lv_font_montserrat_16` 。要在样式中使用它们，只需添加一个指向字体变量的指针，如上所示。
 
 具有 *bpp = 4* 的内置字体包含ASCII字符，并使用 `Montserrat <https://fonts.google.com/specimen/Montserrat>`__ 字体。
 
-除ASCII范围外，还从 `FontAwesome <https://fontawesome.com/>`__ 字体中添加了以下符号。
+除ASCII范围外，还从 `FontAwesome <https://fontawesome.com/>`__ 字体中添加了以下符号到内置字体中。
 
 .. _fonts_symbols:
 
 .. image:: /misc/symbols.png
 
-这些符号可以单独使用：
+这些符号可以单独使用，如下所示：
 
 .. code:: c
 
@@ -251,7 +251,7 @@ Or more symbols together:
 
    lv_label_set_text(my_label, LV_SYMBOL_OK "Apply");
 
-或一起使用多个符号：
+或多个符号一起使用：
 
 .. code:: c
 
@@ -320,11 +320,11 @@ LVGL不仅支持RTL文本，还支持混合（也称为双向，BiDi）文本渲
 
 .. image:: /misc/bidi.png
 
-通过 *lv_conf.h* 中的 :c:macro:`LV_USE_BIDI` 可以启用BiDi支持
+通过在 *lv_conf.h* 文件中设置 :c:macro:`LV_USE_BIDI` 以启用BiDi支持
 
 所有文本都有一个基本方向（LTR或RTL），确定了一些渲染规则和文本的默认对齐方式（左对齐或右对齐）。但是，在LVGL中，基本方向不仅适用于标签。这是一个可以为每个对象设置的通用属性。如果未设置，则会从父级继承。这意味着只需设置一个屏幕的基本方向，每个对象都会继承它。
 
-可以通过 *lv_conf.h* 中的 :c:macro:`LV_BIDI_BASE_DIR_DEF` 设置屏幕的默认基本方向，其他对象从其父对象继承基本方向。
+屏幕的默认基本方向可以通过 *lv_conf.h* 文件中的 :c:macro:`LV_BIDI_BASE_DIR_DEF` 来设置，其他对象从其父对象继承基本方向。
 
 要设置对象的基本方向，请使用 :cpp:expr:`lv_obj_set_style_base_dir(obj, base_dir, selector)`。可能的基本方向包括：
 
@@ -336,7 +336,7 @@ LVGL不仅支持RTL文本，还支持混合（也称为双向，BiDi）文本渲
 
 - 默认情况下在右侧创建对象
 - ``lv_tabview``：从右到左显示选项卡
-- ``lv_checkbox``：在右侧显示框
+- ``lv_checkbox``：在右侧显示复选框
 - ``lv_buttonmatrix``：从右到左显示按钮
 - ``lv_list``：在右侧显示图标
 - ``lv_dropdown``：将选项对齐到右侧
@@ -371,8 +371,8 @@ However, there are some limitations:
    <br>
 
 
-有一些特殊规则来显示阿拉伯和波斯字符：
-字符的 *形式* 取决于其在文本中的位置。当字符处于孤立、开始、中间或结尾位置时，需要使用相同字母的不同形式。除此之外，还应考虑一些连词规则。
+对于显示阿拉伯和波斯字符有一些特殊规则：
+字符的 *形式* 取决于其在文本中的位置。当同一个字母处于孤立、开头、中间或结尾位置时，需要使用相同字母的不同形式。除此之外，还应考虑一些连接规则。
 
 如果启用了宏命令  :c:macro:`LV_USE_ARABIC_PERSIAN_CHARS`，LVGL将支持这些规则。
 
@@ -417,16 +417,16 @@ however this can be swapped by setting :c:macro:`LV_SUBPX_BGR`  ``1`` in
    <br>
 
 
-子像素渲染允许通过在红色、绿色和蓝色通道上渲染抗锯齿边缘而不是在像素级别上进行三倍水平分辨率。
-这利用了每个像素的物理颜色通道的位置，从而实现更高质量的字母抗锯齿。在此了解更多信息
+亚像素渲染通过在红色、绿色和蓝色通道上渲染抗锯齿边缘而不是在像素级别粒度上进行渲染，从而使水平分辨率增加两倍。
+这利用了每个像素的物理颜色通道的位置，从而实现更高质量的字母抗锯齿效果。在此了解更多信息
 `here <https://en.wikipedia.org/wiki/Subpixel_rendering>`__。
 
-要进行子像素渲染，需要使用特殊设置生成字体:
+要进行亚像素渲染，需要使用特殊设置生成字体:
 
 - 在在线转换器中勾选 ``Subpixel`` 框
 - 在命令行工具中使用 ``--lcd`` 标志。请注意，生成的字体需要大约三倍的内存。
 
-子像素渲染仅在像素的颜色通道具有水平布局时起作用。
+亚像素渲染仅在像素的颜色通道具有水平布局时起作用。
 也就是说，R、G、B通道相邻而不是重叠。颜色通道的顺序也需要与库设置相匹配。
 默认情况下，LVGL假定是 ``RGB`` 顺序，但可以通过在 *lv_conf.h* 中设置 :c:macro:`LV_SUBPX_BGR`  ``1`` 来进行交换。
 
@@ -466,7 +466,7 @@ because
 - 在在线转换器中勾选 ``压缩`` 复选框
 - 在离线转换器中不使用 ``--no-compress`` 标志（默认情况下会应用压缩）
 
-对于较大的字体和较高的位深度，压缩效果更好。然而，压缩字体的渲染速度会慢大约30%。因此，建议只对用户界面中最大的字体进行压缩，因为：
+对于较大的字体和较高的每像素位数，压缩效果更好。然而，压缩字体的渲染速度会慢大约30%。因此，建议只对用户界面中最大的字体进行压缩，因为：
 
 - 它们需要最多的内存
 - 它们可以更好地压缩
@@ -500,12 +500,12 @@ To configure kerning at runtime, use :cpp:func:`lv_font_set_kerning`.
 
 字体可以提供字距调整信息，以调整特定字符之间的间距。
 
-- 在线转换器生成字距表。
+- 在线转换器生成字距调整表。
 - 离线转换器生成字距表，除非指定了 ``--no-kerning``。
 - FreeType集成目前不支持字距调整。
 - Tiny TTF字体引擎支持GPOS和Kern表。
 
-要在运行时配置字距调整，使用 :cpp:func:`lv_font_set_kerning`。
+要在运行时配置字距调整，使用 :cpp:func:`lv_font_set_kerning`函数。
 
 
 .. _add_font:
@@ -728,10 +728,10 @@ Example
 
 
 :cpp:func:`lv_binfont_create_from_buffer` 可以用来从内存缓冲区加载字体。
-这个函数可能会用来从外部文件系统加载字体，这是LVGL不支持的。
+这个函数在从 LVGL 不支持的外部文件系统加载字体时可能很有用。
 字体需要具有与从文件加载时相同的格式。
 
-:注意: 要从缓冲区加载字体，需要启用 :ref:`LVGL's filesystem <overview_file_system>` 并添加MEMFS驱动。
+:注意: 要从缓冲区加载字体，需要启用 :ref:`LVGL's filesystem <overview_file_system>` ，并且必须添加MEMFS驱动程序。
 
 示例
 
@@ -975,12 +975,12 @@ To do this, a custom :cpp:type:`lv_font_t` variable needs to be created:
    <br>
 
 
-LVGL的字体接口设计非常灵活，但即使如此，你也可以在LVGL的内部引擎之外添加自己的字体引擎。
+LVGL的字体接口设计非常灵活，但即使如此，你可以添加自己的字体引擎来替代 LVGL 内部的字体引擎。
 例如，你可以使用 `FreeType <https://www.freetype.org/>`__ 实时渲染TTF字体的字形，或者使用外部flash来存储字体的位图，并在库需要时读取它们。
 
-可以在 `lv_freetype <https://github.com/lvgl/lv_lib_freetype>`__ 存储库中找到一个可直接使用的FreeType。
+可以在 `lv_freetype <https://github.com/lvgl/lv_lib_freetype>`__ 存储库中找到一个可直接使用的FreeType版本。
 
-要实现这一点，需要创建一个自定义的 :cpp:type:`lv_font_t` 变量：
+要实现这一点，需要创建一个自定义的 :cpp:type:`lv_font_t` 类型变量：
 
 .. code:: c
 
