@@ -28,9 +28,9 @@ stroke; diagonal scrolling is not possible.
    <br>
 
 
-在LVGL中，滚动非常直观：如果一个对象超出了其父级内容区域（不包括填充的大小），父级就会变成可滚动的，并且会出现滚动条。就是这样。
+在LVGL中，滚动的工作方式非常直观：如果一个对象超出了其父对象内容区域（不包括内边距的大小），那么其父对象就会变成可滚动的，并且会出现滚动条。就是这样。
 
-任何对象都可以是可滚动的，包括 ``lv_obj``, ``lv_image``, ``lv_button``, ``lv_meter`` 等等。
+任何对象都可以是可滚动的，包括 ``lv_obj``, ``lv_image``, ``lv_button``, ``lv_meter`` 等。
 
 对象可以在一个操作中水平或垂直滚动；无法进行对角线滚动。
 
@@ -67,7 +67,7 @@ following ``mode``\ (s) exist:
 - :cpp:enumerator:`LV_SCROLLBAR_MODE_OFF`：从不显示滚动条
 - :cpp:enumerator:`LV_SCROLLBAR_MODE_ON`：始终显示滚动条
 - :cpp:enumerator:`LV_SCROLLBAR_MODE_ACTIVE`：在对象滚动时显示滚动条
-- :cpp:enumerator:`LV_SCROLLBAR_MODE_AUTO`：当内容足够大时显示滚动条进行滚动
+- :cpp:enumerator:`LV_SCROLLBAR_MODE_AUTO`：当内容足够大可以滚动时显示滚动条
 
 通过 ``lv_obj_set_scrollbar_mode(obj, LV_SCROLLBAR_MODE_...)`` 可以设置对象上的滚动条模式。
 
@@ -138,7 +138,7 @@ base direction.
 
    lv_obj_add_style(obj, &style_red, LV_PART_SCROLLBAR);
 
-当对象被滚动时，对象进入 :cpp:enumerator:`LV_STATE_SCROLLED` 状态。这允许当滚动时，向滚动条或对象本身添加不同的样式。此代码使对象被滚动时滚动条变蓝色：
+当对象正在被滚动时，它会进入 :cpp:enumerator:`LV_STATE_SCROLLED` 状态。这允许当滚动时，向滚动条或对象本身添加不同的样式。此代码使对象被滚动时滚动条变蓝色：
 
 .. code:: c
 
@@ -248,7 +248,7 @@ OR-ed values are also possible. E.g. :cpp:expr:`LV_DIR_TOP | LV_DIR_LEFT`.
 
 可以使用 :cpp:expr:`lv_obj_remove_flag(obj, LV_OBJ_FLAG_SCROLLABLE)` 来使对象不可滚动。
 
-不可滚动的对象仍然可以将滚动（链）传播到它们的父级。
+不可滚动的对象仍然可以将滚动（链）传播到它们的父对象。
 
 滚动的方向可以通过 ``lv_obj_set_scroll_dir(obj, LV_DIR_...)`` 来控制。
 
@@ -290,9 +290,9 @@ parent(s) won't be scrolled.
    <br>
 
 
-如果一个对象无法进一步滚动（例如，其内容已经到达最底部位置），额外的滚动将传递给其父级。如果在该方向上可以滚动父级，则父级将被滚动。它会继续传递给祖父和曾祖父级。
+如果一个对象无法进一步滚动（例如，其内容已经到达最底部位置），额外的滚动将传递给其父对象。如果在该方向上可以滚动父对象，则父对象将被滚动。它会继续传递给祖父和曾祖父对象。
 
-滚动传播被称为“滚动链”，可以使用 ``LV_OBJ_FLAG_SCROLL_CHAIN_HOR/VER`` 标志来启用/禁用它。如果禁用了链式滚动，传播将停止在该对象上，并且父级将不会滚动。
+滚动传播被称为“滚动链”，可以使用 ``LV_OBJ_FLAG_SCROLL_CHAIN_HOR/VER`` 标志来启用/禁用它。如果禁用了链式滚动，传播将在该对象处停止，并且父对象（们）将不会滚动。
 
 
 Scroll momentum（滚动惯性效果）
@@ -385,7 +385,7 @@ Under the hood the following happens:
    <br>
 
 
-这个对象的子项可以根据特定规则进行对齐。当滚动结束时，子项可以通过 :cpp:enumerator:`LV_OBJ_FLAG_SNAPPABLE` 标志单独进行对齐。
+这个对象的子对象可以根据特定规则进行对齐。当滚动结束时，子对象可以通过设置 :cpp:enumerator:`LV_OBJ_FLAG_SNAPPABLE` 标志单独进行对齐。
 
 一个对象可以以四种方式对齐被捕获的子项：
 
@@ -394,14 +394,14 @@ Under the hood the following happens:
 - :cpp:enumerator:`LV_SCROLL_SNAP_END`: 将子项对齐到滚动对象的右/底部
 - :cpp:enumerator:`LV_SCROLL_SNAP_CENTER`: 将子项对齐到滚动对象的中心
 
-捕获对齐通过 ``lv_obj_set_scroll_snap_x/y(obj, LV_SCROLL_SNAP_...)`` 进行设置：
+通过 ``lv_obj_set_scroll_snap_x/y(obj, LV_SCROLL_SNAP_...)`` 设置对齐方式：
 
 在底层，以下操作会发生：
 
 1. 用户滚动对象并释放屏幕
 2. LVGL根据滚动动量计算滚动结束的位置
 3. LVGL找到最近的滚动点
-4. LVGL以动画的方式滚动到捕获点
+4. LVGL以动画的方式滚动到对齐点
 
 
 Scroll one(只滚动一个)
@@ -509,12 +509,12 @@ functions:
 
 以下API函数允许手动滚动对象：
 
-- ``lv_obj_scroll_by(obj, x, y, LV_ANIM_ON/OFF)`` 通过 ``x`` 和 ``y`` 的值滚动
+- ``lv_obj_scroll_by(obj, x, y, LV_ANIM_ON/OFF)`` 按照给定的 ``x`` 和 ``y`` 值滚动
 - ``lv_obj_scroll_to(obj, x, y, LV_ANIM_ON/OFF)`` 滚动以将给定坐标带到左上角
 - ``lv_obj_scroll_to_x(obj, x, LV_ANIM_ON/OFF)`` 滚动以将给定坐标带到左侧
 - ``lv_obj_scroll_to_y(obj, y, LV_ANIM_ON/OFF)`` 滚动以将给定坐标带到顶部
 
-偶尔您可能需要检索元素的滚动位置，以便稍后恢复它，或者根据当前滚动动态显示一些元素。以下是一个示例，介绍如何结合滚动事件并存储滚动顶部位置。
+有时您可能需要检索元素的滚动位置，以便稍后恢复它，或者根据当前滚动动态显示一些元素。以下是一个示例，介绍如何结合滚动事件并存储滚动顶部位置。
 
 .. code:: c
 
@@ -584,15 +584,15 @@ an object. Here is an example to see how to handle the event:
    <br>
 
 
-自尺寸是一个对象的属性。通常情况下，用户不应该使用这个参数，但如果创建了一个自定义窗口部件，它可能是有用的。
+自身大小是一个对象的属性。通常情况下，用户不应该使用这个参数，但如果创建了一个自定义控件，它可能会很有用。
 
-简而言之，自尺寸确定了对象内容的大小。为了更好地理解，以表格为例。假设它有10行，每行高度为50像素。
+简而言之，自身大小确定了对象内容的大小。为了更好地理解，以表格为例。假设它有10行，每行高度为50像素。
 因此，内容的总高度是500像素。换句话说，“自身高度”为500像素。
-如果用户为表格仅设置了200像素的高度，LVGL将会发现自尺寸更大，并使表格可滚动。
+如果用户为表格仅设置了200像素的高度，LVGL将会发现自身大小更大，并使表格可滚动。
 
-这意味着不仅子对象可以使一个对象可滚动，而且更大的自尺寸也可以。
+这意味着不仅子对象可以使一个对象可滚动，而且更大的自身大小也可以。
 
-LVGL使用 :cpp:enumerator:`LV_EVENT_GET_SELF_SIZE` 事件来获取一个对象的自尺寸。下面是一个处理该事件的示例：
+LVGL使用 :cpp:enumerator:`LV_EVENT_GET_SELF_SIZE` 事件来获取一个对象的自身大小。下面是一个处理该事件的示例：
 
 .. code:: c
 
