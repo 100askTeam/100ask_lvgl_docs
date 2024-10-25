@@ -24,9 +24,9 @@ You can specify a duration and repeat count.
    <br>
 
 
-动画图像对象类似于正常的 “图像” 对象。唯一区别是，设置的不是一个图像源，而是多个图像源。
+动画图像对象类似于普通的 “图像” 对象。唯一区别是，设置的不是一个图像源，而是设置由多个源图像组成的数组。
 
-可以指定持续时间和重复计数。
+可以指定持续时间和重复次数。
 
 
 .. _lv_animimg_parts_and_styles:
@@ -49,7 +49,7 @@ Parts and Styles（部分和样式）
    <br>
 
 
-:cpp:enumerator:`LV_PART_MAIN` 使用典型背景样式属性的背景样式属性和使用图像样式属性的图像本身。 使用典型背景样式属性和图像本身使用图像样式属性。
+:cpp:enumerator:`LV_PART_MAIN` 一个背景矩形，它使用典型的背景样式属性，而图像本身使用图像样式属性。
 
 .. _lv_animimg_usage:
 
