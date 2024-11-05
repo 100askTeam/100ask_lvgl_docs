@@ -21,7 +21,7 @@ The Arc consists of a background and a foreground arc. The foreground
    <br>
 
 
-圆弧由背景弧和前景弧组成。前景弧（指示器）可以进行触摸与调节操作。
+圆弧由背景弧和前景弧组成。前景（指示器）部分可以通过触摸进行调节。
 
 .. _lv_arc_parts_and_styles:
 
@@ -50,9 +50,9 @@ Parts and Styles（部分和样式）
    <br>
 
 
--  :cpp:enumerator:`LV_PART_MAIN` 使用典型背景样式特性绘制背景，使用圆弧样式特性绘制圆弧。圆弧的大小和位置遵循填充（padding）样式属性。
+-  :cpp:enumerator:`LV_PART_MAIN` 使用典型背景样式属性绘制背景，并使用圆弧样式属性绘制圆弧。圆弧的大小和位置遵循填充（padding）样式属性。
 -  :cpp:enumerator:`LV_PART_INDICATOR` 使用圆弧（arc）样式属性绘制出来的另一条圆弧。它的填充值是相对于背景弧来解释的。
--  :cpp:enumerator:`LV_PART_KNOB` 在指标的末尾绘制一个旋钮，使用所有背景属性和填充值。如果使用零填充，旋钮大小与指示器的宽度相同。较大的填充使其更大，较小的填充使其更小。
+-  :cpp:enumerator:`LV_PART_KNOB` 使用所有背景属性和填充值在指示器的末端绘制一个旋钮。当填充值为零时，旋钮大小与指示器的宽度相同。填充值越大，旋钮越大；填充值越小，旋钮越小。
 
 
 .. _lv_arc_usage:
@@ -89,7 +89,7 @@ the [0;360] range.
    <br>
 
 
-可以使用 :cpp:expr:`lv_arc_set_value(arc, new_value)` 设置新值。设置的值被解释为一个范围（最小值和最大值），可以使用 :cpp:expr:`lv_arc_set_range(arc, min, max)` 修改。默认范围为 0...100。
+可以使用 :cpp:expr:`lv_arc_set_value(arc, new_value)` 设置新值。设置的值在一个范围（最小值和最大值）内解读，这个范围可以使用 :cpp:expr:`lv_arc_set_range(arc, min, max)` 修改。默认范围为 0...100。
 
 指示弧绘制在主要部分的弧上。如果将该值设置为最大值，则指示弧将覆盖整个“背景”弧。要设置背景弧的起始角度和终止角度，请使用 :cpp:expr:`lv_arc_set_bg_angles(arc, start_angle, end_angle)` 函数或 ``lv_arc_set_bg_start/end_angle(arc, angle)`` 函数。
 
@@ -143,13 +143,13 @@ adjusted by finger.
 
 弧线可以是以下模式之一：
 
-- :cpp:enumerator:`LV_ARC_MODE_NORMAL` 普通模式。指示器从最小值绘制到当前值。
+- :cpp:enumerator:`LV_ARC_MODE_NORMAL` 普通模式。指示弧从最小值绘制到当前值。
 
-- :cpp:enumerator:`LV_ARC_MODE_REVERSE` 反向模式。指示器从最大值到当前值逆时针绘制。
+- :cpp:enumerator:`LV_ARC_MODE_REVERSE` 反向模式。指示弧从最大值到当前值逆时针绘制。
 
-- :cpp:enumerator:`LV_ARC_MODE_SYMMETRICAL` 对称模式。指示器从中间点绘制到当前值。
+- :cpp:enumerator:`LV_ARC_MODE_SYMMETRICAL` 对称模式。指示弧从中间点绘制到当前值。
 
-模式可通过 :cpp:expr:`lv_arc_set_mode(arc, LV_ARC_MODE_...)` 设置，并且在角度由 :cpp:func:`lv_arc_set_value` 设置或弧度用手指调整时使用。
+模式可通过 :cpp:expr:`lv_arc_set_mode(arc, LV_ARC_MODE_...)` 设置，并且只有在角度由 :cpp:func:`lv_arc_set_value` 设置或弧度用手指调整时才会使用。
 
 
 Change rate（变化率）
@@ -192,7 +192,7 @@ relative to the end of the arc The knob offset can be set by
    <br>
 
 
-旋钮的位置可以通过设置偏移值调整，如果不调整默认位于前景弧最末端处，调整偏移后可以在其之前以及之后。旋钮偏移可以通过 :cpp:expr:`lv_arc_set_knob_offset(arc, offset_angle)` 设置，只在 :cpp:enumerator:`LV_PART_KNOB` 部分生效。
+改变旋钮偏移量可以使旋钮的位置相对于圆弧末端移动。旋钮偏移可以通过 :cpp:expr:`lv_arc_set_knob_offset(arc, offset_angle)` 设置，只有当 :cpp:enumerator:`LV_PART_KNOB` 生效时，旋钮才会可见。
 
 
 Setting the indicator manually（手动设置指示器部分）
@@ -221,9 +221,9 @@ the object non-clickable:
    <br>
 
 
-也可以使用 :cpp:expr:`lv_arc_set_angles(arc, start_angle, end_angle)` 函数或 ``lv_arc_set_start/end_angle(arc, start_angle)`` 直接设置指示器部分的角度(零度位于对象的中间右侧（3 点钟方向），并且度数沿顺时针方向增加。)。 在这种情况下，设置的 “值” 和 “模式” 将被忽略。
+也可以使用 :cpp:expr:`lv_arc_set_angles(arc, start_angle, end_angle)` 函数或 ``lv_arc_set_start/end_angle(arc, start_angle)`` 直接设置指示弧部分的角度(零度位于对象的中间右侧（3 点钟方向），并且度数沿顺时针方向增加。)。 在这种情况下，设置的 “值” 和 “模式” 将被忽略。
 
-换言之，角度和值设置是独立的。你应该只使用其中之一。将两者混合可能会导致意外行为。
+换言之，角度和值的设置是相互独立的。你应该只使用其中之一。将两者混合可能会导致意外行为。
 
 要使弧度不可调，请移除旋钮的样式并使对象不可点击：
 
@@ -252,7 +252,7 @@ area larger inside and outside with the given number of pixels.
    <br>
 
 
-如果启用了 :cpp:enumerator:`LV_OBJ_FLAG_ADV_HITTEST` 标志，则弧可以在中间点击。只有在环上才能识别点击背景弧。 :cpp:func:`lv_obj_set_ext_click_size` 使敏感在给定的像素数下，内部和外部区域更大。
+如果启用了 :cpp:enumerator:`LV_OBJ_FLAG_ADV_HITTEST` 标志，则可以在圆弧中间点击。只有在背景圆弧的环形区域上识别点击操作。 :cpp:func:`lv_obj_set_ext_click_size` 函数会根据给定的像素数增大内部和外部的敏感区域。
 
 
 Place another object to the knob（将另一个对象放在旋钮上）
@@ -280,11 +280,11 @@ event of the arc.
    <br>
 
 
-另一个对象可以根据当前位置定位弧，以便遵循弧的当前值（角度）。为此，执行此操作请使用 :cpp:expr:`lv_arc_align_obj_to_angle(arc, obj_to_align, radius_offset)`。
+可以根据圆弧的当前位置来放置另一个对象，以便使其跟随圆弧的当前值（角度）。为此，执行此操作请使用 :cpp:expr:`lv_arc_align_obj_to_angle(arc, obj_to_align, radius_offset)`。
 
 类似地，:cpp:expr:`lv_arc_rotate_obj_to_angle(arc, obj_to_rotate, radius_offset)` 可以是用于将对象根据旋钮的角度旋转之后再对齐到arc的旋钮的位置上。
 
-在 ``VALUE_CHANGED`` 发生弧形时调用这些函数是一个典型的用例。
+在圆弧的 ``VALUE_CHANGED`` 事件中调用这些函数是一个典型的用例。
 
 
 .. _lv_arc_events:

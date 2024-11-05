@@ -27,11 +27,11 @@ changes the start position of the indicator.
    <br>
 
 
-进度条对象有一个背景和一个指示器。指示器的宽度根据进度条的当前值自动设置。
+进度条对象有一个背景，并且上面有一个指示器。指示器的宽度根据进度条的当前值自动设置。
 
-如果设置进度条的宽度小于其高度，就可以创建出垂直摆放的进度条。。
+如果设置进度条的宽度小于其高度，就可以创建出垂直摆放的进度条。
 
-不仅可以设置结束，还可以设置进度条的起始值，从而改变指标的起始位置。
+不仅可以设置进度条的结束值，还可以设置进度条的起始值，从而改变指示器的起始位置。
 
 
 .. _lv_bar_parts_and_styles:
@@ -57,7 +57,7 @@ Parts and Styles（零件和样式）
    <br>
 
 
--  :cpp:enumerator:`LV_PART_MAIN` 进度条的背景，它使用典型的背景样式属性。添加填充使指示器更小或更大。如果值设置为  :cpp:enumerator:`LV_ANIM_ON`，则可以继续通过设置 ``anim_time`` 样式属性设置动画的时间。
+-  :cpp:enumerator:`LV_PART_MAIN` 进度条的背景，它使用典型的背景样式属性。增加内边距会使指示器更小或更大。如果值设置为  :cpp:enumerator:`LV_ANIM_ON`，则可以继续通过设置 ``anim_time`` 样式属性设置动画的时间。
 -  :cpp:enumerator:`LV_PART_INDICATOR` 指示器本身;也使用了所有典型的背景属性。
 
 
@@ -91,9 +91,9 @@ animation depending on the last parameter (``LV_ANIM_ON/OFF``).
    <br>
 
 
-可以通过 ``lv_bar_set_value(bar, new_value, LV_ANIM_ON/OFF)`` 设置新值。值在范围（最小值和最大值）中解释，该范围可以使用 :cpp:expr:`lv_bar_set_range(bar, min, max)` 修改。默认范围为 0..100，默认绘制方向为水平模式下从左到右和垂直模式下从下到上。如果最小值大于最大值，例如 100..0，绘图方向变为相反方向。
+可以通过 ``lv_bar_set_value(bar, new_value, LV_ANIM_ON/OFF)`` 设置新值。值在范围（最小值和最大值）中解读，该范围可以使用 :cpp:expr:`lv_bar_set_range(bar, min, max)` 修改。默认范围为 0..100，默认绘制方向为水平模式下从左到右和垂直模式下从下到上。如果最小值大于最大值，例如 100..0，绘图方向变为相反方向。
 
-使用 :cpp:func:`lv_bar_set_value` 设置的新值可以通过其最后的一个参数 (LV_ANIM_ON/OFF) 设置生效新值时的过渡动画。
+使用 :cpp:func:`lv_bar_set_value` 设置的新值可以通过其最后的一个参数 (LV_ANIM_ON/OFF) 来决定是否设置动画。
 
 Modes（模式）
 ------------
@@ -118,10 +118,10 @@ The bar can be one of the following modes:
    <br>
 
 
-该条形图可以是以下模式之一：
+该进度条可以是以下模式之一：
 
 - :cpp:enumerator:`LV_BAR_MODE_NORMAL` 如上所述的普通进度条(默认)
-- :cpp:enumerator:`LV_BAR_MODE_SYMMETRICAL` 将指标从零值绘制为当前值。需要否定最小范围和正最大范围。
+- :cpp:enumerator:`LV_BAR_MODE_SYMMETRICAL` 将指示器从零值绘制为当前值。需要一个负的最小范围和正的最大范围。
 - :cpp:enumerator:`LV_BAR_MODE_RANGE` 这个模式下也可以指定负的最小范围。这样进度条的起始值可以不是0，而是你指定的数值(参考示例)，但是这样设置的起始值 ``lv_bar_set_start_value(bar, new_value, LV_ANIM_ON/OFF)`` 必须小于结束值。
 
 

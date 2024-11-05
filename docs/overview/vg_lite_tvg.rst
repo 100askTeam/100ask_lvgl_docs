@@ -21,7 +21,7 @@ It has been integrated into the CI automated compilation and testing process to 
 
 
 LVGL集成了一个基于ThorVG的VG-Lite模拟器。
-它的目的是简化VG-Lite适配的调试，并减少在硬件设备上调试和定位问题的时间。
+它的目的是简化对VG-Lite适配的调试工作，并减少在硬件设备上调试和定位问题的时间。
 
 它已经集成到CI自动化编译和测试流程中，以确保每次PR修改后VG-Lite渲染后端可以经过充分的测试。
 
@@ -71,8 +71,8 @@ Make sure :c:macro:`LV_VG_LITE_USE_GPU_INIT` is enabled, because the thorvg draw
 
 1. 启用VG-Lite渲染后端，请参见 `VG-Lite渲染后端 </overview/renderers/vg_lite>`__。
 
-2. 启用ThorVG并打开配置 :c:macro:`LV_USE_THORVG_INTERNAL` 或 :c:macro:`LV_USE_THORVG_EXTERNAL`。
-建议使用内部ThorVG库以确保统一的渲染结果。
+2. 启用ThorVG并打开配置宏 :c:macro:`LV_USE_THORVG_INTERNAL` 或 :c:macro:`LV_USE_THORVG_EXTERNAL`。
+建议使用内部ThorVG库以确保渲染结果的一致性。
 
 3. 启用 :c:macro:`LV_USE_VG_LITE_THORVG` 并将 :c:macro:`LV_DRAW_BUF_ALIGN` 设置为64。其余选项可以保持默认。
 确保启用 :c:macro:`LV_VG_LITE_USE_GPU_INIT` 因为在使用之前需要初始化ThorVG绘图上下文

@@ -23,9 +23,9 @@ timer. Therefore, you can call any LVGL related function in a timer.
    <br>
 
 
-LVGL有一个内置的计时器系统。您可以注册一个函数，让它定期被调用。这些计时器在 :cpp:func:`lv_timer_handler` 中进行处理和调用，需要每隔几毫秒调用一次。更多信息请参阅 `Porting </porting/timer-handler>`__ 。
+LVGL有一个内置的定时器系统。您可以注册一个函数，让它定期被调用。这些定时器在 :cpp:func:`lv_timer_handler` 函数中进行处理和调用，该函数需要每隔几毫秒调用一次。更多信息请参阅 `Porting </porting/timer-handler>`__ 。
 
-计时器是非抢占式的，这意味着一个计时器不能中断另一个计时器。因此，您可以在计时器中调用任何与LVGL相关的函数。
+定时器是非抢占式的，这意味着一个定时器不能中断另一个定时器。因此，您可以在定时器中调用任何与LVGL相关的函数。
 
 
 Create a timer（创建定时器）
@@ -74,9 +74,9 @@ For example:
    <br>
 
 
-要创建一个新定时器，使用 :cpp:expr:`lv_timer_create(timer_cb, period_ms, user_data)`。这将创建一个 :cpp:type:`lv_timer_t` ``*`` 变量，可以稍后用来修改定时器的参数。 :cpp:func:`lv_timer_create_basic` 也可以使用。这允许您在不指定任何参数的情况下创建一个新定时器。
+要创建一个新定时器，使用 :cpp:expr:`lv_timer_create(timer_cb, period_ms, user_data)`。这将创建一个 :cpp:type:`lv_timer_t` ``*`` 类型的变量，之后可以使用这个变量来修改定时器的参数。 :cpp:func:`lv_timer_create_basic` 也可以使用。这允许您在不指定任何参数的情况下创建一个新定时器。
 
-定时器回调函数应该有一个 ``void (*lv_timer_cb_t)(lv_timer_t *)`` 原型。
+定时器回调函数的原型应该是 ``void (*lv_timer_cb_t)(lv_timer_t *)`` 。
 
 例如：
 
@@ -123,9 +123,9 @@ called again after the defined period of milliseconds has elapsed.
    <br>
 
 
-:cpp:expr:`lv_timer_ready(timer)` 使计时器在下一次调用 :cpp:func:`lv_timer_handler` 时运行。
+:cpp:expr:`lv_timer_ready(timer)` 使定时器在下一次调用 :cpp:func:`lv_timer_handler` 函数时运行。
 
-:cpp:expr:`lv_timer_reset(timer)` 重置计时器的周期。在定义的毫秒周期过去后，它将再次被调用。
+:cpp:expr:`lv_timer_reset(timer)` 重置定时器的周期。在定义的毫秒周期过去后，它将再次被调用。
 
 
 Set parameters(参数设置)
@@ -148,7 +148,7 @@ You can modify some timer parameters later:
    <br>
 
 
-您可以稍后修改一些计时器参数：
+您可以稍后修改一些定时器参数：
 
 - :cpp:expr:`lv_timer_set_cb(timer, new_cb)` （设置新的回调函数）
 - :cpp:expr:`lv_timer_set_period(timer, new_period)` （设置新的时间周期）
@@ -174,8 +174,8 @@ Set the count to ``-1`` to repeat indefinitely.
    <br>
 
 
-你可以使用 :cpp:expr:`lv_timer_set_repeat_count(timer, count)` 来让一个定时器只重复指定次数。
-当定时器调用了定义的次数后，它会自动被删除。将计数设置为 ``-1`` 表示无限重复。
+你可以使用 :cpp:expr:`lv_timer_set_repeat_count(timer, count)` 来让一个定时器只重复给定的次数。
+当定时器在被调用指定次数后将自动被删除。将计数设置为 ``-1`` 表示无限重复。
 
 
 Enable and Disable（启用和禁用）
@@ -242,10 +242,10 @@ it won't actually measure the time the OS spends in an idle thread.
 
 您可以使用 `lv_timer_get_idle` 函数获取 :cpp:func:`lv_timer_handler` 函数的空闲百分比时间。
 请注意，它并不测量整个系统的空闲时间，仅测量 :cpp:func:`lv_timer_handler` 的空闲时间。
-如果您在操作系统中使用定时器调用 :cpp:func:`lv_timer_handler`，这可能会产生误导，因为它实际上不能测量操作系统在空闲线程中的消耗时间。
+如果您使用操作系统并在定时器中调用 :cpp:func:`lv_timer_handler`，这可能会产生误导，因为它实际上不能测量操作系统在空闲线程中的消耗时间。
 
 
-Timer handler resume callback（计时器处理程序恢复回调）
+Timer handler resume callback（定时器处理程序恢复回调）
 *****************************************************
 
 .. raw:: html
@@ -321,9 +321,9 @@ will delete the object on the next call to :cpp:func:`lv_timer_handler`.
    <br>
 
 
-在某些情况下，您不能立即执行某个操作。例如，如果还有其他东西在使用该对象，或者您不希望阻塞执行。
+在某些情况下，您不能立即执行某个操作。例如，你不能删除一个对象，因为还有其他东西正在使用它，或者你现在不想阻塞执行。
 对于这些情况，可以使用 :cpp:expr:`lv_async_call(my_function, data_p)` 在下一次调用 :cpp:func:`lv_timer_handler` 时调用 ``my_function``。
-当调用函数时，将传递 ``data_p``。请注意，只保存数据指针，因此您需要确保在调用函数时变量仍然有效。
+``data_p``将在函数被调用时传递给该函数。请注意，只保存数据指针，因此您需要确保在调用函数时变量仍然有效。
 它可以是 *静态*、全局或动态分配的数据。如果您想要取消异步调用，请调用 :cpp:expr:`lv_async_call_cancel(my_function, data_p)`，
 它将清除与 ``my_function`` 和 ``data_p`` 匹配的所有异步调用。
 
