@@ -1,8 +1,8 @@
 .. _base_widget_overview:
 
-===========
-Base Widget
-===========
+======================
+Base Widget（控件基础）
+======================
 
 The following details apply to all types of Widgets.
 

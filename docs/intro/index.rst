@@ -1,7 +1,7 @@
 .. _intro-page:
 
-Introduction
-============
+Introduction（介绍）
+====================
 
 .. toctree::
     :maxdepth: 1

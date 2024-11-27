@@ -1,8 +1,8 @@
 .. _lvgl_basics:
 
-===========
-LVGL Basics
-===========
+============================
+LVGL Basics（LVGL基础知识）
+============================
 
 LVGL (Light and Versatile Graphics Library) is a free and open-source graphics
 library providing everything you need to create an embedded GUI with easy-to-use

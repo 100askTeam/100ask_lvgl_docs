@@ -1,8 +1,8 @@
 .. _debugging:
 
-=========
-Debugging
-=========
+==================
+Debugging（调试）
+==================
 
 .. toctree::
     :maxdepth: 2

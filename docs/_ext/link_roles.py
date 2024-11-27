@@ -39,6 +39,8 @@ class TranslationLinkNodeTransform(SphinxPostTransform):
                 env = self.document.settings.env
                 docname = env.docname
                 #doc_path = env.doc2path(docname, False)
+                if "LVGL_URLPATH" not in os.environ:
+                    os.environ['LVGL_URLPATH'] = 'master'
                 urlpath = os.environ['LVGL_URLPATH']+'/'
                 return_path = URL_BASE.get(language, "") + urlpath
                 
