@@ -56,7 +56,7 @@ static lv_result_t btn_release_handler(lv_obj_t * obj);
 static lv_result_t list_release_handler(lv_obj_t * list_obj);
 static void list_press_handler(lv_obj_t * page);
 static uint32_t get_id_on_point(lv_obj_t * dropdown_obj, int32_t y);
-static void position_to_selected(lv_obj_t * obj);
+static void position_to_selected(lv_obj_t * dropdown_obj, lv_anim_enable_t anim_en);
 static lv_obj_t * get_label(const lv_obj_t * obj);
 
 /**********************
@@ -347,7 +347,7 @@ void lv_dropdown_set_selected(lv_obj_t * obj, uint32_t sel_opt)
     dropdown->sel_opt_id_orig = dropdown->sel_opt_id;
 
     if(dropdown->list) {
-        position_to_selected(obj);
+        position_to_selected(obj, LV_ANIM_OFF);
     }
 
     lv_obj_invalidate(obj);
@@ -576,7 +576,7 @@ void lv_dropdown_open(lv_obj_t * dropdown_obj)
     if(list_h > list_fit_h) list_h = list_fit_h;
     lv_obj_set_height(dropdown->list, list_h);
 
-    position_to_selected(dropdown_obj);
+    position_to_selected(dropdown_obj, LV_ANIM_OFF);
 
     if(dir == LV_DIR_BOTTOM)     lv_obj_align_to(dropdown->list, dropdown_obj, LV_ALIGN_OUT_BOTTOM_LEFT, 0, 0);
     else if(dir == LV_DIR_TOP)   lv_obj_align_to(dropdown->list, dropdown_obj, LV_ALIGN_OUT_TOP_LEFT, 0, 0);
@@ -773,7 +773,7 @@ static void lv_dropdown_event(const lv_obj_class_t * class_p, lv_event_t * e)
             }
             else if(dropdown->sel_opt_id + 1 < dropdown->option_cnt) {
                 dropdown->sel_opt_id++;
-                position_to_selected(obj);
+                position_to_selected(obj, LV_ANIM_ON);
             }
         }
         else if(c == LV_KEY_LEFT || c == LV_KEY_UP) {
@@ -783,7 +783,7 @@ static void lv_dropdown_event(const lv_obj_class_t * class_p, lv_event_t * e)
             }
             else if(dropdown->sel_opt_id > 0) {
                 dropdown->sel_opt_id--;
-                position_to_selected(obj);
+                position_to_selected(obj, LV_ANIM_ON);
             }
         }
         else if(c == LV_KEY_ESC) {
@@ -810,7 +810,7 @@ static void lv_dropdown_event(const lv_obj_class_t * class_p, lv_event_t * e)
             new_id = LV_CLAMP(0, new_id, (int32_t)dropdown->option_cnt - 1);
 
             dropdown->sel_opt_id = new_id;
-            position_to_selected(obj);
+            position_to_selected(obj, LV_ANIM_ON);
         }
     }
     else if(code == LV_EVENT_DRAW_MAIN) {
@@ -862,7 +862,6 @@ static void draw_main(lv_event_t * e)
     int32_t border_width = lv_obj_get_style_border_width(obj, LV_PART_MAIN);
     int32_t left = lv_obj_get_style_pad_left(obj, LV_PART_MAIN) + border_width;
     int32_t right = lv_obj_get_style_pad_right(obj, LV_PART_MAIN) + border_width;
-    int32_t top = lv_obj_get_style_pad_top(obj, LV_PART_MAIN) + border_width;
 
     lv_draw_label_dsc_t symbol_dsc;
     lv_draw_label_dsc_init(&symbol_dsc);
@@ -906,24 +905,22 @@ static void draw_main(lv_event_t * e)
         }
 
         lv_area_t symbol_area;
+        symbol_area.y1 = obj->coords.y1;
+        symbol_area.y2 = symbol_area.y1 + symbol_h - 1;
+        symbol_area.x1 = obj->coords.x1;
+        symbol_area.x2 = symbol_area.x1 + symbol_w - 1;
         if(symbol_to_left) {
-            symbol_area.x1 = obj->coords.x1 + left;
-            symbol_area.x2 = symbol_area.x1 + symbol_w - 1;
+            lv_area_align(&obj->coords, &symbol_area, LV_ALIGN_LEFT_MID, left, 0);
         }
         else {
-            symbol_area.x1 = obj->coords.x2 - right - symbol_w;
-            symbol_area.x2 = symbol_area.x1 + symbol_w - 1;
+            lv_area_align(&obj->coords, &symbol_area, LV_ALIGN_RIGHT_MID, -right, 0);
         }
 
         if(symbol_type == LV_IMAGE_SRC_SYMBOL) {
-            symbol_area.y1 = obj->coords.y1 + top;
-            symbol_area.y2 = symbol_area.y1 + symbol_h - 1;
             symbol_dsc.text = dropdown->symbol;
             lv_draw_label(layer, &symbol_dsc, &symbol_area);
         }
         else {
-            symbol_area.y1 = obj->coords.y1 + (lv_obj_get_height(obj) - symbol_h) / 2;
-            symbol_area.y2 = symbol_area.y1 + symbol_h - 1;
             lv_draw_image_dsc_t img_dsc;
             lv_draw_image_dsc_init(&img_dsc);
             lv_obj_init_draw_image_dsc(obj, LV_PART_INDICATOR, &img_dsc);
@@ -943,22 +940,21 @@ static void draw_main(lv_event_t * e)
                      label_dsc.flag);
 
     lv_area_t txt_area;
-    txt_area.y1 = obj->coords.y1 + top;
-    txt_area.y2 = txt_area.y1 + size.y;
+    txt_area.x1 = obj->coords.x1;
+    txt_area.x2 = txt_area.x1 + size.x - 1;
+    txt_area.y1 = obj->coords.y1;
+    txt_area.y2 = txt_area.y1 + size.y - 1;
     /*Center align the text if no symbol*/
     if(dropdown->symbol == NULL) {
-        txt_area.x1 = obj->coords.x1 + (lv_obj_get_width(obj) - size.x) / 2;
-        txt_area.x2 = txt_area.x1 + size.x;
+        lv_area_align(&obj->coords, &txt_area, LV_ALIGN_CENTER, 0, 0);
     }
     else {
         /*Text to the right*/
         if(symbol_to_left) {
-            txt_area.x1 = obj->coords.x2 - right - size.x;
-            txt_area.x2 = txt_area.x1 + size.x;
+            lv_area_align(&obj->coords, &txt_area, LV_ALIGN_RIGHT_MID, -right, 0);
         }
         else {
-            txt_area.x1 = obj->coords.x1 + left;
-            txt_area.x2 = txt_area.x1 + size.x;
+            lv_area_align(&obj->coords, &txt_area, LV_ALIGN_LEFT_MID, left, 0);
         }
     }
 
@@ -1202,7 +1198,7 @@ static uint32_t get_id_on_point(lv_obj_t * dropdown_obj, int32_t y)
  * Set the position of list when it is closed to show the selected item
  * @param ddlist pointer to a drop down list
  */
-static void position_to_selected(lv_obj_t * dropdown_obj)
+static void position_to_selected(lv_obj_t * dropdown_obj, lv_anim_enable_t anim_en)
 {
     lv_dropdown_t * dropdown = (lv_dropdown_t *)dropdown_obj;
 
@@ -1218,7 +1214,7 @@ static void position_to_selected(lv_obj_t * dropdown_obj)
     int32_t line_y1 = dropdown->sel_opt_id * unit_h;
 
     /*Scroll to the selected option*/
-    lv_obj_scroll_to_y(dropdown->list, line_y1, LV_ANIM_OFF);
+    lv_obj_scroll_to_y(dropdown->list, line_y1, anim_en);
     lv_obj_invalidate(dropdown->list);
 }
 

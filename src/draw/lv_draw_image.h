@@ -26,7 +26,7 @@ extern "C" {
  *      MACROS
  **********************/
 
-typedef struct lv_draw_image_dsc_t {
+typedef struct _lv_draw_image_dsc_t {
     lv_draw_dsc_base_t base;
 
     const void * src;
@@ -43,7 +43,7 @@ typedef struct lv_draw_image_dsc_t {
     lv_opa_t recolor_opa;
 
     lv_opa_t opa;
-    lv_blend_mode_t blend_mode : 4;
+    lv_blend_mode_t blend_mode : 3;
 
     uint16_t antialias          : 1;
     uint16_t tile               : 1;

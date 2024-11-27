@@ -132,7 +132,7 @@ bool lv_obj_remove_event_cb(lv_obj_t * obj, lv_event_cb_t event_cb)
     uint32_t i;
     for(i = 0; i < event_cnt; i++) {
         lv_event_dsc_t * dsc = lv_obj_get_event_dsc(obj, i);
-        if(dsc->cb == event_cb) {
+        if(dsc && dsc->cb == event_cb) {
             lv_obj_remove_event(obj, i);
             return true;
         }
@@ -371,7 +371,6 @@ static lv_result_t event_send_core(lv_event_t * e)
     if(parent && event_is_bubbled(e)) {
         e->current_target = parent;
         res = event_send_core(e);
-        if(res != LV_RESULT_OK || e->stop_processing || e->stop_bubbling) return res;
     }
 
     return res;

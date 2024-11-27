@@ -120,6 +120,15 @@ char * lv_strcpy(char * dst, const char * src);
 int lv_strcmp(const char * s1, const char * s2);
 
 /**
+ * @brief  This function will compare two strings up to the given length.
+ * @param s1    pointer to the first string
+ * @param s2    pointer to the second string
+ * @param len   the maximum amount of characters to compare
+ * @return      the difference between the value of the first unmatching character.
+ */
+int lv_strncmp(const char * s1, const char * s2, size_t len);
+
+/**
  * @brief Duplicate a string by allocating a new one and copying the content.
  * @param src Pointer to the source of data to be copied.
  * @return A pointer to the new allocated string. NULL if failed.
@@ -146,6 +155,14 @@ char * lv_strcat(char * dst, const char * src);
  * @return A pointer to the destination string, which is dst.
  */
 char * lv_strncat(char * dst, const char * src, size_t src_len);
+
+/**
+ * @brief Searches for the first occurrence of character c in the string str.
+ * @param str Pointer to the null-terminated byte string to be searched.
+ * @param c The character to be searched for.
+ * @return A pointer to the first occurrence of character c in the string str, or a null pointer if c is not found.
+ */
+char * lv_strchr(const char * str, int c);
 
 /**********************
  *      MACROS

@@ -54,6 +54,15 @@ typedef enum {
     LV_SCALE_MODE_LAST
 } lv_scale_mode_t;
 
+#define LV_SCALE_LABEL_ROTATE_MATCH_TICKS  0x100000
+LV_EXPORT_CONST_INT(LV_SCALE_LABEL_ROTATE_MATCH_TICKS);
+
+#define LV_SCALE_LABEL_ROTATE_KEEP_UPRIGHT 0x80000
+LV_EXPORT_CONST_INT(LV_SCALE_LABEL_ROTATE_KEEP_UPRIGHT);
+
+#define LV_SCALE_ROTATION_ANGLE_MASK 0x7FFFF
+LV_EXPORT_CONST_INT(LV_SCALE_ROTATION_ANGLE_MASK);
+
 LV_ATTRIBUTE_EXTERN_DATA extern const lv_obj_class_t lv_scale_class;
 
 /**********************
@@ -151,7 +160,8 @@ void lv_scale_set_image_needle_value(lv_obj_t * obj, lv_obj_t * needle_img, int3
 /**
  * Set custom text source for major ticks labels
  * @param obj       pointer to a scale object
- * @param txt_src   pointer to an array of strings which will be display at major ticks
+ * @param txt_src   pointer to an array of strings which will be display at major ticks;
+ *                  last element must be a NULL pointer.
  */
 void lv_scale_set_text_src(lv_obj_t * obj, const char * txt_src[]);
 

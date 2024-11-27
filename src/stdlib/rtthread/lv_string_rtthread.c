@@ -86,6 +86,11 @@ int lv_strcmp(const char * s1, const char * s2)
     return rt_strcmp(s1, s2);
 }
 
+int lv_strncmp(const char * s1, const char * s2, size_t len)
+{
+    return rt_strncmp(s1, s2, len);
+}
+
 char * lv_strdup(const char * src)
 {
     size_t len = lv_strlen(src) + 1;
@@ -114,6 +119,21 @@ char * lv_strncat(char * dst, const char * src, size_t src_len)
     }
     *dst = '\0';
     return tmp;
+}
+
+char * lv_strchr(const char * s, int c)
+{
+    for(; ; s++) {
+        if(*s == c) {
+            return (char *)s;
+        }
+
+        if(*s == '\0') {
+            break;
+        }
+    }
+
+    return NULL;
 }
 
 /**********************

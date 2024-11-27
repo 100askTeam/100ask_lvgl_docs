@@ -69,6 +69,9 @@ static void lv_snippet_push(lv_snippet_t * item);
 static lv_snippet_t * lv_get_snippet(uint32_t index);
 static int32_t convert_indent_pct(lv_obj_t * spans, int32_t width);
 
+static lv_span_coords_t make_span_coords(const lv_span_t * prev_span, const lv_span_t * curr_span, int32_t width,
+                                         lv_area_t padding, int32_t indent);
+
 /**********************
  *  STATIC VARIABLES
  **********************/
@@ -258,6 +261,11 @@ lv_style_t * lv_span_get_style(lv_span_t * span)
     return &span->style;
 }
 
+const char * lv_span_get_text(lv_span_t * span)
+{
+    return span->txt;
+}
+
 lv_span_t * lv_spangroup_get_child(const lv_obj_t * obj, int32_t id)
 {
     if(obj == NULL) {
@@ -442,7 +450,7 @@ int32_t lv_spangroup_get_expand_height(lv_obj_t * obj, int32_t width)
 
     /* coords of draw span-txt */
     lv_point_t txt_pos;
-    lv_point_set(&txt_pos, 0, indent); /* first line need add indent */
+    lv_point_set(&txt_pos, indent, 0); /* first line need add indent */
 
     lv_span_t * cur_span = lv_ll_get_head(&spans->child_ll);
     const char * cur_txt = cur_span->txt;
@@ -451,6 +459,7 @@ int32_t lv_spangroup_get_expand_height(lv_obj_t * obj, int32_t width)
     lv_snippet_t snippet;   /* use to save cur_span info and push it to stack */
     lv_memset(&snippet, 0, sizeof(snippet));
 
+    lv_span_t * prev_span = cur_span;
     int32_t line_cnt = 0;
     int32_t lines = spans->lines < 0 ? INT32_MAX : spans->lines;
     /* the loop control how many lines need to draw */
@@ -462,6 +471,8 @@ int32_t lv_spangroup_get_expand_height(lv_obj_t * obj, int32_t width)
         while(1) {
             /* switch to the next span when current is end */
             if(cur_txt[cur_txt_ofs] == '\0') {
+                cur_span->trailing_pos = txt_pos;
+
                 cur_span = lv_ll_get_next(&spans->child_ll, cur_span);
                 if(cur_span == NULL) break;
                 cur_txt = cur_span->txt;
@@ -484,6 +495,8 @@ int32_t lv_spangroup_get_expand_height(lv_obj_t * obj, int32_t width)
             int32_t use_width = 0;
             bool isfill = lv_text_get_snippet(&cur_txt[cur_txt_ofs], snippet.font, snippet.letter_space,
                                               max_w, txt_flag, &use_width, &next_ofs);
+            if(isfill) txt_pos.x = 0;
+            else txt_pos.x += use_width;
 
             /* break word deal width */
             if(isfill && next_ofs > 0 && snippet_cnt > 0) {
@@ -521,8 +534,16 @@ int32_t lv_spangroup_get_expand_height(lv_obj_t * obj, int32_t width)
         }
 
         /* next line init */
-        txt_pos.x = 0;
         txt_pos.y += max_line_h;
+
+        /* iterate all the spans in the current line and set the trailing height to the max line height */
+        for(lv_span_t * tmp_span = prev_span;
+            tmp_span && tmp_span != cur_span;
+            tmp_span = lv_ll_get_next(&spans->child_ll, tmp_span))
+            tmp_span->trailing_height = max_line_h;
+
+        prev_span = cur_span;
+
         max_w = max_width;
         line_cnt += 1;
         if(line_cnt >= lines) {
@@ -532,6 +553,69 @@ int32_t lv_spangroup_get_expand_height(lv_obj_t * obj, int32_t width)
     txt_pos.y -= line_space;
 
     return txt_pos.y;
+}
+
+lv_span_coords_t lv_spangroup_get_span_coords(lv_obj_t * obj, const lv_span_t * span)
+{
+    /* find previous span */
+    const lv_spangroup_t * spangroup = (lv_spangroup_t *)obj;
+    const lv_ll_t * spans = &spangroup->child_ll;
+    const int32_t width = lv_obj_get_content_width(obj);
+    const int32_t indent = lv_spangroup_get_indent(obj);
+
+    if(obj == NULL || span == NULL || lv_ll_get_head(spans) == NULL) return (lv_span_coords_t) {
+        0
+    };
+
+    lv_span_t * prev_span = NULL;
+    lv_span_t * curr_span;
+    LV_LL_READ(spans, curr_span) {
+        if(curr_span == span) break;
+        prev_span = curr_span;
+    }
+
+    const uint32_t border_width = lv_obj_get_style_border_width(obj, LV_PART_MAIN);
+    return make_span_coords(prev_span, curr_span, width, (lv_area_t) {
+        .x1 = lv_obj_get_style_pad_left(obj, LV_PART_MAIN) + border_width,
+        .y1 = lv_obj_get_style_pad_top(obj, LV_PART_MAIN) + border_width,
+        .x2 = lv_obj_get_style_pad_right(obj, LV_PART_MAIN) + border_width, .y2 = 0
+    },
+    indent);
+}
+
+lv_span_t * lv_spangroup_get_span_by_point(lv_obj_t * obj, const lv_point_t * p)
+{
+    const lv_spangroup_t * spangroup = (lv_spangroup_t *)obj;
+    const lv_ll_t * spans = &spangroup->child_ll;
+    const int32_t width = lv_obj_get_content_width(obj);
+    const int32_t indent = lv_spangroup_get_indent(obj);
+
+    if(obj == NULL || p == NULL || lv_ll_get_head(spans) == NULL) return NULL;
+
+    lv_point_t point;
+    point.x = p->x - obj->coords.x1;
+    point.y = p->y - obj->coords.y1;
+
+    /* find previous span */
+
+    const lv_span_t * prev_span = NULL;
+    lv_span_t * curr_span;
+    LV_LL_READ(spans, curr_span) {
+        lv_span_coords_t coords = make_span_coords(prev_span, curr_span, width, (lv_area_t) {
+            .x1 = lv_obj_get_style_pad_left(obj, LV_PART_MAIN),
+            .y1 = lv_obj_get_style_pad_top(obj, LV_PART_MAIN),
+            .x2 = lv_obj_get_style_pad_right(obj, LV_PART_MAIN),
+            .y2 = 0
+        },
+        indent);
+        if(lv_area_is_point_on(&coords.heading,  &point, 0) ||
+           lv_area_is_point_on(&coords.middle,   &point, 0) ||
+           lv_area_is_point_on(&coords.trailing, &point, 0)) {
+            return curr_span;
+        }
+        prev_span = curr_span;
+    }
+    return NULL;
 }
 
 /**********************
@@ -654,7 +738,7 @@ static bool lv_text_get_snippet(const char * txt, const lv_font_t * font,
     real_max_width++;
 #endif
 
-    uint32_t ofs = lv_text_get_next_line(txt, font, letter_space, real_max_width, use_width, flag);
+    uint32_t ofs = lv_text_get_next_line(txt, LV_TEXT_LEN_MAX, font, letter_space, real_max_width, use_width, flag);
     *end_ofs = ofs;
 
     if(txt[ofs] == '\0' && *use_width < max_width && !(ofs && (txt[ofs - 1] == '\n' || txt[ofs - 1] == '\r'))) {
@@ -934,16 +1018,11 @@ static void lv_draw_span(lv_obj_t * obj, lv_layer_t * layer)
             if(last_snippet->txt[last_snippet->bytes] == '\0') {
                 next_line_h = 0;
                 lv_span_t * next_span = lv_ll_get_next(&spans->child_ll, last_snippet->span);
-                if(next_span) { /* have the next line */
+                if(next_span && next_span->txt && next_span->txt[0]) { /* have the next line */
                     next_line_h = lv_font_get_line_height(lv_span_get_style_text_font(obj, next_span)) + line_space;
                 }
             }
             if(txt_pos.y + max_line_h + next_line_h - line_space > coords.y2 + 1) { /* for overflow if is end line. */
-                if(last_snippet->txt[last_snippet->bytes] != '\0') {
-                    last_snippet->bytes = lv_strlen(last_snippet->txt);
-                    last_snippet->txt_w = lv_text_get_width(last_snippet->txt, last_snippet->bytes, last_snippet->font,
-                                                            last_snippet->letter_space);
-                }
                 ellipsis_valid = spans->overflow == LV_SPAN_OVERFLOW_ELLIPSIS;
                 is_end_line = true;
             }
@@ -992,76 +1071,45 @@ static void lv_draw_span(lv_obj_t * obj, lv_layer_t * layer)
             }
             uint32_t txt_bytes = pinfo->bytes;
 
-            /* overflow */
-            uint32_t dot_letter_w = 0;
+            if(pos.x > clip_area.x2) {
+                continue;
+            }
+
+            label_draw_dsc.text = bidi_txt;
+            label_draw_dsc.text_length = txt_bytes;
+            label_draw_dsc.letter_space = pinfo->letter_space;
+            label_draw_dsc.decor = lv_span_get_style_text_decor(obj, pinfo->span);
+            lv_area_t a;
+            a.x1 = pos.x;
+            a.y1 = pos.y;
+            a.x2 = a.x1 + pinfo->txt_w;
+            a.y2 = a.y1 + pinfo->line_h;
+
+            bool need_draw_ellipsis = false;
             uint32_t dot_width = 0;
+            /* deal overflow */
             if(ellipsis_valid) {
-                dot_letter_w = lv_font_get_glyph_width(pinfo->font, '.', '.');
+                uint32_t dot_letter_w = lv_font_get_glyph_width(pinfo->font, '.', '.');
                 dot_width = dot_letter_w * 3;
-            }
-            int32_t ellipsis_width = coords.x1 + max_width - dot_width;
 
-            uint32_t j = 0;
-            while(j < txt_bytes) {
-                /* skip invalid fields */
-                if(pos.x > clip_area.x2) {
-                    break;
-                }
-                uint32_t letter      = lv_text_encoded_next(bidi_txt, &j);
-                uint32_t letter_next = lv_text_encoded_next(&bidi_txt[j], NULL);
-                int32_t letter_w = lv_font_get_glyph_width(pinfo->font, letter, letter_next);
-
-                /* skip invalid fields */
-                if(pos.x + letter_w + pinfo->letter_space < clip_area.x1) {
-                    if(letter_w > 0) {
-                        pos.x = pos.x + letter_w + pinfo->letter_space;
-                    }
-                    continue;
-                }
-
-                if(ellipsis_valid && pos.x + letter_w + pinfo->letter_space > ellipsis_width) {
-                    for(int ell = 0; ell < 3; ell++) {
-                        lv_draw_character(layer, &label_draw_dsc, &pos, '.');
-                        pos.x = pos.x + dot_letter_w + pinfo->letter_space;
-                    }
-                    if(pos.x <= ellipsis_width) {
-                        pos.x = ellipsis_width + 1;
-                    }
-                    break;
-                }
-                else {
-                    lv_draw_character(layer, &label_draw_dsc, &pos, letter);
-                    if(letter_w > 0) {
-                        pos.x = pos.x + letter_w + pinfo->letter_space;
-                    }
-                }
+                label_draw_dsc.flag = LV_TEXT_FLAG_BREAK_ALL;
+                uint32_t next_ofs;
+                need_draw_ellipsis = lv_text_get_snippet(pinfo->txt, pinfo->font, pinfo->letter_space, coords.x2 - a.x1 - dot_width,
+                                                         label_draw_dsc.flag, &pinfo->txt_w, &next_ofs);
+                a.x2 = a.x1 + pinfo->txt_w;
+                label_draw_dsc.text_length = next_ofs + 1;
             }
 
-            /* draw decor */
-            lv_text_decor_t decor = lv_span_get_style_text_decor(obj, pinfo->span);
-            if(decor != LV_TEXT_DECOR_NONE) {
-                lv_draw_line_dsc_t line_dsc;
-                lv_draw_line_dsc_init(&line_dsc);
-                line_dsc.color = label_draw_dsc.color;
-                line_dsc.width = label_draw_dsc.font->underline_thickness ? pinfo->font->underline_thickness : 1;
-                line_dsc.opa = label_draw_dsc.opa;
-                line_dsc.blend_mode = label_draw_dsc.blend_mode;
+            lv_draw_label(layer, &label_draw_dsc, &a);
 
-                if(decor & LV_TEXT_DECOR_STRIKETHROUGH) {
-                    int32_t y = pos.y + ((pinfo->line_h - line_space) >> 1)  + (line_dsc.width >> 1);
-                    lv_point_precise_set(&line_dsc.p1, txt_pos.x, y);
-                    lv_point_precise_set(&line_dsc.p2, pos.x, y);
-                    lv_draw_line(layer, &line_dsc);
-                }
-
-                if(decor & LV_TEXT_DECOR_UNDERLINE) {
-                    int32_t y = pos.y + pinfo->line_h - line_space - pinfo->font->base_line - pinfo->font->underline_position;
-                    lv_point_precise_set(&line_dsc.p1, txt_pos.x, y);
-                    lv_point_precise_set(&line_dsc.p2, pos.x, y);
-                    lv_draw_line(layer, &line_dsc);
-                }
+            if(need_draw_ellipsis) {
+                label_draw_dsc.text = "...";
+                a.x1 = a.x2;
+                a.x2 = a.x1 + dot_width;
+                lv_draw_label(layer, &label_draw_dsc, &a);
             }
-            txt_pos.x = pos.x;
+
+            txt_pos.x = a.x2;
         }
 
 Next_line_init:
@@ -1084,6 +1132,54 @@ static void refresh_self_size(lv_obj_t * obj)
     spans->refresh = 1;
     lv_obj_invalidate(obj);
     lv_obj_refresh_self_size(obj);
+}
+
+static lv_span_coords_t make_span_coords(const lv_span_t * prev_span, const lv_span_t * curr_span, const int32_t width,
+                                         const lv_area_t padding, const int32_t indent)
+{
+    lv_span_coords_t coords = { 0 };
+
+    if(curr_span == NULL) return coords;
+
+    /* first line */
+    if(prev_span == NULL) {
+        lv_area_set(&coords.heading, padding.x1 + indent, padding.y1, width + padding.x1,
+                    curr_span->trailing_pos.y + padding.y1);
+        lv_area_set(&coords.middle, coords.heading.x1, coords.heading.y2, curr_span->trailing_pos.x + padding.x1,
+                    coords.heading.y2 + curr_span->trailing_height);
+        lv_area_set(&coords.trailing, 0, 0, 0, 0);
+
+        return coords;
+    }
+
+    /* start and end on the same line */
+    const bool is_same_line = prev_span->trailing_pos.y == curr_span->trailing_pos.y;
+    if(is_same_line == true) {
+        lv_area_set(&coords.heading,
+                    prev_span->trailing_pos.x + padding.x1, prev_span->trailing_pos.y + padding.y1,
+                    curr_span->trailing_pos.x + padding.x1, curr_span->trailing_pos.y + curr_span->trailing_height + padding.y1);
+        return coords;
+    }
+
+    /* common case */
+    const lv_point_t pre_trailing_pos = prev_span->trailing_pos;
+    const int32_t pre_trailing_height = prev_span->trailing_height;
+
+    lv_area_set(&coords.heading,
+                pre_trailing_pos.x + padding.x1, pre_trailing_pos.y + padding.y1,
+                width + padding.x1, pre_trailing_pos.y + pre_trailing_height + padding.y1);
+    /* When it happens to be two lines of text,
+    * the y2 of the middle area is exactly the y1 + line height of the first line of text,
+    * so the area of the middle area is empty.
+    * */
+    lv_area_set(&coords.middle,
+                padding.x1, coords.heading.y2,
+                width + padding.x1, curr_span->trailing_pos.y + padding.y1);
+    lv_area_set(&coords.trailing,
+                coords.middle.x1, coords.middle.y2,
+                curr_span->trailing_pos.x + padding.x1, curr_span->trailing_pos.y + curr_span->trailing_height + padding.y1);
+
+    return coords;
 }
 
 #endif

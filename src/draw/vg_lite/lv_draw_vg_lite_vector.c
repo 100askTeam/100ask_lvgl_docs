@@ -25,12 +25,26 @@
  *      DEFINES
  *********************/
 
+#if LV_USE_VG_LITE_THORVG
+    /**
+    * It is found that thorvg cannot handle large coordinates well.
+    * When the coordinates are larger than 4096, the calculation of tvgSwRle module will overflow in 32-bit system.
+    * So we use FLT_MAX and FLT_MIN to write the mark to bounding_box to tell vg_lite_tvg not to add clip path to the current path.
+    */
+    #define PATH_COORD_MAX FLT_MAX
+    #define PATH_COORD_MIN FLT_MIN
+#else
+    /*  18 bits is enough to represent the coordinates of path bounding box */
+    #define PATH_COORD_MAX (1 << 18)
+    #define PATH_COORD_MIN (-PATH_COORD_MAX)
+#endif
+
 /**********************
  *      TYPEDEFS
  **********************/
 
 typedef void * path_drop_data_t;
-typedef void (*path_drop_func_t)(struct lv_draw_vg_lite_unit_t *, path_drop_data_t);
+typedef void (*path_drop_func_t)(struct _lv_draw_vg_lite_unit_t *, path_drop_data_t);
 
 /**********************
  *  STATIC PROTOTYPES
@@ -63,9 +77,9 @@ void lv_draw_vg_lite_vector(lv_draw_unit_t * draw_unit, const lv_draw_vector_tas
     if(layer->draw_buf == NULL)
         return;
 
-    LV_PROFILER_BEGIN;
+    LV_PROFILER_DRAW_BEGIN;
     lv_vector_for_each_destroy_tasks(dsc->task_list, task_draw_cb, draw_unit);
-    LV_PROFILER_END;
+    LV_PROFILER_DRAW_END;
 }
 
 /**********************
@@ -85,7 +99,7 @@ static vg_lite_color_t lv_color32_to_vg(lv_color32_t color, lv_opa_t opa)
 
 static void task_draw_cb(void * ctx, const lv_vector_path_t * path, const lv_vector_draw_dsc_t * dsc)
 {
-    LV_PROFILER_BEGIN;
+    LV_PROFILER_DRAW_BEGIN;
     lv_draw_vg_lite_unit_t * u = ctx;
     LV_VG_LITE_ASSERT_DEST_BUFFER(&u->target_buffer);
 
@@ -95,10 +109,10 @@ static void task_draw_cb(void * ctx, const lv_vector_path_t * path, const lv_vec
         vg_lite_color_t c = lv_color32_to_vg(dsc->fill_dsc.color, LV_OPA_COVER);
         vg_lite_rectangle_t rect;
         lv_vg_lite_rect(&rect, &dsc->scissor_area);
-        LV_PROFILER_BEGIN_TAG("vg_lite_clear");
+        LV_PROFILER_DRAW_BEGIN_TAG("vg_lite_clear");
         LV_VG_LITE_CHECK_ERROR(vg_lite_clear(&u->target_buffer, &rect, c));
-        LV_PROFILER_END_TAG("vg_lite_clear");
-        LV_PROFILER_END;
+        LV_PROFILER_DRAW_END_TAG("vg_lite_clear");
+        LV_PROFILER_DRAW_END;
         return;
     }
 
@@ -116,7 +130,7 @@ static void task_draw_cb(void * ctx, const lv_vector_path_t * path, const lv_vec
 
     /* get path bounds */
     float min_x, min_y, max_x, max_y;
-    lv_vg_lite_path_get_bonding_box(lv_vg_path, &min_x, &min_y, &max_x, &max_y);
+    lv_vg_lite_path_get_bounding_box(lv_vg_path, &min_x, &min_y, &max_x, &max_y);
 
     /* convert path type */
     vg_lite_path_type_t path_type = lv_path_opa_to_path_type(dsc);
@@ -146,6 +160,7 @@ static void task_draw_cb(void * ctx, const lv_vector_path_t * path, const lv_vec
 
             /* drop original path */
             lv_vg_lite_path_drop(u, lv_vg_path);
+            LV_PROFILER_DRAW_END;
             return;
         }
 
@@ -177,6 +192,11 @@ static void task_draw_cb(void * ctx, const lv_vector_path_t * path, const lv_vec
     if(vg_lite_query_feature(gcFEATURE_BIT_VG_SCISSOR)) {
         /* set scissor area */
         lv_vg_lite_set_scissor_area(&dsc->scissor_area);
+
+        /* no bounding box */
+        lv_vg_lite_path_set_bounding_box(lv_vg_path,
+                                         (float)PATH_COORD_MIN, (float)PATH_COORD_MIN,
+                                         (float)PATH_COORD_MAX, (float)PATH_COORD_MAX);
     }
     else {
         /* calc inverse matrix */
@@ -184,7 +204,7 @@ static void task_draw_cb(void * ctx, const lv_vector_path_t * path, const lv_vec
         if(!lv_vg_lite_matrix_inverse(&result, &matrix)) {
             LV_LOG_ERROR("no inverse matrix");
             path_drop_func(u, path_drop_data);
-            LV_PROFILER_END;
+            LV_PROFILER_DRAW_END;
             return;
         }
 
@@ -196,13 +216,13 @@ static void task_draw_cb(void * ctx, const lv_vector_path_t * path, const lv_vec
         lv_point_precise_t p2 = { dsc->scissor_area.x2 + 1, dsc->scissor_area.y2 + 1 };
         lv_point_precise_t p2_res = lv_vg_lite_matrix_transform_point(&result, &p2);
 
-        lv_vg_lite_path_set_bonding_box(lv_vg_path, p1_res.x, p1_res.y, p2_res.x, p2_res.y);
+        lv_vg_lite_path_set_bounding_box(lv_vg_path, p1_res.x, p1_res.y, p2_res.x, p2_res.y);
     }
 
     switch(dsc->fill_dsc.style) {
         case LV_VECTOR_DRAW_STYLE_SOLID: {
                 /* normal draw shape */
-                LV_PROFILER_BEGIN_TAG("vg_lite_draw");
+                LV_PROFILER_DRAW_BEGIN_TAG("vg_lite_draw");
                 LV_VG_LITE_CHECK_ERROR(vg_lite_draw(
                                            &u->target_buffer,
                                            vg_path,
@@ -210,14 +230,14 @@ static void task_draw_cb(void * ctx, const lv_vector_path_t * path, const lv_vec
                                            &matrix,
                                            blend,
                                            vg_color));
-                LV_PROFILER_END_TAG("vg_lite_draw");
+                LV_PROFILER_DRAW_END_TAG("vg_lite_draw");
             }
             break;
         case LV_VECTOR_DRAW_STYLE_PATTERN: {
                 /* draw image */
                 vg_lite_buffer_t image_buffer;
                 lv_image_decoder_dsc_t decoder_dsc;
-                if(lv_vg_lite_buffer_open_image(&image_buffer, &decoder_dsc, dsc->fill_dsc.img_dsc.src, false)) {
+                if(lv_vg_lite_buffer_open_image(&image_buffer, &decoder_dsc, dsc->fill_dsc.img_dsc.src, false, true)) {
                     /* Calculate pattern matrix. Should start from path bond box, and also apply fill matrix. */
                     lv_matrix_t m = dsc->matrix;
                     lv_matrix_translate(&m, min_x, min_y);
@@ -226,11 +246,11 @@ static void task_draw_cb(void * ctx, const lv_vector_path_t * path, const lv_vec
                     vg_lite_matrix_t pattern_matrix;
                     lv_vg_lite_matrix(&pattern_matrix, &m);
 
-                    vg_lite_color_t recolor = lv_vg_lite_color(dsc->fill_dsc.img_dsc.recolor, dsc->fill_dsc.img_dsc.recolor_opa, true);
+                    vg_lite_color_t recolor = lv_vg_lite_image_recolor(&image_buffer, &dsc->fill_dsc.img_dsc);
 
                     LV_VG_LITE_ASSERT_MATRIX(&pattern_matrix);
 
-                    LV_PROFILER_BEGIN_TAG("vg_lite_draw_pattern");
+                    LV_PROFILER_DRAW_BEGIN_TAG("vg_lite_draw_pattern");
                     LV_VG_LITE_CHECK_ERROR(vg_lite_draw_pattern(
                                                &u->target_buffer,
                                                vg_path,
@@ -243,15 +263,25 @@ static void task_draw_cb(void * ctx, const lv_vector_path_t * path, const lv_vec
                                                vg_color,
                                                recolor,
                                                VG_LITE_FILTER_BI_LINEAR));
-                    LV_PROFILER_END_TAG("vg_lite_draw_pattern");
+                    LV_PROFILER_DRAW_END_TAG("vg_lite_draw_pattern");
 
                     lv_vg_lite_pending_add(u->image_dsc_pending, &decoder_dsc);
                 }
             }
             break;
         case LV_VECTOR_DRAW_STYLE_GRADIENT: {
-                vg_lite_matrix_t grad_matrix;
-                lv_vg_lite_matrix(&grad_matrix, &dsc->fill_dsc.matrix);
+                vg_lite_matrix_t grad_matrix = matrix;
+
+#if LV_USE_VG_LITE_THORVG
+                /* Workaround inconsistent radial gradient matrix behavior between device and ThorVG */
+                if(dsc->fill_dsc.gradient.style == LV_VECTOR_GRADIENT_STYLE_RADIAL) {
+                    /* Restore matrix to identity */
+                    vg_lite_identity(&grad_matrix);
+                }
+#endif
+                vg_lite_matrix_t fill_matrix;
+                lv_vg_lite_matrix(&fill_matrix, &dsc->fill_dsc.matrix);
+                lv_vg_lite_matrix_multiply(&grad_matrix, &fill_matrix);
 
                 lv_vg_lite_draw_grad(
                     u,
@@ -280,7 +310,7 @@ static void task_draw_cb(void * ctx, const lv_vector_path_t * path, const lv_vec
         lv_vg_lite_disable_scissor();
     }
 
-    LV_PROFILER_END;
+    LV_PROFILER_DRAW_END;
 }
 
 static vg_lite_quality_t lv_quality_to_vg(lv_vector_path_quality_t quality)
@@ -299,7 +329,7 @@ static vg_lite_quality_t lv_quality_to_vg(lv_vector_path_quality_t quality)
 
 static void lv_path_to_vg(lv_vg_lite_path_t * dest, const lv_vector_path_t * src)
 {
-    LV_PROFILER_BEGIN;
+    LV_PROFILER_DRAW_BEGIN;
     lv_vg_lite_path_set_quality(dest, lv_quality_to_vg(src->quality));
 
     /* init bounds */
@@ -362,8 +392,8 @@ static void lv_path_to_vg(lv_vg_lite_path_t * dest, const lv_vector_path_t * src
         }
     }
 
-    lv_vg_lite_path_set_bonding_box(dest, min_x, min_y, max_x, max_y);
-    LV_PROFILER_END;
+    lv_vg_lite_path_set_bounding_box(dest, min_x, min_y, max_x, max_y);
+    LV_PROFILER_DRAW_END;
 }
 
 static vg_lite_path_type_t lv_path_opa_to_path_type(const lv_vector_draw_dsc_t * dsc)

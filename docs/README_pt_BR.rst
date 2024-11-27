@@ -1,7 +1,7 @@
 .. raw:: html
 
    <p align="left">
-     <a href="https://github.com/sponsors/lvgl" target="_blank"><img align="left" src="https://lvgl.io/assets/images/sponsor.png" height="32px"></a>
+     <a href="https://github.com/sponsors/lvgl" target="_blank"><img align="left" src="https://lvgl.io/github-assets/sponsor.png" height="32px"></a>
    </p>
 
    <p align="right">
@@ -89,7 +89,7 @@ algum suporte durante o desenvolvimento de seu próximo projeto de GUI.
 -  Pode ser compilado para qualquer display MCU ou MPU, e qualquer
    sistema operacional de tempo real (RT-OS).
 -  Suporta monitores monocromáticos, ePaper, OLED ou TFT. `Guia de
-   portabilidade <https://docs.lvgl.io/master/porting/project.html>`__
+   portabilidade <https://docs.lvgl.io/master/intro/add-lvgl-to-your-project/connecting_lvgl.html>`__
 -  Distribuído sob a licença do MIT, para que você também possa usá-lo
    facilmente em projetos comerciais.
 -  Precisa de apenas 32 kB de RAM e 128 kB de Flash, um frame buffer e
@@ -126,10 +126,10 @@ algum suporte durante o desenvolvimento de seu próximo projeto de GUI.
 -  Nenhum sistema de compilação personalizado é usado. Você pode
    construir o LVGL enquanto constrói os outros arquivos do seu projeto.
 -  O suporte para Make e
-   `CMake <https://docs.lvgl.io/master/get-started/platforms/cmake.html>`__
+   `CMake <https://docs.lvgl.io/master/details/integration/building/cmake.html>`__
    já vem incluído.
 -  `Desenvolva no
-   PC <https://docs.lvgl.io/master/get-started/platforms/pc-simulator.html>`__
+   PC <https://docs.lvgl.io/master/details/integration/ide/pc-simulator.html>`__
    e use o mesmo código de interface do usuário em hardwares
    incorporados (embedded hardware).
 -  Converta o código C para um arquivo HTML com o `Emscripten
@@ -187,19 +187,19 @@ receberá o pagamento em alguns dias.
 LVGL está disponível para:
 
 -  `Arduino
-   library <https://docs.lvgl.io/master/get-started/platforms/arduino.html>`__
+   library <https://docs.lvgl.io/master/details/entegration/framework/arduino.html>`__
 -  `PlatformIO
    package <https://registry.platformio.org/libraries/lvgl/lvgl>`__
 -  `Zephyr
    library <https://docs.zephyrproject.org/latest/kconfig.html#CONFIG_LVGL>`__
 -  `ESP32
-   component <https://docs.lvgl.io/master/get-started/platforms/espressif.html>`__
+   component <https://docs.lvgl.io/master/details/integration/chip/espressif.html>`__
 -  `NXP MCUXpresso
    component <https://www.nxp.com/design/software/embedded-software/lvgl-open-source-graphics-library:LITTLEVGL-OPEN-SOURCE-GRAPHICS-LIBRARY>`__
 -  `NuttX
-   library <https://docs.lvgl.io/master/get-started/os/nuttx.html>`__
+   library <https://docs.lvgl.io/master/details/integration/os/nuttx.html>`__
 -  `RT-Thread
-   RTOS <https://docs.lvgl.io/master/get-started/os/rt-thread.html>`__
+   RTOS <https://docs.lvgl.io/master/details/integration/os/rt-thread.html>`__
 -  NXP MCUXpresso library
 -  CMSIS-Pack
 
@@ -237,9 +237,9 @@ Código C
 
    </summary>
 
-.. code:: c
+.. code-block:: c
 
-   lv_obj_t * btn = lv_btn_create(lv_scr_act());                   /* Adiciona o botão a tela atual */
+   lv_obj_t * btn = lv_button_create(lv_screen_active());                   /* Adiciona o botão a tela atual */
    lv_obj_center(btn);                                             /* Define a posição do botão */
    lv_obj_set_size(btn, 100, 50);                                  /* Define o tamanho do botão */
    lv_obj_add_event(btn, btn_event_cb, LV_EVENT_CLICKED, NULL); /* Atribui um retorno de chamada (callback) ao botão */
@@ -272,7 +272,7 @@ Código MicroPython \| Simulador online
 
    </summary>
 
-.. code:: python
+.. code-block:: python
 
    def btn_event_cb(e):
      print("Clicado")
@@ -313,28 +313,28 @@ Código em C
 
    </summary>
 
-.. code:: c
+.. code-block:: c
 
 
-   lv_obj_set_flex_flow(lv_scr_act(), LV_FLEX_FLOW_COLUMN);
-   lv_obj_set_flex_align(lv_scr_act(), LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_START, LV_FLEX_ALIGN_CENTER);
+   lv_obj_set_flex_flow(lv_screen_active(), LV_FLEX_FLOW_COLUMN);
+   lv_obj_set_flex_align(lv_screen_active(), LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_START, LV_FLEX_ALIGN_CENTER);
 
    lv_obj_t * cb;
-   cb = lv_checkbox_create(lv_scr_act());
+   cb = lv_checkbox_create(lv_screen_active());
    lv_checkbox_set_text(cb, "Maça");
    lv_obj_add_event(cb, event_handler, LV_EVENT_ALL, NULL);
 
-   cb = lv_checkbox_create(lv_scr_act());
+   cb = lv_checkbox_create(lv_screen_active());
    lv_checkbox_set_text(cb, "Banana");
    lv_obj_add_state(cb, LV_STATE_CHECKED);
    lv_obj_add_event(cb, event_handler, LV_EVENT_ALL, NULL);
 
-   cb = lv_checkbox_create(lv_scr_act());
+   cb = lv_checkbox_create(lv_screen_active());
    lv_checkbox_set_text(cb, "Limão");
    lv_obj_add_state(cb, LV_STATE_DISABLED);
    lv_obj_add_event(cb, event_handler, LV_EVENT_ALL, NULL);
 
-   cb = lv_checkbox_create(lv_scr_act());
+   cb = lv_checkbox_create(lv_screen_active());
    lv_obj_add_state(cb, LV_STATE_CHECKED | LV_STATE_DISABLED);
    lv_checkbox_set_text(cb, "Melão\ne uma nova linha");
    lv_obj_add_event(cb, event_handler, LV_EVENT_ALL, NULL);
@@ -357,7 +357,7 @@ Código MicroPython \| Online Simulator
 
    </summary>
 
-.. code:: python
+.. code-block:: python
 
    def event_handler(e):
        code = e.get_code()
@@ -419,9 +419,9 @@ Código C
 
    </summary>
 
-.. code:: c
+.. code-block:: c
 
-   lv_obj_t * slider = lv_slider_create(lv_scr_act());
+   lv_obj_t * slider = lv_slider_create(lv_screen_active());
    lv_slider_set_value(slider, 70, LV_ANIM_OFF);
    lv_obj_set_size(slider, 300, 20);
    lv_obj_center(slider);
@@ -472,7 +472,7 @@ Código MicroPython \| Simulador online
 
    </summary>
 
-.. code:: python
+.. code-block:: python
 
    # Crie um controle deslizante (slider) e adicione o estilo
    slider = lv.slider(lv.scr_act())
@@ -533,22 +533,22 @@ Código C
 
    </summary>
 
-.. code:: c
+.. code-block:: c
 
-   lv_obj_t * ltr_label = lv_label_create(lv_scr_act());
+   lv_obj_t * ltr_label = lv_label_create(lv_screen_active());
    lv_label_set_text(ltr_label, "In modern terminology, a microcontroller is similar to a system on a chip (SoC).");
    lv_obj_set_style_text_font(ltr_label, &lv_font_montserrat_16, 0);
    lv_obj_set_width(ltr_label, 310);
    lv_obj_align(ltr_label, LV_ALIGN_TOP_LEFT, 5, 5);
 
-   lv_obj_t * rtl_label = lv_label_create(lv_scr_act());
+   lv_obj_t * rtl_label = lv_label_create(lv_screen_active());
    lv_label_set_text(rtl_label,"מעבד, או בשמו המלא יחידת עיבוד מרכזית (באנגלית: CPU - Central Processing Unit).");
    lv_obj_set_style_base_dir(rtl_label, LV_BASE_DIR_RTL, 0);
    lv_obj_set_style_text_font(rtl_label, &lv_font_dejavu_16_persian_hebrew, 0);
    lv_obj_set_width(rtl_label, 310);
    lv_obj_align(rtl_label, LV_ALIGN_LEFT_MID, 5, 0);
 
-   lv_obj_t * cz_label = lv_label_create(lv_scr_act());
+   lv_obj_t * cz_label = lv_label_create(lv_screen_active());
    lv_label_set_text(cz_label,
                      "嵌入式系统（Embedded System），\n是一种嵌入机械或电气系统内部、具有专一功能和实时计算性能的计算机系统。");
    lv_obj_set_style_text_font(cz_label, &lv_font_simsun_16_cjk, 0);
@@ -573,7 +573,7 @@ Código MicroPython \| Simulador online
 
    </summary>
 
-.. code:: python
+.. code-block:: python
 
    ltr_label = lv.label(lv.scr_act())
    ltr_label.set_text("In modern terminology, a microcontroller is similar to a system on a chip (SoC).")
@@ -614,28 +614,28 @@ Esta lista irá guiá-lo para começar com o LVGL passo a passo.
    `introdução <https://docs.lvgl.io/master/intro/index.html>`__ da
    documentação (~5 minutos)
 3. Familiarize-se com o básico na página de `visão geral
-   rápida <https://docs.lvgl.io/master/get-started/quick-overview.html>`__
+   rápida <https://docs.lvgl.io/master/intro/basics.html>`__
    (~15 minutos)
 
 **Começando a usar o LVGL**
 
 4. Configure um
-   `simulador <https://docs.lvgl.io/master/get-started/platforms/pc-simulator.html>`__
+   `simulador <https://docs.lvgl.io/master/details/integration/ide/pc-simulator.html>`__
    (~10 minutos)
 5. Experimente alguns
    `exemplos <https://github.com/lvgl/lvgl/tree/master/examples>`__
 6. Porte o LVGL para uma placa. Veja o guia `portando o
-   LVGL <https://docs.lvgl.io/master/porting/index.html>`__ ou veja um
+   LVGL <https://docs.lvgl.io/master/intro/add-lvgl-to-your-project/index.html>`__ ou veja um
    projeto pronto para usar em
    `projetos <https://github.com/lvgl?q=lv_port_>`__
 
 **Torne-se um profissional**
 
 7. Leia a página `visão
-   geral <https://docs.lvgl.io/master/overview/index.html>`__ para
+   geral <https://docs.lvgl.io/master/details/main-components/index.html>`__ para
    entender melhor a biblioteca (~2-3 horas)
 8. Verifique a documentação dos
-   `widgets <https://docs.lvgl.io/master/widgets/index.html>`__ para ver
+   `widgets <https://docs.lvgl.io/master/details/widgets/index.html>`__ para ver
    seus recursos e usabilidade
 
 **Obtenha ajuda e ajude outras pessoas**

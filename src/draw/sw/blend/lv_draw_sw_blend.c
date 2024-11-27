@@ -1,4 +1,4 @@
-﻿/**
+/**
  * @file lv_draw_sw_blend.c
  *
  */
@@ -22,7 +22,7 @@
 #if LV_DRAW_SW_SUPPORT_ARGB8888
     #include "lv_draw_sw_blend_to_argb8888.h"
 #endif
-#if LV_DRAW_SW_SUPPORT_RGB888
+#if LV_DRAW_SW_SUPPORT_RGB888 || LV_DRAW_SW_SUPPORT_XRGB8888
     #include "lv_draw_sw_blend_to_rgb888.h"
 #endif
 #if LV_DRAW_SW_SUPPORT_I1
@@ -62,7 +62,7 @@ void lv_draw_sw_blend(lv_draw_unit_t * draw_unit, const lv_draw_sw_blend_dsc_t *
     lv_area_t blend_area;
     if(!lv_area_intersect(&blend_area, blend_dsc->blend_area, draw_unit->clip_area)) return;
 
-    LV_PROFILER_BEGIN;
+    LV_PROFILER_DRAW_BEGIN;
     lv_layer_t * layer = draw_unit->target_layer;
     uint32_t layer_stride_byte = layer->draw_buf->header.stride;
 
@@ -131,12 +131,12 @@ void lv_draw_sw_blend(lv_draw_unit_t * draw_unit, const lv_draw_sw_blend_dsc_t *
     }
     else {
         if(!lv_area_intersect(&blend_area, &blend_area, blend_dsc->src_area)) {
-            LV_PROFILER_END;
+            LV_PROFILER_DRAW_END;
             return;
         }
 
         if(blend_dsc->mask_area && !lv_area_intersect(&blend_area, &blend_area, blend_dsc->mask_area)) {
-            LV_PROFILER_END;
+            LV_PROFILER_DRAW_END;
             return;
         }
 
@@ -162,6 +162,7 @@ void lv_draw_sw_blend(lv_draw_unit_t * draw_unit, const lv_draw_sw_blend_dsc_t *
         else image_dsc.mask_buf = blend_dsc->mask_buf;
 
         if(image_dsc.mask_buf) {
+            LV_ASSERT_NULL(blend_dsc->mask_area);
             image_dsc.mask_buf = blend_dsc->mask_buf;
             image_dsc.mask_stride = blend_dsc->mask_stride ? blend_dsc->mask_stride : lv_area_get_width(blend_dsc->mask_area);
             image_dsc.mask_buf += image_dsc.mask_stride * (blend_area.y1 - blend_dsc->mask_area->y1) +
@@ -218,7 +219,7 @@ void lv_draw_sw_blend(lv_draw_unit_t * draw_unit, const lv_draw_sw_blend_dsc_t *
                 break;
         }
     }
-    LV_PROFILER_END;
+    LV_PROFILER_DRAW_END;
 }
 
 /**********************

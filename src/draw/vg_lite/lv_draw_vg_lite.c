@@ -71,6 +71,7 @@ void lv_draw_vg_lite_init(void)
     unit->base_unit.dispatch_cb = draw_dispatch;
     unit->base_unit.evaluate_cb = draw_evaluate;
     unit->base_unit.delete_cb = draw_delete;
+    unit->base_unit.name = "VG_LITE";
 
     lv_vg_lite_image_dsc_init(unit);
 #if LV_USE_VECTOR_GRAPHIC
@@ -91,8 +92,17 @@ void lv_draw_vg_lite_deinit(void)
 
 static bool check_image_is_supported(const lv_draw_image_dsc_t * dsc)
 {
+    return lv_vg_lite_is_src_cf_supported(dsc->header.cf);
+}
+
+static bool check_arc_is_supported(const lv_draw_arc_dsc_t * dsc)
+{
+    if(dsc->img_src == NULL) {
+        return true;
+    }
+
     lv_image_header_t header;
-    lv_result_t res = lv_image_decoder_get_info(dsc->src, &header);
+    lv_result_t res = lv_image_decoder_get_info(dsc->img_src, &header);
     if(res != LV_RESULT_OK) {
         LV_LOG_TRACE("get image info failed");
         return false;
@@ -114,7 +124,9 @@ static void draw_execute(lv_draw_vg_lite_unit_t * u)
     lv_draw_buf_set_flag(layer->draw_buf, LV_IMAGE_FLAGS_PREMULTIPLIED);
 
     vg_lite_identity(&u->global_matrix);
-    vg_lite_translate(-layer->buf_area.x1, -layer->buf_area.y1, &u->global_matrix);
+    if(layer->buf_area.x1 || layer->buf_area.y1) {
+        vg_lite_translate(-layer->buf_area.x1, -layer->buf_area.y1, &u->global_matrix);
+    }
 
 #if LV_DRAW_TRANSFORM_USE_MATRIX
     vg_lite_matrix_t layer_matrix;
@@ -235,13 +247,19 @@ static int32_t draw_evaluate(lv_draw_unit_t * draw_unit, lv_draw_task_t * task)
 #endif
         case LV_DRAW_TASK_TYPE_LAYER:
         case LV_DRAW_TASK_TYPE_LINE:
-        case LV_DRAW_TASK_TYPE_ARC:
         case LV_DRAW_TASK_TYPE_TRIANGLE:
         case LV_DRAW_TASK_TYPE_MASK_RECTANGLE:
 
 #if LV_USE_VECTOR_GRAPHIC
         case LV_DRAW_TASK_TYPE_VECTOR:
 #endif
+            break;
+
+        case LV_DRAW_TASK_TYPE_ARC: {
+                if(!check_arc_is_supported(task->draw_dsc)) {
+                    return 0;
+                }
+            }
             break;
 
         case LV_DRAW_TASK_TYPE_IMAGE: {

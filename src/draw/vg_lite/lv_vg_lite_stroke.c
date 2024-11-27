@@ -56,7 +56,7 @@ static lv_cache_compare_res_t stroke_compare_cb(const stroke_item_t * lhs, const
  *   GLOBAL FUNCTIONS
  **********************/
 
-void lv_vg_lite_stroke_init(struct lv_draw_vg_lite_unit_t * unit, uint32_t cache_cnt)
+void lv_vg_lite_stroke_init(struct _lv_draw_vg_lite_unit_t * unit, uint32_t cache_cnt)
 {
     LV_ASSERT_NULL(unit);
 
@@ -70,7 +70,7 @@ void lv_vg_lite_stroke_init(struct lv_draw_vg_lite_unit_t * unit, uint32_t cache
     lv_cache_set_name(unit->stroke_cache, "VG_STROKE");
 }
 
-void lv_vg_lite_stroke_deinit(struct lv_draw_vg_lite_unit_t * unit)
+void lv_vg_lite_stroke_deinit(struct _lv_draw_vg_lite_unit_t * unit)
 {
     LV_ASSERT_NULL(unit);
     LV_ASSERT_NULL(unit->stroke_cache);
@@ -106,8 +106,8 @@ static vg_lite_join_style_t lv_stroke_join_to_vg(lv_vector_stroke_join_t join)
     }
 }
 
-lv_cache_entry_t * lv_vg_lite_stroke_get(struct lv_draw_vg_lite_unit_t * unit,
-                                         struct lv_vg_lite_path_t * path,
+lv_cache_entry_t * lv_vg_lite_stroke_get(struct _lv_draw_vg_lite_unit_t * unit,
+                                         struct _lv_vg_lite_path_t * path,
                                          const lv_vector_stroke_dsc_t * dsc)
 {
     LV_ASSERT_NULL(unit);
@@ -147,7 +147,7 @@ lv_cache_entry_t * lv_vg_lite_stroke_get(struct lv_draw_vg_lite_unit_t * unit,
     return cache_node_entry;
 }
 
-struct lv_vg_lite_path_t * lv_vg_lite_stroke_get_path(lv_cache_entry_t * cache_entry)
+struct _lv_vg_lite_path_t * lv_vg_lite_stroke_get_path(lv_cache_entry_t * cache_entry)
 {
     LV_ASSERT_NULL(cache_entry);
 
@@ -156,7 +156,7 @@ struct lv_vg_lite_path_t * lv_vg_lite_stroke_get_path(lv_cache_entry_t * cache_e
     return stroke_item->path;
 }
 
-void lv_vg_lite_stroke_drop(struct lv_draw_vg_lite_unit_t * unit,
+void lv_vg_lite_stroke_drop(struct _lv_draw_vg_lite_unit_t * unit,
                             lv_cache_entry_t * cache_entry)
 {
     LV_ASSERT_NULL(unit);
@@ -210,7 +210,8 @@ static bool stroke_create_cb(stroke_item_t * item, void * user_data)
                                 0);
 
     if(error != VG_LITE_SUCCESS) {
-        LV_LOG_ERROR("vg_lite_set_stroke failed: %d(%s)", (int)error, lv_vg_lite_error_string(error));
+        LV_LOG_ERROR("vg_lite_set_stroke error: %d", (int)error);
+        lv_vg_lite_error_dump_info(error);
         stroke_free_cb(item, NULL);
         return false;
     }
@@ -218,16 +219,17 @@ static bool stroke_create_cb(stroke_item_t * item, void * user_data)
     const vg_lite_pointer * ori_path = vg_path->path;
     const vg_lite_uint32_t ori_path_length = vg_path->path_length;
 
-    LV_PROFILER_BEGIN_TAG("vg_lite_update_stroke");
+    LV_PROFILER_DRAW_BEGIN_TAG("vg_lite_update_stroke");
     error = vg_lite_update_stroke(vg_path);
-    LV_PROFILER_END_TAG("vg_lite_update_stroke");
+    LV_PROFILER_DRAW_END_TAG("vg_lite_update_stroke");
 
     /* check if path is changed */
     LV_ASSERT_MSG(vg_path->path_length == ori_path_length, "vg_path->path_length should not change");
     LV_ASSERT_MSG(vg_path->path == ori_path, "vg_path->path should not change");
 
     if(error != VG_LITE_SUCCESS) {
-        LV_LOG_ERROR("vg_lite_update_stroke failed: %d(%s)", (int)error, lv_vg_lite_error_string(error));
+        LV_LOG_ERROR("vg_lite_update_stroke error: %d", (int)error);
+        lv_vg_lite_error_dump_info(error);
         stroke_free_cb(item, NULL);
         return false;
     }
@@ -247,9 +249,6 @@ static void stroke_free_cb(stroke_item_t * item, void * user_data)
 
 static lv_cache_compare_res_t path_compare(const vg_lite_path_t * lhs, const vg_lite_path_t * rhs)
 {
-    LV_VG_LITE_ASSERT_PATH(lhs);
-    LV_VG_LITE_ASSERT_PATH(rhs);
-
     LV_ASSERT(lhs->format == VG_LITE_FP32);
     LV_ASSERT(rhs->format == VG_LITE_FP32);
 
