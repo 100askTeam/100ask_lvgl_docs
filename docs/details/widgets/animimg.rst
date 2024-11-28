@@ -12,9 +12,9 @@ Overview（概述）
    <details>
      <summary>显示原文</summary>
 
-The animation image is similar to the normal 'Image' object. The only
+The animation image is similar to the normal 'Image' Widget. The only
 difference is that instead of one source image, you set an array of
-multiple source images.
+multiple source images that supply "frames" in an animation.
 
 You can specify a duration and repeat count.
 
@@ -24,7 +24,7 @@ You can specify a duration and repeat count.
    <br>
 
 
-动画图像对象类似于普通的 “图像” 对象。唯一区别是，设置的不是一个图像源，而是设置由多个源图像组成的数组。
+动画图像与普通的 “图像” 部件类似。唯一的区别在于，你设置的不是一张源图像，而是一组多张源图像，这些源图像为动画提供了 “帧”。
 
 可以指定持续时间和重复次数。
 
@@ -64,14 +64,22 @@ Image sources（图片来源）
    <details>
      <summary>显示原文</summary>
 
-To set the image in a state, use the
+To set the image animation images sources, use
 :cpp:expr:`lv_animimg_set_src(imagebutton, dsc[], num)`.
 
 .. raw:: html
 
    </details> 
    <br>
+Using the inner animation
+-------------------------
 
+For more advanced use cases, the animation used internally by the image can be
+retrieved using :cpp:expr:`lv_animimg_get_anim(animimg)`.  Using this, you can
+use the :ref:`Animation <animation>` functions, for example, to
+override the animation values using the
+:cpp:expr:`lv_anim_set_values(anim, start, end)` or to set a callback
+on the animation completed event.
 
 使用接口 :cpp:expr:`lv_animimg_set_src(imagebutton, dsc[], num)` 为动画图像设置图像源，参数 ``dsc`` 是包含一个或多个图像源的数组，参数num是图像源的个数。
 
@@ -85,11 +93,13 @@ Events（事件）
    <details>
      <summary>显示原文</summary>
 
-No special events are sent by image objects.
+No special events are sent by Animation-Image Widgets.
 
-See the events of the Base object too.
+.. admonition::  Further Reading
 
-Learn more about :ref:`events`.
+    Learn more about :ref:`lv_obj_events` emitted by all Widgets.
+
+    Learn more about :ref:`events`.
 
 .. raw:: html
 
@@ -97,9 +107,9 @@ Learn more about :ref:`events`.
    <br>
 
 
-图像对象不会发送任何特殊事件。
+动画图像部件不会发送任何特殊事件。
 
-另请参阅基础对象的事件。
+了解更多关于所有部件发出的 :ref:lv_obj_events（对象事件）的相关内容。
 
 详细了解阅读 :ref:`events`。
 
@@ -114,16 +124,18 @@ Keys（按键）
    <details>
      <summary>显示原文</summary>
 
-No Keys are processed by the object type.
+No *Keys* are processed by Animation-Image Widgets.
 
-Learn more about :ref:`indev_keys`.
+.. admonition::  Further Reading
+
+    Learn more about :ref:`indev_keys`.
 
 .. raw:: html
 
    </details> 
    <br>
 
-对象类型不处理任何键。
+动画图像部件不会处理任何 “键”。
 
 阅读了解有关 :ref:`indev_keys` 的更多信息。
   
