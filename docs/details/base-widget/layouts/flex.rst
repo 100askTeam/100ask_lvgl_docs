@@ -30,19 +30,14 @@ with :c:macro:`LV_USE_FLEX` in ``lv_conf.h``.
    </details>
    <br>
 
+Flexbox（弹性布局）（或简称 Flex）是 `CSS Flexbox <https://css-tricks.com/snippets/css/a-guide-to-flexbox/>`__ 的一个子集。
 
-Flexbox（简称Flex）是“CSS Flexbox”_行为的子集。
+它可以将元素排列成行或列（轨道(tracks)），处理包裹，调整元素和轨道之间的间距，处理 grow 以使元素填充相对于最小/最大宽度和高度的剩余空间。
 
-它可以将项目（子控件）排列成行或列（轨迹），处理包装，
-调整项目和轨迹之间的间距，处理*grow*以使
-物品按照最小/最大宽度填充剩余空间，以及
-高度。
+要使对象变为 flex 容器请调用 :cpp:expr:`lv_obj_set_layout(obj, LV_LAYOUT_FLEX)` 。
 
-将Widget作为Flex容器调用
-：cpp:expr:`lv_obj_set_layout（小部件，lv_layout_FLEX）`。
+请注意，LVGL 的 flex 布局功能需要打开 ``lv_conf.h`` 中的宏 :c:macro:`LV_USE_FLEX` 启用。
 
-请注意，LVGL的Flex布局功能需要全局启用
-在 ``LV_conf.h`` 中具有：c:macro:`LV_USE_FLEX`。
 
 Terms（约定）
 **************
@@ -71,18 +66,21 @@ See `CSS Flexbox`_ for illustrations showing the meanings of these terms.
 
 术语约定：
 
-- **tracks**：行或列
-- **主方向**：行或列，多个项目所在的方向放在第一位
-- **横向**：垂直于**主方向的方向**
-- **wrap**：如果曲目中没有更多的空间，则启动新曲目
-- **grow**：如果在项目上设置，它将“增长”以填充剩余的空间轨道。可用空间将分布在项目之间相应于其增长值（值越大，表示空间越大）
-- **gap**：行和列之间的空间或轨迹上的项目
-
-有关显示这些术语含义的插图，请参见“CSS Flexbox”。
+- **tracks（轨道）**：行或列
+- **main direction（主要方向或主轴）**：行或列，元素放置的方向
+- **cross direction（交叉方向或交叉轴）**：垂直于主方向
+- **wrap（包裹）**：如果轨道中没有更多空间，则开始新的轨道放置元素
+- **grow（增长）**：如果设置在一个元素上，它将增长以填充轨道上的剩余空间。 可用空间将根据其增长值分配给各个元素（值越大意味着空间越大）
+- **gap（间隙）**：行和列或轨道上的元素之间的空间
 
 
-Simple interface（简单接口）
+Simple Interface（简单接口）
 ******************************
+
+.. raw:: html
+
+   <details>
+     <summary>显示原文</summary>
 
 Use the following functions to set and control the Flex layout on any parent Widget.
 
@@ -91,13 +89,6 @@ Use the following functions to set and control the Flex layout on any parent Wid
     The parent Widget must be a Flex container for these styles to take effect.
     The functions below cause the parent Widget to become a Flex container if it is
     not already.
-
-.. raw:: html
-
-   <details>
-     <summary>显示原文</summary>
-
-With the following functions you can set a Flex layout on any parent.
 
 .. raw:: html
 
@@ -267,7 +258,7 @@ Flex grow（弹性增长）可用于让一个或多个孩子填满轨道上的�
 
 .. _flex_style:
 
-Style interface（样式接口）
+Style Interface（样式接口）
 *****************************
 
 .. raw:: html
@@ -336,7 +327,7 @@ Widgets: :cpp:expr:`lv_style_set_pad_column(&row_container_style, 0)`
 
 .. _flex_other:
 
-Other features（其它功能）
+Other Features（其它功能）
 ****************************
 
 RTL
@@ -393,8 +384,8 @@ You can force Flex to put an item into a new line with
 
 .. _flex_example:
 
-Example
-**********
+Example（示例）
+****************
 
 .. include:: ../examples/layouts/flex/index.rst
 
