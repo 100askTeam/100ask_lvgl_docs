@@ -9,11 +9,15 @@ Layers（图层）
    <details>
      <summary>显示原文</summary>
 
-In LVGL "layers" can be interpreted in various ways:
+When the term "layer" is used in LVGL documentation, it may refer to one of several
+things:
 
-1. The order of widget creation naturally creates a layering of widgets
-2. Permanent screen-sized layers can be also used
-3. For some draw operations LVGL renders a widget and all its children into a buffer (a.k.a. layer) first
+1.  for Widgets, the :ref:`layers_creation` creates a natural layering of Widgets;
+2.  in the context of pixel rendering (drawing), there are :ref:`draw_layers`;
+3.  permanent :ref:`screen_layers` are part of each :ref:`display` object, and
+    are covered :ref:`here <screen_layers>`
+
+#1 and #2 are covered below.
 
 .. raw:: html
 
@@ -38,37 +42,37 @@ Order of creation（图层顺序）
    <details>
      <summary>显示原文</summary>
 
-By default, LVGL draws new objects on top of old objects.
+By default, LVGL draws new Widgets on top of old Widgets.
 
-For example, assume we add a button to a parent object named button1 and
+For example, assume we add a button to a parent Widget named button1 and
 then another button named button2. Then button1 (along with its child
-object(s)) will be in the background and can be covered by button2 and
+Widget(s)) will be in the background and can be covered by button2 and
 its children.
 
 .. image:: /misc/layers.png
 
-.. code:: c
+.. code-block:: c
 
-   /*Create a screen*/
+   /* Create a screen */
    lv_obj_t * scr = lv_obj_create(NULL, NULL);
-   lv_screen_load(scr);          /*Load the screen*/
+   lv_screen_load(scr);          /* Load the screen */
 
-   /*Create 2 buttons*/
-   lv_obj_t * btn1 = lv_button_create(scr, NULL);     /*Create a button on the screen*/
-   lv_button_set_fit(btn1, true, true);               /*Enable automatically setting the size according to content*/
-   lv_obj_set_pos(btn1, 60, 40);                      /*Set the position of the button*/
+   /* Create 2 buttons */
+   lv_obj_t * btn1 = lv_button_create(scr, NULL);     /* Create a button on the screen */
+   lv_button_set_fit(btn1, true, true);               /* Enable automatically setting the size according to content */
+   lv_obj_set_pos(btn1, 60, 40);                      /* Set the position of the button */
 
-   lv_obj_t * btn2 = lv_button_create(scr, btn1);     /*Copy the first button*/
-   lv_obj_set_pos(btn2, 180, 80);                     /*Set the position of the button*/
+   lv_obj_t * btn2 = lv_button_create(scr, btn1);     /* Copy the first button */
+   lv_obj_set_pos(btn2, 180, 80);                     /* Set the position of the button */
 
-   /*Add labels to the buttons*/
-   lv_obj_t * label1 = lv_label_create(btn1, NULL);   /*Create a label on the first button*/
-   lv_label_set_text(label1, "Button 1");             /*Set the text of the label*/
+   /* Add labels to the buttons */
+   lv_obj_t * label1 = lv_label_create(btn1, NULL);   /* Create a label on the first button */
+   lv_label_set_text(label1, "Button 1");             /* Set the text of the label */
 
-   lv_obj_t * label2 = lv_label_create(btn2, NULL);   /*Create a label on the second button*/
-   lv_label_set_text(label2, "Button 2");             /*Set the text of the label*/
+   lv_obj_t * label2 = lv_label_create(btn2, NULL);   /* Create a label on the second button */
+   lv_label_set_text(label2, "Button 2");             /* Set the text of the label */
 
-   /*Delete the second label*/
+   /* Delete the second label */
    lv_obj_delete(label2);
 
 .. raw:: html
@@ -110,7 +114,7 @@ its children.
 
 .. _layers_order:
 
-Change order（改变顺序）
+Changing Order（改变顺序）
 ------------------------
 
 .. raw:: html
@@ -118,18 +122,18 @@ Change order（改变顺序）
    <details>
      <summary>显示原文</summary>
 
-There are four explicit ways to bring an object to the foreground:
+There are four explicit ways to bring a Widget to the foreground:
 
-- Use :cpp:expr:`lv_obj_move_foreground(obj)` to bring an object to the foreground.
-  Similarly, use :cpp:expr:`lv_obj_move_background(obj)` to move it to the background.
-- Use :cpp:expr:`lv_obj_move_to_index(obj, idx)` to move an object to a given index in the order of children.
+- Use :cpp:expr:`lv_obj_move_foreground(widget)` to bring a Widget to the foreground.
+  Similarly, use :cpp:expr:`lv_obj_move_background(widget)` to move it to the background.
+- Use :cpp:expr:`lv_obj_move_to_index(widget, idx)` to move a Widget to a given index in the order of children.
 
   - ``0``: background
   - ``child_num - 1``: foreground
-  - ``< 0``: count from the top, to move forward (up): :cpp:expr:`lv_obj_move_to_index(obj, lv_obj_get_index(obj) - 1)`
+  - ``< 0``: count from the top, to move forward (up): :cpp:expr:`lv_obj_move_to_index(widget, lv_obj_get_index(widget) - 1)`
 
-- Use :cpp:expr:`lv_obj_swap(obj1, obj2)` to swap the relative layer position of two objects.
-- When :cpp:expr:`lv_obj_set_parent(obj, new_parent)` is used, ``obj`` will be on the foreground of the ``new_parent``.
+- Use :cpp:expr:`lv_obj_swap(widget1, widget2)` to swap the relative layer position of two Widgets.
+- When :cpp:expr:`lv_obj_set_parent(widget, new_parent)` is used, ``widget`` will be on the foreground of ``new_parent``.
 
 .. raw:: html
 
@@ -234,8 +238,9 @@ The get the bottom layer use :cpp:func:`lv_layer_bottom`.
 
 要获取底层，请使用 :cpp:func:`lv_layer_bottom`。
 
+.. _draw_layers:
 
-Draw layers（绘制图层）
+Draw Layers（绘制图层）
 ***********************
 
 .. raw:: html
@@ -243,7 +248,9 @@ Draw layers（绘制图层）
    <details>
      <summary>显示原文</summary>
 
-Some style properties make LVGL to allocate a buffer and render a widget and its children there first. Later that layer will be merged to the screen or its parent layer after applying some transformations or other modifications.
+Some style properties cause LVGL to allocate a buffer and render a Widget and its
+children there first.  Later that layer will be merged to the screen or its parent
+layer after applying some transformations or other modifications.
 
 .. raw:: html
 
@@ -263,16 +270,17 @@ Simple layer（简单层）
    <details>
      <summary>显示原文</summary>
 
-The following style properties trigger the creation of a "Simple layer":
+The following style properties trigger the creation of a "Simple Layer":
 
 - ``opa_layered``
 - ``bitmap_mask_src``
 - ``blend_mode``
 
+In this case the Widget will be sliced into ``LV_DRAW_SW_LAYER_SIMPLE_BUF_SIZE``
+sized chunks.
 
-In this case widget will be sliced into ``LV_DRAW_SW_LAYER_SIMPLE_BUF_SIZE`` sized chunks.
-
-If there is no memory for a new chunk, LVGL will try allocating layer when another chunk is rendered and freed.
+If there is no memory for a new chunk, LVGL will try allocating the layer after
+another chunk is rendered and freed.
 
 .. raw:: html
 
@@ -299,10 +307,12 @@ Transformed layer（转换图层）
    <details>
      <summary>显示原文</summary>
 
-When the widget is transformed a larger part of the widget needs to rendered to provide enough data for transformation. LVGL tries to render as small area of the widget as possible, but due to the nature of transformations no slicing is possible in this case.
+When the widget is transformed a larger part of the Widget needs to rendered to
+provide enough data for transformation.  LVGL tries to render as small area of the
+widget as possible, but due to the nature of transformations no slicing is possible
+in this case.
 
-
-The following style properties trigger the creation of a "Transform layer":
+The following style properties trigger the creation of a "Transform Layer":
 
 - ``transform_scale_x``
 - ``transform_scale_y``
@@ -335,7 +345,8 @@ Clip corner（夹角）
    <details>
      <summary>显示原文</summary>
 
-The ``clip_corner`` style property also makes LVGL to create a 2 layers with radius height for the top and bottom part of the widget.
+The ``clip_corner`` style property also causes LVGL to create a 2 layers with radius
+height for the top and bottom parts of the Widget.
 
 .. raw:: html
 
