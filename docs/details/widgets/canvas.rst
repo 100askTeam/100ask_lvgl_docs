@@ -12,9 +12,9 @@ Overview（概述）
    <details>
      <summary>显示原文</summary>
 
-A Canvas inherits from :ref:`Image <lv_image>` where the user can draw
-anything. Rectangles, texts, images, lines, arcs can be drawn here using
-lvgl's drawing engine.
+A Canvas inherits from :ref:`Image <lv_image>` and extends it, enabling the user to draw
+anything. Rectangles, text, images, lines, arcs, etc. can be drawn here using
+LVGL's extensive drawing engine.
 
 .. raw:: html
 
@@ -22,7 +22,7 @@ lvgl's drawing engine.
    <br>
 
 
-Canvas（画布） 继承自 :ref:`Image <lv_image>` ，用户可以在其中绘制任何内容：矩形、文本、图像、线条、圆弧可以在这里使用lvgl的绘图引擎绘制。
+画布（Canvas）继承自 :ref:`Image <lv_image>` 并对其进行了扩展，使用户能够绘制任何内容。在这里，可以使用 LVGL 强大的绘图引擎绘制矩形、文本、图像、线条、弧线等等。
 
 
 .. _lv_canvas_parts_and_styles:
@@ -35,8 +35,8 @@ Parts and Styles（部分和样式）
    <details>
      <summary>显示原文</summary>
 
--  :cpp:enumerator:`LV_PART_MAIN` Uses the typical rectangle style properties and image
-style properties.
+- :cpp:enumerator:`LV_PART_MAIN` Uses the typical rectangle and image style
+  properties.
 
 .. raw:: html
 
@@ -44,7 +44,7 @@ style properties.
    <br>
 
 
--  :cpp:enumerator:`LV_PART_MAIN` 使用典型的矩形样式属性和图像样式属性。
+-  :cpp:enumerator:`LV_PART_MAIN` 使用典型的矩形和图像样式属性。
 
 
 .. _lv_canvas_usage:
@@ -60,7 +60,7 @@ Buffer（缓冲区）
    <details>
      <summary>显示原文</summary>
 
-The Canvas needs a buffer in which it stores the drawn image. To assign a
+The Canvas needs a buffer in which it store the drawn image. To assign a
 buffer to a Canvas, use
 :cpp:expr:`lv_canvas_set_buffer(canvas, buffer, width, height, LV_COLOR_FORMAT_...)`.
 Where ``buffer`` is a static buffer (not just a local variable) to hold
@@ -70,7 +70,7 @@ the image of the canvas. For example for a 100x50 ARGB8888 buffer:
 Or you can use
 ``static uint8_t buffer[LV_CANVAS_BUF_SIZE(width, height, bit_per_pixel, stride_in_bytes)]``.
 
-The canvas supports all the color formats like
+Canvas supports all the color formats like
 :cpp:enumerator:`LV_COLOR_FORMAT_ARGB8888` or :cpp:enumerator:`LV_COLOR_FORMAT_I2`. See the full
 list in the :ref:`Color formats <overview_image_color_formats>` section.
 
@@ -96,9 +96,14 @@ Indexed colors（颜色索引）
    <details>
      <summary>显示原文</summary>
 
-For ``LV_COLOR_FORMAT_I1/2/4/8`` color formats a palette needs to be
-initialized with :cpp:expr:`lv_canvas_set_palette(canvas, 3, lv_color_hex(0xff0000))`. It
-sets pixels with *index=3* to red.
+For indexed color formats (``LV_COLOR_FORMAT_I1/2/4/8``), the palette needs to be
+populated for all palette indices that will be used using
+:cpp:expr:`lv_canvas_set_palette(canvas, index, color)`.  For example, the following
+sets pixels with *index==3* to red.
+
+.. code-block:: c
+
+    lv_canvas_set_palette(canvas, 3, lv_color_hex(0xff0000))
 
 .. raw:: html
 
@@ -106,7 +111,7 @@ sets pixels with *index=3* to red.
    <br>
 
 
-对于 ``LV_COLOR_FORMAT_I1/2/4/8`` 颜色格式，调色板需要用 :cpp:expr:`lv_canvas_set_palette(canvas, 3, lv_color_hex(0xff0000))` 初始化。 它将 *index=3* 的像素设置为红色
+对于索引颜色格式(``LV_COLOR_FORMAT_I1/2/4/8``)，需要使用 :cpp:expr:`lv_canvas_set_palette(canvas, index, color)`为所有将要使用的调色板索引填充调色板。例如，以下代码将索引为 3 的像素设置为红色。
 
 
 Drawing（画画）
@@ -135,7 +140,7 @@ color format of the buffer and the canvas need to match.
 
 To draw something to the canvas use LVGL's draw functions directly. See the examples for more details.
 
-The draw function can draw to any color format to which LVGL can render. Typically it means
+The draw function can draw to any color format to which LVGL can render. Typically this means
 :cpp:enumerator:`LV_COLOR_FORMAT_RGB565`, :cpp:enumerator:`LV_COLOR_FORMAT_RGB888`,
 :cpp:enumerator:`LV_COLOR_FORMAT_XRGB888`, and :cpp:enumerator:`LV_COLOR_FORMAT_ARGB8888`.
 
@@ -166,12 +171,13 @@ Events（事件）
    <details>
      <summary>显示原文</summary>
 
-No special events are sent by canvas objects. The same events are sent
-as for the
+No special events are sent by Canvas Widgets.
 
-See the events of the :ref:`lv_image` too.
+.. admonition::  Further Reading
 
-Learn more about :ref:`events`.
+    Learn more about :ref:`lv_obj_events` emitted by all Widgets.
+
+    Learn more about :ref:`events`.
 
 .. raw:: html
 
@@ -181,9 +187,11 @@ Learn more about :ref:`events`.
 
 画布对象不会发送特殊事件。
 
-也可以阅读 :ref:`lv_image` 的事件。
+.. admonition::  Further Reading
 
-详细了解更多阅读 :ref:`events`。
+    了解更多关于所有部件发出的 :ref:`lv_obj_events` 的内容。
+
+    了解更多关于 :ref:`events` 的内容。
 
 
 .. _lv_canvas_keys:
@@ -196,9 +204,11 @@ Keys（按键）
    <details>
      <summary>显示原文</summary>
 
-No *Keys* are processed by the object type.
+No *Keys* are processed by Canvas Widgets.
 
-Learn more about :ref:`indev_keys`.
+.. admonition::  Further Reading
+
+    Learn more about :ref:`indev_keys`.
 
 .. raw:: html
 
@@ -206,7 +216,7 @@ Learn more about :ref:`indev_keys`.
    <br>
 
 
-对象类型不处理 *Keys*。
+画布部件不处理任何 “键” 操作。
 
 阅读了解有关 :ref:`indev_keys` 的更多信息
 
