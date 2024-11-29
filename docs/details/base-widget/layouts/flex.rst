@@ -30,6 +30,7 @@ with :c:macro:`LV_USE_FLEX` in ``lv_conf.h``.
    </details>
    <br>
 
+
 Flexbox（弹性布局）（或简称 Flex）是 `CSS Flexbox <https://css-tricks.com/snippets/css/a-guide-to-flexbox/>`__ 的一个子集。
 
 它可以将元素排列成行或列（轨道(tracks)），处理包裹，调整元素和轨道之间的间距，处理 grow 以使元素填充相对于最小/最大宽度和高度的剩余空间。
@@ -73,6 +74,7 @@ See `CSS Flexbox`_ for illustrations showing the meanings of these terms.
 - **grow（增长）**：如果设置在一个元素上，它将增长以填充轨道上的剩余空间。 可用空间将根据其增长值分配给各个元素（值越大意味着空间越大）
 - **gap（间隙）**：行和列或轨道上的元素之间的空间
 
+有关显示这些术语含义的插图，请参见 `CSS Flexbox`_ 。
 
 Simple Interface（简单接口）
 ******************************
@@ -96,7 +98,12 @@ Use the following functions to set and control the Flex layout on any parent Wid
    <br>
 
 
-使用以下功能，可以在任何父级上设置 Flex 布局。
+使用以下函数设置和控制任何父Widget上的Flex布局。
+
+.. 注意::
+
+    父Widget必须是 Flex容器，这些样式才能生效。
+    下面的函数会导致父 Widget 成为 Flex 容器（如果它还不是）。
 
 
 .. _flex_flow:
@@ -141,6 +148,9 @@ by combining flex-direction_ and flex-wrap_ as defined under flex-flow_.
 - :cpp:enumerator:`LV_FLEX_FLOW_COLUMN_REVERSE`: 将孩子放在一列，不包裹起来，但顺序相反
 - :cpp:enumerator:`LV_FLEX_FLOW_ROW_WRAP_REVERSE`: 将孩子按行排列并包裹起来，但顺序相反
 - :cpp:enumerator:`LV_FLEX_FLOW_COLUMN_WRAP_REVERSE`: 将孩子按列排列并包裹起来，但顺序相反
+
+这些值导致 Widget 的布局行为模拟 `CSS Flexbox`_ 行为
+通过结合 flex-direction_ 和 flex-wrap_ （如 flex-flow_ 下定义）。
 
 （注：flex-flow是flex-direction 与 flex-wrap的结合）
 
@@ -211,6 +221,7 @@ See justify-content_, align-items_ and align-content_ for illustrations of these
 - :cpp:enumerator:`LV_FLEX_ALIGN_SPACE_AROUND`: 元素在轨道上均匀分布，元素两侧之间的间隔相等。请注意，从视觉上看，空间并不相等，因为所有元素的两侧都有相等的空间。第一个元素在容器边缘有一个单位的空间，但下一个元素之间有两个单位的间隔，因为下一个项有自己的适用间距。不适用于 ``cross_place``。
 - :cpp:enumerator:`LV_FLEX_ALIGN_SPACE_BETWEEN`:  元素在轨道上彼此之间的间隔相等，首尾元素贴合容器边缘。不适用于 ``cross_place``。
 
+有关这些值的说明，请参阅 justify-content_、align-items_ 和align-content_。
 
 .. _flex_grow:
 
@@ -255,6 +266,7 @@ Flex grow（弹性增长）可用于让一个或多个孩子填满轨道上的�
 
 可以使用 :cpp:expr:`lv_obj_set_flex_grow(child, value)` 在子节点上设置 Flex 增长值。 ``value`` 需要 > 1 或 0 才能禁用在孩子身上生长。
 
+有关此行为的说明，请参阅 flex-grow_ 。
 
 .. _flex_style:
 
@@ -369,6 +381,9 @@ New track（新轨道）
 You can force Flex to put an item into a new line with
 :cpp:expr:`lv_obj_add_flag(child, LV_OBJ_FLAG_FLEX_IN_NEW_TRACK)`.
 
+
+
+
 .. admonition::  Further Reading
 
     Learn more about `CSS Flexbox`_.
@@ -384,10 +399,11 @@ You can force Flex to put an item into a new line with
 
 .. _flex_example:
 
-Example（示例）
-****************
+Examples
+********
 
-.. include:: ../examples/layouts/flex/index.rst
+.. include:: ../../../examples/layouts/flex/index.rst
+
 
 ..  Hyperlinks
 
@@ -400,7 +416,8 @@ Example（示例）
 .. _align-content:   https://css-tricks.com/snippets/css/a-guide-to-flexbox/#aa-align-content
 .. _flex-grow:       https://css-tricks.com/snippets/css/a-guide-to-flexbox/#aa-flex-grow
 
+
 .. _flex_api:
 
 API
-******
+***
