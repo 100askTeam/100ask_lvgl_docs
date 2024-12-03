@@ -79,11 +79,11 @@ To make the variable visible in the C file, you need to declare it with
 :cpp:expr:`LV_IMAGE_DECLARE(converted_img_var)`.
 
 To use external files, you also need to convert the image files using
-the online converter tool but now you should select the binary output
+the online converter tool, but select the binary output
 format. You also need to use LVGL's file system module and register a
-driver with some functions for the basic file operation. Go to the
-:ref:`File system <overview_file_system>` to learn more. To set an image sourced
-from a file, use :cpp:expr:`lv_image_set_src(img, "S:folder1/my_img.bin")` .
+driver with some functions for basic file operations.  See
+:ref:`File system <overview_file_system>` to learn more.  Then set the translated
+image as the image source with :cpp:expr:`lv_image_set_src(img, "S:folder1/my_img.bin")`.
 
 You can also set a symbol similarly to :ref:`Labels <lv_label>`. In
 this case, the image will be rendered as text according to the *font*
@@ -106,7 +106,7 @@ specified in the style. It enables to use of light-weight monochrome
 
 要从 PNG、JPG 或 BMP 图像生成像素数组，请使用 `LVGL官网的在线图像转换工具 <https://lvgl.io/tools/imageconverter>`__ 并将转换后的图像指针（比如 ``converted_img_var`` ）通过接口函数 :cpp:expr:`lv_image_set_src(img1, &converted_img_var)` 使用。要使该变量在 C 文件中可见，需要使用 :cpp:expr:`LV_IMAGE_DECLARE(converted_img_var)` 声明它。
 
-要使用外部文件，还需要使用 `LVGL官网的在线图像转换工具 <https://lvgl.io/tools/imageconverter>`__  转换图像文件，这时候需要选择转为二进制输出格式；转出来之后还需要使用 :ref:`LVGL 的文件系统接口 <overview_file_system>` 对接你适配好的文件系统驱动。 要设置来自文件系统的二进制图像文件，请使用这样使用该接口 :cpp:expr:`lv_image_set_src(img, "S:folder1/my_img.bin")` 。
+若要使用外部文件，你还需要使用在线转换工具对图像文件进行转换，不过要选择二进制输出格式。此外，还需要使用 LVGL（轻量级图形库）的文件系统模块，并注册一个带有一些用于基本文件操作功能的驱动程序。可查看 :ref:`File system <overview_file_system>` 以了解更多相关内容。然后使用 :cpp:expr:`lv_image_set_src(img, "S:folder1/my_img.bin")`将转换后的图像设置为图像源。
 
 图像控件还可以显示类似于 :ref:`标签 <lv_label>` 控件那样显示 :ref:`Symbols(符号) <fonts_symbols>` 或者字符；在这种情况下，图像将根据样式中指定的 *font* 呈现文本。 它允许使用轻量级单色 “字母” 而不是真实图像，例如 :cpp:expr:`lv_image_set_src(img1, LV_SYMBOL_OK "Some text")` 。
 
@@ -119,11 +119,12 @@ Label as an image（标签作为图象）
    <details>
      <summary>显示原文</summary>
 
-Images and labels are sometimes used to convey the same thing. For
-example, to describe what a button does. Therefore, images and labels
-are somewhat interchangeable, that is the images can display texts by
-using :c:macro:`LV_SYMBOL_DUMMY` as the prefix of the text. For example,
-:cpp:expr:`lv_image_set_src(img, LV_SYMBOL_DUMMY, "Some text")`.
+Images and labels are sometimes used to convey the same thing, such as
+describing what a button does.  In this context, images and labels
+are somewhat interchangeable:  images can display text by
+using the macro :c:macro:`LV_SYMBOL_DUMMY` (which equates to a 3-byte C string
+containing a special code) as the prefix of the text.  For example,
+``lv_image_set_src(img, LV_SYMBOL_DUMMY "Some text")``.
 
 .. raw:: html
 
@@ -131,8 +132,7 @@ using :c:macro:`LV_SYMBOL_DUMMY` as the prefix of the text. For example,
    <br>
 
 
-图像和标签有时可以用于传达相同的内容，例如，描述按钮的作用。因此，图像和标签在某种程度上是可以互换的，也就是说图像可以通过使用 :c:macro:`LV_SYMBOL_DUMMY` 作为文本的前缀来显示文本。 例如， :cpp:expr:`lv_image_set_src(img, LV_SYMBOL_DUMMY "Some text")` 。
-
+图像和标签有时用于传达相同的内容，比如描述一个按钮的功能。在这种情况下，图像和标签在一定程度上是可以互换的：图像能够通过使用宏 :c:macro:`LV_SYMBOL_DUMMY`（它等同于一个包含特殊代码的 3 字节 C 语言字符串）作为文本前缀来显示文本。例如， ``lv_image_set_src(img, LV_SYMBOL_DUMMY "Some text")`` 这样的用法。
 
 Transparency（透明度）
 ------------------------
@@ -145,8 +145,11 @@ Transparency（透明度）
 The internal (variable) and external images support 2 transparency
 handling methods:
 
--  **Alpha byte**: An alpha byte is added to every pixel that contains
-   the pixel's opacity
+-  **Alpha byte**: An alpha channel is added to every pixel that contains
+   its opacity, typically a byte.  It is the 'A' in the the various color formats
+   that contain an alpha channel, such as ARGB8888, ARGB8565, ARGB1555, etc.
+-  **Indexed transparent color**:  a specific index in a color palette serves to
+   signal transparency for each pixel that uses it.
 
 .. raw:: html
 
@@ -156,8 +159,8 @@ handling methods:
 
 内部（变量）和外部图像支持 2 种透明度处理方法：
 
-- **Alpha 字节** 向每个包含像素不透明度的像素添加一个 Alpha 字节
-
+-  **Alpha 字节**：每个像素都会添加一个包含其不透明度信息的 Alpha 通道，通常为一个字节。它就是各种包含 Alpha 通道的颜色格式（如 ARGB8888、ARGB8565、ARGB1555 等）中的 “A”。
+-  **索引透明色**：调色板中的某个特定索引用于表示使用该索引的每个像素的透明性。
 
 Palette and Alpha index（调色板和 Alpha 索引）
 -----------------------------------------------
@@ -170,8 +173,8 @@ Palette and Alpha index（调色板和 Alpha 索引）
 Besides the *True color* (RGB) color format, the following formats are
 supported:
 
-- **Indexed**: Image has a palette.
-- **Alpha indexed**: Only alpha values are stored.
+- **Indexed**: Image has a color palette, and each pixel is an index into that palette.
+- **Alpha indexed**: The values stored at pixel positions are alpha (opacity) values.
 
 These options can be selected in the image converter. To learn more
 about the color formats, read the :ref:`Images <overview_image>` section.
@@ -184,9 +187,9 @@ about the color formats, read the :ref:`Images <overview_image>` section.
 
 除了 *True color* (RGB) 颜色格式外，还支持以下格式：
 
-- **Indexed（索引）** ： 图像有调色板。
+- **Indexed（索引）** ： 图像具有一个调色板，并且每个像素都是指向该调色板的一个索引。
 
-- **Alpha indexed（透明度索引）** ：仅存储 Alpha（透明度） 值。
+- **Alpha indexed（透明度索引）** ：存储在像素位置处的值为 Alpha（不透明度）值。
 
 可以在图像转换器中选择这些选项。 要了解有关颜色格式的更多信息，请阅读 :ref:`图像 <overview_image>`  部分。
 
@@ -230,7 +233,7 @@ Offset（偏移量）
 
 With :cpp:expr:`lv_image_set_offset_x(img, x_ofs)` and
 :cpp:expr:`lv_image_set_offset_y(img, y_ofs)`, you can add some offset to the
-displayed image. Useful if the object size is smaller than the image
+displayed image. Useful if the Widget size is smaller than the image
 source size. Using the offset parameter a `Texture atlas <https://en.wikipedia.org/wiki/Texture_atlas>`__
 or a "running image" effect can be created by :ref:`Animating <animations>` the x or y offset.
 
@@ -240,7 +243,7 @@ or a "running image" effect can be created by :ref:`Animating <animations>` the 
    <br>
 
 
-可以通过接口 :cpp:expr:`lv_image_set_offset_x(img, x_ofs)` 和 :cpp:expr:`lv_image_set_offset_y(img, y_ofs)` 为显示的图像添加一些偏移，这在对象尺寸小于图像源大小的情况下非常有用。使用偏移参数，可以创建一个 `纹理图集 <https://en.wikipedia.org/wiki/Texture_atlas>`__ 或 "运行图像 "效果，可以通过动画 :ref:`Animating <animations>` 设置 x 或 y 偏移量。
+可以通过接口 :cpp:expr:`lv_image_set_offset_x(img, x_ofs)` 和 :cpp:expr:`lv_image_set_offset_y(img, y_ofs)` 为显示的图像添加一些偏移，这在部件尺寸小于图像源大小的情况下非常有用。使用偏移参数，可以创建一个 `纹理图集 <https://en.wikipedia.org/wiki/Texture_atlas>`__ 或 "运行图像 "效果，可以通过动画 :ref:`Animating <animations>` 设置 x 或 y 偏移量。
 
 
 Transformations（转换）
@@ -251,22 +254,23 @@ Transformations（转换）
    <details>
      <summary>显示原文</summary>
 
-Using the :cpp:expr:`lv_image_set_scale(img, factor)` the images will be zoomed.
+You can zoom images in or out by using :cpp:expr:`lv_image_set_scale(img, factor)`.
 Set ``factor`` to ``256`` or :c:macro:`LV_SCALE_NONE` to disable zooming. A
 larger value enlarges the images (e.g. ``512`` double size), a smaller
-value shrinks it (e.g. ``128`` half size). Fractional scale works as
-well. E.g. ``281`` for 10% enlargement.
+value shrinks it (e.g. ``128`` half size). Fractional scaling works using a value
+that is proportionally larger or smaller, e.g. ``281`` for 10% enlargement.
 
 :cpp:expr:`lv_image_set_scale_x(img, factor)` and
 :cpp:expr:`lv_image_set_scale_y(img, factor)` also can be used to
 the scale independently horizontally and vertically (non-uniform scale).
 
-To rotate the image use :cpp:expr:`lv_image_set_rotation(img, angle)`. Angle has 0.1
-degree precision, so for 45.8° set 458.
+To rotate the image use :cpp:expr:`lv_image_set_rotation(img, angle_x10)`.
+The ``angle_x10`` argument is an ``int32_t`` containing the angle (in degrees)
+multiplied by 10.  This gives 0.1-degree resolution.  Example:  458 means 45.8°.
 
 By default, the pivot point of the rotation is the center of the image.
-It can be changed with :cpp:expr:`lv_image_set_pivot(img, pivot_x, pivot_y)`.
-``0;0`` is the top left corner.
+This can be changed with :cpp:expr:`lv_image_set_pivot(img, pivot_x, pivot_y)` where
+the coordinates ``(0,0)`` represent the top left corner.
 
 The quality of the transformation can be adjusted with
 :cpp:expr:`lv_image_set_antialias(img, true)`. With enabled anti-aliasing
@@ -282,13 +286,12 @@ Note that the real coordinates of image objects won't change during
 transformation. That is :cpp:expr:`lv_obj_get_width/height/x/y()` will return
 the original, non-zoomed coordinates.
 
-**IMPORTANT** The transformation of the image is independent of the
-transformation properties coming from styles. (See
-:ref:`here <styles_opacity_blend_modes_transformations>`). The main
-differences are that pure image widget transformation
+**IMPORTANT**:  The transformation of the image is independent of the transformation
+properties :ref:`coming from styles <style_opacity_blend_modes_transformations>`.
+The main differences are that pure Image Widget transformations:
 
-- doesn't transform the children of the image widget
-- image is transformed directly without creating an intermediate layer (buffer) to snapshot the widget
+- do not transform the children of the Image Widget, and
+- the image is transformed directly without creating an intermediate layer (buffer) to snapshot the Widget.
 
 .. raw:: html
 
@@ -296,13 +299,16 @@ differences are that pure image widget transformation
    <br>
 
 
-可以通过接口 :cpp:expr:`lv_image_set_scale(img, factor)` 缩放图像，参数 ``factor`` 控制缩放，将其设置为 ``256`` 或 :c:macro:`LV_SCALE_NONE` 就是不进行缩放；一个较大的值会放大图像（例如 ``512`` 放大两倍），较小的值会缩小它（例如 ``128`` 缩小一半）；分数缩放也可以同样有效。例如 ``281`` 用于 10% 的放大。
+你可以通过使用 :cpp:expr:`lv_image_set_scale(img, factor)`来对图像进行放大或缩小操作。
+将 ``factor`` 设置为 ``256`` 或者 :c:macro:`LV_SCALE_NONE`可禁用缩放功能。较大的值会放大图像（例如， ``512`` 表示放大两倍），较小的值则会缩小图像（例如， ``128`` 表示缩小为一半大小）。分数缩放可使用按比例增大或减小的值来实现，例如， ``281`` 表示放大 10%。
 
 可以通过函数 :cpp:expr:`lv_image_set_scale_x(img, factor)` 和 :cpp:expr:`lv_image_set_scale_y(img, factor)` 进行水平和垂直独立缩放（非均匀缩放）。
 
-要旋转图像，请使用 :cpp:expr:`lv_image_set_rotation(img, angle)` ； 参数 ``factor`` 控制角度，其角度精度为 0.1 度，比如，要设置为 45.8° 将其设置为458。
+要旋转图像，可使用 :cpp:expr:`lv_image_set_rotation(img, angle_x10)`。
+``angle_x10`` 参数是一个 ``int32_t`` 类型的数据，它包含的是角度（以度为单位）乘以 10 之后的值。这样可以实现 0.1 度的分辨率。例如，458 就表示 45.8 度。
 
-默认情况下，旋转的轴心点是图像的中心，可以通过函数 :cpp:expr:`lv_image_set_pivot(img, pivot_x, pivot_y)` 更改轴心点； 参数 ``pivot_x`` , ``pivot_y`` 就是要指定的轴心点坐标，比如 ``[0, 0]`` 意思是将轴心点改到图像的左上角。
+默认情况下，旋转的中心点是图像的中心。
+可以使用 :cpp:expr:`lv_image_set_pivot(img, pivot_x, pivot_y)`来改变这一中心点，其中坐标 ``(0,0)`` 代表图像的左上角。
 
 转换的质量可以通过函数 :cpp:expr:`lv_image_set_antialias(img, true)` 进行调整；启用抗锯齿会让转换质量更高，但速度较慢。
 
@@ -310,10 +316,11 @@ differences are that pure image widget transformation
 
 注意，图像对象的真实坐标在转换过程中不会改变。也就是说，:cpp:expr:`lv_obj_get_width/height/x/y()` 将返回原始的、未缩放的坐标。
 
-**重要** 图像的转换与来自样式的转换属性无关，(请阅读 :ref:`这里 <styles_opacity_blend_modes_transformations>` )。主要区别在于纯图像控件的转换。
+**重要** 图像的变换与那些 :ref:`coming from styles <style_opacity_blend_modes_transformations>` 是相互独立的。
+主要区别在于纯粹的图像部件变换具有以下特点：
 
-- 不会转换图像控件的子项
-- 图像直接转换，无需创建中间层（缓冲区）来快照控件
+- 不会变换图像部件的子部件；
+- 图像是直接进行变换的，不会创建一个中间层（缓冲区）来对部件进行快照处理。
 
 
 Inner align（内部对齐）
@@ -327,10 +334,11 @@ Inner align（内部对齐）
 By default the image widget's width and height is :cpp:enumerator:`LV_SIZE_CONTENT`.
 It means that the widget will be sized automatically according to the image source.
 
-If the widget's width or height is set the larger value the ``inner_align`` property tells
-how to align the image source inside the widget.
+If the Widget's width or height is set to a different value, the value of the ``inner_align``
+property (set using :cpp:expr:`lv_image_set_inner_align(widget, align)`) governs how
+the image source is aligned inside the Widget.
 
-The alignment set any of these:
+``align`` can be any of these values:
 
 - :cpp:enumerator:`LV_IMAGE_ALIGN_DEFAULT`: Meaning top left
 - :cpp:enumerator:`LV_IMAGE_ALIGN_TOP_LEFT`
@@ -345,16 +353,15 @@ The alignment set any of these:
 - :cpp:enumerator:`LV_IMAGE_ALIGN_STRETCH`
 - :cpp:enumerator:`LV_IMAGE_ALIGN_TILE`
 
-The ``offset`` value is applied after the image source is aligned. For example setting an ``y=-10``
-and :cpp:enumerator:`LV_IMAGE_ALIGN_CENTER` will move the image source up a little bit
-from the center of the widget.
+Any ``offset`` value is applied after the image source is aligned. For example setting
+an offset of ``y=-10`` with ``align`` == :cpp:enumerator:`LV_IMAGE_ALIGN_CENTER` will
+move the image source up 10 pixels from the center of the Widget.
 
-Or to automatically scale or tile the image
+To automatically scale or tile the image, pass one of these ``align`` values:
 
-- :cpp:enumerator:`LV_IMAGE_ALIGN_STRETCH` Set X and Y scale to fill the widget's area
-- :cpp:enumerator:`LV_IMAGE_ALIGN_TILE` Tile the image to will the widget area. Offset is applied to shift the tiling.
+- :cpp:enumerator:`LV_IMAGE_ALIGN_STRETCH` Set X and Y scale to fill the Widget's area
+- :cpp:enumerator:`LV_IMAGE_ALIGN_TILE` Tile image to fill Widget's area. Offset is applied to shift the tiling.
 
-The alignment can be set by :cpp:func:`lv_image_set_inner_align`
 
 .. raw:: html
 
@@ -364,9 +371,9 @@ The alignment can be set by :cpp:func:`lv_image_set_inner_align`
 
 默认情况下，图像控件的宽度和高度为 :cpp:enumerator:`LV_SIZE_CONTENT` ，也就是说其会根据图像源自动调整大小。
 
-如果宽度或高度设置为较大的值，则 ``inner_align`` 属性会告知如何在图像控件内对齐图像源。
+如果部件的宽度或高度被设置为一个不同的值，那么 ``inner_align`` 属性的值（通过:cpp:expr:`lv_image_set_inner_align(widget, align)`进行设置）将决定图像源在部件内部如何对齐。
 
-对齐方式可以设置为：
+``align`` 可以是以下任何一个值：
 
 - :cpp:enumerator:`LV_IMAGE_ALIGN_DEFAULT`：意思是左上角
 - :cpp:enumerator:`LV_IMAGE_ALIGN_TOP_LEFT`
@@ -381,14 +388,12 @@ The alignment can be set by :cpp:func:`lv_image_set_inner_align`
 - :cpp:enumerator:`LV_IMAGE_ALIGN_STRETCH`
 - :cpp:enumerator:`LV_IMAGE_ALIGN_TILE`
 
-``offset（偏移）`` 值在图像源对齐后应用。例如，设置 ``y=-10`` 和 :cpp:enumerator:`LV_IMAGE_ALIGN_CENTER` 将使图像源从控件的中心向上移动一些。
+任何 ``offset`` 值都是在图像源对齐之后应用的。例如，当 ``align`` 的值等于 :cpp:enumerator:`LV_IMAGE_ALIGN_CENTER`时，设置一个 ``y=-10`` 的偏移量，将会把图像源从部件的中心向上移动 10 个像素。
 
-或者自动缩放或平铺图像
+为了自动缩放或平铺图像，可传入以下这些 ``align`` 值中的一个：
 
-- :cpp:enumerator:`LV_IMAGE_ALIGN_STRETCH` 自动根据 X 和 Y 的比例来平铺填充控件的区域，即使控件区域不对称。
-- :cpp:enumerator:`LV_IMAGE_ALIGN_TILE` 将图像像印章那样平铺满控件区域，底层应用 offset（偏移） 来移动平铺。
-
-对齐方式可以通过调用此函数设置 :cpp:func:`lv_image_set_inner_align`
+- :cpp:enumerator:`LV_IMAGE_ALIGN_STRETCH` 将 X 和 Y 方向的缩放比例设置为填充部件的区域
+- :cpp:enumerator:`LV_IMAGE_ALIGN_TILE` 平铺图像以填充部件的区域。偏移量可应用于此来移动平铺的位置
 
 
 .. _lv_image_events:
@@ -401,11 +406,15 @@ Events（事件）
    <details>
      <summary>显示原文</summary>
 
-No special events are sent by image objects.
+No special events are sent by Image Widgets.  By default, Image Widgets are created
+without the LV_OBJ_FLAG_CLICKABLE flag, but you can add it to make an Image Widget
+detect and emit LV_EVENT_CLICKED events if desired.
 
-See the events of the :ref:`Base object <lv_obj>` too.
+.. admonition::  Further Reading
 
-Learn more about :ref:`events`.
+    Learn more about :ref:`lv_obj_events` emitted by all Widgets.
+
+    Learn more about :ref:`events`.
 
 .. raw:: html
 
@@ -413,11 +422,11 @@ Learn more about :ref:`events`.
    <br>
 
 
-图像对象不发送特殊事件。
+图像部件不会发送特殊事件。默认情况下，图像部件在创建时是没有设置 LV_OBJ_FLAG_CLICKABLE 标志的，但如果有需要，你可以添加该标志，使图像部件能够检测并发出 LV_EVENT_CLICKED 事件。
 
-请阅读 :ref:`基本对象 <lv_obj>` 的事件。
+了解更多关于所有部件都会发出的 :ref:`lv_obj_events` 的相关内容。
 
-详细了解更多 :ref:`events` 。
+了解更多关于 :ref:`events` 的相关内容。
 
 
 .. _lv_image_keys:
@@ -430,7 +439,7 @@ Keys（按键）
    <details>
      <summary>显示原文</summary>
 
-No *Keys* are processed by the object type.
+No *Keys* are processed by Image Widgets.
 
 Learn more about :ref:`indev_keys`.
 
@@ -440,7 +449,7 @@ Learn more about :ref:`indev_keys`.
    <br>
 
 
-图像对象不处理 *Keys* 。
+图像部件不会处理任何*按键*操作。
 
 阅读了解有关 :ref:`indev_keys` 的更多信息。
 
