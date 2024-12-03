@@ -34,7 +34,7 @@ things:
 
 .. _layers_creation:
 
-Order of creation（图层顺序）
+Order of Creation（图层顺序）
 *****************************
 
 .. raw:: html
@@ -262,7 +262,7 @@ layer after applying some transformations or other modifications.
 之后，该层将在应用一些转换或其他修改后，被合并到屏幕或其父层。
 
 
-Simple layer（简单层）
+Simple Layer（简单层）
 ----------------------
 
 .. raw:: html
@@ -299,7 +299,7 @@ another chunk is rendered and freed.
 如果没有足够的内存来创建一个新的块，LVGL 将尝试在另一个块被渲染并释放时分配图层。
 
 
-Transformed layer（转换图层）
+Transformed Layer（转换图层）
 -----------------------------
 
 .. raw:: html
