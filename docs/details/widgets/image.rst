@@ -75,7 +75,7 @@ To set the source of an image, use :cpp:expr:`lv_image_set_src(img, src)`.
 
 To generate a pixel array from a PNG, JPG or BMP image, use the `Online image converter tool <https://lvgl.io/tools/imageconverter>`__
 and set the converted image with its pointer  :cpp:expr:`lv_image_set_src(img1, &converted_img_var)`
-To make the variable visible in the C file, you need to declare it with
+To make the converted image variable accessible from the C file, you need to declare it with
 :cpp:expr:`LV_IMAGE_DECLARE(converted_img_var)`.
 
 To use external files, you also need to convert the image files using
@@ -85,10 +85,11 @@ driver with some functions for basic file operations.  See
 :ref:`File system <overview_file_system>` to learn more.  Then set the translated
 image as the image source with :cpp:expr:`lv_image_set_src(img, "S:folder1/my_img.bin")`.
 
-You can also set a symbol similarly to :ref:`Labels <lv_label>`. In
+You can also set a symbol as an image source similar to a :ref:`Labels <lv_label>`. In
 this case, the image will be rendered as text according to the *font*
-specified in the style. It enables to use of light-weight monochrome
-"letters" instead of real images. You can set symbol like :cpp:expr:`lv_image_set_src(img1, LV_SYMBOL_OK)` .
+specified in the style. It enables the use of light-weight monochrome
+"characters" instead of real images. You can set a symbol as an image source with
+:cpp:expr:`lv_image_set_src(img1, LV_SYMBOL_OK)`.
 
 .. raw:: html
 
@@ -104,12 +105,11 @@ specified in the style. It enables to use of light-weight monochrome
 
 要设置图像的来源，请使用 :cpp:expr:`lv_image_set_src(img, src)` 接口。
 
-要从 PNG、JPG 或 BMP 图像生成像素数组，请使用 `LVGL官网的在线图像转换工具 <https://lvgl.io/tools/imageconverter>`__ 并将转换后的图像指针（比如 ``converted_img_var`` ）通过接口函数 :cpp:expr:`lv_image_set_src(img1, &converted_img_var)` 使用。要使该变量在 C 文件中可见，需要使用 :cpp:expr:`LV_IMAGE_DECLARE(converted_img_var)` 声明它。
+要从 PNG、JPG 或 BMP 图像生成像素数组，请使用 `LVGL官网的在线图像转换工具 <https://lvgl.io/tools/imageconverter>`__ 并将转换后的图像指针（比如 ``converted_img_var`` ）通过接口函数 :cpp:expr:`lv_image_set_src(img1, &converted_img_var)` 使用。要使转换后的图像变量能从 C 文件中访问，需要使用 :cpp:expr:`LV_IMAGE_DECLARE(converted_img_var)` 声明它。
 
 若要使用外部文件，你还需要使用在线转换工具对图像文件进行转换，不过要选择二进制输出格式。此外，还需要使用 LVGL（轻量级图形库）的文件系统模块，并注册一个带有一些用于基本文件操作功能的驱动程序。可查看 :ref:`File system <overview_file_system>` 以了解更多相关内容。然后使用 :cpp:expr:`lv_image_set_src(img, "S:folder1/my_img.bin")`将转换后的图像设置为图像源。
 
-图像控件还可以显示类似于 :ref:`标签 <lv_label>` 控件那样显示 :ref:`Symbols(符号) <fonts_symbols>` 或者字符；在这种情况下，图像将根据样式中指定的 *font* 呈现文本。 它允许使用轻量级单色 “字母” 而不是真实图像，例如 :cpp:expr:`lv_image_set_src(img1, LV_SYMBOL_OK "Some text")` 。
-
+你还可以将一个符号设置为图像源，这与 :ref:`Labels <lv_label>` 的用法类似。在这种情况下，图像将依据样式中指定的 *font* 被渲染成文本。这样一来，就可以使用轻量级的单色 “字符” 来替代真实图像了。你可以使用 :cpp:expr:`lv_image_set_src(img1, LV_SYMBOL_OK)` 来将一个符号设置为图像源。
 
 Label as an image（标签作为图象）
 ----------------------------------
@@ -177,7 +177,7 @@ supported:
 - **Alpha indexed**: The values stored at pixel positions are alpha (opacity) values.
 
 These options can be selected in the image converter. To learn more
-about the color formats, read the :ref:`Images <overview_image>` section.
+about the color formats, read the :ref:`overview_image_color_formats` section.
 
 .. raw:: html
 
@@ -191,7 +191,7 @@ about the color formats, read the :ref:`Images <overview_image>` section.
 
 - **Alpha indexed（透明度索引）** ：存储在像素位置处的值为 Alpha（不透明度）值。
 
-可以在图像转换器中选择这些选项。 要了解有关颜色格式的更多信息，请阅读 :ref:`图像 <overview_image>`  部分。
+可以在图像转换器中选择这些选项。 要了解有关颜色格式的更多信息，请阅读 :ref:`overview_image_color_formats`  部分。
 
 
 Recolor（重新着色）
