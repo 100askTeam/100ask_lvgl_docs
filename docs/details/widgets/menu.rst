@@ -320,7 +320,7 @@ Keys（按键）
    <details>
      <summary>显示原文</summary>
 
-No keys are handled by the menu widget.
+No *Keys* are processed by Menu Widgets.
 
 Learn more about :ref:`indev_keys`.
 
