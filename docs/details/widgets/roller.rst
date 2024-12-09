@@ -33,15 +33,20 @@ Parts and Styles（部分和样式）
    <details>
      <summary>显示原文</summary>
 
--  :cpp:enumerator:`LV_PART_MAIN` The background of the roller uses all the typical
-   background properties and text style properties.
-   ``style_text_line_space`` adjusts the space between the options. When
-   the Roller is scrolled and doesn't stop exactly on an option it will
-   scroll to the nearest valid option automatically in ``anim_time``
-   milliseconds as specified in the style.
--  :cpp:enumerator:`LV_PART_SELECTED` The selected option in the middle. Besides the
-   typical background properties it uses the text style properties to
-   change the appearance of the text in the selected area.
+-  :cpp:enumerator:`LV_PART_MAIN` The background of the Roller uses the
+   background- and text-style properties.
+
+   - Style ``text_line_space`` adjusts the space between list items.
+     Use :cpp:func:`lv_obj_set_style_text_line_space` to set this value.
+
+   - When the Roller is scrolled and doesn't stop exactly on an item, it will
+     automatically scroll to the nearest valid item in ``anim_time``
+     milliseconds as specified in the ``anim_duration`` style.  Use
+     :cpp:func:`lv_obj_set_style_anim_duration` to set this value.
+
+-  :cpp:enumerator:`LV_PART_SELECTED` The selected item (displayed in the  middle of
+   the Roller).  Besides the typical background properties, it uses text style
+   properties to change the appearance of the text of the selected item.
 
 .. raw:: html
 
@@ -49,9 +54,13 @@ Parts and Styles（部分和样式）
    <br>
 
 
--  :cpp:enumerator:`LV_PART_MAIN` 滚轮的背景使用了所有典型的背景属性和文本样式属性。 可以通过 ``style_text_line_space`` 调整选项之间的间隔。 当滚轮滚动并且没有完全停在一个选项上时，它将按照样式中指定的 ``anim_time`` 值(毫秒)自动滚动到前进方向最近的有效选项。
--  :cpp:enumerator:`LV_PART_SELECTED` 中间选中的选项。 除了典型的背景属性之外，它还使用文本样式属性来更改所选区域中文本的外观。
+-  :cpp:enumerator:`LV_PART_MAIN`：滚轮的背景使用背景样式和文本样式属性。
 
+样式  ``text_line_space`` 用于调整列表项之间的间距。使用 :cpp:func:`lv_obj_set_style_text_line_space` 来设置该值。
+
+当滚轮滚动且未恰好停在某个项目上时，它将按照 ``anim_time`` 样式中指定的 ``anim_duration``（以毫秒为单位）自动滚动到最近的有效项目。使用 :cpp:func:`lv_obj_set_style_anim_duration` 来设置该值。
+
+-  :cpp:enumerator:`LV_PART_SELECTED`：被选中的项目（显示在滚轮的中间位置）。除了典型的背景属性外，它还使用文本样式属性来改变所选项目文本的外观。
 
 .. _lv_roller_usage:
 
@@ -66,16 +75,20 @@ Set options（设置选项）
    <details>
      <summary>显示原文</summary>
 
-Options are passed to the Roller as a string with
-:cpp:expr:`lv_roller_set_options(roller, options, LV_ROLLER_MODE_NORMAL)`.
-The options should be separated by ``\n``. For example:
+List items are passed to the Roller as a string with
+:cpp:expr:`lv_roller_set_options(roller, string_list, LV_ROLLER_MODE_NORMAL)`.
+The items should be separated by ``\n``. For example:
 ``"First\nSecond\nThird"``.
 
-:cpp:enumerator:`LV_ROLLER_MODE_INFINITE` makes the roller circular.
+:cpp:enumerator:`LV_ROLLER_MODE_INFINITE` makes the Roller circular.
 
-You can select an option manually with
+You can select an option programmatically with
 :cpp:expr:`lv_roller_set_selected(roller, id, LV_ANIM_ON)`,
-where *id* is the index of an option.
+where *id* is the zero-based index of the list item to be selected.
+
+If you don't know the index of an option can also select an item with
+:cpp:expr:`lv_roller_set_selected_str(roller, str, LV_ANIM_ON)`,
+where *str* is the string equal to one of the list items.
 
 .. raw:: html
 
@@ -83,13 +96,13 @@ where *id* is the index of an option.
    <br>
 
 
-可以通过这个函数 :cpp:expr:`lv_roller_set_options(roller, options, LV_ROLLER_MODE_NORMAL)` 设置 Roller 中的选项。 选项之间要用 ``\n`` 分隔。 例如： ``"First\nSecond\nThird"``。
+列表项作为一个字符串传递给滚轮，通过 :cpp:expr:`lv_roller_set_options(roller, string_list, LV_ROLLER_MODE_NORMAL)`来实现。这些列表项应当用 ``\n`` 进行分隔。例如： ``"First\nSecond\nThird"``。
 
-参数 :cpp:enumerator:`LV_ROLLER_MODE_NORMAL` 是设置为正常模式（滚轮在选项结束时结束）
-参数 :cpp:enumerator:`LV_ROLLER_MODE_INFINITE` 是设置为无限模式（滚轮可以一直滚动）
+:cpp:enumerator:`LV_ROLLER_MODE_INFINITE`可使滚轮变为循环模式。
 
-可以使用 :cpp:expr:`lv_roller_set_selected(roller, id, LV_ANIM_ON)` 手动选中一个选项，其中 *id* 是选项的索引，选项从 0 开始索引。
+你可以通过编程的方式使用 :cpp:expr:`lv_roller_set_selected(roller, id, LV_ANIM_ON)`来选择一个选项，其中 id 是要选择的列表项基于零开始的索引。
 
+如果你不知道某个选项的索引，也可以使用 :cpp:expr:`lv_roller_set_selected_str(roller, str, LV_ANIM_ON)`来选择一个项目，其中 str 是与列表项之一相等的字符串。
 
 Get selected option（获取选中的选项）
 ------------------------------------

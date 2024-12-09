@@ -12,7 +12,7 @@ Overview（概述）
    <details>
      <summary>显示原文</summary>
 
-A label is the basic object type that is used to display text.
+A Label is the Widget used to display text.
 
 .. raw:: html
 
@@ -20,7 +20,7 @@ A label is the basic object type that is used to display text.
    <br>
 
 
-标签是用来显示文本的基本对象类型。
+标签是用来显示文本的部件。
 
 
 .. _lv_label_parts_and_styles:
@@ -72,17 +72,42 @@ dynamically, and the provided string will be copied into that buffer.
 Therefore, you don't need to keep the text you pass to
 :cpp:func:`lv_label_set_text` in scope after that function returns.
 
-With :cpp:expr:`lv_label_set_text_fmt(label, "Value: %d", 15)` printf formatting
-can be used to set the text.
+With :cpp:expr:`lv_label_set_text_fmt(label, fmt, ...)` printf formatting
+can be used to set the text.  Example:  :cpp:expr:`lv_label_set_text_fmt(label, "Value: %d", 15)`.
 
-Labels are able to show text from a static character buffer. To do so,
-use :cpp:expr:`lv_label_set_text_static(label, "Text")`. In this case, the text
-is not stored in the dynamic memory and the given buffer is used
-directly instead. This means that the array can't be a local variable
-which goes out of scope when the function exits. Constant strings are
-safe to use with :cpp:func:`lv_label_set_text_static` (except when used with
-:cpp:enumerator:`LV_LABEL_LONG_DOT`, as it modifies the buffer in-place), as they are
-stored in ROM memory, which is always accessible.
+Labels are able to show text from a static character buffer as well.  To do so, use
+:cpp:expr:`lv_label_set_text_static(label, "Text")`.  In this case, the text is not
+stored in dynamic memory and the given buffer is used directly instead.  This means
+that the contents of the character buffer *must* remain valid for the life of the
+label or until another buffer is set via one of the above functions.
+
+``const`` strings are safe to use with :cpp:func:`lv_label_set_text_static` since
+they are stored in ROM memory, which is always accessible.
+
+.. warning::
+
+    Do not use ``const`` strings with :cpp:func:`lv_label_set_text_static` when the
+    Label is being used in :cpp:enumerator:`LV_LABEL_LONG_DOT` mode since the Label
+    will attempt to do an in-place edit of the string.  This will cause an MCU
+    exception by attempting to modify program memory (ROM).
+
+.. _label_rapidly_updating_text:
+
+.. caution::
+
+    If your Label is updated with new strings rapidly (e.g. > 30X / second, such as
+    RPM in a dashboard, or an ADC value), and the length of those strings changes
+    frequently, it is advisable to:
+
+    - allocate a static string buffer large enough contain the largest possible string,
+    - update that buffer with the new strings only when they will make a visible
+      difference for the end user, and
+    - update the Label with :cpp:expr:`lv_label_set_text_static(label, buffer)` using that buffer.
+
+    Reason:  if you use :cpp:expr:`lv_label_set_text(label, new_text)`, a memory
+    realloc() will be forced every time the length of the string changes.  That
+    MCU overhead can be avoided by doing the above.
+
 
 .. raw:: html
 
@@ -92,9 +117,27 @@ stored in ROM memory, which is always accessible.
 
 您可以在运行时使用 :cpp:expr:`lv_label_set_text(label, "New text")`. 设置标签上的文本。 这将动态分配一个缓冲区，并且提供的字符串将被复制到该缓冲区中。 因此，在该函数返回后，您不需要将传递给 :cpp:func:`lv_label_set_text` 的文本保留在作用域中。
 
-使用 :cpp:expr:`lv_label_set_text_fmt(label, "Value: %d", 15)`  printf 格式可用于设置文本。
+通过 :cpp:expr:`lv_label_set_text_fmt(label, fmt, ...)` ，可以使用 printf 格式化的方式来设置文本。示例：:cpp:expr:`lv_label_set_text_fmt(label, "Value: %d", 15)` 。
 
-标签能够显示来自静态字符缓冲区的文本。 为此，请使用 :cpp:expr:`lv_label_set_text_static(label, "Text")`。 在这种情况下，文本不存储在动态内存中，而是直接使用给定的缓冲区。 这意味着数组不能是在函数退出时超出范围的局部变量。 常量字符串可以安全地与 :cpp:func:`lv_label_set_text_static` 一起使用（除非与 :cpp:enumerator:`LV_LABEL_LONG_DOT` 一起使用，因为它会就地修改缓冲区），因为它们存储在 ROM 内存中，始终可以访问。
+标签（Labels）也能够显示来自静态字符缓冲区的文本。要实现这一点，可使用 :cpp:expr:`lv_label_set_text_static(label, "Text")` 。在这种情况下，文本不会存储在动态内存中，而是直接使用给定的缓冲区。这意味着字符缓冲区的内容在标签的整个生命周期内必须保持有效，或者直到通过上述函数之一设置了另一个缓冲区为止。
+
+``const`` 字符串可以安全地与 :cpp:func:`lv_label_set_text_static` 一起使用，因为它们存储在只读存储器（ROM）中，始终是可访问的。
+
+.. warning::
+
+    当标签（Label）处于 :cpp:enumerator:`LV_LABEL_LONG_DOT` 模式下时，不要将 ``const`` 字符串与 :cpp:func:`lv_label_set_text_static` 一起使用，因为标签会尝试对字符串进行原地编辑。这样做会因试图修改程序内存（只读存储器，即 ROM）而导致微控制器（MCU）出现异常。
+
+.. _label_rapidly_updating_text:
+
+.. caution::
+
+    如果你的标签（Label）需要快速更新新的字符串（例如，每秒更新次数大于 30 次，比如仪表盘上的每分钟转数（RPM）或者模数转换器（ADC）的值），并且这些字符串的长度频繁变化，那么建议采取以下做法：
+    
+    - 分配一个足够大的静态字符串缓冲区，使其能够容纳可能出现的最长字符串；
+    - 仅当新字符串对最终用户来说会产生可见差异时，才用新字符串更新该缓冲区；
+    - 使用那个缓冲区，通过 :cpp:expr:`lv_label_set_text_static(label, buffer)` 来更新标签。
+    
+    原因：如果你使用 :cpp:expr:`lv_label_set_text(label, new_text)` ，那么每当字符串长度发生变化时，就会强制进行内存重分配（realloc() ）操作。通过上述做法可以避免微控制器（MCU）出现此类开销。
 
 
 .. _lv_label_newline:
@@ -212,9 +255,10 @@ Text alignment（文本对齐方式）
    <details>
      <summary>显示原文</summary>
 
-To horizontally align the lines of a label the `text_align` style property can be used with
-:cpp:func:`lv_obj_set_style_text_align` or :cpp:func:`lv_style_set_text_align`
-Note that it has a visible effect only if
+To horizontally align the lines of a Label the `text_align` style property can be used with
+:cpp:func:`lv_obj_set_style_text_align` or :cpp:func:`lv_style_set_text_align`,
+passing one of the ``LV_TEXT_ALIGN_...`` enumeration values.
+Note that this has a visible effect only if:
 
 - the label widget's width is larger than the width of the longest line of the text
 - the text has multiple lines with non equal line length
@@ -225,7 +269,8 @@ Note that it has a visible effect only if
    <br>
 
 
-若要水平对齐标签的行， `text_align` 样式属性可以使用 :cpp:func:`lv_obj_set_style_text_align` 或者 :cpp:func:`lv_style_set_text_align`，请注意，只有在以下情况下，它才具有可见效果。
+要对标签（Label）中的文本行进行水平对齐，可以将 `text_align` 样式属性与 :cpp:func:`lv_obj_set_style_text_align` 或 :cpp:func:`lv_style_set_text_align` 函数配合使用，并传入 ``LV_TEXT_ALIGN_...`` 枚举值中的某一个。
+请注意，只有在以下情况下，这样做才会产生可见的效果：
 
 - 标签小组件的宽度大于文本最长行的宽度
 - 文本有多行行长度不相等
@@ -313,11 +358,15 @@ Events（事件）
    <details>
      <summary>显示原文</summary>
 
-No special events are sent by the Label.
+No special events are sent by Label Widgets.  By default, Label Widgets are created
+without the LV_OBJ_FLAG_CLICKABLE flag, but you can add it to make a Label Widget
+emit LV_EVENT_CLICKED events if desired.
 
-See the events of the :ref:`Base object <lv_obj>` too.
+.. admonition::  Further Reading
 
-Learn more about :ref:`events`.
+    Learn more about :ref:`lv_obj_events` emitted by all Widgets.
+
+    Learn more about :ref:`events`.
 
 .. raw:: html
 
@@ -325,9 +374,9 @@ Learn more about :ref:`events`.
    <br>
 
 
-标签不发送特殊事件。
+标签（Label）部件不会发送特殊事件。默认情况下，创建标签部件时不会带有 LV_OBJ_FLAG_CLICKABLE 标志，不过如果需要的话，你可以添加该标志，使标签部件能够发出 LV_EVENT_CLICKED 事件。
 
-另请参阅 :ref:`基本对象 <lv_obj>` 的事件。
+另请参阅 :ref:`lv_obj_events` 的事件。
 
 详细了解更多 :ref:`events`。
 
@@ -342,7 +391,7 @@ Keys（按键）
    <details>
      <summary>显示原文</summary>
 
-No *Keys* are processed by the object type.
+No *Keys* are processed by Label Widgets.
 
 Learn more about :ref:`indev_keys`.
 
@@ -352,7 +401,7 @@ Learn more about :ref:`indev_keys`.
    <br>
 
 
-对象类型不处理 *按键* 。
+标签（Label）部件不处理任何 *按键*（Keys） 操作。
 
 了解有关 :ref:`indev_keys` 的更多信息。
 

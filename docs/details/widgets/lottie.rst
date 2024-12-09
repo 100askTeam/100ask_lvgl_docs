@@ -71,12 +71,12 @@ Dependencies（依赖）
    <details>
      <summary>显示原文</summary>
 
-The Lottie widget uses the `ThorVG <https://github.com/thorvg/thorvg>`__ library which is `integrated into LVGL <https://github.com/lvgl/lvgl/tree/master/src/libs/thorvg>`__.
-In order to use Lottie animations ``LV_USE_THORVG_INTERNAL`` (to use the built-in ThorVG) or
-``LV_USE_THORVG_EXTERNAL`` (to link it externally) needs to enabled. For vector graphics in general
-``LV_USE_VECTOR_GRAPHIC`` also needs to be enabled.
+The Lottie Widget uses the `ThorVG <https://github.com/thorvg/thorvg>`__ library which is `integrated into LVGL <https://github.com/lvgl/lvgl/tree/master/src/libs/thorvg>`__.
+In order to use Lottie animations :c:macro:`LV_USE_THORVG_INTERNAL` (to use the built-in ThorVG) or
+:c:macro:`LV_USE_THORVG_EXTERNAL` (to link it externally) needs to enabled in ``lv_conf.h``. For vector graphics in general
+:c:macro:`LV_USE_VECTOR_GRAPHIC` also needs to be enabled.
 
-As ThorVG is written in C++, when using ``LV_USE_THORVG_INTERNAL`` be sure that you
+As ThorVG is written in C++, when using :c:macro:`LV_USE_THORVG_INTERNAL` be sure that you
 can compile the cpp files.
 
 .. raw:: html
@@ -85,12 +85,11 @@ can compile the cpp files.
    <br>
 
 
-Lottie 控件使用到了 `ThorVG <https://github.com/thorvg/thorvg>`__ 库，该库已经 `集成内置到 LVGL库  <https://github.com/lvgl/lvgl/tree/master/src/libs/thorvg>`__ 中。
+Lottie 部件使用了 `ThorVG <https://github.com/thorvg/thorvg>`__库，该库已集成到LVGL中 `integrated into LVGL <https://github.com/lvgl/lvgl/tree/master/src/libs/thorvg>`__。
 
-为了使用 Lottie 动画，需要在 `lv_conf.h` 中启用 ``LV_USE_THORVG_INTERNAL`` （使用内置的 ThorVG 库）或者 ``LV_USE_THORVG_EXTERNAL`` （使用外部库或自定义的库）。对于矢量图形，通常还需要启用 ``LV_USE_VECTOR_GRAPHIC`` 。
+为了使用 Lottie 动画，需要在 ``lv_conf.h`` 中启用:c:macro:`LV_USE_THORVG_INTERNAL`（使用内置的 ThorVG）或:c:macro:`LV_USE_THORVG_EXTERNAL`（外部链接它）。对于一般的矢量图形，还需要启用 :c:macro:`LV_USE_VECTOR_GRAPHIC`。
 
-由于 ThorVG 用 C++ 编写，当使用 ``LV_USE_THORVG_INTERNAL`` 时，请确保你的编译环境能编译 cpp 文件。
-
+由于 ThorVG 是用 C++ 编写的，当使用:c:macro:`LV_USE_THORVG_INTERNAL`时，请确保你可以编译 cpp 文件。
 
 Set a buffer（设置缓冲区）
 --------------------------
@@ -150,7 +149,9 @@ array. E.g.:
 
 .. code:: shell
 
-   ./filetohex.py path/to/lottie.json > out.txt
+   ./filetohex.py path/to/lottie.json --filter-character --null-terminate > out.txt
+
+``--filter-character`` filters out non-ASCII characters and ``--null-terminate`` makes sure that a trailing zero is appended to properly close the string.
 
 To create an animation from data use
 :cpp:enumerator:`lv_lottie_set_src_data(lottie, data, sizeof(data))`
@@ -174,7 +175,9 @@ Note that the Lottie loader doesn't support LVGL's File System interface but a "
 
 .. code:: shell
 
-   python ./filetohex.py path/to/lottie.json > out.txt
+   ./filetohex.py path/to/lottie.json --filter-character --null-terminate > out.txt
+
+``--filter-character`` 用于过滤掉非 ASCII 字符， ``--null-terminate``用于确保添加一个尾随零以正确结束字符串。
 
 要从数据源创建 lottie 动画，使用 :cpp:expr:`lv_lottie_set_src_data(lottie, data, sizeof(data))` 
 
@@ -191,7 +194,11 @@ Get the animation（获取动画）
    <details>
      <summary>显示原文</summary>
 
-``lv_anim_t * a = lv_lottie_get_anim(lottie)`` return the LVGL animation which controls the
+.. code-block:: c
+
+    lv_anim_t * a = lv_lottie_get_anim(lottie)
+
+returns the LVGL animation which controls the
 Lottie animation. By default it is running infinitely at 60FPS however the LVGL animation
 can be freely adjusted.
 
@@ -201,8 +208,9 @@ can be freely adjusted.
    <br>
 
 
-``lv_anim_t * a = lv_lottie_get_anim(lottie)`` 返回控制 Lottie 动画的 LVGL 动画。默认情况下，它以60FPS的速度无限运行，但是 LVGL 的动画可以对其进行调整。
+lv_anim_t * a = lv_lottie_get_anim(lottie)
 
+返回用于控制 Lottie 动画的 LVGL 动画。默认情况下，它以 60FPS 无限运行，不过 LVGL 动画可以自由调整。
 
 .. _lv_lottie_events:
 
@@ -214,9 +222,13 @@ Events（事件）
    <details>
      <summary>显示原文</summary>
 
-No special events are sent by the Lottie widget.
+No events are emitted by Lottie Widgets.
 
-Learn more about :ref:`events`.
+.. admonition::  Further Reading
+
+    Learn more about :ref:`lv_obj_events` emitted by all Widgets.
+
+    Learn more about :ref:`events`.
 
 .. raw:: html
 
@@ -224,9 +236,11 @@ Learn more about :ref:`events`.
    <br>
 
 
-Lottie 控件没有发送特殊事件。
+Lottie 部件不会发出任何事件。
 
-了解更多关于 :ref:`events`。
+进一步了解所有部件发出的 :ref:`lv_obj_events`。
+
+进一步了解 :ref:`events`。
 
 .. _lv_lottie_keys:
 
@@ -238,7 +252,8 @@ Keys（按键）
    <details>
      <summary>显示原文</summary>
 
-No keys are processed by the Lottie widget
+No keys are processed by Lottie Widgets.
+
 Learn more about :ref:`indev_keys`.
 
 .. raw:: html
@@ -248,6 +263,7 @@ Learn more about :ref:`indev_keys`.
 
 
 Lottie 控件不处理任何键。
+
 了解更多关于 :ref:`indev_keys`。
 
 .. _lv_lottie_example:

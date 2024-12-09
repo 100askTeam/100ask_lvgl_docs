@@ -12,8 +12,8 @@ Overview（概述）
    <details>
      <summary>显示原文</summary>
 
-The Slider object looks like a `Bar </widgets/bar>`__ supplemented with
-a knob. The knob can be dragged to set a value. Just like Bar, Slider
+The Slider Widget looks like a :ref:`lv_bar` supplemented with
+a knob. The knob can be dragged to set the Slider's value. Like Bar, a Slider
 can be vertical or horizontal.
 
 .. raw:: html
@@ -22,8 +22,7 @@ can be vertical or horizontal.
    <br>
 
 
-滑动条对象看起来像是在 `进度条 </widgets/bar>`__  增加了一个可以调节的旋钮，使用时可以通过拖动旋钮来设置一个值。 就像进度条(bar)一样，Slider可以是垂直的或水平的(当设置进度条的宽度小于其高度，就可以创建出垂直摆放的滑动条)。
-
+滑块部件（Slider Widget）看起来就像是添加了一个旋钮的 :ref:`lv_bar`。可以拖动旋钮来设置滑块的值。和进度条（Bar）一样，滑块可以是垂直方向的，也可以是水平方向的。
 
 .. _lv_slider_parts_and_styles:
 
@@ -35,17 +34,16 @@ Parts and Styles（零件和样式）
    <details>
      <summary>显示原文</summary>
 
--  :cpp:enumerator:`LV_PART_MAIN` The background of the slider. Uses all the typical
-   background style properties. ``padding`` makes the indicator smaller
-   in the respective direction.
+-  :cpp:enumerator:`LV_PART_MAIN` The background of the Slider. Uses the
+   :ref:`typical background style properties <typical bg props>`. ``padding`` makes
+   the indicator smaller in the respective direction.
 -  :cpp:enumerator:`LV_PART_INDICATOR` The indicator that shows the current state of
-   the slider. Also uses all the typical background style properties.
--  :cpp:enumerator:`LV_PART_KNOB` A rectangle (or circle) drawn at the current value.
-   Also uses all the typical background properties to describe the
-   knob(s). By default, the knob is square (with an optional corner
-   radius) with side length equal to the smaller side of the slider. The
-   knob can be made larger with the ``padding`` values. Padding values
-   can be asymmetric too.
+   the Slider; also uses the :ref:`typical background style properties <typical bg props>`.
+-  :cpp:enumerator:`LV_PART_KNOB` A rectangle (or circle) drawn at the current value;
+   also uses the :ref:`typical background style properties <typical bg props>` to
+   describe the knob(s).  By default, the knob is round (radius-style can modify this)
+   with side length equal to the smaller dimension of the Slider.  The knob can be
+   made larger with the ``padding`` values.  Padding values can be asymmetric as well.
 
 .. raw:: html
 
@@ -53,9 +51,9 @@ Parts and Styles（零件和样式）
    <br>
 
 
--  :cpp:enumerator:`LV_PART_MAIN` 滑动条的背景。 使用所有典型的背景样式属性。 设置 ``padding`` 样式会使指标在相应方向上变小。
--  :cpp:enumerator:`LV_PART_INDICATOR` 显示滑动条当前状态的指示器。 也是使用所有典型的背景样式属性。
--  :cpp:enumerator:`LV_PART_KNOB` 旋钮(可以是原形或矩形)。 也是使用所有典型的背景属性。 默认情况下，旋钮是方形的（带有可选的圆角半径），边长等于滑动条的较小边。 可以通过设置 ``padding`` 样式调整旋钮的大小。 填充值也可以是不对称的。
+-  :cpp:enumerator:`LV_PART_MAIN` 滑块的背景。使用:ref:`typical background style properties <typical bg props>`典型的背景样式属性。 ``padding`` 属性会使指示器在相应方向上变小。
+-  :cpp:enumerator:`LV_PART_INDICATOR` 用于显示滑块当前状态的指示器，同样使用:ref:`typical background style properties <typical bg props>`典型的背景样式属性。
+-  :cpp:enumerator:`LV_PART_KNOB` 在当前值位置绘制的一个矩形（或圆形），也使用:ref:`typical background style properties <typical bg props>`典型的背景样式属性来描述旋钮。默认情况下，旋钮是圆形的（半径样式可对此进行修改），其边长等于滑块较小的那个尺寸。可以通过 ``padding`` 值使旋钮变大。内边距的值也可以是非对称的。
 
 
 .. _lv_slider_usage:
@@ -63,21 +61,38 @@ Parts and Styles（零件和样式）
 Usage（用法）
 ************
 
-Value and range（值和范围）
---------------------------
+Value, range and orientation(值、范围和方向）
+--------------------------------------------
 
 .. raw:: html
 
    <details>
      <summary>显示原文</summary>
 
-To set an initial value use :cpp:expr:`lv_slider_set_value(slider, new_value, LV_ANIM_ON/OFF)`. The
-animation time is set by the styles' ``anim_time`` property.
+Once a Slider is created, it has:
 
-To specify the range (min, max values), :cpp:expr:`lv_slider_set_range(slider, min , max)` can be used.
-The default range is 0..100, and the default drawing direction is from left to right in horizontal mode and
-bottom to top in vertical mode. If the minimum value is greater than the maximum value, like
-100..0, the drawing direction changes to the opposite direction.
+- value == 0
+- default range of [0..100],
+- horizontal orientation, with
+- default width of approximately 2 inches (according to configured value of :c:macro:`LV_DPI_DEF`),
+- default hight of approximately 1/10 inch (according to configured value of :c:macro:`LV_DPI_DEF`).
+
+To set a different value use:
+
+- :cpp:expr:`lv_slider_set_value(slider, new_value, LV_ANIM_ON/OFF)` (animation time
+  is set by the styles' ``anim_time`` property);
+- :cpp:expr:`lv_slider_set_range(slider, min , max)`; and
+- for orientation, width and height, simply set width and height style properties;
+- :cpp:expr:`lv_bar_set_orientation(slider, orientation)` to override orientation
+  caused by ``width`` and ``height``.  Valid values for ``orientation`` are:
+
+  - LV_BAR_ORIENTATION_AUTO,
+  - LV_BAR_ORIENTATION_HORIZONTAL,
+  - LV_BAR_ORIENTATION_VERTICAL.
+
+The default drawing direction is from left to right in horizontal orientation and
+bottom to top in vertical orientation.  If the minimum value is set to be greater
+than the maximum value (e.g. [100..0]), the drawing direction is reversed.
 
 .. raw:: html
 
@@ -85,10 +100,26 @@ bottom to top in vertical mode. If the minimum value is greater than the maximum
    <br>
 
 
-要设置滑动条的初始值，请使用 :cpp:expr:`lv_slider_set_value(slider, new_value, LV_ANIM_ON/OFF)`。 动画时间由样式的 ``anim_time`` 属性设置。
+一旦创建了一个滑块（Slider），它具有以下属性：
 
-要指定滑动条的范围（最小值、最大值），可以使用 :cpp:expr:`lv_slider_set_range(slider, min , max)` 。默认范围为 0..100，在水平模式下默认绘制方向为从左到右，并且垂直模式下从下到上。如果最小值大于最大值，如100..0时，绘制方向变为相反的方向。
+- 值（value）等于 0；
+- 默认范围是 [0..100]；
+- 水平方向，且
+- 默认宽度大约为 2 英寸（依据 LV_DPI_DEF（C 语言宏）配置的值而定），
+- 默认高度大约为 1/10 英寸（依据 LV_DPI_DEF（C 语言宏）配置的值而定）。
 
+若要设置不同的值，可使用以下方法：
+
+- :cpp:expr:`lv_slider_set_value(slider, new_value, LV_ANIM_ON/OFF)`（动画时间由样式的 ``anim_time`` 属性设置）；
+- :cpp:expr:`lv_slider_set_range(slider, min , max)`；以及
+对于方向、宽度和高度，只需设置宽度和高度样式属性即可；
+- :cpp:expr:`lv_bar_set_orientation(slider, orientation)`可覆盖由 ``width`` 和 ``height`` 所决定的方向。 ``orientation`` 的有效值如下：
+ 
+  - LV_BAR_ORIENTATION_AUTO,
+  - LV_BAR_ORIENTATION_HORIZONTAL,
+  - LV_BAR_ORIENTATION_VERTICAL.
+
+默认的绘制方向在水平方向上是从左到右，在垂直方向上是从下到上。如果最小值被设置得大于最大值（例如 [100..0]），那么绘制方向将会反转。
 
 Modes（模式）
 -----
