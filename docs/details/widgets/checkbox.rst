@@ -12,7 +12,7 @@ Overview（概述）
    <details>
      <summary>显示原文</summary>
 
-The Checkbox object is created from a "tick box" and a label. When the
+The Checkbox Widget is created from a "tick box" and a label. When the
 Checkbox is clicked the tick box is toggled.
 
 .. raw:: html
@@ -73,9 +73,9 @@ The text can be modified with the
 :cpp:expr:`lv_checkbox_set_text(cb, "New text")` function and will be
 dynamically allocated.
 
-To set a static text, use :cpp:expr:`lv_checkbox_set_static_text(cb, txt)`. This
-way, only a pointer to ``txt`` will be stored. The text then shouldn't
-be deallocated while the checkbox exists.
+To set static text, use :cpp:expr:`lv_checkbox_set_text_static(cb, txt)`. This
+way, only a pointer to ``txt`` will be stored.  The provided text buffer must remain
+available for the life of the Checkbox.
 
 .. raw:: html
 
@@ -85,8 +85,7 @@ be deallocated while the checkbox exists.
 
 文本可以使用 :cpp:expr:`lv_checkbox_set_text(cb, "New text")` 函数进行修改，并将被动态分配。
 
-要设置静态文本， 使用 :cpp:expr:`lv_checkbox_set_static_text(cb, txt)`。 这样，只会存储一个指向 ``txt`` 的指针。 当复选框存在时，不应取消分配文本。
-
+要设置静态文本，可使用 :cpp:expr:`lv_checkbox_set_text_static(cb, txt)`。通过这种方式，只会存储指向 ``txt`` 的指针。所提供的文本缓冲区在复选框（Checkbox）的整个生命周期内都必须保持可用状态。
 
 Check, uncheck, disable（选中，取消选中，禁用）
 ---------------------------------------------
@@ -135,11 +134,13 @@ Events（事件）
    <details>
      <summary>显示原文</summary>
 
--  :cpp:enumerator:`LV_EVENT_VALUE_CHANGED` Sent when the checkbox is toggled.
+-  :cpp:enumerator:`LV_EVENT_VALUE_CHANGED` Sent when Checkbox is toggled.
 
-See the events of the :ref:`Base object <lv_obj>` too.
+.. admonition::  Further Reading
 
-Learn more about :ref:`events`.
+    Learn more about :ref:`lv_obj_events` emitted by all Widgets.
+
+    Learn more about :ref:`events`.
 
 .. raw:: html
 
@@ -147,12 +148,13 @@ Learn more about :ref:`events`.
    <br>
 
 
--  :cpp:enumerator:`LV_EVENT_VALUE_CHANGED` 当复选框被切换时发送。
+-  :cpp:enumerator:`LV_EVENT_VALUE_CHANGED`：当复选框（Checkbox）被切换时发送该事件。
 
+.. admonition::  Further Reading
 
-另请参阅 :ref:`基本对象 <lv_obj>` 的事件。
+    进一步了解所有部件发出的:ref:`lv_obj_events`。
 
-详细了解更多 :ref:`events`。
+    进一步了解:ref:`events`。
 
 
 .. _lv_checkbox_keys:
@@ -165,15 +167,18 @@ Keys（按键）
    <details>
      <summary>显示原文</summary>
 
-The following *Keys* are processed by the 'Buttons': -
-``LV_KEY_RIGHT/UP`` Go to toggled state if toggling is enabled -
-``LV_KEY_LEFT/DOWN`` Go to non-toggled state if toggling is enabled -
-:cpp:enumerator:`LV_KEY_ENTER` Clicks the checkbox and toggles it
+The following *Keys* are processed by Checkbox:
+
+- ``LV_KEY_RIGHT/UP`` Go to CHECKED state if Checkbox is enabled
+- ``LV_KEY_LEFT/DOWN`` Go to non-CHECKED state if Checkbox is enabled
+- :cpp:enumerator:`LV_KEY_ENTER` Clicks the Checkbox and toggles its value.
 
 Note that, as usual, the state of :cpp:enumerator:`LV_KEY_ENTER` is translated to
 ``LV_EVENT_PRESSED/PRESSING/RELEASED`` etc.
 
-Learn more about :ref:`indev_keys`.
+.. admonition::  Further Reading
+
+    Learn more about :ref:`indev_keys`.
 
 .. raw:: html
 
@@ -181,15 +186,16 @@ Learn more about :ref:`indev_keys`.
    <br>
 
 
-以下按键由 *按钮* 处理：
+以下 “按键（Keys）” 可由复选框（Checkbox）进行处理：
 
-- ``LV_KEY_RIGHT/UP`` 如果启用切换，则转到切换状态
-- ``LV_KEY_LEFT/DOWN``如果启用切换，则转到非切换状态
-- :cpp:enumerator:`LV_KEY_ENTER` 单击复选框并切换它
+- ``LV_KEY_RIGHT/UP``：如果复选框处于启用状态，则切换至 “已选中（CHECKED）” 状态。
+- ``LV_KEY_LEFT/DOWN``：如果复选框处于启用状态，则切换至 “未选中” 状态。
+- :cpp:enumerator:`LV_KEY_ENTER`：点击复选框并切换其值。
 
-请注意，跟往常一样，:cpp:enumerator:`LV_KEY_ENTER` 的状态被转换为 ``LV_EVENT_PRESSED/PRESSING/RELEASED`` 等。
+需要注意的是，和往常一样，:cpp:enumerator:`LV_KEY_ENTER` 的状态会被转换为 ``LV_EVENT_PRESSED/PRESSING/RELEASED`` 等状态。
 
-了解有关 :ref:`indev_keys`的更多信息。
+.. admonition::  Further Reading
+    进一步了解:ref:`indev_keys`。
 
 
 .. _lv_checkbox_example:

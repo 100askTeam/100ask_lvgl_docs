@@ -12,7 +12,8 @@ Overview（概述）
    <details>
      <summary>显示原文</summary>
 
-The Spinner object is a spinning arc over a ring.
+The Spinner Widget is a spinning arc over a ring, typically used to show some type of
+activity is in progress.
 
 .. raw:: html
 
@@ -20,7 +21,7 @@ The Spinner object is a spinning arc over a ring.
    <br>
 
 
-Spinner（环形加载器）对象是在环上旋转的圆弧。
+微调器部件（Spinner Widget）是位于圆环上方的一个旋转弧线，通常用于指示某项活动正在进行中。
 
 
 .. _lv_spinner_parts_and_styles:
@@ -33,7 +34,8 @@ Parts and Styles（部分和样式）
    <details>
      <summary>显示原文</summary>
 
-The parts are identical to the parts of :ref:`lv_arc`.
+Spinner's parts are identical to those of :ref:`Arc <lv_arc_parts_and_styles>`.
+
 
 .. raw:: html
 
@@ -41,7 +43,8 @@ The parts are identical to the parts of :ref:`lv_arc`.
    <br>
 
 
-这些部分与 :ref:`lv_arc` 的部分相同。
+微调器（Spinner）的部件与:ref:`Arc <lv_arc_parts_and_styles>`的部件相同。
+
 
 
 .. _lv_spinner_usage:
@@ -60,8 +63,8 @@ Create a spinner（创建环形加载器）
 To create a spinner use
 :cpp:expr:`lv_spinner_create(parent)`.
 
-Using :cpp:expr:`lv_spinner_set_anim_params(spinner, spin_duration, angle)` the duration
-of one revolution and the length of he arc can be customized.
+Use :cpp:expr:`lv_spinner_set_anim_params(spinner, spin_duration, angle)` to
+customize the duration of one revolution and the length of the arc.
 
 .. raw:: html
 
@@ -71,8 +74,7 @@ of one revolution and the length of he arc can be customized.
 
 若要创建环形加载器，请使用 :cpp:expr:`lv_spinner_create(parent)`。
 
-使用 :cpp:expr:`lv_spinner_set_anim_params(spinner, spin_duration, angle)` 设置环形加载器的动画时间和弧长角度。
-
+使用 :cpp:expr:`lv_spinner_set_anim_params(spinner, spin_duration, angle)`来自定义旋转一周的时长以及弧线的长度。
 
 .. _lv_spinner_events:
 
@@ -84,11 +86,15 @@ Events（事件）
    <details>
      <summary>显示原文</summary>
 
-No special events are sent to the Spinner.
+No special events are sent by Spinner Widgets.
 
-See the events of the `Arc </widgets/arc>`__ too.
+.. admonition::  Further Reading
 
-Learn more about :ref:`events`.
+    :ref:`Arc Events <lv_arc_events>`
+
+    Learn more about :ref:`lv_obj_events` emitted by all Widgets.
+
+    Learn more about :ref:`events`.
 
 .. raw:: html
 
@@ -96,11 +102,13 @@ Learn more about :ref:`events`.
    <br>
 
 
-LVGL库本身不会向环形加载器发送任何特殊事件。
+微调器部件（Spinner Widgets）不会发送特殊事件。
 
-另请参阅 `圆弧 </widgets/arc>`__ 的事件。
-
-详细了解更多 :ref:`events`。
+    :ref:`Arc Events <lv_arc_events>`
+    
+    进一步了解所有部件发出的 :ref:`lv_obj_events`（对象事件）。
+    
+    深入学习有关 :ref:`events`的更多内容。
 
 
 .. _lv_spinner_keys:
@@ -113,7 +121,7 @@ Keys（按键）
    <details>
      <summary>显示原文</summary>
 
-No *Keys* are processed by the object type.
+No *Keys* are processed by Spinner Widgets.
 
 Learn more about :ref:`indev_keys`.
 
