@@ -12,8 +12,8 @@ Overview
    <details>
      <summary>显示原文</summary>
 
-The List is basically a rectangle with vertical layout to which Buttons
-and Texts can be added
+The List Widget is basically a rectangle with vertical layout to which Buttons
+and Text can be added.
 
 .. raw:: html
 
@@ -21,7 +21,7 @@ and Texts can be added
    <br>
 
 
-List（列表） 基本上是一个垂直布局的矩形，按钮指向该矩形并且可以添加文本。
+列表部件基本上是一个采用垂直布局的矩形，可向其中添加按钮和文本。
 
 
 .. _lv_list_parts_and_styles:
@@ -36,10 +36,13 @@ Parts and Styles（部分和样式）
    <details>
      <summary>显示原文</summary>
 
-- :cpp:enumerator:`LV_PART_MAIN` The main part of the list that uses all the typical background properties
-- :cpp:enumerator:`LV_PART_SCROLLBAR` The scrollbar. See the :ref:`Base objects <lv_obj>` documentation for details.
+- :cpp:enumerator:`LV_PART_MAIN` The main part of the List that uses all the typical background properties
+- :cpp:enumerator:`LV_PART_SCROLLBAR` The scrollbar. See :ref:`base_widget`
+  documentation for details.
 
-**Buttons and Texts** See the :ref:`Button <lv_button>`\ 's and :ref:`Label <lv_label>`\ 's documentation.
+**Buttons and Texts** 
+
+- See the :ref:`Button <lv_button>`'s and :ref:`Label <lv_label>`'s documentation.
 
 .. raw:: html
 
@@ -47,10 +50,10 @@ Parts and Styles（部分和样式）
    <br>
 
 
-- :cpp:enumerator:`LV_PART_MAIN` 使用所有典型背景属性的列表的主要部分
-- :cpp:enumerator:`LV_PART_SCROLLBAR` 滚动条。有关详细信息，请参阅 :ref:`基本对象 <lv_obj>` 文档。
+- :cpp:enumerator:`LV_PART_MAIN` 列表的主体部分，会用到所有常见的背景属性。
+- :cpp:enumerator:`LV_PART_SCROLLBAR` 滚动条。详情请参阅 :ref:`base_widget` 文档。
 
-**按钮和文本** 请参阅 :ref:`按钮 <lv_button>`\ 和 :ref:`标签 <lv_label>`\ 的文档。
+**按钮和文本** 请参阅 :ref:`Button <lv_button>` 和 :ref:`Label <lv_label>` 的文档。
 
 
 .. _lv_list_usage:
@@ -67,11 +70,10 @@ Buttons（按钮）
      <summary>显示原文</summary>
 
 :cpp:expr:`lv_list_add_button(list, icon, text)` adds a full-width button with an icon
+(that can be an image or symbol) and text.  This function returns a pointer to the
+button created, which you can use to, for example, add an event call-back.
 
-- that can be an image or symbol
-- and a text.
-
-The text starts to scroll horizontally if it's too long.
+The text is scrolled horizontally if it is longer than the button.
 
 .. raw:: html
 
@@ -79,12 +81,9 @@ The text starts to scroll horizontally if it's too long.
    <br>
 
 
-:cpp:expr:`lv_list_add_button(list, icon, text)` 添加一个带有图标和文本的全宽按钮
+:cpp:expr:`lv_list_add_button(list, icon, text)`会添加一个带有图标（图标可以是图像或符号）和文本的全宽按钮。该函数会返回一个指向所创建按钮的指针，你可以利用这个指针（例如）添加一个事件回调函数。
 
-- 可以是图像或符号
-- 和文本。
-
-如果文本太长，文本将会水平滚动。
+如果文本长度超过按钮宽度，文本将会水平滚动。
 
 
 Texts（文本）
@@ -95,7 +94,9 @@ Texts（文本）
    <details>
      <summary>显示原文</summary>
 
-:cpp:expr:`lv_list_add_text(list, text)` adds a text.
+:cpp:expr:`lv_list_add_text(list, text)` adds a text string.  This function returns a
+pointer to the label created, which you can use to, for example, change its text
+with one of the ``lv_label_set_text...()`` functions.
 
 .. raw:: html
 
@@ -103,7 +104,7 @@ Texts（文本）
    <br>
 
 
-:cpp:expr:`lv_list_add_text(list, text)` 添加文本。
+:cpp:expr:`lv_list_add_text(list, text)`用于添加一个文本字符串。该函数会返回一个指向所创建标签的指针，你可以利用这个指针（例如）通过某个 ``lv_label_set_text...()``函数来更改其文本内容。
 
 
 .. _lv_list_events:
@@ -116,9 +117,13 @@ Events（事件）
    <details>
      <summary>显示原文</summary>
 
-No special events are sent by the List, but sent by the Button as usual.
+No special events are sent by List Widgets, but events can be sent by Buttons as usual.
 
-Learn more about :ref:`events`.
+.. admonition::  Further Reading
+
+    Learn more about :ref:`lv_obj_events` emitted by all Widgets.
+
+    Learn more about :ref:`events`.
 
 .. raw:: html
 
@@ -126,9 +131,11 @@ Learn more about :ref:`events`.
    <br>
 
 
-列表不会发送任何特殊事件，但会像往常一样由按钮发送。
+列表部件不会发送特殊事件，但按钮通常可以发送事件。
 
-详细了解更多 :ref:`events`。
+进一步了解所有部件发出的 :ref:`lv_obj_events`。
+
+进一步了解 :ref:`events`。
 
 
 .. _lv_list_keys:
@@ -141,7 +148,7 @@ Keys（按键）
    <details>
      <summary>显示原文</summary>
 
-No *Keys* are processed by the object type.
+No *Keys* are processed by List Widgets.
 
 Learn more about :ref:`indev_keys`.
 
@@ -151,7 +158,7 @@ Learn more about :ref:`indev_keys`.
    <br>
 
 
-对象类型不处理任何 *按键*。
+列表部件不处理任何 *按键*。
 
 了解有关 :ref:`indev_keys` 的更多信息。
 

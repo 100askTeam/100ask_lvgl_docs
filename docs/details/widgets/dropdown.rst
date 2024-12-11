@@ -19,9 +19,9 @@ predefined text. When activated (by click on the drop-down list), a list
 is created from which the user may select one option. When the user
 selects a new value, the list is deleted again.
 
-The Drop-down list is added to the default group (if it is set). Besides
-the Drop-down list is an editable object to allow selecting an option
-with encoder navigation too.
+The Drop-down list is added to the default group (if one is set).
+The Drop-down list is an editable Widget allowing list-item selection via
+encoder or keyboard navigation as well.
 
 .. raw:: html
 
@@ -33,8 +33,8 @@ with encoder navigation too.
 
 下拉列表的选项表默认是关闭的，其中的选项可以是单个值或预定义文本。 当单击下拉列表后，其将创建一个列表，用户可以从中选择一个选项。 当用户选择了一个值后，该列表将被删除，下次点击会再重新生成。
 
-下拉列表已经添加到默认组。此外，下拉列表是一个可编辑的对象，允许通过编码器导航选项。
-
+下拉列表被添加到默认组（如果已设置默认组的话）。
+下拉列表是一个可编辑的部件，它也允许通过编码器或键盘导航来进行列表项的选择。
 
 .. _lv_dropdown_parts_and_styles:
 
@@ -58,7 +58,7 @@ The Dropdown widget is built from the elements: "button" and "list"
 下拉组件由以下元素组成：“按钮”和“列表”（都与按钮和列表控件无关，也就是并不是按钮和列表控件）
 
 
-Button（列表）
+Button（按钮）
 -------------
 
 .. raw:: html
@@ -66,10 +66,10 @@ Button（列表）
    <details>
      <summary>显示原文</summary>
 
--  :cpp:enumerator:`LV_PART_MAIN` The background of the button. Uses the typical
-   background properties and text properties for the text on it.
--  :cpp:enumerator:`LV_PART_INDICATOR` Typically an arrow symbol that can be an image
-   or a text (:cpp:enumerator:`LV_SYMBOL`).
+-  :cpp:enumerator:`LV_PART_MAIN` Background of button, uses the typical
+   background- and text-properties for its text.
+-  :cpp:enumerator:`LV_PART_INDICATOR` Typically an arrow symbol that can be an Image
+   or text (e.g. :cpp:enumerator:`LV_SYMBOL`).
 
 The button goes to :cpp:enumerator:`LV_STATE_CHECKED` when it's opened.
 
@@ -79,8 +79,8 @@ The button goes to :cpp:enumerator:`LV_STATE_CHECKED` when it's opened.
    <br>
 
 
--  :cpp:enumerator:`LV_PART_MAIN` 按钮的背景。 对其上面的文本使用典型的背景属性和文本属性。
--  :cpp:enumerator:`LV_PART_INDICATOR` 通常是一个箭头符号，可以是图像或文本(:cpp:enumerator:`LV_SYMBOL`)。
+-  :cpp:enumerator:`LV_PART_MAIN`：按钮的背景部分，其文本会使用典型的背景属性和文本属性。
+-  :cpp:enumerator:`LV_PART_INDICATOR`：通常是一个箭头符号，可以是图片或文本形式（例如 :cpp:enumerator:`LV_SYMBOL`）
 
 按钮在打开时，会设置为 :cpp:enumerator:`LV_STATE_CHECKED` 状态。
 
@@ -142,7 +142,7 @@ Usage（用法）
 Options（选项）
 ***************
 
-Set options（设置选项）
+List items（列表选项）
 ----------------------
 
 .. raw:: html
@@ -150,14 +150,14 @@ Set options（设置选项）
    <details>
      <summary>显示原文</summary>
 
-Options are passed to the drop-down list as a string with
-:cpp:expr:`lv_dropdown_set_options(dropdown, options)`. Options should be
-separated by ``\n``. For example: ``"First\nSecond\nThird"``. This
-string will be saved in the drop-down list, so it can in a local
-variable.
+The list items are passed to the Drop-Down List as a newline-separated list in a string
+as the ``options`` argument to :cpp:expr:`lv_dropdown_set_options(dropdown, options)`.
+Each list item should be separated by ``\n``.  Example: ``"First\nSecond\nThird"``.
+This string is copied by the Drop-Down List, so its contents do not need to remain
+available beyond this call.
 
 The :cpp:expr:`lv_dropdown_add_option(dropdown, "New option", pos)` function
-inserts a new option to ``pos`` index.
+inserts a new option at index ``pos``.
 
 To save memory the options can set from a static(constant) string too
 with :cpp:expr:`lv_dropdown_set_static_options(dropdown, options)`. In this case
@@ -174,9 +174,9 @@ an option.
    <br>
 
 
-可以通过这个函数 :cpp:expr:`lv_dropdown_set_options(dropdown, options)` 设置列表中的选项。 选项之间需要使用 ``\n`` 分隔开来，例如： ``"First\nSecond\nThird"`` ，该字符串将保存在下拉列表开辟的空间中，因此在设置到列表之前它可以保存在局部变量中。
+列表项作为一个以换行符分隔的字符串列表，通过 :cpp:expr:`lv_dropdown_set_options(dropdown, options)` 函数的 ``options`` 参数传递给下拉列表。每个列表项应该用 ``\n`` 分隔。例如： ``"First\nSecond\nThird"``。这个字符串会被下拉列表复制，所以在此调用之后，其内容无需保持可用状态。
 
-:cpp:expr:`lv_dropdown_add_option(dropdown, "New option", pos)` 函数向 ``pos`` 索引插入一个新选项。
+:cpp:expr:`lv_dropdown_add_option(dropdown, "New option", pos)` 函数可在索引 ``pos``处插入一个新的选项。
 
 为了节省内存，选项也可以使用函数 :cpp:expr:`lv_dropdown_set_static_options(dropdown, options)` 从静态（常量）字符串中设置。 在这种情况下，当下拉列表存在时，选项字符串应该处于活动状态，并且不能使用 :cpp:func:`lv_dropdown_add_option` 插入新的选项。
 
@@ -280,16 +280,16 @@ the selected option is displayed on the button.
 主要部分(LV_PART_MAIN)可以显示所选选项或静态文本。 如果使用函数 :cpp:expr:`lv_dropdown_set_text(dropdown, "Some text")` 设置内容，那么无论选择哪个选项，它都会只会显示你所设置的内容。 如果文本为 ``NULL``，则所当前选选项将显示在按钮上。
 
 
-Manually open/close（手动打开或关闭）
-----------------------------------
+Programmatically open/close（编程打开或关闭）
+---------------------------------------------
 
 .. raw:: html
 
    <details>
      <summary>显示原文</summary>
 
-To manually open or close the drop-down list the
-``lv_dropdown_open/close(dropdown)`` function can be used.
+To programmatically open or close the Drop-Down List use
+:cpp:expr:`lv_dropdown_open(dropdown)` or :cpp:expr:`lv_dropdown_close(dropdown)`.
 
 .. raw:: html
 
@@ -297,8 +297,7 @@ To manually open or close the drop-down list the
    <br>
 
 
-要手动打开或关闭下拉列表，可以使用 ``lv_dropdown_open/close(dropdown)`` 函数。
-
+要通过编程方式打开或关闭下拉列表，可以使用 :cpp:expr:`lv_dropdown_open(dropdown)`或 :cpp:expr:`lv_dropdown_close(dropdown)`。
 
 .. _lv_dropdown_events:
 
@@ -349,12 +348,14 @@ Keys（按键）
    <details>
      <summary>显示原文</summary>
 
--  ``LV_KEY_RIGHT/DOWN`` Select the next option.
--  ``LV_KEY_LEFT/UP`` Select the previous option.
--  :cpp:enumerator:`LV_KEY_ENTER` Apply the selected option (Sends
-   :cpp:enumerator:`LV_EVENT_VALUE_CHANGED` event and closes the drop-down list).
+-  ``LV_KEY_RIGHT/DOWN`` Select next list item.
+-  ``LV_KEY_LEFT/UP`` Select previous list item.
+-  :cpp:enumerator:`LV_KEY_ENTER` Apply selected list item (sends
+   :cpp:enumerator:`LV_EVENT_VALUE_CHANGED` event and closes Drop-Down List).
 
-Learn more about :ref:`indev_keys`.
+.. admonition::  Further Reading
+
+    Learn more about :ref:`indev_keys`.
 
 .. raw:: html
 
@@ -362,11 +363,13 @@ Learn more about :ref:`indev_keys`.
    <br>
 
 
--  ``LV_KEY_RIGHT/DOWN`` 选择下一个选项。
--  ``LV_KEY_LEFT/UP`` 选择上一个选项。
--  :cpp:enumerator:`LV_KEY_ENTER` 应用选择的选项（发送 :cpp:enumerator:`LV_EVENT_VALUE_CHANGED` 事件并关闭下拉列表）。
+-  ``LV_KEY_RIGHT/DOWN``：选择下一个列表项。
+-  ``LV_KEY_LEFT/UP``：选择上一个列表项。
+-  :cpp:enumerator:`LV_KEY_ENTER`：应用所选的列表项（会发送  :cpp:enumerator:`LV_EVENT_VALUE_CHANGED` 事件并关闭下拉列表）。
 
-了解有关 :ref:`indev_keys` 的更多信息。
+.. admonition::  Further Reading
+
+    进一步了解:ref:`indev_keys`。
 
 
 .. _lv_dropdown_example:

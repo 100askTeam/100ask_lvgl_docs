@@ -12,7 +12,7 @@ Overview（概述）
    <details>
      <summary>显示原文</summary>
 
-The Line object is capable of drawing straight lines between a set of
+The Line Widget is capable of drawing straight lines between a set of
 points.
 
 .. raw:: html
@@ -59,14 +59,14 @@ Set points（设置点）
      <summary>显示原文</summary>
 
 The points have to be stored in an :cpp:struct:`lv_point_precise_t` array and passed to
-the object by the :cpp:expr:`lv_line_set_points(lines, point_array, point_cnt)`
+the Widget by the :cpp:expr:`lv_line_set_points(lines, point_array, point_cnt)`
 function.
 
 Their coordinates can either be specified as raw pixel coordinates
-(e.g. ``{5, 10}``), or as a percentage of the line's bounding box using
-:cpp:expr:`lv_pct(x)`. In the latter case, the line's width/height may need to
-be set explicitly using ``lv_obj_set_width/height``, as percentage
-values do not automatically expand the bounding box.
+(e.g. ``{5, 10}``), or as a percentage of the Line's bounding box using
+:cpp:expr:`lv_pct(x)`. In the latter case, the Line's width/height may need to
+be set explicitly using :cpp:func:`lv_obj_set_width` and :cpp:func:`lv_obj_set_height`,
+as percentage values do not automatically expand the bounding box.
 
 .. raw:: html
 
@@ -76,7 +76,7 @@ values do not automatically expand the bounding box.
 
 点必须存储在 :cpp:struct:`lv_point_precise_t` 类型的数组中，并通过 :cpp:expr:`lv_line_set_points(lines, point_array, point_cnt)` 函数将数组传递给line对象。
 
-它们的坐标可以指定为原始像素坐标 （例如 ``{5, 10}``），或使用 :cpp:expr:`lv_pct(x)` 设置线条边界的区域百分比（相对于父对象）。在后一种情况下，线的宽度/高度（可现实的最大区域）需要显式使用函数 ``lv_obj_set_width/height``设置， 作为百分比值不会自适应调整边界。
+它们的坐标既可以指定为原始像素坐标（例如 ``{5, 10}``），也可以使用 :cpp:expr:`lv_pct(x)`指定为相对于线条边界框的百分比。在后一种情况下，可能需要使用 :cpp:func:`lv_obj_set_width`和 :cpp:func:`lv_obj_set_height`显式地设置线条的宽度 / 高度，因为百分比值不会自动扩展边界框。
 
 Auto-size（自动调整大小）
 ------------------------
@@ -133,12 +133,13 @@ Events（事件）
    <details>
      <summary>显示原文</summary>
 
-Only the `Generic events <../overview/event.html#generic-events>`__ are
-sent by the object type.
+Only :ref:`generic events <events>` are sent by Line Widgets.
 
-See the events of the :ref:`Base object <lv_obj>` too.
+.. admonition::  Further Reading
 
-Learn more about :ref:`events`.
+    Learn more about :ref:`lv_obj_events` emitted by all Widgets.
+
+    Learn more about :ref:`events`.
 
 .. raw:: html
 
@@ -146,11 +147,11 @@ Learn more about :ref:`events`.
    <br>
 
 
-线条对象仅发送 `通用事件 <../overview/event.html#generic-events>`__ 。
+线性部件仅发送 :ref:`generic events <events>`。
 
-另请参阅 :ref:`基本对象 <lv_obj>` 的事件。
+进一步了解所有部件发出的 :ref:`lv_obj_events`。
 
-详细了解更多 :ref:`events`。
+进一步了解 :ref:`events`。
 
 
 .. _lv_line_keys:
@@ -163,7 +164,7 @@ Keys（按键）
    <details>
      <summary>显示原文</summary>
 
-No *Keys* are processed by the object type.
+No *Keys* are processed by Line Widgets.
 
 Learn more about :ref:`indev_keys`.
 
@@ -173,7 +174,7 @@ Learn more about :ref:`indev_keys`.
    <br>
 
 
-线条对象不响应处理 *按键*(以及触摸)。
+线性部件不处理任何*按键*。
 
 了解有关 :ref:`indev_keys` 的更多信息。
 

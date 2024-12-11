@@ -75,9 +75,11 @@ is 0..100.
 
 The indicator arc is drawn on the main part's arc. This if the value is
 set to maximum the indicator arc will cover the entire "background" arc.
-To set the start and end angle of the background arc use the
-:cpp:expr:`lv_arc_set_bg_angles(arc, start_angle, end_angle)` functions or
-``lv_arc_set_bg_start/end_angle(arc, angle)``.
+To set the start and end angle of the background arc use any of these functions:
+
+- :cpp:expr:`lv_arc_set_bg_start_angle(arc, angle)`
+- :cpp:expr:`lv_arc_set_bg_end_angle(arc, angle)`
+- :cpp:expr:`lv_arc_set_bg_angles(arc, start_angle, end_angle)`
 
 Zero degrees is at the middle right (3 o'clock) of the object and the
 degrees are increasing in clockwise direction. The angles should be in
@@ -91,7 +93,11 @@ the [0;360] range.
 
 可以使用 :cpp:expr:`lv_arc_set_value(arc, new_value)` 设置新值。设置的值在一个范围（最小值和最大值）内解读，这个范围可以使用 :cpp:expr:`lv_arc_set_range(arc, min, max)` 修改。默认范围为 0...100。
 
-指示弧绘制在主要部分的弧上。如果将该值设置为最大值，则指示弧将覆盖整个“背景”弧。要设置背景弧的起始角度和终止角度，请使用 :cpp:expr:`lv_arc_set_bg_angles(arc, start_angle, end_angle)` 函数或 ``lv_arc_set_bg_start/end_angle(arc, angle)`` 函数。
+指示弧绘制在主体部分的弧线上。也就是说，如果将值设置为最大值，指示弧将会覆盖整个 “背景” 弧线。要设置背景弧的起始角和终止角，可以使用以下任意函数：
+
+- :cpp:expr:`lv_arc_set_bg_start_angle(arc, angle)`
+- :cpp:expr:`lv_arc_set_bg_end_angle(arc, angle)`
+- :cpp:expr:`lv_arc_set_bg_angles(arc, start_angle, end_angle)`
 
 零度位于对象的右侧（3 点钟方向），度数按顺时针方向递增。角度应在[0;360] 范围内。
 
@@ -126,14 +132,14 @@ Mode（模式）
 
 The arc can be one of the following modes:
 
-- :cpp:enumerator:`LV_ARC_MODE_NORMAL` The indicator arc is drawn from the minimum value to the current.
-- :cpp:enumerator:`LV_ARC_MODE_REVERSE` The indicator arc is drawn counter-clockwise
-  from the maximum value to the current.
-- :cpp:enumerator:`LV_ARC_MODE_SYMMETRICAL` The indicator arc is drawn from the middle point to the current value.
+- :cpp:enumerator:`LV_ARC_MODE_NORMAL` Indicator arc is drawn clockwise from minimum to current value.
+- :cpp:enumerator:`LV_ARC_MODE_REVERSE` Indicator arc is drawn counter-clockwise
+  from maximum to current value.
+- :cpp:enumerator:`LV_ARC_MODE_SYMMETRICAL` Indicator arc is drawn from middle point to current value.
 
 The mode can be set by :cpp:expr:`lv_arc_set_mode(arc, LV_ARC_MODE_...)` and
-used only if the angle is set by :cpp:func:`lv_arc_set_value` or the arc is
-adjusted by finger.
+has no effect until angle is set by :cpp:func:`lv_arc_set_value` or value of the arc
+is changed by pointer input (finger, mouse, etc.).
 
 .. raw:: html
 
@@ -143,13 +149,13 @@ adjusted by finger.
 
 弧线可以是以下模式之一：
 
-- :cpp:enumerator:`LV_ARC_MODE_NORMAL` 普通模式。指示弧从最小值绘制到当前值。
+- :cpp:enumerator:`LV_ARC_MODE_NORMAL` 普通模式。指示弧从最小值开始按顺时针方向绘制到当前值。
 
-- :cpp:enumerator:`LV_ARC_MODE_REVERSE` 反向模式。指示弧从最大值到当前值逆时针绘制。
+- :cpp:enumerator:`LV_ARC_MODE_REVERSE` 反向模式。指示弧从最大值开始按逆时针方向绘制到当前值。
 
 - :cpp:enumerator:`LV_ARC_MODE_SYMMETRICAL` 对称模式。指示弧从中间点绘制到当前值。
 
-模式可通过 :cpp:expr:`lv_arc_set_mode(arc, LV_ARC_MODE_...)` 设置，并且只有在角度由 :cpp:func:`lv_arc_set_value` 设置或弧度用手指调整时才会使用。
+可以通过 :cpp:expr:lv_arc_set_mode(arc, LV_ARC_MODE_...) 来设置模式，并且在通过 :cpp:func:lv_arc_set_value 设置角度或者通过指针输入（手指、鼠标等）改变弧线的值之前，设置模式是不起作用的。
 
 
 Change rate（变化率）
@@ -160,9 +166,9 @@ Change rate（变化率）
    <details>
      <summary>显示原文</summary>
 
-If the arc is pressed the current value will set with a limited speed
-according to the set *change rate*. The change rate is defined in
-degree/second unit and can be set with
+When the arc's value is changed by pointer input (finger, mouse, etc.), the rate of
+its change is limited according to its *change rate*.  Change rate is defined in
+degrees/second units and can be set with
 :cpp:expr:`lv_arc_set_change_rage(arc, rate)`
 
 .. raw:: html
@@ -171,7 +177,7 @@ degree/second unit and can be set with
    <br>
 
 
-如果按下弧形键，当前值将以一定的速度反映在前景弧的变化上，这个变化的过程称为 *变化率*。变化率以度/秒为单位，可以用 :cpp:expr:`lv_arc_set_change_rage(arc, rate)` 设置。（简单的理解就是arc的前景弧到达某个值所需要的时间，时间单位是 度/秒）
+当通过指针输入（手指、鼠标等）改变弧线的值时，其变化速率会根据它的 “变化率” 受到限制。变化率是以度 / 秒为单位来定义的，并且可以通过以下方式进行设置: :cpp:expr:`lv_arc_set_change_rage(arc, rate)` 设置。（简单的理解就是arc的前景弧到达某个值所需要的时间，时间单位是 度/秒）
 
 Knob offset（旋钮偏移）
 ----------------------
@@ -182,9 +188,9 @@ Knob offset（旋钮偏移）
      <summary>显示原文</summary>
 
 Changing the knob offset allows the location of the knob to be moved
-relative to the end of the arc The knob offset can be set by
-:cpp:expr:`lv_arc_set_knob_offset(arc, offset_angle)`, will only be visible if
-:cpp:enumerator:`LV_PART_KNOB` is visible
+relative to the end of the arc.  The knob offset can be set by
+:cpp:expr:`lv_arc_set_knob_offset(arc, offset_angle)`, and will only be visible if
+:cpp:enumerator:`LV_PART_KNOB` is visible.
 
 .. raw:: html
 
@@ -192,28 +198,31 @@ relative to the end of the arc The knob offset can be set by
    <br>
 
 
-改变旋钮偏移量可以使旋钮的位置相对于圆弧末端移动。旋钮偏移可以通过 :cpp:expr:`lv_arc_set_knob_offset(arc, offset_angle)` 设置，只有当 :cpp:enumerator:`LV_PART_KNOB` 生效时，旋钮才会可见。
+改变旋钮偏移量可以使旋钮的位置相对于弧线末端进行移动。旋钮偏移量可以通过 :cpp:expr:lv_arc_set_knob_offset(arc, offset_angle) 来设置，并且只有在 :cpp:enumerator:LV_PART_KNOB（旋钮部件）可见的情况下才会显示出来。
 
 
-Setting the indicator manually（手动设置指示器部分）
------------------------------------------------
+Setting indicator programmatically（以编程方式设置指示器）
+---------------------------------------------------------
 
 .. raw:: html
 
    <details>
      <summary>显示原文</summary>
 
-It's also possible to set the angles of the indicator arc directly with
-:cpp:expr:`lv_arc_set_angles(arc, start_angle, end_angle)` function or
-``lv_arc_set_start/end_angle(arc, start_angle)``. In this case the set
-"value" and "mode" are ignored.
+It is possible to set indicator angle directly with any of these functions:
 
-In other words, the angle and value settings are independent. You should
-exclusively use one or the other. Mixing the two might result in
-unintended behavior.
+- :cpp:expr:`lv_arc_set_start_angle(arc, start_angle)`
+- :cpp:expr:`lv_arc_set_end_angle(arc, end_angle)`
+- :cpp:expr:`lv_arc_set_angles(arc, start_angle, end_angle)`
 
-To make the arc non-adjustable, remove the style of the knob and make
-the object non-clickable:
+When used, "value" and "mode" are ignored.
+
+In other words, the angle and value settings are independent.  You should
+exclusively use one or the other of the two methods.  Mixing the two could
+result in unintended behavior.
+
+To make the arc non-adjustable by external input, remove the style of the knob and
+make the Widget non-clickable:
 
 .. raw:: html
 
@@ -221,11 +230,17 @@ the object non-clickable:
    <br>
 
 
-也可以使用 :cpp:expr:`lv_arc_set_angles(arc, start_angle, end_angle)` 函数或 ``lv_arc_set_start/end_angle(arc, start_angle)`` 直接设置指示弧部分的角度(零度位于对象的中间右侧（3 点钟方向），并且度数沿顺时针方向增加。)。 在这种情况下，设置的 “值” 和 “模式” 将被忽略。
+可以使用以下任意函数直接设置指示器角度：
 
-换言之，角度和值的设置是相互独立的。你应该只使用其中之一。将两者混合可能会导致意外行为。
+- :cpp:expr:`lv_arc_set_start_angle(arc, start_angle)` 设置弧的起始角度
+- :cpp:expr:`lv_arc_set_end_angle(arc, end_angle)` 设置弧的终止角度
+- :cpp:expr:`lv_arc_set_angles(arc, start_angle, end_angle)` 同时设置弧的起始角度和终止角度
 
-要使弧度不可调，请移除旋钮的样式并使对象不可点击：
+使用这些函数时，“值” 和 “模式” 会被忽略。
+
+换句话说，角度设置和值设置是相互独立的。你应该只选用这两种方法中的一种。将两者混用可能会导致意想不到的行为。
+
+要使弧不能通过外部输入进行调整，可以移除旋钮的样式并使该部件不可点击：
 
 
 .. code:: c
@@ -233,7 +248,7 @@ the object non-clickable:
    lv_obj_remove_style(arc, NULL, LV_PART_KNOB);
    lv_obj_remove_flag(arc, LV_OBJ_FLAG_CLICKABLE);
 
-Advanced hit test（高级触摸测试）
+Interactive area（交互区域）
 --------------------------------
 
 .. raw:: html
@@ -241,10 +256,17 @@ Advanced hit test（高级触摸测试）
    <details>
      <summary>显示原文</summary>
 
-If the :cpp:enumerator:`LV_OBJ_FLAG_ADV_HITTEST` flag is enabled the arc can be
-clicked through in the middle. Clicks are recognized only on the ring of
-the background arc. :cpp:func:`lv_obj_set_ext_click_size` makes the sensitive
-area larger inside and outside with the given number of pixels.
+By default :cpp:enumerator:`LV_OBJ_FLAG_ADV_HITTEST` is disabled which
+means the arc's whole area is interactive.
+As usual :cpp:func:`lv_obj_set_ext_click_area` can be used to increase
+the area that will respond to pointer input (touch, mouse, etc.) outside the arc by a
+specified number of pixels.
+
+If :cpp:enumerator:`LV_OBJ_FLAG_ADV_HITTEST` is enabled the arc will be sensitive only
+in the range between start and end background angles and on the arc itself (not inside the arc).
+In this case ``ext_click_area`` makes the sensitive area ticker both inward and outward.
+Additionally, a tolerance of :cpp:expr:`lv_dpx(50)` pixels is applied to each angle, extending the
+hit-test range along the arc's length.
 
 .. raw:: html
 
@@ -252,18 +274,24 @@ area larger inside and outside with the given number of pixels.
    <br>
 
 
-如果启用了 :cpp:enumerator:`LV_OBJ_FLAG_ADV_HITTEST` 标志，则可以在圆弧中间点击。只有在背景圆弧的环形区域上识别点击操作。 :cpp:func:`lv_obj_set_ext_click_size` 函数会根据给定的像素数增大内部和外部的敏感区域。
+默认情况下，:cpp:enumerator:`LV_OBJ_FLAG_ADV_HITTEST`（高级命中测试对象标志）是禁用的，这意味着弧线的整个区域都是可交互的。
+
+通常，可以使用 :cpp:func:`lv_obj_set_ext_click_area`（设置扩展点击区域函数）来将弧线外部能响应指针输入（触摸、鼠标等）的区域增加指定的像素数。
+
+如果启用了 :cpp:enumerator:`LV_OBJ_FLAG_ADV_HITTEST`，那么弧线将仅在起始和终止背景角度之间的范围以及弧线本身（而不是弧线内部）上具有交互敏感性。在这种情况下，``ext_click_area``（扩展点击区域）会使敏感区域向内和向外扩展。
+
+此外，会对每个角度应用 :cpp:expr:`lv_dpx(50)` 像素的公差，从而沿着弧线的长度扩展命中测试范围。
 
 
-Place another object to the knob（将另一个对象放在旋钮上）
---------------------------------------------------------
+Place another Widget on the knob（将另一个部件放置在旋钮上）
+-----------------------------------------------------------
 
 .. raw:: html
 
    <details>
      <summary>显示原文</summary>
 
-Another object can be positioned according to the current position of
+Another Widget can be positioned according to the current position of
 the arc in order to follow the arc's current value (angle). To do this
 use :cpp:expr:`lv_arc_align_obj_to_angle(arc, obj_to_align, radius_offset)`.
 
@@ -271,7 +299,7 @@ Similarly
 :cpp:expr:`lv_arc_rotate_obj_to_angle(arc, obj_to_rotate, radius_offset)` can be
 used to rotate the object to the current value of the arc.
 
-It's a typical use case to call these functions in the ``VALUE_CHANGED``
+A typical use case is to call these functions in the ``VALUE_CHANGED``
 event of the arc.
 
 .. raw:: html
@@ -280,11 +308,11 @@ event of the arc.
    <br>
 
 
-可以根据圆弧的当前位置来放置另一个对象，以便使其跟随圆弧的当前值（角度）。为此，执行此操作请使用 :cpp:expr:`lv_arc_align_obj_to_angle(arc, obj_to_align, radius_offset)`。
+可以根据圆弧的当前位置来放置另一个部件，以便使其跟随圆弧的当前值（角度）。为此，执行此操作请使用 :cpp:expr:`lv_arc_align_obj_to_angle(arc, obj_to_align, radius_offset)`。
 
 类似地，:cpp:expr:`lv_arc_rotate_obj_to_angle(arc, obj_to_rotate, radius_offset)` 可以是用于将对象根据旋钮的角度旋转之后再对齐到arc的旋钮的位置上。
 
-在圆弧的 ``VALUE_CHANGED`` 事件中调用这些函数是一个典型的用例。
+一个典型的用例是在弧线的 ``VALUE_CHANGED``（值已改变）事件中调用这些函数。
 
 
 .. _lv_arc_events:
@@ -322,9 +350,11 @@ Events（事件）
       -  ``draw_area``: the area of the knob
       -  ``rect_dsc``:
 
-See the events of the :ref:`Base object <lv_obj>` too.
+.. admonition::  Further Reading
 
-Learn more about :ref:`events`.
+    Learn more about :ref:`lv_obj_events` emitted by all Widgets.
+
+    Learn more about :ref:`events`.
 
 .. raw:: html
 
@@ -380,6 +410,8 @@ Learn more about :ref:`indev_keys`.
 
 -  ``LV_KEY_RIGHT/UP`` 将值增加 1。
 -  ``LV_KEY_LEFT/DOWN`` 将该值减小 1。
+
+了解更多关于所有部件发出的 :ref:`lv_obj_events`（对象事件）的内容。
 
 了解有关 :ref:`indev_按键`的更多信息。
 

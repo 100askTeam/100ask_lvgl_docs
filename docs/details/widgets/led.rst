@@ -12,7 +12,7 @@ Overview（概述）
    <details>
      <summary>显示原文</summary>
 
-The LEDs are rectangle-like (or circle) object whose brightness can be
+The LEDs are rectangle-like (or circle) Widgets whose brightness can be
 adjusted. With lower brightness the colors of the LED become darker.
 
 .. raw:: html
@@ -21,7 +21,7 @@ adjusted. With lower brightness the colors of the LED become darker.
    <br>
 
 
-LED（指示灯）是矩形（或圆形）对象。它的亮度可以调节。亮度降低时，LED的颜色会变暗。
+LED（指示灯）是矩形（或圆形）部件。它的亮度可以调节。亮度降低时，LED的颜色会变暗。
 
 
 .. _lv_led_parts_and_styles:
@@ -102,6 +102,10 @@ Use :cpp:expr:`lv_led_on(led)` and :cpp:expr:`lv_led_off(led)` to set the bright
 a predefined ON or OFF value. The :cpp:expr:`lv_led_toggle(led)` toggles between
 the ON and OFF state.
 
+You can set custom LED ON and OFF brightness values by defining macros
+``LV_LED_BRIGHT_MAX`` and ``LV_LED_BRIGHT_MIN`` in your project.  Their default
+values are 80 and 255. These too must be in the range [0..255].
+
 .. raw:: html
 
    </details> 
@@ -109,7 +113,7 @@ the ON and OFF state.
 
 使用函数 :cpp:expr:`lv_led_on(led)` 和 :cpp:expr:`lv_led_off(led)` 将亮度设置为预定义的ON或OFF值。函数:cpp:expr:`lv_led_toggle(led)` 就像开关，会让led在ON和OFF状态之间切换。
 
-
+你可以通过在项目中定义宏 ``LV_LED_BRIGHT_MAX`` 和 ``LV_LED_BRIGHT_MIN`` 来设置自定义的 LED 亮起和熄灭时的亮度值。它们的默认值分别为 80 和 255。这两个值也必须处于 [0..255] 这个取值范围内。
 .. _lv_led_events:
 
 Events（事件）
@@ -120,17 +124,22 @@ Events（事件）
    <details>
      <summary>显示原文</summary>
 
-See the events of the :ref:`Base object <lv_obj>` too.
+No special events are sent by LED Widgets.
 
-Learn more about :ref:`events`.
+.. admonition::  Further Reading
+
+    Learn more about :ref:`lv_obj_events` emitted by all Widgets.
+
+    Learn more about :ref:`events`.
 
 .. raw:: html
 
    </details> 
    <br>
 
+LED 部件不会发送特殊事件。
 
-另请参阅 :ref:`基础对象 <lv_obj>` 的事件。
+另请参阅 :ref:`lv_obj_events` 的事件。
 
 了解有关 :ref:`events` 的更多内容。
 
@@ -145,7 +154,7 @@ Keys（按键）
    <details>
      <summary>显示原文</summary>
 
-No *Keys* are processed by the object type.
+No *Keys* are processed by LED Widgets.
 
 Learn more about :ref:`indev_keys`.
 
@@ -155,7 +164,7 @@ Learn more about :ref:`indev_keys`.
    <br>
 
 
-对象类型不处理任何 *按键* 。
+LED 部件不处理任何 *按键* 。
 
 了解有关 :ref:`indev_keys` 的更多内容。
 

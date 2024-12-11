@@ -12,12 +12,12 @@ Overview（概述）
    <details>
      <summary>显示原文</summary>
 
-The Image button is very similar to the simple 'Button' object. The only
-difference is that it displays user-defined images in each state instead
-of drawing a rectangle.
+The Image Button is very similar to the simple 'Button' Widget. The only
+difference is that it displays user-defined images for each state instead
+of drawing a rectangle.  The list of states is covered below.
 
 You can set a left, right and center image, and the center image will be
-repeated to match the width of the object.
+repeated to match the width of the Widget.
 
 .. raw:: html
 
@@ -25,9 +25,9 @@ repeated to match the width of the object.
    <br>
 
 
-图像按钮与简单的 “Button” 对象非常相似。唯一的区别是，它在每个状态下显示用户定义的图像，而不是绘制矩形。
+图像按钮与简单的 “按钮” 部件非常相似。唯一的区别在于，它会针对每个状态显示用户定义的图像，而不是绘制一个矩形。以下涵盖了各状态的相关内容。
 
-可以设置左、右和中心图像，中心图像将重复以匹配对象的宽度。
+可以设置左、右和中心图像，中心图像将重复以匹配部件的宽度。
 
 
 .. _lv_imagebutton_parts_and_styles:
@@ -42,7 +42,7 @@ Parts and Styles（部分和样式）
 
 -  :cpp:enumerator:`LV_PART_MAIN` Refers to the image(s). If background style
    properties are used, a rectangle will be drawn behind the image
-   button.
+   Button.
 
 .. raw:: html
 
@@ -69,8 +69,9 @@ Image sources（图片来源）
 To set the image in a state, use the
 :cpp:expr:`lv_imagebutton_set_src(imagebutton, LV_IMAGEBUTTON_STATE_..., src_left, src_center, src_right)`.
 
-The image sources work the same as described in the `Image object </widgets/image>`__
+The image sources work the same as described in the :ref:`Image Widget <lv_image>`
 except that "Symbols" are not supported by the Image button. Any of the sources can ``NULL``.
+Typically the middle image should be one of the set image sources.
 
 If only ``src_center`` is specified, the width of the widget will be set automatically to the
 width of the image. However, if all three sources are set, the width needs to be set by the user
@@ -85,9 +86,10 @@ The possible states are:
 - :cpp:enumerator:`LV_IMAGEBUTTON_STATE_CHECKED_PRESSED`
 - :cpp:enumerator:`LV_IMAGEBUTTON_STATE_CHECKED_DISABLED`
 
-If you set sources only in :cpp:enumerator:`LV_IMAGEBUTTON_STATE_RELEASED`, these sources
-will be used in other states too. If you set e.g. :cpp:enumerator:`LV_IMAGEBUTTON_STATE_PRESSED`
-they will be used in pressed state instead of the released images.
+The image sources set for state :cpp:enumerator:`LV_IMAGEBUTTON_STATE_RELEASED` are
+used for any state that has not had image sources set for it.  If an image sources
+have been set for other states, e.g. :cpp:enumerator:`LV_IMAGEBUTTON_STATE_PRESSED`,
+they will be used instead when the Image Button is in that state.
 
 .. raw:: html
 
@@ -97,7 +99,7 @@ they will be used in pressed state instead of the released images.
 
 要将图像设置为某个状态，请使用 :cpp:expr:`lv_imagebutton_set_src(imagebutton, LV_IMAGEBUTTON_STATE_..., src_left, src_center, src_right)` 。
 
-图像源的工作原理与 `图片对象 </widgets/image>`__ 中所述的相同，但是 "图像" 按钮不支持 "Symbols（符号）" 。任何源都可以为 ``NULL`` 。
+图像源的工作方式与 :ref:`Image Widget <lv_image>`中所描述的相同，不过图像按钮不支持 “符号”。任何图像源都可以设置为 ``NULL``。通常来说，中间图像应该是已设置的图像源之一。
 
 如果只指定了 ``src_center`` ，则控件的宽度将自动设置为图像的宽度。但是，如果设置了所有三个源，则宽度需要由用户设置（例如使用 :cpp:expr:`lv_obj_set_width` ），并且中心图像将被平铺以填充给定的大小。
 
@@ -110,10 +112,10 @@ they will be used in pressed state instead of the released images.
 - :cpp:enumerator:`LV_IMAGEBUTTON_STATE_CHECKED_PRESSED`
 - :cpp:enumerator:`LV_IMAGEBUTTON_STATE_CHECKED_DISABLED`
 
-如果只给状态 :cpp:enumerator:`LV_IMAGEBUTTON_STATE_RELEASED` 设置源，这些源也将在其他状态使用。如果设置了例如 :cpp:enumerator:`LV_IMAGEBUTTON_STATE_PRESSED` ，它们将在按下状态下使用图像源，而不是在 :cpp:enumerator:`LV_IMAGEBUTTON_STATE_RELEASED` 中使用。
+为 :cpp:enumerator:`LV_IMAGEBUTTON_STATE_RELEASED`状态设置的图像源，可用于任何尚未为其设置图像源的其他状态。如果已经为其他状态（例如 :cpp:enumerator:`LV_IMAGEBUTTON_STATE_PRESSED`）设置了图像源，那么当图像按钮处于相应状态时，就会改用为该状态所设置的图像源。
 
-States（状态）
--------------
+Setting State Programmatically（以编程方式设置状态）
+----------------------------------------------------
 
 .. raw:: html
 
@@ -122,8 +124,8 @@ States（状态）
 
 
 Instead of the regular :cpp:func:`lv_obj_add_state` and :cpp:func:`lv_obj_remove_state` functions,
-the :cpp:expr:`lv_imagebutton_set_state(imagebutton, LV_IMAGEBUTTON_STATE_...)` function should be
-used to manually set a state.
+use :cpp:expr:`lv_imagebutton_set_state(imagebutton, LV_IMAGEBUTTON_STATE_...)` to
+set the state of Image Buttons.
 
 .. raw:: html
 
@@ -131,8 +133,7 @@ used to manually set a state.
    <br>
 
 
-应使用 :cpp:expr:`lv_imagebutton_set_state(imagebutton, LV_IMAGEBUTTON_STATE_...)` 函数来手动设置状态，而不是常规的 :cpp:func:`lv_obj_add_state` 和 :cpp:func:`lv_obj_remove_state` 函数。
-
+不要使用常规的 :cpp:func:`lv_obj_add_state` 和 :cpp:func:`lv_obj_remove_state` 函数，而是使用 :cpp:expr:`lv_imagebutton_set_state(imagebutton, LV_IMAGEBUTTON_STATE_...)`来设置图像按钮的状态。
 
 .. _lv_imagebutton_events:
 
@@ -145,9 +146,14 @@ Events（事件）
      <summary>显示原文</summary>
 
 
--  :cpp:enumerator:`LV_EVENT_VALUE_CHANGED` Sent when the button is toggled.
+-  :cpp:enumerator:`LV_EVENT_VALUE_CHANGED` Sent when Image Button's CHECKED state is toggled.
+   This requires the Image Button's :cpp:enumerator:`LV_OBJ_FLAG_CHECKABLE` flag to be set.
 
-Learn more about :ref:`events`.
+.. admonition::  Further Reading
+
+    Learn more about :ref:`lv_obj_events` emitted by all Widgets.
+
+    Learn more about :ref:`events`.
 
 .. raw:: html
 
@@ -155,10 +161,12 @@ Learn more about :ref:`events`.
    <br>
 
 
--  :cpp:enumerator:`LV_EVENT_VALUE_CHANGED` 切换按钮时发送该事件。
-
+-  :cpp:enumerator:`LV_EVENT_VALUE_CHANGED`：当图像按钮的 “已选中（CHECKED）” 状态被切换时会发送该事件。这需要将图像按钮的 :cpp:enumerator:`LV_OBJ_FLAG_CHECKABLE`标志设置好才行。
 详细了解更多阅读 :ref:`events`。
 
+了解更多关于所有部件都会发出的 :ref:`lv_obj_events` 的相关内容。
+
+了解更多关于 :ref:`events` 的相关内容。
 
 .. _lv_imagebutton_keys:
 
@@ -171,11 +179,11 @@ Keys（按键）
      <summary>显示原文</summary>
 
 
--  ``LV_KEY_RIGHT/UP`` Go to toggled state if :cpp:enumerator:`LV_OBJ_FLAG_CHECKABLE`
+-  ``LV_KEY_RIGHT/UP`` Go to CHECKED state if :cpp:enumerator:`LV_OBJ_FLAG_CHECKABLE`
    is enabled.
--  ``LV_KEY_LEFT/DOWN`` Go to non-toggled state if
+-  ``LV_KEY_LEFT/DOWN`` Go to un-CHECKED state if
    :cpp:enumerator:`LV_OBJ_FLAG_CHECKABLE` is enabled.
--  :cpp:enumerator:`LV_KEY_ENTER` Clicks the button
+-  :cpp:enumerator:`LV_KEY_ENTER` Clicks the Image Button
 
 Learn more about :ref:`indev_keys`.
 
@@ -185,9 +193,9 @@ Learn more about :ref:`indev_keys`.
    <br>
 
 
--  ``LV_KEY_RIGHT/UP`` 如果 :cpp:enumerator:`LV_OBJ_FLAG_CHECKABLE` 已启用，则转到切换状态。
--  ``LV_KEY_LEFT/DOWN`` 如果 :cpp:enumerator:`LV_OBJ_FLAG_CHECKABLE` 已启用，则转到非切换状态。
--  :cpp:enumerator:`LV_KEY_ENTER` 点击按钮
+-  ``LV_KEY_RIGHT/UP`` 如果 :cpp:enumerator:`LV_OBJ_FLAG_CHECKABLE` 已启用，则切换至 “已选中（CHECKED）” 状态。
+-  ``LV_KEY_LEFT/DOWN`` 如果 :cpp:enumerator:`LV_OBJ_FLAG_CHECKABLE` 已启用，则切换至 “未选中（un-CHECKED）” 状态。
+-  :cpp:enumerator:`LV_KEY_ENTER` 点击图像按钮
 
 
 .. _lv_imagebutton_example:
