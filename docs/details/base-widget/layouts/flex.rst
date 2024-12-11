@@ -102,7 +102,7 @@ Use the following functions to set and control the Flex layout on any parent Wid
 
 .. 注意::
 
-    父Widget必须是 Flex容器，这些样式才能生效。
+    父 Widget 必须是 Flex 容器，这些样式才能生效。
     下面的函数会导致父 Widget 成为 Flex 容器（如果它还不是）。
 
 
@@ -151,8 +151,6 @@ by combining flex-direction_ and flex-wrap_ as defined under flex-flow_.
 
 这些值导致 Widget 的布局行为模拟 `CSS Flexbox`_ 行为
 通过结合 flex-direction_ 和 flex-wrap_ （如 flex-flow_ 下定义）。
-
-（注：flex-flow是flex-direction 与 flex-wrap的结合）
 
 
 .. _flex_align:
@@ -264,7 +262,7 @@ Flex grow（弹性增长）可用于让一个或多个孩子填满轨道上的�
 
 ``A`` 和 ``B`` 的大小为 100 px，而 ``C`` 的大小为 200 px。
 
-可以使用 :cpp:expr:`lv_obj_set_flex_grow(child, value)` 在子节点上设置 Flex 增长值。 ``value`` 需要 > 1 或 0 才能禁用在孩子身上生长。
+可以使用 :cpp:expr:`lv_obj_set_flex_grow(child, value)` 在子节点上设置 Flex 增长值。 ``value`` 需要 >= 1 或 0 才能禁用在孩子身上生长。
 
 有关此行为的说明，请参阅 flex-grow_ 。
 
@@ -278,8 +276,8 @@ Style Interface（样式接口）
    <details>
      <summary>显示原文</summary>
 
-All the Flex-related values are style properties under the hood and you
-can use them similarly to any other style property.
+All Flex-related values are style properties under the hood so you
+can use them as you would any other style property.
 
 The following flex related style properties exist:
 
@@ -380,7 +378,6 @@ New track（新轨道）
 
 You can force Flex to put an item into a new line with
 :cpp:expr:`lv_obj_add_flag(child, LV_OBJ_FLAG_FLEX_IN_NEW_TRACK)`.
-
 
 
 
