@@ -12,16 +12,14 @@ Overview（概述）
    <details>
      <summary>显示原文</summary>
 
-Tables, as usual, are built from rows, columns, and cells containing
-texts.
+Tables are built from rows, columns, and cells containing text.
 
-The Table object is very lightweight because only the texts are stored.
-No real objects are created for cells but they are just drawn on the
-fly.
+The Table Widget is very lightweight because only the text strings are stored.
+No real Widgets are created for cells --- they are just drawn on the fly.
 
-The Table is added to the default group (if it is set). Besides the
-Table is an editable object to allow selecting a cell with encoder
-navigation too.
+The Table is added to the default group (if one is set).
+Table is an editable Widget, allow selecting a cell with encoder and keyboard
+navigation as well.
 
 .. raw:: html
 
@@ -29,12 +27,11 @@ navigation too.
    <br>
 
 
-Table（表格）是由包含文本的行、列和单元格构建的。
+表格是由包含文本的行、列以及单元格构建而成的。
 
-表格对象非常轻量级，因为仅存储文本。没有为各个单元格创建真实的对象，因为它们只是即时绘制出来的。
+表格部件（Table Widget）非常轻巧，因为它只存储文本字符串。并不会为单元格创建真正的部件，它们只是即时绘制出来的。
 
-表格对象默认已经在默认组中（如果已设置）。可以在导航模式下选中整张表，之后进入编辑模式可以在各个单元格之间进行移动选择。
-
+表格会被添加到默认组（如果设置了默认组的话）。表格是一个可编辑的部件，允许使用编码器以及键盘导航来选择单元格。
 
 .. _lv_table_parts_and_styles:
 
@@ -46,10 +43,11 @@ Parts and Styles（部分和样式）
    <details>
      <summary>显示原文</summary>
 
--  :cpp:enumerator:`LV_PART_MAIN` The background of the table uses all the typical
-   background style properties.
--  :cpp:enumerator:`LV_PART_ITEMS` The cells of the table also use all the typical
-   background style properties and the text properties.
+-  :cpp:enumerator:`LV_PART_MAIN` The background of the Table; uses the :ref:`typical
+   background style properties <typical bg props>`.
+-  :cpp:enumerator:`LV_PART_ITEMS` The cells of the Table also use the
+   :ref:`typical background style properties <typical bg props>` as well as text
+   style properties.
 
 .. raw:: html
 
@@ -57,9 +55,9 @@ Parts and Styles（部分和样式）
    <br>
 
 
--  :cpp:enumerator:`LV_PART_MAIN` 表格的背景使用了所有典型的背景样式属性。
--  :cpp:enumerator:`LV_PART_ITEMS` 表格的单元格也使用所有典型的背景样式属性和文本属性。
-
+-  :cpp:enumerator:`LV_PART_MAIN`：表格的背景部分；使用:ref:`typical
+   background style properties <typical bg props>`（典型的背景样式属性，可参考对应引用内容）。
+-  :cpp:enumerator:`LV_PART_ITEMS`：表格的单元格部分，同样使用 :ref:`typical background style properties <typical bg props>`（典型的背景样式属性）以及文本样式属性。
 
 .. _lv_table_usage:
 
@@ -78,7 +76,7 @@ The cells can store only text so numbers need to be converted to text
 before displaying them in a table.
 
 :cpp:expr:`lv_table_set_cell_value(table, row, col, "Content")`. The text is
-saved by the table so it can be even a local variable.
+saved by the Table so the buffer containing the string can be a local variable.
 
 Line breaks can be used in the text like ``"Value\n60.3"``.
 
@@ -92,7 +90,7 @@ New rows and columns are automatically added is required
 
 单元格只能存储文本，因此在将数字显示在表格中之前，需要将其转换为文本。
 
-:cpp:expr:`lv_table_set_cell_value(table, row, col, "Content")`。 传入的文本由表独立保存，因此它甚至可以是局部变量。这个接口会自动添加新的行和列。
+:cpp:expr:`lv_table_set_cell_value(table, row, col, "Content")`。 文本会由表格进行保存，所以包含该字符串的缓冲区可以是一个局部变量。
 
 可以在文本中使用换行符，例如 ``"Value\n60.3"``。
 
@@ -125,9 +123,9 @@ Width and Height（宽度和高度）
 
 The width of the columns can be set with
 :cpp:expr:`lv_table_set_column_width(table, col_id, width)`. The overall width of
-the Table object will be set to the sum of columns widths.
+the Table Widget will be set to the sum of columns widths.
 
-The height is calculated automatically from the cell styles (font,
+Height is calculated automatically from the cell styles (font,
 padding etc) and the number of rows.
 
 .. raw:: html
@@ -136,9 +134,9 @@ padding etc) and the number of rows.
    <br>
 
 
-列的宽度可以通过 :cpp:expr:`lv_table_set_column_width(table, col_id, width)` 设置。 Table 对象的总宽度将设置为列宽的总和。
+列的宽度可以通过 :cpp:expr:`lv_table_set_column_width(table, col_id, width)` 设置。 Table 部件的总宽度将设置为列宽的总和。
 
-表格对象会根据单元的格样式（字体、填充等）和行数自动计算高度。
+高度会根据单元格样式（字体、内边距等）以及行数自动进行计算。
 
 
 Merge cells（合并单元格）
@@ -162,8 +160,8 @@ To merge more adjacent cells call this function for each cell.
 单元格可以使用 :cpp:expr:`lv_table_add_cell_ctrl(table, row, col, LV_TABLE_CELL_CTRL_MERGE_RIGHT)` 进行水平合并。 要合并更多相邻单元格，请为每个单元格调用此函数。
 
 
-Scroll（滚动）
---------------
+Scrolling（滚动）
+-----------------
 
 .. raw:: html
 
@@ -202,9 +200,11 @@ Events（事件）
 -  :cpp:enumerator:`LV_EVENT_VALUE_CHANGED` Sent when a new cell is selected with
    keys.
 
-See the events of the :ref:`Base object <lv_obj>` too.
+.. admonition::  Further Reading
 
-Learn more about :ref:`events`.
+    Learn more about :ref:`lv_obj_events` emitted by all Widgets.
+
+    Learn more about :ref:`events`.
 
 .. raw:: html
 
@@ -214,9 +214,9 @@ Learn more about :ref:`events`.
 
 -  :cpp:enumerator:`LV_EVENT_VALUE_CHANGED` 用选择（通过触摸或按键点击）单元格时发送的事件。
 
-参见 :ref:`Base object <lv_obj>` 的事件。
+了解更多关于所有部件都会发出的:ref:`lv_obj_events`（可参考对应引用内容）的相关信息。
 
-详细了解更多 :ref:`events`。
+了解更多关于:ref:`events`（可参考对应引用内容）的相关信息。
 
 
 .. _lv_table_keys:
@@ -229,8 +229,9 @@ Keys（按键）
    <details>
      <summary>显示原文</summary>
 
-The following *Keys* are processed by the Tables: -
-``LV_KEY_RIGHT/LEFT/UP/DOWN/`` Select a cell.
+The following *Keys* are processed by Table Widgets:
+
+- ``LV_KEY_RIGHT/LEFT/UP/DOWN/`` Select a cell.
 
 Note that, as usual, the state of :cpp:enumerator:`LV_KEY_ENTER` is translated to
 ``LV_EVENT_PRESSED/PRESSING/RELEASED`` etc.
@@ -247,7 +248,7 @@ Learn more about :ref:`indev_keys`.
    <br>
 
 
-以下 *按键* 由表处理：
+以下 *按键* 可由表格部件进行处理：
 
 - ``LV_KEY_RIGHT/LEFT/UP/DOWN/`` 选中一个单元格。
 
