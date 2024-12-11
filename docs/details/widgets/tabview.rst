@@ -15,10 +15,10 @@ Overview（概述）
 The Tab view object can be used to organize content in tabs. The Tab
 view is built from other widgets:
 
-- Main container: :ref:`lv_obj`
-- Tab buttons: an :ref:`lv_obj` with :ref:`lv_obj` 
-- Container for the tabs: :ref:`lv_obj`
-- Content of the tabs: :ref:`lv_obj`
+- Main container: :ref:`base_widget`
+- Tab buttons: an :ref:`base_widget` with :ref:`lv_button`
+- Container for the tabs: :ref:`base_widget`
+- Content of the tabs: :ref:`base_widget`
 
 The tab buttons can be positioned on the top, bottom, left and right
 side of the Tab view.
@@ -34,9 +34,10 @@ sliding horizontally on the content.
 
 Tabview（选项卡）对象可用于组织选项卡中的内容。选项卡对象是由其他控件组件而成的：
 
-- 主容器： :ref:`lv_obj`
-- 选项卡栏及其按钮： :ref:`lv_obj` 、 :ref:`lv_btn` 、 :ref:`lv_label` 
-- 选项卡标签： :ref:`lv_obj`
+- 主容器：:ref:`base_widget`。
+- 选项卡按钮：一个带有:ref:`lv_button`的:ref:`base_widget`。
+- 选项卡的容器：:ref:`base_widget`。
+- 选项卡的内容：:ref:`base_widget`。
 
 选项卡栏可以位于选项卡控件的顶部、底部、左侧和右侧。
 
@@ -53,8 +54,8 @@ Parts and Styles（部分和样式）
    <details>
      <summary>显示原文</summary>
 
-There are no special parts on the Tab view but the ``lv_obj`` and
-``lv_button`` widgets are used to create the Tab view.
+There are no special parts on the Tab view but the :ref:`base_widget` and
+:ref:`lv_button` widgets are used to create the Tab view.
 
 .. raw:: html
 
@@ -62,7 +63,7 @@ There are no special parts on the Tab view but the ``lv_obj`` and
    <br>
 
 
-选项卡上没有特殊部分，但 ``lv_obj`` 和 ``lv_button`` 控件用于创建选项卡。
+选项卡上没有特殊部分，但 :ref:`base_widget` 和 :ref:`lv_button` 控件用于创建选项卡。
 
 
 .. _lv_tabview_usage:
@@ -98,7 +99,7 @@ Add tabs（添加选项卡标签）
      <summary>显示原文</summary>
 
 New tabs can be added with :cpp:expr:`lv_tabview_add_tab(tabview, "Tab name")`.
-This will return a pointer to an :ref:`lv_obj` object where
+This will return a pointer to a :ref:`base_widget` where
 the tab's content can be created.
 
 .. raw:: html
@@ -107,7 +108,7 @@ the tab's content can be created.
    <br>
 
 
-可以使用函数 :cpp:expr:`lv_tabview_add_tab(tabview, "Tab name")` 添加一个新的选项卡标签。 这将返回一个指向 :ref:`lv_obj` 对象的指针，在该对象中可以创建选项卡标签的内容。
+可以使用函数 :cpp:expr:`lv_tabview_add_tab(tabview, "Tab name")` 添加一个新的选项卡标签。 这将返回一个指向:ref:`base_widget`的指针，可在该部件上创建选项卡的内容。
 
 
 Rename tabs（重命名选项卡标签）
@@ -234,7 +235,11 @@ Events（事件）
    or clicking the tab button. :cpp:expr:`lv_tabview_get_tab_active(tabview)`
    returns the zero based index of the current tab.
 
-Learn more about :ref:`events`.
+.. admonition::  Further Reading
+
+    Learn more about :ref:`lv_obj_events` emitted by all Widgets.
+
+    Learn more about :ref:`events`.
 
 .. raw:: html
 
@@ -244,7 +249,9 @@ Learn more about :ref:`events`.
 
 -  :cpp:enumerator:`LV_EVENT_VALUE_CHANGED` 通过滑动选项卡标签或单击选项栏按钮切换到新选项卡时发送。 :cpp:expr:`lv_tabview_get_tab_active(tabview)` 返回当前所在选项卡标签的索引（从零开始）。
 
-详细阅读了解更多 :ref:`events` 。
+了解更多关于所有部件发出的:ref:`lv_obj_events`（可参考对应引用内容）的相关内容。
+
+了解更多关于:ref:`events`的相关内容。
 
 
 .. _lv_tabview_keys:
