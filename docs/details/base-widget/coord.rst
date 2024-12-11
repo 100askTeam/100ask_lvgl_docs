@@ -32,16 +32,16 @@ In short this means:
    <br>
 
 
-与LVGL的许多其他部分类似，设置坐标的概念受到了CSS的启发。LVGL绝不是对CSS的完整实现，而是实现了一个类似的子集（有的地方进行了微小调整）。
+类似于 LVGL 的许多其他部分，设置坐标的概念受到 CSS 的启发。LVGL 并没有完整实现 CSS，但实现了一个相似的子集（有时做了些微调）。
 
 简而言之，这意味着：
 
-- 显式设置的坐标存储在样式中（尺寸、位置、布局等）
+- 显式设置的坐标存储在样式中（位置、大小、布局等）
 - 支持最小宽度、最大宽度、最小高度、最大高度
-- 有像素、百分比和“内容（content）”单位
-- x=0；y=0坐标表示父对象的 左上角 + 左或上内边距 + 边框的宽度
-- 宽/高（width/height）表示完整的尺寸，“内容区域”在加上内边距和边框宽度后会变小
-- 支持flexbox和grid布局的部分功能（子集）
+- 支持像素、百分比和“内容”单位
+- x=0；y=0 坐标表示父级的左上角加上左/上边距加上边框宽度
+- 宽度/高度表示完整的大小，“内容区域”较小，包含了边距和边框宽度
+- 支持子集的 flexbox 和 grid 布局
 
 
 .. _coord_unites:
@@ -69,13 +69,12 @@ Units（单位）
    <br>
 
 
-- 像素（pixel）：简单地说就是一个以像素为单位的位置。整数总是指像素。
-   例如 :cpp:expr:`lv_obj_set_x(btn, 10)` （设置按钮的横（x）坐标为10个像素）
-- 百分比（percentage）：是对象自身或其父对象大小的百分比（取决于具体的属性）。 :cpp:expr:`lv_pct(value)` 将一个值转换为百分比。
-   例如 :cpp:expr:`lv_obj_set_width(btn, lv_pct(50))` （将按钮的宽度设置为父级宽度的50%）
-- :c:macro:`LV_SIZE_CONTENT`：一个特殊的值，用于讲对象的宽度/高度设置为包含所有子对象所需要的大小。类似于CSS中的 ``auto``。
-   例如 :cpp:expr:`lv_obj_set_width(btn, LV_SIZE_CONTENT)`（将按钮的宽度设置为能容纳其所有子对象的大小）
-
+- pixel: 像素位置。整数始终表示像素。
+   例如：:cpp:expr:`lv_obj_set_x(btn, 10)`
+- percentage: 控件或其父控件大小的百分比
+   （取决于属性）。:cpp:expr:`lv_pct(value)` 将一个值转换为百分比。 例如：:cpp:expr:`lv_obj_set_width(btn, lv_pct(50))`
+- :c:macro:`LV_SIZE_CONTENT`: 设置控件宽度/高度为包含所有子控件的特殊值。类似于CSS中的 ``auto``。
+   例如：:cpp:expr:`lv_obj_set_width(btn, LV_SIZE_CONTENT)`。
 
 .. _boxing_model:
 
@@ -252,38 +251,34 @@ For example:
    <br>
 
 
-根据 :ref:`coord_using_styles` 章节的内容，
-坐标也可以通过样式属性进行设置。更准确地说，实际上每个与样式坐标相关的属性都会以样式属性的方式存储在内部（RAM）。
-如果你使用 :cpp:expr:`lv_obj_set_x(obj, 20)`，LVGL会将 ``x=20`` 存储在对象的局部样式中（RAM）。
+正如在 :ref:`coord_using_styles`部分中所描述的，坐标也可以通过样式属性进行设置。更准确地说，实际上每个与坐标相关的样式属性都会作为样式属性进行存储。如果你使用:cpp:expr:`lv_obj_set_x(widget, 20)`，LVGL会在小部件的本地样式中保存 ``x=20``。
 
-这是一个内部机制，在你使用LVGL时并不太需要重点关注。
-然而，有一个情况下你需要注意实现方式。
-如果通过以下方式移除对象的样式：
+这是一个内部机制，对使用LVGL的过程影响不大。然而，有一种情况需要你注意实现方式。如果小部件的样式被移除：
 
-.. code:: c
+.. code-block:: c
 
-   lv_obj_remove_style_all(obj)
+   lv_obj_remove_style_all(widget)
 
-或者
+或
 
-.. code:: c
+.. code-block:: c
 
-   lv_obj_remove_style(obj, NULL, LV_PART_MAIN);
+   lv_obj_remove_style(widget, NULL, LV_PART_MAIN);
 
-那么会导致之前设置的坐标也将被移除。
+之前设置的坐标也会被移除。
 
 例如：
 
-.. code:: c
+.. code-block:: c
 
-   /* obj1 的大小将在最后被设置回默认值 */
-   lv_obj_set_size(obj1, 200, 100);  /* 现在 obj1 的大小为 200;100 */
-   lv_obj_remove_style_all(obj1);    /* 它会移除设置的大小 */
+   /* obj1的大小将在最后恢复为默认值 */
+   lv_obj_set_size(widget1, 200, 100);  /* 现在obj1的大小是200;100 */
+   lv_obj_remove_style_all(widget1);    /* 它移除了设置的大小 */
 
 
-   /* obj2 最后将会有 200;100 的大小 */
-   lv_obj_remove_style_all(obj2);
-   lv_obj_set_size(obj2, 200, 100);  
+   /* widget2最终将保持200;100的大小 */
+   lv_obj_remove_style_all(widget2);
+   lv_obj_set_size(widget2, 200, 100);  
 
 
 .. _positioning_widgets:
@@ -327,7 +322,7 @@ Percentage values are calculated from the parent's content area size.
 
 如果想最简单地设置对象的x和y坐标，可以这样操作：
 
-.. code:: c
+.. code-block:: c
 
    lv_obj_set_x(obj, 10);        //单独设置...
    lv_obj_set_y(obj, 20);
@@ -337,7 +332,7 @@ Percentage values are calculated from the parent's content area size.
 
 百分比值是通过父对象的内容（content）区域的大小来计算的。
 
-.. code:: c
+.. code-block:: c
 
    lv_obj_set_x(btn, lv_pct(10)); //x = 父元素内容区域宽度的10%
 
@@ -442,13 +437,13 @@ The following illustration shows the meaning of each "anchor" mentioned above.
 
 在某些情况下，可以方便地从对象默认的左上角更改其定位原点。如果改变了原点，比如改成右下角，那么(0,0)位置的意思是：与右下角对齐。要改变原点，使用如下代码：
 
-.. code:: c
+.. code-block:: c
 
    lv_obj_set_align(obj, align);
 
 改变对齐方式并设置新的坐标：
 
-.. code:: c
+.. code-block:: c
 
    lv_obj_align(obj, align, x, y);
 
@@ -466,7 +461,7 @@ The following illustration shows the meaning of each "anchor" mentioned above.
 
 将子对象对齐到其父对象的中心是非常常见的操作，因此存在专门的函数：
 
-.. code:: c
+.. code-block:: c
 
    lv_obj_center(obj);
 
@@ -477,7 +472,7 @@ The following illustration shows the meaning of each "anchor" mentioned above.
 
 上述介绍的功能使对象与其父对象对象。然而，也可以将对象与任意参考对象对其。
 
-.. code:: c
+.. code-block:: c
 
    lv_obj_align_to(obj_to_align, reference_obj, align, x, y);
 
@@ -498,7 +493,7 @@ The following illustration shows the meaning of each "anchor" mentioned above.
 
 例如，将标签对齐到按钮上方并使标签水平居中：
 
-.. code:: c
+.. code-block:: c
 
    lv_obj_align_to(label, btn, LV_ALIGN_OUT_TOP_MID, 0, -10);
 
@@ -569,7 +564,7 @@ the following functions:
 
 一个对象的宽度和高度也可以很容易地进行设置：
 
-.. code:: c
+.. code-block:: c
 
    lv_obj_set_width(obj, 200);       //分别设置...
    lv_obj_set_height(obj, 100);
@@ -577,7 +572,7 @@ the following functions:
 
 百分比值是基于父对象的内容区域大小进行计算的。例如，要将对象的高度设置为屏幕高度：
 
-.. code:: c
+.. code-block:: c
 
    lv_obj_set_height(obj, lv_pct(100));
 
@@ -587,14 +582,14 @@ the following functions:
 
 上述函数设置对象边界框的大小，但内容区域的大小也可以设置。这也就是说，对象的边界框会根据内边距的增加而扩大。
 
-.. code:: c
+.. code-block:: c
 
    lv_obj_set_content_width(obj, 50); //实际宽度：左内边距 + 50 + 右内边距
    lv_obj_set_content_height(obj, 30); //实际高度：顶部内边距 + 30 + 底部内边距
 
 可以使用以下函数获取边界框和内容区域的大小：
 
-.. code:: c
+.. code-block:: c
 
    int32_t w = lv_obj_get_width(obj);
    int32_t h = lv_obj_get_height(obj);
@@ -674,7 +669,7 @@ complex features can be used via styles.
 
 以下是使用样式设置对象大小的一些示例代码：
 
-.. code:: c
+.. code-block:: c
 
    static lv_style_t style;
    lv_style_init(&style);
@@ -767,7 +762,7 @@ change.
 
 实现这一目标的一种方法是为其按下状态设置一个新的Y坐标：
 
-.. code:: c
+.. code-block:: c
 
    static lv_style_t style_normal;
    lv_style_init(&style_normal);
@@ -788,7 +783,7 @@ change.
 
 这种方法有效，但不够灵活，因为按下时的坐标是硬编码的。如果按钮不在y=100处， ``style_pressed`` 就不会如预期般工作。可以使用平移来解决这个问题：
 
-.. code:: c
+.. code-block:: c
 
    static lv_style_t style_normal;
    lv_style_init(&style_normal);
@@ -859,7 +854,7 @@ This code enlarges a button when it's pressed:
 
 下面的代码会在按钮被按下时放大：
 
-.. code:: c
+.. code-block:: c
 
    static lv_style_t style_pressed;
    lv_style_init(&style_pressed);
@@ -914,7 +909,7 @@ the parent's content area.
 
 与CSS类似，LVGL也支持 ``min-width``、 ``max-width``、 ``min-height``和 ``max-height``。这些限制了对象的大小，防止其变得比这些值更小/更大。如果通过百分比或 :c:macro:`LV_SIZE_CONTENT` 来设置大小，它们尤其有用。
 
-.. code:: c
+.. code-block:: c
 
    static lv_style_t style_max_height;
    lv_style_init(&style_max_height);
@@ -925,7 +920,7 @@ the parent's content area.
 
 也可以使用百分比值，相对于父对象的内容区域的大小。
 
-.. code:: c
+.. code-block:: c
 
    static lv_style_t style_max_height;
    lv_style_init(&style_max_height);
@@ -1090,7 +1085,7 @@ the update callback. For example:
 
 LVGL可以通过自定义布局自由扩展，如下所示：
 
-.. code:: c
+.. code-block:: c
 
    uint32_t MY_LAYOUT;
 
@@ -1107,7 +1102,7 @@ LVGL可以通过自定义布局自由扩展，如下所示：
 
 可以添加自定义样式属性，并在更新回调函数中检索和使用它们。例如：
 
-.. code:: c
+.. code-block:: c
 
    uint32_t MY_PROP;
    ...
