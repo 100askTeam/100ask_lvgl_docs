@@ -426,14 +426,12 @@ new properties cannot be added.
    <br>
 
 
-样式存储在 `lv_style_t` 类型的变量中。样式变量应该是静态的、全局的或者动态分配的。
-换句话说，它们不能是函数内部的局部变量，在函数结束时会被销毁。
-在使用样式之前，应该使用 `lv_style_init(&my_style)` 进行初始化。样式初始化后，可以添加或更改属性。
+样式存储在 :cpp:type:`lv_style_t` 变量中。样式变量应为 ``static``、全局或动态分配的。换句话说，它们不能是函数中的局部变量，因为局部变量会在函数退出时被销毁。在使用样式之前，应通过 :cpp:expr:`lv_style_init(&my_style)` 初始化样式。初始化样式后，可以添加或更改属性。
 
-属性设置函数的格式如下：
-`lv_style_set_<property_name>(&style, <value>)`。例如：
+属性设置函数如下所示：
+``lv_style_set_<property_name>(&style, <value>);`` 例如：
 
-.. code:: c
+.. code-block:: c
 
    static lv_style_t style_btn;
    lv_style_init(&style_btn);
@@ -444,40 +442,40 @@ new properties cannot be added.
 
    static lv_style_t style_btn_red;
    lv_style_init(&style_btn_red);
-   lv_style_set_bg_color(&style_btn_red, lv_palette_main (LV_PALETTE_RED));
+   lv_style_set_bg_color(&style_btn_red, lv_palette_main(LV_PALETTE_RED));
    lv_style_set_bg_opa(&style_btn_red, LV_OPA_COVER);
 
-要删除一个属性，可以使用：
+要移除某个属性，请使用：
 
-.. code:: c
+.. code-block:: c
 
    lv_style_remove_prop(&style, LV_STYLE_BG_COLOR);
 
-从样式中获取属性的值：
+要从样式中获取属性的值：
 
-.. code:: c
+.. code-block:: c
 
    lv_style_value_t v;
-   lv_res_t res = lv_style_get_prop(&style, LV_STYLE_BG_COLOR, &v);
-   if(res == LV_RES_OK) {  /*找到了*/
+   lv_result_t res = lv_style_get_prop(&style, LV_STYLE_BG_COLOR, &v);
+   if(res == LV_RESULT_OK) {  /* Found */
        do_something(v.color);
    }
 
-`lv_style_value_t` 包含 3 个字段：
+:cpp:union:`lv_style_value_t` 具有 3 个字段，只有其中一个字段会生效，这取决于它所应用的属性类型：
 
-- `num`：用于整数、布尔值和不透明度属性
-- `color`：用于颜色属性
-- `ptr`：用于指针属性
+- :cpp:member:`num`：用于整数、布尔值和透明度属性
+- :cpp:member:`color`：用于颜色属性
+- :cpp:member:`ptr`：用于指针属性
 
-要重置一个样式（释放其所有数据），可以使用：
+要重置样式（释放其所有数据），请使用：
 
-.. code:: c
+.. code-block:: c
 
    lv_style_reset(&style);
 
-样式也可以定义为 `const`，以节省 RAM：
+样式也可以构建为 ``const`` 以节省 RAM：
 
-.. code:: c
+.. code-block:: c
 
    const lv_style_const_prop_t style1_props[] = {
       LV_STYLE_CONST_WIDTH(50),
@@ -487,7 +485,7 @@ new properties cannot be added.
 
    LV_STYLE_CONST_INIT(style1, style1_props);
 
-以后可以像其他样式一样使用 `const` 样式，但显然不能添加新属性。
+之后 ``const`` 样式可以像其他样式一样使用，但（显然）无法添加新属性。
 
 
 .. _styles_add_remove:
@@ -554,7 +552,7 @@ Using :cpp:func:`lv_obj_add_style`:
 
 使用 :cpp:func:`lv_obj_add_style`：
 
-.. code:: c
+.. code-block:: c
 
    lv_obj_add_style(btn, &style_btn, 0);                     /*默认按钮样式*/
    lv_obj_add_style(btn, &btn_red, LV_STATE_PRESSED);        /*仅在按下时将部分颜色更改为红色*/
@@ -598,7 +596,7 @@ Using :cpp:func:`lv_obj_replace_style`:
 
 使用 :cpp:func:`lv_obj_replace_style`：
 
-.. code:: c
+.. code-block:: c
 
    lv_obj_add_style(btn, &style_btn, 0);                      /* 添加按钮样式 */
    lv_obj_replace_style(btn, &style_btn, &new_style_btn, 0);  /* 用不同的样式替换按钮样式 */
@@ -628,12 +626,14 @@ any state or part.
    <br>
 
  
-从对象中删除所有样式，请使用 :cpp:expr:`lv_obj_remove_style_all(obj)`。
+要从小部件中移除所有样式，使用：cpp:expr:`lv_obj_remove_style_all(widget)`。
 
-要删除特定的样式，请使用 :cpp:expr:`lv_obj_remove_style(obj, style, selector)`。
-此函数将仅在 ``selector`` 与 :cpp:func:`lv_obj_add_style` 中使用的 ``selector`` 匹配时删除 ``style``。
-``style`` 可以是 ``NULL``，以仅检查 ``selector`` 并删除所有匹配的样式。
-``selector`` 可以使用 :cpp:enumerator:`LV_STATE_ANY` 和 :cpp:enumerator:`LV_PART_ANY` 值，从任何状态或部件中删除样式。
+要移除特定样式，使用
+:cpp:expr:`lv_obj_remove_style(widget, style, selector)`。
+此函数仅在 ``selector`` 与
+:cpp:func:`lv_obj_add_style` 中使用的 ``selector`` 匹配时，才会移除 ``style``。
+``style``可以是 ``NULL``，仅检查 ``selector``并移除所有匹配的样式。
+``selector``可以使用 :cpp:enumerator:`LV_STATE_ANY`和 :cpp:enumerator:`LV_PART_ANY`值，从任何状态或部分移除样式。
 
 
 Report style changes（通知样式更改）
@@ -663,12 +663,11 @@ notified. There are 3 options to do this:
    </details>
    <br>
 
+如果已经分配给一个 Widget 的样式发生变化（即添加或更改了属性），应该通知使用该样式的 Widget。这里有 3 种方法：
 
-如果已经分配给一个对象的样式发生改变（例如添加或更改属性），那么使用该样式的对象应该收到通知。有三种选项可以做到这一点：
-
-1. 如果你知道改变的属性可以通过简单的重绘来应用（例如颜色或不透明度的变化），只需调用： `lv_obj_invalidate(obj)` 或者 `lv_obj_invalidate(lv_screen_active())`。
-2. 如果更改或添加了更复杂的样式属性，并且你知道哪些对象受到该样式的影响，请调用： `lv_obj_refresh_style(obj, part, property)`。要刷新所有部件和属性，请使用： `lv_obj_refresh_style(obj, LV_PART_ANY, LV_STYLE_PROP_ANY)`。
-3. 要让LVGL检查所有对象以查看它们是否使用了样式，并在需要时刷新它们，请调用： `lv_obj_report_style_change(&style)`。如果 `style` 是 `NULL`，则所有对象将收到有关样式更改的通知。
+1. 如果你知道更改的属性可以通过简单的重绘来应用（例如颜色或不透明度变化），只需调用 :cpp:expr:`lv_obj_invalidate(widget)` 或 :cpp:expr:`lv_obj_invalidate(lv_screen_active())`。
+2. 如果更改或添加了更复杂的样式属性，并且你知道哪些 Widget 受到该样式的影响，调用 :cpp:expr:`lv_obj_refresh_style(widget, part, property)`。要刷新所有部分和属性，使用 :cpp:expr:`lv_obj_refresh_style(widget, LV_PART_ANY, LV_STYLE_PROP_ANY)`。
+3. 要让 LVGL 检查所有 Widget，看它们是否使用了某个样式，并在需要时刷新它们，调用 :cpp:expr:`lv_obj_report_style_change(&style)`。如果 ``style``为 ``NULL``，所有 Widget 都会被通知样式更改。
 
 
 Get a property's value on an object（获取对象的属性值）
@@ -698,17 +697,19 @@ For example:
    </details>
    <br>
 
+为了考虑最终值的样式属性
 
-获取物体的最终属性值
+- 层叠，
+- 继承，
+- 本地样式和过渡（见下文）
 
-- 考虑层叠、继承、本地样式和过渡效果（见下文）
-- 可以使用此类属性获取函数： ``lv_obj_get_style_<property_name>(obj, <part>)``。
-  这些函数使用物体的当前状态，如果没有更好的候选项，则返回默认值。
-  例如：
+可以使用类似这样的属性 “get” 函数： ``lv_obj_get_style_<property_name>(widget, <part>)``。
+这些函数使用小部件的当前状态，如果没有更好的候选值，它们将返回默认值。
+例如：
 
-.. code:: c
+.. code-block:: c
 
-   lv_color_t color = lv_obj_get_style_bg_color(btn, LV_PART_MAIN);
+    lv_color_t color = lv_obj_get_style_bg_color(btn, LV_PART_MAIN);
 
 
 .. _styles_local:
@@ -746,18 +747,23 @@ To set a local property use functions like
    <br>
 
 
-除了“普通”样式外，对象还可以存储本地样式。
-这个概念类似于CSS中的内联样式（例如 ``<div style="color:red">``），但有一些修改。
+除了“普通”样式，控件还可以存储本地样式。
+这个概念类似于CSS中的内联样式
+（例如 ``<div style="color:red">``），但有所修改。
 
-本地样式与普通样式类似，但不能在其他对象之间共享。如果使用，本地样式会自动分配，并且在对象被删除时释放。它们很适合为对象添加本地定制。
+本地样式就像普通样式，但不能在
+其他控件之间共享。如果使用，本地样式会自动分配，并
+在控件被删除时释放。它们用于为控件添加本地定制。
 
-与CSS不同，LVGL中的本地样式可以分配给状态（ *伪类*）和部分（ *伪元素*）。
+与CSS不同，LVGL本地样式可以分配给状态
+(pseudo-classes_) 和部分 (pseudo-elements_)。
 
-要设置本地属性，请使用如下函数： ``lv_obj_set_style_<property_name>(obj, <value>, <selector>);`` 例如：
+要设置本地属性，请使用如下函数：
+``lv_obj_set_style_<property_name>(widget, <value>, <selector>);``   例如：
 
-.. code:: c
+.. code-block:: c
 
-   lv_obj_set_style_bg_color(slider, lv_color_red(), LV_PART_INDICATOR | LV_STATE_FOCUSED);
+    lv_obj_set_style_bg_color(slider, lv_color_red(), LV_PART_INDICATOR | LV_STATE_FOCUSED);
 
 
 .. _style_properties_overview:
@@ -810,15 +816,19 @@ See :ref:`boxing_model` for the meanings of these terms.
    <br>
 
 
-在控件的文档中，您会看到类似于“该控件使用典型的背景属性”的句子。这些“典型的背景属性”包括：
+在 widgets 的文档中，您会看到类似“The
+_____ Widget 使用典型的背景样式属性”。这些“典型的
+背景属性”是指的如下属性：
 
 - 背景
 - 边框
-- 轮廓
+- 外轮廓
 - 阴影
-- 填充
+- 内边距
 - 宽度和高度转换
-- X 和 Y 的平移
+- X 和 Y 平移
+
+参见 :ref:`boxing_model` 了解这些术语的含义。
 
 
 .. _style_transitions:
@@ -875,27 +885,25 @@ initialized and added to a style:
    <br>
 
 
-默认情况下，当对象改变状态（例如，被按下）时，新状态的新属性立即设置。然而，使用过渡效果可以在状态改变时播放动画。
-例如，按下按钮时，它的背景颜色可以在 300 毫秒内动画过渡到按下状态的颜色。
+默认情况下，当小部件改变状态（例如按下时）时，新的属性会立即被设置。然而，通过过渡可以在状态变化时播放动画。例如，在按下按钮时，背景颜色可以在300毫秒内动画到按下颜色。
 
-过渡效果的参数存储在样式中。可以设置：
+过渡的参数存储在样式中。可以设置：
 
 - 过渡时间
 - 开始过渡前的延迟
-- 动画路径（也称为定时或缓动函数）
-- 要进行动画处理的属性
+- 动画路径（也称为时间函数或缓动函数）
+- 要动画的属性
 
-过渡属性可以为每个状态定义。例如，在默认状态下设置500毫秒的过渡时间意味着当对象进入默认状态时，将应用500毫秒的过渡时间。
-在按下状态下设置100毫秒的过渡时间，则在进入按下状态时会有100毫秒的过渡。这个例子的配置意味着迅速进入按下状态，然后慢慢返回默认状态。
+过渡属性可以为每个状态单独定义。例如，在默认状态下设置500毫秒的过渡时间意味着当小部件进入默认状态时，会应用500毫秒的过渡时间。在按下状态下设置100毫秒的过渡时间则表示进入按下状态时会进行100毫秒的过渡。这个配置的结果是：进入按下状态很快，然后再慢慢返回默认状态。
 
-为了描述一个过渡，需要初始化一个 :cpp:struct:`lv_transition_dsc_t` 变量，并将其添加到一个样式中：
+要描述一个过渡，需要初始化一个`:cpp:struct:`lv_transition_dsc_t`变量并将其添加到样式中：
 
-.. code:: c
+.. code-block:: c
 
-   /*Only its pointer is saved so must static, global or dynamically allocated */
+   /* 只有它的指针被保存，所以必须是静态的、全局的或动态分配的 */
    static const lv_style_prop_t trans_props[] = {
                                                LV_STYLE_BG_OPA, LV_STYLE_BG_COLOR,
-                                               0, /*End marker*/
+                                               0, /* 结束标记 */
    };
 
    static lv_style_transition_dsc_t trans1;
@@ -1032,7 +1040,7 @@ and sets it when a display is created.
 
 主题初始化函数可以有不同的原型。下面的例子显示了如何设置“默认”主题：
 
-.. code:: c
+.. code-block:: c
 
     lv_theme_t * th = lv_theme_default_init(display,  /*使用该显示器的DPI、大小等*/
                                             LV_COLOR_PALETTE_BLUE, LV_COLOR_PALETTE_CYAN,   /*主色和辅助色板*/
@@ -1067,11 +1075,12 @@ There is an example of this below.
    <br>
 
 
-内置主题可以进行扩展。如果创建了自定义主题，则可以选择父主题。父主题的样式将在自定义主题的样式之前添加。可以通过这种方式链接任意数量的主题。例如，默认主题 -> 自定义主题 -> 深色主题。
+内置主题可以扩展。如果创建了自定义主题，可以选择父主题。父主题的样式将在自定义主题的样式之前添加。可以通过这种方式链式组合任意数量的主题。
+例如：默认主题 -> 自定义主题 -> 黑暗主题。
 
-:cpp:expr:`lv_theme_set_parent(new_theme, base_theme)` 用 ``new_theme`` 扩展了 ``base_theme``。
+:cpp:expr:`lv_theme_set_parent(new_theme, base_theme)` 用 ``new_theme`` 扩展 ``base_theme``。
 
-下面有一个示例。
+下面是一个示例。
 
 
 .. _styles_example:
