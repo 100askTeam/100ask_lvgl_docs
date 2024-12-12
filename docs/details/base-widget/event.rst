@@ -27,14 +27,15 @@ from ``lv_obj_`` to ``lv_display_`` or ``lv_indev_``.
    <br>
 
 
-当发生某些对用户可能感兴趣的事情时，LVGL中的事件将被触发，例如：
+在 LVGL 中，当发生某些可能引起用户兴趣的事情时会触发事件，例如当一个 Widget：
 
 - 被点击
 - 被滚动
-- 值发生改变
+- 更改了它的值
 - 重新绘制等。
 
-除了部件，事件还可以从显示和输入设备进行注册。
+除了 Widgets，也可以从 displays 和 input devices 注册事件。
+下面没有详细说明，但您可以通过将函数的前缀从 ``lv_obj_`` 更改为 ``lv_display_`` 或 ``lv_indev_`` 来实现这一点。
 
 .. _adding_events_to_a_widget:
 
@@ -109,13 +110,13 @@ In the very same way, events can be attached to input devices and displays like 
    <br>
 
 
-用户可以为对象指定回调函数以查看其事件。
-实际操作是这样的：
+用户可以为控件分配回调函数来处理事件。  
+实际上，它的操作如下所示：
 
-.. code:: c
+.. code-block:: c
 
    lv_obj_t * btn = lv_button_create(lv_screen_active());
-   lv_obj_add_event_cb(btn, my_event_cb, LV_EVENT_CLICKED, NULL);   /*分配一个事件回调*/
+   lv_obj_add_event_cb(btn, my_event_cb, LV_EVENT_CLICKED, user_data);   /* 分配一个事件回调 */
 
    ...
 
@@ -124,32 +125,42 @@ In the very same way, events can be attached to input devices and displays like 
        printf("Clicked\n");
    }
 
-在示例中 :cpp:enumerator:`LV_EVENT_CLICKED` 意味着只有点击事件会调用 ``my_event_cb``。查看 :ref:`事件代码列表 <events_codes>` 以获取所有选项。 :cpp:enumerator:`LV_EVENT_ALL` 可用于接收所有事件。
+在示例中，:cpp:enumerator:`LV_EVENT_CLICKED` 表示只有点击事件会调用 ``my_event_cb``。  
+请参阅 :ref:`list of event codes <events_codes>` 以获取所有选项。  
+:cpp:enumerator:`LV_EVENT_ALL` 可用于接收所有事件。
 
-:cpp:func:`lv_obj_add_event` 的最后一个参数是指向事件中可用的任何自定义数据的指针。稍后将更详细地描述它。
+:cpp:func:`lv_obj_add_event` 的最后一个参数是指向任何自定义数据的指针，该数据将在事件中可用。  
+如果不需要在处理事件时使用该数据，可以为此参数传递 NULL。  
+您可以像这样检索设置回调函数时传递的指针：
 
-可以向对象添加更多事件，像这样：
+.. code-block:: c
 
-.. code:: c
+    my_user_data_t  * user_data;
+    ...
+    user_data = lv_event_get_user_data(e);
 
-   lv_obj_add_event_cb(obj, my_event_cb_1, LV_EVENT_CLICKED, NULL);
-   lv_obj_add_event_cb(obj, my_event_cb_2, LV_EVENT_PRESSED, NULL);
-   lv_obj_add_event_cb(obj, my_event_cb_3, LV_EVENT_ALL, NULL);       /*无过滤，接收所有事件*/
+可以向控件添加更多事件，如下所示：
 
-甚至相同的事件回调也可以在具有不同“user_data”的对象上使用。例如：
+.. code-block:: c
 
-.. code:: c
+   lv_obj_add_event_cb(widget, my_event_cb_1, LV_EVENT_CLICKED, NULL);
+   lv_obj_add_event_cb(widget, my_event_cb_2, LV_EVENT_PRESSED, NULL);
+   lv_obj_add_event_cb(widget, my_event_cb_3, LV_EVENT_ALL, NULL);       /* 无过滤，接收所有事件 */
 
-   lv_obj_add_event_cb(obj, increment_on_click, LV_EVENT_CLICKED, &num1);
-   lv_obj_add_event_cb(obj, increment_on_click, LV_EVENT_CLICKED, &num2);
+即使是相同的事件回调也可以在控件上使用不同的 ``user_data``。例如：
 
-事件将按其被添加的顺序调用。
+.. code-block:: c
 
-其他对象可以使用相同的 *事件回调*。
+   lv_obj_add_event_cb(widget, increment_on_click, LV_EVENT_CLICKED, &num1);
+   lv_obj_add_event_cb(widget, increment_on_click, LV_EVENT_CLICKED, &num2);
 
-以完全相同的方式，事件可以附加到输入设备和显示器上，像这样：
+事件将按照它们被添加的顺序调用。
 
-.. code:: c
+其他控件也可以使用相同的 *事件回调*。
+
+同样地，事件可以附加到输入设备和显示器上，如下所示：
+
+.. code-block:: c
 
    lv_display_add_event_cb(disp, event_cb, LV_EVENT_RESOLUTION_CHANGED, NULL);
    lv_indev_add_event_cb(indev, event_cb, LV_EVENT_CLICKED, NULL);
@@ -200,15 +211,15 @@ The following event codes exist:
    <br>
 
 
-事件代码可以分为以下类别：- 输入设备事件 - 绘图事件 - 其他事件 - 特殊事件 - 自定义事件
+事件代码可以分为以下几类：- 输入设备事件 - 绘制事件 - 其他事件 - 特殊事件 - 自定义事件
 
-所有对象（如按钮/标签/滑块等）无论其类型，都会接收 *输入设备*、 *绘图* 和 *其他* 事件。
+所有Widgets（如Buttons/Labels/Sliders等），无论其类型，都会接收*输入设备*、*绘制*和*其他*事件。
 
-然而， *特殊事件* 是特定于特定部件类型的。请参阅 :ref:`widgets' documentation <widgets>` 以了解它们何时被发送。
+然而，*特殊事件*是特定于某个Widget类型的。参见 :ref:`widgets' documentation <widgets>` 以了解它们在何时被发送，
 
-*自定义事件* 是用户添加的，并且永远不会被LVGL发送。
+*自定义事件*由用户添加，并且永远不会由LVGL发送。
 
-存在以下事件代码：  
+以下事件代码存在：
 
 
 Input device events（输入设备事件）
@@ -488,12 +499,12 @@ user notify a Widget to refresh itself. Some examples:
    <br>
 
 
-:cpp:enumerator:`LV_EVENT_REFRESH` 是一个特殊事件，因为它被设计用来让用户通知对象刷新自身。一些例子包括：
+cpp:enumerator:`LV_EVENT_REFRESH` 是一个特殊事件，因为它设计用于让用户通知一个Widget刷新自身。一些例子包括：
 
-- 通知标签根据一个或多个变量刷新其文本（比如当前时间）
-- 当语言发生变化时刷新标签
-- 如果满足一些条件（比如输入了正确的PIN码），则启用一个按钮
-- 当超出限制时，为对象添加/移除样式，等等
+- 通知标签根据一个或多个变量（例如当前时间）刷新其文本
+- 当语言更改时刷新标签
+- 如果满足某些条件（例如输入了正确的PIN码）启用按钮
+- 如果超过了限制，则向Widget添加/移除样式等
 
 
 Sending Events Manually
@@ -573,10 +584,9 @@ not the original Widget. To get the original target call
    <br>
 
 
-如果启用了 :cpp:expr:`lv_obj_add_flag(obj, LV_OBJ_FLAG_EVENT_BUBBLE)`，那么所有事件也会发送给对象的父对象。如果父对象也启用了 :cpp:enumerator:`LV_OBJ_FLAG_EVENT_BUBBLE`，那么该事件将继续被发送给其父对象，依此类推。
+如果启用了 :cpp:expr:`lv_obj_add_flag(widget, LV_OBJ_FLAG_EVENT_BUBBLE)`，则所有事件也将发送给Widget的父级。如果父级也启用了 :cpp:enumerator:`LV_OBJ_FLAG_EVENT_BUBBLE`，那么事件将被发送给它的父级，依此类推。
 
-事件的 *target* 参数始终是当前的目标对象，而不是原始对象。要获取原始目标对象，可以在事件处理函数中调用 :cpp:expr:`lv_event_get_target_obj(e)`。
-
+事件的 *target* 参数始终是当前的目标Widget，而不是原始的Widget。要获取原始目标，可以在事件处理程序中调用 :cpp:expr:`lv_event_get_target_obj(e)`。
 
 .. _events_examples:
 
