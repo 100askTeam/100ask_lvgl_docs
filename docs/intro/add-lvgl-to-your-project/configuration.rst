@@ -1,19 +1,23 @@
 .. _configuration:
 
-=============
-Configuration
-=============
+====================
+Configuration（配置）
+====================
 
 
 
 .. _lv_conf:
 
-lv_conf.h
-*********
+lv_conf.h（LV 配置头文件）
+*************************
 
 
-Creating lv_conf.h
-------------------
+Creating lv_conf.h（创建 LV 配置头文件）
+--------------------------------------
+.. raw:: html
+
+   <details>
+     <summary>显示原文</summary>
 
 When setting up your project for the first time, copy ``lvgl/lv_conf_template.h`` to
 ``lv_conf.h`` next to the ``lvgl`` folder.  Change the first ``#if 0`` to ``1`` to
@@ -36,7 +40,9 @@ will attempt to include ``lv_conf.h`` simply with ``#include "lv_conf.h"``.
 You can even use a different name for ``lv_conf.h``. The custom path can
 be set via the :c:macro:`LV_CONF_PATH` define. For example
 ``-DLV_CONF_PATH="/home/joe/my_project/my_custom_conf.h"``. If this define
-is set :c:macro:`LV_CONF_SKIP` is assumed to be ``0``.
+is set :c:macro:`LV_CONF_SKIP` is assumed to be ``0``. Please notice,
+when defining the :c:macro:`LV_CONF_PATH`, you need to make sure it is
+defined as a string, otherwise a build error will be raised.
 
 If :c:macro:`LV_CONF_SKIP` is defined, LVGL will not try to include
 ``lv_conf.h``. Instead you can pass the config defines using build
@@ -50,11 +56,36 @@ from ``lv_conf.h`` or build settings (``-D...``) override the values
 set in Kconfig. To ignore the configs from ``lv_conf.h`` simply remove
 its content, or define :c:macro:`LV_CONF_SKIP`.
 
+.. raw:: html
+
+   </details> 
+   <br>
+
+首次设置项目时，将 ``lvgl/lv_conf_template.h`` 文件复制到 ``lvgl`` 文件夹旁边，并命名为 ``lv_conf.h``。将文件开头的 ``#if 0`` 改为 ``#if 1`` 以启用文件内容，并根据显示屏面板所使用的颜色深度来设置 :c:macro:`LV_COLOR_DEPTH` 这个宏定义。详情可查看 ``lv_conf.h`` 文件中的注释。
+
+文件的布局应当如下所示：
+
+    lvgl/
+    lv_conf.h
+    other files and folders in your project
+
+或者，也可以将 ``lv_conf.h`` 文件复制到其他位置，但之后你需要将 :c:macro:`LV_CONF_INCLUDE_SIMPLE` 这个宏定义添加到编译器选项中（例如，对于 GCC 编译器来说就是 ``-DLV_CONF_INCLUDE_SIMPLE``），并且手动设置包含路径（例如 ``-I../include/gui``）。在这种情况下，LVGL 将会尝试仅通过 ``#include "lv_conf.h"`` 语句来包含 ``lv_conf.h`` 文件。
+
+你甚至可以为 ``lv_conf.h`` 使用不同的文件名。可以通过 :c:macro:`LV_CONF_PATH` 这个宏定义来设置自定义路径。例如 ``-DLV_CONF_PATH="/home/joe/my_project/my_custom_conf.h"``。如果设置了这个宏定义，就会默认 :c:macro:`LV_CONF_SKIP`` 的值为 ``0``。请注意，在定义 :c:macro:`LV_CONF_PATH` 时，你需要确保将其定义为一个字符串，否则将会引发编译错误。
+
+如果定义了 :c:macro:`LV_CONF_SKIP`，LVGL 将不会尝试包含 ``lv_conf.h`` 文件。相反，你可以通过构建选项来传递配置定义。例如 ``"-DLV_COLOR_DEPTH=32 -DLV_USE_BUTTON=1"``。未设置的选项将采用默认值，该默认值与 ``lv_conf_template.h`` 文件中的内容相同。
+
+LVGL 也可以通过 ``Kconfig`` 和 ``menuconfig`` 来使用。你也可以将 ``lv_conf.h`` 与 ``Kconfig`` 一起使用，但要记住， ``lv_conf.h`` 中的值或者构建设置（ ``-D...`` 形式的选项）会覆盖在 ``Kconfig`` 中设置的值。要忽略来自 ``lv_conf.h`` 的配置，只需删除其内容，或者定义 :c:macro:`LV_CONF_SKIP` 即可。
 
 .. _configuration_settings:
 
-Configuration Settings
-----------------------
+Configuration Settings（配置设置）
+---------------------------------
+.. raw:: html
+
+   <details>
+     <summary>显示原文</summary>
+
 
 Once the ``lv_conf.h`` file is in place, you can modify this header to configure
 LVGL's behavior, disable unused modules and features, adjust the size of buffers, etc.
@@ -66,9 +97,24 @@ in ``lv_conf.h`` if you need them.
 
 TODO:  Add all things related to ``lv_conf.h`` file and its contents.
 
+.. raw:: html
 
-Multiple Instances of LVGL
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+   </details> 
+   <br>
+
+一旦 ``lv_conf.h`` 文件就位，你就可以修改这个头文件来配置 LVGL 的行为，禁用未使用的模块和特性，调整缓冲区大小等等。
+
+``lv_conf.h`` 文件中的注释解释了每个设置的含义。务必至少根据显示屏的颜色深度来设置 :c:macro:`LV_COLOR_DEPTH`。请注意，如果你需要示例和演示程序，那么必须要在 ``lv_conf.h`` 文件中显式地启用它们。
+
+待办事项：添加所有与 ``lv_conf.h`` 文件及其内容相关的事项。
+
+Multiple Instances of LVGL（LVGL 的多个实例）
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. raw:: html
+
+   <details>
+     <summary>显示原文</summary>
+
 It is possible to run multiple, independent isntances of LVGL.  To enable its
 multi-instance feature, set :c:macro:`LV_GLOBAL_CUSTOM` in ``lv_conf.h``
 and provide a custom function to :cpp:func:`lv_global_default` using ``__thread`` or
@@ -85,9 +131,34 @@ For example:
         return &lv_global;
     }
 
+.. raw:: html
 
+   </details> 
+   <br>
 
+可以运行多个相互独立的 LVGL 实例。要启用其多实例特性，需在 ``lv_conf.h`` 文件中设置 :c:macro:`LV_GLOBAL_CUSTOM`，并使用 ``__thread`` 或 ``pthread_key_t`` 为 :cpp:func:`lv_global_default` 提供一个自定义函数。这样就能通过将 LVGL 的全局变量存储在线程本地存储（TLS）中，从而允许运行多个 LVGL 实例。
+
+例如：
+
+.. code-block:: c
+
+    lv_global_t * lv_global_default(void)
+    {
+        static __thread lv_global_t lv_global;
+        return &lv_global;
+    }
 Kconfig
 *******
+.. raw:: html
+
+   <details>
+     <summary>显示原文</summary>
+
 TODO:  Add how to use LVGL with Kconfig.
 
+.. raw:: html
+
+   </details> 
+   <br>
+
+待办事项：添加如何结合 Kconfig 使用 LVGL 的相关内容。
