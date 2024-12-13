@@ -78,7 +78,7 @@ To enable the profiler, set :c:macro:`LV_USE_PROFILER` in ``lv_conf.h`` and conf
 
 - Recommended configuration in **UNIX** environments:
 
-    .. code:: c
+    .. code-block:: c
 
         #include <sys/syscall.h>
         #include <sys/types.h>
@@ -116,7 +116,7 @@ To enable the profiler, set :c:macro:`LV_USE_PROFILER` in ``lv_conf.h`` and conf
 
 - Recommended configuration in **Arduino** environments:
 
-    .. code:: c
+    .. code-block:: c
 
         void my_profiler_init(void)
         {
@@ -129,7 +129,7 @@ To enable the profiler, set :c:macro:`LV_USE_PROFILER` in ``lv_conf.h`` and conf
 
 4. Log output configuration: LVGL uses the :cpp:func:`LV_LOG` interface by default to output trace information. If you want to use another interface to output log information (e.g., file stream), you can redirect the log output using the following code:
 
-    .. code:: c
+    .. code-block:: c
 
         static void my_log_print_cb(const char * buf)
         {
@@ -161,7 +161,7 @@ To enable the profiler, set :c:macro:`LV_USE_PROFILER` in ``lv_conf.h`` and conf
 
 - **UNIX** 环境推荐配置：
 
-    .. code:: c
+    .. code-block:: c
 
         #include <sys/syscall.h>
         #include <sys/types.h>
@@ -190,7 +190,7 @@ To enable the profiler, set :c:macro:`LV_USE_PROFILER` in ``lv_conf.h`` and conf
         {
             lv_profiler_builtin_config_t config;
             lv_profiler_builtin_config_init(&config);
-            config.tick_per_sec = 1000000; /* 一秒等于1000000微秒 */
+            config.tick_per_sec = 1000000; /* One second is equal to 1000000 microseconds */
             config.tick_get_cb = my_get_tick_us_cb;
             config.tid_get_cb = my_get_tid_cb;
             config.cpu_get_cb = my_get_cpu_cb;
@@ -199,20 +199,20 @@ To enable the profiler, set :c:macro:`LV_USE_PROFILER` in ``lv_conf.h`` and conf
 
 - **Arduino** 环境推荐配置：
 
-    .. code:: c
+    .. code-block:: c
 
         void my_profiler_init(void)
         {
             lv_profiler_builtin_config_t config;
             lv_profiler_builtin_config_init(&config);
-            config.tick_per_sec = 1000000; /* 一秒等于1000000微秒 */
-            config.tick_get_cb = micros; /* 使用Arduino提供的微秒级时间戳 */
+            config.tick_per_sec = 1000000; /* One second is equal to 1000000 microseconds */
+            config.tick_get_cb = micros; /* Use the microsecond time stamp provided by Arduino */
             lv_profiler_builtin_init(&config);
         }
 
 4. 日志输出配置：LVGL默认使用 :cpp:func:`LV_LOG` 接口输出跟踪信息。如果您想使用另一个接口输出日志信息（例如文件流），可以使用以下代码重定向日志输出：
 
-    .. code:: c
+    .. code-block:: c
 
         static void my_log_print_cb(const char * buf)
         {
@@ -223,7 +223,7 @@ To enable the profiler, set :c:macro:`LV_USE_PROFILER` in ``lv_conf.h`` and conf
         {
             lv_profiler_builtin_config_t config;
             lv_profiler_builtin_config_init(&config);
-            ... /* 其他配置 */
+            ... /* other configurations */
             config.flush_cb = my_log_print_cb;
             lv_profiler_builtin_init(&config);
         }
@@ -258,19 +258,19 @@ Process the logs（处理日志）
 
 Save the output log as `my_trace.txt`, use `trace_filter.py` for filtering and preprocessing:
 
-    .. code:: bash
+    .. code-block:: bash
 
         ./lvgl/scripts/trace_filter.py my_trace.txt
 
     or
 
-    .. code:: bash
+    .. code-block:: bash
 
         python3 ./lvgl/scripts/trace_filter.py my_trace.txt
 
 You will obtain a processed text file named `trace.systrace`, which roughly contains the following content:
 
-    .. code:: text
+    .. code-block:: text
 
         # tracer: nop
         #
@@ -295,17 +295,17 @@ Import the processed `trace.systrace` file into `Perfetto <https://ui.perfetto.d
 
 请将输出日志保存为 `my_trace.txt`，使用 `trace_filter.py` 进行过滤和预处理：
 
-    .. code:: bash
+    .. code-block:: text
 
         ./lvgl/scripts/trace_filter.py my_trace.txt
 或者
-    .. code:: bash
+    .. code-block:: text
 
         python3 ./lvgl/scripts/trace_filter.py my_trace.txt
 
 您将获得一个名为 `trace.systrace` 的处理过的文本文件，大致包含以下内容：
 
-    .. code:: text
+    .. code-block:: text
 
         # tracer: nop
         #
@@ -336,8 +336,8 @@ If the log parsing is successful, you will see the following screen:
 
 .. image:: /misc/perfetto_ui.png
 
-In the Perfetto UI, use the :kbd:`A` or :kbd:`D` keys to pan the timeline horizontally 
-and the :kbd:`W` or :kbd:`S` keys to zoom in or out on the timeline. 
+In the Perfetto UI, use the :kbd:`A` or :kbd:`D` keys to pan the timeline horizontally
+and the :kbd:`W` or :kbd:`S` keys to zoom in or out on the timeline.
 Use the mouse to move the focus and click on functions on the timeline to observe their execution time.
 
 .. raw:: html
@@ -365,7 +365,7 @@ Add Measurement Point（添加测量点）
 
 Users can add their own measured functions:
 
-.. code:: c
+.. code-block:: c
 
     void my_function_1(void)
     {
@@ -393,7 +393,7 @@ Users can add their own measured functions:
 
 用户可以添加自己的测量函数：
 
-.. code:: c
+.. code-block:: c
 
     void my_function_1(void)
     {
@@ -435,7 +435,7 @@ If you wish to use a profiler method provided by your operating system, you can 
 
 Taking `NuttX <https://github.com/apache/nuttx>`_ RTOS as an example:
 
-.. code:: c
+.. code-block:: c
 
     #define LV_PROFILER_INCLUDE "nuttx/sched_note.h"
     #define LV_PROFILER_BEGIN          sched_note_begin(NOTE_TAG_ALWAYS)
@@ -459,7 +459,7 @@ Taking `NuttX <https://github.com/apache/nuttx>`_ RTOS as an example:
 
 以 `NuttX <https://github.com/apache/nuttx>`_ RTOS 为例：
 
-.. code:: c
+.. code-block:: c
 
     #define LV_PROFILER_INCLUDE "nuttx/sched_note.h"
     #define LV_PROFILER_BEGIN          sched_note_begin(NOTE_TAG_ALWAYS)
@@ -567,5 +567,3 @@ If the trace logs are not automatically printed when the buffer is not full, you
 
 1. 减小宏 :c:macro:`LV_PROFILER_BUILTIN_BUF_SIZE` 的值，以更快地填充缓冲区并触发自动打印。
 2. 手动调用或使用定时器调用 :cpp:func:`lv_profiler_builtin_flush` 函数来强制日志输出。
-
-
