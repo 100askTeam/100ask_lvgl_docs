@@ -12,7 +12,7 @@ Overview（概述）
    <details>
      <summary>显示原文</summary>
 
-The Window is container-like object built from a header with title and
+The Window is container-like Widget built from a header with title and
 buttons and a content area.
 
 .. raw:: html
@@ -37,11 +37,11 @@ Parts and Styles（部分和样式）
 The Window is built from other widgets so you can check their
 documentation for details:
 
-- Background: :ref:`lv_obj`
-- Header on the background: :ref:`lv_obj`
+- Background: :ref:`base_widget`
+- Header on the background: :ref:`base_widget`
 - Title on the header: :ref:`lv_label`
 - Buttons on the header: :ref:`lv_button`
-- Content area on the background: :ref:`lv_obj`
+- Content area on the background: :ref:`base_widget`
 
 .. raw:: html
 
@@ -51,11 +51,11 @@ documentation for details:
 
 窗口控件是由其他控件构建的，因此可以查看它们的文档以获取详细信息：
 
-- 背景：:ref:`lv_obj`
-- 背景标头：:ref:`lv_obj`
+- 背景：:ref:`base_widget`
+- 背景标头：:ref:`base_widget`
 - 标头上的标题：:ref:`lv_label`
 - 标头上的按钮： :ref:`lv_button`
-- 背景内容区：:ref:`lv_obj`
+- 背景内容区：:ref:`base_widget`
 
 
 .. _lv_win_usage:
@@ -71,7 +71,7 @@ Create a Window（创建一个窗口）
    <details>
      <summary>显示原文</summary>
 
-:cpp:expr:`lv_win_create(parent)` creates a Window with an empty
+:cpp:expr:`lv_win_create(parent, header_height)` creates a Window with an empty
 header.
 
 .. raw:: html
@@ -80,7 +80,7 @@ header.
    <br>
 
 
-:cpp:expr:`lv_win_create(parent)` 创建一个标头为空的窗口。
+:cpp:expr:`lv_win_create(parent, header_height)` 创建一个标头为空的窗口。
 
 
 Title and buttons（标头和按钮）
@@ -151,7 +151,7 @@ Events（事件）
    <details>
      <summary>显示原文</summary>
 
-No special events are sent by the windows, however events can be added
+No special events are sent by the windows Widgets, however events can be added
 manually to the return value of :cpp:func:`lv_win_add_button`.
 
 Learn more about :ref:`events`.
@@ -177,9 +177,11 @@ Keys（按键）
    <details>
      <summary>显示原文</summary>
 
-No *Keys* are handled by the window.
+No *Keys* are handled by the window Widgets.
 
-Learn more about :ref:`indev_keys`.
+.. admonition::  Further Reading
+
+    Learn more about :ref:`indev_keys`.
 
 .. raw:: html
 
