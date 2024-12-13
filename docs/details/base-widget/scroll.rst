@@ -1,8 +1,8 @@
 .. _scroll:
 
-==============
-Scroll（滚动）
-==============
+================
+Scrolling（滚动）
+================
 
 Overview（概述）
 ****************
@@ -12,14 +12,14 @@ Overview（概述）
    <details>
      <summary>显示原文</summary>
 
-In LVGL scrolling works very intuitively: if an object is outside its
+In LVGL scrolling works very intuitively: if a Widget is outside its
 parent content area (the size without padding), the parent becomes
 scrollable and scrollbar(s) will appear. That's it.
 
-Any object can be scrollable including ``lv_obj``, ``lv_image``,
+Any Widget can be scrollable including :ref:`base_widget`, ``lv_image``,
 ``lv_button``, ``lv_meter``, etc
 
-The object can either be scrolled horizontally or vertically in one
+The Widget can either be scrolled horizontally or vertically in one
 stroke; diagonal scrolling is not possible.
 
 .. raw:: html
@@ -28,11 +28,11 @@ stroke; diagonal scrolling is not possible.
    <br>
 
 
-在LVGL中，滚动的工作方式非常直观：如果一个对象超出了其父对象内容区域（不包括内边距的大小），那么其父对象就会变成可滚动的，并且会出现滚动条。就是这样。
+在LVGL中，滚动的工作方式非常直观：如果一个Widget超出了其父对象的内容区域（即去除内边距后的大小），其父对象就会变得可滚动，并且滚动条会出现。就是这样简单。
 
-任何对象都可以是可滚动的，包括 ``lv_obj``, ``lv_image``, ``lv_button``, ``lv_meter`` 等。
+任何Widget都可以是可滚动的，包括:ref:`base_widget`、``lv_image``、``lv_button``、``lv_meter``等。
 
-对象可以在一个操作中水平或垂直滚动；无法进行对角线滚动。
+Widget可以在一次滑动中水平或垂直滚动；但不支持对角线方向的滚动。
 
 
 Scrollbar（滚动条）
@@ -46,15 +46,15 @@ Mode（模式）
    <details>
      <summary>显示原文</summary>
 
-Scrollbars are displayed according to a configured ``mode``. The
-following ``mode``\ (s) exist:
+Scrollbars are displayed according to the configured ``scrollbar-mode``.  The
+following modes are available:
 
 - :cpp:enumerator:`LV_SCROLLBAR_MODE_OFF`: Never show the scrollbars
 - :cpp:enumerator:`LV_SCROLLBAR_MODE_ON`: Always show the scrollbars
-- :cpp:enumerator:`LV_SCROLLBAR_MODE_ACTIVE`: Show scroll bars while an object is being scrolled
+- :cpp:enumerator:`LV_SCROLLBAR_MODE_ACTIVE`: Show scroll bars while a Widget is being scrolled
 - :cpp:enumerator:`LV_SCROLLBAR_MODE_AUTO`: Show scroll bars when the content is large enough to be scrolled
 
-``lv_obj_set_scrollbar_mode(obj, LV_SCROLLBAR_MODE_...)`` sets the scrollbar mode on an object.
+:cpp:expr:`lv_obj_set_scrollbar_mode(widget, LV_SCROLLBAR_MODE_...)` sets the scrollbar mode on a Widget.
 
 .. raw:: html
 
@@ -62,15 +62,14 @@ following ``mode``\ (s) exist:
    <br>
 
 
-滚动条的显示方式根据配置的 ``mode`` 来确定。存在以下几种 ``mode``：
+滚动条的显示取决于配置的``scrollbar-mode``。可用的模式如下：
 
-- :cpp:enumerator:`LV_SCROLLBAR_MODE_OFF`：从不显示滚动条
-- :cpp:enumerator:`LV_SCROLLBAR_MODE_ON`：始终显示滚动条
-- :cpp:enumerator:`LV_SCROLLBAR_MODE_ACTIVE`：在对象滚动时显示滚动条
-- :cpp:enumerator:`LV_SCROLLBAR_MODE_AUTO`：当内容足够大可以滚动时显示滚动条
+- :cpp:enumerator:`LV_SCROLLBAR_MODE_OFF`: 从不显示滚动条
+- :cpp:enumerator:`LV_SCROLLBAR_MODE_ON`: 始终显示滚动条
+- :cpp:enumerator:`LV_SCROLLBAR_MODE_ACTIVE`: 当Widget正在被滚动时显示滚动条
+- :cpp:enumerator:`LV_SCROLLBAR_MODE_AUTO`: 当内容足够大以至于可以滚动时显示滚动条
 
-通过 ``lv_obj_set_scrollbar_mode(obj, LV_SCROLLBAR_MODE_...)`` 可以设置对象上的滚动条模式。
-
+使用:cpp:expr:`lv_obj_set_scrollbar_mode(widget, LV_SCROLLBAR_MODE_...)`可以为Widget设置滚动条模式。
 
 Styling（样式）
 ^^^^^^^^^^^^^^^
@@ -80,11 +79,11 @@ Styling（样式）
    <details>
      <summary>显示原文</summary>
 
-The scrollbars have their own dedicated part, called
-:cpp:enumerator:`LV_PART_SCROLLBAR`. For example a scrollbar can turn to red like
+A Scrollbar is a dedicated part of a Widget, called
+:cpp:enumerator:`LV_PART_SCROLLBAR`.  For example, a scrollbar can turn to red like
 this:
 
-.. code:: c
+.. code-block:: c
 
    static lv_style_t style_red;
    lv_style_init(&style_red);
@@ -92,14 +91,14 @@ this:
 
    ...
 
-   lv_obj_add_style(obj, &style_red, LV_PART_SCROLLBAR);
+   lv_obj_add_style(widget, &style_red, LV_PART_SCROLLBAR);
 
-An object goes to the :cpp:enumerator:`LV_STATE_SCROLLED` state while it's being
-scrolled. This allows adding different styles to the scrollbar or the
-object itself when scrolled. This code makes the scrollbar blue when the
-object is scrolled:
+A Widget goes to the :cpp:enumerator:`LV_STATE_SCROLLED` state while it's being
+scrolled.  This allows adding different styles to the Widget that will be effective
+while it is being scrolled.  For example, this code makes the scrollbar blue while
+the Widget is being scrolled:
 
-.. code:: c
+.. code-block:: c
 
    static lv_style_t style_blue;
    lv_style_init(&style_blue);
@@ -107,14 +106,14 @@ object is scrolled:
 
    ...
 
-   lv_obj_add_style(obj, &style_blue, LV_STATE_SCROLLED | LV_PART_SCROLLBAR);
+   lv_obj_add_style(widget, &style_blue, LV_STATE_SCROLLED | LV_PART_SCROLLBAR);
 
 If the base direction of the :cpp:enumerator:`LV_PART_SCROLLBAR` is RTL
 (:c:macro:`LV_BASE_DIR_RTL`) the vertical scrollbar will be placed on the left.
 Note that, the ``base_dir`` style property is inherited. Therefore, it
-can be set directly on the :cpp:enumerator:`LV_PART_SCROLLBAR` part of an object or on
-the object's or any parent's main part to make a scrollbar inherit the
-base direction.
+can be set directly on the :cpp:enumerator:`LV_PART_SCROLLBAR` part of a Widget, or
+on the Widget's LV_PART_MAIN part, or that of any of its parents, to make a scrollbar
+inherit the base direction.
 
 ``pad_left/right/top/bottom`` sets the spacing around the scrollbars and
 ``width`` sets the scrollbar's width.
@@ -126,9 +125,9 @@ base direction.
    <br>
 
 
-滚动条有其专用的部分，称为 :cpp:enumerator:`LV_PART_SCROLLBAR`。例如，滚动条可以像这样变成红色：
+滚动条是Widget的一个专用部分，称为:cpp:enumerator:`LV_PART_SCROLLBAR`。例如，可以通过以下代码将滚动条设置为红色：
 
-.. code:: c
+.. code-block:: c
 
    static lv_style_t style_red;
    lv_style_init(&style_red);
@@ -136,11 +135,11 @@ base direction.
 
    ...
 
-   lv_obj_add_style(obj, &style_red, LV_PART_SCROLLBAR);
+   lv_obj_add_style(widget, &style_red, LV_PART_SCROLLBAR);
 
-当对象正在被滚动时，它会进入 :cpp:enumerator:`LV_STATE_SCROLLED` 状态。这允许当滚动时，向滚动条或对象本身添加不同的样式。此代码使对象被滚动时滚动条变蓝色：
+当Widget正在被滚动时，它会进入:cpp:enumerator:`LV_STATE_SCROLLED`状态。这允许为Widget添加在滚动期间有效的不同样式。例如，以下代码会在Widget滚动时将滚动条设置为蓝色：
 
-.. code:: c
+.. code-block:: c
 
    static lv_style_t style_blue;
    lv_style_init(&style_blue);
@@ -148,30 +147,31 @@ base direction.
 
    ...
 
-   lv_obj_add_style(obj, &style_blue, LV_STATE_SCROLLED | LV_PART_SCROLLBAR);
+   lv_obj_add_style(widget, &style_blue, LV_STATE_SCROLLED | LV_PART_SCROLLBAR);
 
-如果 :cpp:enumerator:`LV_PART_SCROLLBAR` 的基本方向是RTL(:c:macro:`LV_BASE_DIR_RTL`) ，垂直滚动条将被放置在左侧。请注意， ``base_dir`` 样式属性是继承的。
-因此，它可以直接在对象的 :cpp:enumerator:`LV_PART_SCROLLBAR` 部分上设置，或者在对象的或任何父级的主要部分上设置，以使滚动条继承基本方向。
+如果:cpp:enumerator:`LV_PART_SCROLLBAR`的基础方向是RTL (:c:macro:`LV_BASE_DIR_RTL`)，垂直滚动条将会被放置在左侧。请注意，``base_dir``样式属性是继承的。因此，可以直接在Widget的:cpp:enumerator:`LV_PART_SCROLLBAR`部分上设置，也可以在Widget的LV_PART_MAIN部分或其任意父对象上设置，从而让滚动条继承基础方向。
 
-``pad_left/right/top/bottom`` 设置滚动条周围的间距， ``width`` 设置滚动条的宽度。
+``pad_left/right/top/bottom``属性设置滚动条周围的间距，``width``属性设置滚动条的宽度。
 
 
 .. _scroll_events:
 
-Events(事件)
-------------
+Scrolling Events(事件)
+----------------------
 
 .. raw:: html
 
    <details>
      <summary>显示原文</summary>
 
-The following events are related to scrolling:
+The following events are emitted as part of scrolling:
 
-- :cpp:enumerator:`LV_EVENT_SCROLL_BEGIN`: Scrolling begins. The event parameter is
-  ``NULL`` or an ``lv_anim_t *`` with a scroll animation descriptor that can be modified if required.
-- :cpp:enumerator:`LV_EVENT_SCROLL_END`: Scrolling ends.
-- :cpp:enumerator:`LV_EVENT_SCROLL`: Scroll happened. Triggered on every position change. Scroll events
+- :cpp:enumerator:`LV_EVENT_SCROLL_BEGIN`: Signals that scrolling has begun. The
+  event parameter is ``NULL`` or an ``lv_anim_t *`` with a scroll animation
+  descriptor that can be modified if required.
+- :cpp:enumerator:`LV_EVENT_SCROLL_END`: Signals that scrolling has ended.
+- :cpp:enumerator:`LV_EVENT_SCROLL`: Signals that the scrolling position changed;
+  triggered on every position change.
 
 .. raw:: html
 
@@ -202,15 +202,12 @@ Features of scrolling（滚动的特点）
 Besides, managing "normal" scrolling there are many interesting and
 useful additional features.
 
-
-此外，除了管理“正常”滚动外，还有许多有趣和实用的额外功能。
-
-
 .. raw:: html
 
    </details>
    <br>
 
+此外，除了管理“正常”滚动外，还有许多有趣和实用的额外功能。
   
 Scrollable（滚动效果）
 ----------------------
@@ -220,15 +217,16 @@ Scrollable（滚动效果）
    <details>
      <summary>显示原文</summary>
 
-It's possible to make an object non-scrollable with
-:cpp:expr:`lv_obj_remove_flag(obj, LV_OBJ_FLAG_SCROLLABLE)`.
+It is possible to make a Widget non-scrollable with
+:cpp:expr:`lv_obj_remove_flag(widget, LV_OBJ_FLAG_SCROLLABLE)`.
 
-Non-scrollable objects can still propagate the scrolling (chain) to
+Non-scrollable Widgets can still propagate the scrolling (chain) to
 their parents.
 
-The direction in which scrolling happens can be controlled by ``lv_obj_set_scroll_dir(obj, LV_DIR_...)``. 
+The direction in which scrolling happens can be controlled by
+:cpp:expr:`lv_obj_set_scroll_dir(widget, LV_DIR_...)`.
 
-The following values are possible for the direction:
+The following values can be used for the direction:
 
 - :cpp:enumerator:`LV_DIR_TOP`: only scroll up
 - :cpp:enumerator:`LV_DIR_LEFT`: only scroll left
@@ -246,26 +244,26 @@ OR-ed values are also possible. E.g. :cpp:expr:`LV_DIR_TOP | LV_DIR_LEFT`.
    <br>
 
 
-可以使用 :cpp:expr:`lv_obj_remove_flag(obj, LV_OBJ_FLAG_SCROLLABLE)` 来使对象不可滚动。
+可以使用:cpp:expr:`lv_obj_remove_flag(widget, LV_OBJ_FLAG_SCROLLABLE)`使Widget不可滚动。
 
-不可滚动的对象仍然可以将滚动（链）传播到它们的父对象。
+即使Widget不可滚动，它仍然可以将滚动事件（链式）传播给其父对象。
 
-滚动的方向可以通过 ``lv_obj_set_scroll_dir(obj, LV_DIR_...)`` 来控制。
+滚动发生的方向可以通过:cpp:expr:`lv_obj_set_scroll_dir(widget, LV_DIR_...)`进行控制。
 
-以下值可以用于指定方向：
+以下是可用的方向值：
 
-- :cpp:enumerator:`LV_DIR_TOP`: 只向上滚动
-- :cpp:enumerator:`LV_DIR_LEFT`: 只向左滚动
-- :cpp:enumerator:`LV_DIR_BOTTOM`: 只向下滚动
-- :cpp:enumerator:`LV_DIR_RIGHT`: 只向右滚动
-- :cpp:enumerator:`LV_DIR_HOR`: 只水平滚动
-- :cpp:enumerator:`LV_DIR_VER`: 只垂直滚动
-- :cpp:enumerator:`LV_DIR_ALL`: 滚动任何方向
+- :cpp:enumerator:`LV_DIR_TOP`: 仅向上滚动
+- :cpp:enumerator:`LV_DIR_LEFT`: 仅向左滚动
+- :cpp:enumerator:`LV_DIR_BOTTOM`: 仅向下滚动
+- :cpp:enumerator:`LV_DIR_RIGHT`: 仅向右滚动
+- :cpp:enumerator:`LV_DIR_HOR`: 仅水平滚动
+- :cpp:enumerator:`LV_DIR_VER`: 仅垂直滚动
+- :cpp:enumerator:`LV_DIR_ALL`: 任意方向滚动
 
-也可以组合多个方向。比如：:cpp:expr:`LV_DIR_TOP | LV_DIR_LEFT`。
+还可以使用按位或的值。例如:cpp:expr:`LV_DIR_TOP | LV_DIR_LEFT`。
 
 
-Scroll chain（滚动条）
+Scroll chaining（滚动条）
 ----------------------
 
 .. raw:: html
@@ -273,15 +271,15 @@ Scroll chain（滚动条）
    <details>
      <summary>显示原文</summary>
 
-If an object can't be scrolled further (e.g. its content has reached the
-bottom-most position) additional scrolling is propagated to its parent.
+If a Widget can't be scrolled further (e.g. its content has reached the
+bottom-most position), additional scrolling is propagated to its parent.
 If the parent can be scrolled in that direction than it will be scrolled
-instead. It continues propagating to the grandparent and
-grand-grandparents as well.
+instead. It continues propagating up the Widget's parent hierarchy up to
+the :ref:`Screen <screens>`.
 
 The propagation on scrolling is called "scroll chaining" and it can be
 enabled/disabled with ``LV_OBJ_FLAG_SCROLL_CHAIN_HOR/VER`` flag. If
-chaining is disabled the propagation stops on the object and the
+chaining is disabled the propagation stops on the Widget and the
 parent(s) won't be scrolled.
 
 .. raw:: html
@@ -303,11 +301,12 @@ Scroll momentum（滚动惯性效果）
    <details>
      <summary>显示原文</summary>
 
-When the user scrolls an object and releases it, LVGL can emulate
-inertial momentum for the scrolling. It's like the object was thrown and
-scrolling slows down smoothly.
+When the user scrolls a Widget and releases it, LVGL can emulate
+inertial momentum for the scrolling. It's like the Widget was "thrown"
+and scrolling slows down smoothly.
 
-The scroll momentum can be enabled/disabled with the :cpp:enumerator:`LV_OBJ_FLAG_SCROLL_MOMENTUM` flag.
+Scroll momentum can be enabled/disabled with the
+:cpp:enumerator:`LV_OBJ_FLAG_SCROLL_MOMENTUM` flag.
 
 .. raw:: html
 
@@ -315,9 +314,9 @@ The scroll momentum can be enabled/disabled with the :cpp:enumerator:`LV_OBJ_FLA
    <br>
 
 
-当用户滚动一个对象并释放时，LVGL可以模拟滚动的惯性动量。就像物体被扔出去一样，滚动平稳地减速。
+当用户滚动一个Widget并释放时，LVGL可以模拟滚动的惯性动量。就像Widget被“抛出”一样，滚动会平滑地减速。
 
-滚动动量可以通过设置 :cpp:enumerator:`LV_OBJ_FLAG_SCROLL_MOMENTUM` 标志来启用/禁用。
+可以通过:cpp:enumerator:`LV_OBJ_FLAG_SCROLL_MOMENTUM`标志启用或禁用滚动动量。
 
 
 Elastic scroll（弹性卷轴效果）
@@ -328,14 +327,14 @@ Elastic scroll（弹性卷轴效果）
    <details>
      <summary>显示原文</summary>
 
-Normally an object can't be scrolled past the extremities of its
-content. That is the top side of the content can't be below the top side
-of the object.
+Normally a Widget can't be scrolled past the extremities of its
+content.  That is, the top side of the content can't be below the top side
+of the Widget, and vice versa for the bottom side.
 
 However, with :cpp:enumerator:`LV_OBJ_FLAG_SCROLL_ELASTIC` a fancy effect is added
 when the user "over-scrolls" the content. The scrolling slows down, and
-the content can be scrolled inside the object. When the object is
-released the content scrolled in it will be animated back to the valid
+the content can be scrolled inside the Widget. When the Widget is
+released the content scrolled in it is animated back to the closest valid
 position.
 
 .. raw:: html
@@ -358,26 +357,27 @@ Snapping（捕捉）
    <details>
      <summary>显示原文</summary>
 
-The children of an object can be snapped according to specific rules
+The children of a Widget can be snapped according to specific rules
 when scrolling ends. Children can be made snappable individually with
 the :cpp:enumerator:`LV_OBJ_FLAG_SNAPPABLE` flag.
 
-An object can align snapped children in four ways:
+A Widget can align snapped children in four ways:
 
 - :cpp:enumerator:`LV_SCROLL_SNAP_NONE`: Snapping is disabled. (default)
-- :cpp:enumerator:`LV_SCROLL_SNAP_START`: Align the children to the left/top side of a scrolled object
-- :cpp:enumerator:`LV_SCROLL_SNAP_END`: Align the children to the right/bottom side of a scrolled object
-- :cpp:enumerator:`LV_SCROLL_SNAP_CENTER`: Align the children to the center of a scrolled object
+- :cpp:enumerator:`LV_SCROLL_SNAP_START`: Align the children to the left/top side of a scrolled Widget
+- :cpp:enumerator:`LV_SCROLL_SNAP_END`: Align the children to the right/bottom side of a scrolled Widget
+- :cpp:enumerator:`LV_SCROLL_SNAP_CENTER`: Align the children to the center of a scrolled Widget
 
 Snap alignment is set with
-``lv_obj_set_scroll_snap_x/y(obj, LV_SCROLL_SNAP_...)``:
+:cpp:expr:`lv_obj_set_scroll_snap_x(widget, LV_SCROLL_SNAP_...)` and
+:cpp:expr:`lv_obj_set_scroll_snap_y(widget, LV_SCROLL_SNAP_...)`.
 
-Under the hood the following happens:
+This is what happens under the hood:
 
-1. User scrolls an object and releases the screen
-2. LVGL calculates where the scroll would end considering scroll momentum
-3. LVGL finds the nearest scroll point
-4. LVGL scrolls to the snap point with an animation
+1. user scrolls and releases a Widget;
+2. LVGL calculates where the scroll would end considering scroll momentum;
+3. LVGL finds the nearest scroll point;
+4. LVGL scrolls to the snap point with an animation.
 
 .. raw:: html
 
@@ -385,23 +385,25 @@ Under the hood the following happens:
    <br>
 
 
-这个对象的子对象可以根据特定规则进行对齐。当滚动结束时，子对象可以通过设置 :cpp:enumerator:`LV_OBJ_FLAG_SNAPPABLE` 标志单独进行对齐。
+当滚动结束时，Widget的子对象可以根据特定规则对齐（snap）。子对象可以通过设置:cpp:enumerator:`LV_OBJ_FLAG_SNAPPABLE`标志单独启用snap功能。
 
-一个对象可以以四种方式对齐被捕获的子项：
+Widget可以以以下四种方式对齐其子对象：
 
-- :cpp:enumerator:`LV_SCROLL_SNAP_NONE`: 对齐被禁用。（默认设置）
-- :cpp:enumerator:`LV_SCROLL_SNAP_START`: 将子项对齐到滚动对象的左/顶部
-- :cpp:enumerator:`LV_SCROLL_SNAP_END`: 将子项对齐到滚动对象的右/底部
-- :cpp:enumerator:`LV_SCROLL_SNAP_CENTER`: 将子项对齐到滚动对象的中心
+- :cpp:enumerator:`LV_SCROLL_SNAP_NONE`: 禁用对齐功能。（默认）
+- :cpp:enumerator:`LV_SCROLL_SNAP_START`: 将子对象对齐到滚动Widget的左侧/顶部。
+- :cpp:enumerator:`LV_SCROLL_SNAP_END`: 将子对象对齐到滚动Widget的右侧/底部。
+- :cpp:enumerator:`LV_SCROLL_SNAP_CENTER`: 将子对象对齐到滚动Widget的中心。
 
-通过 ``lv_obj_set_scroll_snap_x/y(obj, LV_SCROLL_SNAP_...)`` 设置对齐方式：
+可以通过以下方法设置snap对齐方式：
+- :cpp:expr:`lv_obj_set_scroll_snap_x(widget, LV_SCROLL_SNAP_...)`：设置水平方向的snap。
+- :cpp:expr:`lv_obj_set_scroll_snap_y(widget, LV_SCROLL_SNAP_...)`：设置垂直方向的snap。
 
-在底层，以下操作会发生：
+以下是内部处理流程：
 
-1. 用户滚动对象并释放屏幕
-2. LVGL根据滚动动量计算滚动结束的位置
-3. LVGL找到最近的滚动点
-4. LVGL以动画的方式滚动到对齐点
+1. 用户滚动并释放Widget；
+2. LVGL根据滚动动量计算滚动结束的位置；
+3. LVGL找到最近的snap点；
+4. LVGL通过动画滚动到snap点。
 
 
 Scroll one(只滚动一个)
@@ -414,7 +416,7 @@ Scroll one(只滚动一个)
 
 The "scroll one" feature tells LVGL to allow scrolling only one
 snappable child at a time. This requires making the children snappable
-and setting a scroll snap alignment different from
+and setting scroll snap alignment to something other than
 :cpp:enumerator:`LV_SCROLL_SNAP_NONE`.
 
 This feature can be enabled by the :cpp:enumerator:`LV_OBJ_FLAG_SCROLL_ONE` flag.
@@ -438,13 +440,13 @@ Scroll on focus（滚动焦点）
    <details>
      <summary>显示原文</summary>
 
-Imagine that there a lot of objects in a group that are on a scrollable
-object. Pressing the "Tab" button focuses the next object but it might
-be outside the visible area of the scrollable object. If the "scroll on
-focus" feature is enabled LVGL will automatically scroll objects to
-bring their children into view. The scrolling happens recursively
-therefore even nested scrollable objects are handled properly. The
-object will be scrolled into view even if it's on a different page of a
+Imagine that there are a lot of Widgets in a group that are on a scrollable
+Widget. Pressing the "Tab" button moves focus to the next Widget but it might
+be outside the visible area of the scrollable Widget. If the "scroll on
+focus" feature is enabled LVGL will automatically scroll Widgets to
+bring the child Widget with focus into view.  The scrolling happens recursively
+therefore even nested scrollable Widgets are handled properly. The
+Widget will be scrolled into view even if it is on a different page of a
 tabview.
 
 .. raw:: html
@@ -458,48 +460,57 @@ tabview.
 即使对象在选项卡视图的不同页面上，它也会被滚动到视图中。
 
 
-Scroll manually（手动滚动）
-***************************
+Scrolling Programmatically
+**************************
 
 .. raw:: html
 
    <details>
      <summary>显示原文</summary>
 
-The following API functions allow manual scrolling of objects:
+The following API functions allow programmatic scrolling of Widgets:
 
-- ``lv_obj_scroll_by(obj, x, y, LV_ANIM_ON/OFF)`` scroll by ``x`` and ``y`` values
-- ``lv_obj_scroll_to(obj, x, y, LV_ANIM_ON/OFF)`` scroll to bring the given coordinate to the top left corner
-- ``lv_obj_scroll_to_x(obj, x, LV_ANIM_ON/OFF)`` scroll to bring the given coordinate to the left side
-- ``lv_obj_scroll_to_y(obj, y, LV_ANIM_ON/OFF)`` scroll to bring the given coordinate to the top side
+- ``lv_obj_scroll_by(widget, x, y, LV_ANIM_ON/OFF)`` scroll by ``x`` and ``y`` values
+- ``lv_obj_scroll_to(widget, x, y, LV_ANIM_ON/OFF)`` scroll to bring the given coordinate to the top left corner
+- ``lv_obj_scroll_to_x(widget, x, LV_ANIM_ON/OFF)`` scroll to bring the given coordinate to the left side
+- ``lv_obj_scroll_to_y(widget, y, LV_ANIM_ON/OFF)`` scroll to bring the given coordinate to the top side
 
-From time to time you may need to retrieve the scroll position of an
-element, either to restore it later, or to display dynamically some
-elements according to the current scroll. Here is an example to see how
-to combine scroll event and store the scroll top position.
+From time to time you may need to retrieve the *scroll position* of a
+scrollable Widget, either to restore it later, or to dynamically display some
+elements according to its current scroll position. Here is an example to illustrate
+how to combine scroll event and store the scroll-top position.
 
-.. code:: c
+.. code-block:: c
 
    static int scroll_value = 0;
 
-   static void store_scroll_value_event_cb(lv_event_t* e) {
-     lv_obj_t* screen = lv_event_get_target(e);
-     scroll_value = lv_obj_get_scroll_top(screen);
-     printf("%d pixels are scrolled out on the top\n", scroll_value);
+   static void store_scroll_top_value_event_cb(lv_event_t* e) {
+     lv_obj_t * scr = lv_event_get_target(e);
+     scroll_value = lv_obj_get_scroll_top(scr);
+     printf("%d pixels are scrolled above top edge of display.\n", scroll_value);
    }
 
-   lv_obj_t* container = lv_obj_create(NULL);
-   lv_obj_add_event_cb(container, store_scroll_value_event_cb, LV_EVENT_SCROLL, NULL);
+   lv_obj_t * scr = lv_obj_create(NULL);
+   lv_obj_add_event_cb(scr, store_scroll_top_value_event_cb, LV_EVENT_SCROLL, NULL);
 
-Scroll coordinates can be retrieved from different axes with these
-functions:
+Scroll coordinates can be retrieved from different axes with these functions:
 
-- ``lv_obj_get_scroll_x(obj)`` Get the ``x`` coordinate of object
-- ``lv_obj_get_scroll_y(obj)`` Get the ``y`` coordinate of object
-- ``lv_obj_get_scroll_top(obj)`` Get the scroll coordinate from the top
-- ``lv_obj_get_scroll_bottom(obj)`` Get the scroll coordinate from the bottom
-- ``lv_obj_get_scroll_left(obj)`` Get the scroll coordinate from the left
-- ``lv_obj_get_scroll_right(obj)`` Get the scroll coordinate from the right
+- :cpp:expr:`lv_obj_get_scroll_x(widget)`      Pixels scrolled past left edge of Widget's view window.
+- :cpp:expr:`lv_obj_get_scroll_y(widget)`      Pixels scrolled past top of Widget's view window.
+- :cpp:expr:`lv_obj_get_scroll_top(widget)`    Identical to :cpp:expr:`lv_obj_get_scroll_y(widget)`
+- :cpp:expr:`lv_obj_get_scroll_bottom(widget)` Pixels scrolled past bottom of Widget's view window.
+- :cpp:expr:`lv_obj_get_scroll_left(widget)`   Identical to :cpp:expr:`lv_obj_get_scroll_x(widget)`.
+- :cpp:expr:`lv_obj_get_scroll_right(widget)`  Pixels scrolled past right edge of Widget's view window.
+
+Setting scroll position can be done with these functions:
+
+- :cpp:expr:`lv_obj_scroll_by(widget, dx, dy, anim_enable)`               Scroll by given amount of pixels.
+- :cpp:expr:`lv_obj_scroll_by_bounded(widget, dx, dy, animation_enable)`  Scroll by given amount of pixels.
+- :cpp:expr:`lv_obj_scroll_to(widget, x, y, animation_enable)`            Scroll to given coordinate on Widget.
+- :cpp:expr:`lv_obj_scroll_to_x(widget, x, animation_enable)`             Scroll to X coordinate on Widget.
+- :cpp:expr:`lv_obj_scroll_to_y(widget, y, animation_enable)`             Scroll to Y coordinate on Widget.
+- :cpp:expr:`lv_obj_scroll_to_view(widget, animation_enable)`             Scroll ``obj``'s parent Widget until ``obj`` becomes visible.
+- :cpp:expr:`lv_obj_scroll_to_view_recursive(widget, animation_enable)`   Scroll ``obj``'s parent Widgets recursively until ``obj`` becomes visible.
 
 .. raw:: html
 
@@ -507,39 +518,49 @@ functions:
    <br>
 
 
-以下API函数允许手动滚动对象：
+以下API函数可以用于以编程方式滚动Widgets：
 
-- ``lv_obj_scroll_by(obj, x, y, LV_ANIM_ON/OFF)`` 按照给定的 ``x`` 和 ``y`` 值滚动
-- ``lv_obj_scroll_to(obj, x, y, LV_ANIM_ON/OFF)`` 滚动以将给定坐标带到左上角
-- ``lv_obj_scroll_to_x(obj, x, LV_ANIM_ON/OFF)`` 滚动以将给定坐标带到左侧
-- ``lv_obj_scroll_to_y(obj, y, LV_ANIM_ON/OFF)`` 滚动以将给定坐标带到顶部
+- ``lv_obj_scroll_by(widget, x, y, LV_ANIM_ON/OFF)`` 根据``x``和``y``的值进行滚动。
+- ``lv_obj_scroll_to(widget, x, y, LV_ANIM_ON/OFF)`` 滚动以将指定坐标移动到左上角。
+- ``lv_obj_scroll_to_x(widget, x, LV_ANIM_ON/OFF)`` 滚动以将指定坐标移动到左侧。
+- ``lv_obj_scroll_to_y(widget, y, LV_ANIM_ON/OFF)`` 滚动以将指定坐标移动到顶部。
 
-有时您可能需要检索元素的滚动位置，以便稍后恢复它，或者根据当前滚动动态显示一些元素。以下是一个示例，介绍如何结合滚动事件并存储滚动顶部位置。
+有时，您可能需要获取可滚动Widget的*滚动位置*，以便稍后恢复，或者根据当前的滚动位置动态显示一些元素。以下示例说明了如何结合滚动事件存储滚动顶部的位置：
 
-.. code:: c
+.. code-block:: c
 
    static int scroll_value = 0;
 
-   static void store_scroll_value_event_cb(lv_event_t* e) {
-     lv_obj_t* screen = lv_event_get_target(e);
-     scroll_value = lv_obj_get_scroll_top(screen);
-     printf("向上滚动了%d像素\n", scroll_value);
+   static void store_scroll_top_value_event_cb(lv_event_t* e) {
+     lv_obj_t * scr = lv_event_get_target(e);
+     scroll_value = lv_obj_get_scroll_top(scr);
+     printf("%d pixels are scrolled above top edge of display.\n", scroll_value);
    }
 
-   lv_obj_t* container = lv_obj_create(NULL);
-   lv_obj_add_event_cb(container, store_scroll_value_event_cb, LV_EVENT_SCROLL, NULL);
+   lv_obj_t * scr = lv_obj_create(NULL);
+   lv_obj_add_event_cb(scr, store_scroll_top_value_event_cb, LV_EVENT_SCROLL, NULL);
 
-使用这些函数可以从不同轴检索滚动坐标：
+可以通过以下函数从不同的轴获取滚动坐标：
 
-- ``lv_obj_get_scroll_x(obj)`` 获取对象的 ``x`` 坐标
-- ``lv_obj_get_scroll_y(obj)`` 获取对象的 ``y`` 坐标
-- ``lv_obj_get_scroll_top(obj)`` 从顶部获取滚动坐标
-- ``lv_obj_get_scroll_bottom(obj)`` 从底部获取滚动坐标
-- ``lv_obj_get_scroll_left(obj)`` 从左侧获取滚动坐标
-- ``lv_obj_get_scroll_right(obj)`` 从右侧获取滚动坐标
+- :cpp:expr:`lv_obj_get_scroll_x(widget)`      滚动超过Widget视窗左侧的像素。
+- :cpp:expr:`lv_obj_get_scroll_y(widget)`      滚动超过Widget视窗顶部的像素。
+- :cpp:expr:`lv_obj_get_scroll_top(widget)`    等同于:cpp:expr:`lv_obj_get_scroll_y(widget)`。
+- :cpp:expr:`lv_obj_get_scroll_bottom(widget)` 滚动超过Widget视窗底部的像素。
+- :cpp:expr:`lv_obj_get_scroll_left(widget)`   等同于:cpp:expr:`lv_obj_get_scroll_x(widget)`。
+- :cpp:expr:`lv_obj_get_scroll_right(widget)`  滚动超过Widget视窗右侧的像素。
+
+可以通过以下函数设置滚动位置：
+
+- :cpp:expr:`lv_obj_scroll_by(widget, dx, dy, anim_enable)`               按指定像素量滚动。
+- :cpp:expr:`lv_obj_scroll_by_bounded(widget, dx, dy, animation_enable)`  按指定像素量滚动。
+- :cpp:expr:`lv_obj_scroll_to(widget, x, y, animation_enable)`            滚动到Widget上的指定坐标。
+- :cpp:expr:`lv_obj_scroll_to_x(widget, x, animation_enable)`             滚动到Widget上的X坐标。
+- :cpp:expr:`lv_obj_scroll_to_y(widget, y, animation_enable)`             滚动到Widget上的Y坐标。
+- :cpp:expr:`lv_obj_scroll_to_view(widget, animation_enable)`             滚动父Widget直到``obj``变得可见。
+- :cpp:expr:`lv_obj_scroll_to_view_recursive(widget, animation_enable)`   递归滚动父Widget直到``obj``变得可见。
 
 
-Self size（自身尺寸）
+Self Size（自身尺寸）
 *********************
 
 .. raw:: html
@@ -547,36 +568,36 @@ Self size（自身尺寸）
    <details>
      <summary>显示原文</summary>
 
-Self size is a property of an object. Normally, the user shouldn't use
+Self size is a property of a Widget. Normally, the user shouldn't use
 this parameter but if a custom widget is created it might be useful.
 
-In short, self size establishes the size of an object's content. To
+In short, self size establishes the size of a Widget's content. To
 understand it better take the example of a table. Let's say it has 10
 rows each with 50 px height. So the total height of the content is 500
 px. In other words the "self height" is 500 px. If the user sets only
 200 px height for the table LVGL will see that the self size is larger
 and make the table scrollable.
 
-This means not only the children can make an object scrollable but a
-larger self size will too.
+This means not only the children can make a Widget scrollable but a
+larger self size will as well.
 
 LVGL uses the :cpp:enumerator:`LV_EVENT_GET_SELF_SIZE` event to get the self size of
-an object. Here is an example to see how to handle the event:
+a Widget. Here is an example to see how to handle the event:
 
-.. code:: c
+.. code-block:: c
 
-   if(event_code == LV_EVENT_GET_SELF_SIZE) {
-       lv_point_t * p = lv_event_get_param(e);
+    if(event_code == LV_EVENT_GET_SELF_SIZE) {
+        lv_point_t * p = lv_event_get_param(e);
 
-     //If x or y < 0 then it doesn't need to be calculated now
-     if(p->x >= 0) {
-       p->x = 200; //Set or calculate the self width
-     }
+        /* If x or y < 0 then it doesn't need to be calculated now. */
+        if(p->x >= 0) {
+            p->x = 200; /* Set or calculate self width. */
+        }
 
-     if(p->y >= 0) {
-       p->y = 50;  //Set or calculate the self height
-     }
-   }
+        if(p->y >= 0) {
+            p->y = 50;  /* Set or calculate self height. */
+        }
+    }
 
 .. raw:: html
 
@@ -584,37 +605,35 @@ an object. Here is an example to see how to handle the event:
    <br>
 
 
-自身大小是一个对象的属性。通常情况下，用户不应该使用这个参数，但如果创建了一个自定义控件，它可能会很有用。
+自尺寸（Self size）是Widget的一个属性。通常，用户不需要直接使用这个参数，但在创建自定义Widget时可能会很有用。
 
-简而言之，自身大小确定了对象内容的大小。为了更好地理解，以表格为例。假设它有10行，每行高度为50像素。
-因此，内容的总高度是500像素。换句话说，“自身高度”为500像素。
-如果用户为表格仅设置了200像素的高度，LVGL将会发现自身大小更大，并使表格可滚动。
+简而言之，自尺寸确定了Widget内容的大小。为了更好地理解这一点，可以看一个表格的例子。假设表格有10行，每行50像素高。那么内容的总高度是500像素。换句话说，“自高度”是500像素。如果用户仅为表格设置了200像素的高度，LVGL会看到自尺寸更大，从而使表格变为可滚动。
 
-这意味着不仅子对象可以使一个对象可滚动，而且更大的自身大小也可以。
+这意味着，不仅子对象的大小可以使Widget变为可滚动，一个较大的自尺寸同样也会让Widget变得可滚动。
 
-LVGL使用 :cpp:enumerator:`LV_EVENT_GET_SELF_SIZE` 事件来获取一个对象的自身大小。下面是一个处理该事件的示例：
+LVGL使用:cpp:enumerator:`LV_EVENT_GET_SELF_SIZE`事件来获取Widget的自尺寸。以下是一个处理该事件的示例：
 
-.. code:: c
+.. code-block:: c
 
-   if(event_code == LV_EVENT_GET_SELF_SIZE) {
-       lv_point_t * p = lv_event_get_param(e);
+    if(event_code == LV_EVENT_GET_SELF_SIZE) {
+        lv_point_t * p = lv_event_get_param(e);
 
-     //如果x或y < 0，则不需要立即计算
-     if(p->x >= 0) {
-       p->x = 200; //设置或计算自身宽度
-     }
+        /* 如果x或y < 0，则不需要立即计算 */
+        if(p->x >= 0) {
+            p->x = 200; /* 设置或计算自宽度 */
+        }
 
-     if(p->y >= 0) {
-       p->y = 50;  //设置或计算自身高度
-     }
-   }
+        if(p->y >= 0) {
+            p->y = 50;  /* 设置或计算自高度 */
+        }
+    }
 
 .. _scroll_example:
 
 Examples
 ********
 
-.. include:: ../examples/scroll/index.rst
+.. include:: ../../examples/scroll/index.rst
 
 .. _scroll_api:
 

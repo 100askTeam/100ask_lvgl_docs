@@ -12,17 +12,17 @@ Overview（概述）
    <details>
      <summary>显示原文</summary>
 
-The Flexbox (or Flex for short) is a subset of `CSS Flexbox <https://css-tricks.com/snippets/css/a-guide-to-flexbox/>`__.
+The Flexbox (or Flex for short) is a subset of `CSS Flexbox`_ behaviors.
 
-It can arrange items into rows or columns (tracks), handle wrapping,
-adjust the spacing between the items and tracks, handle *grow* to make
-the item(s) fill the remaining space with respect to min/max width and
+It can arrange items (child Widgets) into rows or columns (tracks), handle wrapping,
+adjust the spacing between items and tracks, handle *grow* to make
+item(s) fill remaining space with respect to min/max width and
 height.
 
-To make an object flex container call
-:cpp:expr:`lv_obj_set_layout(obj, LV_LAYOUT_FLEX)`.
+To make a Widget a Flex container call
+:cpp:expr:`lv_obj_set_layout(widget, LV_LAYOUT_FLEX)`.
 
-Note that the flex layout feature of LVGL needs to be globally enabled
+Note that the Flex layout feature of LVGL needs to be globally enabled
 with :c:macro:`LV_USE_FLEX` in ``lv_conf.h``.
 
 .. raw:: html
@@ -48,15 +48,17 @@ Terms（约定）
    <details>
      <summary>显示原文</summary>
 
--  **tracks**: the rows or columns
--  **main direction**: row or column, the direction in which the items are
-   placed
--  **cross direction**: perpendicular to the main direction
--  **wrap**: if there is no more space in the track a new track is started
--  **grow**: if set on an item it will grow to fill the remaining space on
+-  **tracks**: rows or columns
+-  **main direction**: row or column, the direction in which multiple items are
+   placed first
+-  **cross direction**: the direction perpendicular to the **main direction**
+-  **wrap**: if there is no more space in the track, a new track is started
+-  **grow**: if set on an item it will "grow" to fill the remaining space in
    the track. The available space will be distributed among items
    respective to their grow value (larger value means more space)
--  **gap**: the space between the rows and columns or the items on a track
+-  **gap**: the space between rows and columns or the items on a track
+
+See `CSS Flexbox`_ for illustrations showing the meanings of these terms.
 
 .. raw:: html
 
@@ -72,8 +74,9 @@ Terms（约定）
 - **grow（增长）**：如果设置在一个元素上，它将增长以填充轨道上的剩余空间。 可用空间将根据其增长值分配给各个元素（值越大意味着空间越大）
 - **gap（间隙）**：行和列或轨道上的元素之间的空间
 
+有关显示这些术语含义的插图，请参见 `CSS Flexbox`_ 。
 
-Simple interface（简单接口）
+Simple Interface（简单接口）
 ******************************
 
 .. raw:: html
@@ -81,7 +84,13 @@ Simple interface（简单接口）
    <details>
      <summary>显示原文</summary>
 
-With the following functions you can set a Flex layout on any parent.
+Use the following functions to set and control the Flex layout on any parent Widget.
+
+.. note::
+
+    The parent Widget must be a Flex container for these styles to take effect.
+    The functions below cause the parent Widget to become a Flex container if it is
+    not already.
 
 .. raw:: html
 
@@ -89,7 +98,12 @@ With the following functions you can set a Flex layout on any parent.
    <br>
 
 
-使用以下功能，可以在任何父级上设置 Flex 布局。
+使用以下函数设置和控制任何父Widget上的Flex布局。
+
+.. 注意::
+
+    父 Widget 必须是 Flex 容器，这些样式才能生效。
+    下面的函数会导致父 Widget 成为 Flex 容器（如果它还不是）。
 
 
 .. _flex_flow:
@@ -102,7 +116,7 @@ Flex flow（布局流向）
    <details>
      <summary>显示原文</summary>
 
-:cpp:expr:`lv_obj_set_flex_flow(obj, flex_flow)`
+:cpp:expr:`lv_obj_set_flex_flow(widget, flex_flow)`
 
 The possible values for ``flex_flow`` are:
 
@@ -114,6 +128,9 @@ The possible values for ``flex_flow`` are:
 - :cpp:enumerator:`LV_FLEX_FLOW_COLUMN_REVERSE`: Place the children in a column without wrapping but in reversed order
 - :cpp:enumerator:`LV_FLEX_FLOW_ROW_WRAP_REVERSE`: Place the children in a row with wrapping but in reversed order
 - :cpp:enumerator:`LV_FLEX_FLOW_COLUMN_WRAP_REVERSE`: Place the children in a column with wrapping but in reversed order
+
+These values cause the Widget's layout behavior to model `CSS Flexbox`_ behavior
+by combining flex-direction_ and flex-wrap_ as defined under flex-flow_.
 
 .. raw:: html
 
@@ -132,7 +149,8 @@ The possible values for ``flex_flow`` are:
 - :cpp:enumerator:`LV_FLEX_FLOW_ROW_WRAP_REVERSE`: 将孩子按行排列并包裹起来，但顺序相反
 - :cpp:enumerator:`LV_FLEX_FLOW_COLUMN_WRAP_REVERSE`: 将孩子按列排列并包裹起来，但顺序相反
 
-（注：flex-flow是flex-direction 与 flex-wrap的结合）
+这些值导致 Widget 的布局行为模拟 `CSS Flexbox`_ 行为
+通过结合 flex-direction_ 和 flex-wrap_ （如 flex-flow_ 下定义）。
 
 
 .. _flex_align:
@@ -145,35 +163,40 @@ Flex align（对齐方式）
    <details>
      <summary>显示原文</summary>
 
-To manage the placement of the children use
-:cpp:expr:`lv_obj_set_flex_align(obj,  main_place, cross_place, track_cross_place)`
+To manage placement of children use
+:cpp:expr:`lv_obj_set_flex_align(widget,  main_place, cross_place, track_cross_place)`
+which makes the parent Widget model the Flex-container behavior defined `here
+<justify-content_>`_.
 
 -  ``main_place`` determines how to distribute the items in their track
-   on the main axis. E.g. flush the items to the right on :cpp:enumerator:`LV_FLEX_FLOW_ROW_WRAP`. (It's called
-   ``justify-content`` in CSS)
+   on the main axis. E.g. flush the items to the right on
+   :cpp:enumerator:`LV_FLEX_FLOW_ROW_WRAP`. (It's called
+   justify-content_ in CSS.)
 -  ``cross_place`` determines how to distribute the items in their track
-   on the cross axis. E.g. if the items have different height place them
-   to the bottom of the track. (It's called ``align-items`` in CSS)
+   on the cross axis. E.g. if the items have different height, align them
+   against the bottom of the track. (It's called align-items_ in CSS.)
 -  ``track_cross_place`` determines how to distribute the tracks (It's
-   called ``align-content`` in CSS)
+   called align-content_ in CSS.)
 
 The possible values are:
 
-- :cpp:enumerator:`LV_FLEX_ALIGN_START`: means left on a horizontally and top vertically (default)
-- :cpp:enumerator:`LV_FLEX_ALIGN_END`: means right on a horizontally and bottom vertically
-- :cpp:enumerator:`LV_FLEX_ALIGN_CENTER`: simply center
+- :cpp:enumerator:`LV_FLEX_ALIGN_START`: means left when direction is horizontal, top when vertical (default)
+- :cpp:enumerator:`LV_FLEX_ALIGN_END`: means right when direction is horizontal, bottom when vertical
+- :cpp:enumerator:`LV_FLEX_ALIGN_CENTER`: simply center with respect to direction
 - :cpp:enumerator:`LV_FLEX_ALIGN_SPACE_EVENLY`: items are distributed so
   that the spacing between any two items (and the space to the edges) is
   equal. Does not apply to ``track_cross_place``.
 - :cpp:enumerator:`LV_FLEX_ALIGN_SPACE_AROUND`: items are evenly
   distributed in the track with equal space around them. Note that
-  visually the spaces aren't equal, since all the items have equal space
-  on both sides. The first item will have one unit of space against the
-  container edge, but two units of space between the next item because
-  that next item has its own spacing that applies. Not applies to
+  visually the spaces are not equal since all the items have equal space
+  on both sides.  This makes the space between items double the space
+  between edge items and the container's edge.  Does not apply to
   ``track_cross_place``.
 - :cpp:enumerator:`LV_FLEX_ALIGN_SPACE_BETWEEN`: items are evenly distributed in
-  the track: first item is on the start line, last item on the end line. Not applies to ``track_cross_place``.
+  the track with no space before and after first and last items.  Does not apply
+  to ``track_cross_place``.
+
+See justify-content_, align-items_ and align-content_ for illustrations of these values.
 
 .. raw:: html
 
@@ -196,6 +219,7 @@ The possible values are:
 - :cpp:enumerator:`LV_FLEX_ALIGN_SPACE_AROUND`: 元素在轨道上均匀分布，元素两侧之间的间隔相等。请注意，从视觉上看，空间并不相等，因为所有元素的两侧都有相等的空间。第一个元素在容器边缘有一个单位的空间，但下一个元素之间有两个单位的间隔，因为下一个项有自己的适用间距。不适用于 ``cross_place``。
 - :cpp:enumerator:`LV_FLEX_ALIGN_SPACE_BETWEEN`:  元素在轨道上彼此之间的间隔相等，首尾元素贴合容器边缘。不适用于 ``cross_place``。
 
+有关这些值的说明，请参阅 justify-content_、align-items_ 和align-content_。
 
 .. _flex_grow:
 
@@ -207,20 +231,22 @@ Flex grow（弹性增长）
    <details>
      <summary>显示原文</summary>
 
-Flex grow can be used to make one or more children fill the available
-space on the track. When more children have grow parameters, the
-available space will be distributed proportionally to the grow values.
-For example, there is 400 px remaining space and 4 objects with grow: 
+Flex grow can be used to make one or more children fill available space in the track.
+When more than one child Widget have non-zero grow values, all available space will
+be distributed in proportion to their respective grow values.  For example, if there
+is 400 px space remaining and 3 child Widgets with non-zero grow values:
 
 - ``A`` with grow = 1
 - ``B`` with grow = 1
 - ``C`` with grow = 2
 
-``A`` and ``B`` will have 100 px size, and ``C`` will have 200 px size.
+``A`` and ``B`` will occupy 100 px, and ``C`` will occupy 200 px.
 
-Flex grow can be set on a child with
-:cpp:expr:`lv_obj_set_flex_grow(child, value)`. ``value`` needs to be >
+Flex grow can be set on a child Widget with
+:cpp:expr:`lv_obj_set_flex_grow(child, value)`. ``value`` needs to be >=
 1 or 0 to disable grow on the child.
+
+See flex-grow_ for an illustration of this behavior.
 
 .. raw:: html
 
@@ -236,12 +262,13 @@ Flex grow（弹性增长）可用于让一个或多个孩子填满轨道上的�
 
 ``A`` 和 ``B`` 的大小为 100 px，而 ``C`` 的大小为 200 px。
 
-可以使用 :cpp:expr:`lv_obj_set_flex_grow(child, value)` 在子节点上设置 Flex 增长值。 ``value`` 需要 > 1 或 0 才能禁用在孩子身上生长。
+可以使用 :cpp:expr:`lv_obj_set_flex_grow(child, value)` 在子节点上设置 Flex 增长值。 ``value`` 需要 >= 1 或 0 才能禁用在孩子身上生长。
 
+有关此行为的说明，请参阅 flex-grow_ 。
 
 .. _flex_style:
 
-Style interface（样式接口）
+Style Interface（样式接口）
 *****************************
 
 .. raw:: html
@@ -249,8 +276,8 @@ Style interface（样式接口）
    <details>
      <summary>显示原文</summary>
 
-All the Flex-related values are style properties under the hood and you
-can use them similarly to any other style property.
+All Flex-related values are style properties under the hood so you
+can use them as you would any other style property.
 
 The following flex related style properties exist:
 
@@ -285,15 +312,15 @@ Internal padding（内部填充）
    <details>
      <summary>显示原文</summary>
 
-To modify the minimum space flexbox inserts between objects, the
-following properties can be set on the flex container style:
+To modify the minimum space flexbox inserts between Widgets, the
+following functions can be used to set the flex container padding style:
 
--  ``pad_row`` Sets the padding between the rows.
+-  :cpp:func:`lv_style_set_pad_row` sets padding between rows.
 
--  ``pad_column`` Sets the padding between the columns.
+-  :cpp:func:`lv_style_set_pad_column` sets padding between columns.
 
-These can for example be used if you don't want any padding between your
-objects: :cpp:expr:`lv_style_set_pad_column(&row_container_style,0)`
+These can, for example, be used if you do not want any padding between
+Widgets: :cpp:expr:`lv_style_set_pad_column(&row_container_style, 0)`
 
 .. raw:: html
 
@@ -310,7 +337,7 @@ objects: :cpp:expr:`lv_style_set_pad_column(&row_container_style,0)`
 
 .. _flex_other:
 
-Other features（其它功能）
+Other Features（其它功能）
 ****************************
 
 RTL
@@ -352,6 +379,12 @@ New track（新轨道）
 You can force Flex to put an item into a new line with
 :cpp:expr:`lv_obj_add_flag(child, LV_OBJ_FLAG_FLEX_IN_NEW_TRACK)`.
 
+
+
+.. admonition::  Further Reading
+
+    Learn more about `CSS Flexbox`_.
+
 .. raw:: html
 
    </details>
@@ -363,12 +396,25 @@ You can force Flex to put an item into a new line with
 
 .. _flex_example:
 
-Example
-**********
+Examples
+********
 
-.. include:: ../examples/layouts/flex/index.rst
+.. include:: ../../../examples/layouts/flex/index.rst
+
+
+..  Hyperlinks
+
+.. _css flexbox:     https://css-tricks.com/snippets/css/a-guide-to-flexbox/
+.. _flex-direction:  https://css-tricks.com/snippets/css/a-guide-to-flexbox/#aa-flex-direction
+.. _flex-wrap:       https://css-tricks.com/snippets/css/a-guide-to-flexbox/#aa-flex-wrap
+.. _flex-flow:       https://css-tricks.com/snippets/css/a-guide-to-flexbox/#aa-flex-flow
+.. _justify-content: https://css-tricks.com/snippets/css/a-guide-to-flexbox/#aa-justify-content
+.. _align-items:     https://css-tricks.com/snippets/css/a-guide-to-flexbox/#aa-align-items
+.. _align-content:   https://css-tricks.com/snippets/css/a-guide-to-flexbox/#aa-align-content
+.. _flex-grow:       https://css-tricks.com/snippets/css/a-guide-to-flexbox/#aa-flex-grow
+
 
 .. _flex_api:
 
 API
-******
+***

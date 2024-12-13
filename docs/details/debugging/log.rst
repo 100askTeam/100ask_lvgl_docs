@@ -97,6 +97,18 @@ can register a "logger" callback with :cpp:func:`lv_log_register_print_cb`.
 
 For example:
 
+.. code-block:: c
+
+   void my_log_cb(lv_log_level_t level, const char * buf)
+   {
+     serial_send(buf, strlen(buf));
+   }
+
+   ...
+
+
+   lv_log_register_print_cb(my_log_cb);
+
 .. raw:: html
 
    </details>
@@ -107,7 +119,7 @@ For example:
 
 例如：
 
-.. code:: c
+.. code-block:: c
 
    void my_log_cb(lv_log_level_t level, const char * buf)
    {
