@@ -12,7 +12,7 @@ Overview（概述）
    <details>
      <summary>显示原文</summary>
 
-The Tile view is a container object whose elements (called *tiles*) can
+The Tile view is a container Widget whose elements (called *tiles*) can
 be arranged in grid form. A user can navigate between the tiles by
 swiping. Any direction of swiping can be disabled on the tiles
 individually to not allow moving from one tile to another.
@@ -41,10 +41,10 @@ Parts and Styles（部分和样式）
    <details>
      <summary>显示原文</summary>
 
-The Tile view is built from an :ref:`lv_obj` container and
-:ref:`lv_obj` tiles.
+The Tile view is built from an :ref:`base_widget` container and
+:ref:`base_widget` tiles.
 
-The parts and styles work the same as for :ref:`lv_obj`.
+The parts and styles work the same as for :ref:`base_widget`.
 
 .. raw:: html
 
@@ -52,9 +52,9 @@ The parts and styles work the same as for :ref:`lv_obj`.
    <br>
 
 
-平铺视图是由 :ref:`lv_obj` 容器和 :ref:`lv_obj` 平铺构建而成的。
+平铺视图是由 :ref:`base_widget` 容器和 :ref:`base_widget` 平铺构建而成的。
 
-部分和样式的工作方式与 :ref:`lv_obj` 相同。
+部分和样式的工作方式与 :ref:`base_widget` 相同。
 
 
 .. _lv_tileview_usage:
@@ -142,9 +142,11 @@ Keys（按键）
    <details>
      <summary>显示原文</summary>
 
-*Keys* are not handled by the Tile view.
+No *Keys* are processed by Tileview Widgets.
 
-Learn more about :ref:`indev_keys`.
+.. admonition::  Further Reading
+
+    Learn more about :ref:`indev_keys`.
 
 .. raw:: html
 
@@ -162,7 +164,7 @@ Learn more about :ref:`indev_keys`.
 Example
 *******
 
-.. include:: ../examples/widgets/tileview/index.rst
+.. include:: ../../examples/widgets/tileview/index.rst
 
 .. _lv_tileview_api:
 
