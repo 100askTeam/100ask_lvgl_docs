@@ -11,7 +11,7 @@ Overview（概述）
     :alt: Architectural overview of Renesas GLCDC
     :align: center
 
-|
+<br/>
 
 .. raw:: html
 
@@ -30,11 +30,14 @@ It is designed to automatically generate timing and data signals for different L
 - Supports brightness adjustment, contrast adjustment, and gamma correction
 - Supports GLCDC interrupts to handle frame-buffer switching or underflow detection
 
-| Setting up a project and further integration with Renesas' ecosystem is described in detail on :ref:`page Renesas <renesas>`. 
-| Check out the following repositories for ready-to-use examples:
+
+Setting up a project and further integration with Renesas' ecosystem is described in detail on :ref:`page Renesas <renesas>`.
+Check out the following repositories for ready-to-use examples:
+
 - `EK-RA8D1 <https://github.com/lvgl/lv_port_renesas_ek-ra8d1>`__
 - `EK-RA6M3G <https://github.com/lvgl/lv_port_renesas_ek-ra6m3g>`__
 - `RX72N Envision Kit <https://github.com/lvgl/lv_port_renesas_rx72n-envision-kit>`__
+
 .. raw:: html
 
    </details>
@@ -93,16 +96,17 @@ There is no need to implement any platform-specific functions.
 
 The following code demonstrates using the diver in :cpp:enumerator:`LV_DISPLAY_RENDER_MODE_DIRECT` mode.
 
-.. code:: c
+.. code-block:: c
 
     lv_display_t * disp = lv_renesas_glcdc_direct_create();
     lv_display_set_default(disp);
 
 To use the driver in :cpp:enumerator:`LV_DISPLAY_RENDER_MODE_PARTIAL` mode, an extra buffer must be allocated,
 preferably in the fastest available memory region.
-Buffer swapping can be activated by passing a second buffer of same size instead  of the :cpp:expr:`NULL` argument.
 
-.. code:: c
+Buffer swapping can be activated by passing a second buffer of same size instead of the :cpp:expr:`NULL` argument.
+
+.. code-block:: c
 
     static lv_color_t partial_draw_buf[DISPLAY_HSIZE_INPUT0 * DISPLAY_VSIZE_INPUT0 / 10] BSP_PLACE_IN_SECTION(".sdram") BSP_ALIGN_VARIABLE(1024);
 
@@ -119,19 +123,20 @@ Buffer swapping can be activated by passing a second buffer of same size instead
    <br>
 
 
-无需实现任何特定平台的函数。
+不需要实现任何平台特定的函数。
 
-以下代码演示了在 :cpp:enumerator:`LV_DISPLAY_RENDER_MODE_DIRECT` 模式下使用驱动。
+以下代码演示了在 :cpp:enumerator:`LV_DISPLAY_RENDER_MODE_DIRECT` 模式下使用驱动程序。
 
-.. code:: c
+.. code-block:: c
 
     lv_display_t * disp = lv_renesas_glcdc_direct_create();
     lv_display_set_default(disp);
 
-要在 :cpp:enumerator:`LV_DISPLAY_RENDER_MODE_PARTIAL` 模式下使用驱动，必须分配一个额外的缓冲区，最好在最快的可用内存区域中。
-通过传递第二个相同大小的缓冲区而不是 :cpp:expr:`NULL` 参数，可以激活缓冲区交换。
+要在 :cpp:enumerator:`LV_DISPLAY_RENDER_MODE_PARTIAL` 模式下使用驱动程序，需要分配一个额外的缓冲区，最好位于最快的可用内存区域中。
 
-.. code:: c
+通过传递一个与第一个缓冲区大小相同的第二个缓冲区，而不是 :cpp:expr:`NULL` 参数，可以激活缓冲区交换。
+
+.. code-block:: c
 
     static lv_color_t partial_draw_buf[DISPLAY_HSIZE_INPUT0 * DISPLAY_VSIZE_INPUT0 / 10] BSP_PLACE_IN_SECTION(".sdram") BSP_ALIGN_VARIABLE(1024);
 
@@ -140,7 +145,7 @@ Buffer swapping can be activated by passing a second buffer of same size instead
 
 .. note::
 
-    可以通过示例项目的 ``src/board_init.c`` 文件中的宏来激活部分模式。
+    可以通过 demo 项目中 ``src/board_init.c`` 文件的宏来激活 Partial 模式。
 
 Screen rotation（屏幕旋转）
 """""""""""""""""""""""""""""
@@ -152,14 +157,14 @@ Screen rotation（屏幕旋转）
 
 Software based screen rotation is supported in partial mode. It uses the common API, no extra configuration is required:
 
-.. code:: c
-   
+.. code-block:: c
+
     lv_display_set_rotation(lv_display_get_default(), LV_DISP_ROTATION_90);
     /* OR */
     lv_display_set_rotation(lv_display_get_default(), LV_DISP_ROTATION_180);
     /* OR */
     lv_display_set_rotation(lv_display_get_default(), LV_DISP_ROTATION_270);
-    
+
 Make sure the heap is large enough, as a buffer with the same size as the partial buffer will be allocated.
 
 .. raw:: html
@@ -170,7 +175,7 @@ Make sure the heap is large enough, as a buffer with the same size as the partia
 
 支持在部分模式下进行基于软件的屏幕旋转。它使用通用API，无需额外配置：
 
-.. code:: c
+.. code-block:: c
 
     lv_display_set_rotation(lv_display_get_default(), LV_DISP_ROTATION_90);
     /* OR */
