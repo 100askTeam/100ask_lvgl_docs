@@ -53,7 +53,7 @@ Configuring the driver（配置驱动程序）
 Enable the framebuffer driver support in lv_conf.h, by cmake compiler define or by KConfig. Additionally you may configure the rendering
 mode.
 
-.. code:: c
+.. code-block:: c
 
 	#define LV_USE_LINUX_FBDEV           1
 	#define LV_LINUX_FBDEV_RENDER_MODE   LV_DISPLAY_RENDER_MODE_PARTIAL
@@ -66,7 +66,7 @@ mode.
 
 请在lv_conf.h中启用framebuffer驱动程序支持，可以通过CMake编译器定义或KConfig来实现。另外，您还可以配置渲染模式。
 
-.. code:: c
+.. code-block:: c
 
 	#define LV_USE_LINUX_FBDEV           1
 	#define LV_LINUX_FBDEV_RENDER_MODE   LV_DISPLAY_RENDER_MODE_PARTIAL
@@ -83,7 +83,7 @@ Usage（用法）
 To set up a framebuffer-based display, first create a display with ``lv_linux_fbdev_create``. Afterwards set the framebuffer device
 node on the display (usually this is ``/dev/fb0``).
 
-.. code:: c
+.. code-block:: c
 
 	lv_display_t *disp = lv_linux_fbdev_create();
 	lv_linux_fbdev_set_file(disp, "/dev/fb0");
@@ -100,7 +100,7 @@ be enabled unless really needed.
 
 搭建基于帧缓冲显示的方法如下：首先使用 ``lv_linux_fbdev_create`` 创建一个显示器。然后在显示器上设置帧缓冲设备节点（通常为 ``/dev/fb0``）。
 
-.. code:: c
+.. code-block:: c
 
 	lv_display_t *disp = lv_linux_fbdev_create();
 	lv_linux_fbdev_set_file(disp, "/dev/fb0");
