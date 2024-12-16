@@ -61,7 +61,7 @@ Configuring the driver（配置驱动程序）
 
 Enable the ST7789 driver support in lv_conf.h, by cmake compiler define or by KConfig
 
-.. code:: c
+.. code-block:: c
 
 	#define LV_USE_ST7789  1
 
@@ -73,7 +73,7 @@ Enable the ST7789 driver support in lv_conf.h, by cmake compiler define or by KC
 
 在lv_conf.h中启用ST7789驱动程序支持，可以通过CMake编译器定义或通过KConfig进行配置。
 
-.. code:: c
+.. code-block:: c
 
 	#define LV_USE_ST7789  1
 
@@ -88,7 +88,7 @@ Usage（用法）
 
 You need to implement two platform-dependent functions:
 
-.. code:: c
+.. code-block:: c
 
 	/* Send short command to the LCD. This function shall wait until the transaction finishes. */
 	int32_t my_lcd_send_cmd(lv_display_t *disp, const uint8_t *cmd, size_t cmd_size, const uint8_t *param, size_t param_size)
@@ -104,7 +104,7 @@ You need to implement two platform-dependent functions:
 
 To create an ST7789-based display use the function
 
-.. code:: c
+.. code-block:: c
 
 	/**
 	 * Create an LCD display with ST7789 driver
@@ -121,6 +121,10 @@ To create an ST7789-based display use the function
 
 For additional details and a working example see the `generic MIPI driver documentation <https://github.com/lvgl/lvgl/doc/integration/drivers/display/gen_mipi.rst>`__.
 
+.. note::
+
+	You can find a step-by-step guide and the actual implementation of the callbacks on an STM32F746 using STM32CubeIDE and the ST HAL libraries here: :ref:`lcd_stm32_guide`
+	
 .. raw:: html
 
    </details>
@@ -129,7 +133,7 @@ For additional details and a working example see the `generic MIPI driver docume
    
 你需要实现两个平台相关的函数：
 
-.. code:: c
+.. code-block:: c
 
 	/* 向LCD发送短命令。此函数将等待事务完成。 */
 	int32_t my_lcd_send_cmd(lv_display_t *disp, const uint8_t *cmd, size_t cmd_size, const uint8_t *param, size_t param_size)
@@ -145,7 +149,7 @@ For additional details and a working example see the `generic MIPI driver docume
 
 要创建基于ST7789驱动的显示器，请使用以下函数
 
-.. code:: c
+.. code-block:: c
 
 	/**
 	 * 使用ST7789驱动程序创建LCD显示器
@@ -160,5 +164,4 @@ For additional details and a working example see the `generic MIPI driver docume
 									lv_st7789_send_cmd_cb_t send_cmd_cb, lv_st7789_send_color_cb_t send_color_cb);
 
 
-有关更多详细信息和工作示例，请参阅 `通用MIPI驱动文档 <https://github.com/lvgl/lvgl/doc/integration/drivers/display/gen_mipi.rst>`__。
-
+您可以在此处找到分步指南以及使用 STM32CubeIDE 和 ST HAL 库在 STM32F746 上回调的实际实现：:ref:`lcd_stm32_guide`
