@@ -37,9 +37,9 @@ Including LVGL in a Project（在项目中包含LVGL）
   navigating to **C/C++ Build** -> **Settings** -> **Include paths**, and
   ensuring that the LVGL directory is listed.
 
-Now that the source files are included in your project, follow the
-instructions for `Porting <https://docs.lvgl.io/master/porting/project.html>`__ your
-project to create the ``lv_conf.h`` file, and initialise the display.
+Now that the source files are included in your project, follow the instructions to
+:ref:`add_lvgl_to_your_project` and to create the ``lv_conf.h`` file, and
+initialise the display.
 
 .. raw:: html
 
@@ -51,8 +51,8 @@ project to create the ``lv_conf.h`` file, and initialise the display.
 - 将整个LVGL文件夹复制到 *[project_folder]/Drivers/lvgl* 目录下。
 - 在STM32CubeIDE的 **项目资源管理器** 窗格中，右键单击您复制的LVGL文件夹（可能需要先刷新视图才能看到），然后选择 **添加/移除包含路径...**。如果这个选项没有出现或无法使用，您可以在 **项目** -> **属性** 菜单中查看项目的包含路径，然后导航到 **C/C++ 构建** -> **设置** -> **包含路径**，确保LVGL目录已列出。
 
-现在源文件已包含在您的项目中，请按照 `移植 <https://docs.lvgl.io/master/porting/project.html>`__ 您的项目的说明，创建 ``lv_conf.h`` 文件并初始化显示。
-
+现在源文件已经包含在您的项目中，请按照以下说明操作：  
+:ref:`add_lvgl_to_your_project` 并创建 ``lv_conf.h`` 文件，然后初始化显示屏。
 
 Bare Metal Example（裸机示例）
 -----------------------------
@@ -69,112 +69,113 @@ set to **SysTick**. \* Configure any other peripherals (including the
 LCD panel), and initialise them in *main.c*. \* ``#include "lvgl.h"`` in
 the *main.c* file. \* Create some frame buffer(s) as global variables:
 
-.. code:: c
+.. code-block:: c
 
-   //Frame buffers
-   /*Static or global buffer(s). The second buffer is optional*/
-   //TODO: Adjust color format and choose buffer size. DISPLAY_WIDTH * 10 is one suggestion.
-   #define BYTE_PER_PIXEL (LV_COLOR_FORMAT_GET_SIZE(LV_COLOR_FORMAT_RGB565)) /*will be 2 for RGB565 */
-   #define BUFF_SIZE (DISPLAY_WIDTH * 10 * BYTE_PER_PIXEL)
+   /* Frame buffers
+    * Static or global buffer(s). The second buffer is optional
+    * TODO: Adjust color format and choose buffer size. DISPLAY_WIDTH * 10 is one suggestion. */
+   #define BYTES_PER_PIXEL (LV_COLOR_FORMAT_GET_SIZE(LV_COLOR_FORMAT_RGB565)) /* will be 2 for RGB565 */
+   #define BUFF_SIZE (DISPLAY_WIDTH * 10 * BYTES_PER_PIXEL)
    static uint8_t buf_1[BUFF_SIZE];
    static uint8_t buf_2[BUFF_SIZE];
 
 - In your ``main()`` function, after initialising your CPU,
-  peripherals, and LCD panel, call :cpp:func:`lv_init` to initialise LVGL.
-  You can then create the display driver using
-  :cpp:func:`lv_display_create`, and register the frame buffers using
-  :cpp:func:`lv_display_set_buffers`.
+    peripherals, and LCD panel, call :cpp:func:`lv_init` to initialise LVGL.
+    You can then create the display driver using
+    :cpp:func:`lv_display_create`, and register the frame buffers using
+    :cpp:func:`lv_display_set_buffers`.
 
-.. code:: c
+    .. code-block:: c
 
-   //Initialise LVGL UI library
-   lv_init();
+        //Initialise LVGL UI library
+        lv_init();
 
-   lv_display_t * disp = lv_display_create(WIDTH, HEIGHT); /*Basic initialization with horizontal and vertical resolution in pixels*/
-   lv_display_set_flush_cb(disp, my_flush_cb); /*Set a flush callback to draw to the display*/
-   lv_display_set_buffers(disp, buf_1, buf_2, sizeof(buf_1), LV_DISPLAY_RENDER_MODE_PARTIAL); /*Set an initialized buffer*/
+        lv_display_t * disp = lv_display_create(WIDTH, HEIGHT); /* Basic initialization with horizontal and vertical resolution in pixels */
+        lv_display_set_flush_cb(disp, my_flush_cb); /* Set a flush callback to draw to the display */
+        lv_display_set_buffers(disp, buf_1, buf_2, sizeof(buf_1), LV_DISPLAY_RENDER_MODE_PARTIAL); /* Set an initialized buffer */
 
-- Create some dummy objects to test the output:
+- Create some dummy Widgets to test the output:
 
-.. code:: c
+    .. code-block:: c
 
-   // Change the active screen's background color
-   lv_obj_set_style_bg_color(lv_screen_active(), lv_color_hex(0x003a57), LV_PART_MAIN);
-   lv_obj_set_style_text_color(lv_screen_active(), lv_color_hex(0xffffff), LV_PART_MAIN);
+        /* Change Active Screen's background color */
+        lv_obj_set_style_bg_color(lv_screen_active(), lv_color_hex(0x003a57), LV_PART_MAIN);
+        lv_obj_set_style_text_color(lv_screen_active(), lv_color_hex(0xffffff), LV_PART_MAIN);
 
-   /*Create a spinner*/
-   lv_obj_t * spinner = lv_spinner_create(lv_screen_active(), 1000, 60);
-   lv_obj_set_size(spinner, 64, 64);
-   lv_obj_align(spinner, LV_ALIGN_BOTTOM_MID, 0, 0);
+        /* Create a spinner */
+        lv_obj_t * spinner = lv_spinner_create(lv_screen_active(), 1000, 60);
+        lv_obj_set_size(spinner, 64, 64);
+        lv_obj_align(spinner, LV_ALIGN_BOTTOM_MID, 0, 0);
+
 
 - Add a call to :cpp:func:`lv_timer_handler` inside your ``while(1)`` loop:
 
-.. code:: c
+  .. code-block:: c
 
-   /* Infinite loop */
-   while (1)
-   {
-     lv_timer_handler();
-     HAL_Delay(5);
-   }
+      /* Infinite loop */
+      while (1)
+      {
+          lv_timer_handler();
+          HAL_Delay(5);
+      }
 
-- Add a call to :cpp:func:`lv_tick_inc` inside the :cpp:func:`SysTick_Handler`
-  function. Open the *stm32xxxx_it.c* file (the name will depend on
-  your specific MCU), and update the :cpp:func:`SysTick_Handler` function:
 
-.. code:: c
+- Add a call to :cpp:func:`lv_tick_inc` inside the :cpp:func:`SysTick_Handler` function. Open the *stm32xxxx_it.c*
+  file (the name will depend on your specific MCU), and update the :cpp:func:`SysTick_Handler` function:
 
-   void SysTick_Handler(void)
-   {
-     /* USER CODE BEGIN SysTick_IRQn 0 */
+  .. code-block:: c
 
-       HAL_SYSTICK_IRQHandler();
-       lv_tick_inc(1);
-       #ifdef USE_RTOS_SYSTICK
-         osSystickHandler();
-       #endif
+      void SysTick_Handler(void)
+      {
+          /* USER CODE BEGIN SysTick_IRQn 0 */
 
-     /* USER CODE END SysTick_IRQn 0 */
-     HAL_IncTick();
-     /* USER CODE BEGIN SysTick_IRQn 1 */
+          HAL_SYSTICK_IRQHandler();
+          lv_tick_inc(1);
+          #ifdef USE_RTOS_SYSTICK
+              osSystickHandler();
+          #endif
 
-     /* USER CODE END SysTick_IRQn 1 */
-   }
+          /* USER CODE END SysTick_IRQn 0 */
+          HAL_IncTick();
+          /* USER CODE BEGIN SysTick_IRQn 1 */
 
-- Finally, write the callback function, ``my_flush_cb``, which will
-  send the display buffer to your LCD panel. Below is one example, but
-  it will vary depending on your setup.
+          /* USER CODE END SysTick_IRQn 1 */
+      }
 
-.. code:: c
 
-   void my_flush_cb(lv_display_t * disp, const lv_area_t * area, lv_color_t * color_p)
-   {
-     //Set the drawing region
-     set_draw_window(area->x1, area->y1, area->x2, area->y2);
+- Finally, write the callback function, ``my_flush_cb``, which will send the display buffer to your LCD panel. Below is
+  one example, but it will vary depending on your setup.
 
-     int height = area->y2 - area->y1 + 1;
-     int width = area->x2 - area->x1 + 1;
+  .. code-block:: c
 
-     //We will do the SPI write manually here for speed
-     HAL_GPIO_WritePin(DC_PORT, DC_PIN, GPIO_PIN_SET);
-     //CS low to begin data
-     HAL_GPIO_WritePin(CS_PORT, CS_PIN, GPIO_PIN_RESET);
+      void my_flush_cb(lv_display_t * disp, const lv_area_t * area, lv_color_t * color_p)
+      {
+          //Set the drawing region
+          set_draw_window(area->x1, area->y1, area->x2, area->y2);
 
-     //Write colour to each pixel
-     for (int i = 0; i < width * height; i++) {
-       uint16_t color_full = (color_p->red << 11) | (color_p->green << 5) | (color_p->blue);
-       parallel_write(color_full);
+          int height = area->y2 - area->y1 + 1;
+          int width = area->x2 - area->x1 + 1;
 
-       color_p++;
-     }
+          //We will do the SPI write manually here for speed
+          HAL_GPIO_WritePin(DC_PORT, DC_PIN, GPIO_PIN_SET);
+          //CS low to begin data
+          HAL_GPIO_WritePin(CS_PORT, CS_PIN, GPIO_PIN_RESET);
 
-     //Return CS to high
-     HAL_GPIO_WritePin(CS_PORT, CS_PIN, GPIO_PIN_SET);
+          //Write colour to each pixel
+          for (int i = 0; i < width * height; i++) {
+              uint16_t color_full = (color_p->red << 11) | (color_p->green << 5) | (color_p->blue);
+              parallel_write(color_full);
 
-     /* IMPORTANT!!!
-     * Inform the graphics library that you are ready with the flushing*/
-     lv_display_flush_ready(disp);
-   }
+              color_p++;
+          }
+
+          //Return CS to high
+          HAL_GPIO_WritePin(CS_PORT, CS_PIN, GPIO_PIN_SET);
+
+          /* IMPORTANT!!!
+           * Inform the graphics library that you are ready with the flushing */
+          lv_display_flush_ready(disp);
+      }
 
 .. raw:: html
 
@@ -182,75 +183,112 @@ the *main.c* file. \* Create some frame buffer(s) as global variables:
    <br>
 
 
-使用STM32CubeIDE和HAL的最简示例。 \* 在使用设备配置工具的 **引脚配置和设置** 中，选择 **系统核心** -> **SYS** 并确保 **时间基准源** 设置为 **SysTick** 。 \* 配置任何其他外设（包括LCD面板），并在 *main.c* 中对它们进行初始化。 \* 在 *main.c* 文件中 ``#include "lvgl.h"``。 \* 创建一些帧缓冲区作为全局变量：
+使用 STM32CubeIDE 和 HAL 的一个最简示例：  
 
-.. code:: c
+\* 在使用 **Device Configuration Tool** 进行 **Pinout and Configuration** 设置时，选择 **System Core** -> **SYS**，确保 **Timebase Source** 设置为 **SysTick**。  
+\* 配置其他外设（包括 LCD 面板），并在 *main.c* 中初始化它们。  
+\* 在 *main.c* 文件中添加 ``#include "lvgl.h"``。  
+\* 创建一些帧缓冲区作为全局变量：  
 
-   //Frame buffers
-   /*静态或全局缓冲区。第二个缓冲区是可选的*/
-   //TODO：调整颜色格式并选择缓冲区大小。一个建议是 DISPLAY_WIDTH * 10。
-   #define BYTE_PER_PIXEL (LV_COLOR_FORMAT_GET_SIZE(LV_COLOR_FORMAT_RGB565)) /* 对于 RGB565 来说将是 2 */
-   #define BUFF_SIZE (DISPLAY_WIDTH * 10 * BYTE_PER_PIXEL)
-   static uint8_t buf_1[BUFF_SIZE];
-   static uint8_t buf_2[BUFF_SIZE];
+.. code-block:: c  
 
-- 在您的 ``main()`` 函数中，初始化CPU，外设和LCD面板后，调用 :cpp:func:`lv_init` 初始化LVGL。然后，您可以使用 :cpp:func:`lv_display_create` 创建显示驱动程序，并使用 :cpp:func:`lv_display_set_buffers` 注册帧缓冲区。
+   /* 帧缓冲区  
+    * 静态或全局缓冲区。第二个缓冲区是可选的  
+    * TODO: 调整颜色格式并选择缓冲区大小。DISPLAY_WIDTH * 10 是一种建议 */  
+   #define BYTES_PER_PIXEL (LV_COLOR_FORMAT_GET_SIZE(LV_COLOR_FORMAT_RGB565)) /* RGB565 的值为 2 */  
+   #define BUFF_SIZE (DISPLAY_WIDTH * 10 * BYTES_PER_PIXEL)  
+   static uint8_t buf_1[BUFF_SIZE];  
+   static uint8_t buf_2[BUFF_SIZE];  
 
-.. code:: c
+- 在您的 ``main()`` 函数中，初始化 CPU、外设和 LCD 面板后，调用 :cpp:func:`lv_init` 初始化 LVGL。  
+  然后使用 :cpp:func:`lv_display_create` 创建显示驱动，并通过 :cpp:func:`lv_display_set_buffers` 注册帧缓冲区：  
 
-   //初始化LVGL UI库
-   lv_init();
+    .. code-block:: c  
 
-   lv_display_t * disp = lv_display_create(WIDTH, HEIGHT); /*基本初始化，水平和垂直分辨率以像素为单位*/
-   lv_display_set_flush_cb(disp, my_flush_cb); /*设置刷新回调以绘制到显示*/
-   lv_display_set_buffers(disp, buf_1, buf_2, sizeof(buf_1), LV_DISPLAY_RENDER_MODE_PARTIAL); /*设置一个已初始化的缓冲区*/
+        // 初始化 LVGL UI 库  
+        lv_init();  
 
-- 创建一些虚拟对象以测试输出：
+        lv_display_t * disp = lv_display_create(WIDTH, HEIGHT); /* 以水平和垂直分辨率（像素）进行基本初始化 */  
+        lv_display_set_flush_cb(disp, my_flush_cb); /* 设置刷新回调函数以绘制到显示屏 */  
+        lv_display_set_buffers(disp, buf_1, buf_2, sizeof(buf_1), LV_DISPLAY_RENDER_MODE_PARTIAL); /* 设置已初始化的缓冲区 */  
 
-.. code:: c
+- 创建一些简单的控件以测试输出：  
 
-   // 更改活动屏幕的背景颜色
-   lv_obj_set_style_bg_color(lv_screen_active(), lv_color_hex(0x003a57), LV_PART_MAIN);
-   lv_obj_set_style_text_color(lv_screen_active(), lv_color_hex(0xffffff), LV_PART_MAIN);
+    .. code-block:: c  
 
-   /*创建旋转器*/
-   lv_obj_t * spinner = lv_spinner_create(lv_screen_active(), 1000, 60);
-   lv_obj_set_size(spinner, 64, 64);
-   lv_obj_align(spinner, LV_ALIGN_BOTTOM_MID, 0, 0);
+        /* 更改当前屏幕的背景颜色 */  
+        lv_obj_set_style_bg_color(lv_screen_active(), lv_color_hex(0x003a57), LV_PART_MAIN);  
+        lv_obj_set_style_text_color(lv_screen_active(), lv_color_hex(0xffffff), LV_PART_MAIN);  
 
-- 在您的 ``while(1)`` 循环中添加对 :cpp:func:`lv_timer_handler` 的调用：
+        /* 创建一个 Spinner */  
+        lv_obj_t * spinner = lv_spinner_create(lv_screen_active(), 1000, 60);  
+        lv_obj_set_size(spinner, 64, 64);  
+        lv_obj_align(spinner, LV_ALIGN_BOTTOM_MID, 0, 0);  
 
-.. code:: c
+- 在 ``while(1)`` 循环中添加 :cpp:func:`lv_timer_handler` 调用：  
 
-   /* 无限循环 */
-   while (1)
-   {
-     lv_timer_handler();
-     HAL_Delay(5);
-   }
+    .. code-block:: c  
 
-- 在 :cpp:func:`SysTick_Handler` 函数中添加对 :cpp:func:`lv_tick_inc` 的调用。打开 *stm32xxxx_it.c* 文件（名称将取决于您的具体MCU），并更新 :cpp:func:`SysTick_Handler` 函数：
+        /* 无限循环 */  
+        while (1)  
+        {  
+            lv_timer_handler();  
+            HAL_Delay(5);  
+        }  
 
-.. code:: c
+- 在 :cpp:func:`SysTick_Handler` 函数中添加 :cpp:func:`lv_tick_inc` 调用。在 *stm32xxxx_it.c* 文件中（文件名取决于您的 MCU），更新 :cpp:func:`SysTick_Handler` 函数：  
 
-   void SysTick_Handler(void)
-   {
-     /* 用户代码开始SysTick_IRQn 0 */
+    .. code-block:: c  
 
-       HAL_SYSTICK_IRQHandler();
-       lv_tick_inc(1);
-       #ifdef USE_RTOS_SYSTICK
-         osSystickHandler();
-       #endif
+        void SysTick_Handler(void)  
+        {  
+            /* USER CODE BEGIN SysTick_IRQn 0 */  
 
-     /* 用户代码结束SysTick_IRQn 0 */
-     HAL_IncTick();
-     /* 用户代码开始SysTick_IRQn 1 */
+            HAL_SYSTICK_IRQHandler();  
+            lv_tick_inc(1);  
+            #ifdef USE_RTOS_SYSTICK  
+                osSystickHandler();  
+            #endif  
 
-     /* 用户代码结束SysTick_IRQn 1 */
-   }
+            /* USER CODE END SysTick_IRQn 0 */  
+            HAL_IncTick();  
+            /* USER CODE BEGIN SysTick_IRQn 1 */  
 
-- 最后，编写回调函数 ``my_flush_cb``，该函数将显示缓冲区发送到LCD面板。下面是一个示例，但它将根据您的设置而有所不同。
+            /* USER CODE END SysTick_IRQn 1 */  
+        }  
+
+- 最后，编写回调函数 ``my_flush_cb``，将显示缓冲区发送到 LCD 面板。以下是一个示例，根据您的设置可能有所不同：  
+
+    .. code-block:: c  
+
+        void my_flush_cb(lv_display_t * disp, const lv_area_t * area, lv_color_t * color_p)  
+        {  
+            // 设置绘制区域  
+            set_draw_window(area->x1, area->y1, area->x2, area->y2);  
+
+            int height = area->y2 - area->y1 + 1;  
+            int width = area->x2 - area->x1 + 1;  
+
+            // 手动执行 SPI 写入以提高速度  
+            HAL_GPIO_WritePin(DC_PORT, DC_PIN, GPIO_PIN_SET);  
+            // CS 置低开始传输数据  
+            HAL_GPIO_WritePin(CS_PORT, CS_PIN, GPIO_PIN_RESET);  
+
+            // 为每个像素写入颜色  
+            for (int i = 0; i < width * height; i++) {  
+                uint16_t color_full = (color_p->red << 11) | (color_p->green << 5) | (color_p->blue);  
+                parallel_write(color_full);  
+
+                color_p++;  
+            }  
+
+            // 将 CS 置高  
+            HAL_GPIO_WritePin(CS_PORT, CS_PIN, GPIO_PIN_SET);  
+
+            /* 重要！！！  
+             * 通知图形库刷新已完成 */  
+            lv_display_flush_ready(disp);  
+        }  
 
 
 FreeRTOS Example（FreeRTOS示例）
@@ -261,49 +299,50 @@ FreeRTOS Example（FreeRTOS示例）
    <details>
      <summary>显示原文</summary>
 
-A minimal example using STM32CubeIDE, HAL, and CMSISv1 (FreeRTOS). *Note
-that we have not used Mutexes in this example, however LVGL is* **NOT**
-*thread safe and so Mutexes should be used*. See: :ref:`os_interrupt`
-\* ``#include "lvgl.h"`` \* Create your frame buffer(s) as global
-variables:
+A minimal example using STM32CubeIDE, HAL, and CMSISv1 (FreeRTOS).
+*Note that we have not used Mutexes in this example, however LVGL is* **NOT**
+*thread safe and so Mutexes should be used*. See: :ref:`threading`
+\* ``#include "lvgl.h"`` \* Create your frame buffer(s) as global variables:
 
-.. code:: c
+.. code-block:: c
 
-   //Frame buffers
-   /*Static or global buffer(s). The second buffer is optional*/
-   #define BYTE_PER_PIXEL (LV_COLOR_FORMAT_GET_SIZE(LV_COLOR_FORMAT_RGB565)) /*will be 2 for RGB565 */
-   //TODO: Declare your own BUFF_SIZE appropriate to your system.
-   #define BUFF_SIZE (DISPLAY_WIDTH * 10 * BYTE_PER_PIXEL)
-   static uint8_t buf_1[BUFF_SIZE];
-   static uint8_t buf_2[BUFF_SIZE];
+    /* Frame buffers
+     * Static or global buffer(s). The second buffer is optional */
+    #define BYTES_PER_PIXEL (LV_COLOR_FORMAT_GET_SIZE(LV_COLOR_FORMAT_RGB565)) /* will be 2 for RGB565 */
+    /* TODO: Declare your own BUFF_SIZE appropriate to your system. */
+    static lv_color_t buf_1[BUFF_SIZE];
+    #define BUFF_SIZE (DISPLAY_WIDTH * 10 * BYTES_PER_PIXEL)
+    static uint8_t buf_1[BUFF_SIZE];
+    static lv_color_t buf_2[BUFF_SIZE];
 
 - In your ``main`` function, after your peripherals (SPI, GPIOs, LCD
   etc) have been initialised, initialise LVGL using :cpp:func:`lv_init`,
   create a new display driver using :cpp:func:`lv_display_create`, and
   register the frame buffers using :cpp:func:`lv_display_set_buffers`.
 
-.. code:: c
+  .. code-block:: c
 
-   //Initialise LVGL UI library
+   /* Initialise LVGL UI library */
    lv_init();
-   lv_display_t *display = lv_display_create(WIDTH, HEIGHT); /*Create the display*/
-   lv_display_set_flush_cb(display, my_flush_cb);        /*Set a flush callback to draw to the display*/
-   lv_display_set_buffers(disp, buf_1, buf_2, sizeof(buf_1), LV_DISPLAY_RENDER_MODE_PARTIAL); /*Set an initialized buffer*/
+   lv_display_t *display = lv_display_create(WIDTH, HEIGHT); /* Create the display */
+   lv_display_set_flush_cb(display, my_flush_cb);            /* Set a flush callback to draw to the display */
+   lv_display_set_buffers(disp, buf_1, buf_2, sizeof(buf_1), LV_DISPLAY_RENDER_MODE_PARTIAL); /* Set an initialized buffer */
 
-   // Register the touch controller with LVGL - Not included here for brevity.
+   /* Register the touch controller with LVGL - Not included here for brevity. */
 
-- Create some dummy objects to test the output:
 
-.. code:: c
+- Create some dummy Widgets to test the output:
 
-   // Change the active screen's background color
-   lv_obj_set_style_bg_color(lv_screen_active(), lv_color_hex(0x003a57), LV_PART_MAIN);
-   lv_obj_set_style_text_color(lv_screen_active(), lv_color_hex(0xffffff), LV_PART_MAIN);
+  .. code-block:: c
 
-   /*Create a spinner*/
-   lv_obj_t * spinner = lv_spinner_create(lv_screen_active(), 1000, 60);
-   lv_obj_set_size(spinner, 64, 64);
-   lv_obj_align(spinner, LV_ALIGN_BOTTOM_MID, 0, 0);
+    /* Change Active Screen's background color */
+    lv_obj_set_style_bg_color(lv_screen_active(), lv_color_hex(0x003a57), LV_PART_MAIN);
+    lv_obj_set_style_text_color(lv_screen_active(), lv_color_hex(0xffffff), LV_PART_MAIN);
+
+    /* Create a spinner */
+    lv_obj_t * spinner = lv_spinner_create(lv_screen_active(), 1000, 60);
+    lv_obj_set_size(spinner, 64, 64);
+    lv_obj_align(spinner, LV_ALIGN_BOTTOM_MID, 0, 0);
 
 - Create two threads to call :cpp:func:`lv_timer_handler`, and
   :cpp:func:`lv_tick_inc`.You will need two ``osThreadId`` handles for
@@ -312,7 +351,7 @@ variables:
   using CMSIS and STM32Cube code generation it should look something
   like this:
 
-.. code:: c
+  .. code-block:: c
 
    //Thread Handles
    osThreadId lvgl_tickHandle;
@@ -328,7 +367,7 @@ variables:
 
 - And create the thread functions:
 
-.. code:: c
+  .. code-block:: c
 
    /* LVGL timer for tasks. */
    void LVGLTimer(void const * argument)
@@ -354,7 +393,7 @@ variables:
   depending on which MCU features you are using. Below is an example
   for a typical MCU interface.
 
-.. code:: c
+  .. code-block:: c
 
    void my_flush_cb(lv_display_t * display, const lv_area_t * area, uint8_t * px_map);
    {
@@ -380,7 +419,7 @@ variables:
      HAL_GPIO_WritePin(CS_PORT, CS_PIN, GPIO_PIN_SET);
 
      /* IMPORTANT!!!
-      * Inform the graphics library that you are ready with the flushing*/
+      * Inform the graphics library that you are ready with the flushing */
      lv_display_flush_ready(display);
    }
 
@@ -390,115 +429,118 @@ variables:
    <br>
 
 
-一个使用STM32CubeIDE、HAL和CMSISv1（FreeRTOS）的最小示例。请注意，此示例中没有使用互斥锁，但是LVGL *不是* 线程安全的，因此应该使用互斥锁。请参见：:ref:`os_interrupt`
+使用 STM32CubeIDE、HAL 和 CMSISv1 (FreeRTOS) 的一个最小示例。  
+*注意：此示例中没有使用 Mutex，但 LVGL **不是** 线程安全的，因此应使用 Mutex。详见：:ref:`threading`*  
+\* ``#include "lvgl.h"``  
+\* 创建您的帧缓冲区作为全局变量：  
 
-\* ``#include "lvgl.h"`` \*将帧缓冲区作为全局变量创建：
+.. code-block:: c  
 
-.. code:: c
+    /* 帧缓冲区  
+     * 静态或全局缓冲区。第二个缓冲区是可选的 */  
+    #define BYTES_PER_PIXEL (LV_COLOR_FORMAT_GET_SIZE(LV_COLOR_FORMAT_RGB565)) /* RGB565 为 2 */  
+    /* TODO: 根据您的系统声明适当的 BUFF_SIZE。 */  
+    #define BUFF_SIZE (DISPLAY_WIDTH * 10 * BYTES_PER_PIXEL)  
+    static lv_color_t buf_1[BUFF_SIZE];  
+    static lv_color_t buf_2[BUFF_SIZE];  
 
-   //帧缓冲区
-   /*静态或全局缓冲区（可选的第二个缓冲区）*/
-   #define BYTE_PER_PIXEL (LV_COLOR_FORMAT_GET_SIZE(LV_COLOR_FORMAT_RGB565)) /* 对于 RGB565 格式，每个像素将占用 2 字节 */
-   // 待办事项：根据您的系统需求，自行声明合适的缓冲区大小。
-   #define BUFF_SIZE (DISPLAY_WIDTH * 10 * BYTE_PER_PIXEL)
-   static uint8_t buf_1[BUFF_SIZE];
-   static uint8_t buf_2[BUFF_SIZE];
+- 在您的 ``main`` 函数中，初始化外设（SPI、GPIO、LCD 等）后，使用 :cpp:func:`lv_init` 初始化 LVGL，  
+  使用 :cpp:func:`lv_display_create` 创建显示驱动，并通过 :cpp:func:`lv_display_set_buffers` 注册帧缓冲区：  
 
-- 在您的 ``main`` 函数中，在初始化外设（SPI，GPIO，LCD）之后，使用 :cpp:func:`lv_init` 初始化LVGL，使用 :cpp:func:`lv_display_create` 创建新的显示驱动程序，使用 :cpp:func:`lv_display_set_buffers` 注册帧缓冲区。
+  .. code-block:: c  
 
-.. code:: c
+   /* 初始化 LVGL UI 库 */  
+   lv_init();  
+   lv_display_t *display = lv_display_create(WIDTH, HEIGHT); /* 创建显示驱动 */  
+   lv_display_set_flush_cb(display, my_flush_cb);            /* 设置刷新回调函数以绘制到显示屏 */  
+   lv_display_set_buffers(display, buf_1, buf_2, sizeof(buf_1), LV_DISPLAY_RENDER_MODE_PARTIAL); /* 设置缓冲区 */  
 
-   //初始化LVGL用户界面库
-   lv_init();
-   lv_display_t *display = lv_display_create(WIDTH, HEIGHT); /*创建显示*/
-   lv_display_set_flush_cb(display, my_flush_cb);        /*设置刷新回调以绘制到显示器*/
-   lv_display_set_buffers(disp, buf_1, buf_2, sizeof(buf_1), LV_DISPLAY_RENDER_MODE_PARTIAL); /*设置一个已初始化的缓冲区*/
+   /* 注册触摸控制器到 LVGL - 此处未包含以保持简洁。 */  
 
-   // 使用LVGL注册触摸控制器-由于篇幅的原因，此处未包含。
+- 创建一些简单的控件以测试输出：  
 
-- 创建一些虚拟对象来测试输出：
+  .. code-block:: c  
 
-.. code:: c
+    /* 更改当前屏幕的背景颜色 */  
+    lv_obj_set_style_bg_color(lv_screen_active(), lv_color_hex(0x003a57), LV_PART_MAIN);  
+    lv_obj_set_style_text_color(lv_screen_active(), lv_color_hex(0xffffff), LV_PART_MAIN);  
 
-   //更改活动屏幕的背景颜色
-   lv_obj_set_style_bg_color(lv_screen_active(), lv_color_hex(0x003a57), LV_PART_MAIN);
-   lv_obj_set_style_text_color(lv_screen_active(), lv_color_hex(0xffffff), LV_PART_MAIN);
+    /* 创建一个 Spinner */  
+    lv_obj_t * spinner = lv_spinner_create(lv_screen_active(), 1000, 60);  
+    lv_obj_set_size(spinner, 64, 64);  
+    lv_obj_align(spinner, LV_ALIGN_BOTTOM_MID, 0, 0);  
 
-   /*创建旋转器*/
-   lv_obj_t * spinner = lv_spinner_create(lv_screen_active(), 1000, 60);
-   lv_obj_set_size(spinner, 64, 64);
-   lv_obj_align(spinner, LV_ALIGN_BOTTOM_MID, 0, 0);
+- 创建两个线程，分别调用 :cpp:func:`lv_timer_handler` 和 :cpp:func:`lv_tick_inc`。对于 CMSISv1，您需要两个 ``osThreadId`` 句柄。  
+  如果您使用 CMSIS 和 STM32Cube 代码生成，代码类似以下示例：  
 
-- 创建两个线程来调用 :cpp:func:`lv_timer_handler` 和 :cpp:func:`lv_tick_inc`。对于CMSISv1，您将需要两个 ``osThreadId`` 句柄。在这种情况下，它们不一定要在全局范围内访问，但是STM32Cube代码生成默认情况下是如此。如果您正在使用CMSIS和STM32Cube代码生成，它应该类似于以下示例：
+  .. code-block:: c  
 
-.. code:: c
+   // 线程句柄  
+   osThreadId lvgl_tickHandle;  
+   osThreadId lvgl_timerHandle;  
 
-   //线程句柄
-   osThreadId lvgl_tickHandle;
-   osThreadId lvgl_timerHandle;
+   /* 定义并创建 lvgl_tick 线程 */  
+   osThreadDef(lvgl_tick, LVGLTick, osPriorityNormal, 0, 1024);  
+   lvgl_tickHandle = osThreadCreate(osThread(lvgl_tick), NULL);  
 
-   /*定义并创建lvgl_tick*/
-   osThreadDef(lvgl_tick, LVGLTick, osPriorityNormal, 0, 1024);
-   lvgl_tickHandle = osThreadCreate(osThread(lvgl_tick), NULL);
+   // LVGL 更新定时器  
+   osThreadDef(lvgl_timer, LVGLTimer, osPriorityNormal, 0, 1024);  
+   lvgl_timerHandle = osThreadCreate(osThread(lvgl_timer), NULL);  
 
-   //LVGL更新定时器
-   osThreadDef(lvgl_timer, LVGLTimer, osPriorityNormal, 0, 1024);
-   lvgl_timerHandle = osThreadCreate(osThread(lvgl_timer), NULL);
+- 编写线程函数：  
 
-- 并创建线程函数：
+  .. code-block:: c  
 
-.. code:: c
+   /* LVGL 任务定时器 */  
+   void LVGLTimer(void const * argument)  
+   {  
+     for(;;)  
+     {  
+       lv_timer_handler();  
+       osDelay(20);  
+     }  
+   }  
+   /* LVGL 时间源 */  
+   void LVGLTick(void const * argument)  
+   {  
+     for(;;)  
+     {  
+       lv_tick_inc(10);  
+       osDelay(10);  
+     }  
+   }  
 
-   /*用于任务的LVGL定时器。*/
-   void LVGLTimer(void const * argument)
-   {
-     for(;;)
-     {
-       lv_timer_handler();
-       osDelay(20);
-     }
-   }
-   /*LVGL滴答源*/
-   void LVGLTick(void const * argument)
-   {
-     for(;;)
-     {
-       lv_tick_inc(10);
-       osDelay(10);
-     }
-   }
+- 最后，编写 ``my_flush_cb`` 回调函数，将帧缓冲区输出到 LCD。此函数的具体实现取决于您的 MCU 接口。下面是一个典型的示例：  
 
-- 最后，创建 ``my_flush_cb`` 函数来将帧缓冲区输出到LCD。此函数的具体细节将取决于您使用的MCU功能。以下是一个典型MCU接口的示例。
+  .. code-block:: c  
 
-.. code:: c
+   void my_flush_cb(lv_display_t * display, const lv_area_t * area, uint8_t * px_map);  
+   {  
+     uint16_t * color_p = (uint16_t *)px_map;  
 
-   void my_flush_cb(lv_display_t * display, const lv_area_t * area, uint8_t * px_map);
-   {
-     uint16_t * color_p = (uint16_t *)px_map;
+     // 设置绘制区域  
+     set_draw_window(area->x1, area->y1, area->x2, area->y2);  
 
-     //设置绘制区域
-     set_draw_window(area->x1, area->y1, area->x2, area->y2);
+     int height = area->y2 - area->y1 + 1;  
+     int width = area->x2 - area->x1 + 1;  
 
-     int height = area->y2 - area->y1 + 1;
-     int width = area->x2 - area->x1 + 1;
+     // 开始 SPI 数据传输  
+     HAL_GPIO_WritePin(DC_PORT, DC_PIN, GPIO_PIN_SET);  
+     HAL_GPIO_WritePin(CS_PORT, CS_PIN, GPIO_PIN_RESET);  
 
-     //开始SPI写入数据
-     HAL_GPIO_WritePin(DC_PORT, DC_PIN, GPIO_PIN_SET);
-     HAL_GPIO_WritePin(CS_PORT, CS_PIN, GPIO_PIN_RESET);
+     // 写入每个像素的颜色  
+     for (int i = 0; i < width * height; i++) {  
+         parallel_write(color_p);  
+         color_p++;  
+     }  
 
-     //向每个像素写入颜色
-     for (int i = 0; i < width * height; i++) {
-         parallel_write(color_p);
-         color_p++;
-     }
+     // CS 置为高电平  
+     HAL_GPIO_WritePin(CS_PORT, CS_PIN, GPIO_PIN_SET);  
 
-     //恢复CS为高电平
-     HAL_GPIO_WritePin(CS_PORT, CS_PIN, GPIO_PIN_SET);
-
-     /*重要！！！
-      *通知图形库刷新准备就绪*/
-     lv_display_flush_ready(display);
-   }
+     /* 重要！！！  
+      * 通知图形库刷新已完成 */  
+     lv_display_flush_ready(display);  
+   }  
 
 
 DMA2D Support（DMA2D 支持）
@@ -526,6 +568,8 @@ If ``LV_USE_DRAW_DMA2D_INTERRUPT`` is enabled then you are required to call
 :cpp:expr:`lv_draw_dma2d_transfer_complete_interrupt_handler` whenever the DMA2D
 "transfer complete" global interrupt is received.
 
+If your STM device has a NeoChrom GPU, you can use the :ref:`Nema GFX renderer <nema_gfx>` instead.
+
 .. raw:: html
 
    </details>
@@ -540,3 +584,4 @@ LVGL 支持 DMA2D，这是一些 STM32 微控制器的特性，可以在混合�
 
 如果启用了 ``LV_USE_DRAW_DMA2D_INTERRUPT`` ，则需要在收到 DMA2D “传输完成”全局中断时调用 :cpp:expr:`lv_draw_dma2d_transfer_complete_interrupt_handler` 。
 
+如果您的 STM 设备具有 NeoChrom GPU，您可以使用 :ref:`Nema GFX 渲染器 <nema_gfx>` 代替。
