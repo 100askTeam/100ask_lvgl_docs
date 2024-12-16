@@ -70,7 +70,7 @@ The simplest way to integrate LVGL into your ESP-IDF project is via the `esp_lvg
 
 The esp_lvgl_port supports LVGL versions 8 and 9 and is compatible with ESP-IDF v4.4 and above. To add it to your project, use the following command:
 
-.. code:: sh
+.. code-block:: sh
 
    idf.py add-dependency "espressif/esp_lvgl_port^2.3.0"
 By default, esp_lvgl_port depends on the latest stable version of LVGL, so no additional steps are needed for new projects. If a specific LVGL version is required, specify this in your project to avoid automatic updates. LVGL can also be used without esp_lvgl_port, as described below.
@@ -86,7 +86,7 @@ By default, esp_lvgl_port depends on the latest stable version of LVGL, so no ad
 
 esp_lvgl_port支持LVGL版本8和9，与ESP-IDF v4.4及以上版本兼容。要将其添加到您的项目中，请使用以下命令：
 
-.. code:: sh
+.. code-block:: sh
 
    idf.py add-dependency "espressif/esp_lvgl_port^2.3.0"
 
@@ -103,7 +103,7 @@ Obtaining LVGL（获取LVGL）
 LVGL is distributed through `ESP Registry <https://components.espressif.com/>`__, where all LVGL releases are uploaded.
 In case you do not want to use esp_lvgl_port, you can add `LVGL component <https://components.espressif.com/component/lvgl/lvgl>`__ into your project with following command:
 
-.. code:: sh
+.. code-block:: sh
 
    idf.py add-dependency lvgl/lvgl^9.*
 
@@ -113,7 +113,7 @@ Adjust the ``^9.*`` part to match your LVGL version requirement. More informatio
 
 For LVGL development and testing, it may be useful to use LVGL as a local component instead of from the ESP Registry, which offers only released versions and does not allow local modifications. To do this, clone LVGL to your project with the following command:
 
-.. code:: sh
+.. code-block:: sh
 
    git submodule add https://github.com/lvgl/lvgl.git components/lvgl
 
@@ -130,7 +130,7 @@ For LVGL development and testing, it may be useful to use LVGL as a local compon
 LVGL 通过 ESP Registry <https://components.espressif.com/>__ 进行分发，所有的 LVGL 版本都上传到了这里。
 如果您不想使用 esp_lvgl_port，您可以使用以下命令将 LVGL 组件 <https://components.espressif.com/component/lvgl/lvgl>__ 添加到您的项目中：
 
-.. code:: sh
+.. code-block:: sh
 
    idf.py add-dependency lvgl/lvgl^9.*
 
@@ -140,7 +140,7 @@ LVGL 通过 ESP Registry <https://components.espressif.com/>__ 进行分发，�
 
 对于 LVGL 的开发和测试，使用本地的 LVGL 组件而不是从 ESP Registry 获取可能很有用，因为 ESP Registry 只提供已发布的版本，不允许本地修改。要做到这一点，可以使用以下命令将 LVGL 克隆到您的项目中：
 
-.. code:: sh
+.. code-block:: sh
 
    git submodule add https://github.com/lvgl/lvgl.git components/lvgl
 
@@ -173,7 +173,7 @@ These components share a common public API, making it easy to migrate your proje
 
 To add a display or touch driver to your project, use a command like:
 
-.. code:: sh
+.. code-block:: sh
 
    idf.py add-dependency "espressif/esp_lcd_gc9a01^2.0.0"
 
@@ -195,7 +195,7 @@ To add a display or touch driver to your project, use a command like:
 
 要向您的项目添加显示或触摸驱动，可以使用如下命令：
 
-.. code:: sh
+.. code-block:: sh
 
    idf.py add-dependency "espressif/esp_lcd_gc9a01^2.0.0"
 
@@ -239,11 +239,13 @@ The process is described in details below, using ``SPIFFS`` as demonstration.
       The exact configuration depends on your flash size and existing partitions,
       but the new final result should look something like this:
 
-      .. code:: csv
+      .. csv-table:: Partition Table
+      
          nvs,      data, nvs,     0x9000,  0x6000,
          phy_init, data, phy,     0xf000,  0x1000,
          factory,  app,  factory, 0x10000, 1400k,
          storage,  data, spiffs,         ,  400k,
+
       .. note::
 
          If you are not using a custom ``parition.csv`` yet, it can be added
