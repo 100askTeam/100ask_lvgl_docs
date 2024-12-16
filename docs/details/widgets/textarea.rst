@@ -12,10 +12,9 @@ Overview（概述）
    <details>
      <summary>显示原文</summary>
 
-The Text Area is a `Base object </widgets/obj.html>`__ with a
-`Label </widgets/label.html>`__ and a cursor on it. Texts or characters
-can be added to it. Long lines are wrapped and when the text becomes
-long enough the Text area can be scrolled.
+The Text Area is a :ref:`base_widget_overview` with a :ref:`lv_label` and a cursor on
+it.  Texts or characters can be added to it.  Long lines are wrapped and when the
+text becomes long enough the Text area can be scrolled.
 
 One line mode and password modes are supported.
 
@@ -25,9 +24,9 @@ One line mode and password modes are supported.
    <br>
 
 
-文本框是一个 `基础对象 </widgets/obj.html>`__ ，其上面有一个 `标签(Label) </widgets/label.html>`__ 和一个光标(cursor)。 我们可以向文本框中添加文本或字符。 长行会被换行，当文本内容变得足够长时(文本框可视区域容纳不下时)，可以滚动文本框。
+文本区域是一个带有 :ref:`lv_label`（标签）以及光标在其上的 :ref:`base_widget_overview`（基础部件概览）。可以向其中添加文本或字符。长行文本会自动换行，而且当文本足够长时，文本区域可以进行滚动。
 
-支持单行输入模式和密码输入模式。
+它支持单行模式和密码模式。
 
 
 .. _lv_textarea_parts_and_styles:
@@ -116,7 +115,7 @@ To add wide characters like ``'á'``, ``'ß'`` or CJK characters use
 
 
 Placeholder（占位符）
------------
+--------------------
 
 .. raw:: html
 
@@ -389,7 +388,7 @@ Events（事件）
 -  :cpp:enumerator:`LV_EVENT_READY` Sent when :cpp:enumerator:`LV_KEY_ENTER` is pressed (or sent) to
    a one line text area.
 
-See the events of the :ref:`Base object <lv_obj>` too.
+See the events of the :ref:`lv_obj_events` too.
 
 Learn more about :ref:`events`.
 
@@ -403,7 +402,7 @@ Learn more about :ref:`events`.
 -  :cpp:enumerator:`LV_EVENT_VALUE_CHANGED` 当文本框的内容被改变时发送该事件。
 -  :cpp:enumerator:`LV_EVENT_READY` 在按下 :cpp:enumerator:`LV_KEY_ENTER` 按键时发送到单行文本框。
 
-参见 :ref:`Base object <lv_obj>` 的事件。
+参见 :ref:`lv_obj_events` 的事件。
 
 详细了解更多 :ref:`events`。
 
