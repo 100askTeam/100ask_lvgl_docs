@@ -145,7 +145,7 @@ Tasmota + Berry + LVGL could be used for:（Tasmota + Berry + LVGL 可用于：�
 
 - Fast prototyping GUI.
 - Shortening the cycle of changing and fine-tuning the GUI.
-- Modelling the GUI in a more abstract way by defining reusable composite objects, taking
+- Modelling the GUI in a more abstract way by defining reusable composite Widgets, taking
   advantage of Berry's language features such as Inheritance, Closures, Exception Handling…
 - Make LVGL accessible to a larger audience. No need to know C to create a nice GUI on an embedded system.
 
@@ -195,7 +195,7 @@ TL;DR: 类似于 MicroPython，它与 C API 非常相似，但针对 LVGL 组件
 A simple example（一个简单的例子）
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. code:: python
+.. code-block:: python
 
    lv.start()                 # start LVGL
    scr = lv.screen_active()         # get default screen
