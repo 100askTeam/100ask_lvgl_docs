@@ -34,7 +34,7 @@ Install FFmpeg（安装 FFmpeg）
 
 Download first FFmpeg from `here <https://www.ffmpeg.org/download.html>`__, then install it:
 
-.. code:: shell
+.. code-block:: shell
 
     ./configure --disable-all --disable-autodetect --disable-podpages --disable-asm --enable-avcodec --enable-avformat --enable-decoders --enable-encoders --enable-demuxers --enable-parsers --enable-protocol='file' --enable-swscale --enable-zlib
     make
@@ -48,7 +48,7 @@ Download first FFmpeg from `here <https://www.ffmpeg.org/download.html>`__, then
 
 首先从这里下载 FFmpeg，然后安装它：
 
-.. code:: shell
+.. code-block:: shell
 
     ./configure --disable-all --disable-autodetect --disable-podpages --disable-asm --enable-avcodec --enable-avformat --enable-decoders --enable-encoders --enable-demuxers --enable-parsers --enable-protocol='file' --enable-swscale --enable-zlib
     make
@@ -84,13 +84,11 @@ Usage（用法）
    <details>
      <summary>显示原文</summary>
 
-Enable :c:macro:`LV_USE_FFMPEG` in .
+Enable :c:macro:`LV_USE_FFMPEG` in ``lv_conf.h``.
 
 See the examples below.
 
-:Note: FFmpeg extension doesn't use LVGL's file system. You can
-simply pass the path to the image or video as usual on your operating
-system or platform.
+:note: Enable :c:macro:`LV_FFMPEG_PLAYER_USE_LV_FS` in ``lv_conf.h`` if you want to integrate the lvgl file system into FFmpeg.
 
 .. raw:: html
 
@@ -107,10 +105,31 @@ system or platform.
 
 .. _ffmpeg_example:
 
+Events
+------
+
+.. raw:: html
+
+   <details>
+     <summary>显示原文</summary>
+
+- :cpp:enumerator:`LV_EVENT_READY` Sent when playback is complete and auto-restart is not enabled.
+
+Learn more about :ref:`events`.
+
+.. raw:: html
+
+   </details>
+   <br>
+
+- :cpp:enumerator:`LV_EVENT_READY` 在播放完成并且未启用自动重启时发送。
+
+了解更多关于 :ref:`events` 的信息。
+
 Example
 -------
 
-.. include:: ../examples/libs/ffmpeg/index.rst
+.. include:: ../../examples/libs/ffmpeg/index.rst
 
 .. _ffmpeg_api:
 
