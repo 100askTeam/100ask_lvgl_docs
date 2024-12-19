@@ -49,6 +49,7 @@ if supported, or disable.
 
 允许在 LVGL 中使用 TrueType 字体。
 
+详细介绍：<https://github.com/nothings/stb>
 
 在 ``lv_conf.h`` 中启用 :c:macro:`LV_USE_TINY_TTF` 后，可以使用 :cpp:expr:`lv_tiny_ttf_create_data(data, data_size, font_size)` 创建一个指定行高的 TTF 字体实例。随后可以在任何接受 :c:struct:`lv_font_t` 的地方使用该字体。
 
