@@ -23,10 +23,10 @@ Detailed introduction:
    <br>
 
 
-LittleFS 是一个小型故障安全文件系统，专为微控制器设计并集成在 Arduino 框架中
-与 ESP32 和 ESP8266 一起使用时。
+LittleFS 是一个为微控制器设计的小型故障保护文件系统，并在与 ESP32 和 ESP8266 一起使用时集成在 Arduino 框架中。
 
 详细介绍：
+
 - https://github.com/esp8266/Arduino
 - https://github.com/espressif/arduino-esp32
 
@@ -46,9 +46,7 @@ Enable :c:macro:`LV_USE_FS_ARDUINO_ESP_LITTLEFS` and define a :c:macro:`LV_FS_AR
    </details>
    <br>
 
-
-启用 :c:macro:`LV_USE_FS_ARDUINO_ESP_LITTLEFS` 并在 lv_conf.h 中定义 :c:macro:`LV_FS_ARDUINO_ESP_LITTLEFS_LETTER` 。
-
+在 ``lv_conf.h`` 中启用 :c:macro:`LV_USE_FS_ARDUINO_ESP_LITTLEFS` 并定义 :c:macro:`LV_FS_ARDUINO_ESP_LITTLEFS_LETTER`。
 
 API
 ---
