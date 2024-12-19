@@ -13,3 +13,4 @@ Renderers and GPUs
     sdl
     stm32_dma2d
     vg_lite
+    
