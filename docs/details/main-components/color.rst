@@ -42,6 +42,21 @@ RGB（三原色）
 
 Create colors from Red, Green and Blue channel values:
 
+.. code-block:: c
+
+   /* All channels are 0-255 */
+   lv_color_t c = lv_color_make(red, green, blue);
+
+
+   /* Same but can be used for const initialization as well */
+   lv_color_t c = LV_COLOR_MAKE(red, green, blue);
+
+   /* From hex code 0x000000..0xFFFFFF interpreted as RED + GREEN + BLUE */
+   lv_color_t c = lv_color_hex(0x123456);
+
+   /* From 3 digits. Same as lv_color_hex(0x112233) */
+   lv_color_t c = lv_color_hex3(0x123);
+
 .. raw:: html
 
    </details>
@@ -75,6 +90,18 @@ HSV（色调饱和值-Hue Saturation Value）
      <summary>显示原文</summary>
 
 Create colors from Hue, Saturation and Value values:
+
+.. code-block:: c
+
+   //h = 0..359, s = 0..100, v = 0..100
+   lv_color_t c = lv_color_hsv_to_rgb(h, s, v);
+
+   //All channels are 0-255
+   lv_color_hsv_t c_hsv = lv_color_rgb_to_hsv(r, g, b);
+
+
+   //From lv_color_t variable
+   lv_color_hsv_t c_hsv = lv_color_to_hsv(color);
 
 .. raw:: html
 
@@ -134,12 +161,12 @@ The names of the colors are as follows:
 - :c:macro:`LV_PALETTE_GREY`
 
 To get the main color use
-``lv_color_t c = lv_palette_main(LV_PALETTE_...)``.
+:cpp:expr:`lv_color_t` ``c =`` :cpp:expr:`lv_palette_main(LV_PALETTE_...)`.
 
 For the lighter variants of a palette color use
-``lv_color_t c = lv_palette_lighten(LV_PALETTE_..., v)``. ``v`` can be
+:cpp:expr:`lv_color_t` ``c =`` :cpp:expr:`lv_palette_lighten(LV_PALETTE_..., v)`. ``v`` can be
 1..5. For the darker variants of a palette color use
-``lv_color_t c = lv_palette_darken(LV_PALETTE_..., v)``. ``v`` can be
+:cpp:expr:`lv_color_t` ``c =`` :cpp:expr:`lv_palette_darken(LV_PALETTE_..., v)`. ``v`` can be
 1..4.
 
 .. raw:: html
@@ -191,6 +218,21 @@ Modify and mix colors（修改和混合颜色）
      <summary>显示原文</summary>
 
 The following functions can modify a color:
+
+.. code-block:: c
+
+   // Lighten a color. 0: no change, 255: white
+   lv_color_t c = lv_color_lighten(c, lvl);
+
+   // Darken a color. 0: no change, 255: black
+   lv_color_t c = lv_color_darken(lv_color_t c, lv_opa_t lvl);
+
+   // Lighten or darken a color. 0: black, 128: no change 255: white
+   lv_color_t c = lv_color_change_lightness(lv_color_t c, lv_opa_t lvl);
+
+
+   // Mix two colors with a given ratio 0: full c2, 255: full c1, 128: half c1 and half c2
+   lv_color_t c = lv_color_mix(c1, c2, ratio);
 
 .. raw:: html
 
