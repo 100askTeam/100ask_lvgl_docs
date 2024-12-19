@@ -4,12 +4,31 @@
 SVG support
 ==============
 
+.. raw:: html
+
+   <details>
+     <summary>显示原文</summary>
+
 Scalable Vector Graphics (SVG) Tiny 1.2 support in LVGL.
 
 Detailed introduction: https://www.w3.org/TR/SVGTiny12/
 
+.. raw:: html
+
+   </details>
+   <br>
+
+可缩放矢量图形 (SVG) Tiny 1.2 在 LVGL 中的支持。
+
+详细介绍：https://www.w3.org/TR/SVGTiny12/
+
 Usage
 *****
+
+.. raw:: html
+
+   <details>
+     <summary>显示原文</summary>
 
 Enable :c:macro:`LV_USE_SVG` in ``lv_conf.h``.
 
@@ -17,6 +36,17 @@ See the examples below.
 
 If you need support SVG animation attribute parsing,
 you can enable :c:macro:`LV_USE_SVG_ANIMATION` in ``lv_conf.h``.
+
+.. raw:: html
+
+   </details>
+   <br>
+
+在 ``lv_conf.h`` 中启用 :c:macro:`LV_USE_SVG`。
+
+请参阅以下示例。
+
+如果需要支持解析 SVG 动画属性，可以在 ``lv_conf.h`` 中启用 :c:macro:`LV_USE_SVG_ANIMATION`。
 
 .. _svg_example:
 
