@@ -27,14 +27,14 @@ libpng 是官方的 PNG 参考库。它支持几乎所有 PNG 功能，可扩展
 Install（安装）
 --------------
 
-.. code:: bash
+.. code-block:: bash
 
     sudo apt install libpng-dev
 
 Add libpng to your project（将libpng加入你的项目）
 ------------------------------------------------
 
-.. code:: cmake
+.. code-block:: cmake
 
     find_package(PNG REQUIRED)
     include_directories(${PNG_INCLUDE_DIR})
@@ -53,7 +53,7 @@ Usage（用法）
 Enable :c:macro:`LV_USE_LIBPNG` in ``lv_conf.h``.
 
 See the examples below.
-It should be noted that each image of this decoder needs to consume ``width x height x 4`` bytes of RAM, 
+It should be noted that each image of this decoder needs to consume ``width x height x 4`` bytes of RAM,
 and it needs to be combined with the :ref:`overview_image_caching` feature to ensure that the memory usage is within a reasonable range.
 The decoded image is stored in RGBA pixel format.
 
@@ -79,7 +79,7 @@ The decoded image is stored in RGBA pixel format.
 Example
 -------
 
-.. include:: ../examples/libs/libpng/index.rst
+.. include:: ../../examples/libs/libpng/index.rst
 
 .. _libpng_api:
 
