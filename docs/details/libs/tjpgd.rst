@@ -68,13 +68,13 @@ as image sources.
 
 For example:
 
-.. code:: c
+.. code-block:: c
 
    lv_image_set_src(my_img, "S:path/to/picture.jpg");
 
-:Note: a file system driver needs to be registered to open images from
-files. Read more about :ref:`overview_file_system` or just
-enable one in ``lv_conf.h`` with ``LV_USE_FS_...`` config.
+:note: a file system driver needs to be registered to open images from
+       files. Read more about :ref:`overview_file_system` or just
+       enable one in ``lv_conf.h`` with ``LV_USE_FS_...`` config.
 
 .. raw:: html
 
@@ -86,12 +86,12 @@ enable one in ``lv_conf.h`` with ``LV_USE_FS_...`` config.
 
 例如：
 
-.. code:: c
+.. code-block:: c
 
    lv_image_set_src(my_img, "S:path/to/picture.jpg");
 
-:注意: 需要注册文件系统驱动程序才能打开映像文件。阅读更多关于 :ref:`overview_file_system` ，或者只是使用 ``LV_USE_FS_...`` 在 ``lv_conf.h`` 启用一个配置。
-
+:note: 需要注册一个文件系统驱动才能从文件中打开图像。
+       可以阅读更多关于 :ref:`overview_file_system` 的内容，或者在 ``lv_conf.h`` 中启用 ``LV_USE_FS_...`` 配置来使用其中一个文件系统驱动。
 
 Converter（转换器）
 ------------------
@@ -122,15 +122,15 @@ Converting JPEG to C array（将JPEG转换为C数组）
 Example
 -------
 
-.. include:: ../examples/libs/tjpgd/index.rst
+.. include:: ../../examples/libs/tjpgd/index.rst
 
 .. _tjpgd_api:
 
 API
 ---
 
-:ref:`lv_tjpgd`
+:ref:`lv_tjpgd_h`
 
-:ref:`tjpgd`
+:ref:`tjpgd_h`
 
-:ref:`tjpgdcnf`
+:ref:`tjpgdcnf_h`
