@@ -32,8 +32,6 @@ LVGL有一个“文件系统”抽象模块，可以让你连接任何类型的�
 
 	如果你想在路径中省略驱动器前缀，可以使用 :c:macro:`LV_FS_DEFAULT_DRIVE_LETTER` 配置参数。
 
-
-
 Ready to use drivers（准备使用驱动程序）
 ***************************************
 
@@ -71,29 +69,29 @@ To add a driver, a :cpp:type:`lv_fs_drv_t` needs to be initialized like below.
 The :cpp:type:`lv_fs_drv_t` needs to be static, global or dynamically allocated
 and not a local variable.
 
-.. code:: c
+.. code-block:: c
 
-   static lv_fs_drv_t drv;                   /*Needs to be static or global*/
-   lv_fs_drv_init(&drv);                     /*Basic initialization*/
+   static lv_fs_drv_t drv;                   /* Needs to be static or global */
+   lv_fs_drv_init(&drv);                     /* Basic initialization */
 
-   drv.letter = 'S';                         /*An uppercase letter to identify the drive */
-   drv.cache_size = my_cache_size;           /*Cache size for reading in bytes. 0 to not cache.*/
+   drv.letter = 'S';                         /* An uppercase letter to identify the drive */
+   drv.cache_size = my_cache_size;           /* Cache size for reading in bytes. 0 to not cache. */
 
-   drv.ready_cb = my_ready_cb;               /*Callback to tell if the drive is ready to use */
-   drv.open_cb = my_open_cb;                 /*Callback to open a file */
-   drv.close_cb = my_close_cb;               /*Callback to close a file */
-   drv.read_cb = my_read_cb;                 /*Callback to read a file */
-   drv.write_cb = my_write_cb;               /*Callback to write a file */
-   drv.seek_cb = my_seek_cb;                 /*Callback to seek in a file (Move cursor) */
-   drv.tell_cb = my_tell_cb;                 /*Callback to tell the cursor position  */
+   drv.ready_cb = my_ready_cb;               /* Callback to tell if the drive is ready to use */
+   drv.open_cb = my_open_cb;                 /* Callback to open a file */
+   drv.close_cb = my_close_cb;               /* Callback to close a file */
+   drv.read_cb = my_read_cb;                 /* Callback to read a file */
+   drv.write_cb = my_write_cb;               /* Callback to write a file */
+   drv.seek_cb = my_seek_cb;                 /* Callback to seek in a file (Move cursor) */
+   drv.tell_cb = my_tell_cb;                 /* Callback to tell the cursor position  */
 
-   drv.dir_open_cb = my_dir_open_cb;         /*Callback to open directory to read its content */
-   drv.dir_read_cb = my_dir_read_cb;         /*Callback to read a directory's content */
-   drv.dir_close_cb = my_dir_close_cb;       /*Callback to close a directory */
+   drv.dir_open_cb = my_dir_open_cb;         /* Callback to open directory to read its content */
+   drv.dir_read_cb = my_dir_read_cb;         /* Callback to read a directory's content */
+   drv.dir_close_cb = my_dir_close_cb;       /* Callback to close a directory */
 
-   drv.user_data = my_user_data;             /*Any custom data if required*/
+   drv.user_data = my_user_data;             /* Any custom data if required */
 
-   lv_fs_drv_register(&drv);                 /*Finally register the drive*/
+   lv_fs_drv_register(&drv);                 /* Finally register the drive */
 
 Any of the callbacks can be ``NULL`` to indicate that operation is not
 supported.
@@ -107,7 +105,7 @@ supported.
 添加驱动程序时，需要像下面这样初始化一个 :cpp:type:`lv_fs_drv_t` 类型的变量。
 :cpp:type:`lv_fs_drv_t` 类型的变量需要是静态的、全局的或者动态分配的，不能是局部变量。
 
-.. code:: c
+.. code-block:: c
 
    static lv_fs_drv_t drv;                   /* 需要是静态的或全局的 */
    lv_fs_drv_init(&drv);                     /* 基本初始化 */
@@ -147,7 +145,7 @@ Open callback（打开回调）
 
 The prototype of ``open_cb`` looks like this:
 
-.. code:: c
+.. code-block:: c
 
    void * (*open_cb)(lv_fs_drv_t * drv, const char * path, lv_fs_mode_t mode);
 
@@ -167,7 +165,7 @@ related callbacks. (see below)
 
 ``open_cb`` 的原型如下：
 
-.. code:: c
+.. code-block:: c
 
    void * (*open_cb)(lv_fs_drv_t * drv, const char * path, lv_fs_mode_t mode);
 
@@ -189,7 +187,7 @@ Other callbacks（其他回调）
 The other callbacks are quite similar. For example ``write_cb`` looks
 like this:
 
-.. code:: c
+.. code-block:: c
 
    lv_fs_res_t (*write_cb)(lv_fs_drv_t * drv, void * file_p, const void * buf, uint32_t btw, uint32_t * bw);
 
@@ -208,7 +206,7 @@ For a template of these callbacks see
 
 其他的回调函数非常相似。例如， ``write_cb`` 的结构如下：
 
-.. code:: c
+.. code-block:: c
 
    lv_fs_res_t (*write_cb)(lv_fs_drv_t * drv, void * file_p, const void * buf, uint32_t btw, uint32_t * bw);
 
@@ -227,7 +225,7 @@ Usage example（使用示例）
 
 The example below shows how to read from a file:
 
-.. code:: c
+.. code-block:: c
 
    lv_fs_file_t f;
    lv_fs_res_t res;
@@ -248,7 +246,7 @@ This example shows how to read a directory's content. It's up to the
 driver how to mark directories in the result but it can be a good
 practice to insert a ``'/'`` in front of each directory name.
 
-.. code:: c
+.. code-block:: c
 
    lv_fs_dir_t dir;
    lv_fs_res_t res;
@@ -263,7 +261,7 @@ practice to insert a ``'/'`` in front of each directory name.
            break;
        }
 
-       /*fn is empty, if not more files to read*/
+       /* fn is empty, if not more files to read */
        if(strlen(fn) == 0) {
            break;
        }
@@ -281,7 +279,7 @@ practice to insert a ``'/'`` in front of each directory name.
 
 以下示例显示如何从文件中读取：
 
-.. code:: c
+.. code-block:: c
 
    lv_fs_file_t f;
    lv_fs_res_t res;
@@ -299,7 +297,7 @@ practice to insert a ``'/'`` in front of each directory name.
 
 该示例显示如何读取目录的内容。如何标记结果中的目录是由驱动程序决定的，但在每个目录名称前面加上 ``'/'`` 可能是一个很好的做法。
 
-.. code:: c
+.. code-block:: c
 
    lv_fs_dir_t dir;
    lv_fs_res_t res;
@@ -333,7 +331,7 @@ Use drives for images（使用图像驱动程序）
    <details>
      <summary>显示原文</summary>
 
-:ref:`Image <lv_image>` objects can be opened from files too (besides
+:ref:`Image <lv_image>` Widgets can be opened from files as well (besides
 variables stored in the compiled program).
 
 To use files in image widgets the following callbacks are required:
