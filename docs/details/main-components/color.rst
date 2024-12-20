@@ -22,10 +22,9 @@ This type and format is used in almost all APIs regardless to :cpp:expr:`LV_COLO
    <br>
 
 
-颜色模块处理所有与颜色相关的功能，如改变颜色深度、从十六进制代码创建颜色、在颜色深度之间转换、混合颜色等。
+颜色模块处理所有与颜色相关的功能，如更改颜色深度、从十六进制代码创建颜色、在不同颜色深度之间转换、混合颜色等。
 
-类型 :cpp:type:`lv_color_t` 用于以RGB888格式存储颜色。无论 :cpp:expr:`LV_COLOR_DEPTH` 如何，几乎所有 API 中都使用此类型和格式。
-
+类型 :cpp:type:`lv_color_t` 用于存储 RGB888 格式的颜色。这个类型和格式在几乎所有的 API 中都被使用，与 :cpp:expr:`LV_COLOR_DEPTH` 无关。
 
 .. _color_create:
 
@@ -66,7 +65,7 @@ Create colors from Red, Green and Blue channel values:
 从红色、绿色和蓝色通道值创建颜色
 
 
-.. code:: c
+.. code-block:: c
 
    /*All channels are 0-255*/
    lv_color_t c = lv_color_make(red, green, blue);
@@ -111,8 +110,7 @@ Create colors from Hue, Saturation and Value values:
 
 根据色相、饱和度和值创建颜色
 
-
-.. code:: c
+.. code-block:: c
 
    //h = 0..359, s = 0..100, v = 0..100
    lv_color_t c = lv_color_hsv_to_rgb(h, s, v);
@@ -175,9 +173,10 @@ For the lighter variants of a palette color use
    <br>
 
 
-LVGL中包含 `Material Design's palette <https://vuetifyjs.com/en/styles/colors/#material-colors>`__ 的颜色。在这个系统中，所有命名的颜色都有一个名义上的主要颜色，以及四种更深和五种较浅的变体。
+LVGL 包含了 `Material Design 的调色板 <https://vuetifyjs.com/en/styles/colors/#material-colors>`__。
+在这个系统中，所有命名的颜色都有一个主要颜色以及四种较暗和五种较亮的变体。
 
-颜色的名称如下：
+这些颜色的名称如下：
 
 - :c:macro:`LV_PALETTE_RED`
 - :c:macro:`LV_PALETTE_PINK`
@@ -199,13 +198,12 @@ LVGL中包含 `Material Design's palette <https://vuetifyjs.com/en/styles/colors
 - :c:macro:`LV_PALETTE_BLUE_GREY`
 - :c:macro:`LV_PALETTE_GREY`
 
-要获取主要颜色，请使用
-``lv_color_t c = lv_palette_main(LV_PALETTE_...)``.
+要获取主要颜色，可以使用
+:cpp:expr:`lv_color_t` ``c =`` :cpp:expr:`lv_palette_main(LV_PALETTE_...)`。
 
-要获得调整亮度后的调色板颜色，请使用 ``lv_color_t c = lv_palette_lighten(LV_PALETTE_..., v)``. ``v`` 可以是1到5。
-
-要获得调整深度后的调色板颜色，请使用 ``lv_color_t c = lv_palette_darken(LV_PALETTE_..., v)``. ``v`` 可以是1到4。
-
+对于调色板颜色的较亮变体，可以使用
+:cpp:expr:`lv_color_t` ``c =`` :cpp:expr:`lv_palette_lighten(LV_PALETTE_..., v)`。 ``v`` 可以是 1..5。对于调色板颜色的较暗变体，可以使用
+:cpp:expr:`lv_color_t` ``c =`` :cpp:expr:`lv_palette_darken(LV_PALETTE_..., v)`。 ``v`` 可以是 1..4。
 
 .. _color_modify_and_mix:
 
@@ -243,7 +241,7 @@ The following functions can modify a color:
 以下函数可以修改颜色：
 
 
-.. code:: c
+.. code-block:: c
 
    // Lighten a color. 0: no change, 255: white
    lv_color_t c = lv_color_lighten(c, lvl);
@@ -310,17 +308,15 @@ mixing *ratio*.
    <br>
 
 
-描述不透明度时，创建了 :cpp:type:`lv_opa_t` 类型，该类型由 `uint8_t` 创建。
-还引入了一些特殊目的的定义：
+为了描述不透明度，创建了 :cpp:type:`lv_opa_t` 类型，它是基于 ``uint8_t`` 类型的。同时，还引入了一些特殊用途的定义：
 
--  :cpp:enumerator:`LV_OPA_TRANSP` 值为0，表示完全透明，使颜色完全透明
--  :cpp:enumerator:`LV_OPA_10` 值为25，表示颜色仅覆盖一小部分
--  ``LV_OPA_20 ... OPA_80`` 遵循逻辑
--  :cpp:enumerator:`LV_OPA_90` 值为229，表示颜色几乎完全覆盖
--  :cpp:enumerator:`LV_OPA_COVER` 值为255，表示颜色完全覆盖（完全不透明）
+-  :cpp:enumerator:`LV_OPA_TRANSP` 值：0，表示没有不透明度，使颜色完全透明
+-  :cpp:enumerator:`LV_OPA_10` 值：25，表示颜色只覆盖一点点
+-  ``LV_OPA_20 ... OPA_80`` 按逻辑顺序递增
+-  :cpp:enumerator:`LV_OPA_90` 值：229，表示颜色几乎完全覆盖
+-  :cpp:enumerator:`LV_OPA_COVER` 值：255，表示颜色完全覆盖（完全不透明）
 
-您还可以在 :cpp:func:`lv_color_mix` 中使用 ``LV_OPA_*`` 定义作为混合的 *比例*。
-
+你也可以在 :cpp:func:`lv_color_mix` 中使用 ``LV_OPA_*`` 定义作为混合 *比例*。
 
 .. _color_api:
 
