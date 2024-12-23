@@ -124,7 +124,7 @@ to learn about the Hanyu Pinyin syllables and the syllable table.
 
 Then, write your own dictionary according to the following format:
 
-.. code:: c
+.. code-block:: c
 
    lv_100ask_pinyin_dict_t your_pinyin_dict[] = {
                { "a", "啊阿呵吖" },
@@ -150,7 +150,7 @@ properly.
 每个拼音音节的排列顺序非常重要。你需要根据汉语拼音音节表定制自己的词库。
 你可以阅读 `这里 <https://baike.baidu.com/item/%E6%B1%89%E8%AF%AD%E6%8B%BC%E9%9F%B3%E9%9F%B3%E8%8A%82/9167981>`__ 的内容了解汉语拼音音节和音节表。然后，根据以下格式编写你自己的词典：
 
-.. code:: c
+.. code-block:: c
 
    lv_100ask_pinyin_dict_t your_pinyin_dict[] = {
                { "a", "啊阿呵吖" },
@@ -180,7 +180,7 @@ Apply new dictionary（应用新的字典）
 After writing a dictionary according to the above dictionary format, you
 only need to call this function to set up and use your dictionary:
 
-.. code:: c
+.. code-block:: c
 
        lv_obj_t * pinyin_ime = lv_100ask_pinyin_ime_create(lv_screen_active());
        lv_100ask_pinyin_ime_set_dict(pinyin_ime, your_pinyin_dict);
@@ -193,7 +193,7 @@ only need to call this function to set up and use your dictionary:
 
 根据上述字典格式编写字典后，您只需要调用此函数进行设置和使用您的字典：
 
-.. code:: c
+.. code-block:: c
 
        lv_obj_t * pinyin_ime = lv_100ask_pinyin_ime_create(lv_screen_active());
        lv_100ask_pinyin_ime_set_dict(pinyin_ime, your_pinyin_dict);
@@ -243,7 +243,7 @@ lv_ime_pinyin有以下几种模式：
 Example
 -------
 
-.. include:: ../examples/others/ime/index.rst
+.. include:: ../../examples/others/ime/index.rst
 
 .. _ime_pinyin_api:
 
