@@ -112,6 +112,11 @@ Coding guide（编码指南）
 
    <details>
      <summary>显示原文</summary>
+-  Editor:
+
+   -  Set editor to use 4 spaces for tab indentations (instead of tab characters).
+   -  Exception:  the **Kconfig** file and any make files require leading tab characters
+      on child items.
 
 -  Functions:
 
@@ -132,7 +137,10 @@ Coding guide（编码指南）
 
    </details> 
    <br>
+-  编辑器：
 
+   -  设置编辑器使用4个空格进行缩进（而不是制表符）。
+   -  例外： **Kconfig** 文件和任何 make 文件在子项上需要使用前导制表符。
 
 - 功能：
 
@@ -157,31 +165,67 @@ Comments（注释）
    <details>
      <summary>显示原文</summary>
 
-Before every function have in ``.h`` files a comment like this:
+Before every function prototype in ``.h`` files, include a Doxygen-formatted comment
+like this:
 
-.. code:: c
+.. code-block:: c
 
-   /**
-    * Return with the screen of an object
-    * @param obj pointer to an object
-    * @return pointer to a screen
-    */
-   lv_obj_t * lv_obj_get_screen(lv_obj_t * obj);
+    /**
+     * Brief description.  Add a blank line + additional paragraphs when more detail is needed.
+     * @param  parent     brief description of argument.  Additional detail can appear
+     *                    on subsequent lines.  List of accepted values:
+     *                    - value one
+     *                    - value two
+     *                    - value three
+     * @return   brief description of return value.
+     */
+    type_name_t * lv_function_name(lv_obj_t * parent);
 
-Always use ``/*Something*/`` format and NOT ``//Something``
+The normal comment prefix ``/**`` causes the comment to document the code member
+*after* the comment.  When documenting a code member that is *before* the
+comment, such as a struct member, use ``/**<`` like this:
 
-Write readable code to avoid descriptive comments like:
-``x++; /*Add 1 to x*/``. The code should show clearly what you are
-doing.
+.. code-block:: c
 
-You should write **why** have you done this:
-``x++; /*Because of closing '\0' of the string*/``
+    /**
+     * Brief description of struct
+     *
+     * When more detail is needed, add a blank line then the detail.
+     */
+    typedef struct {
+        char      *text;    /**< Brief description of this member */
+        uint16_t   length;  /**< Brief description of this member */
+    } lv_example_type_t;
 
-Short "code summaries" of a few lines are accepted. E.g.
-``/*Calculate the new coordinates*/``
+-  When commenting code, use block comments like this ``/* Description */``,
+   not end-of-line comments like this ``// Description``.
 
-In comments use \` \` when referring to a variable. E.g.
-:literal:`/\*Update the value of \`x_act`*/`
+-  Include a space after the ``/*`` or ``/**<`` and before the ``*/`` for improved readability.
+
+-  Write readable code to avoid descriptive comments like:  ``x++; /* Add 1 to x */``.
+
+-  The code should show clearly what you are doing.
+
+-  You should write **why** you did it:  ``x++;  /* Point to closing '\0' of string */``
+
+-  Short "code summaries" of a few lines are accepted: ``/* Calculate new coordinates */``
+
+-  In comments use back-quotes (\`...\`) when referring to a code element, such as a variable, type,
+   or struct name: ``/* Update value of `x_act` */``
+
+-  When adding or modifying comments, priorities are (in order of importance):
+
+       1.  clarity (the ease with which other programmers can understand your intention),
+       2.  readability (the ease with which other programmers can read your comments),
+       3.  brevity (the quality of using few words when speaking or writing).
+
+-  Blank lines within comments are desirable when they improve clarity and readability.
+
+-  Remember, when you are writing source code, you are not just teaching the computer
+   what to do, but also teaching other programmers how it works, not only users of the
+   API, but also future maintainers of your source code.  Comments add information
+   about what you were thinking when the code was written, and **why** you did things
+   that way---information that cannot be conveyed by the source code alone.
 
 
 .. raw:: html
@@ -190,27 +234,277 @@ In comments use \` \` when referring to a variable. E.g.
    <br>
 
 
-在文件中的每个函数之前都有 ``.h`` 这样的注释：
+在 ``.h`` 文件中的每个函数原型之前，包含一个 Doxygen 格式的注释，如下所示：
 
-.. code:: c
+.. code-block:: c
 
-   /**
-    * Return with the screen of an object
-    * @param obj pointer to an object
-    * @return pointer to a screen
-    */
-   lv_obj_t * lv_obj_get_screen(lv_obj_t * obj);
+    /**
+     * 简要描述。当需要更多细节时，添加空行和额外段落。
+     * @param  parent     参数的简要描述。额外的细节可以出现在后续行中。接受的值列表：
+     *                    - 值一
+     *                    - 值二
+     *                    - 值三
+     * @return   返回值的简要描述。
+     */
+    type_name_t * lv_function_name(lv_obj_t * parent);
 
-始终使用 ``/*Something*/`` 格式而不是 ``//Something``
+普通的注释前缀 ``/**`` 会使注释记录在注释后的代码成员。当记录注释在注释前的代码成员时，
+例如结构体成员，使用 ``/**<``，如下所示：
 
-编写可读的代码以避免描述性注释，例如 ``x++; /*Add 1 to x*/``。代码应该清楚地显示您在做什么。
+.. code-block:: c
 
-你应该写下 **为什么** 这样做： ``x++; /*Because of closing '\0' of the string*/``
+    /**
+     * 结构体的简要描述
+     *
+     * 当需要更多细节时，添加空行然后添加细节。
+     */
+    typedef struct {
+        char      *text;    /**< 该成员的简要描述 */
+        uint16_t   length;  /**< 该成员的简要描述 */
+    } lv_example_type_t;
 
-接受几行的简短“代码摘要”。例如 ``/*Calculate the new coordinates*/``
+-  注释代码时，使用块注释 ``/* 描述 */``，而不是行尾注释 ``// 描述``。
 
-在注释中引用变量时使用 \` \` 。例如 :literal:`/\*Update the value of \`x_act`*/`
+-  为了提高可读性，在 ``/*`` 或 ``/**<`` 之后和 ``*/`` 之前包含一个空格。
 
+-  编写可读的代码，避免描述性注释，如：``x++; /* x 加 1 */``。
+
+-  代码应清楚地显示你在做什么。
+
+-  你应该写明 **为什么** 这样做：``x++;  /* 指向字符串的结束符 '\0' */``
+
+-  接受几行的简短“代码摘要”：``/* 计算新坐标 */``
+
+-  在注释中使用反引号（\`...\`）引用代码元素，如变量、类型或结构体名称：``/* 更新 `x_act` 的值 */``
+
+-  添加或修改注释时，优先级（按重要性顺序）：
+
+       1.  清晰度（其他程序员理解你意图的难易程度），
+       2.  可读性（其他程序员阅读你注释的难易程度），
+       3.  简洁性（说话或写作时使用较少词语的质量）。
+
+-  当空行能提高清晰度和可读性时，注释中应包含空行。
+
+-  记住，当你编写源代码时，你不仅是在教计算机该做什么，还在教其他程序员它是如何工作的，
+   不仅是 API 的用户，还有你源代码的未来维护者。注释添加了代码编写时你在想什么以及
+   **为什么** 这样做的信息——这些信息是源代码本身无法传达的。
+
+Doxygen Comment Specifics（Doxygen 注释细节）
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. raw:: html
+
+   <details>
+     <summary>显示原文</summary>
+Doxygen is the first program in a chain that generates the online LVGL API
+documentation from the files in the LVGL repository.  Doxygen detects files it should
+pay attention to by them having a ``@file`` command inside a Doxygen comment.  Doxygen
+comments begin with a leading ``/**``.  It ignores comments that do not have exactly
+two ``*``.
+
+The following is an illustration of an API function prototype with documentation
+illustrating most of the Doxygen commands used in LVGL.
+
+.. code-block:: c
+
+    /**
+     * Set alignment of Widgets placed in containers with LV_STYLE_FLEX_FLOW style.
+     *
+     * The values for the `..._place` arguments come from the `lv_flex_align_t`
+     * enumeration and have the same meanings as they do for flex containers in CSS.
+     * @param  obj                   pointer to flex container.  It must have
+     *                               `LV_STYLE_FLEX_FLOW` style or nothing will happen.
+     * @param  main_place            where to place items on main axis (in their track).
+     *                               (Any value of `lv_flex_align_t`.)
+     * @param  cross_place           where to place item in track on cross axis.
+     *                               - `LV_FLEX_ALIGN_START`
+     *                               - `LV_FLEX_ALIGN_END`
+     *                               - `LV_FLEX_ALIGN_CENTER`
+     * @param  track_cross_place     where to place tracks in cross direction.
+     *                               (Any value of `lv_flex_align_t`.)
+     * Example for a title bar layout:
+     * @code{.c}
+     *     lv_obj_set_flex_align(title_bar, LV_FLEX_ALIGN_START, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
+     * @endcode
+     * @see
+     *     - https://css-tricks.com/snippets/css/a-guide-to-flexbox/
+     *     - see  `lv_obj_set_flex_grow()` for additional information.
+     */
+    void lv_obj_set_flex_align(lv_obj_t * widget, lv_flex_align_t main_place, lv_flex_align_t cross_place,
+                               lv_flex_align_t track_cross_place);
+
+
+- Always start Doxygen comment with a brief description of the code element it documents.
+
+- When more detail is needed, add a blank line below the brief description and add
+  additional information that may be needed by LVGL API users, including preconditions
+  for calling the function.  Doxygen needs the blank line to separate "brief" from
+  "detail" portions of the description.
+
+- Describe function parameters with the ``@param`` command.  When a function writes
+  to the address contained by a pointer parameter, if not already obvious (e.g. when
+  the parameter name contains the word "out"), include the direction in the command
+  for clarity:
+
+      ``@param[out]  param_name     description``.
+
+- Describe return values with the ``@return`` command.
+
+- Add at least 2 spaces after Doxygen commands for improved readability.
+
+- Use back-quotes (\`...\`) around code elements (variables, type names, function names).  For type
+  names and function names, Doxygen generates a hyperlink to that code member's
+  documentation (when it exists) with or without the single back-quotes.
+
+- Append empty "()" to function names.  Doxygen will not generate a hyperlink to the
+  function's documentation without this.
+
+- Use proper grammar for clarity.  Descriptions of parameters do not need periods
+  after them unless they are full sentences.
+
+- Align edges of text around lists of parameters for ease of reading.
+
+- Lists (e.g. of accepted parameter values) can be created by using the '-' character.
+  If the list needs to be numbered, numbers can also be used.
+
+- Place example code in a code block by surrounding it with ``@code{.c}`` and ``@endcode`` commands.
+  Doxygen doesn't need the ``{.c}`` part, but the downstream software does.
+
+- Refer reader to additional information using the ``@see`` command.  Doxygen adds a
+  "See also" paragraph.  The text following the ``@see`` command will be indented.
+
+- If you create a new pair of ``.c`` and ``.h`` files (e.g. for a new driver), ensure
+  a Doxygen comment like this is at the top of each new file.  Doxygen will not parse
+  the file without the ``@file`` command being present.
+
+.. code-block:: c
+
+      /**
+       * @file filename.c
+       *
+       */
+.. raw:: html
+
+   </details> 
+   <br>
+Doxygen 是生成在线 LVGL API 文档的链条中的第一个程序，它从 LVGL 仓库中的文件生成文档。
+Doxygen 通过在 Doxygen 注释中包含 ``@file`` 命令来检测它应该关注的文件。Doxygen 注释以
+前导 ``/**`` 开始。它会忽略不完全有两个 ``*`` 的注释。
+
+以下是一个带有文档的 API 函数原型示例，展示了 LVGL 中使用的大多数 Doxygen 命令。
+
+.. code-block:: c
+
+    /**
+     * 设置在具有 LV_STYLE_FLEX_FLOW 样式的容器中放置的部件的对齐方式。
+     *
+     * `..._place` 参数的值来自 `lv_flex_align_t` 枚举，并且与 CSS 中的弹性容器具有相同的含义。
+     * @param  obj                   指向弹性容器的指针。它必须具有 `LV_STYLE_FLEX_FLOW` 样式，否则不会发生任何事情。
+     * @param  main_place            在主轴上放置项目的位置（在它们的轨道中）。
+     *                               （`lv_flex_align_t` 的任何值。）
+     * @param  cross_place           在交叉轴上放置项目的位置。
+     *                               - `LV_FLEX_ALIGN_START`
+     *                               - `LV_FLEX_ALIGN_END`
+     *                               - `LV_FLEX_ALIGN_CENTER`
+     * @param  track_cross_place     在交叉方向上放置轨道的位置。
+     *                               （`lv_flex_align_t` 的任何值。）
+     * 示例标题栏布局：
+     * @code{.c}
+     *     lv_obj_set_flex_align(title_bar, LV_FLEX_ALIGN_START, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
+     * @endcode
+     * @see
+     *     - https://css-tricks.com/snippets/css/a-guide-to-flexbox/
+     *     - 参见 `lv_obj_set_flex_grow()` 以获取更多信息。
+     */
+    void lv_obj_set_flex_align(lv_obj_t * widget, lv_flex_align_t main_place, lv_flex_align_t cross_place,
+                               lv_flex_align_t track_cross_place);
+
+
+- 始终以简要描述代码元素的 Doxygen 注释开始。
+
+- 当需要更多细节时，在简要描述下方添加一个空行，并添加 LVGL API 用户可能需要的额外信息，
+  包括调用函数的前提条件。Doxygen 需要空行来分隔“简要”部分和“详细”部分。
+
+- 使用 ``@param`` 命令描述函数参数。当函数写入指针参数包含的地址时，如果不明显（例如参数名称包含“out”），
+  为了清晰起见，在命令中包含方向：
+
+      ``@param[out]  param_name     描述``。
+
+- 使用 ``@return`` 命令描述返回值。
+
+- 在 Doxygen 命令后至少添加 2 个空格以提高可读性。
+
+- 使用反引号（\`...\`）引用代码元素（变量、类型名称、函数名称）。对于类型名称和函数名称，
+  Doxygen 会生成指向该代码成员文档的超链接（如果存在）。
+
+- 在函数名称后附加空的“()”。没有这个，Doxygen 将不会生成指向函数文档的超链接。
+
+- 使用正确的语法以确保清晰。参数描述不需要句号，除非它们是完整的句子。
+
+- 对齐参数列表周围的文本边缘以便于阅读。
+
+- 可以使用“-”字符创建列表（例如接受的参数值）。如果需要编号列表，也可以使用数字。
+
+- 将示例代码放在代码块中，使用 ``@code{.c}`` 和 ``@endcode`` 命令将其包围。Doxygen 不需要 ``{.c}`` 部分，
+  但下游软件需要。
+
+- 使用 ``@see`` 命令引用读者获取更多信息。Doxygen 会添加一个“另请参见”段落。``@see`` 命令后的文本将缩进。
+
+- 如果创建了一对新的 ``.c`` 和 ``.h`` 文件（例如用于新驱动程序），请确保在每个新文件的顶部都有一个 Doxygen 注释。
+  如果没有 ``@file`` 命令，Doxygen 将不会解析该文件。
+
+.. code-block:: c
+
+      /**
+       * @file filename.c
+       *
+       */
+Supported Doxygen Commands（支持的 Doxygen 命令）
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. raw:: html
+
+   <details>
+     <summary>显示原文</summary>
+-  ``@file``
+   tells Doxygen to parse this file and also supplies documentation about
+   the file itself when applicable (everything following it in the same comment).
+-  ``@param  name  description``
+   documents ``name`` as a function parameter, and ``description`` is the text that
+   follows it until Doxygen encounters a blank line or another Doxygen command.
+-  ``@return  description``
+   documents the return value until Doxygen encounters a blank line or another Doxygen command.
+-  ``@code{.c}/@endcode``
+   surrounds code that should be placed in a code block.  While Doxygen knows to use C
+   color-coding of code blocks in a .C file, the downstream part of the documentation
+   generation sequence does not, so the ``{.c}`` appendage to the ``@code`` command
+   is necessary.
+-  ``@note  text``
+   starts a paragraph where a note can be entered.  The note ends with a blank line,
+   the end of the comment, or another Doxygen command that starts a new section.
+   If the note contains more than one paragraph, additional paragraphs can be added
+   by using additional ``@note`` commands.  At this writing, ``@par`` commands do not
+   add additional paragraphs to notes as indicated in the Doxygen documentation.
+-  ``@see  text``
+   generates a "See also" pagraph in a highlighted section, helpful when additional
+   information about a topic can be found elsewhere.
+.. raw:: html
+
+   </details> 
+   <br>
+-  ``@file``
+   告诉 Doxygen 解析此文件，并在适用时提供有关文件本身的文档（同一注释中的所有内容）。
+-  ``@param  name  description``
+   将 ``name`` 记录为函数参数，``description`` 是后续文本，直到 Doxygen 遇到空行或另一个 Doxygen 命令。
+-  ``@return  description``
+   记录返回值，直到 Doxygen 遇到空行或另一个 Doxygen 命令。
+-  ``@code{.c}/@endcode``
+   包围应放置在代码块中的代码。虽然 Doxygen 知道在 .C 文件中使用 C 语法高亮显示代码块，
+   但文档生成序列的下游部分不知道，因此 ``@code`` 命令的 ``{.c}`` 附加部分是必要的。
+-  ``@note  text``
+   开始一个可以输入注释的段落。注释以空行、注释结束或另一个开始新部分的 Doxygen 命令结束。
+   如果注释包含多个段落，可以使用额外的 ``@note`` 命令添加额外的段落。目前，``@par`` 命令不会像
+   Doxygen 文档中所述那样为注释添加额外的段落。
+-  ``@see  text``
+   在高亮部分生成一个“另请参见”段落，当有关主题的更多信息可以在其他地方找到时很有帮助。
 API Conventions（API规定）
 --------------------------
 
@@ -422,18 +716,21 @@ Skipping hooks（跳钩）
 
 If you want to skip any particular hook you can do so with:
 
+.. code-block:: console
+
+   SKIP=name-of-the-hook git commit
 .. raw:: html
 
    </details> 
    <br>
 
 
-如果你想跳过任何特定的钩子，你可以这样做：
+如果你想跳过任何特定的钩子，可以这样做：
 
-
-.. code:: console
+.. code-block:: console
 
    SKIP=name-of-the-hook git commit
+
 
 Testing hooks（测试钩子）
 -------------------------

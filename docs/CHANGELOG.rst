@@ -13,17 +13,17 @@ Changelog（更新日志）
 
 It's huge release with many interesting updates:
 
-- Built-in `Wayland driver <https://docs.lvgl.io/master/integration/driver/wayland.html>`__
-- `OpenGL ES and GLFW driver <https://docs.lvgl.io/master/integration/driver/opengles.html>`__ with support for external textures
-- `Renesas GLCDC <https://docs.lvgl.io/master/integration/driver/display/renesas_glcdc.html>`__ driver
+- Built-in :ref:`Wayland driver <wayland_driver>`
+- :ref:`OpenGL ES and GLFW driver <opengl_es_driver>` with support for external textures
+- :ref:`renesas_glcdc` driver
 - L8 and I1 rendering support
 - Matrix transformations during rendering
-- New `file system interfaces <https://docs.lvgl.io/master/libs/fs.html>`__: LittleFS, ESP LittleFS, Arduino FS
+- New :ref:`file system interfaces <libs_filesystem>`: LittleFS, ESP LittleFS, Arduino FS
 - SDL renderer improvements (supporting all draw task types and improving speed)
-- Radial, Conic, and Skew `gradients supported <https://docs.lvgl.io/master/overview/style.html#metallic-knob-with-conic-gradient>`__ by software rendering and VG-Lite
-- `QNX <https://docs.lvgl.io/master/integration/os/qnx.html>`__ and `MQX <https://docs.lvgl.io/master/integration/os/mqx.html>`__ support
-- `Mouse hover handling <https://docs.lvgl.io/master/get-started/quick-overview.html>`__
-- `Lottie <https://docs.lvgl.io/master/widgets/lottie.html>`__ support
+- Radial, Conic, and Skew `gradients supported <https://docs.lvgl.io/master/details/base-widget/styles/style.html#metallic-knob-with-conic-gradient>`__ by software rendering and VG-Lite
+- :ref:`qnx` and :ref:`mqx` support
+- :ref:`Mouse hover handling <style_states>`
+- :ref:`lv_lottie` support
 - CI tests for UEFI builds
 
 And many smaller fixes and features
@@ -37,19 +37,19 @@ And many smaller fixes and features
 `v9.2 <https://github.com/lvgl/lvgl/compare/v9.1.0...v9.2.0>`__ 2024年8月26日
 ------------------------------------------------------------------------------
 
-这是一个巨大的版本更新，包含许多有趣的更新：
+这是一个包含许多有趣更新的大版本：
 
-- 内置 Wayland 驱动 `Wayland driver <https://docs.lvgl.io/master/integration/driver/wayland.html>`__
-- `OpenGL ES and GLFW driver <https://docs.lvgl.io/master/integration/driver/opengles.html>`__ 支持外部纹理
-- `Renesas GLCDC <https://docs.lvgl.io/master/integration/driver/display/renesas_glcdc.html>`__ 驱动
-- L8 和 I1 渲染支持
+- 内置 :ref:`Wayland 驱动 <wayland_driver>`
+- :ref:`OpenGL ES 和 GLFW 驱动 <opengl_es_driver>`，支持外部纹理
+- :ref:`renesas_glcdc` 驱动
+- 支持 L8 和 I1 渲染
 - 渲染期间的矩阵变换
-- 新的 `文件系统接口 <https://docs.lvgl.io/master/libs/fs.html>`__: LittleFS, ESP LittleFS, Arduino FS
-- SDL 渲染器改进（支持所有绘图任务类型并提高速度）
-- 软件渲染和 VG-Lite 支持的 `径向、圆锥和倾斜渐变 <https://docs.lvgl.io/master/overview/style.html#metallic-knob-with-conic-gradient>`__ 
-- `QNX <https://docs.lvgl.io/master/integration/os/qnx.html>`__ 和 `MQX <https://docs.lvgl.io/master/integration/os/mqx.html>`__ 支持
-- `Mouse hover handling <https://docs.lvgl.io/master/get-started/quick-overview.html>`__
-- `Lottie <https://docs.lvgl.io/master/widgets/lottie.html>`__ 支持
+- 新的 :ref:`文件系统接口 <libs_filesystem>`：LittleFS、ESP LittleFS、Arduino FS
+- SDL 渲染器改进（支持所有绘制任务类型并提高速度）
+- 通过软件渲染和 VG-Lite 支持径向、锥形和倾斜 `渐变 <https://docs.lvgl.io/master/details/base-widget/styles/style.html#metallic-knob-with-conic-gradient>`__
+- :ref:`qnx` 和 :ref:`mqx` 支持
+- :ref:`鼠标悬停处理 <style_states>`
+- :ref:`lv_lottie` 支持
 - UEFI 构建的 CI 测试
 
 以及许多较小的修复和功能
@@ -337,7 +337,7 @@ Fixes（修复）
 - **fix(sdl): handle if the window_id is not set correctly in SDL** `6194 <https://github.com/lvgl/lvgl/pull/6194>`__
 - **fix(drivers): drm driver not initialising with small screens** `6244 <https://github.com/lvgl/lvgl/pull/6244>`__
 - **fix(freetype): fix potential multi-threaded data conflicts** `6252 <https://github.com/lvgl/lvgl/pull/6252>`__
-- **fix(vglite): build issues ** `6245 <https://github.com/lvgl/lvgl/pull/6245>`__
+- **fix(vglite): build issues** `6245 <https://github.com/lvgl/lvgl/pull/6245>`__
 - **fix(canvas): lv_canvas_set_px for indexed images** `6226 <https://github.com/lvgl/lvgl/pull/6226>`__
 - **fix(snapshot): fix memleak in lv_snapshot** `6147 <https://github.com/lvgl/lvgl/pull/6147>`__
 - **fix(span): fix span incorrect max height calculation** `6243 <https://github.com/lvgl/lvgl/pull/6243>`__
