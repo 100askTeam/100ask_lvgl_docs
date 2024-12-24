@@ -20,7 +20,8 @@ Using the simulator on a PC has the following advantages:
 - Portability: The written code is portable, which means you can simply copy it when migrating to embedded hardware.
 - Easy Validation: The simulator is also very useful to report bugs because it provides a common platform for every user.
 - Better developer experience: On PC Debuggers are usually faster and better, you can log to files,
-  add a lot of ``printf``-s, do profiling, and so on.
+  add a lot of ``printf`` s, do profiling, and so on.
+
 
 .. raw:: html
 
@@ -51,11 +52,11 @@ Select an IDE（选择一个IDE）
 The simulator is ported to various IDEs (Integrated Development Environments).
 Choose your favorite IDE, read its README on GitHub, download the project, and load it to the IDE.
 
-- `Eclipse with SDL driver <https://github.com/lvgl/lv_sim_eclipse_sdl>`__: Recommended on Linux and Mac, supports CMake too
+- `Eclipse with SDL driver <https://github.com/lvgl/lv_sim_eclipse_sdl>`__: Recommended on Linux and Mac, supports CMake as well
 - `VisualStudio <https://github.com/lvgl/lv_port_pc_visual_studio>`__: Recommended on Windows
 - `VSCode with SDL driver <https://github.com/lvgl/lv_port_pc_vscode>`__: Recommended on Linux (SDL) and Mac (SDL)
 - `CodeBlocks <https://github.com/lvgl/lv_sim_codeblocks_win>`__: Recommended on Windows
-- `PlatformIO with SDL driver <https://github.com/lvgl/lv_platformio>`__: Recommended on Linux and Mac but has an STM32 environment too
+- `PlatformIO with SDL driver <https://github.com/lvgl/lv_platformio>`__: Recommended on Linux and Mac but has an STM32 environment as well
 - `Generic Linux <https://github.com/lvgl/lv_port_linux>`__: CMake based project where you can easily switch between fbdev, DRM, and SDL.
 - `MDK with FastModel <https://github.com/lvgl/lv_port_an547_cm55_sim>`__: For Windows
 
@@ -93,7 +94,7 @@ Built-in drivers（内置驱动）
    <details>
      <summary>显示原文</summary>
 
-LVGL comes with several `built-in drivers <https://docs.lvgl.io/master/integration/driver/index.html>`__.
+LVGL comes with several :ref:`built-in drivers <drivers>`.
 
 Even if a simulator project comes with e.g. SDL, you can easily replace it by enabling
 another driver in ``lv_conf.h`` and calling its ``create`` function.
@@ -101,7 +102,7 @@ another driver in ``lv_conf.h`` and calling its ``create`` function.
 For example to use the Linux frame buffer device instead of SDL just enable ``LV_USE_LINUX_FBDEV``
 and call
 
-.. code:: c
+.. code-block:: c
 
    lv_display_t *display = lv_linux_fbdev_create();
    lv_linux_fbdev_set_file(display, "/dev/fb0")
@@ -111,8 +112,13 @@ and call
    </details>
    <br>
 
-LVGL带有若干个 `内置驱动 <https://docs.lvgl.io/master/integration/driver/index.html>`__.
+LVGL带有若干个 :ref:`built-in drivers <drivers>`.
 
 即使模拟器项目附带了例如 SDL，你也能通过在 ``lv_conf.h`` 中启用另一个驱动并调用其 ``create`` 函数来轻松替换它。
 
 例如，要使用 Linux 帧缓冲设备而不是 SDL，只需启用 ``LV_USE_LINUX_FBDEV`` 并调用相关函数即可。
+
+.. code-block:: c
+
+   lv_display_t *display = lv_linux_fbdev_create();
+   lv_linux_fbdev_set_file(display, "/dev/fb0")

@@ -10,7 +10,7 @@ NXP
 NXP has integrated LVGL into the MCUXpresso SDK packages for several of our
 microcontrollers as an optional software component, allowing easy evaluation and
 migration into your product design. LVGL is a free and open-source embedded
-graphic library with features that enable you need to create embedded GUIs with
+graphic library with features that enable you to create embedded GUIs with
 intuitive graphical elements, beautiful visual effects and a low memory
 footprint. The complete graphic framework includes a variety of widgets for you
 to use in the creation of your GUI, and supports more advanced functions such as
@@ -87,10 +87,12 @@ Basic configuration:（基本配置：）
    <details>
      <summary>显示原文</summary>
 
-- Select NXP PXP engine in "lv_conf.h": Set :c:macro:`LV_USE_DRAW_PXP` to `1`.
+- Select NXP PXP engine in "lv_conf.h": Set :c:macro:`LV_USE_PXP` to `1`.
+- In order to use PXP as a draw unit, select in "lv_conf.h": Set :c:macro:`LV_USE_DRAW_PXP` to `1`.
+- In order to use PXP to rotate the screen, select in "lv_conf.h": Set :c:macro:`LV_USE_ROTATE_PXP` to `1`.
 - Enable PXP asserts in "lv_conf.h": Set :c:macro: `LV_USE_PXP_ASSERT` to `1`.
   There are few PXP assertions that can stop the program execution in case the
-  c:macro: `LV_ASSERT_HANDLER` is set to `while(1);` (Halt by default). Else,
+  c:macro:`LV_ASSERT_HANDLER` is set to `while(1);` (Halt by default). Else,
   there will be logged just an error message via `LV_LOG_ERROR`.
 - If :c:macro:`SDK_OS_FREE_RTOS` symbol is defined, FreeRTOS implementation
   will be used, otherwise bare metal code will be included.
@@ -101,11 +103,12 @@ Basic configuration:（基本配置：）
    <br>
 
 
-- 在 "lv_conf.h" 中选择 NXP PXP 引擎: 将 :c:macro:`LV_USE_DRAW_PXP` 设置为 `1`。
-- 在 "lv_conf.h" 中启用 PXP 断言: 将 :c:macro:`LV_USE_PXP_ASSERT` 设置为 `1`。
-  如果 :c:macro:`LV_ASSERT_HANDLER` 设置为 `while(1);` (默认情况下为停止)，则会有几个 PXP 断言可能会停止程序执行。否则，只会通过 `LV_LOG_ERROR` 记录错误消息。
-- 如果定义了 :c:macro:`SDK_OS_FREE_RTOS` 符号，则会使用 FreeRTOS 实现，否则将包含裸机代码。
-
+- 在 "lv_conf.h" 中选择 NXP PXP 引擎：将 :c:macro:`LV_USE_PXP` 设置为 `1`。  
+- 为了将 PXP 作为绘图单元使用，请在 "lv_conf.h" 中设置：将 :c:macro:`LV_USE_DRAW_PXP` 设置为 `1`。  
+- 为了使用 PXP 来旋转屏幕，请在 "lv_conf.h" 中设置：将 :c:macro:`LV_USE_ROTATE_PXP` 设置为 `1`。  
+- 在 "lv_conf.h" 中启用 PXP 断言：将 :c:macro:`LV_USE_PXP_ASSERT` 设置为 `1`。  
+  如果 :c:macro:`LV_ASSERT_HANDLER` 被设置为 `while(1);`（默认停止），有一些 PXP 断言会停止程序执行。否则，会通过 `LV_LOG_ERROR` 记录错误消息。  
+- 如果定义了 :c:macro:`SDK_OS_FREE_RTOS` 符号，将使用 FreeRTOS 实现，否则会包含裸机代码。  
 
 Basic initialization:（基本初始化：）
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -116,34 +119,35 @@ Basic initialization:（基本初始化：）
      <summary>显示原文</summary>
 
 PXP draw initialization is done automatically in :cpp:func:`lv_init()` once the
-PXP is enabled, no user code is required:
+PXP is enabled as a draw unit or to rotate the screen, no user code is required:
 
-.. code:: c
+.. code-block:: c
 
-  #if LV_USE_DRAW_PXP
+  #if LV_USE_DRAW_PXP || LV_USE_ROTATE_PXP
     lv_draw_pxp_init();
   #endif
 
 During PXP initialization, a new draw unit `lv_draw_pxp_unit_t` will be created
-with the additional callbacks:
+with the additional callbacks, if :c:macro:`LV_USE_DRAW_PXP` is set to `1`:
 
-.. code:: c
+.. code-block:: c
 
     lv_draw_pxp_unit_t * draw_pxp_unit = lv_draw_create_unit(sizeof(lv_draw_pxp_unit_t));
     draw_pxp_unit->base_unit.evaluate_cb = _pxp_evaluate;
     draw_pxp_unit->base_unit.dispatch_cb = _pxp_dispatch;
     draw_pxp_unit->base_unit.delete_cb = _pxp_delete;
 
+
 and an addition thread `_pxp_render_thread_cb()` will be spawned in order to
 handle the supported draw tasks.
 
-.. code:: c
+.. code-block:: c
 
-  #if LV_USE_OS
-    lv_thread_init(&draw_pxp_unit->thread, LV_THREAD_PRIO_HIGH, _pxp_render_thread_cb, 2 * 1024, draw_pxp_unit);
-  #endif
+    #if LV_USE_PXP_DRAW_THREAD
+        lv_thread_init(&draw_pxp_unit->thread, LV_THREAD_PRIO_HIGH, _pxp_render_thread_cb, 2 * 1024, draw_pxp_unit);
+    #endif
 
-If `LV_USE_OS` is not defined, then no additional draw thread will be created
+If `LV_USE_PXP_DRAW_THREAD` is not defined, then no additional draw thread will be created
 and the PXP drawing task will get executed on the same LVGL main thread.
 
 `_pxp_evaluate()` will get called after each task is being created and will
@@ -164,38 +168,38 @@ unit for processing.
    <br>
 
 
-PXP绘图的初始化在 `lv_init()` 函数中自动完成，一旦启用PXP，不需要用户代码：
+PXP 绘图初始化会在 :cpp:func:`lv_init()` 中自动完成，一旦 PXP 被启用为绘图单元或用于屏幕旋转，用户无需编写任何代码：
 
-.. code:: c
+.. code-block:: c
 
-  #if LV_USE_DRAW_PXP
+  #if LV_USE_DRAW_PXP || LV_USE_ROTATE_PXP
     lv_draw_pxp_init();
   #endif
 
-在PXP初始化过程中，将创建一个新的绘图单元 `lv_draw_pxp_unit_t`，其中包含额外的回调函数：
+在 PXP 初始化期间，如果 :c:macro:`LV_USE_DRAW_PXP` 设置为 `1`，将创建一个新的绘图单元 `lv_draw_pxp_unit_t`，并附加额外的回调函数：
 
-.. code:: c
+.. code-block:: c
 
     lv_draw_pxp_unit_t * draw_pxp_unit = lv_draw_create_unit(sizeof(lv_draw_pxp_unit_t));
     draw_pxp_unit->base_unit.evaluate_cb = _pxp_evaluate;
     draw_pxp_unit->base_unit.dispatch_cb = _pxp_dispatch;
     draw_pxp_unit->base_unit.delete_cb = _pxp_delete;
- 
-还将启动一个名为 `_pxp_render_thread_cb()` 的线程，用于处理支持的绘图任务：
 
-.. code:: c
+同时会生成一个额外的线程 `_pxp_render_thread_cb()` 来处理支持的绘图任务。
 
-  #if LV_USE_OS
-    lv_thread_init(&draw_pxp_unit->thread, LV_THREAD_PRIO_HIGH, _pxp_render_thread_cb, 2 * 1024, draw_pxp_unit);
-  #endif
+.. code-block:: c
 
-如果没有定义 `LV_USE_OS`，那么不会创建额外的绘图线程，PXP绘图任务将在同一个LVGL主线程上执行。
+    #if LV_USE_PXP_DRAW_THREAD
+        lv_thread_init(&draw_pxp_unit->thread, LV_THREAD_PRIO_HIGH, _pxp_render_thread_cb, 2 * 1024, draw_pxp_unit);
+    #endif
 
-`_pxp_evaluate()` 函数在每个任务创建后被调用，分析该任务是否受PXP支持。如果受支持，则会设置一个优先级分数和绘图单元ID给该任务。默认的CPU分数为 `100`。较小的分数意味着PXP能够更快地绘制。
+如果没有定义 `LV_USE_PXP_DRAW_THREAD`，那么不会创建额外的绘图线程，PXP 绘图任务将在相同的 LVGL 主线程上执行。
 
-`_pxp_dispatch()` 是PXP消息分发回调函数，它将接收一个准备好绘制的任务（设置了 `DRAW_UNIT_ID_PXP` ），并将任务传递给PXP绘图单元进行处理。
+`_pxp_evaluate()` 会在每个任务创建后被调用，分析该任务是否被 PXP 支持。如果任务被支持，将为任务设置一个优先得分（score）和绘图单元 ID。`score` 等于 `100` 表示默认的 CPU 得分。得分越低表示 PXP 能够更快地完成绘图任务。
 
-`_pxp_delete()` 函数将清理PXP绘图单元。
+`_pxp_dispatch()` 是 PXP 分发器回调函数，它会接收准备好绘图的任务（已设置 `DRAW_UNIT_ID_PXP`），并将任务传递给 PXP 绘图单元进行处理。
+
+`_pxp_delete()` 会清理 PXP 绘图单元。
 
 
 Features supported:（支持的功能：）
@@ -213,7 +217,7 @@ power savings.
 
 Supported draw tasks are available in "src/draw/nxp/pxp/lv_draw_pxp.c":
 
-.. code:: c
+.. code-block:: c
 
     switch(t->type) {
         case LV_DRAW_TASK_TYPE_FILL:
@@ -231,7 +235,7 @@ Supported draw tasks are available in "src/draw/nxp/pxp/lv_draw_pxp.c":
 
 Additional, the screen rotation can be handled by the PXP:
 
-.. code::c
+.. code-block::c
 
   void lv_draw_pxp_rotate(const void * src_buf, void * dest_buf, int32_t src_width, int32_t src_height,
                           int32_t src_stride, int32_t dest_stride, lv_display_rotation_t rotation,
@@ -255,7 +259,7 @@ LVGL中的几个绘图特性可以通过PXP引擎来卸载。当PXP运行时，C
 
 支持的绘图任务在"src/draw/nxp/pxp/lv_draw_pxp.c"中可用：
 
-.. code:: c
+.. code-block::c
 
     switch(t->type) {
         case LV_DRAW_TASK_TYPE_FILL:
@@ -275,7 +279,7 @@ LVGL中的几个绘图特性可以通过PXP引擎来卸载。当PXP运行时，C
 此外，屏幕旋转也可以由PXP处理：
 
 
-.. code::c
+.. code-block::c
 
   void lv_draw_pxp_rotate(const void * src_buf, void * dest_buf, int32_t src_width, int32_t src_height,
                           int32_t src_stride, int32_t dest_stride, lv_display_rotation_t rotation,
@@ -340,7 +344,7 @@ Project setup:（项目设置：）
    - "src/draw/nxp/pxp/lv_draw_buf_pxp.c": draw buffer callbacks
    - "src/draw/nxp/pxp/lv_draw_pxp_fill.c": fill area
    - "src/draw/nxp/pxp/lv_draw_pxp_img.c": blit image (w/ optional recolor or
-   transformation)
+     transformation)
    - "src/draw/nxp/pxp/lv_draw_pxp_layer.c": layer blending
    - "src/draw/nxp/pxp/lv_draw_pxp.c": draw unit initialization
    - "src/draw/nxp/pxp/lv_pxp_cfg.c": init, deinit, run/wait PXP device
@@ -390,11 +394,11 @@ PXP default configuration:（PXP默认配置：）
   bare metal is provided in lv_pxp_osa.c.
 
    - :cpp:func:`pxp_interrupt_init()`: Initialize PXP interrupt (HW setup,
-   OS setup)
+     OS setup)
    - :cpp:func:`pxp_interrupt_deinit()`: Deinitialize PXP interrupt (HW setup,
-   OS setup)
+     OS setup)
    - :cpp:func:`pxp_run()`: Start PXP job. Use OS-specific mechanism to block
-   drawing thread.
+     drawing thread.
    - :cpp:func:`pxp_wait()`: Wait for PXP completion.
 
 .. raw:: html
@@ -474,14 +478,14 @@ Initialize VGLite GPU before calling :cpp:func:`lv_init()` by specifying the
 width/height of tessellation window. The default values for tesselation width
 and height, and command buffer size are in the SDK file "vglite_support.h".
 
-.. code:: c
+.. code-block:: c
 
-  #if LV_USE_GPU_NXP_VG_LITE
-    #include "vg_lite.h"
-    #include "vglite_support.h"
-  #endif
+    #if LV_USE_DRAW_VGLITE
+        #include "vg_lite.h"
+        #include "vglite_support.h"
+    #endif
     ...
-  #if LV_USE_DRAW_VGLITE
+    #if LV_USE_DRAW_VGLITE
     if(vg_lite_init(DEFAULT_VG_LITE_TW_WIDTH, DEFAULT_VG_LITE_TW_HEIGHT) != VG_LITE_SUCCESS)
     {
         PRINTF("VGLite init error. STOP.");
@@ -497,21 +501,21 @@ and height, and command buffer size are in the SDK file "vglite_support.h".
         while (1)
             ;
     }
-  #endif
+    #endif
 
 VGLite draw initialization is done automatically in :cpp:func:`lv_init()` once
 the VGLite is enabled, no user code is required:
 
-.. code:: c
+.. code-block:: c
 
-  #if LV_USE_DRAW_VGLITE
-    lv_draw_vglite_init();
-  #endif
+    #if LV_USE_DRAW_VGLITE
+        lv_draw_vglite_init();
+    #endif
 
 During VGLite initialization, a new draw unit `lv_draw_vglite_unit_t` will be
 created with the additional callbacks:
 
-.. code:: c
+.. code-block:: c
 
     lv_draw_vglite_unit_t * draw_vglite_unit = lv_draw_create_unit(sizeof(lv_draw_vglite_unit_t));
     draw_vglite_unit->base_unit.evaluate_cb = _vglite_evaluate;
@@ -521,13 +525,13 @@ created with the additional callbacks:
 and an addition thread `_vglite_render_thread_cb()` will be spawned in order to
 handle the supported draw tasks.
 
-.. code:: c
+.. code-block:: c
 
-  #if LV_USE_OS
-    lv_thread_init(&draw_vglite_unit->thread, LV_THREAD_PRIO_HIGH, _vglite_render_thread_cb, 2 * 1024, draw_vglite_unit);
-  #endif
+    #if LV_USE_VGLITE_DRAW_THREAD
+        lv_thread_init(&draw_vglite_unit->thread, LV_THREAD_PRIO_HIGH, _vglite_render_thread_cb, 2 * 1024, draw_vglite_unit);
+    #endif
 
-If `LV_USE_OS` is not defined, then no additional draw thread will be created
+If `LV_USE_VGLITE_DRAW_THREAD` is not defined, then no additional draw thread will be created
 and the VGLite drawing task will get executed on the same LVGL main thread.
 
 `_vglite_evaluate()` will get called after each task is being created and will
@@ -548,19 +552,19 @@ VGLite draw unit for processing.
    <br>
 
 
-在调用 :cpp:func:`lv_init()` 之前，请通过指定镶嵌窗口的宽度/高度来初始化VGLite GPU。镶嵌窗口的默认宽度和高度以及指令缓冲区大小的默认值可以在SDK文件"vglite_support.h"中找到。
+在调用 :cpp:func:`lv_init()` 之前，需要初始化 VGLite GPU，并指定镶嵌窗口（tessellation window）的宽度和高度。默认的镶嵌宽度、高度以及命令缓冲区大小的值在 SDK 文件 "vglite_support.h" 中定义。
 
-.. code:: c
+.. code-block:: c
 
-  #if LV_USE_GPU_NXP_VG_LITE
-    #include "vg_lite.h"
-    #include "vglite_support.h"
-  #endif
+    #if LV_USE_DRAW_VGLITE
+        #include "vg_lite.h"
+        #include "vglite_support.h"
+    #endif
     ...
-  #if LV_USE_DRAW_VGLITE
+    #if LV_USE_DRAW_VGLITE
     if(vg_lite_init(DEFAULT_VG_LITE_TW_WIDTH, DEFAULT_VG_LITE_TW_HEIGHT) != VG_LITE_SUCCESS)
     {
-        PRINTF("VGLite初始化错误。停止。");
+        PRINTF("VGLite init error. STOP.");
         vg_lite_close();
         while (1)
             ;
@@ -568,45 +572,45 @@ VGLite draw unit for processing.
 
     if (vg_lite_set_command_buffer_size(VG_LITE_COMMAND_BUFFER_SIZE) != VG_LITE_SUCCESS)
     {
-        PRINTF("VGLite设置指令缓冲区错误。停止。");
+        PRINTF("VGLite set command buffer. STOP.");
         vg_lite_close();
         while (1)
             ;
     }
-  #endif
+    #endif
 
-VGLite绘制初始化在启用VGLite后会自动在 :cpp:func:`lv_init()` 中完成，不需要用户代码：
+一旦启用 VGLite，在 :cpp:func:`lv_init()` 中会自动完成 VGLite 绘图初始化，用户无需编写额外代码：
 
-.. code:: c
+.. code-block:: c
 
-  #if LV_USE_DRAW_VGLITE
-    lv_draw_vglite_init();
-  #endif
+    #if LV_USE_DRAW_VGLITE
+        lv_draw_vglite_init();
+    #endif
 
-在VGLite初始化期间，将使用附加回调函数创建一个新的绘制单元 `lv_draw_vglite_unit_t`：
+在 VGLite 初始化期间，会创建一个新的绘图单元 `lv_draw_vglite_unit_t`，并附加额外的回调函数：
 
-.. code:: c
+.. code-block:: c
 
     lv_draw_vglite_unit_t * draw_vglite_unit = lv_draw_create_unit(sizeof(lv_draw_vglite_unit_t));
     draw_vglite_unit->base_unit.evaluate_cb = _vglite_evaluate;
     draw_vglite_unit->base_unit.dispatch_cb = _vglite_dispatch;
     draw_vglite_unit->base_unit.delete_cb = _vglite_delete;
 
-并会生成一个额外的线程 `_vglite_render_thread_cb()` 来处理支持的绘制任务。
+同时会生成一个额外的线程 `_vglite_render_thread_cb()` 来处理支持的绘图任务。
 
-.. code:: c
+.. code-block:: c
 
-  #if LV_USE_OS
-    lv_thread_init(&draw_vglite_unit->thread, LV_THREAD_PRIO_HIGH, _vglite_render_thread_cb, 2 * 1024, draw_vglite_unit);
-  #endif
+    #if LV_USE_VGLITE_DRAW_THREAD
+        lv_thread_init(&draw_vglite_unit->thread, LV_THREAD_PRIO_HIGH, _vglite_render_thread_cb, 2 * 1024, draw_vglite_unit);
+    #endif
 
-如果未定义`LV_USE_OS`，则不会创建额外的绘制线程，VGLite绘制任务将在相同的LVGL主线程上执行。
+如果未定义 `LV_USE_VGLITE_DRAW_THREAD`，则不会创建额外的绘图线程，VGLite 绘图任务将在相同的 LVGL 主线程上执行。
 
-`_vglite_evaluate()` 将在每个任务创建后被调用，并分析该任务是否受到VGLite支持。如果受支持，则将为任务设置一个优先评分和绘制单元ID。默认的CPU评分为 `100`。较低的评分意味着VGLite能够更快地绘制。
- 
-`_vglite_dispatch()` 是VGLite调度回调函数，它将获取一个准备好绘制的任务（设置了 `DRAW_UNIT_ID_VGLITE` ），并将任务传递给VGLite绘制单元进行处理。
+`_vglite_evaluate()` 会在每个任务创建后被调用，分析该任务是否被 VGLite 支持。如果任务被支持，将为任务设置一个优先得分（score）和绘图单元 ID。`score` 等于 `100` 表示默认的 CPU 得分。得分越低表示 VGLite 能够更快地完成绘图任务。
 
-`_vglite_delete()` 将清理VGLite绘制单元。
+`_vglite_dispatch()` 是 VGLite 的分发器回调函数，它会接收已准备好的绘图任务（已设置 `DRAW_UNIT_ID_VGLITE`），并将任务传递给 VGLite 绘图单元进行处理。
+
+`_vglite_delete()` 用于清理 VGLite 绘图单元。
 
 
 Advanced configuration:（高级配置：）
@@ -622,9 +626,9 @@ Advanced configuration:（高级配置：）
   Enabling the blit split workaround will mitigate any quality degradation issue
   on screen's dimension > 352 pixels.
 
-.. code:: c
+  .. code-block:: c
 
-  #define VGLITE_BLIT_SPLIT_THR 352
+      #define VGLITE_BLIT_SPLIT_THR 352
 
 - By default, the blit split threshold is set to 352. Blits with width or height
   higher than this value will be done in multiple steps. Value must be multiple
@@ -650,9 +654,9 @@ Advanced configuration:（高级配置：）
   将 :c:macro: `LV_USE_VGLITE_BLIT_SPLIT` 设置为 `1`。
   启用 blit 分割 workaround 将减轻屏幕尺寸大于352像素时的任何质量损失问题。
 
-.. code:: c
+  .. code-block:: c
 
-  #define VGLITE_BLIT_SPLIT_THR 352
+      #define VGLITE_BLIT_SPLIT_THR 352
 
 - 默认情况下，blit 分割阈值设置为352。宽度或高度大于此值的 blits 将以多个步骤完成。
 值必须是像素中的对齐倍数。对于大多数颜色格式，对齐方式是16像素（除了索引格式）。在进行 blit 分割时将不支持转换操作。
@@ -678,7 +682,7 @@ power savings.
 
 Supported draw tasks are available in "src/draw/nxp/pxp/lv_draw_vglite.c":
 
-.. code:: c
+.. code-block:: c
 
     switch(t->type) {
         case LV_DRAW_TASK_TYPE_LABEL:
@@ -709,14 +713,16 @@ Supported draw tasks are available in "src/draw/nxp/pxp/lv_draw_vglite.c":
             break;
     }
 
+
 All the below operation can be done in addition with optional opacity.
+
 - Fill area with color (w/ radius or gradient).
-- Blit source image (any format from `_vglite_src_cf_supported()`) over
-  destination (any format from `_vglite_dest_cf_supported()`).
+- Blit source image (any format from ``_vglite_src_cf_supported()``) over
+  destination (any format from ``_vglite_dest_cf_supported()``).
 - Recolor source image.
 - Scale and rotate (any decimal degree) source image.
 - Blending layers (w/ same supported formats as blitting).
-- Draw letters (blit bitmap letters - raster font).
+- Draw letters (blit bitmap letters / raster font).
 - Draw full borders (LV_BORDER_SIDE_FULL).
 - Draw arcs (w/ rounded edges).
 - Draw lines (w/ dash or rounded edges).
@@ -732,7 +738,7 @@ All the below operation can be done in addition with optional opacity.
 
 支持的绘图任务可以在"src/draw/nxp/pxp/lv_draw_vglite.c"中找到：
 
-.. code:: c
+.. code-block:: c
 
     switch(t->type) {
         case LV_DRAW_TASK_TYPE_LABEL:
@@ -763,27 +769,18 @@ All the below operation can be done in addition with optional opacity.
             break;
     }
 
-除此之外，还可以选择性地执行以下操作，并可选择不透明度：
+所有以下操作都可以附加可选的不透明度：
 
-- 用颜色填充区域（带有半径或渐变）。
-
-- 将源图像（来自 `_vglite_src_cf_supported()` 的任何格式）叠加到目标图像（来自 `_vglite_dest_cf_supported()` 的任何格式）上。
-
-- 对源图像重新着色。
-
-- 缩放和旋转（任意小数度数）源图像。
-
-- 图层混合（与混合相同支持的格式）。
-
-- 绘制字母（位图字母 - 光栅字体）。
-
-- 绘制完整边框（LV_BORDER_SIDE_FULL）。
-
-- 绘制弧形（带有圆角边缘）。
-
-- 绘制线条（带有虚线或圆角边缘）。
-
-- 用颜色绘制三角形（带有渐变）。
+- 使用颜色填充区域（支持圆角或渐变）。  
+- 将源图像（任何格式，参见 ``_vglite_src_cf_supported()``）覆盖到目标（任何格式，参见 ``_vglite_dest_cf_supported()``）。  
+- 对源图像进行重新着色。  
+- 对源图像进行缩放和旋转（支持任意小数角度）。  
+- 图层混合（与图像覆盖相同的格式支持）。  
+- 绘制字母（覆盖位图字母 / 光栅字体）。  
+- 绘制完整边框（LV_BORDER_SIDE_FULL）。  
+- 绘制圆弧（支持圆角）。  
+- 绘制线条（支持虚线或圆角）。  
+- 绘制带颜色的三角形（支持渐变）。  
 
 
 Known limitations:（已知限制：）
@@ -827,8 +824,7 @@ Project setup:（项目设置：）
    - "src/draw/nxp/vglite/lv_draw_vglite_arc.c": draw arc
    - "src/draw/nxp/vglite/lv_draw_vglite_border.c": draw border
    - "src/draw/nxp/vglite/lv_draw_vglite_fill.c": fill area
-   - "src/draw/nxp/vglite/lv_draw_vglite_img.c": blit image (w/ optional
-   recolor or transformation)
+   - "src/draw/nxp/vglite/lv_draw_vglite_img.c": blit image (w/ optional recolor or transformation)
    - "src/draw/nxp/vglite/lv_draw_vglite_label.c": draw label
    - "src/draw/nxp/vglite/lv_draw_vglite_layer.c": layer blending
    - "src/draw/nxp/vglite/lv_draw_vglite_line.c": draw line
@@ -838,6 +834,7 @@ Project setup:（项目设置：）
    - "src/draw/nxp/vglite/lv_vglite_matrix.c": set vglite matrix
    - "src/draw/nxp/vglite/lv_vglite_path.c": create vglite path data
    - "src/draw/nxp/vglite/lv_vglite_utils.c": function helpers
+
 
 .. raw:: html
 

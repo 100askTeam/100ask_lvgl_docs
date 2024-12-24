@@ -12,9 +12,8 @@ MicroPython
 What is MicroPython?
 --------------------
 
-`MicroPython <http://micropython.org/>`__ is Python for
-microcontrollers. Using MicroPython, you can write Python3 code and run
-it even on a bare metal architecture with limited resources.
+`MicroPython <http://micropython.org/>`__ is Python for microcontrollers. Using MicroPython, you can write Python3
+code and run it even on a bare metal architecture with limited resources.
 
 .. raw:: html
 
@@ -132,7 +131,7 @@ MicroPython + LVGL could be used for:（MicroPython + LVGL可以用于：）
 
 - Fast prototyping GUI.
 - Shortening the cycle of changing and fine-tuning the GUI.
-- Modelling the GUI in a more abstract way by defining reusable composite objects, taking advantage of Python's language features
+- Modelling the GUI in a more abstract way by defining reusable composite Widgets, taking advantage of Python's language features
   such as Inheritance, Closures, List Comprehension, Generators, Exception Handling, Arbitrary Precision Integers and others.
 - Make LVGL accessible to a larger audience. No need to know C to create a nice GUI on an embedded system. This goes well with
   `CircuitPython vision <https://learn.adafruit.com/welcome-to-circuitpython/what-is-circuitpython>`__.
@@ -184,19 +183,19 @@ Let's dive right into an example!
 A simple example（一个简单的例子）
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. code:: python
+.. code-block:: python
 
-   # Initialize
-   import display_driver
-   import lvgl as lv
+    # Initialize
+    import display_driver
+    import lvgl as lv
 
-   # Create a button with a label
-   scr = lv.obj()
-   btn = lv.button(scr)
-   btn.align(lv.ALIGN.CENTER, 0, 0)
-   label = lv.label(btn)
-   label.set_text('Hello World!')
-   lv.screen_load(scr)
+    # Create a button with a label
+    scr = lv.obj()
+    btn = lv.button(scr)
+    btn.align(lv.ALIGN.CENTER, 0, 0)
+    label = lv.label(btn)
+    label.set_text('Hello World!')
+    lv.screen_load(scr)
 
 How can I use it?（如何使用它？）
 --------------------------------
@@ -209,14 +208,13 @@ Online Simulator（在线模拟器）
    <details>
      <summary>显示原文</summary>
 
-If you want to experiment with LVGL + MicroPython without downloading
-anything - you can use our online simulator! It's a fully functional
-LVGL + MicroPython that runs entirely in the browser and allows you to
+If you want to experiment with LVGL + MicroPython without downloading anything, you can use our online
+simulator! It's a fully functional LVGL + MicroPython that runs entirely in the browser and allows you to
 edit a python script and run it.
 
 `Click here to experiment on the online simulator <https://sim.lvgl.io/>`__
 
-Many `LVGL examples <https://docs.lvgl.io/master/examples.html>`__ are available also for Micropython. Just click the link!
+Many :ref:`LVGL examples <examples>` are available also for MicroPython. Just click the link!
 
 .. raw:: html
 
@@ -224,11 +222,11 @@ Many `LVGL examples <https://docs.lvgl.io/master/examples.html>`__ are available
    <br>
 
 
-如果你想在不下载任何东西的情况下尝试LVGL + MicroPython，你可以使用我们的在线模拟器！它是一个功能齐全的LVGL + Micropython，完全在浏览器中运行，可以让你编辑Python脚本并运行。
+如果你想在不下载任何东西的情况下尝试LVGL + MicroPython，可以使用我们的在线模拟器！它是一个功能齐全的LVGL + MicroPython环境，完全在浏览器中运行，允许你编辑Python脚本并运行它。
 
-`点击这里在在线模拟器上进行实验 <https://sim.lvgl.io/>`__
+`点击这里在在线模拟器上实验 <https://sim.lvgl.io/>`__
 
-许多 `LVGL示例 <https://docs.lvgl.io/master/examples.html>`__ 也适用于MicroPython。只需点击链接！
+许多 :ref:`LVGL示例 <examples>` 也适用于MicroPython。只需点击链接！
 
 
 PC Simulator（PC 模拟器）

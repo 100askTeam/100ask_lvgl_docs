@@ -14,16 +14,16 @@ to render images of individual letters (glyph). A font is stored in a
 :cpp:type:`lv_font_t` variable and can be set in a style's *text_font* field.
 For example:
 
-.. code:: c
+.. code-block:: c
 
-   lv_style_set_text_font(&my_style, &lv_font_montserrat_28);  /*Set a larger font*/
+   lv_style_set_text_font(&my_style, &lv_font_montserrat_28);  /* Set a larger font */
 
 Fonts have a **format** property. It describes how the glyph draw data is stored.
 It has *2* categories: `Legacy simple format` and `Advanced format`.
-In the legacy simple format, the font is stored in a simple array of bitmaps.
-In the advanced format, the font is stored in a different way like `Vector`, `SVG`, etc.
+In the most simple case, the font is stored in a simple array of bitmaps.
+In the advanced format, the font can be stored in a different way like `Vector`, `SVG`, etc.
 
-In the legacy simple format, the value stored for a pixel determines the pixel's opacity.
+In case of the simple format, the value stored for a pixel determines the pixel's opacity.
 This way, with higher *bpp (bit per pixel)*, the edges of the letter can be smoother.
 The possible *bpp* values are 1, 2, 4 and 8 (higher values mean better quality).
 
@@ -37,18 +37,22 @@ compared to *format = LV_FONT_GLYPH_FORMAT_A1*.
    <br>
 
 
-在LVGL中，字体是位图和其他渲染单个字母（字形）图像所需的信息的集合。字体存储在 `lv_font_t` 类型的变量中，并可以在样式的 `text_font` 字段中设置。例如：
+在 LVGL 中，字体是由位图以及渲染单个字母（字形）所需的其他信息组成的集合。字体存储在一个 :cpp:type:`lv_font_t` 变量中，并可以通过样式的 *text_font* 字段进行设置。例如：  
 
-.. code:: c
+.. code-block:: c  
 
-   lv_style_set_text_font(&my_style, &lv_font_montserrat_28);  /*Set a larger font*/
- 
-字体有一个 **格式** 属性，描述了字形绘制数据的存储方式。它有两个分类： `传统简单格式` 和 `高级格式`。在传统简单格式中，字体存储在一个简单的位图数组中。在高级格式中，字体以不同的方式存储，例如 `矢量图`、 `SVG` 等。
+   lv_style_set_text_font(&my_style, &lv_font_montserrat_28);  /* 设置更大的字体 */  
 
-在传统简单格式中，存储的像素值决定了像素的不透明度。这样，通过更高的 *bpp (每像素位数)*，字母的边缘可以更加平滑。可能的 *bpp* 值为1、2、4和8（更高的值意味着更好的质量）。
+字体具有 **format（格式）** 属性。它描述了字形绘制数据的存储方式，并分为 *2* 类： `Legacy simple format` 和 `Advanced format`。  
+在最简单的情况下，字体以简单的位图数组存储。  
+在高级格式中，字体可以以不同方式存储，例如 `Vector`、 `SVG` 等。  
 
-“格式”属性还影响存储字体所需的内存量。例如， *format = LV_FONT_GLYPH_FORMAT_A4* 的字体大小大约是 *format = LV_FONT_GLYPH_FORMAT_A1* 的四倍。
+对于简单格式，像素中存储的值决定了像素的不透明度。  
+因此，随着 *bpp（每像素位数）* 的增加，字母的边缘可以更加平滑。  
+可能的 *bpp* 值为 1、2、4 和 8（更高的值意味着更高的质量）。  
 
+*format（格式）* 属性还会影响存储字体所需的内存量。例如，  
+*format = LV_FONT_GLYPH_FORMAT_A4* 会使字体的大小几乎是 *format = LV_FONT_GLYPH_FORMAT_A1* 的四倍。  
 
 Unicode support（支持Unicode编码）
 **********************************
@@ -65,7 +69,7 @@ and be sure that, :c:macro:`LV_TXT_ENC` is set to :c:macro:`LV_TXT_ENC_UTF8` in
 
 To test it try
 
-.. code:: c
+.. code-block:: c
 
    lv_obj_t * label1 = lv_label_create(lv_screen_active(), NULL);
    lv_label_set_text(label1, LV_SYMBOL_OK);
@@ -82,12 +86,70 @@ LVGL支持 **UTF-8** 编码的Unicode字符。您的编辑器需要配置为以U
 
 要进行测试，请尝试以下代码：
 
-.. code:: c
+.. code-block:: c
 
    lv_obj_t * label1 = lv_label_create(lv_screen_active(), NULL);
    lv_label_set_text(label1, LV_SYMBOL_OK);
 
 如果一切正常，应该显示一个✓字符。
+
+
+Typesetting
+***********
+
+.. raw:: html
+
+   <details>
+     <summary>显示原文</summary>
+
+Although LVGL can decode and display any Unicode characters
+(assuming the font supports them), LVGL cannot correctly render
+all complex languages.
+
+The standard Latin-based languages (e.g., English, Spanish, German)
+and East Asian languages such as Chinese, Japanese, and Korean (CJK)
+are relatively straightforward, as their characters are simply
+written from left to right.
+
+Languages like Arabic, Persian, and Hebrew, which use Right-to-Left
+(RTL) or mixed writing directions, are also supported in LVGL.
+Learn more :ref:`here <bidi>`.
+
+
+.. |Aacute| unicode:: U+000C1 .. LATIN CAPITAL LETTER A WITH ACUTE
+.. |eacute| unicode:: U+000E9 .. LATIN SMALL LETTER E WITH ACUTE
+.. |otilde| unicode:: U+000F5 .. LATIN SMALL LETTER O WITH TILDE
+.. |Utilde| unicode:: U+00168 .. LATIN CAPITAL LETTER U WITH TILDE
+.. |uuml|   unicode:: U+000FC .. LATIN SMALL LETTER U WITH DIAERESIS
+
+For characters such as '|eacute|', '|uuml|', '|otilde|', '|Aacute|', and '|Utilde|', it is recommended
+to use the single Unicode format (NFC) rather than decomposing them into
+a base letter and diacritics (e.g. ``u + ¨``).
+
+Complex languages where subsequent characters combine into a single glyph
+and where the resulting glyph has no individual Unicode representation
+(e.g., Devanagari), have limited support in LVGL.
+
+.. raw:: html
+
+   </details>
+   <br>
+
+虽然 LVGL 可以解码并显示任何 Unicode 字符（前提是字体支持这些字符），但 LVGL 并不能完全正确渲染所有复杂语言。
+
+对于标准的基于拉丁字母的语言（例如，英语、西班牙语、德语）以及东亚语言（例如中文、日语和韩语，CJK），它们的字符从左到右书写，相对比较简单。
+
+像阿拉伯语、波斯语和希伯来语这样的语言，它们使用从右到左（RTL）或混合书写方向的，也在 LVGL 的支持范围内。了解更多信息请参阅 :ref:`这里 <bidi>`。
+
+.. |Aacute| unicode:: U+000C1 .. LATIN CAPITAL LETTER A WITH ACUTE  
+.. |eacute| unicode:: U+000E9 .. LATIN SMALL LETTER E WITH ACUTE  
+.. |otilde| unicode:: U+000F5 .. LATIN SMALL LETTER O WITH TILDE  
+.. |Utilde| unicode:: U+00168 .. LATIN CAPITAL LETTER U WITH TILDE  
+.. |uuml|   unicode:: U+000FC .. LATIN SMALL LETTER U WITH DIAERESIS  
+
+对于像 '|eacute|'、'|uuml|'、'|otilde|'、'|Aacute|' 和 '|Utilde|' 这样的字符，建议使用单一的 Unicode 格式（NFC），而不是将其分解为基础字母和附加符号（例如 ``u + ¨``）。
+
+对于某些复杂语言（例如梵文），其中的后续字符会组合成一个单一的字形，而生成的字形没有单独的 Unicode 表示，LVGL 的支持是有限的。  
 
 
 Built-in fonts（内置字体）
@@ -201,19 +263,19 @@ font.
 
 The symbols can be used singly as:
 
-.. code:: c
+.. code-block:: c
 
    lv_label_set_text(my_label, LV_SYMBOL_OK);
 
 Or together with strings (compile time string concatenation):
 
-.. code:: c
+.. code-block:: c
 
    lv_label_set_text(my_label, LV_SYMBOL_OK "Apply");
 
 Or more symbols together:
 
-.. code:: c
+.. code-block:: c
 
    lv_label_set_text(my_label, LV_SYMBOL_OK LV_SYMBOL_WIFI LV_SYMBOL_PLAY);
 
@@ -241,25 +303,27 @@ Or more symbols together:
 
 这些符号可以单独使用，如下所示：
 
-.. code:: c
+.. code-block:: c
 
    lv_label_set_text(my_label, LV_SYMBOL_OK);
 
 或与字符串一起使用（编译时字符串连接）：
 
-.. code:: c
+.. code-block:: c
 
    lv_label_set_text(my_label, LV_SYMBOL_OK "Apply");
 
 或多个符号一起使用：
 
-.. code:: c
+.. code-block:: c
 
    lv_label_set_text(my_label, LV_SYMBOL_OK LV_SYMBOL_WIFI LV_SYMBOL_PLAY);
 
 
 Special features（特殊功能）
 ****************************
+
+.. _bidi:
 
 Bidirectional support（双向支持）
 ---------------------------------
@@ -273,8 +337,8 @@ Most languages use a Left-to-Right (LTR for short) writing direction,
 however some languages (such as Hebrew, Persian or Arabic) use
 Right-to-Left (RTL for short) direction.
 
-LVGL not only supports RTL texts but supports mixed (a.k.a.
-bidirectional, BiDi) text rendering too. Some examples:
+LVGL not only supports RTL text but supports mixed (a.k.a.
+bidirectional, BiDi) text rendering as well. Some examples:
 
 .. image:: /misc/bidi.png
 
@@ -283,24 +347,24 @@ BiDi support is enabled by :c:macro:`LV_USE_BIDI` in *lv_conf.h*
 All texts have a base direction (LTR or RTL) which determines some
 rendering rules and the default alignment of the text (Left or Right).
 However, in LVGL, the base direction is not only applied to labels. It's
-a general property which can be set for every object. If not set then it
+a general property which can be set for every Widget. If not set then it
 will be inherited from the parent. This means it's enough to set the
-base direction of a screen and every object will inherit it.
+base direction of a screen and every Widget will inherit it.
 
 The default base direction for screens can be set by
-:c:macro:`LV_BIDI_BASE_DIR_DEF` in *lv_conf.h* and other objects inherit the
+:c:macro:`LV_BIDI_BASE_DIR_DEF` in *lv_conf.h* and other Widgets inherit the
 base direction from their parent.
 
-To set an object's base direction use :cpp:expr:`lv_obj_set_style_base_dir(obj, base_dir, selector)`.
+To set a Widget's base direction use :cpp:expr:`lv_obj_set_style_base_dir(widget, base_dir, selector)`.
 The possible base directions are:
 
 - :cpp:enumerator:`LV_BASE_DIR_LTR`: Left to Right base direction
 - :cpp:enumerator:`LV_BASE_DIR_RTL`: Right to Left base direction
 - :cpp:enumerator:`LV_BASE_DIR_AUTO`: Auto detect base direction
 
-This list summarizes the effect of RTL base direction on objects:
+This list summarizes the effect of RTL base direction on Widgets:
 
-- Create objects by default on the right
+- Create Widgets by default on the right
 - ``lv_tabview``: Displays tabs from right to left
 - ``lv_checkbox``: Shows the box on the right
 - ``lv_buttonmatrix``: Shows buttons from right to left
@@ -313,35 +377,34 @@ This list summarizes the effect of RTL base direction on objects:
    </details>
    <br>
 
+大多数语言使用从左到右（简称 LTR）的书写方向，然而一些语言（例如希伯来语、波斯语或阿拉伯语）使用从右到左（简称 RTL）的书写方向。
 
-大多数语言使用从左到右（简称LTR）的书写方向，然而一些语言（如希伯来语，波斯语或阿拉伯语）使用从右到左（简称RTL）的书写方向。
+LVGL 不仅支持 RTL 文本，还支持混合（即双向，BiDi）文本渲染。一些示例：
 
-LVGL不仅支持RTL文本，还支持混合（也称为双向，BiDi）文本渲染。下面是一些示例：
+.. image:: /misc/bidi.png  
 
-.. image:: /misc/bidi.png
+双向文本支持通过在 *lv_conf.h* 中启用 :c:macro:`LV_USE_BIDI`。  
 
-通过在 *lv_conf.h* 文件中设置 :c:macro:`LV_USE_BIDI` 以启用BiDi支持
+所有文本都有一个基础方向（LTR 或 RTL），它决定了一些渲染规则以及文本的默认对齐方式（左对齐或右对齐）。然而，在 LVGL 中，基础方向不仅适用于标签（Label），它是一个通用属性，可以为每个小部件设置。如果未设置，则会从其父对象继承。这意味着只需为一个屏幕设置基础方向，所有小部件都会继承该方向。  
 
-所有文本都有一个基本方向（LTR或RTL），确定了一些渲染规则和文本的默认对齐方式（左对齐或右对齐）。但是，在LVGL中，基本方向不仅适用于标签。这是一个可以为每个对象设置的通用属性。如果未设置，则会从父级继承。这意味着只需设置一个屏幕的基本方向，每个对象都会继承它。
+屏幕的默认基础方向可以通过 *lv_conf.h* 中的 :c:macro:`LV_BIDI_BASE_DIR_DEF` 设置，其他小部件会从其父对象继承基础方向。  
 
-屏幕的默认基本方向可以通过 *lv_conf.h* 文件中的 :c:macro:`LV_BIDI_BASE_DIR_DEF` 来设置，其他对象从其父对象继承基本方向。
+要设置小部件的基础方向，可以使用 :cpp:expr:`lv_obj_set_style_base_dir(widget, base_dir, selector)`。  
+可能的基础方向有：  
 
-要设置对象的基本方向，请使用 :cpp:expr:`lv_obj_set_style_base_dir(obj, base_dir, selector)`。可能的基本方向包括：
+- :cpp:enumerator:`LV_BASE_DIR_LTR`: 从左到右的基础方向  
+- :cpp:enumerator:`LV_BASE_DIR_RTL`: 从右到左的基础方向  
+- :cpp:enumerator:`LV_BASE_DIR_AUTO`: 自动检测基础方向  
 
-- :cpp:enumerator:`LV_BASE_DIR_LTR`：从左到右的基本方向
-- :cpp:enumerator:`LV_BASE_DIR_RTL`：从右到左的基本方向
-- :cpp:enumerator:`LV_BASE_DIR_AUTO`：自动检测基本方向
+以下是 RTL 基础方向对小部件影响的总结：  
 
-此列表总结了RTL基本方向对对象的影响：
-
-- 默认情况下在右侧创建对象
-- ``lv_tabview``：从右到左显示选项卡
-- ``lv_checkbox``：在右侧显示复选框
-- ``lv_buttonmatrix``：从右到左显示按钮
-- ``lv_list``：在右侧显示图标
-- ``lv_dropdown``：将选项对齐到右侧
-- ``lv_table``， ``lv_buttonmatrix``， ``lv_keyboard``， ``lv_tabview``， ``lv_dropdown``， ``lv_roller`` 中的文本是经过"BiDi处理"以正确显示
-
+- 默认在右侧创建小部件  
+- ``lv_tabview``: 从右到左显示选项卡  
+- ``lv_checkbox``: 在右侧显示复选框  
+- ``lv_buttonmatrix``: 按钮从右到左显示  
+- ``lv_list``: 图标显示在右侧  
+- ``lv_dropdown``: 选项对齐到右侧  
+- 在 ``lv_table``、 ``lv_buttonmatrix``、 ``lv_keyboard``、 ``lv_tabview``、 ``lv_dropdown``、 ``lv_roller`` 中的文本会经过“BiDi 处理”，以正确显示  
 
 Arabic and Persian support(阿拉伯语和波斯语支持)
 -----------------------------------------------
@@ -381,55 +444,6 @@ However, there are some limitations:
 - 仅支持显示文本（例如标签），在文本输入框（例如文本区域）中不支持此功能。
 - 静态文本（即常量）不会被处理。例如，由函数 :cpp:func:`lv_label_set_text` 设置的文本将会被"阿拉伯处理"，但:cpp:func:`lv_label_set_text_static`不会。
 - 文本获取函数（例如 :cpp:func:`lv_label_get_text`）将返回处理后的文本。
-
-
-Subpixel rendering（亚像素渲染）
--------------------------------
-
-.. raw:: html
-
-   <details>
-     <summary>显示原文</summary>
-
-Subpixel rendering allows for tripling the horizontal resolution by
-rendering anti-aliased edges on Red, Green and Blue channels instead of
-at pixel level granularity. This takes advantage of the position of
-physical color channels of each pixel, resulting in higher quality
-letter anti-aliasing. Learn more
-`here <https://en.wikipedia.org/wiki/Subpixel_rendering>`__.
-
-For subpixel rendering, the fonts need to be generated with special
-settings:
-
-- In the online converter tick the ``Subpixel`` box
-- In the command line tool use ``--lcd`` flag. Note that the generated font needs about three times more memory.
-
-Subpixel rendering works only if the color channels of the pixels have a
-horizontal layout. That is the R, G, B channels are next to each other
-and not above each other. The order of color channels also needs to
-match with the library settings. By default, LVGL assumes ``RGB`` order,
-however this can be swapped by setting :c:macro:`LV_SUBPX_BGR`  ``1`` in
-*lv_conf.h*.
-
-.. raw:: html
-
-   </details>
-   <br>
-
-
-亚像素渲染通过在红色、绿色和蓝色通道上渲染抗锯齿边缘而不是在像素级别粒度上进行渲染，从而使水平分辨率增加两倍。
-这利用了每个像素的物理颜色通道的位置，从而实现更高质量的字母抗锯齿效果。在此了解更多信息
-`here <https://en.wikipedia.org/wiki/Subpixel_rendering>`__。
-
-要进行亚像素渲染，需要使用特殊设置生成字体:
-
-- 在在线转换器中勾选 ``Subpixel`` 框
-- 在命令行工具中使用 ``--lcd`` 标志。请注意，生成的字体需要大约三倍的内存。
-
-亚像素渲染仅在像素的颜色通道具有水平布局时起作用。
-也就是说，R、G、B通道相邻而不是重叠。颜色通道的顺序也需要与库设置相匹配。
-默认情况下，LVGL假定是 ``RGB`` 顺序，但可以通过在 *lv_conf.h* 中设置 :c:macro:`LV_SUBPX_BGR`  ``1`` 来进行交换。
-
 
 .. _fonts_compressed:
 
@@ -635,7 +649,7 @@ The built-in symbols are created from the `FontAwesome <https://fontawesome.com/
 要使用该符号，您可能需要更改字体。例如 ``style.text.font = my_font_name``
 
 
-Load a font at run-time（在运行时加载字体）
+Load a Font at Run-Time（在运行时加载字体）
 ******************************************
 
 .. raw:: html
@@ -653,14 +667,14 @@ to have a special binary format. (Not TTF or WOFF). Use
 
 Example
 
-.. code:: c
+.. code-block:: c
 
    lv_font_t *my_font = lv_binfont_create("X:/path/to/my_font.bin");
    if(my_font == NULL) return;
 
-   /*Use the font*/
+   /* Use the font */
 
-   /*Free the font if not required anymore*/
+   /* Free the font if not required anymore */
    lv_binfont_destroy(my_font);
 
 .. raw:: html
@@ -676,7 +690,7 @@ Example
 
 例如
 
-.. code:: c
+.. code-block:: c
 
    lv_font_t *my_font = lv_binfont_create("X:/path/to/my_font.bin");
    if(my_font == NULL) return;
@@ -687,15 +701,15 @@ Example
    lv_binfont_destroy(my_font);
 
 
-Load a font from a memory buffer at run-time（从内存缓冲区在运行时加载字体）
-**************************************************************************
+Loading a Font from a Memory Buffer at Run-Time（从内存缓冲区在运行时加载字体）
+****************************************************************************
 
 .. raw:: html
 
    <details>
      <summary>显示原文</summary>
 
-:cpp:func:`lv_binfont_create_from_buffer`:cpp:func:`lv_binfont_create_from_buffer` can be used to load a font from a memory buffer.
+:cpp:func:`lv_binfont_create_from_buffer` can be used to load a font from a memory buffer.
 This function may be useful to load a font from an external file system, which is not
 supported by LVGL. The font needs to be in the same format as if it were loaded from a file.
 
@@ -704,21 +718,21 @@ supported by LVGL. The font needs to be in the same format as if it were loaded 
 
 Example
 
-.. code:: c
+.. code-block:: c
 
    lv_font_t *my_font;
    uint8_t *buf;
    uint32_t bufsize;
 
-   /*Read font file into the buffer from the external file system*/
+   /* Read font file into the buffer from the external file system */
    ...
 
-   /*Load font from the buffer*/
+   /* Load font from the buffer */
    my_font = lv_binfont_create_from_buffer((void *)buf, buf));
    if(my_font == NULL) return;
-   /*Use the font*/
+   /* Use the font */
 
-   /*Free the font if not required anymore*/
+   /* Free the font if not required anymore */
    lv_binfont_destroy(my_font);
 
 .. raw:: html
@@ -735,7 +749,7 @@ Example
 
 示例
 
-.. code:: c
+.. code-block:: c
 
    lv_font_t *my_font;
    uint8_t *buf;
@@ -792,11 +806,15 @@ Install imagemagick, python3, python3-fontforge and potrace
 On Ubuntu Systems, just type
 
 .. code:: bash
+
     sudo apt install imagemagick python3-fontforge potrace
+
 Clone mkttf
 
 .. code:: bash
+
     git clone https://github.com/Tblue/mkttf
+
 Read the mkttf docs.
 
 Former versions of imagemagick needs the imagemagick call in front of convert, identify and so on.
@@ -806,16 +824,21 @@ Open potrace-wrapper.sh and remove imagemagick from line 55 and line 64.
 line 55
 
 .. code:: bash
+
     wh=($(identify -format '%[width]pt %[height]pt' "${input?}"))
+
 line 64
 
 .. code:: bash
+
     convert "${input?}" -sample '1000%' - \
+
 It might be necessary to change the mkttf.py script.
 
 line 1
 
 .. code:: bash
+
     #!/usr/bin/env python3
 
 
@@ -867,7 +890,8 @@ Example for a 12px font（12像素字体示例）
    <details>
      <summary>显示原文</summary>
 
-.. code:: bash
+.. code-block:: console
+
     cd mkttf
     ./mkttf.py ./TerminusMedium-12-12.bdf
     Importing bitmaps from 0 additional fonts...
@@ -876,10 +900,15 @@ Example for a 12px font（12像素字体示例）
     Saving TTF file...
     Saving SFD file...
     Done!
+
 The TTF TerminusMedium-001.000.ttf has been created from ./TerminusMedium-12-12.bdf.
+
 Create font for lvgl
+
 .. code:: bash
+
     lv_font_conv --bpp 1 --size 12 --no-compress --font TerminusMedium-001.000.ttf --range 0x20-0x7e,0xa1-0xff --format lvgl -o terminus_1bpp_12px.c
+
 :note: use 1bpp because we don't use anti-aliasing. It doesn't look sharp on displays with a low resolution.
 
 .. raw:: html
@@ -901,11 +930,11 @@ The TTF TerminusMedium-001.000.ttf has been created from ./TerminusMedium-12-12.
 为lvgl创建字体
 .. code:: bash
     lv_font_conv --bpp 1 --size 12 --no-compress --font TerminusMedium-001.000.ttf --range 0x20-0x7e,0xa1-0xff --format lvgl -o terminus_1bpp_12px.c
-:n注意: 使用1bpp因为我们不使用抗锯齿。在分辨率低的显示屏上它看起来不够锐利。
+:注意: 使用1bpp因为我们不使用抗锯齿。在分辨率低的显示屏上它看起来不够锐利。
 
 
-Add a new font engine（添加新的字体引擎）
-****************************************
+Adding a New Font Engine（添加新的字体引擎）
+******************************************
 
 .. raw:: html
 
@@ -916,23 +945,20 @@ LVGL's font interface is designed to be very flexible but, even so, you
 can add your own font engine in place of LVGL's internal one. For
 example, you can use `FreeType <https://www.freetype.org/>`__ to
 real-time render glyphs from TTF fonts or use an external flash to store
-the font's bitmap and read them when the library needs them.
+the font's bitmap and read them when the library needs them. FreeType can be used in LVGL as described in :ref:`Freetype <freetype>`.
 
-A ready to use FreeType can be found in
-`lv_freetype <https://github.com/lvgl/lv_lib_freetype>`__ repository.
+To add a new font engine, a custom :cpp:type:`lv_font_t` variable needs to be created:
 
-To do this, a custom :cpp:type:`lv_font_t` variable needs to be created:
+.. code-block:: c
 
-.. code:: c
-
-   /*Describe the properties of a font*/
+   /* Describe the properties of a font */
    lv_font_t my_font;
-   my_font.get_glyph_dsc = my_get_glyph_dsc_cb;        /*Set a callback to get info about glyphs*/
-   my_font.get_glyph_bitmap = my_get_glyph_bitmap_cb;  /*Set a callback to get bitmap of a glyph*/
-   my_font.line_height = height;                       /*The real line height where any text fits*/
-   my_font.base_line = base_line;                      /*Base line measured from the top of line_height*/
-   my_font.dsc = something_required;                   /*Store any implementation specific data here*/
-   my_font.user_data = user_data;                      /*Optionally some extra user data*/
+   my_font.get_glyph_dsc = my_get_glyph_dsc_cb;        /* Set a callback to get info about glyphs */
+   my_font.get_glyph_bitmap = my_get_glyph_bitmap_cb;  /* Set a callback to get bitmap of a glyph */
+   my_font.line_height = height;                       /* The real line height where any text fits */
+   my_font.base_line = base_line;                      /* Base line measured from the top of line_height */
+   my_font.dsc = something_required;                   /* Store any implementation specific data here */
+   my_font.user_data = user_data;                      /* Optionally some extra user data */
 
    ...
 
@@ -942,19 +968,19 @@ To do this, a custom :cpp:type:`lv_font_t` variable needs to be created:
     */
    bool my_get_glyph_dsc_cb(const lv_font_t * font, lv_font_glyph_dsc_t * dsc_out, uint32_t unicode_letter, uint32_t unicode_letter_next)
    {
-       /*Your code here*/
+       /* Your code here */
 
        /* Store the result.
         * For example ...
         */
-       dsc_out->adv_w = 12;        /*Horizontal space required by the glyph in [px]*/
-       dsc_out->box_h = 8;         /*Height of the bitmap in [px]*/
-       dsc_out->box_w = 6;         /*Width of the bitmap in [px]*/
-       dsc_out->ofs_x = 0;         /*X offset of the bitmap in [pf]*/
-       dsc_out->ofs_y = 3;         /*Y offset of the bitmap measured from the as line*/
+       dsc_out->adv_w = 12;        /* Horizontal space required by the glyph in [px] */
+       dsc_out->box_h = 8;         /* Height of the bitmap in [px] */
+       dsc_out->box_w = 6;         /* Width of the bitmap in [px] */
+       dsc_out->ofs_x = 0;         /* X offset of the bitmap in [pf] */
+       dsc_out->ofs_y = 3;         /* Y offset of the bitmap measured from the as line */
        dsc_out->format= LV_FONT_GLYPH_FORMAT_A2;
 
-       return true;                /*true: glyph found; false: glyph was not found*/
+       return true;                /* true: glyph found; false: glyph was not found */
    }
 
 
@@ -966,7 +992,7 @@ To do this, a custom :cpp:type:`lv_font_t` variable needs to be created:
        /* The bitmap should be a continuous bitstream where
         * each pixel is represented by `bpp` bits */
 
-       return bitmap;    /*Or NULL if not found*/
+       return bitmap;    /* Or NULL if not found */
    }
 
 .. raw:: html
@@ -1029,8 +1055,8 @@ LVGL的字体接口设计非常灵活，但即使如此，你可以添加自己�
    }
 
 
-Use font fallback（使用字体回退）
-********************************
+Using Font Fallback（使用字体回退）
+**********************************
 
 .. raw:: html
 
@@ -1043,7 +1069,7 @@ font from ``fallback`` to handle.
 
 ``fallback`` can be chained, so it will try to solve until there is no ``fallback`` set.
 
-.. code:: c
+.. code-block:: c
 
    /* Roboto font doesn't have support for CJK glyphs */
    lv_font_t *roboto = my_font_load_function();

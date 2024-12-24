@@ -20,6 +20,7 @@ Here are the **similarity** for simulator mode and application mode.
 - Support Windows touch input.
 - Support Windows input method integration input.
 - Support Per-monitor DPI Aware (both V1 and V2).
+- Provide HWND-based interoperability for other Windows UI infrastructures.
 
 Here are the **differences** for simulator mode and application mode.
 
@@ -40,7 +41,7 @@ Here are the **differences** for simulator mode and application mode.
 - 支持Windows触摸输入。
 - 支持Windows输入法集成。
 - 支持每个监视器的DPI自适应（V1和V2均可）。
-
+- 为其他 Windows UI 基础结构提供基于 HWND 的互操作性。
 
 Simulator Mode（模拟器模式）
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -76,6 +77,8 @@ Application Mode（应用模式）
 - Designed for Windows desktop application development scenario.
 - Have the Window resizing support and LVGL display resolution will be changed.
 - When Windows DPI scaling setting is changed, the LVGL display DPI value will also be changed.
+- The resolution you set for lv_windows_create_display is the window size instead of window client size for following the convention of other Windows desktop UI infrastructures.
+- The applications based on this mode should adapt the LVGL display resolution changing for supporting window resizing properly.
 
 .. raw:: html
 
@@ -86,7 +89,8 @@ Application Mode（应用模式）
 - 为Windows桌面应用程序开发场景设计。
 - 具有窗口调整支持，LVGL显示分辨率将发生变化。
 - 当更改Windows的DPI缩放设置时，LVGL显示的DPI值也将发生变化。
-
+- 您为 lv_windows_create_display 设置的分辨率是窗口大小，而不是窗口客户端大小，以遵循其他 Windows 桌面 UI 基础结构的约定。
+- 基于此模式的应用程序应适应 LVGL 显示分辨率的变化，以支持正确调整窗口大小。
 
 Prerequisites（先决条件）
 -------------------------
@@ -96,7 +100,7 @@ Prerequisites（先决条件）
    <details>
      <summary>显示原文</summary>
 
-The minimum Windows OS requirement for this driver is Windows Vista RTM.
+he minimum Windows OS requirement for this driver is Windows Vista RTM.
 
 If you use Windows API shim libraries like `YY-Thunks <https://github.com/Chuyu-Team/YY-Thunks>`__, the tested minimum Windows OS requirement for this driver is Windows XP RTM.
 
@@ -108,12 +112,11 @@ According to the Windows GDI API this driver used. Maybe the minimum Windows OS 
    <br>
 
 
-此驱动程序的最低Windows操作系统要求是Windows Vista RTM。
+此驱动的最低 Windows 操作系统要求是 **Windows Vista RTM**。  
 
-如果使用Windows API填充程序库，如 `YY-Thunks <https://github.com/Chuyu-Team/YY-Thunks>`__ ，此驱动程序测试的最低Windows操作系统要求是Windows XP RTM。
+如果使用类似 `YY-Thunks <https://github.com/Chuyu-Team/YY-Thunks>`__ 的 Windows API shim 库，经过测试，该驱动的最低 Windows 操作系统要求为 **Windows XP RTM**。  
 
-根据Windows GDI API此驱动程序使用。也许这个驱动程序的最低Windows操作系统要求限制是Windows 2000 RTM。
-
+根据该驱动所使用的 Windows GDI API，最低 Windows 操作系统要求可能会限制为 **Windows 2000 RTM**。  
 
 Configure Windows driver（配置Windows驱动程序）
 -----------------------------------------------
@@ -125,7 +128,7 @@ Configure Windows driver（配置Windows驱动程序）
 
 Enable the Windows driver support in lv_conf.h, by cmake compiler define or by KConfig
 
-.. code:: c
+.. code-block:: c
 
     #define LV_USE_WINDOWS  1
 
@@ -137,7 +140,7 @@ Enable the Windows driver support in lv_conf.h, by cmake compiler define or by K
 
 在lv_conf.h中启用Windows驱动程序支持，可以通过cmake编译器定义或KConfig来实现。
 
-.. code:: c
+.. code-block:: c
 
     #define LV_USE_WINDOWS  1
     
@@ -145,7 +148,7 @@ Enable the Windows driver support in lv_conf.h, by cmake compiler define or by K
 Usage（用法）
 -------------
 
-.. code:: c
+.. code-block:: c
 
     #include <Windows.h>
     #include "lvgl/lvgl.h"

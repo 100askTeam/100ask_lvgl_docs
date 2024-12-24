@@ -10,7 +10,7 @@ Arduino
 The `LVGL library <https://github.com/lvgl/lvgl>`__ is directly available as Arduino libraries.
 
 Note that you need to choose a board powerful enough to run LVGL and
-your GUI. See the `requirements of LVGL <https://docs.lvgl.io/master/intro/index.html#requirements>`__.
+your GUI. See the :ref:`requirements of LVGL <requirements>`.
 
 For example ESP32 is a good candidate to create UI's with LVGL.
 
@@ -22,7 +22,7 @@ For example ESP32 is a good candidate to create UI's with LVGL.
 
 `LVGL库<https://github.com/lvgl/lvgl>`__ 可直接作为Arduino库使用。
 
-请注意，您需要选择一个功能足够强大的板卡来运行LVGL和您的GUI。请 `参阅LVGL的要求 <https://docs.lvgl.io/master/intro/index.html#requirements>`__ 。
+请注意，您需要选择一个功能足够强大的板卡来运行LVGL和您的GUI。请参阅 :ref:`requirements of LVGL <requirements>`。
 
 例如，ESP32是使用LVGL创建UI的一个很好的选择。
 
@@ -67,7 +67,7 @@ according to your TFT display type via editing either:
 - ``User_Setup.h``
 - or by selecting a configuration in the ``User_Setup_Select.h``
 
-Both files are located in ``TFT_eSPI``library's folder.
+Both files are located in ``TFT_eSPI`` library's folder.
 
 .. raw:: html
 
@@ -102,6 +102,15 @@ installed, follow these configuration steps:
 
 Finally the layout with ``lv_conf.h`` should look like this:
 
+::
+
+   arduino
+    |-libraries
+      |-lvgl
+      |-other_lib_1
+      |-other_lib_2
+      |-lv_conf.h
+
 .. raw:: html
 
    </details>
@@ -117,7 +126,6 @@ LVGL 有一个名为 ``lv_conf.h`` 的配置文件。当安装 LVGL 时，请遵
 
 最后，使用 ``lv_conf.h`` 的布局应如下所示：
 
-
 ::
 
    arduino
@@ -126,7 +134,6 @@ LVGL 有一个名为 ``lv_conf.h`` 的配置文件。当安装 LVGL 时，请遵
       |-other_lib_1
       |-other_lib_2
       |-lv_conf.h
-
 
 Initialize and run LVGL（初始化并运行LVGL）
 ------------------------------------------
@@ -199,10 +206,10 @@ this debug information to the serial interface. To enable this feature
 you have to edit the ``lv_conf.h`` file and enable logging in the
 section ``log settings``:
 
-.. code:: c
+.. code-block:: c
 
-   /*Log settings*/
-   #define USE_LV_LOG      1   /*Enable/disable the log module*/
+   /* Log settings */
+   #define USE_LV_LOG      1   /* Enable/disable the log module */
    #if LV_USE_LOG
    /* How important log should be added:
     * LV_LOG_LEVEL_TRACE       A lot of logs to give detailed information
@@ -228,10 +235,10 @@ LVGL 在遇到问题时可以显示调试信息。
 要启用此功能，您需要编辑 ``lv_conf.h`` 文件，
 并在 ``log settings`` （日志设置）部分启用日志记录：
 
-.. code:: c
+.. code-block:: c
 
-   /*Log settings*/
-   #define USE_LV_LOG      1   /*Enable/disable the log module*/
+   /* Log settings */
+   #define USE_LV_LOG      1   /* Enable/disable the log module */
    #if LV_USE_LOG
    /* How important log should be added:
     * LV_LOG_LEVEL_TRACE       A lot of logs to give detailed information

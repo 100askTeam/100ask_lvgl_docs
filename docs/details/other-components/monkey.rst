@@ -33,7 +33,8 @@ Usage（用法）
 Enable :c:macro:`LV_USE_MONKEY` in ``lv_conf.h``.
 
 First configure monkey, use :c:struct:`lv_monkey_config_t` to define the
-configuration structure, set the ``type`` (check `input devices </overview/indev>`__ for the supported types), and then set the
+configuration structure, set the ``type`` (check :ref:`Input Devices <indev>`
+for the supported types), and then set the
 range of ``period_range`` and ``input_range``, the monkey will output
 random operations at random times within this range. Call
 :cpp:func:`lv_monkey_create` to create monkey. Finally call
@@ -58,29 +59,28 @@ Note that ``input_range`` has different meanings in different ``type``:
    <br>
 
 
-请在 ``lv_conf.h`` 中启用 :c:macro:`LV_USE_MONKEY` 。
+在 ``lv_conf.h`` 中启用 :c:macro:`LV_USE_MONKEY`。
 
-首先配置monkey，使用 :c:struct:`lv_monkey_config_t` 定义配置结构，设置 ``type`` （查看 `input devices</overview/indev>`__ 以获取支持的类型），然后设置 ``period_range`` 和 ``input_range`` 的范围，monkey会在此范围内随机时间输出随机操作。调用 :cpp:func:`lv_monkey_create` 创建monkey。最后调用 :cpp:expr:`lv_monkey_set_enable(monkey, true)` 启用monkey。
+首先配置 monkey，使用 :c:struct:`lv_monkey_config_t` 定义配置结构，设置 ``type``（查看 :ref:`Input Devices <indev>` 了解支持的类型），然后设置 ``period_range`` 和 ``input_range`` 的范围，monkey 将在该范围内随机时间输出随机操作。调用 :cpp:func:`lv_monkey_create` 创建 monkey。最后调用 :cpp:expr:`lv_monkey_set_enable(monkey, true)` 启用 monkey。
 
-如果要暂停monkey，请调用 :cpp:expr:`lv_monkey_set_enable(monkey, false)` 。要删除monkey，请调用 :cpp:expr:`lv_monkey_delete(monkey)` 。
+如果需要暂停 monkey，调用 :cpp:expr:`lv_monkey_set_enable(monkey, false)`。如需删除 monkey，调用 :cpp:expr:`lv_monkey_delete(monkey)`。
 
-请注意， ``input_range`` 在不同的 ``type`` 中有不同的含义：
+需要注意的是，``input_range`` 在不同 ``type`` 中的含义不同：
 
-- :cpp:enumerator:`LV_INDEV_TYPE_POINTER`：无效果，在屏幕分辨率的像素内随机点击。
-- :cpp:enumerator:`LV_INDEV_TYPE_ENCODER`： ``enc_diff`` 的最小值和最大值。
-- :cpp:enumerator:`LV_INDEV_TYPE_BUTTON` ： ``btn_id`` 的最小值和最大值。使用 :cpp:func:`lv_monkey_get_indev` 获取输入设备，并使用 :cpp:func:`lv_indev_set_button_points` 将按键ID映射到坐标上。
-- :cpp:enumerator:`LV_INDEV_TYPE_KEYPAD` ：无效果，发送随机的 :ref:`indev_keys` 。
-
+- :cpp:enumerator:`LV_INDEV_TYPE_POINTER`: 无影响，在屏幕分辨率的像素范围内随机点击。
+- :cpp:enumerator:`LV_INDEV_TYPE_ENCODER`: ``enc_diff`` 的最小值和最大值。
+- :cpp:enumerator:`LV_INDEV_TYPE_BUTTON`: ``btn_id`` 的最小值和最大值。
+  使用 :cpp:func:`lv_monkey_get_indev` 获取输入设备，并使用 :cpp:func:`lv_indev_set_button_points` 将按键 ID 映射到坐标。
+- :cpp:enumerator:`LV_INDEV_TYPE_KEYPAD`: 无影响，发送随机 :ref:`indev_keys`。
 
 .. _monkey_example:
 
 Example
 -------
 
-.. include:: ../examples/others/monkey/index.rst
+.. include:: ../../examples/others/monkey/index.rst
 
 .. _monkey_api:
 
 API
 ---
-

@@ -34,7 +34,7 @@ How it works（工作原理）
    <details>
      <summary>显示原文</summary>
 
-Sort out the APIs in the ``vg_lite.h`` header file provided by the vendor, re-implement the APIs using `ThorVG <https://github.com/thorvg/thorvg>`_, 
+Sort out the APIs in the ``vg_lite.h`` header file provided by the vendor, re-implement the APIs using `ThorVG <https://github.com/thorvg/thorvg>`_,
 and simulate the same rendering images as the real hardware on the simulator.
 
 .. raw:: html
@@ -55,13 +55,13 @@ Configuration（配置）
    <details>
      <summary>显示原文</summary>
 
-1. Enable VG-Lite rendering backend, see `VG-Lite Rendering Backend </overview/renderers/vg_lite>`__.
+1. Enable VG-Lite rendering backend, see :ref:`vg_lite`.
 
 2. Enable ThorVG and turn on the configuration :c:macro:`LV_USE_THORVG_INTERNAL` or :c:macro:`LV_USE_THORVG_EXTERNAL`.
-It is recommended to use the internal ThorVG library to ensure uniform rendering results.
+   It is recommended to use the internal ThorVG library to ensure uniform rendering results.
 
 3. Enable :c:macro:`LV_USE_VG_LITE_THORVG` and set :c:macro:`LV_DRAW_BUF_ALIGN` to 64. The rest of the options can remain default.
-Make sure :c:macro:`LV_VG_LITE_USE_GPU_INIT` is enabled, because the thorvg drawing context needs to be initialized before it can be used.
+   Make sure :c:macro:`LV_VG_LITE_USE_GPU_INIT` is enabled, because the thorvg drawing context needs to be initialized before it can be used.
 
 .. raw:: html
 
@@ -69,10 +69,10 @@ Make sure :c:macro:`LV_VG_LITE_USE_GPU_INIT` is enabled, because the thorvg draw
    <br>
 
 
-1. 启用VG-Lite渲染后端，请参见 `VG-Lite渲染后端 </overview/renderers/vg_lite>`__。
+1. 启用VG-Lite渲染后端，参见 :ref:`vg_lite`。
 
-2. 启用ThorVG并打开配置宏 :c:macro:`LV_USE_THORVG_INTERNAL` 或 :c:macro:`LV_USE_THORVG_EXTERNAL`。
-建议使用内部ThorVG库以确保渲染结果的一致性。
+2. 启用ThorVG，并打开配置 :c:macro:`LV_USE_THORVG_INTERNAL` 或 :c:macro:`LV_USE_THORVG_EXTERNAL`。  
+   推荐使用内部ThorVG库，以确保渲染结果的一致性。
 
-3. 启用 :c:macro:`LV_USE_VG_LITE_THORVG` 并将 :c:macro:`LV_DRAW_BUF_ALIGN` 设置为64。其余选项可以保持默认。
-确保启用 :c:macro:`LV_VG_LITE_USE_GPU_INIT` 因为在使用之前需要初始化ThorVG绘图上下文
+3. 启用 :c:macro:`LV_USE_VG_LITE_THORVG` 并将 :c:macro:`LV_DRAW_BUF_ALIGN` 设置为64。其他选项可保持默认设置。  
+   请确保 :c:macro:`LV_VG_LITE_USE_GPU_INIT` 已启用，因为ThorVG绘图上下文需要在使用之前初始化。

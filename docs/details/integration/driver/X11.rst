@@ -60,34 +60,34 @@ Configure X11 driver（配置X11驱动程序）
      <summary>显示原文</summary>
 
 1. Enable the X11 driver support in lv_conf.h, by cmake compiler define or by KConfig
-    .. code:: c
+    .. code-block:: c
 
         #define LV_USE_X11  1
 
 2. Optional configuration options:
     -  Direct Exit
-        .. code:: c
+        .. code-block:: c
 
-            #define LV_X11_DIRECT_EXIT  1 /*preferred default - ends the application automatically if last window has been closed*/
+            #define LV_X11_DIRECT_EXIT  1 /* preferred default - ends the application automatically if last window has been closed */
             // or
-            #define LV_X11_DIRECT_EXIT  0 /*application is responsible for ending the application (e.g. by own LV_EVENT_DELETE handler*/
+            #define LV_X11_DIRECT_EXIT  0 /* application is responsible for ending the application (e.g. by own LV_EVENT_DELETE handler */
 
 
     -  Double buffering
-        .. code:: c
+        .. code-block:: c
 
-            #define LV_X11_DOUBLE_BUFFER  1 /*preferred default*/
+            #define LV_X11_DOUBLE_BUFFER  1 /* preferred default */
             // or
-            #define LV_X11_DOUBLE_BUFFER  0 /*not recommended*/
+            #define LV_X11_DOUBLE_BUFFER  0 /* not recommended */
 
     - Render mode
-        .. code:: c
+        .. code-block:: c
 
-            #define LV_X11_RENDER_MODE_PARTIAL 1  /*LV_DISPLAY_RENDER_MODE_PARTIAL, preferred default*/
+            #define LV_X11_RENDER_MODE_PARTIAL 1  /* LV_DISPLAY_RENDER_MODE_PARTIAL, preferred default */
             // or
-            #define LV_X11_RENDER_MODE_DIRECT  1  /*LV_DISPLAY_RENDER_MODE_DIRECT, not recommended for X11 driver*/
+            #define LV_X11_RENDER_MODE_DIRECT  1  /* LV_DISPLAY_RENDER_MODE_DIRECT, not recommended for X11 driver */
             // or
-            #define LV_X11_RENDER_MODE_DULL    1  /*LV_DISPLAY_RENDER_MODE_FULL, not recommended for X11 driver*/
+            #define LV_X11_RENDER_MODE_DULL    1  /* LV_DISPLAY_RENDER_MODE_FULL, not recommended for X11 driver */
 
 .. raw:: html
 
@@ -95,35 +95,39 @@ Configure X11 driver（配置X11驱动程序）
    <br>
 
 
-1. 在lv_conf.h中启用X11驱动程序支持，通过cmake编译定义或通过KConfig
-   .. code:: c
+1. 在 `lv_conf.h` 中启用 X11 驱动支持，可以通过 CMake 编译器定义或 KConfig 配置实现：  
 
-        #define LV_USE_X11  1
+.. code-block:: c  
 
-2. 可选配置选项:
-    -  直接退出
-       .. code:: c
+    #define LV_USE_X11  1  
 
-           #define LV_X11_DIRECT_EXIT  1 /*首选默认 - 如果最后一个窗口已关闭，则自动结束应用程序*/
-           // 或
-           #define LV_X11_DIRECT_EXIT  0 /*应用程序负责结束应用程序(例如通过自己的LV_EVENT_DELETE处理程序*/
+2. 可选配置选项：  
 
-   - 双缓冲
-       .. code:: c
+- **直接退出**  
 
-           #define LV_X11_DOUBLE_BUFFER  1 /*首选默认*/
-           // 或
-           #define LV_X11_DOUBLE_BUFFER  0 /*不推荐*/
+.. code-block:: c  
 
-   - 渲染模式
-       .. code:: c
+    #define LV_X11_DIRECT_EXIT  1 /* 推荐默认设置 - 如果最后一个窗口被关闭，应用程序自动结束 */  
+    // 或  
+    #define LV_X11_DIRECT_EXIT  0 /* 应用程序负责结束，例如通过自定义 LV_EVENT_DELETE 事件处理程序 */  
 
-           #define LV_X11_RENDER_MODE_PARTIAL 1  /*LV_DISPLAY_RENDER_MODE_PARTIAL, 首选默认*/
-           // 或
-           #define LV_X11_RENDER_MODE_DIRECT  1  /*LV_DISPLAY_RENDER_MODE_DIRECT, 不推荐用于X11驱动程序*/
-           // 或
-           #define LV_X11_RENDER_MODE_DULL    1  /*LV_DISPLAY_RENDER_MODE_FULL, 不推荐用于X11驱动程序*/
+- **双缓冲**  
 
+.. code-block:: c  
+
+    #define LV_X11_DOUBLE_BUFFER  1 /* 推荐默认设置 */  
+    // 或  
+    #define LV_X11_DOUBLE_BUFFER  0 /* 不推荐 */  
+
+- **渲染模式**  
+
+.. code-block:: c  
+
+    #define LV_X11_RENDER_MODE_PARTIAL 1  /* LV_DISPLAY_RENDER_MODE_PARTIAL，推荐默认设置 */  
+    // 或  
+    #define LV_X11_RENDER_MODE_DIRECT  1  /* LV_DISPLAY_RENDER_MODE_DIRECT，不推荐用于 X11 驱动 */  
+    // 或  
+    #define LV_X11_RENDER_MODE_DULL    1  /* LV_DISPLAY_RENDER_MODE_FULL，不推荐用于 X11 驱动 */  
 
 Usage（用法）
 -------------
@@ -136,7 +140,7 @@ Usage（用法）
 | The minimal initialisation opening a window and enabling keyboard/mouse support
 | (e.g. in main.c, LV_X11_DIRECT_EXIT must be 1):
 
-.. code:: c
+.. code-block:: c
 
     int main(int argc, char ** argv)
     {
@@ -154,7 +158,7 @@ Usage（用法）
         {
             ...
 
-             /* Periodically call the lv_timer handler */
+            /* Periodically call the lv_timer handler */
             lv_timer_handler();
         }
     }
@@ -162,7 +166,7 @@ Usage（用法）
 | Full initialisation with mouse pointer symbol and own application exit handling
 | (dependent on LV_X11_DIRECT_EXIT (can be 1 or 0))
 
-.. code:: c
+.. code-block:: c
 
     bool terminated = false;
 
@@ -211,7 +215,7 @@ Usage（用法）
 
 最小化的初始化，打开一个窗口并启用键盘/鼠标支持（例如，在main.c中，LV_X11_DIRECT_EXIT必须为1）：
 
-.. code:: c
+.. code-block:: c
 
     int main(int argc, char ** argv)
     {
@@ -236,7 +240,7 @@ Usage（用法）
 
 完整的初始化，带有鼠标指针符号和自定义应用程序退出处理（取决于LV_X11_DIRECT_EXIT（可以为1或0））：
 
-.. code:: c
+.. code-block:: c
 
     bool terminated = false;
 

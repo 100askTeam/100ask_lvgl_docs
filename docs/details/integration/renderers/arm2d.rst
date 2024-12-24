@@ -15,6 +15,7 @@ Cortex-M0 to the latest Cortex-M85.
 
 Arm-2D accelerates LVGL9 with two modes: **Synchronous Mode** and
 **Asynchronous Mode**.
+
 - When **Helium** and **ACI (Arm Custom Instruction)** are available, it is recommend
   to use **Synchronous Mode** to accelerate LVGL.
 - When Arm-2D backed 2D-GPUs are available, for example, **DMAC-350 based 2D
@@ -29,15 +30,15 @@ https://github.com/ARM-software/Arm-2D.
    <br>
 
 
-Arm-2D 本身并非GPU，而是一个 **面向微控制器的2DGPU的硬件抽象层** ，支持从Cortex-M0到最新的Cortex-M85等所有的Cortex-M处理器。
+Arm-2D 不是 GPU，而是 **为微控制器专用的 2D GPU 抽象层**。它支持所有 Cortex-M 处理器，从 Cortex-M0 到最新的 Cortex-M85。
 
-Arm-2D提供两种加速方式加速LVGL9： **同步模式（Synchronouse Mode）** 和 **异步模式（Asynchronous Mode）** 。
+Arm-2D 通过两种模式加速 LVGL9： **同步模式** 和 **异步模式**。
 
-- 当芯片支持 **Helium** 或者 **ACI(Arm Custom Instruction)** 时，推荐使用 **同步模式** 来加速LVGL；
-- 当芯片中存在Arm-2D所支持的2D GPU时，（例如：基于Arm DMAC-350所派生出来的2D GPU），推荐使用 **异步模式** 来加速LVGL。
+- 当 **Helium** 和 **ACI (Arm Custom Instruction)** 可用时，推荐使用 **同步模式** 来加速 LVGL。
+- 当 Arm-2D 支持的 2D-GPU 可用时，例如 **基于 DMAC-350 的 2D GPU**，推荐使用 **异步模式** 来加速 LVGL。
 
-Arm-2D是一个托管在Github上的开源项目，更多信息请参考：https://github.com/ARM-software/Arm-2D
-
+Arm-2D 是一个开源项目，托管在 GitHub 上。更多信息，请参考：  
+https://github.com/ARM-software/Arm-2D。
 
 How to Use （如何使用）
 **********************
@@ -49,6 +50,7 @@ How to Use （如何使用）
 
 
 In general:
+
 - you can set the macro :c:macro:`LV_USE_DRAW_ARM2D_SYNC` to ``1`` and
   :c:macro:`LV_DRAW_SW_ASM` to ``LV_DRAW_SW_ASM_HELIUM`` in ``lv_conf.h`` to
   enable Arm-2D synchronous acceleration for LVGL.
@@ -67,13 +69,12 @@ check the environment and set the :c:macro:`LV_USE_DRAW_ARM2D_SYNC` accordingly.
    </details>
    <br>
 
+一般来说：  
 
-总的来说：
+- 您可以在 ``lv_conf.h`` 中将宏 :c:macro:`LV_USE_DRAW_ARM2D_SYNC` 设置为 ``1``，并将 :c:macro:`LV_DRAW_SW_ASM` 设置为 ``LV_DRAW_SW_ASM_HELIUM`` 来启用 Arm-2D 同步加速以加速 LVGL。  
+- 您可以在 ``lv_conf.h`` 中将宏 :c:macro:`LV_USE_DRAW_ARM2D_ASYNC` 设置为 ``1`` 来启用 Arm-2D 异步加速以加速 LVGL。
 
-- 你可以在 ``lv_conf.h`` 中将宏 :c:macro:`LV_USE_DRAW_ARM2D_SYNC` 设置为 ``1``、将宏 :c:macro:`LV_DRAW_SW_ASM` 设置为 ``LV_DRAW_SW_ASM_HELIUM`` 来启用LVGL的Arm-2D同步加速模式。
-- 你可以在 ``lv_conf.h`` 中将宏 :c:macro:`LV_USE_DRAW_ARM2D_ASYNC` 设置为 ``1`` 为LVGL开启Arm-2D的异步加速模式。
-
-如果你正在使用 `CMSIS-Pack <https://github.com/lvgl/lvgl/tree/master/env_support/cmsis-pack>`__ 来部署LVGL，则不需要手动的定义宏 :c:macro:`LV_USE_DRAW_ARM2D_SYNC`，因为 lv_conf_cmsis.h 会根据当前的编译环境自动的对其进行配置。
+如果您使用 `CMSIS-Pack <https://github.com/lvgl/lvgl/tree/master/env_support/cmsis-pack>`__ 来部署 LVGL，则不需要手动定义宏 :c:macro:`LV_USE_DRAW_ARM2D_SYNC`，而是通过 lv_conf_cmsis.h 检查环境并相应地设置 :c:macro:`LV_USE_DRAW_ARM2D_SYNC`。
 
 
 Design Considerations（设计建议）
@@ -106,15 +107,14 @@ LVGL (sometimes worse) for regular Cortex-M processors.
    <br>
 
 
-正如前面所说的那样，Arm-2D是一个针对2D GPU的硬件抽象层，因此，如果系统中既没有硬件加速器、也没有诸如Helium或者ACI这样能够起到加速作用的指令集，那么对普通的Cortex-M处理器来说Arm-2D几乎就无法为LVGL起到任何加速作用（有时甚至还有相反的效果）。
+如前所述，Arm-2D 是一个 2D GPU 抽象层；因此，如果没有加速器或专用指令集（如 Helium 或 ACI）可供 Arm-2D 使用，它对常规 Cortex-M 处理器的 LVGL 性能提升微乎其微（有时甚至更差）。
 
-因此，我们 **推荐大家只在如下所示的情形中为LVGL开启Arm-2D加速** ：
+**我们强烈建议在以下情况下启用 Arm-2D 加速来加速 LVGL：**
 
-- 目标处理器为 **Cortex-M55** 、 **Cortex-M52** 或者 **Cortex-M85** ；
-- 目标处理器支持 `Helium <https://developer.arm.com/documentation/102102/0103/?lang=en>`__；
-- 芯片厂商为自己的2D GPU或者ACI指令集提供了针对Arm-2D的驱动适配；
-- 芯片中包含 `DMAC-350 <https://community.arm.com/arm-community-blogs/b/internet-of-things-blog/posts/arm-corelink-dma-350-next-generation-direct-memory-access-for-endpoint-ai>`__
-
+- 目标处理器为 **Cortex-M55**、 **Cortex-M52** 和 **Cortex-M85**
+- 目标处理器支持 `Helium <https://developer.arm.com/documentation/102102/0103/?lang=en>`__。
+- 设备厂商提供与 arm-2d 兼容的驱动程序，以支持其专有 2D 加速器和/或 ACI（Arm 定制指令）。
+- 目标设备包含 `DMAC-350 <https://community.arm.com/arm-community-blogs/b/internet-of-things-blog/posts/arm-corelink-dma-350-next-generation-direct-memory-access-for-endpoint-ai>`__。
 
 Examples（示例工程）
 ***************
@@ -139,4 +139,6 @@ Examples（示例工程）
 API
 ***
 
-:ref:`lv_gpu_arm2d`
+:ref:`lv_draw_sw_arm2d_h`
+
+:ref:`lv_blend_arm2d_h`

@@ -17,10 +17,11 @@ From the `Wikipedia <https://en.wikipedia.org/wiki/MIPI_Alliance>`__:
 	STMicroelectronics and Texas Instruments.
 
 MIPI Alliance published a series of specifications related to display devices, including DBI (Display Bus Interface), DSI (Display Serial Interface) and DCS
-Display Command Set). Usually when one talks about a MIPI-compatible display, one thinks of a device with a DSI serial interface. However, the Display Bus Interface specification
+(Display Command Set). Usually when one talks about a MIPI-compatible display, one thinks of a device with a DSI serial interface. However, the Display Bus Interface specification
 includes a number of other, legacy interfaces, like SPI serial, or i8080-compatible parallel interface, which are often used to interface LCD displays to lower-end microcontrollers.
 Furthermore, the DCS specification contains a standard command set, which is supported by a large number of legacy TFT LCD controllers, including the popular Sitronix
-(ST7735, ST7789, ST7796) and Ilitek (ILI9341) SOCs. These commands provide a common interface to configure display orientation, color resolution, various power modes, and provide generic video memory access. On top of that standard command set each LCD controller chip has a number of vendor-specific commands to configure voltage generator levels, timings, or gamma curves.
+(ST7735, ST7789, ST7796) and Ilitek (ILI9341) SOCs. These commands provide a common interface to configure display orientation, color resolution, various power modes, and provide generic video memory access. On top
+of that standard command set each LCD controller chip has a number of vendor-specific commands to configure voltage generator levels, timings, or gamma curves.
 
 .. note::
 
@@ -28,6 +29,7 @@ Furthermore, the DCS specification contains a standard command set, which is sup
 
 .. tip::
 	Although this is a generic driver, it can be used to support compatible chips which do not have a specific driver.
+
 
 .. raw:: html
 
@@ -80,12 +82,12 @@ Configuring the driver（配置驱动程序）
 
 Enable the generic MIPI LCD driver support in lv_conf.h, by cmake compiler define or by KConfig
 
-.. code:: c
+.. code-block:: c
 
 	#define LV_USE_GENERIC_MIPI  1
 
 .. note::
-	``LV_USE_GENERIC_MIPI`` is automatically enabled when a compatible driver is enabled.
+	:c:macro:`LV_USE_GENERIC_MIPI` is automatically enabled when a compatible driver is enabled.
 
 .. raw:: html
 
@@ -95,12 +97,12 @@ Enable the generic MIPI LCD driver support in lv_conf.h, by cmake compiler defin
 
 在lv_conf.h中启用通用MIPI LCD驱动程序支持，可以通过cmake编译器定义或通过KConfig进行配置。
 
-.. code:: c
+.. code-block:: c
 
 	#define LV_USE_GENERIC_MIPI  1
 
 .. note::
-	``LV_USE_GENERIC_MIPI``会在启用兼容驱动程序时自动启用。
+	当启用兼容的驱动时，:c:macro:`LV_USE_GENERIC_MIPI` 会被自动启用。
 
 
 Usage（用法）
@@ -113,7 +115,7 @@ Usage（用法）
 
 You need to implement two platform-dependent functions:
 
-.. code:: c
+.. code-block:: c
 
 	/* Send short command to the LCD. This function shall wait until the transaction finishes. */
 	int32_t my_lcd_send_cmd(lv_display_t *disp, const uint8_t *cmd, size_t cmd_size, const uint8_t *param, size_t param_size)
@@ -155,7 +157,7 @@ implement a separate set of callbacks for each display. Also note that the user 
 
 您需要实现两个依赖于平台的函数：
 
-.. code:: c
+.. code-block:: c
 
 	/* 向LCD发送短命令。此函数将等待事务完成。*/
 	int32_t my_lcd_send_cmd(lv_display_t *disp, const uint8_t *cmd, size_t cmd_size, const uint8_t *param, size_t param_size)
@@ -194,8 +196,9 @@ Example（例子）
 
 .. note::
 	You can find a step-by-step guide and the actual implementation of the callbacks on an STM32F746 using STM32CubeIDE and the ST HAL libraries here: :ref:`lcd_stm32_guide`
+	
 
-.. code:: c
+.. code-block:: c
 
 	#include "src/drivers/display/st7789/lv_st7789.h"
 
@@ -278,7 +281,7 @@ Example（例子）
 .. note::
 	您可以在以下位置找到使用STM32CubIDE和ST HAL库的STM32F746上回调的分步指南和实际实现这里：:ref:`lcd_stm32_guide`
 
-.. code:: c
+.. code-block:: c
 
 	#include "src/drivers/display/st7789/lv_st7789.h"
 
@@ -367,7 +370,7 @@ Create flags（创建旗帜）
 The third argument of the :cpp:func:`lv_lcd_generic_mipi_create()` function is a flag array. This can be used to configure the orientation and RGB ordering of the panel if the
 default settings do not work for you. In particular, the generic MIPI driver accepts the following flags:
 
-.. code:: c
+.. code-block:: c
 
 	LV_LCD_FLAG_NONE
 	LV_LCD_FLAG_MIRROR_X
@@ -384,7 +387,7 @@ You can pass multiple flags by ORing them together, e.g., :c:macro:`LV_LCD_FLAG_
 
 :cpp:func:`lv_lcd_generic_mipi_create()` 函数的第三个参数是一个标志数组。如果默认设置不适用，可以使用它来配置面板的方向和RGB顺序。特别是，通用MIPI驱动程序接受以下标志：
 
-.. code:: c
+.. code-block:: c
 
 	LV_LCD_FLAG_NONE
 	LV_LCD_FLAG_MIRROR_X
@@ -409,7 +412,7 @@ of the panel provides some example code with recommended register settings.
 You can use the ``my_lcd_send_cmd()`` function to send an arbitrary command to the LCD controller. However, to make it easier to send a large number of parameters
 the generic MIPI driver supports sending a custom command list to the controller. The commands must be put into a 'uint8_t' array:
 
-.. code:: c
+.. code-block:: c
 
 	static const uint8_t init_cmd_list[] = {
 		<command 1>, <number of parameters>, <parameter 1>, ... <parameter N>,
@@ -425,7 +428,7 @@ the generic MIPI driver supports sending a custom command list to the controller
 You can add a delay between the commands by using the pseudo-command ``LV_LCD_CMD_DELAY_MS``, which must be followed by the delay given in 10ms units.
 To terminate the command list you must use a delay with a value of ``LV_LCD_CMD_EOF``, as shown above.
 
-See an actual example of sending a command list `here <https://github.com/lvgl/lvgl/src/drivers/display/st7789/lv_st7789.c>`__.
+See an actual example of sending a command list `here <https://github.com/lvgl/lvgl/blob/master/src/drivers/display/st7789/lv_st7789.c>`__.
 
 .. raw:: html
 
@@ -438,7 +441,7 @@ See an actual example of sending a command list `here <https://github.com/lvgl/l
 
 您可以使用 ``my_lcd_send_cmd()`` 函数将任意命令发送到LCD控制器。然而，为了更容易发送大量的参数，通用的MIPI驱动程序支持向控制器发送自定义命令列表。命令必须放入一个'uint8_t'数组中：
 
-.. code:: c
+.. code-block:: c
 
 	static const uint8_t init_cmd_list[] = {
 		<命令1>, <参数数量>, <参数1>, ... <参数N>,
@@ -453,5 +456,5 @@ See an actual example of sending a command list `here <https://github.com/lvgl/l
 
 您可以使用伪命令 ``LV_LCD_CMD_DELAY_MS`` 在命令之间添加延迟，后面必须是以10ms为单位给出的延迟值。要终止命令列表，您必须使用值为 ``LV_LCD_CMD_EOF`` 的延迟，如上所示。
 
-在此处可以看到发送命令列表的实际示例 `这里 <https://github.com/lvgl/lvgl/src/drivers/display/st7789/lv_st7789.c>`__.
+在此处可以看到发送命令列表的实际示例 `here <https://github.com/lvgl/lvgl/blob/master/src/drivers/display/st7789/lv_st7789.c>`__.
 

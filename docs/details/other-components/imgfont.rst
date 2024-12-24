@@ -39,8 +39,8 @@ Enable :c:macro:`LV_USE_IMGFONT` in ``lv_conf.h``.
 
 To create a new *imgfont* use :cpp:expr:`lv_imgfont_create(height, path_cb, user_data)`.
 
-- ``height`` Font size. 
-- ``path_cb`` A function to get the image path of a character. 
+- ``height`` Font size.
+- ``path_cb`` A function to get the image path of a character.
   Return ``NULL`` if no image should be shown, but the character itself.
 - ``user_data`` Pointer to user data.
 
@@ -59,10 +59,9 @@ To destroy the *imgfont* that is no longer used, use :cpp:expr:`lv_imgfont_destr
 
 要创建一个新的 *imgfont*，使用 :cpp:expr:`lv_imgfont_create(height, path_cb, user_data)`。
 
-- ``height`` 字体大小。
-- ``path_cb`` 获取字符图像路径的函数。
-  如果不应该显示图像，而是显示字符本身，返回 ``NULL``。
-- ``user_data`` 用户数据指针。
+- ``height`` 字体大小。  
+- ``path_cb`` 一个函数，用于获取字符的图片路径。如果不显示图片而仅显示字符本身，则返回 ``NULL``。  
+- ``user_data`` 指向用户数据的指针。  
 
 要在标签中使用 *imgfont*，请引用它：
 :cpp:expr:`lv_obj_set_style_text_font(label, imgfont, LV_PART_MAIN)`
@@ -75,7 +74,7 @@ To destroy the *imgfont* that is no longer used, use :cpp:expr:`lv_imgfont_destr
 Example
 -------
 
-.. include:: ../examples/others/imgfont/index.rst
+.. include:: ../../examples/others/imgfont/index.rst
 
 .. _lv_imgfont_api:
 

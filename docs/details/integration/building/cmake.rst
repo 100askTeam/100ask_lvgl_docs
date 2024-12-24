@@ -1,7 +1,7 @@
 .. _build_cmake:
 
 =====
-cmake
+CMake
 =====
 
 Overview（概览）
@@ -12,17 +12,16 @@ Overview（概览）
    <details>
      <summary>显示原文</summary>
 
-This project uses CMakePresets to ensure an easy build.  Find out more on Cmake Presets here:
-https://cmake.org/cmake/help/latest/manual/cmake-presets.7.html
+This project uses CMakePresets to ensure an easy build.
+Find out more on Cmake Presets here: https://cmake.org/cmake/help/latest/manual/cmake-presets.7.html
 
 .. raw:: html
 
    </details>
    <br>
 
-
-这个项目使用CMakePresets来确保轻松构建。在这里了解更多关于CMake Presets的信息：https://cmake.org/cmake/help/latest/manual/cmake-presets.7.html
-
+这个项目使用CMakePresets来确保轻松构建。
+在这里了解更多关于CMake Presets的信息：https://cmake.org/cmake/help/latest/manual/cmake-presets.7.html
 
 Prerequisites（先决条件）
 -----------------------
@@ -41,7 +40,6 @@ You need to install
 
    </details>
    <br>
-
 
 你需要安装
 
@@ -69,8 +67,8 @@ More configurations will be added once available.
    </details>
    <br>
 
-
 建议使用提供的CMakePresets.json文件来构建这个项目。该文件包含两个配置：
+
 - 使用Visual Studio进行Windows (msvc)构建
 - 使用Ninja进行Linux (gcc)构建
 
@@ -116,8 +114,8 @@ Build with CMake GUI（使用CMake GUI进行构建）
    <details>
      <summary>显示原文</summary>
 
-Open this project with CMake GUI and select your desired preset.
-When hitting the generate button, CMake will create solution files (for VS) or Ninja Files (for Linux Ninja Build)
+Open this project with CMake GUI and select your desired preset. When hitting the generate button,
+CMake will create solution files (for VS) or Ninja Files (for Linux Ninja Build)
 
 The following targets are available.
 
@@ -138,9 +136,8 @@ If you use cmake to install lvgl 3 folders will be created.
    </details>
    <br>
 
-
-打开 CMake GUI 并选择您想要的预设配置。
-点击生成按钮后，CMake 将创建解决方案文件（用于 VS）或 Ninja 文件（用于 Linux Ninja Build）。
+打开CMake GUI并选择您想要的预设配置。
+点击“生成”按钮后，CMake将创建解决方案文件（适用于VS）或Ninja文件（适用于Linux Ninja Build）。
 
 以下目标可用：
 
@@ -165,24 +162,20 @@ Build with Command line（使用命令行进行构建）
    <details>
      <summary>显示原文</summary>
 
-You can also build your project using the command line.
-Run the following commands
+You can also build your project using the command line. Run the following commands
 
-- cmake --preset windows-base
-- cmake --build --preset windows-base_dbg
-- ctest --preset windows-base_dbg
+- ``cmake --preset windows-base``
+- ``cmake --build --preset windows-base_dbg``
+- ``ctest --preset windows-base_dbg``
 
 .. raw:: html
 
    </details>
    <br>
 
+您也可以使用命令行构建您的项目。
+运行下列命令：
 
-您也可以使用命令行来构建您的项目。
-运行以下命令：
-
-- cmake --preset windows-base
-- cmake --build --preset windows-base_dbg
-- ctest --preset windows-base_dbg
-
-
+- ``cmake --preset windows-base``
+- ``cmake --build --preset windows-base_dbg``
+- ``ctest --preset windows-base_dbg``

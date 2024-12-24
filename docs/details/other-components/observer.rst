@@ -24,7 +24,7 @@ It consists of:
 
 A typical use case looks like this:
 
-.. code:: c
+.. code-block:: c
 
     //It's a global variable
     lv_subject_t my_subject;
@@ -89,7 +89,7 @@ A typical use case looks like this:
 
 一个典型的用例如下:
 
-.. code:: c
+.. code-block:: c
 
     //It's a global variable
     lv_subject_t my_subject;
@@ -155,31 +155,30 @@ Subject initialization（主题初始化）
 
 Subjects have to be static or global :cpp:type:`lv_subject_t` type variables.
 
-To initialize a subject use :cpp:expr:`lv_subject_init_<type>(&subject, params, init_value)`.
+To initialize a subject use ``lv_subject_init_<type>(&subject, params, init_value)``.
 The following initializations exist for types:
 
-- **Integer** :cpp:expr:`void lv_subject_init_int(lv_subject_t * subject, int32_t value)`
-- **String** :cpp:expr:`void lv_subject_init_string(lv_subject_t * subject, char * buf, char * prev_buf, size_t size, const char * value)`
-- **Pointer**  :cpp:expr:`void lv_subject_init_pointer(lv_subject_t * subject, void * value)`
-- **Color** :cpp:expr:`void lv_subject_init_color(lv_subject_t * subject, lv_color_t color)`
-- **Group** :cpp:expr:`void lv_subject_init_group(lv_subject_t * subject, lv_subject_t * list[], uint32_t list_len)`
+- **Integer** ``void lv_subject_init_int(lv_subject_t * subject, int32_t value)``
+- **String** ``void lv_subject_init_string(lv_subject_t * subject, char * buf, char * prev_buf, size_t size, const char * value)``
+- **Pointer**  ``void lv_subject_init_pointer(lv_subject_t * subject, void * value)``
+- **Color** ``void lv_subject_init_color(lv_subject_t * subject, lv_color_t color)``
+- **Group** ``void lv_subject_init_group(lv_subject_t * subject, lv_subject_t * list[], uint32_t list_len)``
 
 .. raw:: html
 
    </details>
    <br>
 
+主题必须是静态或全局的 :cpp:type:`lv_subject_t` 类型变量。
 
-主题必须是静态或全局的 :cpp:type:`lv_subject_t` 类型的变量。
+要初始化一个 Subject，请使用 ``lv_subject_init_<type>(&subject, params, init_value)``。  
+以下是不同类型的初始化方法：
 
-要初始化主题，请使用 :cpp:expr:`lv_subject_init_<type>(&subject, params, init_value)`。
-存在以下类型的初始化:
-
-- **整数** :cpp:expr:`void lv_subject_init_int(lv_subject_t * subject, int32_t value)`
-- **字符串** :cpp:expr:`void lv_subject_init_string(lv_subject_t * subject, char * buf, char * prev_buf, size_t size, const char * value)`
-- **指针**  :cpp:expr:`void lv_subject_init_pointer(lv_subject_t * subject, void * value)`
-- **颜色** :cpp:expr:`void lv_subject_init_color(lv_subject_t * subject, lv_color_t color)`
-- **组** :cpp:expr:`void lv_subject_init_group(lv_subject_t * subject, lv_subject_t * list[], uint32_t list_len)`
+- **Integer** ``void lv_subject_init_int(lv_subject_t * subject, int32_t value)``
+- **String** ``void lv_subject_init_string(lv_subject_t * subject, char * buf, char * prev_buf, size_t size, const char * value)``
+- **Pointer** ``void lv_subject_init_pointer(lv_subject_t * subject, void * value)``
+- **Color** ``void lv_subject_init_color(lv_subject_t * subject, lv_color_t color)``
+- **Group** ``void lv_subject_init_group(lv_subject_t * subject, lv_subject_t * list[], uint32_t list_len)``
 
 
 Set subject value（设定主题值）
@@ -192,10 +191,10 @@ Set subject value（设定主题值）
 
 The following functions can be used to set a subject's value:
 
-- **Integer** :cpp:expr:`void lv_subject_set_int(lv_subject_t * subject, int32_t value)`
-- **String** :cpp:expr:`void lv_subject_copy_string(lv_subject_t * subject, char * buf)`
-- **Pointer**  :cpp:expr:`void lv_subject_set_pointer(lv_subject_t * subject, void * ptr)`
-- **Color** :cpp:expr:`void lv_subject_set_color(lv_subject_t * subject, lv_color_t color)`
+- **Integer** ``void lv_subject_set_int(lv_subject_t * subject, int32_t value)``
+- **String** ``void lv_subject_copy_string(lv_subject_t * subject, char * buf)``
+- **Pointer**  ``void lv_subject_set_pointer(lv_subject_t * subject, void * ptr)``
+- **Color** ``void lv_subject_set_color(lv_subject_t * subject, lv_color_t color)``
 
 .. raw:: html
 
@@ -205,10 +204,10 @@ The following functions can be used to set a subject's value:
 
 以下函数可以用于设置主题的值：
 
-- **整数**：:cpp:expr:`void lv_subject_set_int(lv_subject_t * subject, int32_t value)`
-- **字符串**：:cpp:expr:`void lv_subject_copy_string(lv_subject_t * subject, char * buf)`
-- **指针**：:cpp:expr:`void lv_subject_set_pointer(lv_subject_t * subject, void * ptr)`
-- **颜色**：:cpp:expr:`void lv_subject_set_color(lv_subject_t * subject, lv_color_t color)`
+- **Integer** ``void lv_subject_set_int(lv_subject_t * subject, int32_t value)``
+- **String** ``void lv_subject_copy_string(lv_subject_t * subject, char * buf)``
+- **Pointer**  ``void lv_subject_set_pointer(lv_subject_t * subject, void * ptr)``
+- **Color** ``void lv_subject_set_color(lv_subject_t * subject, lv_color_t color)``
 
 
 Get subject's value（获取主题的值）
@@ -222,10 +221,10 @@ Get subject's value（获取主题的值）
 The following functions can be used to get a subject's value:
 
 
-- **Integer** :cpp:expr:`int32_t lv_subject_get_int(lv_subject_t * subject)`
-- **String** :cpp:expr:`const char * lv_subject_get_string(lv_subject_t * subject)`
-- **Pointer**  :cpp:expr:`const void * lv_subject_get_pointer(lv_subject_t * subject)`
-- **Color** :cpp:expr:`lv_color_t lv_subject_get_color(lv_subject_t * subject)`
+- **Integer** ``int32_t lv_subject_get_int(lv_subject_t * subject)``
+- **String** ``const char * lv_subject_get_string(lv_subject_t * subject)``
+- **Pointer**  ``const void * lv_subject_get_pointer(lv_subject_t * subject)``
+- **Color** ``lv_color_t lv_subject_get_color(lv_subject_t * subject)``
 
 .. raw:: html
 
@@ -235,10 +234,10 @@ The following functions can be used to get a subject's value:
 
 以下函数可用于获取主题值：
 
-- **整数** :cpp:expr:`int32_t lv_subject_get_int(lv_subject_t * subject)`
-- **字符串** :cpp:expr:`const char * lv_subject_get_string(lv_subject_t * subject)`
-- **指针**  :cpp:expr:`const void * lv_subject_get_pointer(lv_subject_t * subject)`
-- **颜色** :cpp:expr:`lv_color_t lv_subject_get_color(lv_subject_t * subject)`
+- **Integer** ``int32_t lv_subject_get_int(lv_subject_t * subject)``
+- **String** ``const char * lv_subject_get_string(lv_subject_t * subject)``
+- **Pointer**  ``const void * lv_subject_get_pointer(lv_subject_t * subject)``
+- **Color** ``lv_color_t lv_subject_get_color(lv_subject_t * subject)``
 
 
 Get subject's previous value（获取主题的以前的值）
@@ -252,10 +251,10 @@ Get subject's previous value（获取主题的以前的值）
 The following functions can be used to get a subject's previous value:
 
 
-- **Integer** :cpp:expr:`int32_t lv_subject_get_previous_int(lv_subject_t * subject)`
-- **String** :cpp:expr:`const char * lv_subject_get_previous_string(lv_subject_t * subject)`
-- **Pointer** :cpp:expr:`const void * lv_subject_get_previous_pointer(lv_subject_t * subject)`
-- **Color** :cpp:expr:`lv_color_t lv_subject_get_previous_color(lv_subject_t * subject)`
+- **Integer** ``int32_t lv_subject_get_previous_int(lv_subject_t * subject)``
+- **String** ``const char * lv_subject_get_previous_string(lv_subject_t * subject)``
+- **Pointer** ``const void * lv_subject_get_previous_pointer(lv_subject_t * subject)``
+- **Color** ``lv_color_t lv_subject_get_previous_color(lv_subject_t * subject)``
 
 
 .. raw:: html
@@ -266,10 +265,10 @@ The following functions can be used to get a subject's previous value:
 
 以下函数可用于获取主题的先前值：
 
-- **整数** :cpp:expr:`int32_t lv_subject_get_previous_int(lv_subject_t * subject)`
-- **字符串** :cpp:expr:`const char * lv_subject_get_previous_string(lv_subject_t * subject)`
-- **指针** :cpp:expr:`const void * lv_subject_get_previous_pointer(lv_subject_t * subject)`
-- **颜色** :cpp:expr:`lv_color_t lv_subject_get_previous_color(lv_subject_t * subject)`
+- **Integer** ``int32_t lv_subject_get_previous_int(lv_subject_t * subject)``
+- **String** ``const char * lv_subject_get_previous_string(lv_subject_t * subject)``
+- **Pointer** ``const void * lv_subject_get_previous_pointer(lv_subject_t * subject)``
+- **Color** ``lv_color_t lv_subject_get_previous_color(lv_subject_t * subject)``
 
 
 .. _observer_observer:
@@ -286,14 +285,14 @@ Subscribe to a subject（订阅一个主题）
 
 To subscribe to a subject the following function can be used:
 
-.. code:: c
+.. code-block:: c
 
     lv_observer_t * observer = lv_subject_add_observer(&some_subject, some_observer_cb, user_data);
 
 
 Where the observer callback should look like this:
 
-.. code:: c
+.. code-block:: c
 
     static void some_observer_cb(lv_observer_t * observer, lv_subject_t * subject)
     {
@@ -306,14 +305,14 @@ In this case when widget is deleted, it will automatically unsubscribe from the 
 
 In the observer callback :cpp:expr:`lv_observer_get_target(observer)` can be used to get the saved widget.
 
-.. code:: c
+.. code-block:: c
 
-    lv_observer_t * observer = lv_subject_add_observer_obj(&some_subject, some_observer_cb, obj, user_data);
+    lv_observer_t * observer = lv_subject_add_observer_obj(&some_subject, some_observer_cb, widget, user_data);
 
 
 In more generic case any pointer can be saved a target:
 
-.. code:: c
+.. code-block:: c
 
     lv_observer_t * observer = lv_subject_add_observer_with_target(&some_subject, some_observer_cb, some_pointer, user_data);
 
@@ -325,14 +324,14 @@ In more generic case any pointer can be saved a target:
 
 订阅主题时可以使用以下函数：
 
-.. code:: c
+.. code-block:: c
 
     lv_observer_t * observer = lv_subject_add_observer(&some_subject, some_observer_cb, user_data);
 
 
 观察者回调函数应该如下所示：
 
-.. code:: c
+.. code-block:: c
 
     static void some_observer_cb(lv_observer_t * observer, lv_subject_t * subject)
     {
@@ -344,14 +343,14 @@ In more generic case any pointer can be saved a target:
 
 在观察者回调中 :cpp:expr:`lv_observer_get_target(observer)` 可以被用来获取保存的部件。
 
-.. code:: c
+.. code-block:: c
 
     lv_observer_t * observer = lv_subject_add_observer_obj(&some_subject, some_observer_cb, obj, user_data);
 
 
 在更通用的情况下，任何指针都可以被保存为目标：
 
-.. code:: c
+.. code-block:: c
 
     lv_observer_t * observer = lv_subject_add_observer_with_target(&some_subject, some_observer_cb, some_pointer, user_data);
 
@@ -365,16 +364,16 @@ Unsubscribe from a subject（取消订阅一个主题）
    <details>
      <summary>显示原文</summary>
 
-.. code:: c
+.. code-block:: c
 
-    	//`observer` is the return value of `lv_subject_add_observer*`
+    /* `observer` is the return value of `lv_subject_add_observer*` */
     lv_observer_remove(observer);
 
 To unsubscribe a widget from a given or all subject use:
 
-.. code:: c
+.. code-block:: c
 
-    	lv_obj_remove_from_subject(obj, subject); //`subject` can be NULL to unsubcribe from all
+    lv_obj_remove_from_subject(widget, subject); /* `subject` can be NULL to unsubcribe from all */
 
 .. raw:: html
 
@@ -382,13 +381,13 @@ To unsubscribe a widget from a given or all subject use:
    <br>
 
 
-.. code:: c
+.. code-block:: c
 
     lv_observer_remove(observer)
 
 要取消订阅主题上的所有小部件，可以使用以下代码：
 
-.. code:: c
+.. code-block:: c
 
     lv_subject_remove_obj(subject, obj)
 
@@ -417,16 +416,17 @@ and it needs to know all 3 parameters to compose its text.
 To handle this you can create an array from some existing subjects and pass
 this array as a parameter when you initialize a subject with group type.
 
-.. code:: c
+.. code-block:: c
+
     static lv_subject_t * subject_list[3] = {&subject_1, &subject_2, &subject_3};
-    lv_subject_init_group(&subject_all, subject_list, 3);  /*The last parameter is the number of elements*/
+    lv_subject_init_group(&subject_all, subject_list, 3);  /*The last parameter is the number of elements */
 
 You can add observers to subject groups in the regular way.
-The trick is that when any element of the group is notified the subject group will be notified too.
+The trick is that when any element of the group is notified the subject group will be notified as well.
 
 The above Voltage/Current measurement example looks like this in the practice:
 
-.. code:: c
+.. code-block:: c
 
     lv_obj_t * label = lv_label_create(lv_screen_active());
 
@@ -478,7 +478,7 @@ The above Voltage/Current measurement example looks like this in the practice:
 
 要处理这个问题，可以从一些现有的主题中创建一个数组，并在初始化组类型的主题时将这个数组作为参数传递。
 
-.. code:: c
+.. code-block:: c
     static lv_subject_t * subject_list[3] = {&subject_1, &subject_2, &subject_3};
     lv_subject_init_group(&subject_all, subject_list, 3);  /*The last parameter is the number of elements*/
 
@@ -487,7 +487,7 @@ The above Voltage/Current measurement example looks like this in the practice:
 
 上面的电压/电流测量示例在实际中看起来像这样：
 
-.. code:: c
+.. code-block:: c
 
     lv_obj_t * label = lv_label_create(lv_screen_active());
 
@@ -534,29 +534,35 @@ Base object（基本对象）
    <details>
      <summary>显示原文</summary>
 
-Set an object flag if an integer subject's value is equal to a reference value, clear the flag otherwise
+Set a Widget flag if an integer subject's value is equal to a reference value, clear the flag otherwise
 
-.. code:: c
+.. code-block:: c
 
-    observer = lv_obj_bind_flag_if_eq(obj, &subject, LV_OBJ_FLAG_*, ref_value);
+    observer = lv_obj_bind_flag_if_eq(widget, &subject, LV_OBJ_FLAG_*, ref_value);
 
-Set an object flag if an integer subject's value is not equal to a reference value, clear the flag otherwise
+Set a Widget flag if an integer subject's value is not equal to a reference value, clear the flag otherwise
 
-.. code:: c
+.. code-block:: c
 
-    observer = lv_obj_bind_flag_if_not_eq(obj, &subject, LV_OBJ_FLAG_*, ref_value);
+    observer = lv_obj_bind_flag_if_not_eq(widget, &subject, LV_OBJ_FLAG_*, ref_value);
 
-Set an object state if an integer subject's value is equal to a reference value, clear the flag otherwise
+Set a Widget state if an integer subject's value is equal to a reference value, clear the flag otherwise
 
-.. code:: c
+.. code-block:: c
 
-    observer = lv_obj_bind_state_if_eq(obj, &subject, LV_STATE_*, ref_value);
+    observer = lv_obj_bind_state_if_eq(widget, &subject, LV_STATE_*, ref_value);
 
-Set an object state if an integer subject's value is not equal to a reference value, clear the flag otherwise
+Set a Widget state if an integer subject's value is not equal to a reference value, clear the flag otherwise
 
-.. code:: c
+.. code-block:: c
 
-    observer = lv_obj_bind_state_if_not_eq(obj, &subject, LV_STATE_*, ref_value);
+    observer = lv_obj_bind_state_if_not_eq(widget, &subject, LV_STATE_*, ref_value);
+
+Set an integer subject to 1 when a Widget is checked and set it 0 when unchecked.
+
+.. code-block:: c
+
+    observer = lv_obj_bind_checked(widget, &subject);
 
 .. raw:: html
 
@@ -564,29 +570,35 @@ Set an object state if an integer subject's value is not equal to a reference va
    <br>
 
 
-如果一个整数subject的值等于一个参考值，那么设置一个对象标志，否则清除标志
+如果一个整数 subject 的值等于参考值，则设置 Widget 的 flag，否则清除该 flag。
 
-.. code:: c
+.. code-block:: c
 
-    observer = lv_obj_bind_flag_if_eq(obj, &subject, LV_OBJ_FLAG_*, ref_value);
+    observer = lv_obj_bind_flag_if_eq(widget, &subject, LV_OBJ_FLAG_*, ref_value);
 
-如果一个整数subject的值不等于一个参考值，那么设置一个对象标志，否则清除标志
+如果一个整数 subject 的值不等于参考值，则设置 Widget 的 flag，否则清除该 flag。
 
-.. code:: c
+.. code-block:: c
 
-    observer = lv_obj_bind_flag_if_not_eq(obj, &subject, LV_OBJ_FLAG_*, ref_value);
+    observer = lv_obj_bind_flag_if_not_eq(widget, &subject, LV_OBJ_FLAG_*, ref_value);
 
-如果一个整数subject的值等于一个参考值，那么设置一个对象状态，否则清除标志
+如果一个整数 subject 的值等于参考值，则设置 Widget 的 state，否则清除该 state。
 
-.. code:: c
+.. code-block:: c
 
-    observer = lv_obj_bind_state_if_eq(obj, &subject, LV_STATE_*, ref_value);
+    observer = lv_obj_bind_state_if_eq(widget, &subject, LV_STATE_*, ref_value);
 
-如果一个整数subject的值不等于一个参考值，那么设置一个对象状态，否则清除标志
+如果一个整数 subject 的值不等于参考值，则设置 Widget 的 state，否则清除该 state。
 
-.. code:: c
+.. code-block:: c
 
-    observer = lv_obj_bind_state_if_not_eq(obj, &subject, LV_STATE_*, ref_value);
+    observer = lv_obj_bind_state_if_not_eq(widget, &subject, LV_STATE_*, ref_value);
+
+当 Widget 被选中时，将一个整数 subject 设置为 1，当未选中时，将其设置为 0。
+
+.. code-block:: c
+
+    observer = lv_obj_bind_checked(widget, &subject);
 
 
 .. raw:: html
@@ -624,9 +636,9 @@ Bind an integer, string, or pointer (pointing to a string) subject to a label.
 An optional format string can be added with 1 format specifier (e.g. ``"%d °C"``)
 If the format string is ``NULL`` the value will be used directly. In this case on string and pointer type subjects can be used.
 
-.. code:: c
+.. code-block:: c
 
-    observer = lv_label_bind_text(obj, &subject, format_string);
+    observer = lv_label_bind_text(widget, &subject, format_string);
 
 .. raw:: html
 
@@ -638,9 +650,9 @@ If the format string is ``NULL`` the value will be used directly. In this case o
 可以使用一个可选的格式字符串，并添加一个格式说明符（例如 ``"%d °C"``）。
 如果格式字符串为 ``NULL``，则将直接使用该值。在这种情况下，只能使用字符串和指针类型的主题。
 
-.. code:: c
+.. code-block:: c
 
-    observer = lv_label_bind_text(obj, &subject, format_string);
+    observer = lv_label_bind_text(widget, &subject, format_string);
 
 
 Arc（弧）
@@ -653,9 +665,9 @@ Arc（弧）
 
 Bind an integer subject to an arc's value.
 
-.. code:: c
+.. code-block:: c
 
-    observer = lv_arc_bind_value(obj, &subject);
+    observer = lv_arc_bind_value(widget, &subject);
 
 .. raw:: html
 
@@ -665,9 +677,9 @@ Bind an integer subject to an arc's value.
 
 绑定一个整数变量到弧形对象的值。
 
-.. code:: c
+.. code-block:: c
 
-    observer = lv_arc_bind_value(obj, &subject);
+    observer = lv_arc_bind_value(widget, &subject);
 
 
 Slider（滑动器）
@@ -680,9 +692,9 @@ Slider（滑动器）
 
 Bind an integer subject to a slider's value
 
-.. code:: c
+.. code-block:: c
 
-    observer = lv_slider_bind_value(obj, &subject);
+    observer = lv_slider_bind_value(widget, &subject);
 
 .. raw:: html
 
@@ -692,9 +704,9 @@ Bind an integer subject to a slider's value
 
 将一个整数值绑定到滑动条的值
 
-.. code:: c
+.. code-block:: c
 
-    observer = lv_slider_bind_value(obj, &subject);
+    observer = lv_slider_bind_value(widget, &subject);
 
 
 Roller（滚筒）
@@ -707,9 +719,9 @@ Roller（滚筒）
 
 Bind an integer subject to a roller's value
 
-.. code:: c
+.. code-block:: c
 
-    observer = lv_roller_bind_value(obj, &subject);
+    observer = lv_roller_bind_value(widget, &subject);
 
 .. raw:: html
 
@@ -719,9 +731,9 @@ Bind an integer subject to a roller's value
 
 将整数对象绑定到滚轮的值
 
-.. code:: c
+.. code-block:: c
 
-    observer = lv_roller_bind_value(obj, &subject);
+    observer = lv_roller_bind_value(widget, &subject);
 
 
 
@@ -735,9 +747,9 @@ Drop-down（下拉菜单）
 
 Bind an integer subject to a drop-down's value
 
-.. code:: c
+.. code-block:: c
 
-    observer = lv_dropdown_bind_value(obj, &subject);
+    observer = lv_dropdown_bind_value(widget, &subject);
 
 .. raw:: html
 
@@ -747,9 +759,9 @@ Bind an integer subject to a drop-down's value
 
 绑定整数主题到下拉菜单的值
 
-.. code:: c
+.. code-block:: c
 
-    observer = lv_dropdown_bind_value(obj, &subject);
+    observer = lv_dropdown_bind_value(widget, &subject);
 
     
 .. _observer_example:
@@ -757,7 +769,7 @@ Bind an integer subject to a drop-down's value
 Example
 *******
 
-.. include:: ../examples/others/observer/index.rst
+.. include:: ../../examples/others/observer/index.rst
 
 .. _observer_api:
 

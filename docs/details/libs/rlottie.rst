@@ -23,13 +23,12 @@ be built separately.
    </details>
    <br>
 
+.. warning::  
+   Rlottie 已被弃用。请考虑使用 :ref:`lv_lottie` 代替。  
 
-.. warning::
-   Rlottie 已被弃用。请考虑改用 :ref:`lv_lottie`。
+在 LVGL 中允许播放 Lottie 动画。代码取自 `lv_rlottie <https://github.com/ValentiWorkLearning/lv_rlottie>`__。  
 
-允许在 LVGL 中播放 Lottie 动画。摘自 `lv_rlottie <https://github.com/ValentiWorkLearning/lv_rlottie>`__。
-
-LVGL 为 `Samsung/rlottie <https://github.com/Samsung/rlottie>`__ 库的 C 提供接口应用程序接口。也就是说，实际的 Lottie 玩家不是 LVGL 的一部分，它需要单独构建。
+LVGL 提供了 `Samsung/rlottie <https://github.com/Samsung/rlottie>`__ 库的 C API 接口。需要注意的是，实际的 Lottie 播放器并不是 LVGL 的一部分，需要单独构建。  
 
 
 Build Rlottie（构建Rlottie）
@@ -48,7 +47,7 @@ To build on desktop you can follow the instructions from Rlottie's
 
 In the most basic case it looks like this:
 
-.. code:: shell
+.. code-block:: shell
 
    mkdir rlottie_workdir
    cd rlottie_workdir
@@ -70,26 +69,27 @@ given build system.
    <br>
 
 
-构建三星的 Rlottie C++ 兼容编译器，并可选地需要 CMake 3.14 或更高版本。
+要构建 Samsung 的 Rlottie，需要兼容 C++14 的编译器，并且可选地需要 CMake 3.14 或更高版本。
 
-要在桌面上构建，您可以按照 Rlottie 的 `README <https://github.com/Samsung/rlottie/blob/master/README.md>`__ 中的说明进行操作。
+在桌面环境上构建，可以按照 Rlottie 的  
+`README <https://github.com/Samsung/rlottie/blob/master/README.md>`__ 中的说明进行操作。
 
-在最基本的情况下，它看起来像这样：
+最基本的构建步骤如下所示：
 
-.. code:: shell
+.. code-block:: shell  
 
-   mkdir rlottie_workdir
-   cd rlottie_workdir
-   git clone https://github.com/Samsung/rlottie.git
-   mkdir build
-   cd build
-   cmake ../rlottie
-   make -j
-   sudo make install
+   mkdir rlottie_workdir  
+   cd rlottie_workdir  
+   git clone https://github.com/Samsung/rlottie.git  
+   mkdir build  
+   cd build  
+   cmake ../rlottie  
+   make -j  
+   sudo make install  
 
-最后，将标志 ``-lrlottie`` 添加到您的链接器。
+最后，将 ``-lrlottie`` 标志添加到链接器中。
 
-在嵌入式系统上，您需要注意将 Rlottie 集成到给定的构建系统。
+在嵌入式系统上，需要自行处理将 Rlottie 集成到指定的构建系统中。
 
 
 ESP-IDF example at bottom （ESP-IDF 示例位于底部）
@@ -108,7 +108,7 @@ Usage（用法）
 You can use animation from files or raw data (text). In either case
 first you need to enable :c:macro:`LV_USE_RLOTTIE` in ``lv_conf.h``.
 
-The ``width`` and ``height`` of the object be set in the *create*
+The ``width`` and ``height`` of the Widget be set in the *create*
 function and the animation will be scaled accordingly.
 
 .. raw:: html
@@ -117,10 +117,9 @@ function and the animation will be scaled accordingly.
    <br>
 
 
-您可以使用来自文件或原始数据（文本）的动画。无论哪种情况 首先，您需要在 ``lv_conf.h`` 中启用 :c:macro:`LV_USE_RLOTTIE` 。
+您可以使用文件或原始数据（文本）中的动画。在任何情况下，首先需要在 ``lv_conf.h`` 中启用 :c:macro:`LV_USE_RLOTTIE`。
 
-在 *create* 函数中设置对象的 ``width`` 和 ``height`` ，动画将相应地缩放。
-
+在 *create* 函数中设置 Widget 的 ``width`` 和 ``height``，动画将根据这些尺寸进行缩放。
 
 Use Rlottie from file（从文件使用 Rlottie）
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -132,7 +131,7 @@ Use Rlottie from file（从文件使用 Rlottie）
 
 To create a Lottie animation from file use:
 
-.. code:: c
+.. code-block:: c
 
      lv_obj_t * lottie = lv_rlottie_create_from_file(parent, width, height, "path/to/lottie.json");
 
@@ -147,7 +146,7 @@ the path "normally" and no LVGL specific driver letter is required.
 
 要从文件使用创建 Lottie 动画：
 
-.. code:: c
+.. code-block:: c
 
      lv_obj_t * lottie = lv_rlottie_create_from_file(parent, width, height, "path/to/lottie.json");
 
@@ -172,13 +171,15 @@ following reasons:
 ``lvgl/scripts/filetohex.py`` can be used to convert a Lottie file a hex
 array. E.g.:
 
-.. code:: shell
+.. code-block:: shell
 
-   ./filetohex.py path/to/lottie.json > out.txt
+   ./filetohex.py path/to/lottie.json --filter-character --null-terminate > out.txt
+
+``--filter-character`` filters out non-ASCII characters and ``--null-terminate`` makes sure that a trailing zero is appended to properly close the string.
 
 To create an animation from raw data:
 
-.. code:: c
+.. code-block:: c
 
    extern const uint8_t lottie_data[];
    lv_obj_t* lottie = lv_rlottie_create_from_raw(parent, width, height, (const char *)lottie_data);
@@ -196,13 +197,13 @@ To create an animation from raw data:
 
 ``lvgl/scripts/filetohex.py`` 可用于将 Lottie 文件转换为十六进制数组。例如：
 
-.. code:: shell
+.. code-block:: shell
 
    ./filetohex.py path/to/lottie.json > out.txt
 
 要从原始数据创建动画：
 
-.. code:: c
+.. code-block:: c
 
    extern const uint8_t lottie_data[];
    lv_obj_t* lottie = lv_rlottie_create_from_raw(parent, width, height, (const char *)lottie_data);
@@ -246,7 +247,7 @@ LVGL provides two functions to control the animation mode:
 You'll combine your intentions when calling the first method, like in
 these examples:
 
-.. code:: c
+.. code-block:: c
 
    lv_obj_t * lottie = lv_rlottie_create_from_file(scr, 128, 128, "test.json");
    lv_obj_center(lottie);
@@ -277,7 +278,7 @@ and inspect the ``current_frame`` and ``total_frames`` members.
 
 LVGL 提供了两个功能来控制动画模式：:cpp:func:`lv_rlottie_set_play_mode` 和 :cpp:func:`lv_rlottie_set_current_frame` 。 在调用第一种方法时，您将结合您的意图，例如 这些示例：
 
-.. code:: c
+.. code-block:: c
 
    lv_obj_t * lottie = lv_rlottie_create_from_file(scr, 128, 128, "test.json");
    lv_obj_center(lottie);
@@ -352,8 +353,8 @@ limitations:
 
 - Build the lottie animation to be sized for the intended size
 - it can scale/resize, but performance will be best when the base lottie size is as intended
-- - Limit total number of frames, the longer the lottie animation is,
-the more memory it will consume for rendering (rlottie consumes IRAM for rendering)
+- Limit total number of frames, the longer the lottie animation is,
+  the more memory it will consume for rendering (rlottie consumes IRAM for rendering)
 - Build the lottie animation for the intended frame rate
 - default lottie is 60fps, embedded LCDs likely won't go above 30fps
 
@@ -385,11 +386,11 @@ Rlottie 不会使用 ``-02`` 编译器选项为 IDF 编译这一次。
 
 在挑选/设计彩票动画时，请考虑以下事项 局限性：
 
-- 生成 lottie 动画以调整为预期大小
-- 它可以缩放/调整大小，但当基本 Lottie 大小符合预期时，性能将最佳
-- 限制总帧数，lottie 动画越长，
-- 渲染消耗的内存越多（rlottie 使用IRAM进行渲染） - 为预期的帧速率构建 lottie 动画 - 默认 lottie 是 60fps，嵌入式 LCD 可能不会超过 30fps
-
+- 构建 Lottie 动画时，应按照预期的尺寸设置大小。  
+- 虽然可以进行缩放/调整大小，但当基础 Lottie 尺寸符合预期时，性能会最佳。  
+- 限制总帧数。Lottie 动画越长，渲染时消耗的内存越多（rlottie 在渲染时会消耗 IRAM）。  
+- 按照预期的帧率构建 Lottie 动画。  
+- 默认的 Lottie 帧率为 60fps，而嵌入式 LCD 可能不会超过 30fps。  
 
 IDF Setup（IDF设置）
 ~~~~~~~~~~~~~~~~~~~
@@ -402,7 +403,7 @@ IDF Setup（IDF设置）
 Where the LVGL simulator uses the installed rlottie lib, the IDF works
 best when using rlottie as a submodule under the components directory.
 
-.. code:: shell
+.. code-block:: shell
 
    cd 'your/project/directory'
    git add submodule
@@ -421,7 +422,7 @@ compile.
 
 当 LVGL 模拟器使用已安装的 rlottie 库时，IDF 可以工作 最好将 rlottie 用作 components 目录下的子模块。
 
-.. code:: shell
+.. code-block:: shell
 
    cd 'your/project/directory'
    git add submodule
@@ -477,7 +478,7 @@ Copy this CMakeLists file to
 In addition to the component CMakeLists file, you'll also need to tell
 your project level CMakeLists in your IDF project to require rlottie:
 
-.. code:: console
+.. code-block:: console
 
    REQUIRES "lvgl" "rlottie"
 
@@ -498,7 +499,7 @@ CMakeLists 文件示例已在 ``/env_support/esp/rlottie/CMakeLists.txt``
 
 除了组件 CMakeLists 文件外，您还需要告诉 您的项目级别 CMakeLists 在您的 IDF 项目中要求 rlottie：
 
-.. code:: console
+.. code-block:: console
 
    REQUIRES "lvgl" "rlottie"
 
@@ -580,7 +581,7 @@ your espressif project. This is as simple as swapping
 IDF) with the appropriate :cpp:expr:`MALLOC_CAP` call - for SPIRAM usage this is
 :cpp:expr:`MALLOC_CAP_SPIRAM`.
 
-.. code:: c
+.. code-block:: c
 
    rlottie->allocated_buf = heap_caps_malloc(allocated_buf_size+1, MALLOC_CAP_SPIRAM);
 
@@ -594,7 +595,7 @@ IDF) with the appropriate :cpp:expr:`MALLOC_CAP` call - for SPIRAM usage this is
 
 可能有更好的解决方案，但就目前而言， 建议对 LVGL 组件进行本地修改您的乐鑫项目。这就像将 `lv_rlottie.c` 中的 :cpp:expr:`lv_alloc/lv_realloc` 调用与 :cpp:expr:`heap_caps_malloc` 交换一样简单（用于 IDF） 与适当的 :cpp:expr:`MALLOC_CAP` 调用 - 对于 SPIRAM 的使用，这是 :cpp:expr:`MALLOC_CAP_SPIRAM`。
 
-.. code:: c
+.. code-block:: c
 
    rlottie->allocated_buf = heap_caps_malloc(allocated_buf_size+1, MALLOC_CAP_SPIRAM);
 
@@ -604,7 +605,7 @@ IDF) with the appropriate :cpp:expr:`MALLOC_CAP` call - for SPIRAM usage this is
 Example
 -------
 
-.. include:: ../examples/libs/rlottie/index.rst
+.. include:: ../../examples/libs/rlottie/index.rst
 
 .. _rlottie_api:
 

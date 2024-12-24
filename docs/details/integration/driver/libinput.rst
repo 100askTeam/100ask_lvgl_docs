@@ -34,7 +34,7 @@ You have the development version of libinput installed (usually ``libinput-dev``
 installed as well (usually in ``/usr/share/libinput/*.quirks``). To test if your device is set up correctly for use with libinput, you can
 run ``libinput list-devices``.
 
-.. code:: console
+.. code-block:: console
 
     $ sudo libinput list-devices
     ...
@@ -61,7 +61,7 @@ installed (usually ``libxkbcommon-dev``).
 
 你已经安装了libinput的开发版本（通常是 ``libinput-dev``）。如果你的输入设备需要quirks，请确保它们也被安装了（通常位于 ``/usr/share/libinput/*.quirks``）。为了测试你的设备是否正确设置为与libinput一起使用，你可以运行 ``libinput list-devices``。
 
-.. code:: console
+.. code-block:: console
 
     $ sudo libinput list-devices
     ...
@@ -90,13 +90,13 @@ Configuring the driver（配置驱动程序）
 
 Enable the libinput driver support in lv_conf.h, by cmake compiler define or by KConfig.
 
-.. code:: c
+.. code-block:: c
 
     #define LV_USE_LIBINPUT    1
 
 Full keyboard support needs to be enabled separately.
 
-.. code:: c
+.. code-block:: c
 
     #define LV_LIBINPUT_XKB            1
     #define LV_LIBINPUT_XKB_KEY_MAP    { .rules = NULL, .model = "pc101", .layout = "us", .variant = NULL, .options = NULL }
@@ -111,13 +111,13 @@ To find the right key map values, you may use the ``setxkbmap -query`` command.
 
 在lv_conf.h中启用libinput驱动程序支持，可以通过cmake编译器定义或KConfig进行。
 
-.. code:: c
+.. code-block:: c
 
     #define LV_USE_LIBINPUT    1
 
 需要单独启用完整键盘支持。
 
-.. code:: c
+.. code-block:: c
 
     #define LV_LIBINPUT_XKB            1
     #define LV_LIBINPUT_XKB_KEY_MAP    { .rules = NULL, .model = "pc101", .layout = "us", .variant = NULL, .options = NULL }
@@ -136,7 +136,7 @@ Usage（用法）
 To set up an input device via the libinput driver, all you need to do is call ``lv_libinput_create`` with the respective device type
 (``LV_INDEV_TYPE_POINTER`` or ``LV_INDEV_TYPE_KEYPAD``) and device node path (e.g. ``/dev/input/event5``).
 
-.. code:: c
+.. code-block:: c
 
     lv_indev_t *indev = lv_libinput_create(LV_INDEV_TYPE_POINTER, "/dev/input/event5");
 
@@ -145,7 +145,7 @@ Note that touchscreens are treated as (absolute) pointer devices by the libinput
 Depending on your system, the device node paths might not be stable across reboots. If this is the case, you can use ``lv_libinput_find_dev``
 to find the first device that has a specific capability.
 
-.. code:: c
+.. code-block:: c
 
     char *path = lv_libinput_find_dev(LV_LIBINPUT_CAPABILITY_TOUCH, true);
 
@@ -155,7 +155,7 @@ all devices that have a specific capability, use ``lv_libinput_find_devs``.
 
 If you want to connect a keyboard device to a textarea, create a dedicated input group and set it on both the indev and textarea.
 
-.. code:: c
+.. code-block:: c
 
     lv_obj_t *textarea = lv_textarea_create(...);
     ...
@@ -171,7 +171,7 @@ If you want to connect a keyboard device to a textarea, create a dedicated input
 
 通过libinput驱动程序设置输入设备，您只需要使用对应的设备类型（ ``LV_INDEV_TYPE_POINTER`` 或 ``LV_INDEV_TYPE_KEYPAD``）和设备节点路径（例如 ``/dev/input/event5``）调用 ``lv_libinput_create`` 函数。
 
-.. code:: c
+.. code-block:: c
 
     lv_indev_t *indev = lv_libinput_create(LV_INDEV_TYPE_POINTER, "/dev/input/event5");
 
@@ -179,7 +179,7 @@ If you want to connect a keyboard device to a textarea, create a dedicated input
 
 根据您的系统，设备节点路径可能在重新启动后不稳定。如果是这种情况，您可以使用 ``lv_libinput_find_dev``来查找具有特定功能的第一个设备。
 
-.. code:: c
+.. code-block:: c
 
     char *path = lv_libinput_find_dev(LV_LIBINPUT_CAPABILITY_TOUCH, true);
 
@@ -187,12 +187,10 @@ If you want to connect a keyboard device to a textarea, create a dedicated input
 
 如果要将键盘设备连接到文本区域，请创建一个专用的输入组，并将其设置在indev和textarea上。
 
-.. code:: c
+.. code-block:: c
 
     lv_obj_t *textarea = lv_textarea_create(...);
     ...
     lv_group_t *keyboard_input_group = lv_group_create();
     lv_indev_set_group(indev, keyboard_input_group);
     lv_group_add_obj(keyboard_input_group, textarea);
-
-    

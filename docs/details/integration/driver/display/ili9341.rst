@@ -61,7 +61,7 @@ Configuring the driver（配置驱动程序）
 
 Enable the ILI9341 driver support in lv_conf.h, by cmake compiler define or by KConfig
 
-.. code:: c
+.. code-block:: c
 
 	#define LV_USE_ILI9341  1
 
@@ -73,7 +73,7 @@ Enable the ILI9341 driver support in lv_conf.h, by cmake compiler define or by K
 
 通过CMake编译器定义或KConfig，在lv_conf.h中启用ILI9341驱动程序支持。
 
-.. code:: c
+.. code-block:: c
 
 	#define LV_USE_ILI9341  1
 
@@ -88,7 +88,7 @@ Usage（用法）
 
 You need to implement two platform-dependent functions:
 
-.. code:: c
+.. code-block:: c
 
 	/* Send short command to the LCD. This function shall wait until the transaction finishes. */
 	int32_t my_lcd_send_cmd(lv_display_t *disp, const uint8_t *cmd, size_t cmd_size, const uint8_t *param, size_t param_size)
@@ -104,7 +104,7 @@ You need to implement two platform-dependent functions:
 
 To create an ILI9341-based display use the function
 
-.. code:: c
+.. code-block:: c
 
 	/**
 	 * Create an LCD display with ILI9341 driver
@@ -124,7 +124,7 @@ For additional details and a working example see the `generic MIPI driver docume
 .. note::
 
 	You can find a step-by-step guide and the actual implementation of the callbacks on an STM32F746 using STM32CubeIDE and the ST HAL libraries here: :ref:`lcd_stm32_guide`
-
+	
 .. raw:: html
 
    </details>
@@ -133,7 +133,7 @@ For additional details and a working example see the `generic MIPI driver docume
 
 您需要实现两个与平台相关的函数：
 
-.. code:: c
+.. code-block:: c
 
 	/* Send short command to the LCD. This function shall wait until the transaction finishes. */
 	int32_t my_lcd_send_cmd(lv_display_t *disp, const uint8_t *cmd, size_t cmd_size, const uint8_t *param, size_t param_size)
@@ -149,7 +149,7 @@ For additional details and a working example see the `generic MIPI driver docume
 
 要创建基于ILI9341驱动的显示器，请使用以下函数：
 
-.. code:: c
+.. code-block:: c
 
 	/**
 	 * Create an LCD display with ILI9341 driver

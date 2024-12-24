@@ -63,7 +63,7 @@ Configuring the driver（配置驱动程序）
 
 Enable the ST7735 driver support in lv_conf.h, by cmake compiler define or by KConfig
 
-.. code:: c
+.. code-block:: c
 
 	#define LV_USE_ST7735  1
 
@@ -91,7 +91,7 @@ Usage（用法）
 
 You need to implement two platform-dependent functions:
 
-.. code:: c
+.. code-block:: c
 
 	/* Send short command to the LCD. This function shall wait until the transaction finishes. */
 	int32_t my_lcd_send_cmd(lv_display_t *disp, const uint8_t *cmd, size_t cmd_size, const uint8_t *param, size_t param_size)
@@ -107,7 +107,7 @@ You need to implement two platform-dependent functions:
 
 To create an ST7735-based display use the function
 
-.. code:: c
+.. code-block:: c
 
 	/**
 	 * Create an LCD display with ST7735 driver
@@ -124,7 +124,9 @@ To create an ST7735-based display use the function
 
 For additional details and a working example see the `generic MIPI driver documentation <https://github.com/lvgl/lvgl/doc/integration/drivers/display/gen_mipi.rst>`__.
 
-.. raw:: html
+.. note::
+
+	You can find a step-by-step guide and the actual implementation of the callbacks on an STM32F746 using STM32CubeIDE and the ST HAL libraries here: :ref:`lcd_stm32_guide`
 
    </details>
    <br>
@@ -132,7 +134,7 @@ For additional details and a working example see the `generic MIPI driver docume
 
 您需要实现两个平台相关的函数：
 
-.. code:: c
+.. code-block:: c
 
 	/* 将短命令发送给LCD，此函数将等待事务完成。 */
 	int32_t my_lcd_send_cmd(lv_display_t *disp, const uint8_t *cmd, size_t cmd_size, const uint8_t *param, size_t param_size)
@@ -148,7 +150,7 @@ For additional details and a working example see the `generic MIPI driver docume
 
 要创建基于ST7735驱动器的显示，请使用以下函数：
 
-.. code:: c
+.. code-block:: c
 
 	/**
 	 * 创建一个带有ST7735驱动器的LCD显示器
