@@ -144,7 +144,7 @@ No *Keys* are processed by Animation-Image Widgets.
 Example
 *********
 
-.. include:: ../examples/widgets/animimg/index.rst
+.. include:: ../../examples/widgets/animimg/index.rst
 
 .. _lv_animimg_api:
 

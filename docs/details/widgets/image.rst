@@ -458,7 +458,7 @@ Learn more about :ref:`indev_keys`.
 Example
 **********
 
-.. include:: ../examples/widgets/image/index.rst
+.. include:: ../../examples/widgets/image/index.rst
 
 .. _lv_image_api:
 

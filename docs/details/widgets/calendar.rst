@@ -378,7 +378,7 @@ Learn more about :ref:`indev_keys`.
 Example
 *******
 
-.. include:: ../examples/widgets/calendar/index.rst
+.. include:: ../../examples/widgets/calendar/index.rst
 
 .. _lv_calendar_api:
 

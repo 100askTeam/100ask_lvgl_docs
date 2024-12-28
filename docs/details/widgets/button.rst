@@ -146,7 +146,7 @@ and :cpp:enumerator:`LV_EVENT_RELEASED` etc.
 Example
 *******
 
-.. include:: ../examples/widgets/button/index.rst
+.. include:: ../../examples/widgets/button/index.rst
 
 .. _lv_button_api:
 

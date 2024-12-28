@@ -199,7 +199,7 @@ No *Keys* are handled by the window Widgets.
 Example
 *********
 
-.. include:: ../examples/widgets/win/index.rst
+.. include:: ../../examples/widgets/win/index.rst
 
 .. _lv_win_api:
 

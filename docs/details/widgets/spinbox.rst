@@ -204,7 +204,7 @@ Keys（按键）
 Example
 *******
 
-.. include:: ../examples/widgets/spinbox/index.rst
+.. include:: ../../examples/widgets/spinbox/index.rst
 
 .. _lv_spinbox_api:
 

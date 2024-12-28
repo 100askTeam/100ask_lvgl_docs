@@ -251,7 +251,7 @@ Learn more about :ref:`indev_keys`.
 Example
 *******
 
-.. include:: ../examples/widgets/slider/index.rst
+.. include:: ../../examples/widgets/slider/index.rst
 
 .. _lv_slider_api:
 

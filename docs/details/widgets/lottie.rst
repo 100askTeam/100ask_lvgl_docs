@@ -271,7 +271,7 @@ Lottie 控件不处理任何键。
 Example（示例）
 ***************
 
-.. include:: ../examples/widgets/lottie/index.rst
+.. include:: ../../examples/widgets/lottie/index.rst
 
 .. _lv_lottie_api:
 

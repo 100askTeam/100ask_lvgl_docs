@@ -757,7 +757,7 @@ Learn more about :ref:`indev_keys`.
 Example
 *******
 
-.. include:: ../examples/widgets/chart/index.rst
+.. include:: ../../examples/widgets/chart/index.rst
 
 .. _lv_chart_api:
 

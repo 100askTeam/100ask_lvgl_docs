@@ -191,7 +191,7 @@ Learn more about :ref:`indev_keys`.
 Example
 *******
 
-.. include:: ../examples/widgets/switch/index.rst
+.. include:: ../../examples/widgets/switch/index.rst
 
 .. _lv_switch_api:
 

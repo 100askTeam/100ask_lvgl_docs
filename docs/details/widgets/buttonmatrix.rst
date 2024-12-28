@@ -317,7 +317,7 @@ Learn more about :ref:`indev_keys`.
 Example
 *******
 
-.. include:: ../examples/widgets/buttonmatrix/index.rst
+.. include:: ../../examples/widgets/buttonmatrix/index.rst
 
 .. _lv_buttonmatrix_api:
 

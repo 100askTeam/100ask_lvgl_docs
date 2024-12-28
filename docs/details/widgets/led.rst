@@ -174,7 +174,7 @@ LED 部件不处理任何 *按键* 。
 Example
 *******
 
-.. include:: ../examples/widgets/led/index.rst
+.. include:: ../../examples/widgets/led/index.rst
 
 .. _lv_led_api:
 

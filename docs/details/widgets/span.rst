@@ -331,7 +331,7 @@ Learn more about :ref:`indev_keys`.
 Example
 *******
 
-.. include:: ../examples/widgets/span/index.rst
+.. include:: ../../examples/widgets/span/index.rst
 
 .. _lv_span_api:
 

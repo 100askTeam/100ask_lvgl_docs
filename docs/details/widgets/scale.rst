@@ -543,7 +543,7 @@ No *Keys* are processed by Scale Widgets.
 Example
 *******
 
-.. include:: ../examples/widgets/scale/index.rst
+.. include:: ../../examples/widgets/scale/index.rst
 
 .. _lv_scale_api:
 

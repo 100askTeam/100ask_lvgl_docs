@@ -292,7 +292,7 @@ Learn more about :ref:`indev_keys`.
 Example
 *******
 
-.. include:: ../examples/widgets/keyboard/index.rst
+.. include:: ../../examples/widgets/keyboard/index.rst
 
 .. _lv_keyboard_api:
 

@@ -377,7 +377,7 @@ Keys（按键）
 Example
 *******
 
-.. include:: ../examples/widgets/dropdown/index.rst
+.. include:: ../../examples/widgets/dropdown/index.rst
 
 .. _lv_dropdown_api:
 

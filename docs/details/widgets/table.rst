@@ -264,7 +264,7 @@ Learn more about :ref:`indev_keys`.
 Example
 *******
 
-.. include:: ../examples/widgets/table/index.rst
+.. include:: ../../examples/widgets/table/index.rst
 
 MicroPython
 -----------

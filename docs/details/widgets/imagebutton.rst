@@ -203,7 +203,7 @@ Learn more about :ref:`indev_keys`.
 Example
 ********
 
-.. include:: ../examples/widgets/imagebutton/index.rst
+.. include:: ../../examples/widgets/imagebutton/index.rst
 
 .. _lv_imagebutton_api:
 

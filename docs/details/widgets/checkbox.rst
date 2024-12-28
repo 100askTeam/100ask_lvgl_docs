@@ -203,7 +203,7 @@ Note that, as usual, the state of :cpp:enumerator:`LV_KEY_ENTER` is translated t
 Example
 *******
 
-.. include:: ../examples/widgets/checkbox/index.rst
+.. include:: ../../examples/widgets/checkbox/index.rst
 
 .. _lv_checkboxapi:
 

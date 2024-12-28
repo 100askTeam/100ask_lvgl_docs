@@ -212,7 +212,7 @@ Keys（按键）
 Example
 *******
 
-.. include:: ../examples/widgets/roller/index.rst
+.. include:: ../../examples/widgets/roller/index.rst
 
 .. _lv_roller_api:
 

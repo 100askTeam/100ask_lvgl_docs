@@ -141,7 +141,7 @@ Learn more about :ref:`indev_keys`.
 Example
 *******
 
-.. include:: ../examples/widgets/spinner/index.rst
+.. include:: ../../examples/widgets/spinner/index.rst
 
 .. _lv_spinner_api:
 

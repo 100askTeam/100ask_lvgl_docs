@@ -33,10 +33,16 @@ def find_files(dir_path, suffix):
 
 
 def exec(temp_directory):
+    """
     files = find_files(temp_directory, '.rst')
-
     for rst_file in files:
         with open(rst_file, 'r+', encoding='utf-8') as f:
             content = f.read()
             f.seek(0, 0)
             f.write(LANGUAGE + content)
+    """
+    rst_file = os.path.join(temp_directory, 'index.rst')
+    with open(rst_file, 'r+', encoding='utf-8') as f:
+        content = f.read()
+        f.seek(0, 0)
+        f.write(LANGUAGE + content)

@@ -183,7 +183,7 @@ Learn more about :ref:`indev_keys`.
 Example
 *******
 
-.. include:: ../examples/widgets/line/index.rst
+.. include:: ../../examples/widgets/line/index.rst
 
 .. _lv_line_api:
 

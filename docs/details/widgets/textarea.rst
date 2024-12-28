@@ -439,7 +439,7 @@ Learn more about :ref:`indev_keys`.
 Example
 *******
 
-.. include:: ../examples/widgets/textarea/index.rst
+.. include:: ../../examples/widgets/textarea/index.rst
 
 .. _lv_textarea_api:
 

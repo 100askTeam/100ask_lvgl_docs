@@ -270,7 +270,7 @@ No *Keys* are processed by Msgbox Widgets.
 Example
 *******
 
-.. include:: ../examples/widgets/msgbox/index.rst
+.. include:: ../../examples/widgets/msgbox/index.rst
 
 .. _lv_msgbox_api:
 

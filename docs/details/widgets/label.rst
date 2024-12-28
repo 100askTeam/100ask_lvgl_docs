@@ -411,7 +411,7 @@ Learn more about :ref:`indev_keys`.
 Example
 *******
 
-.. include:: ../examples/widgets/label/index.rst
+.. include:: ../../examples/widgets/label/index.rst
 
 .. _lv_label_api:
 

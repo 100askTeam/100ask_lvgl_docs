@@ -421,7 +421,7 @@ Learn more about :ref:`indev_keys`.
 Example
 *******
 
-.. include:: ../examples/widgets/arc/index.rst
+.. include:: ../../examples/widgets/arc/index.rst
 
 .. _lv_arc_api:
 

@@ -285,7 +285,7 @@ Learn more about :ref:`indev_keys`.
 Example
 ********
 
-.. include:: ../examples/widgets/tabview/index.rst
+.. include:: ../../examples/widgets/tabview/index.rst
 
 .. _lv_tabview_api:
 

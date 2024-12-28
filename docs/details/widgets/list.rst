@@ -168,7 +168,7 @@ Learn more about :ref:`indev_keys`.
 Example
 *******
 
-.. include:: ../examples/widgets/list/index.rst
+.. include:: ../../examples/widgets/list/index.rst
 
 .. _lv_list_api:
 

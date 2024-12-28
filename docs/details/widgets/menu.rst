@@ -340,7 +340,7 @@ Learn more about :ref:`indev_keys`.
 Example
 *******
 
-.. include:: ../examples/widgets/menu/index.rst
+.. include:: ../../examples/widgets/menu/index.rst
 
 .. _lv_menu_api:
 

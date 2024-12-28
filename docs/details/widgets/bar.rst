@@ -218,7 +218,7 @@ No *Keys* are processed by Bar Widgets.
 Example
 *******
 
-.. include:: ../examples/widgets/bar/index.rst
+.. include:: ../../examples/widgets/bar/index.rst
 
 .. _lv_bar_api:
 
