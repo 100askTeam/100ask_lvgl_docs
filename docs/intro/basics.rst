@@ -3,15 +3,18 @@
 ========================
 LVGL Basics（LVGL 基础）
 ========================
+
 .. raw:: html
 
    <details>
      <summary>显示原文</summary>
+
 LVGL (Light and Versatile Graphics Library) is a free and open-source graphics
 library providing everything you need to create an embedded GUI with easy-to-use
 graphical elements, beautiful visual effects, and a low memory footprint.
 
 How does it do this?
+
 .. raw:: html
 
    </details> 
