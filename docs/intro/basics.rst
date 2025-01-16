@@ -16,6 +16,7 @@ How does it do this?
 
    </details> 
    <br>
+
 LVGL（轻量且通用的图形库）是一个免费的开源图形库，它提供了创建嵌入式图形用户界面（GUI）所需的一切，包含易于使用的图形元素、出色的视觉效果，并且占用内存少。
 
 它是如何做到这些的呢？
@@ -86,6 +87,7 @@ of the rest.
 
    </details> 
    <br>
+
 初始化之后，应用程序的任务仅仅是在需要时创建部件树，管理这些部件因用户交互及其他情况而生成的事件，并在不再需要时删除它们。其余的工作则由 LVGL 负责。
 .. _basics_major_concepts:
 
@@ -113,6 +115,7 @@ between two terms that you will hereafter see frequently:
 
    </details> 
    <br>
+
 在深入探讨部件的任何细节之前，让我们首先厘清两个你之后会频繁看到的术语之间的区别：
 
 - **显示设备** 或 **显示面板** 是用于显示像素的物理硬件。
@@ -132,6 +135,7 @@ See :ref:`default_display` for more information.
 
    </details> 
    <br>
+
 当第一个 :ref:`display` 对象被创建时，它成为默认显示器。
 许多与屏幕小部件相关的功能使用默认显示器。
 有关更多信息，请参见 :ref:`default_display`。
@@ -152,6 +156,7 @@ See :ref:`screens` for more details.
 
    </details> 
    <br>
+
 在本文档中，“屏幕小部件”一词经常缩写为“屏幕”。但重要的是要理解，“屏幕”只是任何没有父级的 :ref:`小部件 <widgets>` —— 每个小部件树的“根”。
 
 有关更多详细信息，请参见 :ref:`screens`。
@@ -167,6 +172,7 @@ See :ref:`active_screen` for more information.
 
    </details> 
    <br>
+
 活动屏幕是当前显示的屏幕（及其子小部件）。
 有关更多信息，请参见 :ref:`active_screen`。
 .. _basics_widgets:
@@ -230,6 +236,7 @@ designer as to how they are managed.
 
    </details> 
    <br>
+
 在初始化 LVGL 之后（参见 :ref:`initializing_lvgl`），为了创建一个交互式用户界面，应用程序接下来会创建一个小部件树，LVGL 可以将其渲染到相关显示器上，并与用户进行交互。
 
 小部件是“智能”的 LVGL 图形元素，例如 :ref:`基本小部件 <base_widget_overview>`（简单的矩形和 :ref:`屏幕`）、按钮、标签、复选框、开关、滑块、图表等。请参见 :ref:`widgets` 以查看完整列表。
@@ -279,6 +286,7 @@ For example:
 
    </details> 
    <br>
+
 小部件是通过调用如下函数创建的::
 
     lv_<type>_create(parent)
@@ -334,6 +342,7 @@ or view it on GitHub, e.g.
 
    </details> 
    <br>
+
 所有小部件的通用属性通过如下函数设置::
 
     lv_obj_set_<attribute_name>(widget, <value>)
@@ -379,6 +388,7 @@ To delete any widget and its children::
 
    </details> 
    <br>
+
 要删除任何小部件及其子小部件::
 
     lv_obj_delete(lv_obj_t * widget)
@@ -433,6 +443,7 @@ To learn all features of the events go to the :ref:`events` section.
 
    </details> 
    <br>
+
 事件用于通知应用程序某个小部件发生了某些事情。
 您可以为小部件分配一个或多个回调，当小部件被点击、释放、拖动、删除等时，这些回调将被调用。
 
@@ -484,6 +495,7 @@ Read the Widget's documentation to learn which parts it uses.
 
    </details> 
    <br>
+
 小部件由一个或多个*部件*构成。例如，一个按钮只有一个部件，称为 :cpp:enumerator:`LV_PART_MAIN`。然而，一个 :ref:`lv_slider` 有 :cpp:enumerator:`LV_PART_MAIN`、:cpp:enumerator:`LV_PART_INDICATOR` 和 :cpp:enumerator:`LV_PART_KNOB`。
 
 通过使用部件，您可以将不同的样式应用于小部件的子元素。（见下文。）
@@ -528,6 +540,7 @@ To manually add or remove states use:
 
    </details> 
    <br>
+
 小部件可以处于以下状态的组合中：
 
 - :cpp:enumerator:`LV_STATE_DEFAULT`: 正常，释放状态
@@ -634,6 +647,7 @@ To learn all the features of styles see :ref:`styles`.
 
    </details> 
    <br>
+
 样式实例包含描述小部件外观的属性，例如背景颜色、边框宽度、字体等。
 
 样式保存在 :cpp:struct:`lv_style_t` 对象中。只有它们的指针保存在小部件中，因此需要将它们定义为静态或全局变量。在使用样式之前，需要使用 :cpp:expr:`lv_style_init(&style1)` 进行初始化。之后，可以添加属性来配置样式。例如：
@@ -708,6 +722,7 @@ The theme for your application is a compile time configuration set in
 
    </details> 
    <br>
+
 主题是小部件的默认样式。主题中的样式在创建小部件时会自动应用。
 
 应用程序的主题是在 ``lv_conf.h`` 中设置的编译时配置。
@@ -739,6 +754,7 @@ LVGL can even be used with :ref:`micropython`.
 
    </details> 
    <br>
+
 LVGL 甚至可以与 :ref:`micropython` 一起使用。
 
 .. code-block:: python
@@ -788,6 +804,7 @@ advancing your knowledge:
 
    </details> 
    <br>
+
 有几种很好的方法可以深入了解 LVGL。以下是推荐的阅读文档顺序和在您提高知识时可以尝试的内容：
 
 1. 如果还没有阅读，请从文档的 :ref:`introduction` 页面开始。（5 分钟）
@@ -817,13 +834,11 @@ the Widget Tree needed to make LVGL render the examples shown.  Each example ass
 a LVGL has undergone normal initialization, meaning that a ``lv_display_t`` object
 was created and therefore has an :ref:`active_screen`.
 
-
-.. include:: ../examples/get_started/index.rst
-
 .. raw:: html
 
    </details> 
    <br>
+
 以下是几个基本示例。它们包含生成小部件树的应用程序代码，以使 LVGL 渲染所示示例。每个示例都假设 LVGL 已经进行了正常初始化，这意味着创建了一个 ``lv_display_t`` 对象，因此有一个 :ref:`active_screen`。
 
 .. include:: ../examples/get_started/index.rst
